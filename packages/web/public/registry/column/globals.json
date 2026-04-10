@@ -1,0 +1,36 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Column Design System",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n@layer base {\n  :root {\n    --background: 0 0% 99%;\n    --foreground: 240 10% 3.9%;\n\n    --card: 0 0% 100%;\n    --card-foreground: 240 10% 3.9%;\n\n    --popover: 0 0% 100%;\n    --popover-foreground: 240 10% 3.9%;\n\n    --primary: 216 66% 47%;\n    --primary-foreground: 0 0% 100%;\n\n    --secondary: 0 0 100%;\n    --secondary-foreground: 240 5.9% 10%;\n\n    --muted: 240 4.8% 95.9%;\n    --muted-foreground: 240 3.8% 46.1%;\n\n    --accent: 240 6% 97%;\n    --accent-foreground: 240 5.9% 10%;\n\n    --destructive: 0 84.2% 60.2%;\n    --destructive-foreground: 0 0% 98%;\n\n    --border: 240 5.9% 90%;\n    --input: 240 3% 92%;\n    --ring: 216 66% 47%;\n\n    --radius: 0.6rem;\n  }\n}\n\n@layer base {\n  * {\n    @apply border-border;\n  }\n  body {\n    @apply bg-background text-foreground;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "0 0% 99%",
+      "--foreground": "240 10% 3.9%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "240 10% 3.9%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "240 10% 3.9%",
+      "--primary": "216 66% 47%",
+      "--primary-foreground": "0 0% 100%",
+      "--secondary": "0 0 100%",
+      "--secondary-foreground": "240 5.9% 10%",
+      "--muted": "240 4.8% 95.9%",
+      "--muted-foreground": "240 3.8% 46.1%",
+      "--accent": "240 6% 97%",
+      "--accent-foreground": "240 5.9% 10%",
+      "--destructive": "0 84.2% 60.2%",
+      "--destructive-foreground": "0 0% 98%",
+      "--border": "240 5.9% 90%",
+      "--input": "240 3% 92%",
+      "--ring": "216 66% 47%",
+      "--radius": "0.6rem"
+    }
+  }
+}

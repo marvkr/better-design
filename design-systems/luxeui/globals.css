@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Luxe — exact styles from the original site (browser-extracted 2026) */
+  /* Light theme: --background #f5f5f5, --foreground #4a4c52 */
+  /* Primary: black (#000), no box shadows — clean minimal */
+  /* Font: Geist Sans, border-radius 12px */
+  /* Border: #d9d9d9, no shadows on any elements */
+
+  --background: hsl(0 0% 96%);          /* #f5f5f5 rgb(245,245,245) */
+  --foreground: hsl(225 5% 31%);        /* #4a4c52 rgb(74,76,82) */
+
+  --card: hsl(0 0% 97%);                /* oklch(0.97) near-white */
+  --card-foreground: hsl(225 5% 31%);
+
+  --popover: hsl(0 0% 97%);
+  --popover-foreground: hsl(225 5% 31%);
+
+  /* Primary: black — monochromatic */
+  --primary: hsl(0 0% 0%);              /* #000 */
+  --primary-foreground: hsl(0 0% 100%);
+
+  /* Secondary: slightly lighter than background */
+  --secondary: hsl(0 0% 93%);
+  --secondary-foreground: hsl(225 5% 37%);
+
+  --muted: hsl(0 0% 96%);
+  --muted-foreground: hsl(0 0% 44%);    /* oklch(0.556) */
+
+  --accent: hsl(0 0% 93%);
+  --accent-foreground: hsl(225 5% 31%);
+
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  --border: hsl(0 0% 85%);              /* #d9d9d9 */
+  --input: hsl(0 0% 96%);
+  --ring: hsl(0 0% 0%);                 /* black focus ring */
+  --radius: 0.75rem;               /* 12px */
+
+  /* Shadow overrides — light theme: clean minimal shadows, not dark-mode 40% black */
+  --shadow-2xs: 0 1px 2px 0 rgba(0,0,0,0.03);
+  --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-sm:  0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
+  --shadow:     0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06);
+  --shadow-lg:  0 8px 16px -2px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-xl:  0 16px 24px -4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: "Geist", "GeistSans", ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

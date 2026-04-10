@@ -1,0 +1,157 @@
+/**
+ * Agent State Indicator Animations
+ *
+ * Single Responsibility: Contains only animation keyframe definitions.
+ */
+
+/* Idle state - gentle breathing effect */
+@keyframes agent-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+}
+
+/* Thinking state - spiral rotation */
+@keyframes agent-spiral {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.4) rotate(180deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0.8) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Executing state - column scan effect */
+@keyframes agent-scan-column {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.2;
+  }
+  40%,
+  60% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+/* Paused state - gentle pulse for icon */
+@keyframes agent-pause-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Question state - subtle bounce for icon */
+@keyframes agent-question-bounce {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.1) translateY(-0.5px);
+    opacity: 1;
+  }
+}
+
+/* Background gentle pulse */
+@keyframes agent-gentle-pulse {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* Success state - checkmark dot appearing */
+@keyframes agent-checkmark-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Success state - glowing effect for icon (after appearing) */
+@keyframes agent-success-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Success state - radial pulse from center outward */
+@keyframes agent-radial-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.05;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.12;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.05;
+  }
+}
+
+/* Error state - wiggle effect for icon (wiggles then pauses) */
+@keyframes agent-wiggle {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  /* Wiggle happens in first 20% of animation */
+  2% {
+    transform: translateX(-3px) rotate(-8deg);
+  }
+  4% {
+    transform: translateX(3px) rotate(8deg);
+  }
+  6% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
+  8% {
+    transform: translateX(2px) rotate(5deg);
+  }
+  10% {
+    transform: translateX(-1px) rotate(-2deg);
+  }
+  12%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  /* Rest is pause until next cycle */
+}

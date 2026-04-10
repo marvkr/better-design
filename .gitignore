@@ -1,0 +1,19 @@
+# Exclude from git
+inspo
+pitch.md
+
+# packages/web - ignore build and deps
+packages/web/node_modules/
+packages/web/.next/
+packages/web/bun.lock
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+
+# Dependencies and build
+node_modules/
+packages/mcp/.env
+packages/mcp/dist/

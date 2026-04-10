@@ -1,0 +1,41 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary/70 border border-primary text-primary-foreground hover:bg-primary/90\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        outline:\n          \"border border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n        secondary:\n          \"border bg-secondary/80 text-secondary-foreground hover:bg-secondary\",\n        ghost: \"hover:bg-accent hover:text-accent-foreground\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-10 px-4 py-2\",\n        sm: \"h-9 rounded-md px-3\",\n        lg: \"h-11 rounded-md px-8\",\n        icon: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "0 0% 11%",
+      "--foreground": "0 0% 95%",
+      "--card": "0 0% 14%",
+      "--card-foreground": "0 0% 95%",
+      "--popover": "0 0% 9%",
+      "--popover-foreground": "0 0% 95%",
+      "--primary": "153 60% 53%",
+      "--primary-foreground": "153 100% 98%",
+      "--secondary": "240 3.7% 15.9%",
+      "--secondary-foreground": "0 0% 98%",
+      "--muted": "0 0% 18%",
+      "--muted-foreground": "240 5% 64.9%",
+      "--accent": "12 6.5% 15.1%",
+      "--accent-foreground": "0 0% 98%",
+      "--destructive": "0 62.8% 30.6%",
+      "--destructive-foreground": "0 85.7% 97.3%",
+      "--border": "0 0% 18%",
+      "--input": "0 0% 18%",
+      "--ring": "152 47% 41%",
+      "--radius": "0.5rem"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+dockerfile = "Dockerfile"
+start_cmd = "npm run dev"

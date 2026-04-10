@@ -1,0 +1,36 @@
+{
+  "name": "@better-design/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./src/index.ts"
+    },
+    "./schema": {
+      "types": "./dist/schema.d.ts",
+      "require": "./dist/schema.js",
+      "import": "./src/schema.ts"
+    },
+    "./mcp": {
+      "types": "./dist/mcp/index.d.ts",
+      "import": "./src/mcp/index.ts"
+    }
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "drizzle-orm": "^0.45.1",
+    "drizzle-zod": "^0.7.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

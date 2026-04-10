@@ -1,0 +1,242 @@
+{
+  "name": "column",
+  "label": "Column Design System",
+  "description": "Professional, trustworthy design for fintech with blue accents",
+  "personality": [
+    "professional",
+    "trustworthy",
+    "clean",
+    "reliable",
+    "minimal"
+  ],
+  "industry": [
+    "fintech",
+    "banking",
+    "financial-services",
+    "enterprise"
+  ],
+  "componentCount": 37,
+  "components": [
+    {
+      "name": "accordion",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "registryDependencies": [
+        "button",
+        "utils"
+      ]
+    },
+    {
+      "name": "alert",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "button",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "calendar",
+      "registryDependencies": [
+        "button",
+        "utils"
+      ]
+    },
+    {
+      "name": "card",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "collapsible"
+    },
+    {
+      "name": "combobox",
+      "registryDependencies": [
+        "button",
+        "utils"
+      ]
+    },
+    {
+      "name": "command",
+      "registryDependencies": [
+        "dialog",
+        "utils"
+      ]
+    },
+    {
+      "name": "context-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "data-range-picker",
+      "registryDependencies": [
+        "button",
+        "calendar",
+        "popover",
+        "utils"
+      ]
+    },
+    {
+      "name": "dialog",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "label",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "menubar",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "popover",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "progress",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "select",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "separator",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "sheet",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "slider",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "switch",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "table",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tabs",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "textarea",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toast",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toaster",
+      "registryDependencies": [
+        "toast",
+        "use-toast"
+      ]
+    },
+    {
+      "name": "toggle",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "use-toast",
+      "registryDependencies": [
+        "toast"
+      ]
+    }
+  ]
+}

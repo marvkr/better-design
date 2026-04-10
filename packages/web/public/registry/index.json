@@ -1,0 +1,22 @@
+{
+  "name": "design-systems",
+  "baseUrl": "https://design-systems.dev/registry",
+  "styles": [
+    {
+      "name": "airbnb",
+      "label": "Airbnb Design System"
+    },
+    {
+      "name": "column",
+      "label": "Column Design System"
+    },
+    {
+      "name": "linear",
+      "label": "Linear Design System"
+    },
+    {
+      "name": "supabase",
+      "label": "Supabase Design System"
+    }
+  ]
+}

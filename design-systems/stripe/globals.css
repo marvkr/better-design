@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 73% 15%);
+
+  --card: hsl(210 40% 98%);
+  --card-foreground: hsl(210 73% 15%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(210 73% 15%);
+
+  --primary: hsl(243 100% 68%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(210 40% 98%);
+  --secondary-foreground: hsl(220 12% 47%);
+
+  --muted: hsl(210 30% 96%);
+  --muted-foreground: hsl(220 12% 47%);
+
+  --accent: hsl(210 30% 94%);
+  --accent-foreground: hsl(210 73% 15%);
+
+  --destructive: hsl(347 84% 49%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  --border: hsl(210 18% 91%);
+  --input: hsl(0 0% 100%);
+  --ring: hsl(243 100% 68%);
+  --radius: 0.375rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: "Sohne", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

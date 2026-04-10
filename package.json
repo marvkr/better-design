@@ -1,0 +1,21 @@
+{
+  "name": "better-design",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev": "bun run dev:mcp & bun run dev:web",
+    "dev:mcp": "bun run --cwd packages/mcp dev",
+    "dev:web": "bun run --cwd packages/web dev",
+    "build": "bun run build:shared && bun run build:mcp && bun run build:web",
+    "build:shared": "bun run --cwd packages/shared build",
+    "build:mcp": "bun run --cwd packages/mcp build",
+    "build:web": "bun run --cwd packages/web build",
+    "typecheck": "bun run typecheck:mcp && bun run typecheck:web",
+    "typecheck:mcp": "cd packages/mcp && node --max-old-space-size=6144 ../../node_modules/typescript/bin/tsc --noEmit",
+    "typecheck:web": "bun run --cwd packages/web lint"
+  },
+  "trustedDependencies": [
+    "inngest-cli"
+  ],
+  "overrides": {}
+}

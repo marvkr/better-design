@@ -1,0 +1,62 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-gradient-to-r from-[#D33753] via-[#D13660] to-[#C72D65] text-primary-foreground focus-visible:border-[#D3D3D3] focus-visible:border-2 hover:bg-[position:_100%_100%] bg-[size:_150%]\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        outline:\n          \"border border-secondary bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-1\",\n        secondary:\n          \"border bg-secondary/90 text-secondary-foreground hover:bg-secondary focus-visible:border-[#D3D3D3] focus-visible:border-2\",\n        ghost: \"hover:bg-accent hover:text-accent-foreground\",\n        link: \"transition text-foreground/90 underline-offset-4 underline hover:text-foreground\",\n      },\n      size: {\n        default: \"h-10 px-4 py-2\",\n        sm: \"h-9 rounded-md px-3\",\n        lg: \"h-11 rounded-md px-8\",\n        icon: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "0 0% 100%",
+      "--foreground": "0 0% 13%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "222.2 84% 4.9%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "222.2 84% 4.9%",
+      "--primary": "349 100% 61%",
+      "--primary-foreground": "0 0% 100%",
+      "--secondary": "0 0% 13%",
+      "--secondary-foreground": "0 0% 100%",
+      "--muted": "0 0% 97%",
+      "--muted-foreground": "215.4 16.3% 46.9%",
+      "--accent": "0 0% 97%",
+      "--accent-foreground": "222.2 47.4% 11.2%",
+      "--destructive": "0 84.2% 60.2%",
+      "--destructive-foreground": "210 40% 98%",
+      "--border": "0 0% 87%",
+      "--input": "214.3 31.8% 91.4%",
+      "--ring": "0 0% 13%",
+      "--radius": "0.5rem"
+    },
+    "dark": {
+      "--background": "222.2 84% 4.9%",
+      "--foreground": "210 40% 98%",
+      "--card": "222.2 84% 4.9%",
+      "--card-foreground": "210 40% 98%",
+      "--popover": "222.2 84% 4.9%",
+      "--popover-foreground": "210 40% 98%",
+      "--primary": "210 40% 98%",
+      "--primary-foreground": "222.2 47.4% 11.2%",
+      "--secondary": "217.2 32.6% 17.5%",
+      "--secondary-foreground": "210 40% 98%",
+      "--muted": "217.2 32.6% 17.5%",
+      "--muted-foreground": "215 20.2% 65.1%",
+      "--accent": "217.2 32.6% 17.5%",
+      "--accent-foreground": "210 40% 98%",
+      "--destructive": "0 62.8% 30.6%",
+      "--destructive-foreground": "210 40% 98%",
+      "--border": "217.2 32.6% 17.5%",
+      "--input": "217.2 32.6% 17.5%",
+      "--ring": "212.7 26.8% 83.9%"
+    }
+  }
+}

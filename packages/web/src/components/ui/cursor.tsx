@@ -1,0 +1,111 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "motion/react"
+
+import { cn } from "@/lib/utils"
+
+interface CursorProps {
+  /** Text to type out */
+  text: string
+  /** Name label shown next to cursor */
+  label?: string
+  /** Color of the cursor dot */
+  color?: string
+  /** Typing speed in ms per character */
+  speed?: number
+  /** Delay before typing starts (ms) */
+  delay?: number
+  /** Whether to loop the animation */
+  loop?: boolean
+  className?: string
+}
+
+export function Cursor({
+  text,
+  label,
+  color = "var(--primary)",
+  speed = 60,
+  delay = 500,
+  loop = false,
+  className,
+}: CursorProps) {
+  const [displayedText, setDisplayedText] = useState("")
+  const [isTyping, setIsTyping] = useState(false)
+  const [showCursor] = useState(true)
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>
+    let charIndex = 0
+
+    const startTyping = () => {
+      setIsTyping(true)
+      setDisplayedText("")
+      charIndex = 0
+
+      const typeChar = () => {
+        if (charIndex < text.length) {
+          setDisplayedText(text.slice(0, charIndex + 1))
+          charIndex++
+          timeout = setTimeout(typeChar, speed + Math.random() * 40)
+        } else {
+          setIsTyping(false)
+          if (loop) {
+            timeout = setTimeout(() => {
+              setDisplayedText("")
+              timeout = setTimeout(startTyping, delay)
+            }, 2000)
+          }
+        }
+      }
+
+      timeout = setTimeout(typeChar, 100)
+    }
+
+    timeout = setTimeout(startTyping, delay)
+
+    return () => clearTimeout(timeout)
+  }, [text, speed, delay, loop])
+
+  return (
+    <div className={cn("relative inline-flex flex-col gap-2", className)}>
+      <div className="relative flex items-start gap-0">
+        <AnimatePresence>
+          {(isTyping || displayedText) && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground shadow-sm"
+              style={{ minHeight: "36px" }}
+            >
+              <span>{displayedText}</span>
+              {showCursor && (
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+                  className="inline-block w-[2px] h-[14px] ml-[1px] align-middle"
+                  style={{ backgroundColor: color }}
+                />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {label && (
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="flex items-center gap-1.5"
+        >
+          <div
+            className="h-2.5 w-2.5 rounded-full shadow-sm"
+            style={{ backgroundColor: color }}
+          />
+          <span className="text-xs font-medium text-muted-foreground">{label}</span>
+        </motion.div>
+      )}
+    </div>
+  )
+}

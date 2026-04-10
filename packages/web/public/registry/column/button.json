@@ -1,0 +1,41 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:border focus-visible:border-primary focus-visible:ring-ring/30 focus-visible:ring-2 focus-visible:ring-offset-0 transition-all disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary/95 border border-background shadow-[inset_0_-2px_#284c87] border-opacity-30 text-primary-foreground drop-shadow-lg hover:bg-primary hover:drop-shadow-xl\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        outline:\n          \"border border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n        secondary:\n          \"border bg-secondary text-secondary-foreground shadow-[0_1px_1px_rgba(0,0,0,0.1)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2)]\",\n        ghost: \"hover:bg-accent hover:text-accent-foreground\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-10 px-4 py-2\",\n        sm: \"h-9 rounded-md px-3\",\n        lg: \"h-11 rounded-md px-8\",\n        icon: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "0 0% 99%",
+      "--foreground": "240 10% 3.9%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "240 10% 3.9%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "240 10% 3.9%",
+      "--primary": "216 66% 47%",
+      "--primary-foreground": "0 0% 100%",
+      "--secondary": "0 0 100%",
+      "--secondary-foreground": "240 5.9% 10%",
+      "--muted": "240 4.8% 95.9%",
+      "--muted-foreground": "240 3.8% 46.1%",
+      "--accent": "240 6% 97%",
+      "--accent-foreground": "240 5.9% 10%",
+      "--destructive": "0 84.2% 60.2%",
+      "--destructive-foreground": "0 0% 98%",
+      "--border": "240 5.9% 90%",
+      "--input": "240 3% 92%",
+      "--ring": "216 66% 47%",
+      "--radius": "0.6rem"
+    }
+  }
+}

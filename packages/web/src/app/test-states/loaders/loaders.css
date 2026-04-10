@@ -1,0 +1,91 @@
+/* Shared keyframes for loader components. Each keyframe is a standard,
+ * reusable pattern (pulse, spin, bounce, scale) used across the loader set. */
+
+@keyframes loader-pulse {
+  0%, 100% { opacity: 0.18; transform: scale(0.82); }
+  50%      { opacity: 1;    transform: scale(1); }
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loader-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes loader-ring-expand {
+  0%   { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(1.4); opacity: 0;   }
+}
+
+@keyframes loader-bar-rise {
+  0%, 100% { transform: scaleY(0.35); opacity: 0.45; }
+  50%      { transform: scaleY(1);    opacity: 1;    }
+}
+
+@keyframes loader-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loader-morph {
+  0%, 100% { border-radius: 50%; transform: rotate(0deg) scale(0.9); }
+  50%      { border-radius: 18%; transform: rotate(180deg) scale(1); }
+}
+
+@keyframes loader-line-sweep {
+  0%, 100% { transform: scaleX(0.3); opacity: 0.35; }
+  50%      { transform: scaleX(1);   opacity: 1;    }
+}
+
+@keyframes loader-bounce {
+  0%, 100% { transform: translateY(0);    opacity: 0.5; }
+  50%      { transform: translateY(-45%); opacity: 1;   }
+}
+
+@keyframes loader-square-cascade {
+  0%, 100% { opacity: 0.22; transform: scale(0.78); }
+  50%      { opacity: 1;    transform: scale(1);    }
+}
+
+@keyframes loader-diamond {
+  0%, 100% { opacity: 0.2; transform: rotate(45deg) scale(0.7); }
+  50%      { opacity: 1;   transform: rotate(45deg) scale(1);   }
+}
+
+@keyframes loader-cross-horizontal {
+  0%, 100% { opacity: 1;   transform: scaleX(1);   }
+  50%      { opacity: 0.2; transform: scaleX(0.2); }
+}
+
+@keyframes loader-cross-vertical {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.2); }
+  50%      { opacity: 1;   transform: scaleY(1);   }
+}
+
+@keyframes loader-staggered-scale {
+  0%, 100% { opacity: 0.25; transform: scale(0.4); }
+  50%      { opacity: 1;    transform: scale(1);   }
+}
+
+@keyframes loader-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(0.82); }
+  50%      { opacity: 1;    transform: scale(1);    }
+}
+
+@keyframes loader-flip-square {
+  0%   { transform: perspective(140px) rotateX(0)    rotateY(0); }
+  50%  { transform: perspective(140px) rotateX(-180deg) rotateY(0); }
+  100% { transform: perspective(140px) rotateX(-180deg) rotateY(-180deg); }
+}
+
+@keyframes loader-dot-trail {
+  0%, 100% { opacity: 0.2; transform: scale(0.55); }
+  50%      { opacity: 1;   transform: scale(1);    }
+}
+
+@keyframes loader-elastic-line {
+  0%   { left: 0%;   width: 18%; }
+  50%  { left: 50%;  width: 36%; }
+  100% { left: 100%; width: 18%; transform: translateX(-100%); }
+}

@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(42 2% 17%);
+
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(42 2% 17%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(42 2% 17%);
+
+  --primary: hsl(0 0% 9%);
+  --primary-foreground: hsl(0 0% 98%);
+
+  --secondary: hsl(40 14% 97%);
+  --secondary-foreground: hsl(42 2% 17%);
+
+  --muted: hsl(40 14% 97%);
+  --muted-foreground: hsl(42 3% 36%);
+
+  --accent: hsl(40 10% 94%);
+  --accent-foreground: hsl(42 2% 17%);
+
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 98%);
+
+  --border: hsl(40 10% 91%);
+  --input: hsl(40 10% 91%);
+  --ring: hsl(210 77% 51%);
+  --radius: 0rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: ui-sans-serif, -apple-system, "system-ui", "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

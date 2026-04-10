@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1767569490072,
+      "tag": "0000_eager_scream",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1767725485294,
+      "tag": "0001_green_lake",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1767754001298,
+      "tag": "0002_spicy_the_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1767858052484,
+      "tag": "0003_sudden_lionheart",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1768010036980,
+      "tag": "0004_left_rocket_raccoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1768015461880,
+      "tag": "0005_amused_shaman",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1768027796327,
+      "tag": "0006_legal_peter_quill",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1768028557658,
+      "tag": "0007_even_kat_farrell",
+      "breakpoints": true
+    }
+  ]
+}

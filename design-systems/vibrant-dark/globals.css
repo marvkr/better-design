@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Dynamic — dark theme, vibrant colors, pill-shaped components */
+  --background: hsl(0 0% 0%);               /* pure black */
+  --foreground: hsl(210 3% 93%);            /* rgb(236, 237, 238) */
+
+  --card: hsl(240 6% 10%);                  /* rgb(24, 24, 27) content1 */
+  --card-foreground: hsl(210 3% 93%);
+
+  --popover: hsl(240 5% 12%);
+  --popover-foreground: hsl(210 3% 93%);
+
+  --primary: hsl(212 100% 47%);             /* rgb(0, 111, 238) #006FEE */
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(240 4% 16%);             /* rgb(39, 39, 42) neutral/default bg */
+  --secondary-foreground: hsl(210 3% 93%);
+
+  --muted: hsl(240 4% 16%);
+  --muted-foreground: hsl(240 5% 65%);      /* rgb(161, 161, 170) */
+
+  --accent: hsl(270 59% 58%);               /* rgb(147, 83, 211) #9353D3 — Dynamic purple secondary */
+  --accent-foreground: hsl(0 0% 100%);
+
+  --destructive: hsl(339 90% 51%);          /* rgb(243, 18, 96) #F31260 */
+  --destructive-foreground: hsl(0 0% 100%);
+
+  /* Extended Dynamic semantic tokens */
+  --success: hsl(146 80% 44%);              /* rgb(23, 201, 100) #17C964 */
+  --success-foreground: hsl(0 0% 100%);
+
+  --warning: hsl(37 91% 55%);               /* rgb(245, 165, 36) #F5A524 */
+  --warning-foreground: hsl(0 0% 0%);
+
+  --border: hsl(240 4% 18%);
+  --input: hsl(240 4% 16%);
+  --ring: hsl(212 100% 47%);
+  --radius: 0.75rem;                   /* 12px — Dynamic medium radius */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@better-design/mcp-server",
+  "version": "3.0.0",
+  "description": "MCP server for Better Design — design systems, UI principles, icons, and code review",
+  "type": "module",
+  "bin": {
+    "better-design-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "bun run tsc",
+    "dev": "bun run tsc --watch",
+    "start": "bun run dist/index.js",
+    "typecheck": "node --max-old-space-size=6144 ../../node_modules/typescript/bin/tsc --noEmit",
+    "setup-db": "bun run src/lib/setup-db.ts",
+    "seed": "bun run src/lib/seed.ts",
+    "seed-principles": "bun run src/lib/seed-principles.ts",
+    "generate-registry": "bun run src/lib/generate-registry.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "dependencies": {
+    "@better-design/shared": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "dotenv": "^16.4.5",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@neondatabase/serverless": "^0.10.4",
+    "@types/node": "^22.13.14",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-orm": "^0.45.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.2"
+  }
+}

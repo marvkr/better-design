@@ -1,0 +1,27 @@
+name = "better-design-api"
+main = "src/worker.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+account_id = "c80af7418c942516775017ebf8f11c73"
+
+routes = [
+  { pattern = "better-design.com/api/*", zone_name = "better-design.com" },
+  { pattern = "www.better-design.com/api/*", zone_name = "better-design.com" },
+]
+
+[vars]
+NODE_ENV = "production"
+
+# Secrets (set via `wrangler secret put`):
+# DATABASE_URL
+# BETTER_AUTH_SECRET
+# BETTER_AUTH_URL
+# GOOGLE_CLIENT_ID
+# GOOGLE_CLIENT_SECRET
+# GITHUB_CLIENT_ID
+# GITHUB_CLIENT_SECRET
+# INNGEST_EVENT_KEY
+# INNGEST_SIGNING_KEY
+# NEXT_PUBLIC_APP_URL
+# TELEGRAM_BOT_TOKEN
+# TELEGRAM_CHAT_ID

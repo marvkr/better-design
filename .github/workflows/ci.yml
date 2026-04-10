@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-typecheck:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+
+      - name: Lint (web)
+        run: bun run lint
+        working-directory: packages/web
+
+      - name: Build shared
+        run: bun run build:shared
+
+      - name: Typecheck (mcp)
+        run: cd packages/mcp && node --max-old-space-size=6144 ../../node_modules/typescript/bin/tsc --noEmit
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+
+      - name: Run vitest
+        run: bun run --cwd packages/web test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint-typecheck, test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+
+      - name: Build shared
+        run: bun run build:shared
+
+      - name: Build web (Next.js)
+        run: bun run --cwd packages/web build
+
+      - name: Build worker (dry-run)
+        run: npx wrangler deploy --dry-run
+        working-directory: packages/web
