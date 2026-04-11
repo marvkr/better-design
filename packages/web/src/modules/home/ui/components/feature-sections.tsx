@@ -1,133 +1,185 @@
+"use client";
+
 import { Icon } from "@iconify/react";
-import Link from "next/link";
-import { DesignSystemPreviewCard } from "@/app/design-systems/preview-card";
+import { CodeTabs } from "@/components/ui/code-tabs";
+import { InteractiveFileTree } from "./interactive-file-tree";
 
-interface DesignSystemInfo {
-  id: string;
-  name: string;
-  description: string;
-  theme: "light" | "dark";
-  tokens: Record<string, string>;
-}
+const mcpIcon = (name: string) => <Icon icon={name} className="size-3.5" />;
 
-export function FeatureSections({ systems }: { systems: DesignSystemInfo[] }) {
-  // Pick 3 visually distinct systems for the preview
-  const showcaseSlugs = ["linear", "stripe", "glassmorphic-dark"];
-  const showcaseSystems = showcaseSlugs
-    .map((slug) => systems.find((s) => s.id === slug))
-    .filter(Boolean) as DesignSystemInfo[];
-
-  return (
-    <div className="max-w-5xl mx-auto w-full px-4 py-24 space-y-32">
-      {/* Feature 1: Components */}
-      <section className="space-y-8">
-        <div className="space-y-3 max-w-2xl">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10">
-              <Icon icon="tabler:components" className="size-5 text-primary" />
-            </div>
-            <h2 className="text-xl md:text-2xl font-semibold">
-              20+ Design Systems, Ready to Use
-            </h2>
-          </div>
-          <p className="text-muted-foreground pl-[52px]">
-            Each one comes with 30+ components styled to match. Pick a vibe and
-            scaffold it into your project.
-          </p>
-          <div className="pl-[52px]">
-            <Link
-              href="/design-systems"
-              className="text-sm text-primary hover:underline inline-flex items-center gap-1"
-            >
-              Browse all design systems
-              <Icon icon="tabler:arrow-right" className="size-4" />
-            </Link>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {showcaseSystems.map((system) => (
-            <div key={system.id} className="group">
-              <DesignSystemPreviewCard system={system} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Feature 2: MCP Server */}
-      <section className="space-y-8">
-        <div className="space-y-3 max-w-2xl">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10">
-              <Icon icon="tabler:plug" className="size-5 text-primary" />
-            </div>
-            <h2 className="text-xl md:text-2xl font-semibold">
-              MCP Server for Your AI Tools
-            </h2>
-          </div>
-          <p className="text-muted-foreground pl-[52px]">
-            Install the MCP server and your AI coding tool gets design tokens,
-            components, and UX principles as context. It writes code that
-            actually matches your design system.
-          </p>
-        </div>
-        <div className="pl-[52px] rounded-lg border bg-card overflow-hidden">
-          <div className="px-4 py-2 border-b bg-muted/30 flex items-center gap-2">
-            <div className="flex gap-1.5">
-              <div className="size-2.5 rounded-full bg-muted-foreground/20" />
-              <div className="size-2.5 rounded-full bg-muted-foreground/20" />
-              <div className="size-2.5 rounded-full bg-muted-foreground/20" />
-            </div>
-            <span className="text-xs text-muted-foreground font-mono">
-              claude_desktop_config.json
-            </span>
-          </div>
-          <pre className="p-4 text-sm font-mono text-muted-foreground overflow-x-auto">
-            <code>{`{
+const MCP_TABS = [
+  {
+    label: "Claude Code",
+    lang: "bash",
+    icon: mcpIcon("simple-icons:claude"),
+    code: `claude mcp add better-design -- npx -y better-design-mcp`,
+  },
+  {
+    label: "Cursor",
+    lang: "json",
+    icon: mcpIcon("simple-icons:cursor"),
+    code: `// .cursor/mcp.json
+{
   "mcpServers": {
     "better-design": {
       "command": "npx",
       "args": ["-y", "better-design-mcp"]
     }
   }
-}`}</code>
-          </pre>
-        </div>
-      </section>
+}`,
+  },
+  {
+    label: "Windsurf",
+    lang: "json",
+    icon: mcpIcon("simple-icons:windsurf"),
+    code: `// ~/.codeium/windsurf/mcp_config.json
+{
+  "mcpServers": {
+    "better-design": {
+      "command": "npx",
+      "args": ["-y", "better-design-mcp"]
+    }
+  }
+}`,
+  },
+  {
+    label: "VS Code",
+    lang: "json",
+    icon: mcpIcon("simple-icons:visualstudiocode"),
+    code: `// .vscode/mcp.json
+{
+  "servers": {
+    "better-design": {
+      "command": "npx",
+      "args": ["-y", "better-design-mcp"]
+    }
+  }
+}`,
+  },
+  {
+    label: "Claude Desktop",
+    lang: "json",
+    icon: mcpIcon("simple-icons:claude"),
+    code: `// claude_desktop_config.json
+{
+  "mcpServers": {
+    "better-design": {
+      "command": "npx",
+      "args": ["-y", "better-design-mcp"]
+    }
+  }
+}`,
+  },
+];
 
-      {/* Feature 3: UX Principles */}
-      <section className="space-y-8">
-        <div className="space-y-3 max-w-2xl">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10">
-              <Icon icon="tabler:bulb" className="size-5 text-primary" />
-            </div>
-            <h2 className="text-xl md:text-2xl font-semibold">
-              UX Principles Built In
-            </h2>
-          </div>
-          <p className="text-muted-foreground pl-[52px]">
-            Your AI tool loads spacing, hierarchy, color, typography, and
-            accessibility principles before writing UI code. The output follows
-            real design guidelines instead of guessing.
-          </p>
-        </div>
-        <div className="pl-[52px] grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { icon: "tabler:layout-distribute-vertical", label: "Spacing & Layout" },
-            { icon: "tabler:typography", label: "Typography" },
-            { icon: "tabler:palette", label: "Color & Contrast" },
-            { icon: "tabler:accessible", label: "Accessibility" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="flex items-center gap-2.5 rounded-lg border bg-card p-3"
-            >
-              <Icon icon={item.icon} className="size-4 text-primary shrink-0" />
-              <span className="text-sm">{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+function BentoHeader({ icon, title, description }: { icon: string; title: string; description: string }) {
+  return (
+    <div className="p-5 space-y-2">
+      <div className="flex items-center gap-3">
+        <Icon icon={icon} className="size-6 text-primary shrink-0" />
+        <h3 className="text-xl font-semibold tracking-tight">{title}</h3>
+      </div>
+      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
     </div>
+  );
+}
+
+export function FeatureSections() {
+  return (
+    <section className="max-w-5xl mx-auto w-full px-4 pt-4 pb-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* MCP setup — full width top */}
+        <div className="rounded-xl border border-border/60 bg-card overflow-hidden md:col-span-2">
+          <BentoHeader
+            icon="tabler:plug"
+            title="MCP server for your AI tools"
+            description="One command to install. Your AI gets design context while it codes."
+          />
+          <div className="px-5 pb-5">
+            <CodeTabs tabs={MCP_TABS} />
+          </div>
+        </div>
+
+        {/* File tree — left */}
+        <div className="rounded-xl border border-border/60 bg-card overflow-hidden">
+          <BentoHeader
+            icon="tabler:folder-code"
+            title="A complete design system"
+            description="Stop building UI from scratch. 87 components, design tokens, and styles ready to scaffold into your codebase."
+          />
+          <InteractiveFileTree />
+        </div>
+
+        {/* UX Principles — right */}
+        <div className="rounded-xl border border-border/60 bg-card overflow-hidden flex flex-col">
+          <BentoHeader
+            icon="tabler:bulb"
+            title="UX principles built in"
+            description="Your AI loads the right design guidelines before writing any UI code."
+          />
+          <div className="px-5 pb-5 space-y-4 flex-1 flex flex-col">
+            {/* Flow diagram */}
+            <div className="flex flex-col items-center gap-0">
+              <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-muted/30 px-3 py-2.5 w-full">
+                <Icon icon="tabler:code" className="size-4 text-foreground/70 shrink-0" />
+                <span className="text-xs">You edit <span className="font-mono text-primary">button.tsx</span></span>
+              </div>
+              <Icon icon="tabler:arrow-down" className="size-4 text-muted-foreground/40 my-1" />
+              <div className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-2.5 w-full space-y-2">
+                <div className="flex items-center gap-2">
+                  <Icon icon="tabler:brain" className="size-4 text-primary shrink-0" />
+                  <span className="text-xs font-medium">AI loads relevant principles</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-0.5 text-[11px] text-primary">
+                    <Icon icon="tabler:click" className="size-3" />
+                    Interactions
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-0.5 text-[11px] text-primary">
+                    <Icon icon="tabler:layers-intersect" className="size-3" />
+                    Depth & Surfaces
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-0.5 text-[11px] text-primary">
+                    <Icon icon="tabler:bounce-right" className="size-3" />
+                    Animation
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-0.5 text-[11px] text-primary">
+                    <Icon icon="tabler:palette" className="size-3" />
+                    Color
+                  </span>
+                </div>
+              </div>
+              <Icon icon="tabler:arrow-down" className="size-4 text-muted-foreground/40 my-1" />
+              <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-muted/30 px-3 py-2.5 w-full">
+                <Icon icon="tabler:check" className="size-4 text-green-500 shrink-0" />
+                <span className="text-xs">Output follows real design guidelines</span>
+              </div>
+            </div>
+
+            {/* Other available principles */}
+            <div className="space-y-2 mt-auto pt-2">
+              <p className="text-base font-medium text-muted-foreground">And many more principles</p>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  { icon: "tabler:layout-distribute-vertical", label: "Spacing & Layout" },
+                  { icon: "tabler:typography", label: "Typography" },
+                  { icon: "tabler:hierarchy-2", label: "Visual Hierarchy" },
+                  { icon: "tabler:forms", label: "Forms" },
+                  { icon: "tabler:photo", label: "Images" },
+                  { icon: "tabler:sparkles", label: "Polish" },
+                ].map((item) => (
+                  <span
+                    key={item.label}
+                    className="inline-flex items-center gap-1 rounded-md border border-border/60 px-2 py-0.5 text-[11px] text-muted-foreground"
+                  >
+                    <Icon icon={item.icon} className="size-3" />
+                    {item.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

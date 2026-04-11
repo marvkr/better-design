@@ -9,8 +9,10 @@ import "prismjs/components/prism-tsx"
 import "prismjs/components/prism-typescript"
 import "prismjs/components/prism-css"
 import "prismjs/components/prism-bash"
+import "prismjs/components/prism-json"
 
 import { cn } from "@/lib/utils"
+import "@/components/code-view/code-theme.css"
 
 interface CodeTab {
   label: string
@@ -51,7 +53,7 @@ export function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
 
   return (
     <div className={cn("rounded-lg border border-border overflow-hidden bg-card", className)}>
-      <div className="relative flex border-b border-border bg-card/50">
+      <div className="relative flex overflow-x-auto scrollbar-none border-b border-border bg-card/50">
         <motion.div
           className="absolute bottom-0 h-[2px] bg-primary rounded-full"
           animate={{ left: indicatorStyle.left, width: indicatorStyle.width }}
@@ -63,7 +65,7 @@ export function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             ref={(el) => { tabRefs.current[i] = el }}
             onClick={() => handleTabChange(i)}
             className={cn(
-              "relative px-4 py-2.5 text-xs font-medium transition-colors flex items-center gap-1.5",
+              "relative px-4 py-2.5 text-xs font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0",
               i === activeIndex
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground/80"

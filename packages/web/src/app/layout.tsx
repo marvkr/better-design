@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Geist, Geist_Mono, Caveat } from "next/font/google";
+import { Geist, Geist_Mono, Caveat, Newsreader } from "next/font/google";
 import { MotionConfig } from "motion/react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -23,6 +23,13 @@ const geistMono = Geist_Mono({
 const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
+});
+
+const newsreader = Newsreader({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["200"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -62,7 +69,7 @@ export default function RootLayout({
       <ReactQueryProvider>
         <html lang="en" suppressHydrationWarning>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} antialiased bg-background`}>
+            className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${newsreader.variable} antialiased bg-background`}>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"

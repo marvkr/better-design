@@ -82,7 +82,7 @@
   --card: oklch(0.21 0.02 275);
   --card-foreground: oklch(0.98 0 0);
 
-  --popover: oklch(0.21 0.02 275);
+  --popover: oklch(0.21 0.02 275 / 0.85);
   --popover-foreground: oklch(0.98 0 0);
 
   --primary: oklch(0.70 0.20 265);
@@ -203,6 +203,12 @@
   [role="button"]:not([disabled]) {
     cursor: pointer;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-weight: 200;
+    letter-spacing: -0.015em;
+  }
 }
 
 /* Animations */
@@ -298,7 +304,7 @@
 @property --bottom-mask-height {
   syntax: "<length>";
   inherits: true;
-  initial-value: 64px;
+  initial-value: 0px;
 }
 @property --left-mask-width {
   syntax: "<length>";
@@ -332,11 +338,9 @@
     0 calc(100% - var(--mask-offset-bottom)),
     0 0;
   mask-composite: exclude;
-  animation-name: show-top-mask, hide-bottom-mask;
-  animation-timeline: scroll(self), scroll(self);
-  animation-range:
-    0 var(--scroll-buffer),
-    calc(100% - var(--scroll-buffer)) 100%;
+  animation-name: show-top-mask;
+  animation-timeline: scroll(self);
+  animation-range: 0 var(--scroll-buffer);
   animation-fill-mode: both;
 }
 

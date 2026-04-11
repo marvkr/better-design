@@ -94,10 +94,10 @@ const Page = async () => {
               } as React.CSSProperties}
             />
           </span>{" "}
-          <span className="ml-1"><span className="font-[family-name:var(--font-caveat)] text-primary opacity-70 mr-1">THE WEB</span> sexy again.</span>
+          <span className="ml-1"><span className="font-[family-name:var(--font-caveat)] text-primary opacity-70 mr-1 underline decoration-primary/40 underline-offset-[6px] decoration-2">THE WEB</span> sexy again.</span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto">
-          Design systems with 30+ components, UX principles, and an MCP server that gives your AI tools real design context.
+          Design systems with 87 components each and an MCP server that gives your AI tools real design context.
         </p>
         <div className="max-w-md mx-auto w-full">
           <WaitlistForm />
@@ -152,7 +152,7 @@ const Page = async () => {
       </div>
 
       {/* Feature sections */}
-      <FeatureSections systems={systems} />
+      <FeatureSections />
 
       <MobileMusicFooter />
     </div>
