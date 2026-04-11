@@ -39,20 +39,22 @@ export function InteractiveFileTree() {
         </div>
 
         {/* Component files */}
-        <div className="relative max-h-[280px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          {/* Vertical connecting line */}
-          <div className="absolute left-[22px] top-0 bottom-0 w-px bg-border/60" />
-          {COMPONENTS.map((file) => (
-            <div
-              key={file}
-              className="relative flex items-center gap-1.5 py-[3px] pl-[22px] text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30 rounded transition-colors cursor-default"
-            >
-              {/* Horizontal branch */}
-              <div className="absolute left-[22px] top-1/2 w-2.5 h-px bg-border/60" />
-              <Icon icon="tabler:file-code" className="size-3.5 shrink-0 opacity-50 ml-3.5" />
-              <span>{file}</span>
-            </div>
-          ))}
+        <div className="max-h-[280px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="relative">
+            {/* Vertical connecting line — spans full content height */}
+            <div className="pointer-events-none absolute left-[22px] top-0 bottom-0 w-px bg-border/60" />
+            {COMPONENTS.map((file) => (
+              <div
+                key={file}
+                className="relative flex items-center gap-1.5 py-[3px] pl-[22px] text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30 rounded transition-colors cursor-default"
+              >
+                {/* Horizontal branch */}
+                <div className="absolute left-[22px] top-1/2 w-2.5 h-px bg-border/60" />
+                <Icon icon="tabler:file-code" className="size-3.5 shrink-0 opacity-50 ml-3.5" />
+                <span>{file}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* globals.css */}

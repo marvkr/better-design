@@ -24,6 +24,7 @@ const DS_META: Record<string, { name: string; description: string; theme: "light
   apple:                 { name: "Apple",                description: "Light premium — SF Pro, pill buttons, #0071e3 blue, #f5f5f7 background", theme: "light", iconPrefix: "solar", iconLibraryName: "Solar" },
   figma:                 { name: "Figma",                description: "Light design tool — Electric Violet #a259ff, purple glow, 8px radius", theme: "light", iconPrefix: "ph", iconLibraryName: "Phosphor" },
   "monochrome-industrial": { name: "Monochrome Industrial", description: "Monochrome industrial — OLED black, Doto + Geist Mono, signal-light red accent, sharp corners, dot-matrix motif", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "glassmorphic-dark":   { name: "Glassmorphic Dark",   description: "Transparent glass panels with blur, frosted surfaces on dark backgrounds", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
 }
 
 function parseTokens(css: string): Record<string, string> {

@@ -32,6 +32,7 @@ const DS_META = [
   { id: "apple",              slug: "apple",               name: "Apple",               description: "Light premium — SF Pro, pill buttons, #0071e3 blue, #f5f5f7 background", theme: "light" as const },
   { id: "figma",              slug: "figma",               name: "Figma",               description: "Light design tool — Electric Violet #a259ff, purple glow, 8px radius", theme: "light" as const },
   { id: "monochrome-industrial", slug: "monochrome-industrial", name: "Monochrome Industrial", description: "Monochrome industrial — OLED black, dot-matrix Doto, signal-light red accent, sharp corners", theme: "dark" as const },
+  { id: "glassmorphic-dark",  slug: "glassmorphic-dark",   name: "Glassmorphic Dark",   description: "Transparent glass panels with blur, frosted surfaces on dark backgrounds", theme: "dark" as const },
 ]
 
 /** Parse CSS custom properties from a :root { } block */

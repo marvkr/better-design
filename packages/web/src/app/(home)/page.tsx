@@ -3,7 +3,7 @@ import { join } from "path"
 import { Icon } from "@iconify/react";
 
 import { ClineIcon, OpenCodeIcon } from "@/components/tool-icons";
-import { McpChatBubble } from "@/components/mcp-chat-bubble";
+// import { McpChatBubble } from "@/components/mcp-chat-bubble";
 import { BuiltWithBadge } from "@/components/ui/badge";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { DesignSystemsCarousel } from "@/modules/home/ui/components/design-systems-carousel";
@@ -141,9 +141,9 @@ const Page = async () => {
         </div>
 
         {/* MCP Chat Bubble - absolute on mobile (relative to section), fixed on desktop */}
-        <div className="absolute bottom-4 right-4 md:fixed md:bottom-4 md:right-4 z-50">
+        {/* <div className="absolute bottom-4 right-4 md:fixed md:bottom-4 md:right-4 z-50">
           <McpChatBubble />
-        </div>
+        </div> */}
       </section>
 
       {/* Design systems carousel */}
