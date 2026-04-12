@@ -85,7 +85,7 @@ function BentoHeader({ icon, title, description }: { icon: string; title: string
 
 export function FeatureSections() {
   return (
-    <section className="max-w-5xl mx-auto w-full px-4 pt-4 pb-24">
+    <section className="max-w-5xl mx-auto w-full px-4 pt-16 md:pt-24 pb-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* MCP setup — full width top */}
         <div className="rounded-xl border border-border/60 bg-card overflow-hidden md:col-span-2">
