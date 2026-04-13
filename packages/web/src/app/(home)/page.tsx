@@ -200,8 +200,8 @@ const Page = async () => {
           Design systems for the AI era.
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto">
-          Pick a vibe. Get every component styled to match. Ship something
-          beautiful.
+          Define your brand. Get 80+ components as building blocks. Push
+          something beautiful into the world.
         </p>
         <div className="max-w-md mx-auto w-full">
           <WaitlistForm />

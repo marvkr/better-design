@@ -29,6 +29,8 @@ export { Button as VercelButton, buttonVariants as vercelButtonVariants } from "
 export { Button as AppleButton, buttonVariants as appleButtonVariants } from "../../../../../../design-systems/apple/components/button"
 export { Button as FigmaButton, buttonVariants as figmaButtonVariants } from "../../../../../../design-systems/figma/components/button"
 export { Button as MonoIndustrialButton, buttonVariants as monoIndustrialButtonVariants } from "../../../../../../design-systems/monochrome-industrial/components/button"
+export { Button as GlassmorphicDarkButton, buttonVariants as glassmorphicDarkButtonVariants } from "../../../../../../design-systems/glassmorphic-dark/components/button"
+export { Button as MidnightGlassButton, buttonVariants as midnightGlassButtonVariants } from "../../../../../../design-systems/midnight-glass/components/button"
 
 // ─── Cards ───
 export { Card as LinearCard, CardHeader as LinearCardHeader, CardTitle as LinearCardTitle, CardDescription as LinearCardDescription, CardContent as LinearCardContent, CardFooter as LinearCardFooter } from "../../../../../../design-systems/linear/components/card"
@@ -50,6 +52,8 @@ export { Card as VercelCard, CardHeader as VercelCardHeader, CardTitle as Vercel
 export { Card as AppleCard, CardHeader as AppleCardHeader, CardTitle as AppleCardTitle, CardDescription as AppleCardDescription, CardContent as AppleCardContent, CardFooter as AppleCardFooter } from "../../../../../../design-systems/apple/components/card"
 export { Card as FigmaCard, CardHeader as FigmaCardHeader, CardTitle as FigmaCardTitle, CardDescription as FigmaCardDescription, CardContent as FigmaCardContent, CardFooter as FigmaCardFooter } from "../../../../../../design-systems/figma/components/card"
 export { Card as MonoIndustrialCard, CardHeader as MonoIndustrialCardHeader, CardTitle as MonoIndustrialCardTitle, CardDescription as MonoIndustrialCardDescription, CardContent as MonoIndustrialCardContent, CardFooter as MonoIndustrialCardFooter } from "../../../../../../design-systems/monochrome-industrial/components/card"
+export { Card as GlassmorphicDarkCard, CardHeader as GlassmorphicDarkCardHeader, CardTitle as GlassmorphicDarkCardTitle, CardDescription as GlassmorphicDarkCardDescription, CardContent as GlassmorphicDarkCardContent, CardFooter as GlassmorphicDarkCardFooter } from "../../../../../../design-systems/glassmorphic-dark/components/card"
+export { Card as MidnightGlassCard, CardHeader as MidnightGlassCardHeader, CardTitle as MidnightGlassCardTitle, CardDescription as MidnightGlassCardDescription, CardContent as MidnightGlassCardContent, CardFooter as MidnightGlassCardFooter } from "../../../../../../design-systems/midnight-glass/components/card"
 
 // ─── Inputs ───
 export { Input as LinearInput } from "../../../../../../design-systems/linear/components/input"
@@ -71,6 +75,8 @@ export { Input as VercelInput } from "../../../../../../design-systems/vercel/co
 export { Input as AppleInput } from "../../../../../../design-systems/apple/components/input"
 export { Input as FigmaInput } from "../../../../../../design-systems/figma/components/input"
 export { Input as MonoIndustrialInput } from "../../../../../../design-systems/monochrome-industrial/components/input"
+export { Input as GlassmorphicDarkInput } from "../../../../../../design-systems/glassmorphic-dark/components/input"
+export { Input as MidnightGlassInput } from "../../../../../../design-systems/midnight-glass/components/input"
 
 // ─── Badges ───
 export { Badge as LinearBadge } from "../../../../../../design-systems/linear/components/badge"
@@ -92,6 +98,8 @@ export { Badge as VercelBadge } from "../../../../../../design-systems/vercel/co
 export { Badge as AppleBadge } from "../../../../../../design-systems/apple/components/badge"
 export { Badge as FigmaBadge } from "../../../../../../design-systems/figma/components/badge"
 export { Badge as MonoIndustrialBadge } from "../../../../../../design-systems/monochrome-industrial/components/badge"
+export { Badge as GlassmorphicDarkBadge } from "../../../../../../design-systems/glassmorphic-dark/components/badge"
+export { Badge as MidnightGlassBadge } from "../../../../../../design-systems/midnight-glass/components/badge"
 
 // ─── Code Tabs ───
 export { CodeTabs as LinearCodeTabs } from "../../../../../../design-systems/linear/components/code-tabs"
@@ -113,6 +121,8 @@ export { CodeTabs as VercelCodeTabs } from "../../../../../../design-systems/ver
 export { CodeTabs as AppleCodeTabs } from "../../../../../../design-systems/apple/components/code-tabs"
 export { CodeTabs as FigmaCodeTabs } from "../../../../../../design-systems/figma/components/code-tabs"
 export { CodeTabs as MonoIndustrialCodeTabs } from "../../../../../../design-systems/monochrome-industrial/components/code-tabs"
+export { CodeTabs as GlassmorphicDarkCodeTabs } from "../../../../../../design-systems/glassmorphic-dark/components/code-tabs"
+export { CodeTabs as MidnightGlassCodeTabs } from "../../../../../../design-systems/midnight-glass/components/code-tabs"
 
 // ─── Cursors ───
 export { Cursor as LinearCursor } from "../../../../../../design-systems/linear/components/cursor"
@@ -134,4 +144,6 @@ export { Cursor as VercelCursor } from "../../../../../../design-systems/vercel/
 export { Cursor as AppleCursor } from "../../../../../../design-systems/apple/components/cursor"
 export { Cursor as FigmaCursor } from "../../../../../../design-systems/figma/components/cursor"
 export { Cursor as MonoIndustrialCursor } from "../../../../../../design-systems/monochrome-industrial/components/cursor"
+export { Cursor as GlassmorphicDarkCursor } from "../../../../../../design-systems/glassmorphic-dark/components/cursor"
+export { Cursor as MidnightGlassCursor } from "../../../../../../design-systems/midnight-glass/components/cursor"
 export { Spinner as MonoIndustrialSpinner } from "../../../../../../design-systems/monochrome-industrial/components/spinner"

@@ -33,6 +33,7 @@ const DS_META = [
   { id: "figma",              slug: "figma",               name: "Figma",               description: "Light design tool — Electric Violet #a259ff, purple glow, 8px radius", theme: "light" as const },
   { id: "monochrome-industrial", slug: "monochrome-industrial", name: "Monochrome Industrial", description: "Monochrome industrial — OLED black, dot-matrix Doto, signal-light red accent, sharp corners", theme: "dark" as const },
   { id: "glassmorphic-dark",  slug: "glassmorphic-dark",   name: "Glassmorphic Dark",   description: "Transparent glass panels with blur, frosted surfaces on dark backgrounds", theme: "dark" as const },
+  { id: "midnight-glass",     slug: "midnight-glass",      name: "Midnight Glass",      description: "Midnight blue glass — prismatic gradient borders, dual indigo-teal accents, frosted pills", theme: "dark" as const },
 ]
 
 /** Parse CSS custom properties from a :root { } block */

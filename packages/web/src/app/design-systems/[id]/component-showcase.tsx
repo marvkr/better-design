@@ -84,6 +84,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton"
 import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table"
@@ -117,7 +118,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { AppleHelloEnglishEffect } from "@/components/ui/apple-hello-effect"
 import { CopyStateIcon } from "@/components/ui/copy-button"
 import { GitHubStars } from "@/components/ui/github-stars"
-import { ScrollFadeEffect } from "@/components/ui/scroll-fade-effect"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { ShimmeringText } from "@/components/ui/shimmering-text"
 import {
   SlideToUnlock, SlideToUnlockHandle, SlideToUnlockText, SlideToUnlockTrack,
@@ -138,7 +139,7 @@ import {
   LinearButton, AirbnbButton, SupabaseButton, CorporateFintechButton,
   DarkOrangeButton, VibrantDarkButton, MinimalLightButton, NeutralMonochromeButton, LightMarketplaceButton, PrecisionLightButton, CinematicDarkButton,
   LinearQualityButton, EditorialDarkButton,
-  NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton, MonoIndustrialButton,
+  NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton, MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton,
   LinearCard, LinearCardHeader, LinearCardTitle, LinearCardDescription, LinearCardContent, LinearCardFooter,
   AirbnbCard, AirbnbCardHeader, AirbnbCardTitle, AirbnbCardDescription, AirbnbCardContent, AirbnbCardFooter,
   SupabaseCard, SupabaseCardHeader, SupabaseCardTitle, SupabaseCardDescription, SupabaseCardContent, SupabaseCardFooter,
@@ -159,22 +160,24 @@ import {
   AppleCard, AppleCardHeader, AppleCardTitle, AppleCardDescription, AppleCardContent, AppleCardFooter,
   FigmaCard, FigmaCardHeader, FigmaCardTitle, FigmaCardDescription, FigmaCardContent, FigmaCardFooter,
   MonoIndustrialCard, MonoIndustrialCardHeader, MonoIndustrialCardTitle, MonoIndustrialCardDescription, MonoIndustrialCardContent, MonoIndustrialCardFooter,
+  GlassmorphicDarkCard, GlassmorphicDarkCardHeader, GlassmorphicDarkCardTitle, GlassmorphicDarkCardDescription, GlassmorphicDarkCardContent, GlassmorphicDarkCardFooter,
+  MidnightGlassCard, MidnightGlassCardHeader, MidnightGlassCardTitle, MidnightGlassCardDescription, MidnightGlassCardContent, MidnightGlassCardFooter,
   LinearInput, AirbnbInput, SupabaseInput, CorporateFintechInput,
   DarkOrangeInput, VibrantDarkInput, MinimalLightInput, NeutralMonochromeInput, LightMarketplaceInput, PrecisionLightInput, CinematicDarkInput,
   LinearQualityInput, EditorialDarkInput,
-  NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput, MonoIndustrialInput,
+  NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput, MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput,
   LinearBadge, AirbnbBadge, SupabaseBadge, CorporateFintechBadge,
   DarkOrangeBadge, VibrantDarkBadge, MinimalLightBadge, NeutralMonochromeBadge, LightMarketplaceBadge, PrecisionLightBadge, CinematicDarkBadge,
   LinearQualityBadge, EditorialDarkBadge,
-  NotionBadge, StripeBadge, VercelBadge, AppleBadge, FigmaBadge, MonoIndustrialBadge,
+  NotionBadge, StripeBadge, VercelBadge, AppleBadge, FigmaBadge, MonoIndustrialBadge, GlassmorphicDarkBadge, MidnightGlassBadge,
   LinearCodeTabs, AirbnbCodeTabs, SupabaseCodeTabs, CorporateFintechCodeTabs,
   DarkOrangeCodeTabs, VibrantDarkCodeTabs, MinimalLightCodeTabs, NeutralMonochromeCodeTabs, LightMarketplaceCodeTabs, PrecisionLightCodeTabs, CinematicDarkCodeTabs,
   LinearQualityCodeTabs, EditorialDarkCodeTabs,
-  NotionCodeTabs, StripeCodeTabs, VercelCodeTabs, AppleCodeTabs, FigmaCodeTabs, MonoIndustrialCodeTabs,
+  NotionCodeTabs, StripeCodeTabs, VercelCodeTabs, AppleCodeTabs, FigmaCodeTabs, MonoIndustrialCodeTabs, GlassmorphicDarkCodeTabs, MidnightGlassCodeTabs,
   LinearCursor, AirbnbCursor, SupabaseCursor, CorporateFintechCursor,
   DarkOrangeCursor, VibrantDarkCursor, MinimalLightCursor, NeutralMonochromeCursor, LightMarketplaceCursor, PrecisionLightCursor, CinematicDarkCursor,
   LinearQualityCursor, EditorialDarkCursor,
-  NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor,
+  NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor, GlassmorphicDarkCursor, MidnightGlassCursor,
   MonoIndustrialSpinner,
 } from "./ds-registry"
 
@@ -303,6 +306,8 @@ const BUTTON_MAP: Record<string, AnyButton> = {
   apple: AppleButton as AnyButton,
   figma: FigmaButton as AnyButton,
   "monochrome-industrial": MonoIndustrialButton as AnyButton,
+  "glassmorphic-dark": GlassmorphicDarkButton as AnyButton,
+  "midnight-glass": MidnightGlassButton as AnyButton,
 }
 
 const INPUT_MAP: Record<string, AnyInput> = {
@@ -325,6 +330,8 @@ const INPUT_MAP: Record<string, AnyInput> = {
   apple: AppleInput as AnyInput,
   figma: FigmaInput as AnyInput,
   "monochrome-industrial": MonoIndustrialInput as AnyInput,
+  "glassmorphic-dark": GlassmorphicDarkInput as AnyInput,
+  "midnight-glass": MidnightGlassInput as AnyInput,
 }
 
 const BADGE_MAP: Record<string, AnyBadge> = {
@@ -347,6 +354,8 @@ const BADGE_MAP: Record<string, AnyBadge> = {
   apple: AppleBadge as AnyBadge,
   figma: FigmaBadge as AnyBadge,
   "monochrome-industrial": MonoIndustrialBadge as AnyBadge,
+  "glassmorphic-dark": GlassmorphicDarkBadge as AnyBadge,
+  "midnight-glass": MidnightGlassBadge as AnyBadge,
 }
 
 const CARD_MAP: Record<string, {
@@ -372,6 +381,8 @@ const CARD_MAP: Record<string, {
   apple: { Card: AppleCard as AnyCard, CardHeader: AppleCardHeader as AnyCardSub, CardTitle: AppleCardTitle as AnyCardSub, CardDescription: AppleCardDescription as AnyCardSub, CardContent: AppleCardContent as AnyCardSub, CardFooter: AppleCardFooter as AnyCardSub },
   figma: { Card: FigmaCard as AnyCard, CardHeader: FigmaCardHeader as AnyCardSub, CardTitle: FigmaCardTitle as AnyCardSub, CardDescription: FigmaCardDescription as AnyCardSub, CardContent: FigmaCardContent as AnyCardSub, CardFooter: FigmaCardFooter as AnyCardSub },
   "monochrome-industrial": { Card: MonoIndustrialCard as AnyCard, CardHeader: MonoIndustrialCardHeader as AnyCardSub, CardTitle: MonoIndustrialCardTitle as AnyCardSub, CardDescription: MonoIndustrialCardDescription as AnyCardSub, CardContent: MonoIndustrialCardContent as AnyCardSub, CardFooter: MonoIndustrialCardFooter as AnyCardSub },
+  "glassmorphic-dark": { Card: GlassmorphicDarkCard as AnyCard, CardHeader: GlassmorphicDarkCardHeader as AnyCardSub, CardTitle: GlassmorphicDarkCardTitle as AnyCardSub, CardDescription: GlassmorphicDarkCardDescription as AnyCardSub, CardContent: GlassmorphicDarkCardContent as AnyCardSub, CardFooter: GlassmorphicDarkCardFooter as AnyCardSub },
+  "midnight-glass": { Card: MidnightGlassCard as AnyCard, CardHeader: MidnightGlassCardHeader as AnyCardSub, CardTitle: MidnightGlassCardTitle as AnyCardSub, CardDescription: MidnightGlassCardDescription as AnyCardSub, CardContent: MidnightGlassCardContent as AnyCardSub, CardFooter: MidnightGlassCardFooter as AnyCardSub },
 }
 
 type AnyCodeTabs = React.ComponentType<{ tabs: { label: string; lang: string; code: string }[]; defaultTab?: number; className?: string }>
@@ -397,6 +408,8 @@ const CODE_TABS_MAP: Record<string, AnyCodeTabs> = {
   apple: AppleCodeTabs as AnyCodeTabs,
   figma: FigmaCodeTabs as AnyCodeTabs,
   "monochrome-industrial": MonoIndustrialCodeTabs as AnyCodeTabs,
+  "glassmorphic-dark": GlassmorphicDarkCodeTabs as AnyCodeTabs,
+  "midnight-glass": MidnightGlassCodeTabs as AnyCodeTabs,
 }
 
 const CURSOR_MAP: Record<string, AnyCursor> = {
@@ -419,6 +432,8 @@ const CURSOR_MAP: Record<string, AnyCursor> = {
   apple: AppleCursor as AnyCursor,
   figma: FigmaCursor as AnyCursor,
   "monochrome-industrial": MonoIndustrialCursor as AnyCursor,
+  "glassmorphic-dark": GlassmorphicDarkCursor as AnyCursor,
+  "midnight-glass": MidnightGlassCursor as AnyCursor,
 }
 
 const ICONS_SECTION: Section = {
@@ -452,10 +467,10 @@ function Grid({ children, cols = 1 }: { children: ReactNode; cols?: number }) {
   return <div className={className}>{children}</div>
 }
 
-function DemoCard({ name, children, minH = 110, overflow = "hidden", anchorId }: { name: string; children: ReactNode; minH?: number; overflow?: string; anchorId?: string }) {
+function DemoCard({ name, children, minH = 110, overflow = "visible", anchorId }: { name: string; children: ReactNode; minH?: number; overflow?: string; anchorId?: string }) {
   return (
-    <div id={anchorId} style={{ borderRadius: "8px", border: "1px solid var(--border)", overflow, fontSize: "13px", display: "flex", flexDirection: "column" }}>
-      <div style={{ padding: "20px 16px", display: "flex", alignItems: "center", justifyContent: "center", flex: 1, minHeight: `${minH}px`, backgroundColor: "var(--background)", color: "var(--foreground)" }}>
+    <div id={anchorId} style={{ borderRadius: "8px", border: "1px solid var(--border)", overflow: "hidden", fontSize: "13px", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "20px 16px", display: "flex", alignItems: "center", justifyContent: "center", flex: 1, minHeight: `${minH}px`, backgroundColor: "var(--background)", color: "var(--foreground)", overflow }}>
         {children}
       </div>
       <div style={{ fontSize: "11px", fontWeight: 500, color: "var(--muted-foreground)", padding: "5px 10px 7px", borderTop: "1px solid var(--border)", backgroundColor: "var(--card)" }}>
@@ -644,10 +659,21 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    const body = document.body
+    const root = document.documentElement
     Object.entries(mergedTokens).forEach(([key, value]) => {
-      body.style.setProperty(key, value)
+      root.style.setProperty(key, value)
+      // Also set the Tailwind --color-* variable so bg-popover etc. resolve correctly in portals
+      const colorKey = key.replace(/^--/, "--color-")
+      if (colorKey !== key) {
+        root.style.setProperty(colorKey, value)
+      }
     })
+    return () => {
+      Object.keys(mergedTokens).forEach((key) => {
+        root.style.removeProperty(key)
+        root.style.removeProperty(key.replace(/^--/, "--color-"))
+      })
+    }
   }, [mergedTokens])
 
   const scrollToSection = (sectionId: string) => {
@@ -1178,9 +1204,9 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                 </div>
               </DemoCard>
               <DemoCard name="Textarea" anchorId="fi-textarea" minH={90}>
-                <textarea
+                <Textarea
                   placeholder="Type your message here..."
-                  className="w-full min-h-[70px] rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                  className="w-full min-h-[70px] resize-none"
                 />
               </DemoCard>
               <DemoCard name="Calendar" anchorId="fi-calendar" minH={280}>
@@ -1513,7 +1539,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                     <DropdownMenuItem>Billing</DropdownMenuItem>
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-destructive">Log out</DropdownMenuItem>
+                    <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </DemoCard>
@@ -1955,13 +1981,13 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                 </Collapsible>
               </DemoCard>
               <DemoCard name="Scroll Area" anchorId="ls-scroll" minH={110}>
-                <ScrollFadeEffect className="h-[80px] w-full rounded-md border p-3">
+                <ScrollArea className="h-[80px] w-full rounded-md border p-3">
                   <div className="space-y-1">
                     {["Radix UI", "Tailwind CSS", "TypeScript", "Next.js", "React", "Vercel", "shadcn/ui"].map((item) => (
                       <div key={item} className="text-sm text-muted-foreground border-b last:border-b-0 py-0.5">{item}</div>
                     ))}
                   </div>
-                </ScrollFadeEffect>
+                </ScrollArea>
               </DemoCard>
               <DemoCard name="Separator" anchorId="ls-separator" minH={80}>
                 <div className="w-full space-y-2">
