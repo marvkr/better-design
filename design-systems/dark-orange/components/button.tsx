@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 // 10px radius (medium), 8px (small)
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground font-medium",
+  "relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground disabled:shadow-none disabled:ring-0 disabled:hover:shadow-none font-medium",
   {
     variants: {
       variant: {
