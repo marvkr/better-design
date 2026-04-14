@@ -5,40 +5,40 @@
 
 :root {
   /* Dynamic — dark theme, vibrant colors, pill-shaped components */
-  --background: hsl(0 0% 0%);               /* pure black */
-  --foreground: hsl(210 3% 93%);            /* rgb(236, 237, 238) */
+  --background: oklch(0 0 0);               /* pure black */
+  --foreground: oklch(0.9463 0.0009 247.83);            /* rgb(236, 237, 238) */
 
-  --card: hsl(240 6% 10%);                  /* rgb(24, 24, 27) content1 */
-  --card-foreground: hsl(210 3% 93%);
+  --card: oklch(0.2102 0.006 285.87);                  /* rgb(24, 24, 27) content1 */
+  --card-foreground: oklch(0.9463 0.0009 247.83);
 
-  --popover: hsl(240 5% 12%);
-  --popover-foreground: hsl(210 3% 93%);
+  --popover: oklch(0.2323 0.0058 285.94);
+  --popover-foreground: oklch(0.9463 0.0009 247.83);
 
-  --primary: hsl(212 100% 47%);             /* rgb(0, 111, 238) #006FEE */
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: oklch(0.5702 0.2106 257.94);             /* rgb(0, 111, 238) #006FEE */
+  --primary-foreground: oklch(1 0 0);
 
-  --secondary: hsl(240 4% 16%);             /* rgb(39, 39, 42) neutral/default bg */
-  --secondary-foreground: hsl(210 3% 93%);
+  --secondary: oklch(0.2747 0.006 286);             /* rgb(39, 39, 42) neutral/default bg */
+  --secondary-foreground: oklch(0.9463 0.0009 247.83);
 
-  --muted: hsl(240 4% 16%);
-  --muted-foreground: hsl(240 5% 65%);      /* rgb(161, 161, 170) */
+  --muted: oklch(0.2747 0.006 286);
+  --muted-foreground: oklch(0.7127 0.0128 286.07);      /* rgb(161, 161, 170) */
 
-  --accent: hsl(270 59% 58%);               /* rgb(147, 83, 211) #9353D3 — Dynamic purple secondary */
-  --accent-foreground: hsl(0 0% 100%);
+  --accent: oklch(0.5802 0.1895 304.14);               /* rgb(147, 83, 211) #9353D3 — Dynamic purple secondary */
+  --accent-foreground: oklch(1 0 0);
 
-  --destructive: hsl(339 90% 51%);          /* rgb(243, 18, 96) #F31260 */
-  --destructive-foreground: hsl(0 0% 100%);
+  --destructive: oklch(0.6183 0.2417 11.15);          /* rgb(243, 18, 96) #F31260 */
+  --destructive-foreground: oklch(1 0 0);
 
   /* Extended Dynamic semantic tokens */
-  --success: hsl(146 80% 44%);              /* rgb(23, 201, 100) #17C964 */
-  --success-foreground: hsl(0 0% 100%);
+  --success: oklch(0.7355 0.1945 150.78);              /* rgb(23, 201, 100) #17C964 */
+  --success-foreground: oklch(1 0 0);
 
-  --warning: hsl(37 91% 55%);               /* rgb(245, 165, 36) #F5A524 */
-  --warning-foreground: hsl(0 0% 0%);
+  --warning: oklch(0.7808 0.1583 72.25);               /* rgb(245, 165, 36) #F5A524 */
+  --warning-foreground: oklch(0 0 0);
 
-  --border: hsl(240 4% 18%);
-  --input: hsl(240 4% 16%);
-  --ring: hsl(212 100% 47%);
+  --border: oklch(0.2948 0.0066 285.99);
+  --input: oklch(0.2747 0.006 286);
+  --ring: oklch(0.5702 0.2106 257.94);
   --radius: 0.75rem;                   /* 12px — Dynamic medium radius */
 }
 

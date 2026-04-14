@@ -8,38 +8,38 @@
   /* Background: rgb(247,247,247) = near-white  */
   /* Foreground: rgb(46,46,46) = charcoal body text */
   /* Primary button: charcoal bg (#2e2e2e) + precision layered shadow */
-  /* Ring/focus: blue #335cff = hsl(228,100%,60%) */
+  /* Ring/focus: blue #335cff = oklch(0.5547 0.2451 266.71) */
   /* Card: white bg + multi-layer doubling-radii shadow + 1px ring */
 
-  --background: hsl(0 0% 97%);          /* rgb(247,247,247) near-white */
-  --foreground: hsl(0 0% 18%);          /* rgb(46,46,46) charcoal */
+  --background: oklch(0.9772 0 0);          /* rgb(247,247,247) near-white */
+  --foreground: oklch(0.3008 0 0);          /* rgb(46,46,46) charcoal */
 
-  --card: hsl(0 0% 100%);               /* white */
-  --card-foreground: hsl(0 0% 18%);
+  --card: oklch(1 0 0);               /* white */
+  --card-foreground: oklch(0.3008 0 0);
 
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(0 0% 18%);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.3008 0 0);
 
   /* Primary: charcoal near-black (CTA button bg matches body text color) */
-  --primary: hsl(0 0% 18%);
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: oklch(0.3008 0 0);
+  --primary-foreground: oklch(1 0 0);
 
   /* Secondary: white surface button */
-  --secondary: hsl(0 0% 100%);
-  --secondary-foreground: hsl(0 0% 18%);
+  --secondary: oklch(1 0 0);
+  --secondary-foreground: oklch(0.3008 0 0);
 
-  --muted: hsl(0 0% 96%);
-  --muted-foreground: hsl(0 0% 36%);    /* rgb(92,92,92) */
+  --muted: oklch(0.9696 0 0);
+  --muted-foreground: oklch(0.4741 0 0);    /* rgb(92,92,92) */
 
-  --accent: hsl(0 0% 95%);
-  --accent-foreground: hsl(0 0% 18%);
+  --accent: oklch(0.9619 0 0);
+  --accent-foreground: oklch(0.3008 0 0);
 
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 100%);
+  --destructive: oklch(0.6356 0.2082 25.38);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: hsl(0 0% 92%);              /* rgb(235,235,235) */
-  --input: hsl(0 0% 97%);               /* same as bg */
-  --ring: hsl(228 100% 60%);            /* blue #335cff — focus rings */
+  --border: oklch(0.9389 0 0);              /* rgb(235,235,235) */
+  --input: oklch(0.9772 0 0);               /* same as bg */
+  --ring: oklch(0.5547 0.2451 266.71);            /* blue #335cff — focus rings */
 
   /* 10px radius — Sharp Light's signature rounded-[10px] */
   --radius: 0.625rem;

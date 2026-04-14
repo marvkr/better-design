@@ -5,39 +5,39 @@
 
 :root {
   /* Sharp Dark — dark landing page style extracted from the original site */
-  /* Brand orange: #F05023 = hsl(13, 87%, 54%) */
-  /* Background: #1c1c1c = hsl(0,0%,11%) */
-  /* Surface: #191919 = hsl(0,0%,10%) */
-  /* Border: #262626 = hsl(0,0%,15%) */
+  /* Brand orange: #F05023 = oklch(0.6469 0.2036 35.49) */
+  /* Background: #1c1c1c = oklch(0.2267 0 0) */
+  /* Surface: #191919 = oklch(0.2156 0 0) */
+  /* Border: #262626 = oklch(0.2697 0 0) */
 
-  --background: hsl(0 0% 11%);          /* #1c1c1c */
-  --foreground: hsl(0 0% 96%);          /* near-white */
+  --background: oklch(0.2267 0 0);          /* #1c1c1c */
+  --foreground: oklch(0.9696 0 0);          /* near-white */
 
-  --card: hsl(0 0% 10%);                /* #191919 */
-  --card-foreground: hsl(0 0% 96%);
+  --card: oklch(0.2156 0 0);                /* #191919 */
+  --card-foreground: oklch(0.9696 0 0);
 
-  --popover: hsl(0 0% 10%);
-  --popover-foreground: hsl(0 0% 96%);
+  --popover: oklch(0.2156 0 0);
+  --popover-foreground: oklch(0.9696 0 0);
 
   /* Brand orange: #F05023 */
-  --primary: hsl(13 87% 54%);
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: oklch(0.6469 0.2036 35.49);
+  --primary-foreground: oklch(1 0 0);
 
-  --secondary: hsl(0 0% 15%);           /* #262626 */
-  --secondary-foreground: hsl(0 0% 75%);
+  --secondary: oklch(0.2697 0 0);           /* #262626 */
+  --secondary-foreground: oklch(0.8054 0 0);
 
-  --muted: hsl(0 0% 14%);
-  --muted-foreground: hsl(0 0% 50%);
+  --muted: oklch(0.2591 0 0);
+  --muted-foreground: oklch(0.5982 0 0);
 
-  --accent: hsl(0 0% 17%);
-  --accent-foreground: hsl(0 0% 96%);
+  --accent: oklch(0.2905 0 0);
+  --accent-foreground: oklch(0.9696 0 0);
 
-  --destructive: hsl(355 96% 60%);
-  --destructive-foreground: hsl(0 0% 100%);
+  --destructive: oklch(0.6469 0.2287 22.64);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: hsl(0 0% 15%);              /* #262626 */
-  --input: hsl(0 0% 13%);
-  --ring: hsl(13 87% 54%);              /* orange ring */
+  --border: oklch(0.2697 0 0);              /* #262626 */
+  --input: oklch(0.2484 0 0);
+  --ring: oklch(0.6469 0.2036 35.49);              /* orange ring */
 
   /* 10px radius — Sharp Dark's signature rounded-10 */
   --radius: 0.625rem;

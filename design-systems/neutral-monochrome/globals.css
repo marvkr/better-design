@@ -12,33 +12,33 @@
   /* Primary: #fff pure white — monochromatic like Luxe but sharper */
   /* Radius: 0.5rem = 8px (vs Luxe 12px, Energetic 14px) */
 
-  --background: hsl(240 10% 4%);           /* #09090b near-black */
-  --foreground: hsl(0 0% 98%);             /* near-white */
+  --background: oklch(0.1417 0.0044 285.82);           /* #09090b near-black */
+  --foreground: oklch(0.9848 0 0);             /* near-white */
 
-  --card: hsl(240 10% 4%);                 /* same as background */
-  --card-foreground: hsl(0 0% 98%);
+  --card: oklch(0.1417 0.0044 285.82);                 /* same as background */
+  --card-foreground: oklch(0.9848 0 0);
 
-  --popover: hsl(240 10% 4%);
-  --popover-foreground: hsl(0 0% 98%);
+  --popover: oklch(0.1417 0.0044 285.82);
+  --popover-foreground: oklch(0.9848 0 0);
 
-  --primary: hsl(0 0% 98%);               /* near-white — monochromatic */
-  --primary-foreground: hsl(240 10% 4%);  /* near-black on white */
+  --primary: oklch(0.9848 0 0);               /* near-white — monochromatic */
+  --primary-foreground: oklch(0.1417 0.0044 285.82);  /* near-black on white */
 
-  --secondary: hsl(240 4% 16%);           /* dark cool gray panel #25252e */
-  --secondary-foreground: hsl(0 0% 98%);
+  --secondary: oklch(0.2747 0.006 286);           /* dark cool gray panel #25252e */
+  --secondary-foreground: oklch(0.9848 0 0);
 
-  --muted: hsl(240 4% 16%);
-  --muted-foreground: hsl(240 5% 65%);    /* medium gray #9b9ba8 */
+  --muted: oklch(0.2747 0.006 286);
+  --muted-foreground: oklch(0.7127 0.0128 286.07);    /* medium gray #9b9ba8 */
 
-  --accent: hsl(240 4% 20%);              /* slightly lighter than secondary */
-  --accent-foreground: hsl(0 0% 98%);
+  --accent: oklch(0.3146 0.0072 285.98);              /* slightly lighter than secondary */
+  --accent-foreground: oklch(0.9848 0 0);
 
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 98%);
+  --destructive: oklch(0.6356 0.2082 25.38);
+  --destructive-foreground: oklch(0.9848 0 0);
 
-  --border: hsl(240 4% 16%);              /* same as secondary */
-  --input: hsl(240 4% 16%);
-  --ring: hsl(0 0% 98%);                  /* white ring */
+  --border: oklch(0.2747 0.006 286);              /* same as secondary */
+  --input: oklch(0.2747 0.006 286);
+  --ring: oklch(0.9848 0 0);                  /* white ring */
   --radius: 0.5rem;                  /* 8px — sharper than Luxe(12) Energetic(14) */
 }
 

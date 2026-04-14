@@ -4,35 +4,35 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(220 9% 7%);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1788 0.0047 264.45);
 
   /* Card: rgb(240,240,240) — browser-extracted from the original site/jaydwivedi */
   /* Energetic uses bg color contrast for cards, zero shadow anywhere */
-  --card: hsl(0 0% 94%);
-  --card-foreground: hsl(220 9% 7%);
+  --card: oklch(0.9542 0 0);
+  --card-foreground: oklch(0.1788 0.0047 264.45);
 
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(220 9% 7%);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1788 0.0047 264.45);
 
-  --primary: hsl(220 5% 11%);
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: oklch(0.2244 0.0039 264.49);
+  --primary-foreground: oklch(1 0 0);
 
-  --secondary: hsl(0 0% 95%);
-  --secondary-foreground: hsl(220 5% 11%);
+  --secondary: oklch(0.9619 0 0);
+  --secondary-foreground: oklch(0.2244 0.0039 264.49);
 
-  --muted: hsl(0 0% 96%);
-  --muted-foreground: hsl(0 0% 45%);
+  --muted: oklch(0.9696 0 0);
+  --muted-foreground: oklch(0.5547 0 0);
 
-  --accent: hsl(0 0% 96%);
-  --accent-foreground: hsl(220 5% 11%);
+  --accent: oklch(0.9696 0 0);
+  --accent-foreground: oklch(0.2244 0.0039 264.49);
 
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 100%);
+  --destructive: oklch(0.6356 0.2082 25.38);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: hsl(0 0% 90%);
-  --input: hsl(0 0% 90%);
-  --ring: hsl(220 5% 11%);
+  --border: oklch(0.9234 0 0);
+  --input: oklch(0.9234 0 0);
+  --ring: oklch(0.2244 0.0039 264.49);
   --radius: 0.875rem;
 
   /* Shadow overrides — light theme: minimal, borderless aesthetic */

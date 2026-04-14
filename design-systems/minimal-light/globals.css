@@ -10,35 +10,35 @@
   /* Font: Geist Sans, border-radius 12px */
   /* Border: #d9d9d9, no shadows on any elements */
 
-  --background: hsl(0 0% 96%);          /* #f5f5f5 rgb(245,245,245) */
-  --foreground: hsl(225 5% 31%);        /* #4a4c52 rgb(74,76,82) */
+  --background: oklch(0.9696 0 0);          /* #f5f5f5 rgb(245,245,245) */
+  --foreground: oklch(0.4208 0.0101 271.17);        /* #4a4c52 rgb(74,76,82) */
 
-  --card: hsl(0 0% 97%);                /* oklch(0.97) near-white */
-  --card-foreground: hsl(225 5% 31%);
+  --card: oklch(0.9772 0 0);                /* oklch(0.97) near-white */
+  --card-foreground: oklch(0.4208 0.0101 271.17);
 
-  --popover: hsl(0 0% 97%);
-  --popover-foreground: hsl(225 5% 31%);
+  --popover: oklch(0.9772 0 0);
+  --popover-foreground: oklch(0.4208 0.0101 271.17);
 
   /* Primary: black — monochromatic */
-  --primary: hsl(0 0% 0%);              /* #000 */
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: oklch(0 0 0);              /* #000 */
+  --primary-foreground: oklch(1 0 0);
 
   /* Secondary: slightly lighter than background */
-  --secondary: hsl(0 0% 93%);
-  --secondary-foreground: hsl(225 5% 37%);
+  --secondary: oklch(0.9466 0 0);
+  --secondary-foreground: oklch(0.4751 0.0117 271.16);
 
-  --muted: hsl(0 0% 96%);
-  --muted-foreground: hsl(0 0% 44%);    /* oklch(0.556) */
+  --muted: oklch(0.9696 0 0);
+  --muted-foreground: oklch(0.5459 0 0);    /* oklch(0.556) */
 
-  --accent: hsl(0 0% 93%);
-  --accent-foreground: hsl(225 5% 31%);
+  --accent: oklch(0.9466 0 0);
+  --accent-foreground: oklch(0.4208 0.0101 271.17);
 
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 100%);
+  --destructive: oklch(0.6356 0.2082 25.38);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: hsl(0 0% 85%);              /* #d9d9d9 */
-  --input: hsl(0 0% 96%);
-  --ring: hsl(0 0% 0%);                 /* black focus ring */
+  --border: oklch(0.8845 0 0);              /* #d9d9d9 */
+  --input: oklch(0.9696 0 0);
+  --ring: oklch(0 0 0);                 /* black focus ring */
   --radius: 0.75rem;               /* 12px */
 
   /* Shadow overrides — light theme: clean minimal shadows, not dark-mode 40% black */

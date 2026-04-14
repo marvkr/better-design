@@ -1,13 +1,14 @@
 {
-  "name": "@better-design/mcp-server",
-  "version": "3.0.0",
+  "name": "better-design-mcp",
+  "version": "0.2.0",
   "description": "MCP server for Better Design — design systems, UI principles, icons, and code review",
   "type": "module",
   "bin": {
     "better-design-mcp": "dist/index.js"
   },
   "scripts": {
-    "build": "bun run tsc",
+    "build": "tsup",
+    "build:tsc": "bun run tsc",
     "dev": "bun run tsc --watch",
     "start": "bun run dist/index.js",
     "typecheck": "node --max-old-space-size=6144 ../../node_modules/typescript/bin/tsc --noEmit",
@@ -20,22 +21,41 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },
+  "keywords": [
+    "mcp",
+    "design-system",
+    "ui",
+    "design",
+    "accessibility",
+    "wcag",
+    "icons",
+    "shadcn",
+    "claude",
+    "ai"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marvkr/better-design",
+    "directory": "packages/mcp"
+  },
+  "homepage": "https://better-design.com",
   "files": [
     "dist",
     "README.md"
   ],
   "dependencies": {
-    "@better-design/shared": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.27.1",
-    "dotenv": "^16.4.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@better-design/shared": "workspace:*",
     "@google/generative-ai": "^0.21.0",
     "@neondatabase/serverless": "^0.10.4",
     "@types/node": "^22.13.14",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
+    "tsup": "^8.4.0",
     "tsx": "^4.19.0",
     "typescript": "^5.8.2"
   }
