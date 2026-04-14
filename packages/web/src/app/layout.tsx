@@ -47,11 +47,13 @@ export const metadata: Metadata = {
     apple: "/logo.svg",
   },
   openGraph: {
-    title: "Better Design — Make the web sexy again",
+    title: "Better Design — Design systems for the AI era.",
     description:
-      "Pick a vibe. Get the puzzles. Put something beautiful into the world.",
+      "Define your brand. Get 80+ components as building blocks. Push something beautiful into the world.",
     siteName: "Better Design",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    // Image intentionally omitted — Next.js resolves it from the
+    // `opengraph-image` file convention at src/app/opengraph-image.tsx
+    // (and `twitter-image.tsx` for Twitter cards).
   },
   twitter: {
     card: "summary_large_image",
