@@ -1,0 +1,17 @@
+{
+  "name": "chart",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as RechartsPrimitive from \"recharts\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Chart: dark bg recharts wrapper with card container\n\nconst ChartContainer = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { config?: Record<string, { label?: string; color?: string }> }\n>(({ className, children, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex aspect-video w-full items-center justify-center rounded-2xl bg-card p-4\", className)}\n    {...props}\n  >\n    <RechartsPrimitive.ResponsiveContainer width=\"100%\" height=\"100%\">\n      {children as React.ReactElement}\n    </RechartsPrimitive.ResponsiveContainer>\n  </div>\n))\nChartContainer.displayName = \"ChartContainer\"\n\nconst ChartTooltip = RechartsPrimitive.Tooltip\n\nconst ChartTooltipContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & {\n    active?: boolean\n    payload?: Array<{ name?: string; value?: number | string; color?: string }>\n    label?: string\n    hideLabel?: boolean\n  }\n>(({ active, payload, label, hideLabel, className, ...props }, ref) => {\n  if (!active || !payload?.length) return null\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\"rounded-xl bg-card border border-border p-3 text-xs shadow-[0_8px_30px_0_rgba(0,0,0,0.5)]\", className)}\n      {...props}\n    >\n      {!hideLabel && label && <p className=\"mb-1.5 font-medium text-foreground\">{label}</p>}\n      <div className=\"flex flex-col gap-1\">\n        {payload.map((entry, i) => (\n          <div key={i} className=\"flex items-center gap-2\">\n            {entry.color && (\n              <span className=\"h-2 w-2 shrink-0 rounded-full\" style={{ backgroundColor: entry.color }} />\n            )}\n            <span className=\"text-muted-foreground\">{entry.name}:</span>\n            <span className=\"font-medium text-foreground\">{entry.value}</span>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n})\nChartTooltipContent.displayName = \"ChartTooltipContent\"\n\nconst ChartLegend = RechartsPrimitive.Legend\n\nconst ChartLegendContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & {\n    payload?: Array<{ value?: string; color?: string }>\n  }\n>(({ payload, className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"flex flex-wrap items-center justify-center gap-4 pt-3 text-xs\", className)} {...props}>\n    {payload?.map((entry, i) => (\n      <div key={i} className=\"flex items-center gap-1.5\">\n        <span className=\"h-2 w-2 shrink-0 rounded-full\" style={{ backgroundColor: entry.color }} />\n        <span className=\"text-muted-foreground\">{entry.value}</span>\n      </div>\n    ))}\n  </div>\n))\nChartLegendContent.displayName = \"ChartLegendContent\"\n\nexport { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

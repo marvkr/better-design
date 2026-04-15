@@ -1,0 +1,82 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Monochrome Industrial Button — monochrome, industrial, sharp corners.\n// Default = white-on-black (or black-on-white in light mode), no shadows,\n// 1px hairline border separation, Space Mono ALL CAPS for the label.\n// Destructive uses the signal-light red (#D71921).\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"font-[family-name:var(--font-mono)] uppercase tracking-[0.08em] text-[12px] font-medium\",\n    \"rounded-none border transition-[background-color,color,border-color] duration-150 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mono-accent)] focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:translate-y-[1px]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary — high-contrast slab. Inverted background, no shadow.\n        default:\n          \"bg-primary text-primary-foreground border-primary \" +\n          \"hover:bg-primary/90 hover:border-primary/90\",\n        // Secondary — surface with hairline border.\n        secondary:\n          \"bg-[var(--mono-surface-raised)] text-foreground border-[var(--mono-border-visible)] \" +\n          \"hover:border-foreground/60\",\n        // Outline — fully transparent, border carries the weight.\n        outline:\n          \"bg-transparent text-foreground border-[var(--mono-border-visible)] \" +\n          \"hover:border-foreground hover:bg-[var(--mono-surface)]\",\n        // Ghost — no border, no fill, label only. The minimal end of the system.\n        ghost:\n          \"bg-transparent text-muted-foreground border-transparent \" +\n          \"hover:text-foreground hover:bg-[var(--mono-surface)]\",\n        // Destructive — the signal-light red moment.\n        destructive:\n          \"bg-[var(--mono-accent)] text-white border-[var(--mono-accent)] \" +\n          \"hover:bg-[var(--mono-accent)]/90\",\n        // Link — Space Mono underlined.\n        link:\n          \"border-transparent text-foreground underline underline-offset-[6px] decoration-[1px] \" +\n          \"hover:text-[var(--mono-accent)]\",\n      },\n      size: {\n        sm:      \"h-8  px-3 text-[11px]\",\n        default: \"h-10 px-5\",\n        lg:      \"h-12 px-7 text-[13px]\",\n        icon:    \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--mono-black": "#000000",
+      "--mono-surface": "#111111",
+      "--mono-surface-raised": "#1a1a1a",
+      "--mono-border": "#222222",
+      "--mono-border-visible": "#333333",
+      "--mono-text-disabled": "#666666",
+      "--mono-text-secondary": "#999999",
+      "--mono-text-primary": "#e8e8e8",
+      "--mono-text-display": "#ffffff",
+      "--mono-accent": "#d71921",
+      "--mono-accent-subtle": "rgba(215, 25, 33, 0.15)",
+      "--mono-success": "#4a9e5c",
+      "--mono-warning": "#d4a843",
+      "--mono-error": "#d71921",
+      "--mono-info": "#999999",
+      "--mono-interactive": "#5b9bf6",
+      "--background": "#000000",
+      "--foreground": "#e8e8e8",
+      "--card": "#111111",
+      "--card-foreground": "#e8e8e8",
+      "--popover": "#111111",
+      "--popover-foreground": "#e8e8e8",
+      "--primary": "#ffffff",
+      "--primary-foreground": "#000000",
+      "--secondary": "#1a1a1a",
+      "--secondary-foreground": "#e8e8e8",
+      "--muted": "#111111",
+      "--muted-foreground": "#999999",
+      "--accent": "#d71921",
+      "--accent-foreground": "#ffffff",
+      "--destructive": "#d71921",
+      "--destructive-foreground": "#ffffff",
+      "--border": "#222222",
+      "--input": "#222222",
+      "--ring": "#d71921",
+      "--radius": "0rem",
+      "--display-xl": "72px",
+      "--display-lg": "48px",
+      "--display-md": "36px",
+      "--heading": "24px",
+      "--subheading": "18px",
+      "--body": "16px",
+      "--body-sm": "14px",
+      "--caption": "12px",
+      "--label": "11px",
+      "--space-2xs": "2px",
+      "--space-xs": "4px",
+      "--space-sm": "8px",
+      "--space-md": "16px",
+      "--space-lg": "24px",
+      "--space-xl": "32px",
+      "--space-2xl": "48px",
+      "--space-3xl": "64px",
+      "--space-4xl": "96px",
+      "--ease-mono": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      "--duration-micro": "200ms",
+      "--duration-transition": "350ms",
+      "--font-display": "\"Doto\", \"Space Mono\", monospace",
+      "--font-sans": "\"Space Grotesk\", \"DM Sans\", system-ui, sans-serif",
+      "--font-mono": "\"Space Mono\", \"JetBrains Mono\", \"SF Mono\", monospace"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Card, CardContent } from \"@/components/ui/card\"\n\n// Linear Stat Card: displays a metric with label, value, and optional change indicator\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: string | number\n  change?: {\n    value: string | number\n    trend: \"up\" | \"down\" | \"neutral\"\n  }\n  icon?: React.ReactNode\n  description?: string\n}\n\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  return (\n    <Card className={cn(\"\", className)} {...props}>\n      <CardContent className=\"p-5\">\n        <div className=\"flex items-start justify-between\">\n          <div className=\"flex flex-col gap-1\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"text-2xl font-semibold tracking-tight text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <div className=\"flex h-9 w-9 items-center justify-center rounded-[10px] bg-secondary text-muted-foreground\">\n              {icon}\n            </div>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"mt-3 flex items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex items-center rounded-full px-1.5 py-0.5 text-xs font-medium\",\n                  change.trend === \"up\" && \"bg-emerald-500/10 text-emerald-700\",\n                  change.trend === \"down\" && \"bg-destructive/10 text-destructive\",\n                  change.trend === \"neutral\" && \"bg-secondary text-muted-foreground\"\n                )}\n              >\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-xs text-muted-foreground\">{description}</span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  )\n}\n\nexport { StatCard }\nexport type { StatCardProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "card",
+    "utils"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\nimport { cn } from \"@/lib/utils\"\n\nconst Collapsible = CollapsiblePrimitive.Root\n\nconst CollapsibleTrigger = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleTrigger>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleTrigger\n    ref={ref}\n    className={cn(\n      \"flex w-full items-center justify-between rounded-xl px-4 py-3\",\n      \"backdrop-blur-md bg-white/[0.06] border border-white/10\",\n      \"text-sm font-medium text-white/90\",\n      \"transition-all duration-200\",\n      \"hover:bg-white/[0.10] hover:shadow-[0_0_12px_rgba(255,255,255,0.06)]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.65_0.19_250)]/40\",\n      \"[&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-b-white/[0.04]\",\n      className\n    )}\n    {...props}\n  />\n))\nCollapsibleTrigger.displayName = CollapsiblePrimitive.CollapsibleTrigger.displayName\n\nconst CollapsibleContent = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleContent>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleContent>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleContent\n    ref={ref}\n    className={cn(\n      \"overflow-hidden rounded-b-xl\",\n      \"backdrop-blur-md bg-white/[0.04] border border-t-0 border-white/10\",\n      \"data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down\",\n      className\n    )}\n    {...props}\n  />\n))\nCollapsibleContent.displayName = CollapsiblePrimitive.CollapsibleContent.displayName\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Section Header — signature dotted-line separator pattern.\n// Label + dotted line that fills remaining space + optional actions.\n// Clean, understated, no glass, no gradients.\n\nconst SectionHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex items-center gap-3 pb-4\", className)}\n    {...props}\n  />\n))\nSectionHeader.displayName = \"SectionHeader\"\n\nconst SectionHeaderLabel = React.forwardRef<\n  HTMLSpanElement,\n  React.HTMLAttributes<HTMLSpanElement>\n>(({ className, ...props }, ref) => (\n  <span\n    ref={ref}\n    className={cn(\n      \"text-xs font-semibold uppercase tracking-wider text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nSectionHeaderLabel.displayName = \"SectionHeaderLabel\"\n\nconst SectionHeaderLine = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    aria-hidden=\"true\"\n    className={cn(\"flex-1 border-t border-dotted border-border\", className)}\n    {...props}\n  />\n))\nSectionHeaderLine.displayName = \"SectionHeaderLine\"\n\nconst SectionHeaderTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h2\n    ref={ref}\n    className={cn(\n      \"text-lg font-semibold tracking-tight text-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nSectionHeaderTitle.displayName = \"SectionHeaderTitle\"\n\nconst SectionHeaderDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nSectionHeaderDescription.displayName = \"SectionHeaderDescription\"\n\nconst SectionHeaderActions = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex items-center gap-2\", className)}\n    {...props}\n  />\n))\nSectionHeaderActions.displayName = \"SectionHeaderActions\"\n\nexport {\n  SectionHeader,\n  SectionHeaderLabel,\n  SectionHeaderLine,\n  SectionHeaderTitle,\n  SectionHeaderDescription,\n  SectionHeaderActions,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

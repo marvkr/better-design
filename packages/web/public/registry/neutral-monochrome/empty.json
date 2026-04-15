@@ -1,0 +1,14 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Earthy Empty: dark neutral, rounded-lg container with dashed border\n// No colored glows — monochromatic icon box, minimal white-on-dark text\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ icon, title, description, action, className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center gap-5\",\n          \"rounded-lg border border-dashed border-border\",\n          \"bg-secondary/30 p-12 text-center\",\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div\n            className={cn(\n              \"flex h-12 w-12 items-center justify-center rounded-lg\",\n              \"border border-border bg-secondary\",\n              \"text-muted-foreground\",\n              \"[&>svg]:h-5 [&>svg]:w-5\"\n            )}\n          >\n            {icon}\n          </div>\n        )}\n\n        <div className=\"flex flex-col gap-1.5 max-w-xs\">\n          <p className=\"text-sm font-medium text-foreground leading-snug\">\n            {title}\n          </p>\n          {description && (\n            <p className=\"text-sm text-muted-foreground leading-relaxed\">\n              {description}\n            </p>\n          )}\n        </div>\n\n        {action && (\n          <div className=\"flex items-center gap-2\">\n            {action}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

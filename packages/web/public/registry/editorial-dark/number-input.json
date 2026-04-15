@@ -1,0 +1,17 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Minus, Plus } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Editorial Dark Number Input: input with increment/decrement buttons\n\ninterface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  ({ className, value = 0, onChange, min, max, step = 1, disabled, ...props }, ref) => {\n    const handleDecrement = () => {\n      const newValue = value - step\n      if (min === undefined || newValue >= min) {\n        onChange?.(newValue)\n      }\n    }\n\n    const handleIncrement = () => {\n      const newValue = value + step\n      if (max === undefined || newValue <= max) {\n        onChange?.(newValue)\n      }\n    }\n\n    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n      const parsed = parseFloat(e.target.value)\n      if (!isNaN(parsed)) {\n        onChange?.(parsed)\n      }\n    }\n\n    return (\n      <div\n        className={cn(\n          \"flex h-10 w-full overflow-hidden rounded-[10px] border border-border bg-background\",\n          \"shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\",\n          \"transition duration-200 focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]\",\n          disabled && \"opacity-70 cursor-not-allowed\",\n          className\n        )}\n      >\n        <button\n          type=\"button\"\n          onClick={handleDecrement}\n          disabled={disabled || (min !== undefined && value <= min)}\n          className=\"flex h-full w-10 shrink-0 items-center justify-center border-r border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:opacity-40\"\n        >\n          <Minus className=\"h-3.5 w-3.5\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          value={value}\n          onChange={handleChange}\n          disabled={disabled}\n          min={min}\n          max={max}\n          step={step}\n          className=\"flex-1 bg-transparent px-2 text-center text-sm text-foreground focus:outline-none disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\"\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleIncrement}\n          disabled={disabled || (max !== undefined && value >= max)}\n          className=\"flex h-full w-10 shrink-0 items-center justify-center border-l border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:opacity-40\"\n        >\n          <Plus className=\"h-3.5 w-3.5\" />\n        </button>\n      </div>\n    )\n  }\n)\nNumberInput.displayName = \"NumberInput\"\n\nexport { NumberInput }\nexport type { NumberInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

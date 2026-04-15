@@ -1,0 +1,14 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\"\n\n// Dynamic Avatar Group: overlapping avatars with ring-2 ring-background\n\ninterface AvatarGroupItem {\n  src?: string\n  alt?: string\n  fallback: string\n}\n\ninterface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  avatars: AvatarGroupItem[]\n  max?: number\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm: \"h-7 w-7 text-xs\",\n  md: \"h-9 w-9 text-sm\",\n  lg: \"h-11 w-11 text-base\",\n}\n\nfunction AvatarGroup({ avatars, max = 5, size = \"md\", className, ...props }: AvatarGroupProps) {\n  const visible = avatars.slice(0, max)\n  const overflow = avatars.length - max\n\n  return (\n    <div className={cn(\"flex items-center\", className)} {...props}>\n      {visible.map((av, i) => (\n        <Avatar\n          key={i}\n          className={cn(\n            sizeClasses[size],\n            \"ring-2 ring-background\",\n            i > 0 && \"-ml-2\"\n          )}\n        >\n          {av.src && <AvatarImage src={av.src} alt={av.alt} />}\n          <AvatarFallback>{av.fallback}</AvatarFallback>\n        </Avatar>\n      ))}\n      {overflow > 0 && (\n        <div\n          className={cn(\n            \"flex shrink-0 items-center justify-center rounded-full ring-2 ring-background\",\n            \"bg-secondary text-secondary-foreground font-medium -ml-2\",\n            sizeClasses[size]\n          )}\n        >\n          +{overflow}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { AvatarGroup }\nexport type { AvatarGroupProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

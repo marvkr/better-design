@@ -1,0 +1,40 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Vibrant Dark",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n:root {\n  /* Dynamic — dark theme, vibrant colors, pill-shaped components */\n  --background: oklch(0 0 0);               /* pure black */\n  --foreground: oklch(0.9463 0.0009 247.83);            /* rgb(236, 237, 238) */\n\n  --card: oklch(0.2102 0.006 285.87);                  /* rgb(24, 24, 27) content1 */\n  --card-foreground: oklch(0.9463 0.0009 247.83);\n\n  --popover: oklch(0.2323 0.0058 285.94);\n  --popover-foreground: oklch(0.9463 0.0009 247.83);\n\n  --primary: oklch(0.5702 0.2106 257.94);             /* rgb(0, 111, 238) #006FEE */\n  --primary-foreground: oklch(1 0 0);\n\n  --secondary: oklch(0.2747 0.006 286);             /* rgb(39, 39, 42) neutral/default bg */\n  --secondary-foreground: oklch(0.9463 0.0009 247.83);\n\n  --muted: oklch(0.2747 0.006 286);\n  --muted-foreground: oklch(0.7127 0.0128 286.07);      /* rgb(161, 161, 170) */\n\n  --accent: oklch(0.5802 0.1895 304.14);               /* rgb(147, 83, 211) #9353D3 — Dynamic purple secondary */\n  --accent-foreground: oklch(1 0 0);\n\n  --destructive: oklch(0.6183 0.2417 11.15);          /* rgb(243, 18, 96) #F31260 */\n  --destructive-foreground: oklch(1 0 0);\n\n  /* Extended Dynamic semantic tokens */\n  --success: oklch(0.7355 0.1945 150.78);              /* rgb(23, 201, 100) #17C964 */\n  --success-foreground: oklch(1 0 0);\n\n  --warning: oklch(0.7808 0.1583 72.25);               /* rgb(245, 165, 36) #F5A524 */\n  --warning-foreground: oklch(0 0 0);\n\n  --border: oklch(0.2948 0.0066 285.99);\n  --input: oklch(0.2747 0.006 286);\n  --ring: oklch(0.5702 0.2106 257.94);\n  --radius: 0.75rem;                   /* 12px — Dynamic medium radius */\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: calc(var(--radius) - 2px);\n  --radius-lg: var(--radius);\n  --radius-xl: calc(var(--radius) + 4px);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  html {\n    font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,\n      BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0 0 0)",
+      "--foreground": "oklch(0.9463 0.0009 247.83)",
+      "--card": "oklch(0.2102 0.006 285.87)",
+      "--card-foreground": "oklch(0.9463 0.0009 247.83)",
+      "--popover": "oklch(0.2323 0.0058 285.94)",
+      "--popover-foreground": "oklch(0.9463 0.0009 247.83)",
+      "--primary": "oklch(0.5702 0.2106 257.94)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.2747 0.006 286)",
+      "--secondary-foreground": "oklch(0.9463 0.0009 247.83)",
+      "--muted": "oklch(0.2747 0.006 286)",
+      "--muted-foreground": "oklch(0.7127 0.0128 286.07)",
+      "--accent": "oklch(0.5802 0.1895 304.14)",
+      "--accent-foreground": "oklch(1 0 0)",
+      "--destructive": "oklch(0.6183 0.2417 11.15)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--success": "oklch(0.7355 0.1945 150.78)",
+      "--success-foreground": "oklch(1 0 0)",
+      "--warning": "oklch(0.7808 0.1583 72.25)",
+      "--warning-foreground": "oklch(0 0 0)",
+      "--border": "oklch(0.2948 0.0066 285.99)",
+      "--input": "oklch(0.2747 0.006 286)",
+      "--ring": "oklch(0.5702 0.2106 257.94)",
+      "--radius": "0.75rem"
+    }
+  }
+}

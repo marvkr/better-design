@@ -1,0 +1,14 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Kbd: keyboard key chip, dark bg with subtle border\n\ninterface KbdProps extends React.HTMLAttributes<HTMLElement> {\n  keys?: string[]\n}\n\nfunction Kbd({ keys, children, className, ...props }: KbdProps) {\n  const content = keys ? keys.join(\"+\") : children\n  return (\n    <kbd\n      className={cn(\n        \"inline-flex items-center justify-center gap-1\",\n        \"rounded-lg border border-border bg-secondary px-1.5 py-0.5\",\n        \"font-mono text-xs text-secondary-foreground\",\n        \"shadow-[0_2px_0_0_hsl(var(--border))]\",\n        className\n      )}\n      {...props}\n    >\n      {content}\n    </kbd>\n  )\n}\n\nexport { Kbd }\nexport type { KbdProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Glassmorphic Dark NativeSelect: native <select> with glass pill styling\n\ninterface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            \"flex h-10 w-full appearance-none items-center\",\n            \"rounded-full border border-white/10 backdrop-blur-xl bg-white/[0.06]\",\n            \"pl-3 pr-9 py-2 text-sm text-white/90\",\n            \"shadow-[inset_0_0_6px_rgba(255,255,255,0.06)]\",\n            \"cursor-pointer\",\n            \"transition duration-200 ease-out\",\n            \"hover:bg-white/[0.08] hover:border-white/[0.15]\",\n            \"focus:outline-none focus:shadow-[inset_0_0_6px_rgba(255,255,255,0.06),0_0_0_3px_oklch(0.65_0.19_250/0.2)] focus:border-primary/50\",\n            \"disabled:cursor-not-allowed disabled:opacity-70\",\n            \"[&>option]:bg-zinc-900 [&>option]:text-white/90\",\n            error && [\n              \"border-destructive\",\n              \"focus:border-destructive focus:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]\",\n            ],\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/40\"\n          aria-hidden=\"true\"\n        >\n          <Icon icon=\"tabler:chevron-down\" className=\"h-4 w-4\" />\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\"\n\n// Luxe AvatarGroup: overlapping ring-2 ring-background stacking\n// Premium detail: hover expands the group slightly via hover:gap-0.5 on wrapper\n\nexport interface AvatarGroupItem {\n  src?: string\n  alt?: string\n  fallback: string\n}\n\nexport interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  avatars: AvatarGroupItem[]\n  max?: number\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizeMap = {\n  sm:      \"h-7 w-7 text-xs\",\n  default: \"h-9 w-9 text-sm\",\n  lg:      \"h-11 w-11 text-base\",\n}\n\nfunction AvatarGroup({\n  avatars,\n  max = 4,\n  size = \"default\",\n  className,\n  ...props\n}: AvatarGroupProps) {\n  const visible = avatars.slice(0, max)\n  const overflow = avatars.length - max\n\n  return (\n    <div\n      className={cn(\"flex items-center -space-x-2\", className)}\n      {...props}\n    >\n      {visible.map((av, i) => (\n        <Avatar\n          key={i}\n          className={cn(\n            sizeMap[size],\n            \"ring-2 ring-background transition-transform duration-200 hover:z-10 hover:scale-110\"\n          )}\n        >\n          {av.src && <AvatarImage src={av.src} alt={av.alt ?? av.fallback} />}\n          <AvatarFallback>{av.fallback}</AvatarFallback>\n        </Avatar>\n      ))}\n      {overflow > 0 && (\n        <Avatar\n          className={cn(\n            sizeMap[size],\n            \"ring-2 ring-background bg-muted\"\n          )}\n        >\n          <AvatarFallback className=\"bg-muted text-muted-foreground text-xs\">\n            +{overflow}\n          </AvatarFallback>\n        </Avatar>\n      )}\n    </div>\n  )\n}\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Status Indicator: glowing colored dot for presence/status\n\ntype StatusType = \"online\" | \"offline\" | \"busy\" | \"away\" | \"idle\"\n\nconst statusConfig: Record<StatusType, { label: string; dotClass: string; glowClass: string }> = {\n  online:  { label: \"Online\",  dotClass: \"bg-[hsl(var(--success))]\", glowClass: \"shadow-[0_0_0_4px_hsl(146_80%_44%/0.25)]\" },\n  offline: { label: \"Offline\", dotClass: \"bg-muted-foreground/40\",    glowClass: \"\" },\n  busy:    { label: \"Busy\",    dotClass: \"bg-destructive\",            glowClass: \"shadow-[0_0_0_4px_hsl(339_90%_51%/0.25)]\" },\n  away:    { label: \"Away\",    dotClass: \"bg-[hsl(var(--warning))]\",  glowClass: \"shadow-[0_0_0_4px_hsl(37_91%_55%/0.25)]\" },\n  idle:    { label: \"Idle\",    dotClass: \"bg-yellow-400\",             glowClass: \"\" },\n}\n\nconst dotSizes = { sm: \"h-1.5 w-1.5\", md: \"h-2.5 w-2.5\", lg: \"h-3.5 w-3.5\" }\n\ninterface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  status: StatusType\n  showLabel?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n  pulse?: boolean\n}\n\nfunction StatusIndicator({ status, showLabel, size = \"md\", pulse, className, ...props }: StatusIndicatorProps) {\n  const config = statusConfig[status]\n\n  return (\n    <div className={cn(\"flex items-center gap-1.5\", className)} {...props}>\n      <span className=\"relative flex shrink-0\">\n        {pulse && status === \"online\" && (\n          <span className={cn(\"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75\", config.dotClass)} />\n        )}\n        <span className={cn(\"relative inline-flex rounded-full\", dotSizes[size], config.dotClass, config.glowClass)} />\n      </span>\n      {showLabel && (\n        <span className=\"text-xs font-medium text-muted-foreground\">{config.label}</span>\n      )}\n    </div>\n  )\n}\n\ninterface AvatarStatusProps { status: StatusType; className?: string }\n\nfunction AvatarStatus({ status, className }: AvatarStatusProps) {\n  const config = statusConfig[status]\n  return (\n    <span\n      className={cn(\n        \"absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-background\",\n        config.dotClass,\n        className\n      )}\n    />\n  )\n}\n\nexport { StatusIndicator, AvatarStatus }\nexport type { StatusIndicatorProps, StatusType }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

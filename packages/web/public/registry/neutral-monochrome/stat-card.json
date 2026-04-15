@@ -1,0 +1,17 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { TrendingUp, TrendingDown, Minus } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: string | number\n  description?: string\n  trend?: {\n    value: number\n    label?: string\n  }\n  icon?: React.ReactNode\n}\n\nfunction StatCard({\n  label,\n  value,\n  description,\n  trend,\n  icon,\n  className,\n  ...props\n}: StatCardProps) {\n  const trendPositive = trend && trend.value > 0\n  const trendNegative = trend && trend.value < 0\n  const trendNeutral = trend && trend.value === 0\n\n  return (\n    <div\n      className={cn(\n        \"rounded-[10px] border border-border/40 bg-card p-5 space-y-3\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-start justify-between gap-2\">\n        <p className=\"text-sm text-muted-foreground font-medium\">{label}</p>\n        {icon && (\n          <div className=\"shrink-0 text-muted-foreground\">{icon}</div>\n        )}\n      </div>\n\n      <div className=\"space-y-1\">\n        <p className=\"text-2xl font-semibold tracking-tight text-foreground\">\n          {value}\n        </p>\n        {description && (\n          <p className=\"text-xs text-muted-foreground\">{description}</p>\n        )}\n      </div>\n\n      {trend && (\n        <div\n          className={cn(\n            \"inline-flex items-center gap-1 text-xs font-medium\",\n            trendPositive && \"text-primary\",\n            trendNegative && \"text-destructive\",\n            trendNeutral && \"text-muted-foreground\"\n          )}\n        >\n          {trendPositive && <TrendingUp className=\"h-3.5 w-3.5\" />}\n          {trendNegative && <TrendingDown className=\"h-3.5 w-3.5\" />}\n          {trendNeutral && <Minus className=\"h-3.5 w-3.5\" />}\n          <span>\n            {trendPositive ? \"+\" : \"\"}{trend.value}%{\" \"}\n            {trend.label && (\n              <span className=\"font-normal text-muted-foreground\">\n                {trend.label}\n              </span>\n            )}\n          </span>\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { StatCard }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Vercel Empty: centered icon area (dashed border), title, description, optional action\n// Light theme: bg-secondary/30, dashed border-border, rounded icon box with shadow\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ icon, title, description, action, className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center gap-5 rounded-[20px]\",\n          \"border border-dashed border-border\",\n          \"bg-secondary/30 p-12 text-center\",\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div\n            className={cn(\n              \"flex h-14 w-14 items-center justify-center\",\n              \"rounded-[12px] border border-border bg-background\",\n              \"shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\",\n              \"text-muted-foreground\"\n            )}\n          >\n            <span className=\"flex h-6 w-6 items-center justify-center [&>svg]:h-6 [&>svg]:w-6\">\n              {icon}\n            </span>\n          </div>\n        )}\n\n        <div className=\"flex flex-col gap-1.5 max-w-xs\">\n          <p className=\"text-sm font-semibold text-foreground leading-snug\">{title}</p>\n          {description && (\n            <p className=\"text-sm text-muted-foreground leading-relaxed\">{description}</p>\n          )}\n        </div>\n\n        {action && (\n          <div className=\"flex items-center gap-2\">\n            {action}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

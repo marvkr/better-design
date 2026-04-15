@@ -1,0 +1,14 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  currentStep?: number\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, currentStep = 0, children, ...props }, ref) => {\n    const steps = React.Children.toArray(children)\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex items-center gap-2\", className)}\n        {...props}\n      >\n        {steps.map((child, index) => (\n          <React.Fragment key={index}>\n            {index > 0 && (\n              <div\n                className={cn(\n                  \"h-px flex-1\",\n                  index <= currentStep ? \"bg-primary/50\" : \"bg-white/[0.08]\"\n                )}\n              />\n            )}\n            <div\n              className={cn(\n                \"flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-all duration-300\",\n                index < currentStep &&\n                  \"bg-primary/80 text-white shadow-[0_0_12px_rgba(255,255,255,0.3)]\",\n                index === currentStep &&\n                  \"backdrop-blur-xl bg-white/[0.1] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.15),0_0_12px_rgba(255,255,255,0.2)]\",\n                index > currentStep &&\n                  \"bg-white/[0.03] text-muted-foreground\"\n              )}\n            >\n              {index + 1}\n            </div>\n          </React.Fragment>\n        ))}\n      </div>\n    )\n  }\n)\nSteps.displayName = \"Steps\"\n\nconst Step = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"\", className)} {...props} />\n))\nStep.displayName = \"Step\"\n\nexport { Steps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

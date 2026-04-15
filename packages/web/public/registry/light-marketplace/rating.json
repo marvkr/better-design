@@ -1,0 +1,17 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Star } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// NOTE: Intentionally does NOT extend React.HTMLAttributes to avoid onChange type conflict\ninterface RatingProps {\n  value?: number\n  max?: number\n  onValueChange?: (value: number) => void\n  readOnly?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n  className?: string\n}\n\nconst sizeMap = {\n  sm: \"h-4 w-4\",\n  md: \"h-5 w-5\",\n  lg: \"h-6 w-6\",\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  (\n    {\n      value = 0,\n      max = 5,\n      onValueChange,\n      readOnly = false,\n      size = \"md\",\n      className,\n    },\n    ref\n  ) => {\n    const [hovered, setHovered] = React.useState<number | null>(null)\n    const display = hovered ?? value\n\n    return (\n      <div\n        ref={ref}\n        role={readOnly ? \"img\" : \"radiogroup\"}\n        aria-label={`Rating: ${value} out of ${max}`}\n        className={cn(\"flex items-center gap-0.5\", className)}\n      >\n        {Array.from({ length: max }, (_, i) => {\n          const starValue = i + 1\n          const filled = starValue <= display\n\n          return (\n            <button\n              key={i}\n              type=\"button\"\n              role={readOnly ? undefined : \"radio\"}\n              aria-checked={readOnly ? undefined : starValue === value}\n              aria-label={readOnly ? undefined : `Rate ${starValue} out of ${max}`}\n              disabled={readOnly}\n              onClick={() => !readOnly && onValueChange?.(starValue)}\n              onMouseEnter={() => !readOnly && setHovered(starValue)}\n              onMouseLeave={() => !readOnly && setHovered(null)}\n              className={cn(\n                \"transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm\",\n                !readOnly && \"hover:scale-110 active:scale-[0.95] cursor-pointer\",\n                readOnly && \"cursor-default\",\n              )}\n            >\n              <Star\n                className={cn(\n                  sizeMap[size],\n                  \"transition-colors\",\n                  filled\n                    ? \"fill-foreground text-foreground\"\n                    : \"fill-transparent text-muted-foreground/30\",\n                )}\n              />\n            </button>\n          )\n        })}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\nexport type { RatingProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

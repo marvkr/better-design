@@ -9,7 +9,9 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-toast"
+    "@radix-ui/react-toast",
+    "class-variance-authority",
+    "lucide-react"
   ],
   "registryDependencies": [
     "utils"

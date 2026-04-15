@@ -1,0 +1,14 @@
+{
+  "name": "time-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/time-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface TimePickerProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {}\n\nconst TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(\n  ({ className, ...props }, ref) => (\n    <div className=\"relative\">\n      <Icon\n        icon=\"tabler:clock\"\n        className=\"pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground\"\n      />\n      <input\n        ref={ref}\n        type=\"time\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"pl-9 [&::-webkit-calendar-picker-indicator]:opacity-60 [&::-webkit-calendar-picker-indicator]:cursor-pointer\",\n          className\n        )}\n        {...props}\n      />\n    </div>\n  )\n)\nTimePicker.displayName = \"TimePicker\"\n\nexport { TimePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

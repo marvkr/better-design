@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Apple Button — pill-shaped CTAs, blue primary, f5f5f7 secondary\n// Primary: #0071e3 blue, 980px radius (fully pill), 17px font, 400 weight\n// Secondary: #f5f5f7 off-white bg, dark text\n// Transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-[17px] font-normal leading-[1.17648] tracking-[-0.022em]\",\n    \"rounded-[980px] transition-[background-color] duration-300\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.99]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"hover:bg-[#0077ed]\",\n        secondary:\n          \"bg-[#f5f5f7] text-[#1d1d1f] \" +\n          \"hover:bg-[#e8e8ed]\",\n        outline:\n          \"bg-transparent text-primary \" +\n          \"border border-primary/30 \" +\n          \"hover:border-primary/60\",\n        ghost:\n          \"bg-transparent text-primary \" +\n          \"hover:bg-[#f5f5f7]\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"hover:bg-destructive/90\",\n        link: \"text-primary text-[17px] underline-offset-4 hover:underline font-normal\",\n      },\n      size: {\n        sm:      \"text-[14px] h-8 px-[14px]\",\n        default: \"h-[44px] px-[22px]\",\n        lg:      \"text-[19px] h-[52px] px-[28px]\",\n        icon:    \"h-[44px] w-[44px]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.9751 0.0022 286.36)",
+      "--foreground": "oklch(0.2344 0.0035 286.13)",
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.2344 0.0035 286.13)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.2344 0.0035 286.13)",
+      "--primary": "oklch(0.5604 0.1989 257)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9751 0.0022 286.36)",
+      "--secondary-foreground": "oklch(0.5364 0.0104 286.04)",
+      "--muted": "oklch(0.9512 0.0033 286.34)",
+      "--muted-foreground": "oklch(0.5364 0.0104 286.04)",
+      "--accent": "oklch(0.9349 0.0044 286.31)",
+      "--accent-foreground": "oklch(0.2344 0.0035 286.13)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9079 0 0)",
+      "--input": "oklch(1 0 0)",
+      "--ring": "oklch(0.5604 0.1989 257)",
+      "--radius": "1.125rem"
+    }
+  }
+}

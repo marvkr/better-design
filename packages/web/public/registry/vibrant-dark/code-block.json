@@ -1,0 +1,17 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Check, Copy } from \"lucide-react\"\n\n// Dynamic Code Block: dark card bg, monospace, copy button\n\ninterface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  filename?: string\n}\n\nfunction CodeBlock({ code, language, filename, className, ...props }: CodeBlockProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  return (\n    <div\n      className={cn(\n        \"group relative overflow-hidden rounded-xl bg-card\",\n        className\n      )}\n      {...props}\n    >\n      {(filename || language) && (\n        <div className=\"flex items-center justify-between border-b border-border px-4 py-2\">\n          <span className=\"text-xs text-muted-foreground font-mono\">\n            {filename ?? language}\n          </span>\n          <button\n            onClick={handleCopy}\n            className=\"flex h-6 w-6 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground\"\n          >\n            {copied ? <Check className=\"h-3.5 w-3.5 text-[hsl(var(--success))]\" /> : <Copy className=\"h-3.5 w-3.5\" />}\n          </button>\n        </div>\n      )}\n      <div className=\"relative\">\n        <pre className=\"overflow-x-auto p-4 text-sm font-mono leading-relaxed text-foreground\">\n          <code>{code}</code>\n        </pre>\n        {!filename && !language && (\n          <button\n            onClick={handleCopy}\n            className=\"absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-lg bg-secondary text-muted-foreground opacity-0 transition-all group-hover:opacity-100 hover:text-foreground\"\n          >\n            {copied ? <Check className=\"h-3.5 w-3.5 text-[hsl(var(--success))]\" /> : <Copy className=\"h-3.5 w-3.5\" />}\n          </button>\n        )}\n      </div>\n    </div>\n  )\n}\n\nexport { CodeBlock }\nexport type { CodeBlockProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

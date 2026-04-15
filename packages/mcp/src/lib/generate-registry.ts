@@ -181,17 +181,22 @@ async function generateRegistry(): Promise<void> {
 
   const entries = fs.readdirSync(DESIGN_SYSTEMS_DIR, { withFileTypes: true });
   const projectDirs = entries
-    .filter((e) => e.isDirectory() && DESIGN_SYSTEM_METADATA[e.name])
+    .filter((e) => e.isDirectory() && !e.name.startsWith("_"))
     .map((e) => e.name);
 
   const styles: RegistryStyle[] = [];
 
   for (const dirName of projectDirs) {
-    const config = DESIGN_SYSTEM_METADATA[dirName];
-    if (!config) {
-      console.log(`⚠️  Skipping ${dirName}: No metadata configured`);
-      continue;
-    }
+    const config = DESIGN_SYSTEM_METADATA[dirName] ?? {
+      id: dirName,
+      label: dirName
+        .split("-")
+        .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+        .join(" "),
+      description: `${dirName} design system`,
+      personality: [],
+      industry: [],
+    };
 
     const projectPath = path.join(DESIGN_SYSTEMS_DIR, dirName);
     const componentsDir = path.join(projectPath, "components");

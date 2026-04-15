@@ -9,7 +9,9 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-dialog"
+    "@radix-ui/react-dialog",
+    "class-variance-authority",
+    "lucide-react"
   ],
   "registryDependencies": [
     "utils"

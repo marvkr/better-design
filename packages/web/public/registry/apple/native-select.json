@@ -1,0 +1,14 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Apple NativeSelect: native <select> styled to match the design system\n// h-10, rounded-[10px], border-border, shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\n// Custom chevron via bg-image SVG (light theme: dark chevron)\n// Appearance: none to hide native arrow, pr-8 to make room for custom arrow\n\ninterface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            \"flex h-10 w-full appearance-none items-center\",\n            \"rounded-[10px] border border-border bg-background\",\n            \"pl-3 pr-9 py-2 text-sm text-foreground\",\n            \"shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\",\n            \"cursor-pointer\",\n            \"transition duration-200 ease-out\",\n            \"hover:border-foreground/30\",\n            \"focus:outline-none focus:border-foreground focus:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]\",\n            \"disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70\",\n            \"[&>option]:bg-background [&>option]:text-foreground\",\n            error && [\n              \"border-destructive\",\n              \"focus:border-destructive focus:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]\",\n            ],\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"m6 9 6 6 6-6\" />\n          </svg>\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

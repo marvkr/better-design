@@ -9,7 +9,9 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-navigation-menu"
+    "@radix-ui/react-navigation-menu",
+    "class-variance-authority",
+    "lucide-react"
   ],
   "registryDependencies": [
     "utils"

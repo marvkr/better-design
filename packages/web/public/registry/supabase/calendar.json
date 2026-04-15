@@ -8,6 +8,10 @@
       "type": "registry:ui"
     }
   ],
+  "dependencies": [
+    "lucide-react",
+    "react-day-picker"
+  ],
   "registryDependencies": [
     "button",
     "utils"

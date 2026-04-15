@@ -1,0 +1,14 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\"\n\nexport interface AvatarGroupItem {\n  src?: string\n  alt?: string\n  fallback?: string\n}\n\nexport interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  avatars: AvatarGroupItem[]\n  max?: number\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm:      \"h-7 w-7 text-xs\",\n  default: \"h-9 w-9 text-sm\",\n  lg:      \"h-11 w-11 text-base\",\n}\n\nfunction AvatarGroup({\n  avatars,\n  max = 5,\n  size = \"default\",\n  className,\n  ...props\n}: AvatarGroupProps) {\n  const visible = avatars.slice(0, max)\n  const overflow = avatars.length - max\n\n  return (\n    <div\n      className={cn(\"flex items-center -space-x-2\", className)}\n      {...props}\n    >\n      {visible.map((avatar, i) => (\n        <Avatar\n          key={i}\n          className={cn(\n            sizeClasses[size],\n            \"ring-2 ring-background transition-transform hover:translate-y-[-2px] hover:z-10\",\n            \"relative\"\n          )}\n        >\n          {avatar.src && (\n            <AvatarImage src={avatar.src} alt={avatar.alt ?? \"\"} />\n          )}\n          <AvatarFallback className={sizeClasses[size]}>\n            {avatar.fallback ?? avatar.alt?.slice(0, 2).toUpperCase() ?? \"?\"}\n          </AvatarFallback>\n        </Avatar>\n      ))}\n      {overflow > 0 && (\n        <div\n          className={cn(\n            sizeClasses[size],\n            \"ring-2 ring-background\",\n            \"relative flex shrink-0 items-center justify-center rounded-full bg-secondary text-muted-foreground font-medium\"\n          )}\n        >\n          +{overflow}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

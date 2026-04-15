@@ -1,0 +1,46 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Button: vibrant colors, pill shapes, active:scale-[0.97] press animation\n// Colors: primary(blue), secondary(purple), success, warning, destructive, neutral\n// Variants: default(solid), flat, bordered/outline, ghost, light\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap select-none\",\n    \"overflow-hidden outline-none subpixel-antialiased\",\n    \"transition-[transform,opacity] duration-150\",\n    \"active:scale-[0.97]\",\n    \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Solid filled\n        default:\n          // Real Dynamic shadow: two-layer upward color bloom (browser-extracted)\n          \"bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_10px_15px_-3px_hsl(212_100%_47%/0.4),0_4px_6px_-4px_hsl(212_100%_47%/0.4)]\",\n        secondary:\n          \"bg-accent text-accent-foreground hover:bg-accent/90 shadow-[0_10px_15px_-3px_hsl(270_59%_58%/0.4),0_4px_6px_-4px_hsl(270_59%_58%/0.4)]\",\n        success:\n          \"bg-[hsl(var(--success))] text-white hover:opacity-90 shadow-[0_10px_15px_-3px_hsl(146_80%_44%/0.4),0_4px_6px_-4px_hsl(146_80%_44%/0.4)]\",\n        warning:\n          \"bg-[hsl(var(--warning))] text-black hover:opacity-90\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-[0_10px_15px_-3px_hsl(339_90%_51%/0.4),0_4px_6px_-4px_hsl(339_90%_51%/0.4)]\",\n        neutral:\n          \"bg-secondary text-secondary-foreground hover:bg-secondary/80\",\n        // Flat — tinted bg, colored text (no shadow)\n        flat:\n          \"bg-primary/20 text-primary hover:bg-primary/30\",\n        // Bordered — transparent with colored border\n        outline:\n          \"border border-primary bg-transparent text-primary hover:bg-primary/10\",\n        // Ghost — no bg, hover shows secondary\n        ghost:\n          \"bg-transparent text-foreground hover:bg-secondary\",\n        link:\n          \"text-primary underline-offset-4 hover:underline bg-transparent\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-lg\",\n        default: \"h-10 px-4 text-sm rounded-xl\",\n        lg:      \"h-12 px-6 text-base rounded-[14px]\",\n        icon:    \"h-10 w-10 rounded-xl\",\n      },\n      pill: {\n        true:  \"!rounded-full\",\n        false: \"\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      pill: false,\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, pill, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, pill, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0 0 0)",
+      "--foreground": "oklch(0.9463 0.0009 247.83)",
+      "--card": "oklch(0.2102 0.006 285.87)",
+      "--card-foreground": "oklch(0.9463 0.0009 247.83)",
+      "--popover": "oklch(0.2323 0.0058 285.94)",
+      "--popover-foreground": "oklch(0.9463 0.0009 247.83)",
+      "--primary": "oklch(0.5702 0.2106 257.94)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.2747 0.006 286)",
+      "--secondary-foreground": "oklch(0.9463 0.0009 247.83)",
+      "--muted": "oklch(0.2747 0.006 286)",
+      "--muted-foreground": "oklch(0.7127 0.0128 286.07)",
+      "--accent": "oklch(0.5802 0.1895 304.14)",
+      "--accent-foreground": "oklch(1 0 0)",
+      "--destructive": "oklch(0.6183 0.2417 11.15)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--success": "oklch(0.7355 0.1945 150.78)",
+      "--success-foreground": "oklch(1 0 0)",
+      "--warning": "oklch(0.7808 0.1583 72.25)",
+      "--warning-foreground": "oklch(0 0 0)",
+      "--border": "oklch(0.2948 0.0066 285.99)",
+      "--input": "oklch(0.2747 0.006 286)",
+      "--ring": "oklch(0.5702 0.2106 257.94)",
+      "--radius": "0.75rem"
+    }
+  }
+}

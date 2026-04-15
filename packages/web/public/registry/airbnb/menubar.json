@@ -9,7 +9,8 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-menubar"
+    "@radix-ui/react-menubar",
+    "lucide-react"
   ],
   "registryDependencies": [
     "utils"

@@ -1,0 +1,14 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Earthy ButtonGroup: dark neutral, rounded-lg (8px), minimal — no glows\n// Monochromatic dividers via border-white/10 between attached buttons\n// Clean and sharp — nearest to a standard shadcn group but darker\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n  attached?: boolean\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  (\n    {\n      className,\n      orientation = \"horizontal\",\n      attached = true,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    const isHorizontal = orientation === \"horizontal\"\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\n          \"inline-flex\",\n          isHorizontal ? \"flex-row\" : \"flex-col\",\n          attached && [\n            \"[&>*]:rounded-none\",\n            isHorizontal\n              ? [\n                  \"[&>*:first-child]:rounded-l-lg [&>*:last-child]:rounded-r-lg\",\n                  \"[&>*:not(:first-child)]:-ml-px\",\n                ]\n              : [\n                  \"[&>*:first-child]:rounded-t-lg [&>*:last-child]:rounded-b-lg\",\n                  \"[&>*:not(:first-child)]:-mt-px\",\n                ],\n            \"[&>*]:relative [&>*:focus-visible]:z-10 [&>*:hover]:z-10\",\n            isHorizontal\n              ? \"[&>*:not(:first-child)]:border-l [&>*:not(:first-child)]:border-l-white/10\"\n              : \"[&>*:not(:first-child)]:border-t [&>*:not(:first-child)]:border-t-white/10\",\n          ],\n          !attached && [\n            isHorizontal ? \"gap-2\" : \"flex-col gap-2\",\n          ],\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    )\n  }\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\ninterface ButtonGroupItemProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ButtonGroupItem = React.forwardRef<HTMLDivElement, ButtonGroupItemProps>(\n  ({ className, children, ...props }, ref) => (\n    <div ref={ref} className={cn(\"contents\", className)} {...props}>\n      {children}\n    </div>\n  )\n)\nButtonGroupItem.displayName = \"ButtonGroupItem\"\n\nexport { ButtonGroup, ButtonGroupItem }\nexport type { ButtonGroupProps, ButtonGroupItemProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

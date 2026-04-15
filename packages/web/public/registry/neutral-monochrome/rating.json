@@ -1,0 +1,17 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Star } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\ninterface RatingProps {\n  value?: number\n  maxValue?: number\n  onValueChange?: (v: number) => void\n  readOnly?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n  className?: string\n}\n\nconst sizeMap = {\n  sm: \"h-4 w-4\",\n  md: \"h-5 w-5\",\n  lg: \"h-6 w-6\",\n}\n\nfunction Rating({\n  value = 0,\n  maxValue = 5,\n  onValueChange,\n  readOnly = false,\n  size = \"md\",\n  className,\n}: RatingProps) {\n  const [hovered, setHovered] = React.useState<number | null>(null)\n  const displayValue = hovered ?? value\n\n  return (\n    <div\n      className={cn(\n        \"inline-flex items-center gap-0.5\",\n        !readOnly && \"cursor-pointer\",\n        className\n      )}\n      role=\"radiogroup\"\n      aria-label=\"Rating\"\n    >\n      {Array.from({ length: maxValue }, (_, i) => {\n        const starValue = i + 1\n        const filled = displayValue >= starValue\n\n        return (\n          <button\n            key={starValue}\n            type=\"button\"\n            role=\"radio\"\n            aria-checked={value === starValue}\n            aria-label={`${starValue} star${starValue !== 1 ? \"s\" : \"\"}`}\n            disabled={readOnly}\n            onClick={() => !readOnly && onValueChange?.(starValue)}\n            onMouseEnter={() => !readOnly && setHovered(starValue)}\n            onMouseLeave={() => !readOnly && setHovered(null)}\n            className={cn(\n              \"transition-all duration-100\",\n              \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm\",\n              readOnly ? \"cursor-default\" : \"cursor-pointer hover:scale-110\"\n            )}\n          >\n            <Star\n              className={cn(\n                sizeMap[size],\n                \"transition-colors\",\n                filled\n                  ? \"fill-primary text-primary\"\n                  : \"fill-transparent text-muted-foreground/40\"\n              )}\n            />\n          </button>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { Rating }\nexport type { RatingProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

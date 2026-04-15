@@ -9,7 +9,8 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-dialog"
+    "@radix-ui/react-dialog",
+    "lucide-react"
   ],
   "registryDependencies": [
     "utils"

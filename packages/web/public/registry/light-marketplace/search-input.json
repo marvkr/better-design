@@ -1,0 +1,17 @@
+{
+  "name": "search-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Search, X } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SearchInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  onClear?: () => void\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, value, onChange, onClear, ...props }, ref) => {\n    const hasValue = value !== undefined ? String(value).length > 0 : false\n\n    const handleClear = () => {\n      onClear?.()\n      if (onChange) {\n        const event = {\n          target: { value: \"\" },\n        } as React.ChangeEvent<HTMLInputElement>\n        onChange(event)\n      }\n    }\n\n    return (\n      <div className=\"relative flex items-center\">\n        <Search className=\"pointer-events-none absolute left-3.5 h-4 w-4 text-muted-foreground\" />\n        <input\n          ref={ref}\n          type=\"search\"\n          value={value}\n          onChange={onChange}\n          className={cn(\n            \"flex h-11 w-full rounded-[14px] border border-border bg-background\",\n            \"pl-10 pr-10 py-2 text-sm\",\n            \"placeholder:text-muted-foreground\",\n            \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-0 transition-colors\",\n            \"disabled:cursor-not-allowed disabled:opacity-50\",\n            \"[&::-webkit-search-cancel-button]:hidden\",\n            className\n          )}\n          {...props}\n        />\n        {hasValue && (\n          <button\n            type=\"button\"\n            onClick={handleClear}\n            aria-label=\"Clear search\"\n            className={cn(\n              \"absolute right-3 flex h-5 w-5 items-center justify-center rounded-full\",\n              \"bg-secondary text-muted-foreground hover:bg-border hover:text-foreground\",\n              \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n            )}\n          >\n            <X className=\"h-3 w-3\" />\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nSearchInput.displayName = \"SearchInput\"\n\nexport { SearchInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {\n  value?: number\n  max?: number\n  onChange?: (value: number) => void\n  readonly?: boolean\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  ({ className, value = 0, max = 5, onChange, readonly = false, ...props }, ref) => {\n    const [hovered, setHovered] = React.useState(-1)\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        {...props}\n      >\n        {Array.from({ length: max }, (_, i) => (\n          <button\n            key={i}\n            type=\"button\"\n            disabled={readonly}\n            className={cn(\n              \"transition-all duration-200\",\n              !readonly && \"cursor-pointer hover:scale-110\",\n              \"disabled:cursor-default\"\n            )}\n            onMouseEnter={() => !readonly && setHovered(i)}\n            onMouseLeave={() => !readonly && setHovered(-1)}\n            onClick={() => onChange?.(i + 1)}\n          >\n            <Icon\n              icon={i < (hovered >= 0 ? hovered + 1 : value) ? \"tabler:star-filled\" : \"tabler:star\"}\n              className={cn(\n                \"h-5 w-5\",\n                i < (hovered >= 0 ? hovered + 1 : value)\n                  ? \"text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.4)]\"\n                  : \"text-white/20\"\n              )}\n            />\n          </button>\n        ))}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

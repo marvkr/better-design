@@ -1,0 +1,14 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Field: form field wrapper primitives\n\nconst Field = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"space-y-2\", className)}\n    {...props}\n  />\n))\nField.displayName = \"Field\"\n\nconst FieldLabel = React.forwardRef<\n  HTMLLabelElement,\n  React.LabelHTMLAttributes<HTMLLabelElement>\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    className={cn(\n      \"text-sm font-medium text-foreground leading-none\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n      className\n    )}\n    {...props}\n  />\n))\nFieldLabel.displayName = \"FieldLabel\"\n\nconst FieldDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nFieldDescription.displayName = \"FieldDescription\"\n\nconst FieldError = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm font-medium text-destructive\", className)}\n    {...props}\n  />\n))\nFieldError.displayName = \"FieldError\"\n\nexport { Field, FieldLabel, FieldDescription, FieldError }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

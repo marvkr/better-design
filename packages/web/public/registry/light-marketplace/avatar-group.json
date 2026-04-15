@@ -1,0 +1,14 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\"\n\nexport interface AvatarGroupItem {\n  src?: string\n  alt?: string\n  fallback?: string\n}\n\nexport interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  avatars: AvatarGroupItem[]\n  max?: number\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm:      \"h-7 w-7 text-xs\",\n  default: \"h-9 w-9 text-sm\",\n  lg:      \"h-11 w-11 text-base\",\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ avatars, max = 4, size = \"default\", className, ...props }, ref) => {\n    const shown = avatars.slice(0, max)\n    const overflow = avatars.length - max\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex items-center\", className)}\n        {...props}\n      >\n        {shown.map((avatar, i) => (\n          <Avatar\n            key={i}\n            className={cn(\n              sizeClasses[size],\n              \"ring-2 ring-background -ml-2 first:ml-0\",\n            )}\n          >\n            {avatar.src && <AvatarImage src={avatar.src} alt={avatar.alt ?? \"\"} />}\n            <AvatarFallback className={sizeClasses[size]}>\n              {avatar.fallback ?? avatar.alt?.slice(0, 2).toUpperCase() ?? \"??\"}\n            </AvatarFallback>\n          </Avatar>\n        ))}\n        {overflow > 0 && (\n          <div\n            className={cn(\n              \"flex items-center justify-center rounded-full ring-2 ring-background -ml-2\",\n              \"bg-secondary text-secondary-foreground font-semibold border border-border\",\n              sizeClasses[size],\n            )}\n          >\n            +{overflow}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

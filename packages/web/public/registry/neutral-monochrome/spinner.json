@@ -1,0 +1,17 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst spinnerVariants = cva(\n  \"animate-spin rounded-full border-2 border-border/30 border-t-primary\",\n  {\n    variants: {\n      size: {\n        sm:      \"h-4 w-4\",\n        default: \"h-6 w-6\",\n        lg:      \"h-8 w-8\",\n        xl:      \"h-12 w-12\",\n      },\n    },\n    defaultVariants: {\n      size: \"default\",\n    },\n  }\n)\n\nexport interface SpinnerProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof spinnerVariants> {\n  label?: string\n}\n\nfunction Spinner({ className, size, label = \"Loading...\", ...props }: SpinnerProps) {\n  return (\n    <div\n      role=\"status\"\n      aria-label={label}\n      className={cn(\"inline-flex items-center justify-center\", className)}\n      {...props}\n    >\n      <div className={cn(spinnerVariants({ size }))} />\n      <span className=\"sr-only\">{label}</span>\n    </div>\n  )\n}\n\nexport { Spinner, spinnerVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

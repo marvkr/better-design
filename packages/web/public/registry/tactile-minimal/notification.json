@@ -1,0 +1,17 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst notificationVariants = cva(\n  [\n    \"relative flex w-full items-start gap-3 rounded-[10px] p-4\",\n    \"border\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-card text-foreground border-border\",\n        success: \"bg-emerald-500/10 border-emerald-500/20 text-emerald-600\",\n        warning: \"bg-amber-500/10 border-amber-500/20 text-amber-600\",\n        destructive: \"bg-destructive/10 border-destructive/20 text-destructive\",\n        info: \"bg-primary/10 border-primary/20 text-primary\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface NotificationProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  onClose?: () => void\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant, onClose, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className=\"flex-1\">{children}</div>\n      {onClose && (\n        <button\n          onClick={onClose}\n          className=\"shrink-0 rounded-[6px] p-0.5 opacity-70 transition-all duration-150 hover:opacity-100 active:scale-[0.98]\"\n        >\n          <Icon icon=\"tabler:x\" className=\"h-4 w-4\" />\n        </button>\n      )}\n    </div>\n  )\n)\nNotification.displayName = \"Notification\"\n\nconst NotificationTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 font-medium leading-none tracking-tight\", className)}\n    {...props}\n  />\n))\nNotificationTitle.displayName = \"NotificationTitle\"\n\nconst NotificationDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm opacity-90\", className)}\n    {...props}\n  />\n))\nNotificationDescription.displayName = \"NotificationDescription\"\n\nexport { Notification, NotificationTitle, NotificationDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

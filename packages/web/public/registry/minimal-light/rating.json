@@ -1,0 +1,14 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe Rating: star rating — white filled stars (monochromatic premium)\n// Empty stars are muted-foreground; hover previews fill; readonly mode supported\n\nexport interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {\n  value?: number\n  onChange?: (value: number) => void\n  max?: number\n  readonly?: boolean\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizeMap = {\n  sm:      \"h-4 w-4\",\n  default: \"h-5 w-5\",\n  lg:      \"h-6 w-6\",\n}\n\nfunction Rating({\n  value = 0,\n  onChange,\n  max = 5,\n  readonly = false,\n  size = \"default\",\n  className,\n  ...props\n}: RatingProps) {\n  const [hovered, setHovered] = React.useState<number | null>(null)\n\n  const effective = hovered ?? value\n\n  return (\n    <div\n      className={cn(\"flex items-center gap-0.5\", className)}\n      role={readonly ? \"img\" : \"group\"}\n      aria-label={`Rating: ${value} out of ${max}`}\n      {...props}\n    >\n      {Array.from({ length: max }, (_, i) => {\n        const filled = i < effective\n        return (\n          <button\n            key={i}\n            type=\"button\"\n            disabled={readonly}\n            onClick={() => onChange?.(i + 1)}\n            onMouseEnter={() => !readonly && setHovered(i + 1)}\n            onMouseLeave={() => !readonly && setHovered(null)}\n            aria-label={`Rate ${i + 1} out of ${max}`}\n            className={cn(\n              \"transition-transform duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded-sm\",\n              !readonly && \"hover:scale-110 active:scale-95 cursor-pointer\",\n              readonly && \"cursor-default pointer-events-none\"\n            )}\n          >\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              viewBox=\"0 0 24 24\"\n              className={cn(\n                sizeMap[size],\n                \"transition-colors duration-150\",\n                filled\n                  ? \"fill-primary text-primary\"\n                  : \"fill-none text-muted-foreground/40 stroke-current stroke-2\"\n              )}\n            >\n              <polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\" />\n            </svg>\n          </button>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

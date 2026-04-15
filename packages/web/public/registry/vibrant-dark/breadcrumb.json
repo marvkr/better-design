@@ -1,0 +1,17 @@
+{
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "content": "import * as React from \"react\"\nimport { ChevronRight, MoreHorizontal } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Breadcrumb: minimal, muted text, chevron separators\n\nconst Breadcrumb = React.forwardRef<\n  HTMLElement,\n  React.ComponentPropsWithoutRef<\"nav\"> & { separator?: React.ReactNode }\n>(({ ...props }, ref) => <nav ref={ref} aria-label=\"breadcrumb\" {...props} />)\nBreadcrumb.displayName = \"Breadcrumb\"\n\nconst BreadcrumbList = React.forwardRef<\n  HTMLOListElement,\n  React.ComponentPropsWithoutRef<\"ol\">\n>(({ className, ...props }, ref) => (\n  <ol\n    ref={ref}\n    className={cn(\"flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nBreadcrumbList.displayName = \"BreadcrumbList\"\n\nconst BreadcrumbItem = React.forwardRef<\n  HTMLLIElement,\n  React.ComponentPropsWithoutRef<\"li\">\n>(({ className, ...props }, ref) => (\n  <li ref={ref} className={cn(\"inline-flex items-center gap-1.5\", className)} {...props} />\n))\nBreadcrumbItem.displayName = \"BreadcrumbItem\"\n\nconst BreadcrumbLink = React.forwardRef<\n  HTMLAnchorElement,\n  React.ComponentPropsWithoutRef<\"a\">\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    className={cn(\"transition-colors hover:text-foreground\", className)}\n    {...props}\n  />\n))\nBreadcrumbLink.displayName = \"BreadcrumbLink\"\n\nconst BreadcrumbPage = React.forwardRef<\n  HTMLSpanElement,\n  React.ComponentPropsWithoutRef<\"span\">\n>(({ className, ...props }, ref) => (\n  <span\n    ref={ref}\n    role=\"link\"\n    aria-disabled=\"true\"\n    aria-current=\"page\"\n    className={cn(\"font-medium text-foreground\", className)}\n    {...props}\n  />\n))\nBreadcrumbPage.displayName = \"BreadcrumbPage\"\n\nconst BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps<\"li\">) => (\n  <li role=\"presentation\" aria-hidden=\"true\" className={cn(\"text-muted-foreground/40\", className)} {...props}>\n    {children ?? <ChevronRight className=\"h-3.5 w-3.5\" />}\n  </li>\n)\nBreadcrumbSeparator.displayName = \"BreadcrumbSeparator\"\n\nconst BreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps<\"span\">) => (\n  <span role=\"presentation\" aria-hidden=\"true\" className={cn(\"flex h-9 w-9 items-center justify-center\", className)} {...props}>\n    <MoreHorizontal className=\"h-4 w-4\" />\n    <span className=\"sr-only\">More</span>\n  </span>\n)\nBreadcrumbEllipsis.displayName = \"BreadcrumbEllipsis\"\n\nexport { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

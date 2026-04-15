@@ -1,0 +1,36 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Neutral Monochrome",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n:root {\n  /* Earthy — neutral dark, near-black bg, pure white primary */\n  /* Actual site: the original site — dark mode default, 8px radius */\n  /* Background: lab(2.51% .24 -.89) ≈ #09090b near-black with slight cool */\n  /* Secondary: lab(15.73% .61 -2.17) ≈ #1c1c22 dark cool gray panel */\n  /* Border: same as secondary */\n  /* Primary: #fff pure white — monochromatic like Luxe but sharper */\n  /* Radius: 0.5rem = 8px (vs Luxe 12px, Energetic 14px) */\n\n  --background: oklch(0.1417 0.0044 285.82);           /* #09090b near-black */\n  --foreground: oklch(0.9848 0 0);             /* near-white */\n\n  --card: oklch(0.1417 0.0044 285.82);                 /* same as background */\n  --card-foreground: oklch(0.9848 0 0);\n\n  --popover: oklch(0.1417 0.0044 285.82);\n  --popover-foreground: oklch(0.9848 0 0);\n\n  --primary: oklch(0.9848 0 0);               /* near-white — monochromatic */\n  --primary-foreground: oklch(0.1417 0.0044 285.82);  /* near-black on white */\n\n  --secondary: oklch(0.2747 0.006 286);           /* dark cool gray panel #25252e */\n  --secondary-foreground: oklch(0.9848 0 0);\n\n  --muted: oklch(0.2747 0.006 286);\n  --muted-foreground: oklch(0.7127 0.0128 286.07);    /* medium gray #9b9ba8 */\n\n  --accent: oklch(0.3146 0.0072 285.98);              /* slightly lighter than secondary */\n  --accent-foreground: oklch(0.9848 0 0);\n\n  --destructive: oklch(0.6356 0.2082 25.38);\n  --destructive-foreground: oklch(0.9848 0 0);\n\n  --border: oklch(0.2747 0.006 286);              /* same as secondary */\n  --input: oklch(0.2747 0.006 286);\n  --ring: oklch(0.9848 0 0);                  /* white ring */\n  --radius: 0.5rem;                  /* 8px — sharper than Luxe(12) Energetic(14) */\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: calc(var(--radius) - 2px);\n  --radius-lg: var(--radius);\n  --radius-xl: calc(var(--radius) + 4px);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  html {\n    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,\n      BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.1417 0.0044 285.82)",
+      "--foreground": "oklch(0.9848 0 0)",
+      "--card": "oklch(0.1417 0.0044 285.82)",
+      "--card-foreground": "oklch(0.9848 0 0)",
+      "--popover": "oklch(0.1417 0.0044 285.82)",
+      "--popover-foreground": "oklch(0.9848 0 0)",
+      "--primary": "oklch(0.9848 0 0)",
+      "--primary-foreground": "oklch(0.1417 0.0044 285.82)",
+      "--secondary": "oklch(0.2747 0.006 286)",
+      "--secondary-foreground": "oklch(0.9848 0 0)",
+      "--muted": "oklch(0.2747 0.006 286)",
+      "--muted-foreground": "oklch(0.7127 0.0128 286.07)",
+      "--accent": "oklch(0.3146 0.0072 285.98)",
+      "--accent-foreground": "oklch(0.9848 0 0)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(0.9848 0 0)",
+      "--border": "oklch(0.2747 0.006 286)",
+      "--input": "oklch(0.2747 0.006 286)",
+      "--ring": "oklch(0.9848 0 0)",
+      "--radius": "0.5rem"
+    }
+  }
+}

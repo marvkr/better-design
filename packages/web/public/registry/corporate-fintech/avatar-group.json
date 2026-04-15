@@ -1,0 +1,15 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\n\n// Column Avatar Group: overlapping avatars with ring border\n// Sizes: sm (24px), md (32px), lg (40px)\n\ninterface AvatarGroupItem {\n  src?: string\n  alt?: string\n  fallback?: string\n}\n\ninterface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  items: AvatarGroupItem[]\n  max?: number\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm: \"h-6 w-6 text-xs\",\n  md: \"h-8 w-8 text-xs\",\n  lg: \"h-10 w-10 text-sm\",\n}\n\nfunction AvatarGroup({\n  items,\n  max = 5,\n  size = \"md\",\n  className,\n  ...props\n}: AvatarGroupProps) {\n  const visibleItems = items.slice(0, max)\n  const remaining = items.length - max\n\n  return (\n    <div className={cn(\"flex -space-x-2\", className)} {...props}>\n      {visibleItems.map((item, i) => (\n        <Avatar\n          key={i}\n          className={cn(\n            sizeClasses[size],\n            \"ring-2 ring-background\",\n            className\n          )}\n        >\n          {item.src && <AvatarImage src={item.src} alt={item.alt} />}\n          <AvatarFallback>{item.fallback ?? \"?\"}</AvatarFallback>\n        </Avatar>\n      ))}\n      {remaining > 0 && (\n        <div\n          className={cn(\n            sizeClasses[size],\n            \"flex items-center justify-center rounded-full bg-secondary ring-2 ring-background font-medium text-muted-foreground\"\n          )}\n        >\n          +{remaining}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { AvatarGroup }\nexport type { AvatarGroupProps, AvatarGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "avatar",
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Apple Input — light, white bg, 10px radius\n// Border: 1px solid rgba(0,0,0,0.12)\n// Focus: blue border + subtle blue glow\n// Font: system-ui at 17px (Apple's standard body)\n// Transition: 0.3s ease\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-[44px] w-full rounded-[10px] bg-input px-4 py-2 text-[17px] leading-[1.47] tracking-[-0.022em] text-foreground\",\n          \"border border-border\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color,box-shadow] duration-300\",\n          \"hover:border-[rgba(0,0,0,0.2)]\",\n          \"focus-visible:outline-none focus-visible:border-primary/60\",\n          \"focus-visible:shadow-[0_0_0_3px_rgba(0,113,227,0.15)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

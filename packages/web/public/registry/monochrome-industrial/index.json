@@ -1,0 +1,49 @@
+{
+  "name": "monochrome-industrial",
+  "label": "Monochrome Industrial",
+  "description": "monochrome-industrial design system",
+  "personality": [],
+  "industry": [],
+  "componentCount": 8,
+  "components": [
+    {
+      "name": "cursor",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "card",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "code-tabs",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "badge",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "button",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "spinner"
+    },
+    {
+      "name": "input",
+      "registryDependencies": [
+        "utils"
+      ]
+    }
+  ]
+}

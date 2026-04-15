@@ -1,0 +1,17 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, AnimatePresence } from \"motion/react\"\nimport { cn } from \"@/lib/utils\"\n\ninterface CodeTab {\n  label: string\n  lang: string\n  code: string\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[]\n  defaultTab?: number\n  className?: string\n}\n\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(defaultTab)\n  const [direction, setDirection] = React.useState(0)\n  const uid = React.useId()\n\n  const handleTabChange = (index: number) => {\n    setDirection(index > activeIndex ? 1 : -1)\n    setActiveIndex(index)\n  }\n\n  const active = tabs[activeIndex]\n\n  return (\n    <div\n      className={cn(\n        \"rounded-xl border border-border/60 bg-card overflow-hidden\",\n        className\n      )}\n    >\n      {/* Tab bar */}\n      <div className=\"relative flex border-b border-border/60 bg-card\">\n        {tabs.map((tab, i) => (\n          <button\n            key={tab.label}\n            onClick={() => handleTabChange(i)}\n            className={cn(\n              \"relative px-4 py-2.5 text-xs font-medium transition-colors\",\n              i === activeIndex\n                ? \"text-foreground\"\n                : \"text-muted-foreground/60 hover:text-muted-foreground\"\n            )}\n          >\n            {i === activeIndex && (\n              <motion.div\n                layoutId={`code-tab-indicator-${uid}`}\n                className=\"absolute bottom-0 left-0 right-0 h-[2px] bg-primary\"\n                transition={{ type: \"spring\", stiffness: 500, damping: 35 }}\n              />\n            )}\n            {tab.label}\n          </button>\n        ))}\n      </div>\n\n      {/* Code content */}\n      <div className=\"relative overflow-hidden\">\n        <AnimatePresence mode=\"popLayout\" initial={false} custom={direction}>\n          <motion.div\n            key={activeIndex}\n            custom={direction}\n            initial={{ opacity: 0, x: direction * 20 }}\n            animate={{ opacity: 1, x: 0 }}\n            exit={{ opacity: 0, x: direction * -20 }}\n            transition={{ duration: 0.2, ease: \"easeInOut\" }}\n          >\n            <pre className=\"p-4 m-0 bg-transparent text-xs font-mono leading-relaxed overflow-x-auto text-foreground\">\n              <code>{active.code}</code>\n            </pre>\n          </motion.div>\n        </AnimatePresence>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeTabs }\nexport type { CodeTabsProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

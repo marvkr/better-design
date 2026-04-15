@@ -1,0 +1,17 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Minus, Plus } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\ninterface NumberInputProps {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n  disabled?: boolean\n  className?: string\n}\n\nfunction NumberInput({\n  value = 0,\n  onChange,\n  min = -Infinity,\n  max = Infinity,\n  step = 1,\n  disabled,\n  className,\n}: NumberInputProps) {\n  const handleDecrement = () => onChange?.(Math.max(min, value - step))\n  const handleIncrement = () => onChange?.(Math.min(max, value + step))\n\n  const btnCls = cn(\n    \"flex h-full w-9 shrink-0 items-center justify-center\",\n    \"text-muted-foreground transition-colors hover:text-foreground active:scale-[0.97]\",\n    \"disabled:pointer-events-none disabled:opacity-40\"\n  )\n\n  return (\n    <div\n      className={cn(\n        \"inline-flex h-10 overflow-hidden rounded-xl bg-secondary\",\n        \"focus-within:ring-2 focus-within:ring-ring\",\n        \"transition-shadow duration-150\",\n        disabled && \"cursor-not-allowed opacity-60\",\n        className\n      )}\n    >\n      <button\n        type=\"button\"\n        onClick={handleDecrement}\n        disabled={disabled || value <= min}\n        className={btnCls}\n      >\n        <Minus className=\"h-3.5 w-3.5\" />\n      </button>\n      <input\n        type=\"number\"\n        value={value}\n        onChange={(e) => onChange?.(Number(e.target.value))}\n        min={min}\n        max={max}\n        step={step}\n        disabled={disabled}\n        className=\"w-14 bg-transparent text-center text-sm text-foreground outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\"\n      />\n      <button\n        type=\"button\"\n        onClick={handleIncrement}\n        disabled={disabled || value >= max}\n        className={btnCls}\n      >\n        <Plus className=\"h-3.5 w-3.5\" />\n      </button>\n    </div>\n  )\n}\n\nexport { NumberInput }\nexport type { NumberInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

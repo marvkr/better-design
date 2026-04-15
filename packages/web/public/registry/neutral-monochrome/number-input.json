@@ -1,0 +1,17 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Minus, Plus } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface NumberInputProps {\n  value?: number\n  defaultValue?: number\n  min?: number\n  max?: number\n  step?: number\n  disabled?: boolean\n  onValueChange?: (value: number) => void\n  className?: string\n}\n\nfunction NumberInput({\n  value: controlledValue,\n  defaultValue = 0,\n  min,\n  max,\n  step = 1,\n  disabled,\n  onValueChange,\n  className,\n}: NumberInputProps) {\n  const [internalValue, setInternalValue] = React.useState(defaultValue)\n  const isControlled = controlledValue !== undefined\n  const value = isControlled ? controlledValue : internalValue\n\n  function clamp(v: number) {\n    let result = v\n    if (min !== undefined) result = Math.max(min, result)\n    if (max !== undefined) result = Math.min(max, result)\n    return result\n  }\n\n  function update(next: number) {\n    const clamped = clamp(next)\n    if (!isControlled) setInternalValue(clamped)\n    onValueChange?.(clamped)\n  }\n\n  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {\n    const parsed = parseFloat(e.target.value)\n    if (!isNaN(parsed)) update(parsed)\n  }\n\n  const atMin = min !== undefined && value <= min\n  const atMax = max !== undefined && value >= max\n\n  return (\n    <div\n      className={cn(\n        \"inline-flex items-center rounded-[10px] border border-border bg-secondary overflow-hidden\",\n        disabled && \"opacity-50 pointer-events-none\",\n        className\n      )}\n    >\n      <button\n        type=\"button\"\n        aria-label=\"Decrease\"\n        onClick={() => update(value - step)}\n        disabled={disabled || atMin}\n        className={cn(\n          \"flex h-10 w-10 shrink-0 items-center justify-center\",\n          \"text-muted-foreground hover:text-foreground hover:bg-accent transition-colors\",\n          \"disabled:opacity-40 disabled:pointer-events-none\"\n        )}\n      >\n        <Minus className=\"h-4 w-4\" />\n      </button>\n\n      <input\n        type=\"number\"\n        value={value}\n        onChange={handleInput}\n        disabled={disabled}\n        min={min}\n        max={max}\n        step={step}\n        className={cn(\n          \"h-10 w-16 bg-card text-center text-sm font-medium text-foreground\",\n          \"border-x border-border\",\n          \"focus:outline-none focus:ring-0\",\n          \"[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none\"\n        )}\n      />\n\n      <button\n        type=\"button\"\n        aria-label=\"Increase\"\n        onClick={() => update(value + step)}\n        disabled={disabled || atMax}\n        className={cn(\n          \"flex h-10 w-10 shrink-0 items-center justify-center\",\n          \"text-muted-foreground hover:text-foreground hover:bg-accent transition-colors\",\n          \"disabled:opacity-40 disabled:pointer-events-none\"\n        )}\n      >\n        <Plus className=\"h-4 w-4\" />\n      </button>\n    </div>\n  )\n}\n\nexport { NumberInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

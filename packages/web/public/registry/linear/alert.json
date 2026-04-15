@@ -8,6 +8,9 @@
       "type": "registry:ui"
     }
   ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "utils"
   ]

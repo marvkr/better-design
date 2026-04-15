@@ -1,0 +1,17 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toaster as Sonner } from \"sonner\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe Sonner: Sonner Toaster wrapper — card bg, rounded-xl, dark monochromatic style\n// Matches the premium dark aesthetic with warm gray text\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\nfunction Toaster({ className, ...props }: ToasterProps & { className?: string }) {\n  return (\n    <Sonner\n      theme=\"dark\"\n      className={cn(\"toaster group\", className)}\n      toastOptions={{\n        classNames: {\n          toast: [\n            \"group toast\",\n            \"group-[.toaster]:rounded-xl\",\n            \"group-[.toaster]:border group-[.toaster]:border-border/60\",\n            \"group-[.toaster]:bg-card\",\n            \"group-[.toaster]:text-foreground\",\n            \"group-[.toaster]:shadow-xl\",\n            \"group-[.toaster]:text-sm group-[.toaster]:tracking-wide\",\n          ].join(\" \"),\n          description: \"group-[.toast]:text-muted-foreground group-[.toast]:text-xs\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg group-[.toast]:text-xs\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-lg group-[.toast]:text-xs\",\n          closeButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:border-border group-[.toast]:text-muted-foreground hover:group-[.toast]:text-foreground\",\n          error:\n            \"group-[.toaster]:border-destructive/30 group-[.toaster]:bg-destructive/10\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

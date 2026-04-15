@@ -1,0 +1,14 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  max?: number\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ className, max, children, ...props }, ref) => {\n    const childArray = React.Children.toArray(children)\n    const visible = max ? childArray.slice(0, max) : childArray\n    const overflow = max ? childArray.length - max : 0\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex -space-x-3\", className)}\n        {...props}\n      >\n        {visible}\n        {overflow > 0 && (\n          <div className=\"relative flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-white/10 backdrop-blur-xl bg-white/[0.08] text-xs font-medium text-muted-foreground\">\n            +{overflow}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

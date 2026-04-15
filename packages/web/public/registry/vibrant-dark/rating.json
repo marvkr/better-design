@@ -1,0 +1,17 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Star } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\ninterface RatingProps {\n  value?: number\n  maxValue?: number\n  onValueChange?: (value: number) => void\n  readOnly?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n  className?: string\n}\n\nconst starSizes = { sm: \"h-4 w-4\", md: \"h-5 w-5\", lg: \"h-6 w-6\" }\n\nfunction Rating({ value = 0, maxValue = 5, onValueChange, readOnly, size = \"md\", className }: RatingProps) {\n  const [hovered, setHovered] = React.useState(0)\n  const display = hovered || value\n\n  return (\n    <div\n      className={cn(\"flex items-center gap-0.5\", className)}\n      role=\"group\"\n      aria-label={`Rating: ${value} of ${maxValue}`}\n    >\n      {Array.from({ length: maxValue }, (_, i) => i + 1).map((star) => (\n        <button\n          key={star}\n          type=\"button\"\n          disabled={readOnly}\n          onClick={() => onValueChange?.(star)}\n          onMouseEnter={() => !readOnly && setHovered(star)}\n          onMouseLeave={() => setHovered(0)}\n          className={cn(\n            \"transition-all duration-100 active:scale-[0.97]\",\n            \"disabled:pointer-events-none outline-none\",\n            \"focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring rounded\"\n          )}\n          aria-label={`${star} star${star !== 1 ? \"s\" : \"\"}`}\n        >\n          <Star\n            className={cn(\n              starSizes[size],\n              \"transition-colors\",\n              star <= display\n                ? \"fill-[hsl(var(--warning))] text-[hsl(var(--warning))]\"\n                : \"fill-transparent text-muted-foreground/40\"\n            )}\n          />\n        </button>\n      ))}\n    </div>\n  )\n}\n\nexport { Rating }\nexport type { RatingProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

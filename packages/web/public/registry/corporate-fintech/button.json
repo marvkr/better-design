@@ -1,0 +1,49 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:border focus-visible:border-primary focus-visible:ring-ring/30 focus-visible:ring-2 focus-visible:ring-offset-0 transition-all disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary/95 border border-background shadow-[inset_0_-2px_#284c87] border-opacity-30 text-primary-foreground drop-shadow-lg hover:bg-primary hover:drop-shadow-xl\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        outline:\n          \"border border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n        secondary:\n          \"border bg-secondary text-secondary-foreground shadow-[0_1px_1px_rgba(0,0,0,0.1)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2)]\",\n        ghost: \"hover:bg-accent hover:text-accent-foreground\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-10 px-4 py-2\",\n        sm: \"h-9 rounded-md px-3\",\n        lg: \"h-11 rounded-md px-8\",\n        icon: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.9924 0 0)",
+      "--foreground": "oklch(0.1405 0.0044 285.82)",
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.1405 0.0044 285.82)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.1405 0.0044 285.82)",
+      "--primary": "oklch(0.5297 0.1615 258.75)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(1 0 0)",
+      "--secondary-foreground": "oklch(0.2103 0.0059 285.88)",
+      "--muted": "oklch(0.9676 0.0013 286.37)",
+      "--muted-foreground": "oklch(0.5519 0.0137 285.94)",
+      "--accent": "oklch(0.9761 0.0012 286.38)",
+      "--accent-foreground": "oklch(0.2103 0.0059 285.88)",
+      "--destructive": "oklch(0.6368 0.2078 25.33)",
+      "--destructive-foreground": "oklch(0.9848 0 0)",
+      "--border": "oklch(0.9197 0.004 286.32)",
+      "--input": "oklch(0.9374 0.0016 286.37)",
+      "--ring": "oklch(0.5297 0.1615 258.75)",
+      "--radius": "0.6rem",
+      "--shadow-2xs": "0 1px 2px 0 rgba(0,0,0,0.04)",
+      "--shadow-xs": "0 1px 2px 0 rgba(0,0,0,0.06)",
+      "--shadow-sm": "0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)",
+      "--shadow": "0 1px 3px 0 rgba(0,0,0,0.1),  0 1px 2px -1px rgba(0,0,0,0.08)",
+      "--shadow-md": "0 4px 6px -1px rgba(0,59,153,0.1), 0 2px 4px -2px rgba(0,59,153,0.06)",
+      "--shadow-lg": "0 8px 16px -2px rgba(0,59,153,0.12), 0 4px 6px -4px rgba(0,59,153,0.06), 0 0 0 1px rgba(0,59,153,0.04)",
+      "--shadow-xl": "0 16px 24px -4px rgba(0,59,153,0.14), 0 8px 10px -6px rgba(0,59,153,0.08)"
+    }
+  }
+}

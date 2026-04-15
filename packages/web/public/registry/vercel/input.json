@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Vercel / Geist Input — dark, pure black bg, #333 border\n// Height: 32px (Geist md), 14px font, -0.006em tracking\n// Focus: #888 border + very subtle white glow\n// Transition: 150ms ease (snappy)\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-8 w-full rounded-md bg-input px-3 py-1.5 text-[14px] tracking-[-0.006em] text-foreground\",\n          \"border border-border\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color,box-shadow] duration-150 ease-out\",\n          \"hover:border-[rgba(255,255,255,0.3)]\",\n          \"focus-visible:outline-none focus-visible:border-[#888]\",\n          \"focus-visible:shadow-[0_0_0_3px_rgba(255,255,255,0.05)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

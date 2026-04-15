@@ -1,0 +1,18 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useDataState, springInteraction } from \"@/lib/motion\"\n\nconst TabsContext = React.createContext<{ uid: string }>({ uid: \"\" })\n\nfunction Tabs({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Root>) {\n  const uid = React.useId()\n  return (\n    <TabsContext.Provider value={{ uid }}>\n      <TabsPrimitive.Root className={cn(\"\", className)} {...props} />\n    </TabsContext.Provider>\n  )\n}\nTabs.displayName = TabsPrimitive.Root.displayName\n\nfunction TabsList({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.List>) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-11 items-center justify-center gap-1 rounded-full p-1\",\n        \"backdrop-blur-xl bg-white/[0.04]\",\n        \"text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = TabsPrimitive.List.displayName\n\nfunction TabsTrigger({\n  className,\n  children,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {\n  const { uid } = React.useContext(TabsContext)\n  const ref = React.useRef<HTMLButtonElement>(null)\n  const dataState = useDataState(ref)\n  const isActive = dataState === \"active\"\n\n  return (\n    <TabsPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"relative inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium\",\n        \"ring-offset-background transition-all\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"data-[state=active]:text-foreground\",\n        className\n      )}\n      {...props}\n    >\n      {isActive && (\n        <motion.div\n          layoutId={`tabs-indicator-${uid}`}\n          className=\"absolute inset-0 rounded-full bg-white/[0.1] shadow-[inset_0_0_8px_rgba(255,255,255,0.12)]\"\n          transition={springInteraction}\n        />\n      )}\n      <span className=\"relative z-10\">{children}</span>\n    </TabsPrimitive.Trigger>\n  )\n}\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName\n\nfunction TabsContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Content>) {\n  return (\n    <TabsPrimitive.Content\n      className={cn(\n        \"mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = TabsPrimitive.Content.displayName\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs",
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

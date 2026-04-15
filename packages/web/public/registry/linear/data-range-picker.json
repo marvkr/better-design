@@ -8,6 +8,10 @@
       "type": "registry:ui"
     }
   ],
+  "dependencies": [
+    "date-fns",
+    "lucide-react"
+  ],
   "registryDependencies": [
     "button",
     "calendar",

@@ -1,0 +1,17 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { X } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\ninterface TagInputProps {\n  value?: string[]\n  onChange?: (tags: string[]) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction TagInput({ value = [], onChange, placeholder = \"Add tag...\", disabled, className }: TagInputProps) {\n  const [input, setInput] = React.useState(\"\")\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  const addTag = (tag: string) => {\n    const trimmed = tag.trim()\n    if (trimmed && !value.includes(trimmed)) {\n      onChange?.([...value, trimmed])\n    }\n    setInput(\"\")\n  }\n\n  const removeTag = (tag: string) => onChange?.(value.filter((t) => t !== tag))\n\n  const handleKeyDown = (e: React.KeyboardEvent) => {\n    if (e.key === \"Enter\" || e.key === \",\") {\n      e.preventDefault()\n      addTag(input)\n    } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n      removeTag(value[value.length - 1]!)\n    }\n  }\n\n  return (\n    <div\n      onClick={() => inputRef.current?.focus()}\n      className={cn(\n        \"flex min-h-10 w-full flex-wrap items-center gap-1.5 rounded-xl bg-secondary px-3 py-2\",\n        \"focus-within:ring-2 focus-within:ring-ring cursor-text\",\n        \"transition-[background,box-shadow] duration-150\",\n        disabled && \"cursor-not-allowed opacity-60\",\n        className\n      )}\n    >\n      {value.map((tag) => (\n        <span\n          key={tag}\n          className=\"inline-flex items-center gap-1 rounded-full bg-primary/20 px-2 py-0.5 text-xs font-medium text-primary\"\n        >\n          {tag}\n          {!disabled && (\n            <button type=\"button\" onClick={() => removeTag(tag)} className=\"text-primary/70 hover:text-primary\">\n              <X className=\"h-3 w-3\" />\n            </button>\n          )}\n        </span>\n      ))}\n      <input\n        ref={inputRef}\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        onKeyDown={handleKeyDown}\n        onBlur={() => addTag(input)}\n        placeholder={value.length === 0 ? placeholder : \"\"}\n        disabled={disabled}\n        className=\"flex-1 min-w-16 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none\"\n      />\n    </div>\n  )\n}\n\nexport { TagInput }\nexport type { TagInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

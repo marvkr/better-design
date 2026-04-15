@@ -5,31 +5,31 @@
   "files": [
     {
       "path": "globals.css",
-      "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n@layer base {\n  :root {\n    --background: 0 0% 11%;\n    --foreground: 0 0% 95%;\n\n    --card: 0 0% 14%;\n    --card-foreground: 0 0% 95%;\n\n    --popover: 0 0% 9%;\n    --popover-foreground: 0 0% 95%;\n\n    --primary: 153 60% 53%;\n    --primary-foreground: 153 100% 98%;\n\n    --secondary: 240 3.7% 15.9%;\n    --secondary-foreground: 0 0% 98%;\n\n    --muted: 0 0% 18%;\n    --muted-foreground: 240 5% 64.9%;\n\n    --accent: 12 6.5% 15.1%;\n    --accent-foreground: 0 0% 98%;\n\n    --destructive: 0 62.8% 30.6%;\n    --destructive-foreground: 0 85.7% 97.3%;\n\n    --border: 0 0% 18%;\n    --input: 0 0% 18%;\n    --ring: 152 47% 41%;\n\n    --radius: 0.5rem;\n  }\n}\n\n@layer base {\n  * {\n    @apply border-border;\n  }\n  body {\n    @apply bg-background text-foreground;\n  }\n}\n",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n:root {\n  --background: oklch(0.2267 0 0);\n  --foreground: oklch(0.9619 0 0);\n\n  --card: oklch(0.2591 0 0);\n  --card-foreground: oklch(0.9619 0 0);\n\n  --popover: oklch(0.2044 0 0);\n  --popover-foreground: oklch(0.9619 0 0);\n\n  --primary: oklch(0.7629 0.1537 159.36);\n  --primary-foreground: oklch(0.9911 0.0123 167.47);\n\n  --secondary: oklch(0.2741 0.0055 286.03);\n  --secondary-foreground: oklch(0.9848 0 0);\n\n  --muted: oklch(0.3008 0 0);\n  --muted-foreground: oklch(0.7119 0.0129 286.07);\n\n  --accent: oklch(0.2685 0.0063 34.3);\n  --accent-foreground: oklch(0.9848 0 0);\n\n  --destructive: oklch(0.3959 0.1331 25.72);\n  --destructive-foreground: oklch(0.971 0.0127 17.38);\n\n  --border: oklch(0.3008 0 0);\n  --input: oklch(0.3008 0 0);\n  --ring: oklch(0.6154 0.1157 159.63);\n\n  --radius: 0.5rem;\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: calc(var(--radius) - 2px);\n  --radius-lg: var(--radius);\n  --radius-xl: calc(var(--radius) + 4px);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  html {\n    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
       "type": "registry:style"
     }
   ],
   "cssVars": {
     "light": {
-      "--background": "0 0% 11%",
-      "--foreground": "0 0% 95%",
-      "--card": "0 0% 14%",
-      "--card-foreground": "0 0% 95%",
-      "--popover": "0 0% 9%",
-      "--popover-foreground": "0 0% 95%",
-      "--primary": "153 60% 53%",
-      "--primary-foreground": "153 100% 98%",
-      "--secondary": "240 3.7% 15.9%",
-      "--secondary-foreground": "0 0% 98%",
-      "--muted": "0 0% 18%",
-      "--muted-foreground": "240 5% 64.9%",
-      "--accent": "12 6.5% 15.1%",
-      "--accent-foreground": "0 0% 98%",
-      "--destructive": "0 62.8% 30.6%",
-      "--destructive-foreground": "0 85.7% 97.3%",
-      "--border": "0 0% 18%",
-      "--input": "0 0% 18%",
-      "--ring": "152 47% 41%",
+      "--background": "oklch(0.2267 0 0)",
+      "--foreground": "oklch(0.9619 0 0)",
+      "--card": "oklch(0.2591 0 0)",
+      "--card-foreground": "oklch(0.9619 0 0)",
+      "--popover": "oklch(0.2044 0 0)",
+      "--popover-foreground": "oklch(0.9619 0 0)",
+      "--primary": "oklch(0.7629 0.1537 159.36)",
+      "--primary-foreground": "oklch(0.9911 0.0123 167.47)",
+      "--secondary": "oklch(0.2741 0.0055 286.03)",
+      "--secondary-foreground": "oklch(0.9848 0 0)",
+      "--muted": "oklch(0.3008 0 0)",
+      "--muted-foreground": "oklch(0.7119 0.0129 286.07)",
+      "--accent": "oklch(0.2685 0.0063 34.3)",
+      "--accent-foreground": "oklch(0.9848 0 0)",
+      "--destructive": "oklch(0.3959 0.1331 25.72)",
+      "--destructive-foreground": "oklch(0.971 0.0127 17.38)",
+      "--border": "oklch(0.3008 0 0)",
+      "--input": "oklch(0.3008 0 0)",
+      "--ring": "oklch(0.6154 0.1157 159.63)",
       "--radius": "0.5rem"
     }
   }

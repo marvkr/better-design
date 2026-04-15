@@ -1,0 +1,17 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe StatusIndicator: presence dot — online=white, offline=muted, busy=destructive\n// Monochromatic: no green — online uses white/foreground tone for premium feel\n\nconst statusIndicatorVariants = cva(\n  \"inline-flex shrink-0 rounded-full\",\n  {\n    variants: {\n      status: {\n        online:  \"bg-primary shadow-[0_0_0_2px_hsl(var(--background))]\",\n        offline: \"bg-muted-foreground shadow-[0_0_0_2px_hsl(var(--background))]\",\n        busy:    \"bg-destructive shadow-[0_0_0_2px_hsl(var(--background))]\",\n        away:    \"bg-muted-foreground/50 shadow-[0_0_0_2px_hsl(var(--background))]\",\n      },\n      size: {\n        xs:      \"h-1.5 w-1.5\",\n        sm:      \"h-2 w-2\",\n        default: \"h-2.5 w-2.5\",\n        lg:      \"h-3 w-3\",\n      },\n    },\n    defaultVariants: {\n      status: \"online\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {\n  pulse?: boolean\n}\n\nfunction StatusIndicator({\n  status,\n  size,\n  pulse = false,\n  className,\n  ...props\n}: StatusIndicatorProps) {\n  const statusLabel = {\n    online: \"Online\",\n    offline: \"Offline\",\n    busy: \"Busy\",\n    away: \"Away\",\n  }[status ?? \"online\"]\n\n  return (\n    <span\n      role=\"img\"\n      aria-label={statusLabel}\n      className={cn(\n        \"relative inline-flex\",\n        className\n      )}\n      {...props}\n    >\n      {pulse && status === \"online\" && (\n        <span\n          className={cn(\n            \"absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40\"\n          )}\n        />\n      )}\n      <span className={cn(statusIndicatorVariants({ status, size }))} />\n    </span>\n  )\n}\n\nexport { StatusIndicator, statusIndicatorVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

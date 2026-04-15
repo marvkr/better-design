@@ -1,0 +1,14 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nconst Timeline = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"relative space-y-6 pl-8\", className)}\n    {...props}\n  />\n))\nTimeline.displayName = \"Timeline\"\n\nconst TimelineItem = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"relative\", className)}\n    {...props}\n  />\n))\nTimelineItem.displayName = \"TimelineItem\"\n\nconst TimelineDot = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute -left-8 top-1 flex h-4 w-4 items-center justify-center\",\n      className\n    )}\n    {...props}\n  >\n    <div className=\"h-2.5 w-2.5 rounded-full bg-primary/70 shadow-[0_0_8px_oklch(0.65_0.19_250/0.4)]\" />\n  </div>\n))\nTimelineDot.displayName = \"TimelineDot\"\n\nconst TimelineLine = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute -left-[25px] top-5 h-[calc(100%+24px)] w-px bg-white/10\",\n      className\n    )}\n    {...props}\n  />\n))\nTimelineLine.displayName = \"TimelineLine\"\n\nconst TimelineContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"pb-2\", className)}\n    {...props}\n  />\n))\nTimelineContent.displayName = \"TimelineContent\"\n\nexport { Timeline, TimelineItem, TimelineDot, TimelineLine, TimelineContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

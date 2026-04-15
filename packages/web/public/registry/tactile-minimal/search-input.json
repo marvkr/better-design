@@ -1,0 +1,14 @@
+{
+  "name": "search-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Search Input: input with leading search icon and optional clear button\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, value, onClear, ...props }, ref) => {\n    return (\n      <div className=\"relative\">\n        <Icon\n          icon=\"tabler:search\"\n          className=\"absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground\"\n        />\n        <input\n          ref={ref}\n          value={value}\n          className={cn(\n            \"flex h-9 w-full pl-9 pr-3 py-1.5 text-sm\",\n            \"rounded-[6px] border border-border bg-background\",\n            \"text-foreground placeholder:text-muted-foreground\",\n            \"transition-all duration-150\",\n            \"hover:border-ring/50\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n            \"disabled:cursor-not-allowed disabled:opacity-50\",\n            onClear && value ? \"pr-9\" : \"\",\n            className\n          )}\n          {...props}\n        />\n        {onClear && value && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            className={cn(\n              \"absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\",\n              \"transition-all duration-150 active:scale-[0.98]\",\n              \"hover:text-foreground\"\n            )}\n          >\n            <Icon icon=\"tabler:x\" className=\"h-4 w-4\" />\n            <span className=\"sr-only\">Clear search</span>\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nSearchInput.displayName = \"SearchInput\"\n\nexport { SearchInput }\nexport type { SearchInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

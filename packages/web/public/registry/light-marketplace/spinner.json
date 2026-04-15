@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\" | \"xl\"\n}\n\nconst sizeClasses = {\n  sm:      \"h-4 w-4 border-2\",\n  default: \"h-6 w-6 border-2\",\n  lg:      \"h-8 w-8 border-[3px]\",\n  xl:      \"h-10 w-10 border-4\",\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ size = \"default\", className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        role=\"status\"\n        aria-label=\"Loading\"\n        className={cn(\n          \"inline-block animate-spin rounded-full\",\n          \"border-border border-t-foreground\",\n          sizeClasses[size],\n          className\n        )}\n        {...props}\n      >\n        <span className=\"sr-only\">Loading...</span>\n      </div>\n    )\n  }\n)\nSpinner.displayName = \"Spinner\"\n\nexport { Spinner }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { X } from \"lucide-react\"\n\n// Dynamic Notification: card bg alert item, colored left border variants\n\ninterface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n  onDismiss?: () => void\n  variant?: \"default\" | \"success\" | \"warning\" | \"destructive\"\n  unread?: boolean\n}\n\nconst variantClasses = {\n  default:     \"border-l-4 border-l-primary\",\n  success:     \"border-l-4 border-l-[hsl(var(--success))]\",\n  warning:     \"border-l-4 border-l-[hsl(var(--warning))]\",\n  destructive: \"border-l-4 border-l-destructive\",\n}\n\nfunction Notification({ icon, title, description, action, onDismiss, variant = \"default\", unread, className, ...props }: NotificationProps) {\n  return (\n    <div\n      className={cn(\n        \"relative flex gap-3 rounded-xl bg-card p-4\",\n        variantClasses[variant],\n        className\n      )}\n      {...props}\n    >\n      {unread && (\n        <div className=\"absolute right-3 top-3 h-2 w-2 rounded-full bg-primary shadow-[0_0_0_3px_hsl(212_100%_47%/0.3)]\" />\n      )}\n      {icon && (\n        <div className=\"flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-secondary text-muted-foreground\">\n          {icon}\n        </div>\n      )}\n      <div className=\"flex flex-1 flex-col gap-1 min-w-0\">\n        <p className=\"text-sm font-medium text-foreground\">{title}</p>\n        {description && <p className=\"text-sm text-muted-foreground\">{description}</p>}\n        {action && <div className=\"mt-2\">{action}</div>}\n      </div>\n      {onDismiss && (\n        <button\n          onClick={onDismiss}\n          className=\"shrink-0 text-muted-foreground transition-colors hover:text-foreground\"\n        >\n          <X className=\"h-4 w-4\" />\n          <span className=\"sr-only\">Dismiss</span>\n        </button>\n      )}\n    </div>\n  )\n}\n\nexport { Notification }\nexport type { NotificationProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

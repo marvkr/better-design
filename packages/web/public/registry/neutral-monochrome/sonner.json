@@ -1,0 +1,17 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toaster as SonnerToaster } from \"sonner\"\nimport { cn } from \"@/lib/utils\"\n\ntype ToasterProps = React.ComponentProps<typeof SonnerToaster>\n\nfunction Toaster({ className, ...props }: ToasterProps) {\n  return (\n    <SonnerToaster\n      theme=\"dark\"\n      className={cn(\"toaster group\", className)}\n      toastOptions={{\n        classNames: {\n          toast: [\n            \"group toast rounded-[10px] border border-border bg-card text-foreground shadow-xl\",\n            \"group-[.toaster]:bg-card group-[.toaster]:text-foreground group-[.toaster]:border-border\",\n          ].join(\" \"),\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground rounded-lg\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground rounded-lg\",\n          closeButton:\n            \"group-[.toast]:border-border group-[.toast]:bg-card group-[.toast]:text-muted-foreground\",\n          success: \"group-[.toaster]:border-primary/30\",\n          error: \"group-[.toaster]:border-destructive/30\",\n          warning: \"group-[.toaster]:border-orange-500/30\",\n          info: \"group-[.toaster]:border-primary/30\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

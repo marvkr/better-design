@@ -1,0 +1,17 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { OTPInput, OTPInputContext } from \"input-otp\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe InputOTP: OTP slots — secondary bg, white ring on active slot\n// Monochromatic: filled slots get foreground text; separator is just a dash\n\nconst InputOTP = React.forwardRef<\n  React.ComponentRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    containerClassName={cn(\n      \"flex items-center gap-2 has-[:disabled]:opacity-40\",\n      containerClassName\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n))\nInputOTP.displayName = \"InputOTP\"\n\nconst InputOTPGroup = React.forwardRef<\n  React.ComponentRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex items-center gap-2\", className)}\n    {...props}\n  />\n))\nInputOTPGroup.displayName = \"InputOTPGroup\"\n\nconst InputOTPSlot = React.forwardRef<\n  React.ComponentRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\"> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext)\n  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots?.[index] ?? {}\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\n        \"relative flex h-12 w-10 items-center justify-center\",\n        \"rounded-xl border border-border bg-secondary\",\n        \"text-sm font-semibold text-foreground tracking-widest\",\n        \"transition-all duration-200\",\n        isActive && \"ring-2 ring-ring ring-offset-1 ring-offset-background border-primary/30 z-10\",\n        className\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-4 w-px animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      )}\n    </div>\n  )\n})\nInputOTPSlot.displayName = \"InputOTPSlot\"\n\nconst InputOTPSeparator = React.forwardRef<\n  React.ComponentRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ ...props }, ref) => (\n  <div ref={ref} role=\"separator\" className=\"text-muted-foreground/60\" {...props}>\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      width=\"14\"\n      height=\"2\"\n      viewBox=\"0 0 14 2\"\n      fill=\"none\"\n      stroke=\"currentColor\"\n      strokeWidth=\"2\"\n      strokeLinecap=\"round\"\n    >\n      <line x1=\"0\" y1=\"1\" x2=\"14\" y2=\"1\" />\n    </svg>\n  </div>\n))\nInputOTPSeparator.displayName = \"InputOTPSeparator\"\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -3,20 +3,96 @@
   "baseUrl": "https://www.better-design.com/registry",
   "styles": [
     {
+      "name": "apple",
+      "label": "Apple"
+    },
+    {
+      "name": "monochrome-industrial",
+      "label": "Monochrome Industrial"
+    },
+    {
+      "name": "vibrant-dark",
+      "label": "Vibrant Dark"
+    },
+    {
+      "name": "cinematic-dark",
+      "label": "Cinematic Dark"
+    },
+    {
+      "name": "vercel",
+      "label": "Vercel"
+    },
+    {
+      "name": "precision-light",
+      "label": "Precision Light"
+    },
+    {
       "name": "airbnb",
       "label": "Airbnb Design System"
     },
     {
-      "name": "corporate-fintech",
-      "label": "Column Design System"
+      "name": "minimal-light",
+      "label": "Minimal Light"
     },
     {
       "name": "linear",
       "label": "Linear Design System"
     },
     {
+      "name": "corporate-fintech",
+      "label": "Column Design System"
+    },
+    {
+      "name": "neutral-monochrome",
+      "label": "Neutral Monochrome"
+    },
+    {
+      "name": "linear-quality",
+      "label": "Linear Quality"
+    },
+    {
+      "name": "notion",
+      "label": "Notion"
+    },
+    {
       "name": "supabase",
       "label": "Supabase Design System"
+    },
+    {
+      "name": "editorial-dark",
+      "label": "Editorial Dark"
+    },
+    {
+      "name": "tactile-minimal",
+      "label": "Tactile Minimal"
+    },
+    {
+      "name": "figma",
+      "label": "Figma"
+    },
+    {
+      "name": "glassmorphic-dark",
+      "label": "Glassmorphic Dark"
+    },
+    {
+      "name": "dark-orange",
+      "label": "Dark Orange"
+    },
+    {
+      "name": "midnight-glass",
+      "label": "Midnight Glass"
+    },
+    {
+      "name": "lumen-dark",
+      "label": "Lumen Dark"
+    },
+    {
+      "name": "light-marketplace",
+      "label": "Light Marketplace"
+    },
+    {
+      "name": "stripe",
+      "label": "Stripe"
     }
   ]
 }

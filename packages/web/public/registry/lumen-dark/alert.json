@@ -1,0 +1,17 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst alertVariants = cva(\n  \"relative w-full rounded-lg p-4 \" +\n    \"border [box-shadow:var(--shadow-s)] \" +\n    \"[&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-card text-card-foreground border-border\",\n        info:\n          \"bg-card text-card-foreground border-primary/40 [&>svg]:text-primary\",\n        success:\n          \"bg-card text-card-foreground border-[oklch(0.5_0.15_145)]/40 [&>svg]:text-[oklch(0.78_0.15_145)]\",\n        warning:\n          \"bg-card text-card-foreground border-[oklch(0.55_0.18_55)]/40 [&>svg]:text-[oklch(0.82_0.14_80)]\",\n        destructive:\n          \"bg-card text-card-foreground border-destructive/40 [&>svg]:text-destructive\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface AlertProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof alertVariants> {}\n\nconst Alert = React.forwardRef<HTMLDivElement, AlertProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} role=\"alert\" className={cn(alertVariants({ variant }), className)} {...props} />\n  )\n)\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(\n  ({ className, ...props }, ref) => (\n    <h5 ref={ref} className={cn(\"mb-1 font-semibold leading-none tracking-tight\", className)} {...props} />\n  )\n)\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"text-sm text-muted-foreground leading-relaxed [&_p]:leading-relaxed\", className)} {...props} />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

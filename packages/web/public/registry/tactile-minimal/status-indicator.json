@@ -1,0 +1,17 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Status Indicator: colored dot + label\n\nconst statusIndicatorVariants = cva(\n  \"inline-flex items-center gap-2 text-sm\",\n  {\n    variants: {\n      variant: {\n        default: \"text-muted-foreground\",\n        success: \"text-emerald-600\",\n        warning: \"text-amber-600\",\n        destructive: \"text-destructive\",\n        info: \"text-primary\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst dotVariants = cva(\n  \"h-2 w-2 rounded-full\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-muted-foreground\",\n        success: \"bg-emerald-500\",\n        warning: \"bg-amber-500\",\n        destructive: \"bg-destructive\",\n        info: \"bg-primary\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, variant, children, ...props }, ref) => (\n    <span\n      ref={ref}\n      className={cn(statusIndicatorVariants({ variant }), className)}\n      {...props}\n    >\n      <span className={cn(dotVariants({ variant }))} />\n      {children}\n    </span>\n  )\n)\nStatusIndicator.displayName = \"StatusIndicator\"\n\nexport { StatusIndicator, statusIndicatorVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "content": "import * as React from \"react\"\nimport * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\"\n\n// Luxe AspectRatio: thin wrapper around Radix AspectRatio\n// Use ratio prop (e.g., 16/9, 4/3, 1) to constrain container proportions\n\nconst AspectRatio = AspectRatioPrimitive.Root\n\nexport { AspectRatio }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-aspect-ratio"
+  ]
+}

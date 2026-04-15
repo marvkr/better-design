@@ -1,0 +1,18 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe IconButton: square or circle icon buttons — consistent with Button styling\n// Square = rounded-xl (default); circle = rounded-full\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center\",\n    \"outline-none transition-all duration-200 ease-out\",\n    \"focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.96]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        secondary:\n          \"bg-secondary text-secondary-foreground border border-border hover:bg-accent\",\n        outline:\n          \"border border-border bg-transparent text-foreground hover:bg-accent\",\n        ghost:\n          \"text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        muted:\n          \"bg-muted text-muted-foreground hover:bg-accent hover:text-foreground\",\n      },\n      size: {\n        xs:      \"h-6 w-6 text-[10px]\",\n        sm:      \"h-8 w-8 text-xs\",\n        default: \"h-10 w-10\",\n        lg:      \"h-12 w-12\",\n        xl:      \"h-14 w-14\",\n      },\n      shape: {\n        square:  \"rounded-xl\",\n        circle:  \"rounded-full\",\n        rounded: \"rounded-lg\",\n      },\n    },\n    defaultVariants: {\n      variant: \"secondary\",\n      size: \"default\",\n      shape: \"square\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        ref={ref}\n        className={cn(iconButtonVariants({ variant, size, shape, className }))}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

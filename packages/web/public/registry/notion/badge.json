@@ -1,0 +1,17 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Notion Badge — multi-select / select tag style\n// Extracted from live Notion workspace (table view, Tags column)\n// No border, semi-transparent fills, 4px radius, 13px font, regular weight\n// Palette: Engineering=gray, Product=yellow, Foundations=orange,\n//          Misc/Post-mortem=pink, RFC=green, Data=purple\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-[4px] font-normal transition-colors focus:outline-none\",\n  {\n    variants: {\n      variant: {\n        // gray — Engineering: rgba(42,28,0,0.07) bg\n        default: \"bg-[rgba(42,28,0,0.07)] text-foreground\",\n        // yellow — Product: rgba(209,156,0,0.28) bg\n        secondary: \"bg-[rgba(209,156,0,0.28)] text-[rgb(101,81,33)]\",\n        // pink — Misc / Post-mortem\n        destructive: \"bg-[rgba(212,76,81,0.15)] text-[rgb(147,55,82)]\",\n        // outline kept for composability\n        outline: \"border border-border text-foreground bg-transparent\",\n        // Named Notion palette variants\n        orange: \"bg-[rgba(196,88,0,0.2)] text-[rgb(106,66,34)]\",\n        green: \"bg-[rgba(42,176,125,0.2)] text-[rgb(42,83,60)]\",\n        purple: \"bg-[rgba(92,0,163,0.14)] text-[rgb(85,59,105)]\",\n        blue: \"bg-[rgba(35,131,226,0.15)] text-[rgb(24,82,161)]\",\n        pink: \"bg-[rgba(212,76,81,0.15)] text-[rgb(147,55,82)]\",\n      },\n      size: {\n        sm: \"h-[18px] gap-1 px-1.5 text-[11px]\",\n        default: \"h-5 gap-1 px-1.5 text-[13px]\",\n        lg: \"h-6 gap-1.5 px-2 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
