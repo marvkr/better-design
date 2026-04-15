@@ -60,7 +60,8 @@ export const Navbar = () => {
             <Button variant="ghost" size="sm" asChild>
               <Link href="/manifesto">Manifesto</Link>
             </Button>
-            {!isPending && !session?.user ? (
+            {/* Sign up / Sign in hidden while in waitlist-only mode */}
+            {/* {!isPending && !session?.user ? (
               <>
                 <Button variant="secondary" size="sm" asChild>
                   <Link href="/sign-up">Sign up</Link>
@@ -70,6 +71,14 @@ export const Navbar = () => {
                 </Button>
               </>
             ) : (
+              <>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/projects">Projects</Link>
+                </Button>
+                <UserControl showName />
+              </>
+            )} */}
+            {!isPending && session?.user && (
               <>
                 <Button variant="ghost" size="sm" asChild>
                   <Link href="/projects">Projects</Link>
@@ -170,7 +179,8 @@ export const Navbar = () => {
                 <Button variant="ghost" asChild>
                   <Link href="/manifesto">Manifesto</Link>
                 </Button>
-                {!isPending && !session?.user ? (
+                {/* Sign up / Sign in hidden while in waitlist-only mode */}
+                {/* {!isPending && !session?.user ? (
                   <>
                     <Button variant="secondary" asChild>
                       <Link href="/sign-up">Sign up</Link>
@@ -180,6 +190,16 @@ export const Navbar = () => {
                     </Button>
                   </>
                 ) : (
+                  <>
+                    <Button variant="ghost" asChild>
+                      <Link href="/projects">Projects</Link>
+                    </Button>
+                    <div className="pt-1">
+                      <UserControl showName />
+                    </div>
+                  </>
+                )} */}
+                {!isPending && session?.user && (
                   <>
                     <Button variant="ghost" asChild>
                       <Link href="/projects">Projects</Link>
