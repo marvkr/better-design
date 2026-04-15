@@ -501,14 +501,24 @@ function Grid({ children, cols = 1 }: { children: ReactNode; cols?: number }) {
   return <div className={className}>{children}</div>
 }
 
-function DemoCard({ name, children, minH = 110, overflow = "visible", anchorId }: { name: string; children: ReactNode; minH?: number; overflow?: string; anchorId?: string }) {
+function DemoCard({ name, children, minH = 110, overflow = "visible", anchorId, credit }: { name: string; children: ReactNode; minH?: number; overflow?: string; anchorId?: string; credit?: { name: string; url: string } }) {
   return (
     <div id={anchorId} style={{ borderRadius: "8px", border: "1px solid var(--border)", overflow: "hidden", fontSize: "13px", display: "flex", flexDirection: "column" }}>
       <div style={{ padding: "20px 16px", display: "flex", alignItems: "center", justifyContent: "center", flex: 1, minHeight: `${minH}px`, backgroundColor: "var(--background)", color: "var(--foreground)", overflow }}>
         {children}
       </div>
-      <div style={{ fontSize: "11px", fontWeight: 500, color: "var(--muted-foreground)", padding: "5px 10px 7px", borderTop: "1px solid var(--border)", backgroundColor: "var(--card)" }}>
-        {name}
+      <div style={{ fontSize: "11px", fontWeight: 500, color: "var(--muted-foreground)", padding: "5px 10px 7px", borderTop: "1px solid var(--border)", backgroundColor: "var(--card)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
+        <span>{name}</span>
+        {credit && (
+          <a
+            href={credit.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", opacity: 0.45, textDecoration: "underline dashed", textUnderlineOffset: "2px", textDecorationThickness: "1px" }}
+          >
+            by {credit.name}
+          </a>
+        )}
       </div>
     </div>
   )
@@ -1418,7 +1428,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                   </InputOTPGroup>
                 </InputOTP>
               </DemoCard>
-              <DemoCard name="Wheel Picker" anchorId="fi-wheel" minH={130}>
+              <DemoCard name="Wheel Picker" anchorId="fi-wheel" minH={130} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <WheelPickerWrapper className="w-48">
                   <WheelPicker
                     options={[1,2,3,4,5,6,7,8,9,10,11,12].map(h => ({ label: String(h).padStart(2,"0"), value: h }))}
@@ -1436,7 +1446,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                   />
                 </WheelPickerWrapper>
               </DemoCard>
-              <DemoCard name="Slide to Unlock" anchorId="fi-slide" minH={90}>
+              <DemoCard name="Slide to Unlock" anchorId="fi-slide" minH={90} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <SlideToUnlock onUnlock={() => {}}>
                   <SlideToUnlockTrack>
                     <SlideToUnlockText>
@@ -1448,7 +1458,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                   </SlideToUnlockTrack>
                 </SlideToUnlock>
               </DemoCard>
-              <DemoCard name="Copy Button" minH={80}>
+              <DemoCard name="Copy Button" minH={80} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <div className="flex items-center gap-3">
                   <Button size="icon" variant="secondary" onClick={() => copyText1("Hello, world!")} aria-label="Copy" className="active:scale-[0.97] transition-transform duration-[120ms]">
                     <CopyStateIcon state={copyState1} />
@@ -1594,10 +1604,10 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                   <p className="text-xs text-muted-foreground">Muted — secondary content and labels.</p>
                 </div>
               </DemoCard>
-              <DemoCard name="Shimmering Text" minH={80}>
+              <DemoCard name="Shimmering Text" minH={80} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <ShimmeringText className="text-xl font-medium" text="Shimmering Text" />
               </DemoCard>
-              <DemoCard name="Text Flip" minH={80}>
+              <DemoCard name="Text Flip" minH={80} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <div className="text-lg font-medium text-muted-foreground flex items-center gap-1.5">
                   <span>I am a</span>
                   <TextFlip className="min-w-24 text-foreground" interval={2}>
@@ -1608,10 +1618,10 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                   </TextFlip>
                 </div>
               </DemoCard>
-              <DemoCard name="GitHub Stars" minH={80}>
+              <DemoCard name="GitHub Stars" minH={80} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <GitHubStars repo="shadcn-ui/ui" stargazersCount={82400} />
               </DemoCard>
-              <DemoCard name="Testimonial" anchorId="dd-testimonial" minH={140}>
+              <DemoCard name="Testimonial" anchorId="dd-testimonial" minH={140} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <div className="w-full rounded-xl border bg-card ring-1 ring-border/50">
                   <Testimonial>
                     <TestimonialQuote>
@@ -2205,7 +2215,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                   <DSCursor text="Nice to meet you." label="Bob" color="var(--destructive)" speed={70} delay={1500} />
                 </div>
               </DemoCard>
-              <DemoCard name="Apple Hello" anchorId="fb-hello" minH={110}>
+              <DemoCard name="Apple Hello" anchorId="fb-hello" minH={110} credit={{ name: "chanhdai.com", url: "https://chanhdai.com" }}>
                 <AppleHelloEnglishEffect className="text-foreground h-14 w-full" speed={0.8} />
               </DemoCard>
               <DemoCard name="Spinner" anchorId="fb-spinner" minH={80}>
