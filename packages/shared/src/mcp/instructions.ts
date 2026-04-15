@@ -54,12 +54,12 @@ This mode helps the user discover and adopt a complete design system. Follow the
 ### Step 1 — Resolve a design system
 Call \`resolve-design-system\` with a query describing the project's industry, personality, or visual style. Present the top matches and let the user pick.
 
-### Step 2 — Load design tokens and components
-Call \`get-design-system-docs\` with the chosen ID. Always request specific components:
-- \`"globals"\` first — CSS variables (colors, spacing, radii, fonts)
-- Then components the user needs: \`["globals", "button", "card", "input"]\`
+### Step 2 — Scaffold the full design system
+Call \`get-design-system-docs({ designSystemId })\` with **only** the ID. The response returns one shadcn command that installs every component (globals.css + every UI primitive) into \`components/ui/\` in a single invocation. Run it in the user's project before you write any feature code — the agent should always have the full library available.
 
-Use these tokens in all code you generate. Never invent colors, spacing, or border-radius values when tokens exist.
+Only pass a \`component\` argument when the user explicitly asks to inspect or customise a specific component's source. The default is install-everything.
+
+Once installed, read \`components/ui/*.tsx\` directly from disk when you need to understand a component's API. Do not re-query this tool for source during a normal build — the files are already local. And never invent colors, spacing, or border-radius values; use the tokens in \`globals.css\`.
 
 ### Step 3 — Icons
 1. Call \`resolve-icon-library\` with the design system's personality traits
@@ -71,15 +71,7 @@ Once scaffolded, switch to Design Intelligence mode (load principles, write code
 
 ### Rules for Scaffold
 - **Always use design tokens.** Every color, spacing value, and border-radius must come from the design system's CSS variables. Never use raw hex values or Tailwind defaults when tokens exist.
-- **Request specific components** — never fetch all components unless asked.
-- **Install via registry** when the project supports shadcn. Batch every component the feature needs into a single command — the CLI accepts multiple URLs. Always include \`globals\` first so CSS variables land before components try to use them:
-\`\`\`bash
-npx shadcn@latest add \\
-  https://www.better-design.com/registry/<id>/globals.json \\
-  https://www.better-design.com/registry/<id>/button.json \\
-  https://www.better-design.com/registry/<id>/input.json \\
-  https://www.better-design.com/registry/<id>/card.json
-\`\`\`
+- **Scaffold the whole DS by default.** \`get-design-system-docs({ designSystemId })\` returns one shadcn command that installs globals + every component at once. Run it. Scope down only if the user asks.
 - **Icons use Iconify:**
 \`\`\`tsx
 import { Icon } from "@iconify/react";

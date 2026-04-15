@@ -86,22 +86,23 @@ Examples:
     "get-design-system-docs",
     {
       title: "Get Design System Documentation",
-      description: `Retrieves component documentation for a specific design system.
+      description: `Scaffolds a design system into the user's project.
 
 You must call 'resolve-design-system' first to obtain the design system ID.
 
-Always request "globals" first for design tokens (CSS variables, colors, spacing, border-radius), then specific components you need.
+**Default behavior (recommended): install the full design system.**
+Call with only a designSystemId and this tool returns ONE shadcn command that
+installs every component (globals + all UI primitives) into components/ui/ in
+one shot. Run that command before you start writing feature code — the agent
+should always have the full component library available.
 
-Use the 'component' parameter to request specific components (recommended):
-- "globals" - Design tokens
-- "button", "card", "input", "tabs", etc.
-- Request multiple: ["globals", "button", "card"]
-
-If no component is specified, returns ALL components (use sparingly).`,
+Pass 'component' only when the user explicitly asks to inspect or customise a
+specific component's source code. In that mode the tool returns just the
+requested components plus their source code, not an install command.`,
       inputSchema: z.object({
         designSystemId: z.string().describe("The design system ID from resolve-design-system"),
         component: z.union([z.string(), z.array(z.string())]).optional()
-          .describe('Component(s) to retrieve. Examples: "button", "globals", ["button", "card", "globals"]'),
+          .describe('Optional. Only pass this when the user asks to inspect specific component source code. Examples: "button", ["button", "card"]. Omit to scaffold the entire design system.'),
       }),
       annotations: { readOnlyHint: true },
     },
@@ -115,39 +116,57 @@ If no component is specified, returns ALL components (use sparingly).`,
 
         const { metadata, components: allComponents } = system;
 
-        const componentNames = component
-          ? Array.isArray(component) ? component : [component]
-          : null;
-
-        const components = componentNames
-          ? allComponents.filter((c) => componentNames.includes(c.name))
-          : allComponents;
-
-        const parts: string[] = [
+        const header: string[] = [
           `# ${metadata.title}\n`,
           `**Description:** ${metadata.description}`,
           `**Personality:** ${metadata.personality.join(", ")}`,
           `**Industry:** ${metadata.industry.join(", ")}`,
         ];
+        if (metadata.primaryColor) header.push(`**Primary Color:** ${metadata.primaryColor}`);
+        if (metadata.borderRadius) header.push(`**Border Radius:** ${metadata.borderRadius}`);
+        if (metadata.font) header.push(`**Font:** ${metadata.font}`);
 
-        if (metadata.primaryColor) parts.push(`**Primary Color:** ${metadata.primaryColor}`);
-        if (metadata.borderRadius) parts.push(`**Border Radius:** ${metadata.borderRadius}`);
-        if (metadata.font) parts.push(`**Font:** ${metadata.font}`);
+        // Install-all mode — default when no component filter is passed.
+        if (!component) {
+          const installNames = [
+            "globals",
+            ...allComponents.map((c) => c.name).sort(),
+          ];
+          const installUrls = installNames
+            .map((name) => `${REGISTRY_BASE_URL}/${metadata.id}/${name}.json`)
+            .join(" \\\n  ");
 
-        parts.push("\n## Installation\n");
-        const installUrls = components
-          .map((c) => `${REGISTRY_BASE_URL}/${metadata.id}/${c.name}.json`)
+          const parts = [
+            ...header,
+            "\n## Scaffold the full design system\n",
+            `Run this command in the user's project root. It installs **all ${installNames.length} pieces** (globals.css + ${allComponents.length} components) into \`components/ui/\` with a single shadcn invocation:`,
+            "```bash",
+            `npx shadcn@latest add \\\n  ${installUrls}`,
+            "```",
+            "\nAfter the install completes, read files from `components/ui/` directly when writing feature code — do not ask this tool for component source unless the user wants to inspect or customise a specific file.",
+            "\n## Included components\n",
+            installNames.map((n) => `- \`${n}\``).join("\n"),
+          ];
+
+          return { content: [{ type: "text" as const, text: parts.join("\n") }] };
+        }
+
+        // Scoped mode — return source code for specific components.
+        const componentNames = Array.isArray(component) ? component : [component];
+        const components = allComponents.filter((c) => componentNames.includes(c.name));
+
+        const scopedUrls = componentNames
+          .map((name) => `${REGISTRY_BASE_URL}/${metadata.id}/${name}.json`)
           .join(" \\\n  ");
-        parts.push(
-          "Install the components above into `components/ui/` in one shot:",
-        );
-        parts.push("```bash");
-        parts.push(`npx shadcn@latest add \\\n  ${installUrls}`);
-        parts.push("```");
-        parts.push(
-          "The shadcn CLI accepts multiple URLs per invocation. Always install `globals` first to get the CSS variables.",
-        );
-        parts.push("\n---\n");
+
+        const parts = [
+          ...header,
+          "\n## Install just these components\n",
+          "```bash",
+          `npx shadcn@latest add \\\n  ${scopedUrls}`,
+          "```",
+          "\n---\n",
+        ];
 
         for (const comp of components) {
           const name = comp.name.charAt(0).toUpperCase() + comp.name.slice(1);
