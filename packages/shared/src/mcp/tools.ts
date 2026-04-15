@@ -135,10 +135,18 @@ If no component is specified, returns ALL components (use sparingly).`,
         if (metadata.font) parts.push(`**Font:** ${metadata.font}`);
 
         parts.push("\n## Installation\n");
-        parts.push("Install components using the shadcn CLI:");
+        const installUrls = components
+          .map((c) => `${REGISTRY_BASE_URL}/${metadata.id}/${c.name}.json`)
+          .join(" \\\n  ");
+        parts.push(
+          "Install the components above into `components/ui/` in one shot:",
+        );
         parts.push("```bash");
-        parts.push(`npx shadcn@latest add <component> --registry ${REGISTRY_BASE_URL}/${metadata.id}`);
+        parts.push(`npx shadcn@latest add \\\n  ${installUrls}`);
         parts.push("```");
+        parts.push(
+          "The shadcn CLI accepts multiple URLs per invocation. Always install `globals` first to get the CSS variables.",
+        );
         parts.push("\n---\n");
 
         for (const comp of components) {

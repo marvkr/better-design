@@ -72,9 +72,13 @@ Once scaffolded, switch to Design Intelligence mode (load principles, write code
 ### Rules for Scaffold
 - **Always use design tokens.** Every color, spacing value, and border-radius must come from the design system's CSS variables. Never use raw hex values or Tailwind defaults when tokens exist.
 - **Request specific components** — never fetch all components unless asked.
-- **Install via registry** when the project supports shadcn:
+- **Install via registry** when the project supports shadcn. Batch every component the feature needs into a single command — the CLI accepts multiple URLs. Always include \`globals\` first so CSS variables land before components try to use them:
 \`\`\`bash
-npx shadcn@latest add https://www.better-design.com/registry/<id>/<component>.json
+npx shadcn@latest add \\
+  https://www.better-design.com/registry/<id>/globals.json \\
+  https://www.better-design.com/registry/<id>/button.json \\
+  https://www.better-design.com/registry/<id>/input.json \\
+  https://www.better-design.com/registry/<id>/card.json
 \`\`\`
 - **Icons use Iconify:**
 \`\`\`tsx

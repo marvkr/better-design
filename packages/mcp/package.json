@@ -1,6 +1,6 @@
 {
   "name": "better-design-mcp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "MCP server for Better Design — design systems, UI principles, icons, and code review",
   "type": "module",
   "bin": {
