@@ -31,6 +31,8 @@ export { Button as FigmaButton, buttonVariants as figmaButtonVariants } from "..
 export { Button as MonoIndustrialButton, buttonVariants as monoIndustrialButtonVariants } from "../../../../../../design-systems/monochrome-industrial/components/button"
 export { Button as GlassmorphicDarkButton, buttonVariants as glassmorphicDarkButtonVariants } from "../../../../../../design-systems/glassmorphic-dark/components/button"
 export { Button as MidnightGlassButton, buttonVariants as midnightGlassButtonVariants } from "../../../../../../design-systems/midnight-glass/components/button"
+export { Button as TactileMinimalButton, buttonVariants as tactileMinimalButtonVariants } from "../../../../../../design-systems/tactile-minimal/components/button"
+export { Button as LumenDarkButton, buttonVariants as lumenDarkButtonVariants } from "../../../../../../design-systems/lumen-dark/components/button"
 
 // ─── Cards ───
 export { Card as LinearCard, CardHeader as LinearCardHeader, CardTitle as LinearCardTitle, CardDescription as LinearCardDescription, CardContent as LinearCardContent, CardFooter as LinearCardFooter } from "../../../../../../design-systems/linear/components/card"
@@ -54,6 +56,8 @@ export { Card as FigmaCard, CardHeader as FigmaCardHeader, CardTitle as FigmaCar
 export { Card as MonoIndustrialCard, CardHeader as MonoIndustrialCardHeader, CardTitle as MonoIndustrialCardTitle, CardDescription as MonoIndustrialCardDescription, CardContent as MonoIndustrialCardContent, CardFooter as MonoIndustrialCardFooter } from "../../../../../../design-systems/monochrome-industrial/components/card"
 export { Card as GlassmorphicDarkCard, CardHeader as GlassmorphicDarkCardHeader, CardTitle as GlassmorphicDarkCardTitle, CardDescription as GlassmorphicDarkCardDescription, CardContent as GlassmorphicDarkCardContent, CardFooter as GlassmorphicDarkCardFooter } from "../../../../../../design-systems/glassmorphic-dark/components/card"
 export { Card as MidnightGlassCard, CardHeader as MidnightGlassCardHeader, CardTitle as MidnightGlassCardTitle, CardDescription as MidnightGlassCardDescription, CardContent as MidnightGlassCardContent, CardFooter as MidnightGlassCardFooter } from "../../../../../../design-systems/midnight-glass/components/card"
+export { Card as TactileMinimalCard, CardHeader as TactileMinimalCardHeader, CardTitle as TactileMinimalCardTitle, CardDescription as TactileMinimalCardDescription, CardContent as TactileMinimalCardContent, CardFooter as TactileMinimalCardFooter } from "../../../../../../design-systems/tactile-minimal/components/card"
+export { Card as LumenDarkCard, CardHeader as LumenDarkCardHeader, CardTitle as LumenDarkCardTitle, CardDescription as LumenDarkCardDescription, CardContent as LumenDarkCardContent, CardFooter as LumenDarkCardFooter } from "../../../../../../design-systems/lumen-dark/components/card"
 
 // ─── Inputs ───
 export { Input as LinearInput } from "../../../../../../design-systems/linear/components/input"
@@ -77,6 +81,10 @@ export { Input as FigmaInput } from "../../../../../../design-systems/figma/comp
 export { Input as MonoIndustrialInput } from "../../../../../../design-systems/monochrome-industrial/components/input"
 export { Input as GlassmorphicDarkInput } from "../../../../../../design-systems/glassmorphic-dark/components/input"
 export { Input as MidnightGlassInput } from "../../../../../../design-systems/midnight-glass/components/input"
+export { Input as TactileMinimalInput } from "../../../../../../design-systems/tactile-minimal/components/input"
+export { Textarea as TactileMinimalTextarea } from "../../../../../../design-systems/tactile-minimal/components/textarea"
+export { Input as LumenDarkInput } from "../../../../../../design-systems/lumen-dark/components/input"
+export { Textarea as LumenDarkTextarea } from "../../../../../../design-systems/lumen-dark/components/textarea"
 
 // ─── Badges ───
 export { Badge as LinearBadge } from "../../../../../../design-systems/linear/components/badge"
@@ -100,6 +108,8 @@ export { Badge as FigmaBadge } from "../../../../../../design-systems/figma/comp
 export { Badge as MonoIndustrialBadge } from "../../../../../../design-systems/monochrome-industrial/components/badge"
 export { Badge as GlassmorphicDarkBadge } from "../../../../../../design-systems/glassmorphic-dark/components/badge"
 export { Badge as MidnightGlassBadge } from "../../../../../../design-systems/midnight-glass/components/badge"
+export { Badge as TactileMinimalBadge } from "../../../../../../design-systems/tactile-minimal/components/badge"
+export { Badge as LumenDarkBadge } from "../../../../../../design-systems/lumen-dark/components/badge"
 
 // ─── Code Tabs ───
 export { CodeTabs as LinearCodeTabs } from "../../../../../../design-systems/linear/components/code-tabs"
@@ -123,6 +133,8 @@ export { CodeTabs as FigmaCodeTabs } from "../../../../../../design-systems/figm
 export { CodeTabs as MonoIndustrialCodeTabs } from "../../../../../../design-systems/monochrome-industrial/components/code-tabs"
 export { CodeTabs as GlassmorphicDarkCodeTabs } from "../../../../../../design-systems/glassmorphic-dark/components/code-tabs"
 export { CodeTabs as MidnightGlassCodeTabs } from "../../../../../../design-systems/midnight-glass/components/code-tabs"
+export { CodeTabs as TactileMinimalCodeTabs } from "../../../../../../design-systems/tactile-minimal/components/code-tabs"
+export { CodeTabs as LumenDarkCodeTabs } from "../../../../../../design-systems/lumen-dark/components/code-tabs"
 
 // ─── Cursors ───
 export { Cursor as LinearCursor } from "../../../../../../design-systems/linear/components/cursor"
@@ -146,4 +158,6 @@ export { Cursor as FigmaCursor } from "../../../../../../design-systems/figma/co
 export { Cursor as MonoIndustrialCursor } from "../../../../../../design-systems/monochrome-industrial/components/cursor"
 export { Cursor as GlassmorphicDarkCursor } from "../../../../../../design-systems/glassmorphic-dark/components/cursor"
 export { Cursor as MidnightGlassCursor } from "../../../../../../design-systems/midnight-glass/components/cursor"
+export { Cursor as TactileMinimalCursor } from "../../../../../../design-systems/tactile-minimal/components/cursor"
+export { Cursor as LumenDarkCursor } from "../../../../../../design-systems/lumen-dark/components/cursor"
 export { Spinner as MonoIndustrialSpinner } from "../../../../../../design-systems/monochrome-industrial/components/spinner"

@@ -40,51 +40,70 @@ import {
 } from "@/components/ui/accordion"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
-  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
-  AlertDialogTitle, AlertDialogTrigger,
+  AlertDialog as ShadcnAlertDialog, AlertDialogAction as ShadcnAlertDialogAction, AlertDialogCancel as ShadcnAlertDialogCancel, AlertDialogContent as ShadcnAlertDialogContent,
+  AlertDialogDescription as ShadcnAlertDialogDescription, AlertDialogFooter as ShadcnAlertDialogFooter, AlertDialogHeader as ShadcnAlertDialogHeader,
+  AlertDialogTitle as ShadcnAlertDialogTitle, AlertDialogTrigger as ShadcnAlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
   BreadcrumbPage, BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Checkbox as ShadcnCheckbox } from "@/components/ui/checkbox"
+// ─── Tactile Minimal self-contained primitives (override web app's shadcn) ───
+import { Checkbox as TactileMinimalCheckbox } from "../../../../../../design-systems/tactile-minimal/components/checkbox"
+import { Switch as TactileMinimalSwitch } from "../../../../../../design-systems/tactile-minimal/components/switch"
+import { RadioGroup as TactileMinimalRadioGroup, RadioGroupItem as TactileMinimalRadioGroupItem } from "../../../../../../design-systems/tactile-minimal/components/radio-group"
+import { Toggle as TactileMinimalToggle } from "../../../../../../design-systems/tactile-minimal/components/toggle"
+import { Popover as TactileMinimalPopover, PopoverContent as TactileMinimalPopoverContent, PopoverTrigger as TactileMinimalPopoverTrigger } from "../../../../../../design-systems/tactile-minimal/components/popover"
+import { DropdownMenu as TactileMinimalDropdownMenu, DropdownMenuContent as TactileMinimalDropdownMenuContent, DropdownMenuItem as TactileMinimalDropdownMenuItem, DropdownMenuLabel as TactileMinimalDropdownMenuLabel, DropdownMenuSeparator as TactileMinimalDropdownMenuSeparator, DropdownMenuTrigger as TactileMinimalDropdownMenuTrigger } from "../../../../../../design-systems/tactile-minimal/components/dropdown-menu"
+import { Dialog as TactileMinimalDialog, DialogContent as TactileMinimalDialogContent, DialogDescription as TactileMinimalDialogDescription, DialogFooter as TactileMinimalDialogFooter, DialogHeader as TactileMinimalDialogHeader, DialogTitle as TactileMinimalDialogTitle, DialogTrigger as TactileMinimalDialogTrigger } from "../../../../../../design-systems/tactile-minimal/components/dialog"
+import { Tooltip as TactileMinimalTooltip, TooltipContent as TactileMinimalTooltipContent, TooltipProvider as TactileMinimalTooltipProvider, TooltipTrigger as TactileMinimalTooltipTrigger } from "../../../../../../design-systems/tactile-minimal/components/tooltip"
+import { HoverCard as TactileMinimalHoverCard, HoverCardContent as TactileMinimalHoverCardContent, HoverCardTrigger as TactileMinimalHoverCardTrigger } from "../../../../../../design-systems/tactile-minimal/components/hover-card"
+import { Select as TactileMinimalSelect, SelectContent as TactileMinimalSelectContent, SelectItem as TactileMinimalSelectItem, SelectTrigger as TactileMinimalSelectTrigger, SelectValue as TactileMinimalSelectValue } from "../../../../../../design-systems/tactile-minimal/components/select"
+import { Command as TactileMinimalCommand, CommandEmpty as TactileMinimalCommandEmpty, CommandGroup as TactileMinimalCommandGroup, CommandInput as TactileMinimalCommandInput, CommandItem as TactileMinimalCommandItem, CommandList as TactileMinimalCommandList } from "../../../../../../design-systems/tactile-minimal/components/command"
+import { Sheet as TactileMinimalSheet, SheetContent as TactileMinimalSheetContent, SheetDescription as TactileMinimalSheetDescription, SheetHeader as TactileMinimalSheetHeader, SheetTitle as TactileMinimalSheetTitle, SheetTrigger as TactileMinimalSheetTrigger } from "../../../../../../design-systems/tactile-minimal/components/sheet"
+import { ContextMenu as TactileMinimalContextMenu, ContextMenuContent as TactileMinimalContextMenuContent, ContextMenuItem as TactileMinimalContextMenuItem, ContextMenuLabel as TactileMinimalContextMenuLabel, ContextMenuSeparator as TactileMinimalContextMenuSeparator, ContextMenuTrigger as TactileMinimalContextMenuTrigger } from "../../../../../../design-systems/tactile-minimal/components/context-menu"
+import { AlertDialog as TactileMinimalAlertDialog, AlertDialogAction as TactileMinimalAlertDialogAction, AlertDialogCancel as TactileMinimalAlertDialogCancel, AlertDialogContent as TactileMinimalAlertDialogContent, AlertDialogDescription as TactileMinimalAlertDialogDescription, AlertDialogFooter as TactileMinimalAlertDialogFooter, AlertDialogHeader as TactileMinimalAlertDialogHeader, AlertDialogTitle as TactileMinimalAlertDialogTitle, AlertDialogTrigger as TactileMinimalAlertDialogTrigger } from "../../../../../../design-systems/tactile-minimal/components/alert-dialog"
+import { Menubar as TactileMinimalMenubar, MenubarContent as TactileMinimalMenubarContent, MenubarItem as TactileMinimalMenubarItem, MenubarMenu as TactileMinimalMenubarMenu, MenubarSeparator as TactileMinimalMenubarSeparator, MenubarTrigger as TactileMinimalMenubarTrigger } from "../../../../../../design-systems/tactile-minimal/components/menubar"
+import { Drawer as TactileMinimalDrawer, DrawerClose as TactileMinimalDrawerClose, DrawerContent as TactileMinimalDrawerContent, DrawerDescription as TactileMinimalDrawerDescription, DrawerFooter as TactileMinimalDrawerFooter, DrawerHeader as TactileMinimalDrawerHeader, DrawerTitle as TactileMinimalDrawerTitle, DrawerTrigger as TactileMinimalDrawerTrigger } from "../../../../../../design-systems/tactile-minimal/components/drawer"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import {
-  Dialog, DialogContent, DialogDescription, DialogFooter,
-  DialogHeader, DialogTitle, DialogTrigger,
+  Dialog as ShadcnDialog, DialogContent as ShadcnDialogContent, DialogDescription as ShadcnDialogDescription, DialogFooter as ShadcnDialogFooter,
+  DialogHeader as ShadcnDialogHeader, DialogTitle as ShadcnDialogTitle, DialogTrigger as ShadcnDialogTrigger,
 } from "@/components/ui/dialog"
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
-  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu as ShadcnDropdownMenu, DropdownMenuContent as ShadcnDropdownMenuContent, DropdownMenuItem as ShadcnDropdownMenuItem,
+  DropdownMenuLabel as ShadcnDropdownMenuLabel, DropdownMenuSeparator as ShadcnDropdownMenuSeparator, DropdownMenuTrigger as ShadcnDropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { HoverCard as ShadcnHoverCard, HoverCardContent as ShadcnHoverCardContent, HoverCardTrigger as ShadcnHoverCardTrigger } from "@/components/ui/hover-card"
 import { Label } from "@/components/ui/label"
 import {
-  Menubar, MenubarContent, MenubarItem, MenubarMenu,
-  MenubarSeparator, MenubarTrigger,
+  Menubar as ShadcnMenubar, MenubarContent as ShadcnMenubarContent, MenubarItem as ShadcnMenubarItem, MenubarMenu as ShadcnMenubarMenu,
+  MenubarSeparator as ShadcnMenubarSeparator, MenubarTrigger as ShadcnMenubarTrigger,
 } from "@/components/ui/menubar"
 import { MegaMenu } from "@/components/ui/mega-menu"
 import {
   Pagination, PaginationContent, PaginationItem,
   PaginationLink, PaginationNext, PaginationPrevious,
 } from "@/components/ui/pagination"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Popover as ShadcnPopover, PopoverContent as ShadcnPopoverContent, PopoverTrigger as ShadcnPopoverTrigger } from "@/components/ui/popover"
 import { Progress } from "@/components/ui/progress"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { RadioGroup as ShadcnRadioGroup, RadioGroupItem as ShadcnRadioGroupItem } from "@/components/ui/radio-group"
 import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  Select as ShadcnSelect, SelectContent as ShadcnSelectContent, SelectItem as ShadcnSelectItem, SelectTrigger as ShadcnSelectTrigger, SelectValue as ShadcnSelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import {
-  Sheet, SheetContent, SheetDescription, SheetHeader,
-  SheetTitle, SheetTrigger,
+  Sheet as ShadcnSheet, SheetContent as ShadcnSheetContent, SheetDescription as ShadcnSheetDescription, SheetHeader as ShadcnSheetHeader,
+  SheetTitle as ShadcnSheetTitle, SheetTrigger as ShadcnSheetTrigger,
 } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Slider } from "@/components/ui/slider"
-import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
+import { Switch as ShadcnSwitch } from "@/components/ui/switch"
+import { Textarea as ShadcnTextarea } from "@/components/ui/textarea"
+import { Textarea as TactileMinimalTextarea } from "../../../../../../design-systems/tactile-minimal/components/textarea"
+import { Textarea as LumenDarkTextarea } from "../../../../../../design-systems/lumen-dark/components/textarea"
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table"
@@ -92,7 +111,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
-  Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
+  Tooltip as ShadcnTooltip, TooltipContent as ShadcnTooltipContent, TooltipProvider as ShadcnTooltipProvider, TooltipTrigger as ShadcnTooltipTrigger,
 } from "@/components/ui/tooltip"
 
 import { Calendar } from "@/components/ui/calendar"
@@ -100,15 +119,16 @@ import {
   Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,
 } from "@/components/ui/carousel"
 import {
-  Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,
+  Command as ShadcnCommand, CommandEmpty as ShadcnCommandEmpty, CommandGroup as ShadcnCommandGroup,
+  CommandInput as ShadcnCommandInput, CommandItem as ShadcnCommandItem, CommandList as ShadcnCommandList,
 } from "@/components/ui/command"
 import {
-  ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel,
-  ContextMenuSeparator, ContextMenuTrigger,
+  ContextMenu as ShadcnContextMenu, ContextMenuContent as ShadcnContextMenuContent, ContextMenuItem as ShadcnContextMenuItem, ContextMenuLabel as ShadcnContextMenuLabel,
+  ContextMenuSeparator as ShadcnContextMenuSeparator, ContextMenuTrigger as ShadcnContextMenuTrigger,
 } from "@/components/ui/context-menu"
 import {
-  Drawer, DrawerClose, DrawerContent, DrawerDescription,
-  DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger,
+  Drawer as ShadcnDrawer, DrawerClose as ShadcnDrawerClose, DrawerContent as ShadcnDrawerContent, DrawerDescription as ShadcnDrawerDescription,
+  DrawerFooter as ShadcnDrawerFooter, DrawerHeader as ShadcnDrawerHeader, DrawerTitle as ShadcnDrawerTitle, DrawerTrigger as ShadcnDrawerTrigger,
 } from "@/components/ui/drawer"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
 import { Kbd } from "@/components/ui/kbd"
@@ -139,7 +159,7 @@ import {
   LinearButton, AirbnbButton, SupabaseButton, CorporateFintechButton,
   DarkOrangeButton, VibrantDarkButton, MinimalLightButton, NeutralMonochromeButton, LightMarketplaceButton, PrecisionLightButton, CinematicDarkButton,
   LinearQualityButton, EditorialDarkButton,
-  NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton, MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton,
+  NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton, MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton, TactileMinimalButton, LumenDarkButton,
   LinearCard, LinearCardHeader, LinearCardTitle, LinearCardDescription, LinearCardContent, LinearCardFooter,
   AirbnbCard, AirbnbCardHeader, AirbnbCardTitle, AirbnbCardDescription, AirbnbCardContent, AirbnbCardFooter,
   SupabaseCard, SupabaseCardHeader, SupabaseCardTitle, SupabaseCardDescription, SupabaseCardContent, SupabaseCardFooter,
@@ -162,22 +182,24 @@ import {
   MonoIndustrialCard, MonoIndustrialCardHeader, MonoIndustrialCardTitle, MonoIndustrialCardDescription, MonoIndustrialCardContent, MonoIndustrialCardFooter,
   GlassmorphicDarkCard, GlassmorphicDarkCardHeader, GlassmorphicDarkCardTitle, GlassmorphicDarkCardDescription, GlassmorphicDarkCardContent, GlassmorphicDarkCardFooter,
   MidnightGlassCard, MidnightGlassCardHeader, MidnightGlassCardTitle, MidnightGlassCardDescription, MidnightGlassCardContent, MidnightGlassCardFooter,
+  TactileMinimalCard, TactileMinimalCardHeader, TactileMinimalCardTitle, TactileMinimalCardDescription, TactileMinimalCardContent, TactileMinimalCardFooter,
+  LumenDarkCard, LumenDarkCardHeader, LumenDarkCardTitle, LumenDarkCardDescription, LumenDarkCardContent, LumenDarkCardFooter,
   LinearInput, AirbnbInput, SupabaseInput, CorporateFintechInput,
   DarkOrangeInput, VibrantDarkInput, MinimalLightInput, NeutralMonochromeInput, LightMarketplaceInput, PrecisionLightInput, CinematicDarkInput,
   LinearQualityInput, EditorialDarkInput,
-  NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput, MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput,
+  NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput, MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput, TactileMinimalInput, LumenDarkInput,
   LinearBadge, AirbnbBadge, SupabaseBadge, CorporateFintechBadge,
   DarkOrangeBadge, VibrantDarkBadge, MinimalLightBadge, NeutralMonochromeBadge, LightMarketplaceBadge, PrecisionLightBadge, CinematicDarkBadge,
   LinearQualityBadge, EditorialDarkBadge,
-  NotionBadge, StripeBadge, VercelBadge, AppleBadge, FigmaBadge, MonoIndustrialBadge, GlassmorphicDarkBadge, MidnightGlassBadge,
+  NotionBadge, StripeBadge, VercelBadge, AppleBadge, FigmaBadge, MonoIndustrialBadge, GlassmorphicDarkBadge, MidnightGlassBadge, TactileMinimalBadge, LumenDarkBadge,
   LinearCodeTabs, AirbnbCodeTabs, SupabaseCodeTabs, CorporateFintechCodeTabs,
   DarkOrangeCodeTabs, VibrantDarkCodeTabs, MinimalLightCodeTabs, NeutralMonochromeCodeTabs, LightMarketplaceCodeTabs, PrecisionLightCodeTabs, CinematicDarkCodeTabs,
   LinearQualityCodeTabs, EditorialDarkCodeTabs,
-  NotionCodeTabs, StripeCodeTabs, VercelCodeTabs, AppleCodeTabs, FigmaCodeTabs, MonoIndustrialCodeTabs, GlassmorphicDarkCodeTabs, MidnightGlassCodeTabs,
+  NotionCodeTabs, StripeCodeTabs, VercelCodeTabs, AppleCodeTabs, FigmaCodeTabs, MonoIndustrialCodeTabs, GlassmorphicDarkCodeTabs, MidnightGlassCodeTabs, TactileMinimalCodeTabs, LumenDarkCodeTabs,
   LinearCursor, AirbnbCursor, SupabaseCursor, CorporateFintechCursor,
   DarkOrangeCursor, VibrantDarkCursor, MinimalLightCursor, NeutralMonochromeCursor, LightMarketplaceCursor, PrecisionLightCursor, CinematicDarkCursor,
   LinearQualityCursor, EditorialDarkCursor,
-  NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor, GlassmorphicDarkCursor, MidnightGlassCursor,
+  NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor, GlassmorphicDarkCursor, MidnightGlassCursor, TactileMinimalCursor, LumenDarkCursor,
   MonoIndustrialSpinner,
 } from "./ds-registry"
 
@@ -308,6 +330,8 @@ const BUTTON_MAP: Record<string, AnyButton> = {
   "monochrome-industrial": MonoIndustrialButton as AnyButton,
   "glassmorphic-dark": GlassmorphicDarkButton as AnyButton,
   "midnight-glass": MidnightGlassButton as AnyButton,
+  "tactile-minimal": TactileMinimalButton as AnyButton,
+  "lumen-dark": LumenDarkButton as AnyButton,
 }
 
 const INPUT_MAP: Record<string, AnyInput> = {
@@ -332,6 +356,8 @@ const INPUT_MAP: Record<string, AnyInput> = {
   "monochrome-industrial": MonoIndustrialInput as AnyInput,
   "glassmorphic-dark": GlassmorphicDarkInput as AnyInput,
   "midnight-glass": MidnightGlassInput as AnyInput,
+  "tactile-minimal": TactileMinimalInput as AnyInput,
+  "lumen-dark": LumenDarkInput as AnyInput,
 }
 
 const BADGE_MAP: Record<string, AnyBadge> = {
@@ -356,6 +382,8 @@ const BADGE_MAP: Record<string, AnyBadge> = {
   "monochrome-industrial": MonoIndustrialBadge as AnyBadge,
   "glassmorphic-dark": GlassmorphicDarkBadge as AnyBadge,
   "midnight-glass": MidnightGlassBadge as AnyBadge,
+  "tactile-minimal": TactileMinimalBadge as AnyBadge,
+  "lumen-dark": LumenDarkBadge as AnyBadge,
 }
 
 const CARD_MAP: Record<string, {
@@ -383,6 +411,8 @@ const CARD_MAP: Record<string, {
   "monochrome-industrial": { Card: MonoIndustrialCard as AnyCard, CardHeader: MonoIndustrialCardHeader as AnyCardSub, CardTitle: MonoIndustrialCardTitle as AnyCardSub, CardDescription: MonoIndustrialCardDescription as AnyCardSub, CardContent: MonoIndustrialCardContent as AnyCardSub, CardFooter: MonoIndustrialCardFooter as AnyCardSub },
   "glassmorphic-dark": { Card: GlassmorphicDarkCard as AnyCard, CardHeader: GlassmorphicDarkCardHeader as AnyCardSub, CardTitle: GlassmorphicDarkCardTitle as AnyCardSub, CardDescription: GlassmorphicDarkCardDescription as AnyCardSub, CardContent: GlassmorphicDarkCardContent as AnyCardSub, CardFooter: GlassmorphicDarkCardFooter as AnyCardSub },
   "midnight-glass": { Card: MidnightGlassCard as AnyCard, CardHeader: MidnightGlassCardHeader as AnyCardSub, CardTitle: MidnightGlassCardTitle as AnyCardSub, CardDescription: MidnightGlassCardDescription as AnyCardSub, CardContent: MidnightGlassCardContent as AnyCardSub, CardFooter: MidnightGlassCardFooter as AnyCardSub },
+  "tactile-minimal": { Card: TactileMinimalCard as AnyCard, CardHeader: TactileMinimalCardHeader as AnyCardSub, CardTitle: TactileMinimalCardTitle as AnyCardSub, CardDescription: TactileMinimalCardDescription as AnyCardSub, CardContent: TactileMinimalCardContent as AnyCardSub, CardFooter: TactileMinimalCardFooter as AnyCardSub },
+  "lumen-dark": { Card: LumenDarkCard as AnyCard, CardHeader: LumenDarkCardHeader as AnyCardSub, CardTitle: LumenDarkCardTitle as AnyCardSub, CardDescription: LumenDarkCardDescription as AnyCardSub, CardContent: LumenDarkCardContent as AnyCardSub, CardFooter: LumenDarkCardFooter as AnyCardSub },
 }
 
 type AnyCodeTabs = React.ComponentType<{ tabs: { label: string; lang: string; code: string }[]; defaultTab?: number; className?: string }>
@@ -410,6 +440,8 @@ const CODE_TABS_MAP: Record<string, AnyCodeTabs> = {
   "monochrome-industrial": MonoIndustrialCodeTabs as AnyCodeTabs,
   "glassmorphic-dark": GlassmorphicDarkCodeTabs as AnyCodeTabs,
   "midnight-glass": MidnightGlassCodeTabs as AnyCodeTabs,
+  "tactile-minimal": TactileMinimalCodeTabs as AnyCodeTabs,
+  "lumen-dark": LumenDarkCodeTabs as AnyCodeTabs,
 }
 
 const CURSOR_MAP: Record<string, AnyCursor> = {
@@ -434,6 +466,8 @@ const CURSOR_MAP: Record<string, AnyCursor> = {
   "monochrome-industrial": MonoIndustrialCursor as AnyCursor,
   "glassmorphic-dark": GlassmorphicDarkCursor as AnyCursor,
   "midnight-glass": MidnightGlassCursor as AnyCursor,
+  "tactile-minimal": TactileMinimalCursor as AnyCursor,
+  "lumen-dark": LumenDarkCursor as AnyCursor,
 }
 
 const ICONS_SECTION: Section = {
@@ -693,6 +727,109 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
   const { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } = CARD_MAP[id] ?? CARD_MAP.linear
   const CodeTabs = (CODE_TABS_MAP[id] ?? CODE_TABS_MAP.linear) as AnyCodeTabs
   const DSCursor = (CURSOR_MAP[id] ?? CURSOR_MAP.linear) as AnyCursor
+
+  // Tactile Minimal swaps the web app's shadcn primitives for its own DS-native versions.
+  // This keeps the DS showcase self-contained instead of inheriting the web app's Linear-glass styles.
+  // Other DSs continue to use the shadcn versions for now (rollout is tactile-minimal-first).
+  const isTactile = id === "tactile-minimal"
+  const Checkbox = (isTactile ? TactileMinimalCheckbox : ShadcnCheckbox) as typeof ShadcnCheckbox
+  const Switch = (isTactile ? TactileMinimalSwitch : ShadcnSwitch) as typeof ShadcnSwitch
+  const RadioGroup = (isTactile ? TactileMinimalRadioGroup : ShadcnRadioGroup) as typeof ShadcnRadioGroup
+  const RadioGroupItem = (isTactile ? TactileMinimalRadioGroupItem : ShadcnRadioGroupItem) as typeof ShadcnRadioGroupItem
+  const Popover = (isTactile ? TactileMinimalPopover : ShadcnPopover) as typeof ShadcnPopover
+  const PopoverContent = (isTactile ? TactileMinimalPopoverContent : ShadcnPopoverContent) as typeof ShadcnPopoverContent
+  const PopoverTrigger = (isTactile ? TactileMinimalPopoverTrigger : ShadcnPopoverTrigger) as typeof ShadcnPopoverTrigger
+  const HoverCard = (isTactile ? TactileMinimalHoverCard : ShadcnHoverCard) as typeof ShadcnHoverCard
+  const HoverCardContent = (isTactile ? TactileMinimalHoverCardContent : ShadcnHoverCardContent) as typeof ShadcnHoverCardContent
+  const HoverCardTrigger = (isTactile ? TactileMinimalHoverCardTrigger : ShadcnHoverCardTrigger) as typeof ShadcnHoverCardTrigger
+  const Command = (isTactile ? TactileMinimalCommand : ShadcnCommand) as typeof ShadcnCommand
+  const Textarea = (
+    id === "tactile-minimal" ? TactileMinimalTextarea :
+    id === "lumen-dark" ? LumenDarkTextarea :
+    ShadcnTextarea
+  ) as typeof ShadcnTextarea
+  const CommandEmpty = (isTactile ? TactileMinimalCommandEmpty : ShadcnCommandEmpty) as typeof ShadcnCommandEmpty
+  const CommandGroup = (isTactile ? TactileMinimalCommandGroup : ShadcnCommandGroup) as typeof ShadcnCommandGroup
+  const CommandInput = (isTactile ? TactileMinimalCommandInput : ShadcnCommandInput) as typeof ShadcnCommandInput
+  const CommandItem = (isTactile ? TactileMinimalCommandItem : ShadcnCommandItem) as typeof ShadcnCommandItem
+  const CommandList = (isTactile ? TactileMinimalCommandList : ShadcnCommandList) as typeof ShadcnCommandList
+  const TactileToggle = isTactile ? TactileMinimalToggle : null
+  void TactileToggle
+
+  // Dialog
+  const Dialog = (isTactile ? TactileMinimalDialog : ShadcnDialog) as typeof ShadcnDialog
+  const DialogContent = (isTactile ? TactileMinimalDialogContent : ShadcnDialogContent) as typeof ShadcnDialogContent
+  const DialogDescription = (isTactile ? TactileMinimalDialogDescription : ShadcnDialogDescription) as typeof ShadcnDialogDescription
+  const DialogFooter = (isTactile ? TactileMinimalDialogFooter : ShadcnDialogFooter) as typeof ShadcnDialogFooter
+  const DialogHeader = (isTactile ? TactileMinimalDialogHeader : ShadcnDialogHeader) as typeof ShadcnDialogHeader
+  const DialogTitle = (isTactile ? TactileMinimalDialogTitle : ShadcnDialogTitle) as typeof ShadcnDialogTitle
+  const DialogTrigger = (isTactile ? TactileMinimalDialogTrigger : ShadcnDialogTrigger) as typeof ShadcnDialogTrigger
+
+  // AlertDialog
+  const AlertDialog = (isTactile ? TactileMinimalAlertDialog : ShadcnAlertDialog) as typeof ShadcnAlertDialog
+  const AlertDialogAction = (isTactile ? TactileMinimalAlertDialogAction : ShadcnAlertDialogAction) as typeof ShadcnAlertDialogAction
+  const AlertDialogCancel = (isTactile ? TactileMinimalAlertDialogCancel : ShadcnAlertDialogCancel) as typeof ShadcnAlertDialogCancel
+  const AlertDialogContent = (isTactile ? TactileMinimalAlertDialogContent : ShadcnAlertDialogContent) as typeof ShadcnAlertDialogContent
+  const AlertDialogDescription = (isTactile ? TactileMinimalAlertDialogDescription : ShadcnAlertDialogDescription) as typeof ShadcnAlertDialogDescription
+  const AlertDialogFooter = (isTactile ? TactileMinimalAlertDialogFooter : ShadcnAlertDialogFooter) as typeof ShadcnAlertDialogFooter
+  const AlertDialogHeader = (isTactile ? TactileMinimalAlertDialogHeader : ShadcnAlertDialogHeader) as typeof ShadcnAlertDialogHeader
+  const AlertDialogTitle = (isTactile ? TactileMinimalAlertDialogTitle : ShadcnAlertDialogTitle) as typeof ShadcnAlertDialogTitle
+  const AlertDialogTrigger = (isTactile ? TactileMinimalAlertDialogTrigger : ShadcnAlertDialogTrigger) as typeof ShadcnAlertDialogTrigger
+
+  // DropdownMenu
+  const DropdownMenu = (isTactile ? TactileMinimalDropdownMenu : ShadcnDropdownMenu) as typeof ShadcnDropdownMenu
+  const DropdownMenuContent = (isTactile ? TactileMinimalDropdownMenuContent : ShadcnDropdownMenuContent) as typeof ShadcnDropdownMenuContent
+  const DropdownMenuItem = (isTactile ? TactileMinimalDropdownMenuItem : ShadcnDropdownMenuItem) as typeof ShadcnDropdownMenuItem
+  const DropdownMenuLabel = (isTactile ? TactileMinimalDropdownMenuLabel : ShadcnDropdownMenuLabel) as typeof ShadcnDropdownMenuLabel
+  const DropdownMenuSeparator = (isTactile ? TactileMinimalDropdownMenuSeparator : ShadcnDropdownMenuSeparator) as typeof ShadcnDropdownMenuSeparator
+  const DropdownMenuTrigger = (isTactile ? TactileMinimalDropdownMenuTrigger : ShadcnDropdownMenuTrigger) as typeof ShadcnDropdownMenuTrigger
+
+  // ContextMenu
+  const ContextMenu = (isTactile ? TactileMinimalContextMenu : ShadcnContextMenu) as typeof ShadcnContextMenu
+  const ContextMenuContent = (isTactile ? TactileMinimalContextMenuContent : ShadcnContextMenuContent) as typeof ShadcnContextMenuContent
+  const ContextMenuItem = (isTactile ? TactileMinimalContextMenuItem : ShadcnContextMenuItem) as typeof ShadcnContextMenuItem
+  const ContextMenuLabel = (isTactile ? TactileMinimalContextMenuLabel : ShadcnContextMenuLabel) as typeof ShadcnContextMenuLabel
+  const ContextMenuSeparator = (isTactile ? TactileMinimalContextMenuSeparator : ShadcnContextMenuSeparator) as typeof ShadcnContextMenuSeparator
+  const ContextMenuTrigger = (isTactile ? TactileMinimalContextMenuTrigger : ShadcnContextMenuTrigger) as typeof ShadcnContextMenuTrigger
+
+  // Menubar
+  const Menubar = (isTactile ? TactileMinimalMenubar : ShadcnMenubar) as typeof ShadcnMenubar
+  const MenubarContent = (isTactile ? TactileMinimalMenubarContent : ShadcnMenubarContent) as typeof ShadcnMenubarContent
+  const MenubarItem = (isTactile ? TactileMinimalMenubarItem : ShadcnMenubarItem) as typeof ShadcnMenubarItem
+  const MenubarMenu = (isTactile ? TactileMinimalMenubarMenu : ShadcnMenubarMenu) as typeof ShadcnMenubarMenu
+  const MenubarSeparator = (isTactile ? TactileMinimalMenubarSeparator : ShadcnMenubarSeparator) as typeof ShadcnMenubarSeparator
+  const MenubarTrigger = (isTactile ? TactileMinimalMenubarTrigger : ShadcnMenubarTrigger) as typeof ShadcnMenubarTrigger
+
+  // Sheet
+  const Sheet = (isTactile ? TactileMinimalSheet : ShadcnSheet) as typeof ShadcnSheet
+  const SheetContent = (isTactile ? TactileMinimalSheetContent : ShadcnSheetContent) as typeof ShadcnSheetContent
+  const SheetDescription = (isTactile ? TactileMinimalSheetDescription : ShadcnSheetDescription) as typeof ShadcnSheetDescription
+  const SheetHeader = (isTactile ? TactileMinimalSheetHeader : ShadcnSheetHeader) as typeof ShadcnSheetHeader
+  const SheetTitle = (isTactile ? TactileMinimalSheetTitle : ShadcnSheetTitle) as typeof ShadcnSheetTitle
+  const SheetTrigger = (isTactile ? TactileMinimalSheetTrigger : ShadcnSheetTrigger) as typeof ShadcnSheetTrigger
+
+  // Drawer
+  const Drawer = (isTactile ? TactileMinimalDrawer : ShadcnDrawer) as typeof ShadcnDrawer
+  const DrawerClose = (isTactile ? TactileMinimalDrawerClose : ShadcnDrawerClose) as typeof ShadcnDrawerClose
+  const DrawerContent = (isTactile ? TactileMinimalDrawerContent : ShadcnDrawerContent) as typeof ShadcnDrawerContent
+  const DrawerDescription = (isTactile ? TactileMinimalDrawerDescription : ShadcnDrawerDescription) as typeof ShadcnDrawerDescription
+  const DrawerFooter = (isTactile ? TactileMinimalDrawerFooter : ShadcnDrawerFooter) as typeof ShadcnDrawerFooter
+  const DrawerHeader = (isTactile ? TactileMinimalDrawerHeader : ShadcnDrawerHeader) as typeof ShadcnDrawerHeader
+  const DrawerTitle = (isTactile ? TactileMinimalDrawerTitle : ShadcnDrawerTitle) as typeof ShadcnDrawerTitle
+  const DrawerTrigger = (isTactile ? TactileMinimalDrawerTrigger : ShadcnDrawerTrigger) as typeof ShadcnDrawerTrigger
+
+  // Tooltip
+  const Tooltip = (isTactile ? TactileMinimalTooltip : ShadcnTooltip) as typeof ShadcnTooltip
+  const TooltipContent = (isTactile ? TactileMinimalTooltipContent : ShadcnTooltipContent) as typeof ShadcnTooltipContent
+  const TooltipProvider = (isTactile ? TactileMinimalTooltipProvider : ShadcnTooltipProvider) as typeof ShadcnTooltipProvider
+  const TooltipTrigger = (isTactile ? TactileMinimalTooltipTrigger : ShadcnTooltipTrigger) as typeof ShadcnTooltipTrigger
+
+  // Select
+  const Select = (isTactile ? TactileMinimalSelect : ShadcnSelect) as typeof ShadcnSelect
+  const SelectContent = (isTactile ? TactileMinimalSelectContent : ShadcnSelectContent) as typeof ShadcnSelectContent
+  const SelectItem = (isTactile ? TactileMinimalSelectItem : ShadcnSelectItem) as typeof ShadcnSelectItem
+  const SelectTrigger = (isTactile ? TactileMinimalSelectTrigger : ShadcnSelectTrigger) as typeof ShadcnSelectTrigger
+  const SelectValue = (isTactile ? TactileMinimalSelectValue : ShadcnSelectValue) as typeof ShadcnSelectValue
 
   const cssVars = { ...mergedTokens, backgroundColor: "var(--background)" } as CSSProperties
 
@@ -1814,7 +1951,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                     { value: "b1", q: "Free shipping?", a: "On orders over $50." },
                     { value: "b2", q: "Return policy?", a: "30-day returns, no questions asked." },
                   ].map(({ value, q, a }) => (
-                    <AccordionItem key={value} value={value} className="border rounded-lg px-4 border-b-[1px]">
+                    <AccordionItem key={value} value={value} className="border rounded-lg px-4 last:border-b">
                       <AccordionTrigger className="text-sm py-3">{q}</AccordionTrigger>
                       <AccordionContent className="text-xs">{a}</AccordionContent>
                     </AccordionItem>

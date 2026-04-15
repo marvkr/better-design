@@ -42,9 +42,31 @@ Monorepo with `packages/web` (Next.js app) and `packages/mcp` (MCP server).
 
 **NEVER create functions, helpers, or utilities without wiring them up to the actual call site.** If you build something (alert, hook, handler, etc.), you MUST also connect it where it gets triggered. Dead code is worse than no code — it gives a false sense of coverage. Always verify new code is actually called by tracing the execution path end-to-end.
 
+## Generating Design Systems (`design-systems/<name>/`)
+
+- Extract actual computed styles from the source site via Chrome DevTools. Don't guess.
+- Build only the primitives the source uses. Extrapolate the rest in the same language.
+- Use semantic tokens only: `bg-background`, `bg-card`, `bg-primary`, `text-foreground`, `text-muted-foreground`, `border-border`, `ring-ring`. No `dark:` variants, no raw `bg-white`/`bg-neutral-*`.
+- No `shadow-md`/`lg`/`xl`/`2xl` on popover surfaces unless the source has them. Border-only by default.
+- Form fields (Input, Textarea, PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) import a single `formFieldBase` constant from `./_shared.ts`.
+- Each DS picks its own icon library (Phosphor, Solar, Lucide, Tabler, etc.). The Tabler rule below is for the app, not DSs.
+- If the DS has sound: wire `playClick`/`playTick` into every interactive primitive (Button, Checkbox, Switch, RadioGroup, Toggle, Item), not just Button.
+
+**Wiring checklist (all 6 or the showcase falls back to Linear):**
+1. `packages/web/src/app/(home)/page.tsx` — `DS_META`
+2. `packages/web/src/app/design-systems/page.tsx` — `DS_META`
+3. `packages/web/src/app/design-systems/[id]/page.tsx` — `DS_META` + per-DS `<style>` block if the DS needs custom fonts/overrides
+4. `packages/web/src/app/design-systems/[id]/ds-registry.ts` — exports for Button, Card, Input, Textarea, Badge, CodeTabs, Cursor
+5. `packages/web/src/app/design-systems/[id]/component-showcase.tsx` — imports + MAP entries
+6. `packages/web/src/app/design-systems/preview-card.tsx` — `DS_STYLE` entry
+
+Add each import and the MAP entry referencing it in the same edit (IDE auto-fixer strips unused imports on save).
+
+**Do not modify** `packages/web/src/app/globals.css`'s `[data-ds] :is(h1,h2,h3,h4,h5,h6) { font-family: inherit; font-weight: inherit; letter-spacing: inherit; }` rule. Without it, the app's global serif-heading style leaks into every DS showcase.
+
 ## Icons
 
-Use **Tabler** icons via `@iconify/react`. Tabler has brand icons (Supabase, Airbnb, etc.) plus comprehensive UI icons.
+Use **Tabler** icons via `@iconify/react` in the Better Design **app** code (`packages/web`). Tabler has brand icons (Supabase, Airbnb, etc.) plus comprehensive UI icons. Note: this rule does NOT apply to generated design systems — those pick their own icon library.
 
 ```tsx
 import { Icon } from "@iconify/react";

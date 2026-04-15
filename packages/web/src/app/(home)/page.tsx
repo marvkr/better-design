@@ -154,6 +154,22 @@ const DS_META = [
       "Transparent glass panels with blur, frosted surfaces on dark backgrounds",
     theme: "dark" as const,
   },
+  {
+    id: "tactile-minimal",
+    slug: "tactile-minimal",
+    name: "Tactile Minimal",
+    description:
+      "Clean neutral with synthesized haptic sounds, ASCII cursor trail, staggered animations",
+    theme: "light" as const,
+  },
+  {
+    id: "lumen-dark",
+    slug: "lumen-dark",
+    name: "Lumen Dark",
+    description:
+      "Dark with three-tier depth shadows — inset highlights, layered elevation, warm amber accent",
+    theme: "dark" as const,
+  },
 ];
 
 function parseTokens(css: string): Record<string, string> {

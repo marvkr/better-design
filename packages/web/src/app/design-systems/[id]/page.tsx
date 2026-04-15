@@ -26,6 +26,8 @@ const DS_META: Record<string, { name: string; description: string; theme: "light
   "monochrome-industrial": { name: "Monochrome Industrial", description: "Monochrome industrial — OLED black, Doto + Geist Mono, signal-light red accent, sharp corners, dot-matrix motif", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
   "glassmorphic-dark":   { name: "Glassmorphic Dark",   description: "Transparent glass panels with blur, frosted surfaces on dark backgrounds", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
   "midnight-glass":      { name: "Midnight Glass",      description: "Midnight blue glass — prismatic gradient borders, dual indigo-teal accents, frosted pills", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "tactile-minimal":     { name: "Tactile Minimal",     description: "Clean neutral with synthesized haptic sounds, ASCII cursor trail, staggered blur animations", theme: "light", iconPrefix: "ph", iconLibraryName: "Phosphor" },
+  "lumen-dark":          { name: "Lumen Dark",          description: "Dark theme built on depth & surfaces principle — three-tier layered shadows, inset highlights, warm amber accent", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
 }
 
 function parseTokens(css: string): Record<string, string> {
@@ -71,6 +73,59 @@ export default async function DesignSystemDetailPage({ params }: { params: Promi
   return (
     <div className="min-h-screen bg-background">
       {/* Per-DS font loading. Next 15 hoists <link> in JSX into <head>. */}
+      {id === "tactile-minimal" && (
+        <style>{`
+          [data-ds="tactile-minimal"],
+          [data-ds="tactile-minimal"] * {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+          }
+          [data-ds="tactile-minimal"] h1 {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            letter-spacing: -0.005em !important;
+            line-height: 1.3 !important;
+          }
+          [data-ds="tactile-minimal"] p {
+            font-size: 13px !important;
+          }
+        `}</style>
+      )}
+      {id === "lumen-dark" && (
+        <style>{`
+          [data-ds="lumen-dark"] {
+            --shadow-s:
+              inset 0 1px 0 rgba(255,255,255,0.05),
+              0 1px 2px rgba(0,0,0,0.4),
+              0 2px 4px rgba(0,0,0,0.2);
+            --shadow-m:
+              inset 0 1px 0 rgba(255,255,255,0.08),
+              0 2px 4px rgba(0,0,0,0.5),
+              0 4px 8px rgba(0,0,0,0.25);
+            --shadow-l:
+              inset 0 1px 0 rgba(255,255,255,0.12),
+              0 4px 8px rgba(0,0,0,0.6),
+              0 8px 16px rgba(0,0,0,0.3);
+            --shadow-inset:
+              inset 0 1px 2px rgba(0,0,0,0.35),
+              inset 0 -1px 0 rgba(255,255,255,0.03);
+            --shadow-button:
+              inset 0 1px 0 rgba(255,255,255,0.12),
+              0 0 0 1px rgba(255,255,255,0.04),
+              0 1px 2px rgba(0,0,0,0.5),
+              0 2px 4px rgba(0,0,0,0.25);
+            --shadow-button-hover:
+              inset 0 1px 0 rgba(255,255,255,0.16),
+              0 0 0 1px rgba(255,255,255,0.06),
+              0 2px 4px rgba(0,0,0,0.55),
+              0 4px 8px rgba(0,0,0,0.3);
+            --shadow-primary:
+              inset 0 1px 0 rgba(255,255,255,0.25),
+              0 0 0 1px rgba(255,200,100,0.2),
+              0 1px 3px rgba(0,0,0,0.5),
+              0 4px 12px rgba(240,170,60,0.15);
+          }
+        `}</style>
+      )}
       {id === "monochrome-industrial" && (
         <>
           <link

@@ -209,6 +209,15 @@
     font-weight: 200;
     letter-spacing: -0.015em;
   }
+
+  /* Design system showcases are isolated: headings inside [data-ds] containers
+     must NOT inherit the Better Design app's serif display style. Each DS is
+     responsible for its own typography via its globals.css or per-DS <style>. */
+  [data-ds] :is(h1, h2, h3, h4, h5, h6) {
+    font-family: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
 }
 
 /* Animations */

@@ -53,6 +53,7 @@
     "@google/generative-ai": "^0.21.0",
     "@neondatabase/serverless": "^0.10.4",
     "@types/node": "^22.13.14",
+    "dotenv": "^16.4.5",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
     "tsup": "^8.4.0",
