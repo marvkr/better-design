@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { APIError } from "better-auth/api";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import { consumeInviteForEmail } from "@/server/api/routes/invites";
@@ -58,9 +59,10 @@ function createAuth() {
           before: async (user) => {
             const ok = await consumeInviteForEmail(user.email);
             if (!ok) {
-              throw new Error(
-                "Sign-ups are invite-only right now. Join the waitlist at https://better-design.com to request an invite.",
-              );
+              throw new APIError("FORBIDDEN", {
+                message:
+                  "Better Design is invite-only. Request access on the waitlist.",
+              });
             }
             return { data: user };
           },
