@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
+import { consumeInviteForEmail } from "@/server/api/routes/invites";
 
 function getBaseURL() {
   // Explicit env var takes priority
@@ -15,86 +16,100 @@ function getBaseURL() {
   return "http://localhost:3000";
 }
 
-export const auth = betterAuth({
-  secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: getBaseURL(),
-  database: drizzleAdapter(db, {
-    provider: "pg",
-  }),
-  emailAndPassword: {
-    enabled: true,
-  },
-  socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+function createAuth() {
+  return betterAuth({
+    secret: process.env.BETTER_AUTH_SECRET,
+    baseURL: getBaseURL(),
+    database: drizzleAdapter(db, {
+      provider: "pg",
+    }),
+    emailAndPassword: {
+      enabled: true,
     },
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    },
-  },
-  user: {
-    additionalFields: {
-      plan: {
-        type: "string",
-        required: false,
-        defaultValue: "free",
-        input: false,
+    socialProviders: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID!,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       },
-      isAdmin: {
-        type: "boolean",
-        required: false,
-        defaultValue: false,
-        input: false,
+      github: {
+        clientId: process.env.GITHUB_CLIENT_ID!,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       },
     },
-  },
-  databaseHooks: {
     user: {
-      create: {
-        before: async (user) => {
-          const { consumeInviteForEmail } = await import(
-            "@/server/api/routes/invites"
-          );
-          const ok = await consumeInviteForEmail(user.email);
-          if (!ok) {
-            throw new Error(
-              "Sign-ups are invite-only right now. Join the waitlist at https://better-design.com to request an invite.",
-            );
-          }
-          return { data: user };
+      additionalFields: {
+        plan: {
+          type: "string",
+          required: false,
+          defaultValue: "free",
+          input: false,
         },
-        after: async (user) => {
-          const { alertNewSignup } = await import("@/lib/alerts");
-          alertNewSignup(user.email, user.name).catch(() => {});
-          try {
-            const { getPostHog } = await import("@/lib/posthog");
-            getPostHog().identify({
-              distinctId: user.id,
-              properties: {
-                $set: {
+        isAdmin: {
+          type: "boolean",
+          required: false,
+          defaultValue: false,
+          input: false,
+        },
+      },
+    },
+    databaseHooks: {
+      user: {
+        create: {
+          before: async (user) => {
+            const ok = await consumeInviteForEmail(user.email);
+            if (!ok) {
+              throw new Error(
+                "Sign-ups are invite-only right now. Join the waitlist at https://better-design.com to request an invite.",
+              );
+            }
+            return { data: user };
+          },
+          after: async (user) => {
+            const { alertNewSignup } = await import("@/lib/alerts");
+            alertNewSignup(user.email, user.name).catch(() => {});
+            try {
+              const { getPostHog } = await import("@/lib/posthog");
+              getPostHog().identify({
+                distinctId: user.id,
+                properties: {
+                  $set: {
+                    email: user.email,
+                    name: user.name,
+                  },
+                  $set_once: {
+                    created_at: new Date().toISOString(),
+                  },
+                },
+              });
+              getPostHog().capture({
+                distinctId: user.id,
+                event: "user_signed_up",
+                properties: {
                   email: user.email,
                   name: user.name,
                 },
-                $set_once: {
-                  created_at: new Date().toISOString(),
-                },
-              },
-            });
-            getPostHog().capture({
-              distinctId: user.id,
-              event: "user_signed_up",
-              properties: {
-                email: user.email,
-                name: user.name,
-              },
-            });
-          } catch {}
+              });
+            } catch {}
+          },
         },
       },
     },
+  });
+}
+
+let _auth: ReturnType<typeof createAuth> | undefined;
+function getAuth() {
+  if (!_auth) _auth = createAuth();
+  return _auth;
+}
+
+export const auth = new Proxy({} as ReturnType<typeof createAuth>, {
+  get(_, prop) {
+    return Reflect.get(getAuth(), prop);
+  },
+  has(_, prop) {
+    return prop in getAuth();
   },
 });
 
-export type Session = typeof auth["$Infer"]["Session"];
+export type Session = ReturnType<typeof createAuth>["$Infer"]["Session"];
