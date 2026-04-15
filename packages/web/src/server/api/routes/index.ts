@@ -7,6 +7,7 @@ import projectsRoute from "./projects";
 import fragmentsRoute from "./fragments";
 import apiKeysRoute from "./api-keys";
 import eventsRoute from "./events";
+import invitesRoute from "./invites";
 import { v1Router } from "./v1/index";
 import { mcpRoute } from "./mcp";
 import alertsRoute from "./alerts";
@@ -27,6 +28,7 @@ export const api = createApp()
   .route("/fragments", fragmentsRoute)
   .route("/api-keys", apiKeysRoute)
   .route("/events", eventsRoute)
+  .route("/invites", invitesRoute)
   .route("/v1", v1Router)
   .route("/mcp", mcpRoute)
   .route("/internal/alert", alertsRoute)

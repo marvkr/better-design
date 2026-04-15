@@ -53,6 +53,18 @@ export const auth = betterAuth({
   databaseHooks: {
     user: {
       create: {
+        before: async (user) => {
+          const { consumeInviteForEmail } = await import(
+            "@/server/api/routes/invites"
+          );
+          const ok = await consumeInviteForEmail(user.email);
+          if (!ok) {
+            throw new Error(
+              "Sign-ups are invite-only right now. Join the waitlist at https://better-design.com to request an invite.",
+            );
+          }
+          return { data: user };
+        },
         after: async (user) => {
           const { alertNewSignup } = await import("@/lib/alerts");
           alertNewSignup(user.email, user.name).catch(() => {});

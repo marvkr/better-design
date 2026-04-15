@@ -1,13 +1,13 @@
 {
   "name": "design-systems",
-  "baseUrl": "https://design-systems.dev/registry",
+  "baseUrl": "https://www.better-design.com/registry",
   "styles": [
     {
       "name": "airbnb",
       "label": "Airbnb Design System"
     },
     {
-      "name": "column",
+      "name": "corporate-fintech",
       "label": "Column Design System"
     },
     {

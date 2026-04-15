@@ -44,8 +44,8 @@ const DESIGN_SYSTEM_METADATA: Record<string, DesignSystemConfig> = {
     personality: ["modern", "technical", "developer-friendly", "dark", "bold"],
     industry: ["developer-tools", "database", "backend", "saas"],
   },
-  column: {
-    id: "column",
+  "corporate-fintech": {
+    id: "corporate-fintech",
     label: "Column Design System",
     description:
       "Professional, trustworthy design for fintech with blue accents",
@@ -316,7 +316,7 @@ async function generateRegistry(): Promise<void> {
   // Create main manifest
   const manifest: RegistryManifest = {
     name: "design-systems",
-    baseUrl: "https://design-systems.dev/registry",
+    baseUrl: "https://www.better-design.com/registry",
     styles,
   };
 
@@ -329,7 +329,7 @@ async function generateRegistry(): Promise<void> {
   console.log(`   ${styles.length} design systems`);
   console.log(`   Components available for installation via:`);
   console.log(
-    `   npx shadcn@latest add button --registry https://design-systems.dev/registry/linear`,
+    `   npx shadcn@latest add https://www.better-design.com/registry/linear/button.json`,
   );
 }
 

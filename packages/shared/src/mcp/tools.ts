@@ -2,7 +2,9 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import type { DataProvider } from "./data-provider";
 
-const REGISTRY_BASE_URL = "https://design-systems.dev/registry";
+const REGISTRY_BASE_URL =
+  process.env.BETTER_DESIGN_REGISTRY_URL ??
+  "https://www.better-design.com/registry";
 
 function truncateToTokens(text: string, maxTokens: number): string {
   const maxChars = maxTokens * 4;

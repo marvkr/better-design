@@ -278,6 +278,16 @@ export const waitlist = pgTable("waitlist", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const inviteTokens = pgTable("invite_tokens", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  token: text("token").notNull().unique(),
+  email: text("email").notNull(),
+  note: text("note"),
+  usedAt: timestamp("used_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
+});
+
 export const iconLibraries = pgTable("icon_libraries", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -361,6 +371,9 @@ export const selectApiKeySchema = createSelectSchema(apiKeys);
 
 export const insertUserSchema = createInsertSchema(user);
 export const selectUserSchema = createSelectSchema(user);
+
+export const insertInviteTokenSchema = createInsertSchema(inviteTokens);
+export const selectInviteTokenSchema = createSelectSchema(inviteTokens);
 
 // ─── Inferred Types ───────────────────────────────────────────────────────────
 

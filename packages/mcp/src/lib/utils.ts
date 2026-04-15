@@ -5,7 +5,9 @@ import type {
 } from "./types.js";
 import type { IconLibrary, IconLibrarySearchResult } from "./db.js";
 
-const REGISTRY_BASE_URL = "https://design-systems.dev/registry";
+const REGISTRY_BASE_URL =
+  process.env.BETTER_DESIGN_REGISTRY_URL ??
+  "https://www.better-design.com/registry";
 
 export function formatSearchResults(results: SearchResult[]): string {
   if (results.length === 0) {

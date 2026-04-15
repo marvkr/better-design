@@ -74,7 +74,7 @@ Once scaffolded, switch to Design Intelligence mode (load principles, write code
 - **Request specific components** — never fetch all components unless asked.
 - **Install via registry** when the project supports shadcn:
 \`\`\`bash
-npx shadcn@latest add <component> --registry https://design-systems.dev/registry/<id>
+npx shadcn@latest add https://www.better-design.com/registry/<id>/<component>.json
 \`\`\`
 - **Icons use Iconify:**
 \`\`\`tsx
