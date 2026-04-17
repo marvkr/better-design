@@ -3,9 +3,9 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 // Airbnb Card — extracted from airbnb.com (2026-04)
-// Cards use border for elevation, not heavy shadows
-// Image containers get 20px radius (rounded-2xl)
-// Content area has no visible border — minimal, flat
+// Listing cards have NO border and NO shadow — just stacked content.
+// Image gets rounded-xl, text sits directly below with no wrapper chrome.
+// Use border only when explicitly needed (e.g. settings panels, modals).
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -15,7 +15,6 @@ const Card = React.forwardRef<
     ref={ref}
     className={cn(
       "rounded-2xl bg-card text-card-foreground",
-      "border border-border",
       className
     )}
     {...props}
