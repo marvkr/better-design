@@ -51,6 +51,16 @@ Monorepo with `packages/web` (Next.js app) and `packages/mcp` (MCP server).
 - Form fields (Input, Textarea, PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) import a single `formFieldBase` constant from `./_shared.ts`.
 - Each DS picks its own icon library (Phosphor, Solar, Lucide, Tabler, etc.). The Tabler rule below is for the app, not DSs.
 - If the DS has sound: wire `playClick`/`playTick` into every interactive primitive (Button, Checkbox, Switch, RadioGroup, Toggle, Item), not just Button.
+- **All imports use `@/lib/utils`**, never `../utils` — DS components are served via the shadcn registry and land in the user's `components/ui/` where `@/lib/utils` is the standard path.
+
+**Post-generation audit (mandatory before committing):**
+After generating or modifying a design system, audit EVERY component file against the DS's theme:
+1. **Shadows** — scan for `shadow-md`/`lg`/`xl`/`2xl` and custom `rgba` shadows. Light DSes should have subtle shadows (`rgba(0,0,0,0.06-0.12)`); only dark DSes may use heavier values. Popover surfaces (dropdown, select, popover, context-menu, tooltip, command, navigation-menu) must match the DS's shadow token, not the shadcn default.
+2. **Semantic tokens** — `bg-secondary` renders as the DS's secondary color. If secondary is dark (#222), using it as an input surface is wrong. Check every `bg-secondary`, `bg-foreground`, `bg-primary` usage in context.
+3. **Border-radius** — match the source site. Airbnb is rounder (12-16px on containers); Linear is sharper (8px). Don't leave shadcn's default `rounded-md` (6px) if the source site uses bigger radii.
+4. **Popover surfaces** — dropdown-menu, select, context-menu, popover, tooltip, hover-card, menubar, command, navigation-menu ALL need consistent shadow + radius + border treatment. Check every one, not just the first you see.
+5. **Typography** — confirm `globals.css` declares the right font-family (not Geist if the source uses a different font).
+6. **Use the MCP to verify** — call `get-review-rules({ category: "visual-design" })` and check the generated components against those rules. Also call `get-ui-principle({ topic: "depth" })` to verify shadow/elevation decisions match the principle docs.
 
 **Wiring checklist (all 6 or the showcase falls back to Linear):**
 1. `packages/web/src/app/(home)/page.tsx` — `DS_META`

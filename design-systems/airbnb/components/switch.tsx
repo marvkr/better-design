@@ -23,7 +23,7 @@ function Switch({
         <motion.span
           layout
           transition={springInteraction}
-          className="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+          className="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-[0_1px_3px_rgba(0,0,0,0.1)] ring-0 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
         />
       </SwitchPrimitives.Thumb>
     </SwitchPrimitives.Root>

@@ -22,8 +22,8 @@ function SelectTrigger({
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "flex h-9 w-full items-center justify-between rounded-md border border-border bg-secondary px-3 py-2 text-sm",
-        "shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)]",
+        "flex h-9 w-full items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-sm",
+        "shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)]",
         "placeholder:text-muted-foreground",
         "transition-[border-color,box-shadow] duration-150",
         "hover:border-border/80",
