@@ -26,7 +26,7 @@ const buttonVariants = cva(
         // Rausch solid — radial gradient on hover
         default:
           "bg-primary text-primary-foreground " +
-          "hover:[background:var(--rausch-gradient)] hover:text-white",
+          "hover:bg-primary/90",
         // Dark — #222 solid
         secondary:
           "bg-secondary text-secondary-foreground " +
