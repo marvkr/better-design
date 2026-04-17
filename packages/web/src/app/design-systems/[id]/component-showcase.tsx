@@ -1072,20 +1072,22 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
 
               {/* Cinematic Dark: ultra-dark streaming — cinematic hero + browse row */}
               {id === "cinematic-dark" && (<>
-                <div id="feat-showcase" style={{ marginBottom: "12px", borderRadius: "8px", overflow: "hidden", position: "relative", minHeight: "220px", border: "1px solid var(--border)" }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&h=400&fit=crop&auto=format" alt="Cinema" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.3))" }} />
-                  <div style={{ position: "relative", padding: "28px", display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: "220px" }}>
-                    <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.5)", marginBottom: "6px" }}>Now Streaming</p>
-                    <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "6px" }}>Oppenheimer</h2>
-                    <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.55)", marginBottom: "16px" }}>2023 · 3h · Biography, Drama · Christopher Nolan</p>
-                    <div style={{ display: "flex", gap: "8px" }}>
-                      <Button className="gap-1.5 text-sm"><Icon icon="tabler:player-play-filled" width={14} />Play</Button>
-                      <Button variant="outline" className="text-sm gap-1.5"><Icon icon="tabler:info-circle" width={14} />More Info</Button>
+                <div id="feat-showcase" style={{ marginBottom: "12px", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--border)", maxWidth: "720px", display: "flex", flexDirection: "column" }}>
+                  <div style={{ position: "relative", minHeight: "300px", display: "flex" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&h=400&fit=crop&auto=format" alt="Cinema" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.3))" }} />
+                    <div style={{ position: "relative", padding: "28px", display: "flex", flexDirection: "column", justifyContent: "flex-end", flex: 1 }}>
+                      <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.5)", marginBottom: "6px" }}>Now Streaming</p>
+                      <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "6px" }}>Oppenheimer</h2>
+                      <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.55)", marginBottom: "16px" }}>2023 · 3h · Biography, Drama · Christopher Nolan</p>
+                      <div style={{ display: "flex", gap: "8px" }}>
+                        <Button className="gap-1.5 text-sm"><Icon icon="tabler:player-play-filled" width={14} />Play</Button>
+                        <Button variant="outline" className="text-sm gap-1.5"><Icon icon="tabler:info-circle" width={14} />More Info</Button>
+                      </div>
                     </div>
                   </div>
-                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, fontSize: "11px", fontWeight: 500, color: "var(--muted-foreground)", padding: "5px 10px 7px", borderTop: "1px solid var(--border)", backgroundColor: "var(--card)" }}>Cinematic Hero</div>
+                  <div style={{ fontSize: "11px", fontWeight: 500, color: "var(--muted-foreground)", padding: "5px 10px 7px", borderTop: "1px solid var(--border)", backgroundColor: "var(--card)" }}>Cinematic Hero</div>
                 </div>
                 <Grid cols={3}>
                   {[
@@ -1093,16 +1095,17 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
                     { title: "The Batman", genre: "Action · 2022", img: "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=300&h=180&fit=crop&auto=format" },
                     { title: "Past Lives", genre: "Drama · 2023", img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&h=180&fit=crop&auto=format" },
                   ].map(({ title, genre, img }) => (
-                    <DemoCard key={title} name={title} minH={120}>
+                    <DemoCard key={title} name="Browse Tile" minH={200}>
                       <div className="w-full">
-                        <div style={{ borderRadius: "6px", overflow: "hidden", marginBottom: "8px", height: "70px", position: "relative" }}>
+                        <div style={{ borderRadius: "6px", overflow: "hidden", marginBottom: "10px", height: "120px", position: "relative" }}>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.2)" }}>
                             <Icon icon="tabler:player-play-filled" width={20} style={{ color: "#fff" }} />
                           </div>
                         </div>
-                        <p style={{ fontSize: "10px", color: "var(--muted-foreground)" }}>{genre}</p>
+                        <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--foreground)", marginBottom: "2px", lineHeight: 1.3 }}>{title}</p>
+                        <p style={{ fontSize: "11px", color: "var(--muted-foreground)" }}>{genre}</p>
                       </div>
                     </DemoCard>
                   ))}
