@@ -19,7 +19,7 @@ jobs:
         with:
           bun-version: "1.2.23"
 
-      - run: bun install --frozen-lockfile
+      - run: bun install
 
       - uses: cloudflare/wrangler-action@v3
         with:
