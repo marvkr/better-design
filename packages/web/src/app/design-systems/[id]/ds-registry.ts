@@ -33,6 +33,7 @@ export { Button as GlassmorphicDarkButton, buttonVariants as glassmorphicDarkBut
 export { Button as MidnightGlassButton, buttonVariants as midnightGlassButtonVariants } from "../../../../../../design-systems/midnight-glass/components/button"
 export { Button as TactileMinimalButton, buttonVariants as tactileMinimalButtonVariants } from "../../../../../../design-systems/tactile-minimal/components/button"
 export { Button as LumenDarkButton, buttonVariants as lumenDarkButtonVariants } from "../../../../../../design-systems/lumen-dark/components/button"
+export { Button as TvStyleButton, buttonVariants as tvStyleButtonVariants } from "../../../../../../design-systems/tv-style/components/button"
 
 // ─── Cards ───
 export { Card as LinearCard, CardHeader as LinearCardHeader, CardTitle as LinearCardTitle, CardDescription as LinearCardDescription, CardContent as LinearCardContent, CardFooter as LinearCardFooter } from "../../../../../../design-systems/linear/components/card"
@@ -58,6 +59,7 @@ export { Card as GlassmorphicDarkCard, CardHeader as GlassmorphicDarkCardHeader,
 export { Card as MidnightGlassCard, CardHeader as MidnightGlassCardHeader, CardTitle as MidnightGlassCardTitle, CardDescription as MidnightGlassCardDescription, CardContent as MidnightGlassCardContent, CardFooter as MidnightGlassCardFooter } from "../../../../../../design-systems/midnight-glass/components/card"
 export { Card as TactileMinimalCard, CardHeader as TactileMinimalCardHeader, CardTitle as TactileMinimalCardTitle, CardDescription as TactileMinimalCardDescription, CardContent as TactileMinimalCardContent, CardFooter as TactileMinimalCardFooter } from "../../../../../../design-systems/tactile-minimal/components/card"
 export { Card as LumenDarkCard, CardHeader as LumenDarkCardHeader, CardTitle as LumenDarkCardTitle, CardDescription as LumenDarkCardDescription, CardContent as LumenDarkCardContent, CardFooter as LumenDarkCardFooter } from "../../../../../../design-systems/lumen-dark/components/card"
+export { Card as TvStyleCard, CardHeader as TvStyleCardHeader, CardTitle as TvStyleCardTitle, CardDescription as TvStyleCardDescription, CardContent as TvStyleCardContent, CardFooter as TvStyleCardFooter } from "../../../../../../design-systems/tv-style/components/card"
 
 // ─── Inputs ───
 export { Input as LinearInput } from "../../../../../../design-systems/linear/components/input"
@@ -85,6 +87,8 @@ export { Input as TactileMinimalInput } from "../../../../../../design-systems/t
 export { Textarea as TactileMinimalTextarea } from "../../../../../../design-systems/tactile-minimal/components/textarea"
 export { Input as LumenDarkInput } from "../../../../../../design-systems/lumen-dark/components/input"
 export { Textarea as LumenDarkTextarea } from "../../../../../../design-systems/lumen-dark/components/textarea"
+export { Input as TvStyleInput } from "../../../../../../design-systems/tv-style/components/input"
+export { Textarea as TvStyleTextarea } from "../../../../../../design-systems/tv-style/components/textarea"
 
 // ─── Badges ───
 export { Badge as LinearBadge } from "../../../../../../design-systems/linear/components/badge"
@@ -110,6 +114,7 @@ export { Badge as GlassmorphicDarkBadge } from "../../../../../../design-systems
 export { Badge as MidnightGlassBadge } from "../../../../../../design-systems/midnight-glass/components/badge"
 export { Badge as TactileMinimalBadge } from "../../../../../../design-systems/tactile-minimal/components/badge"
 export { Badge as LumenDarkBadge } from "../../../../../../design-systems/lumen-dark/components/badge"
+export { Badge as TvStyleBadge } from "../../../../../../design-systems/tv-style/components/badge"
 
 // ─── Code Tabs ───
 export { CodeTabs as LinearCodeTabs } from "../../../../../../design-systems/linear/components/code-tabs"
@@ -135,6 +140,7 @@ export { CodeTabs as GlassmorphicDarkCodeTabs } from "../../../../../../design-s
 export { CodeTabs as MidnightGlassCodeTabs } from "../../../../../../design-systems/midnight-glass/components/code-tabs"
 export { CodeTabs as TactileMinimalCodeTabs } from "../../../../../../design-systems/tactile-minimal/components/code-tabs"
 export { CodeTabs as LumenDarkCodeTabs } from "../../../../../../design-systems/lumen-dark/components/code-tabs"
+export { CodeTabs as TvStyleCodeTabs } from "../../../../../../design-systems/tv-style/components/code-tabs"
 
 // ─── Cursors ───
 export { Cursor as LinearCursor } from "../../../../../../design-systems/linear/components/cursor"
@@ -160,4 +166,6 @@ export { Cursor as GlassmorphicDarkCursor } from "../../../../../../design-syste
 export { Cursor as MidnightGlassCursor } from "../../../../../../design-systems/midnight-glass/components/cursor"
 export { Cursor as TactileMinimalCursor } from "../../../../../../design-systems/tactile-minimal/components/cursor"
 export { Cursor as LumenDarkCursor } from "../../../../../../design-systems/lumen-dark/components/cursor"
+export { Cursor as TvStyleCursor } from "../../../../../../design-systems/tv-style/components/cursor"
+export { FlipBoard as TvStyleFlipBoard } from "../../../../../../design-systems/tv-style/components/flip-board"
 export { Spinner as MonoIndustrialSpinner } from "../../../../../../design-systems/monochrome-industrial/components/spinner"
