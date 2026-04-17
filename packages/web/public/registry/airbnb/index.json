@@ -83,10 +83,7 @@
       ]
     },
     {
-      "name": "button-group",
-      "registryDependencies": [
-        "utils"
-      ]
+      "name": "button-group"
     },
     {
       "name": "card",
@@ -204,10 +201,7 @@
       ]
     },
     {
-      "name": "label",
-      "registryDependencies": [
-        "utils"
-      ]
+      "name": "label"
     },
     {
       "name": "sonner"
