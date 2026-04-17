@@ -1299,37 +1299,11 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
               </>)}
 
               {/* TV Style: split-flap terminal board with live animation */}
-              {id === "tv-style" && (<>
+              {id === "tv-style" && (
                 <DemoCard name="Split-Flap Board" anchorId="feat-showcase" minH={220} overflow="visible">
                   <TvStyleFlipBoardDemo />
                 </DemoCard>
-                <Grid cols={3}>
-                  <DemoCard name="Departure" minH={120}>
-                    <TvStyleFlipBoard
-                      rows={["DEPARTING", "SFO - JFK", "GATE B17"]}
-                      tileSize={22}
-                      gap={2}
-                      columns={9}
-                    />
-                  </DemoCard>
-                  <DemoCard name="Score Tiles" minH={120}>
-                    <TvStyleFlipBoard
-                      rows={["HOME  AWAY", "  3 - 2   ", "FINAL SCORE"]}
-                      tileSize={22}
-                      gap={2}
-                      columns={11}
-                    />
-                  </DemoCard>
-                  <DemoCard name="Countdown" minH={120}>
-                    <TvStyleFlipBoard
-                      rows={["LIFT OFF IN", "  00:03:21 ", "  MINUTES  "]}
-                      tileSize={22}
-                      gap={2}
-                      columns={11}
-                    />
-                  </DemoCard>
-                </Grid>
-              </>)}
+              )}
             </div>
           )}
 

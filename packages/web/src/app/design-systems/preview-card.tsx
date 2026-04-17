@@ -9,7 +9,7 @@ import {
   LinearQualityButton, EditorialDarkButton,
   NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton,
   MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton,
-  TactileMinimalButton, LumenDarkButton,
+  TactileMinimalButton, LumenDarkButton, TvStyleButton,
 
   LinearCard, AirbnbCard, SupabaseCard, CorporateFintechCard,
   DarkOrangeCard, VibrantDarkCard, MinimalLightCard, NeutralMonochromeCard,
@@ -17,7 +17,7 @@ import {
   LinearQualityCard, EditorialDarkCard,
   NotionCard, StripeCard, VercelCard, AppleCard, FigmaCard,
   MonoIndustrialCard, GlassmorphicDarkCard, MidnightGlassCard,
-  TactileMinimalCard, LumenDarkCard,
+  TactileMinimalCard, LumenDarkCard, TvStyleCard,
 
   LinearInput, AirbnbInput, SupabaseInput, CorporateFintechInput,
   DarkOrangeInput, VibrantDarkInput, MinimalLightInput, NeutralMonochromeInput,
@@ -25,7 +25,7 @@ import {
   LinearQualityInput, EditorialDarkInput,
   NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput,
   MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput,
-  TactileMinimalInput, LumenDarkInput,
+  TactileMinimalInput, LumenDarkInput, TvStyleInput,
 
 } from "./[id]/ds-registry"
 
@@ -70,6 +70,7 @@ const BUTTON_MAP: Record<string, AnyButton> = {
   "midnight-glass": MidnightGlassButton as AnyButton,
   "tactile-minimal": TactileMinimalButton as AnyButton,
   "lumen-dark": LumenDarkButton as AnyButton,
+  "tv-style": TvStyleButton as AnyButton,
 }
 
 const CARD_MAP: Record<string, AnyCard> = {
@@ -96,6 +97,7 @@ const CARD_MAP: Record<string, AnyCard> = {
   "midnight-glass": MidnightGlassCard as AnyCard,
   "tactile-minimal": TactileMinimalCard as AnyCard,
   "lumen-dark": LumenDarkCard as AnyCard,
+  "tv-style": TvStyleCard as AnyCard,
 }
 
 const INPUT_MAP: Record<string, AnyInput> = {
@@ -122,6 +124,7 @@ const INPUT_MAP: Record<string, AnyInput> = {
   "midnight-glass": MidnightGlassInput as AnyInput,
   "tactile-minimal": TactileMinimalInput as AnyInput,
   "lumen-dark": LumenDarkInput as AnyInput,
+  "tv-style": TvStyleInput as AnyInput,
 }
 
 export function DesignSystemPreviewCard({ system }: { system: DesignSystemInfo }) {
@@ -205,8 +208,8 @@ export function DesignSystemPreviewCard({ system }: { system: DesignSystemInfo }
                 <div className="h-1 w-[70%] rounded" style={{ background: line(0.5) }} />
                 <div className="mt-1 h-1 w-[90%] rounded" style={{ background: line(0.13) }} />
               </Card>
-              <Input className="text-xs" placeholder="Search" />
-              <Input className="text-xs" placeholder="Email" />
+              <Input className="h-8 text-xs" placeholder="Search" />
+              <Input className="h-8 text-xs" placeholder="Email" />
             </div>
           </div>
         </div>

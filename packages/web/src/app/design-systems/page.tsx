@@ -36,6 +36,7 @@ const DS_META = [
   { id: "midnight-glass",     slug: "midnight-glass",      name: "Midnight Glass",      description: "Midnight blue glass — prismatic gradient borders, dual indigo-teal accents, frosted pills", theme: "dark" as const },
   { id: "tactile-minimal",   slug: "tactile-minimal",     name: "Tactile Minimal",     description: "Clean neutral with synthesized haptic sounds, ASCII cursor trail, staggered blur animations", theme: "light" as const },
   { id: "lumen-dark",        slug: "lumen-dark",          name: "Lumen Dark",          description: "Dark theme built on depth & surfaces principle — three-tier layered shadows, inset highlights, warm amber accent", theme: "dark" as const },
+  { id: "tv-style",          slug: "tv-style",            name: "TV Style",            description: "Split-flap terminal board — flat dark tiles, Helvetica uppercase, amber primary, mechanical seam motif", theme: "dark" as const },
 ]
 
 /** Parse CSS custom properties from a :root { } block */

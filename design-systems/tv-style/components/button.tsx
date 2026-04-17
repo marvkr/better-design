@@ -28,6 +28,13 @@ const TICK_MS = 40
 const pickScramble = () =>
   SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
 
+// Only filled "tile-face" variants get the mechanical seam. Transparent
+// variants (outline, ghost, link) render text directly on the canvas — the
+// seam would cut straight through glyph descenders/crossbars and look like
+// a strikethrough, not a flip-board seam.
+const SEAM =
+  "before:pointer-events-none before:absolute before:inset-x-0 before:top-1/2 before:h-px"
+
 const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
@@ -37,39 +44,38 @@ const buttonVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px",
-    "before:pointer-events-none before:absolute before:inset-x-0 before:top-1/2 before:h-px before:bg-black/35",
   ].join(" "),
   {
     variants: {
       variant: {
         default:
+          `${SEAM} before:bg-black/35 ` +
           "bg-card text-foreground " +
           "[box-shadow:var(--shadow-button)] " +
           "hover:bg-accent hover:[box-shadow:var(--shadow-button-hover)]",
         primary:
+          `${SEAM} before:bg-black/45 ` +
           "bg-primary text-primary-foreground " +
           "[box-shadow:var(--shadow-primary)] " +
-          "before:bg-black/45 " +
           "hover:brightness-105",
         secondary:
+          `${SEAM} before:bg-black/35 ` +
           "bg-secondary text-secondary-foreground " +
           "[box-shadow:var(--shadow-button)] " +
           "hover:bg-accent hover:[box-shadow:var(--shadow-button-hover)]",
-        outline:
-          "bg-transparent text-foreground border border-border " +
-          "before:hidden " +
-          "hover:bg-accent hover:border-ring/30",
-        ghost:
-          "bg-transparent text-muted-foreground " +
-          "before:hidden " +
-          "hover:bg-accent hover:text-accent-foreground",
         destructive:
+          `${SEAM} before:bg-black/40 ` +
           "bg-destructive text-destructive-foreground " +
           "[box-shadow:var(--shadow-button)] " +
           "hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover)]",
+        outline:
+          "bg-transparent text-foreground border border-border " +
+          "hover:bg-accent hover:border-ring/30",
+        ghost:
+          "bg-transparent text-muted-foreground " +
+          "hover:bg-accent hover:text-accent-foreground",
         link:
-          "text-primary underline-offset-4 hover:underline " +
-          "before:hidden normal-case tracking-normal",
+          "text-primary underline-offset-4 hover:underline normal-case tracking-normal",
       },
       size: {
         sm: "h-8 px-3 text-xs",
@@ -92,12 +98,27 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, onClick, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, onClick, style, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const label = typeof children === "string" ? children : null
 
     const [scrambled, setScrambled] = React.useState<string | null>(null)
+    const [lockedWidth, setLockedWidth] = React.useState<number | undefined>()
     const timerRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
+    const innerRef = React.useRef<HTMLButtonElement | null>(null)
+
+    React.useImperativeHandle(ref, () => innerRef.current as HTMLButtonElement)
+
+    // Measure the natural label width so the scramble (variable-width random
+    // chars — Helvetica is proportional, so "OK" and "WM" render different
+    // widths) can neither shrink nor GROW the button shell during animation.
+    // Follows the "Loading Button Width Stability" rule in
+    // docs/interactions.md — the user just clicked and the control must not
+    // feel like it's squirming under pressure.
+    React.useLayoutEffect(() => {
+      if (!innerRef.current || !label || lockedWidth !== undefined) return
+      setLockedWidth(innerRef.current.offsetWidth)
+    }, [label, lockedWidth])
 
     React.useEffect(() => {
       return () => {
@@ -129,11 +150,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       onClick?.(e)
     }
 
+    // Apply an exact width — not just min-width — so the button shell stays
+    // frozen when scramble characters happen to be wider than the original
+    // label. min-width alone only prevents shrinking, not growing.
+    const mergedStyle =
+      lockedWidth !== undefined
+        ? { ...style, width: `${lockedWidth}px` }
+        : style
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
+        ref={innerRef}
         onClick={handleClick}
+        style={mergedStyle}
         {...props}
       >
         {scrambled ?? children}

@@ -170,6 +170,14 @@ const DS_META = [
       "Dark with three-tier depth shadows — inset highlights, layered elevation, warm amber accent",
     theme: "dark" as const,
   },
+  {
+    id: "tv-style",
+    slug: "tv-style",
+    name: "TV Style",
+    description:
+      "Split-flap terminal board — flat dark tiles, Helvetica uppercase, amber primary, mechanical seam motif",
+    theme: "dark" as const,
+  },
 ];
 
 function parseTokens(css: string): Record<string, string> {
