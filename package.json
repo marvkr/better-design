@@ -17,5 +17,9 @@
   "trustedDependencies": [
     "inngest-cli"
   ],
-  "overrides": {}
+  "packageManager": "bun@1.2.23",
+  "overrides": {},
+  "devDependencies": {
+    "agentation": "^3.0.2"
+  }
 }
