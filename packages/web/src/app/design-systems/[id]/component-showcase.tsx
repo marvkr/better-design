@@ -5,6 +5,7 @@ import type { CSSProperties, ReactNode } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { Icon } from "@iconify/react"
 import { IconBrowser } from "@/components/ui/icon-browser"
+import { MapBlock } from "@/components/ui/map-block"
 
 // ─── Color tokens shown in the right sidebar ───
 const COLOR_TOKEN_KEYS = [
@@ -470,6 +471,14 @@ const CURSOR_MAP: Record<string, AnyCursor> = {
   "lumen-dark": LumenDarkCursor as AnyCursor,
 }
 
+const BLOCKS_SECTION: Section = {
+  id: "blocks",
+  title: "Blocks",
+  subsections: [
+    { id: "bl-analytics-map", title: "Analytics Map" },
+  ],
+}
+
 const ICONS_SECTION: Section = {
   id: "icons",
   title: "Icons",
@@ -624,6 +633,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
   const sections = [
     ...(hasFeatured ? [HIGHLIGHTS_SECTION] : []),
     ...SECTIONS,
+    BLOCKS_SECTION,
     ...(iconPrefix ? [ICONS_SECTION] : []),
   ]
 
@@ -1083,23 +1093,24 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                     </div>
                   </div>
                 </DemoCard>
+                <div style={{ marginTop: "16px" }} />
                 <Grid cols={3}>
                   {[
-                    { title: "Villa in Tuscany", meta: "4 guests · 3 beds", price: "$180/night", img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=220&fit=crop&auto=format" },
-                    { title: "Studio in Paris", meta: "2 guests · 1 bed", price: "$95/night", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=220&fit=crop&auto=format" },
-                    { title: "Loft in Brooklyn", meta: "3 guests · 2 beds", price: "$140/night", img: "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=400&h=220&fit=crop&auto=format" },
+                    { title: "Villa in Tuscany", meta: "4 guests · 3 beds", price: "$180/night", img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=400&fit=crop&auto=format" },
+                    { title: "Studio in Paris", meta: "2 guests · 1 bed", price: "$95/night", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=400&fit=crop&auto=format" },
+                    { title: "Loft in Brooklyn", meta: "3 guests · 2 beds", price: "$140/night", img: "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=400&h=400&fit=crop&auto=format" },
                   ].map(({ title, meta, price, img }) => (
-                    <DemoCard key={title} name={title} minH={160}>
+                    <DemoCard key={title} name={title} minH={240}>
                       <div className="w-full">
-                        <div style={{ borderRadius: "8px", overflow: "hidden", marginBottom: "8px", height: "90px" }}>
+                        <div style={{ borderRadius: "12px", overflow: "hidden", marginBottom: "10px", aspectRatio: "20/19" }}>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </div>
-                        <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--foreground)", marginBottom: "2px" }}>{title}</div>
-                        <div style={{ fontSize: "11px", color: "var(--muted-foreground)", marginBottom: "6px" }}>{meta}</div>
+                        <div style={{ fontSize: "13px", fontWeight: 500, color: "var(--foreground)", marginBottom: "2px" }}>{title}</div>
+                        <div style={{ fontSize: "12px", color: "var(--muted-foreground)", marginBottom: "8px" }}>{meta}</div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                          <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--foreground)" }}>{price}</span>
-                          <Button size="sm" className="text-xs h-6 px-2">Book</Button>
+                          <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--foreground)" }}>{price}</span>
+                          <Button size="sm" className="text-xs h-7 px-3">Book</Button>
                         </div>
                       </div>
                     </DemoCard>
@@ -2299,6 +2310,21 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                     ))}
                   </ToggleGroup>
                 </div>
+              </DemoCard>
+            </Grid>
+          </div>
+
+          {/* ─── Blocks ─── */}
+          <div id="blocks">
+            <SectionHeader title="Blocks" subtitle="Composed patterns" />
+            <Grid cols={1}>
+              <DemoCard
+                name="Analytics Map"
+                minH={280}
+                anchorId="bl-analytics-map"
+                credit={{ name: "mapcn", url: "https://www.mapcn.dev/blocks" }}
+              >
+                <MapBlock />
               </DemoCard>
             </Grid>
           </div>
