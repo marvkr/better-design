@@ -105,6 +105,7 @@ import { Switch as ShadcnSwitch } from "@/components/ui/switch"
 import { Textarea as ShadcnTextarea } from "@/components/ui/textarea"
 import { Textarea as TactileMinimalTextarea } from "../../../../../../design-systems/tactile-minimal/components/textarea"
 import { Textarea as LumenDarkTextarea } from "../../../../../../design-systems/lumen-dark/components/textarea"
+import { Textarea as TvStyleTextarea } from "../../../../../../design-systems/tv-style/components/textarea"
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table"
@@ -160,7 +161,7 @@ import {
   LinearButton, AirbnbButton, SupabaseButton, CorporateFintechButton,
   DarkOrangeButton, VibrantDarkButton, MinimalLightButton, NeutralMonochromeButton, LightMarketplaceButton, PrecisionLightButton, CinematicDarkButton,
   LinearQualityButton, EditorialDarkButton,
-  NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton, MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton, TactileMinimalButton, LumenDarkButton,
+  NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton, MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton, TactileMinimalButton, LumenDarkButton, TvStyleButton,
   LinearCard, LinearCardHeader, LinearCardTitle, LinearCardDescription, LinearCardContent, LinearCardFooter,
   AirbnbCard, AirbnbCardHeader, AirbnbCardTitle, AirbnbCardDescription, AirbnbCardContent, AirbnbCardFooter,
   SupabaseCard, SupabaseCardHeader, SupabaseCardTitle, SupabaseCardDescription, SupabaseCardContent, SupabaseCardFooter,
@@ -185,22 +186,23 @@ import {
   MidnightGlassCard, MidnightGlassCardHeader, MidnightGlassCardTitle, MidnightGlassCardDescription, MidnightGlassCardContent, MidnightGlassCardFooter,
   TactileMinimalCard, TactileMinimalCardHeader, TactileMinimalCardTitle, TactileMinimalCardDescription, TactileMinimalCardContent, TactileMinimalCardFooter,
   LumenDarkCard, LumenDarkCardHeader, LumenDarkCardTitle, LumenDarkCardDescription, LumenDarkCardContent, LumenDarkCardFooter,
+  TvStyleCard, TvStyleCardHeader, TvStyleCardTitle, TvStyleCardDescription, TvStyleCardContent, TvStyleCardFooter,
   LinearInput, AirbnbInput, SupabaseInput, CorporateFintechInput,
   DarkOrangeInput, VibrantDarkInput, MinimalLightInput, NeutralMonochromeInput, LightMarketplaceInput, PrecisionLightInput, CinematicDarkInput,
   LinearQualityInput, EditorialDarkInput,
-  NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput, MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput, TactileMinimalInput, LumenDarkInput,
+  NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput, MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput, TactileMinimalInput, LumenDarkInput, TvStyleInput,
   LinearBadge, AirbnbBadge, SupabaseBadge, CorporateFintechBadge,
   DarkOrangeBadge, VibrantDarkBadge, MinimalLightBadge, NeutralMonochromeBadge, LightMarketplaceBadge, PrecisionLightBadge, CinematicDarkBadge,
   LinearQualityBadge, EditorialDarkBadge,
-  NotionBadge, StripeBadge, VercelBadge, AppleBadge, FigmaBadge, MonoIndustrialBadge, GlassmorphicDarkBadge, MidnightGlassBadge, TactileMinimalBadge, LumenDarkBadge,
+  NotionBadge, StripeBadge, VercelBadge, AppleBadge, FigmaBadge, MonoIndustrialBadge, GlassmorphicDarkBadge, MidnightGlassBadge, TactileMinimalBadge, LumenDarkBadge, TvStyleBadge,
   LinearCodeTabs, AirbnbCodeTabs, SupabaseCodeTabs, CorporateFintechCodeTabs,
   DarkOrangeCodeTabs, VibrantDarkCodeTabs, MinimalLightCodeTabs, NeutralMonochromeCodeTabs, LightMarketplaceCodeTabs, PrecisionLightCodeTabs, CinematicDarkCodeTabs,
   LinearQualityCodeTabs, EditorialDarkCodeTabs,
-  NotionCodeTabs, StripeCodeTabs, VercelCodeTabs, AppleCodeTabs, FigmaCodeTabs, MonoIndustrialCodeTabs, GlassmorphicDarkCodeTabs, MidnightGlassCodeTabs, TactileMinimalCodeTabs, LumenDarkCodeTabs,
+  NotionCodeTabs, StripeCodeTabs, VercelCodeTabs, AppleCodeTabs, FigmaCodeTabs, MonoIndustrialCodeTabs, GlassmorphicDarkCodeTabs, MidnightGlassCodeTabs, TactileMinimalCodeTabs, LumenDarkCodeTabs, TvStyleCodeTabs,
   LinearCursor, AirbnbCursor, SupabaseCursor, CorporateFintechCursor,
   DarkOrangeCursor, VibrantDarkCursor, MinimalLightCursor, NeutralMonochromeCursor, LightMarketplaceCursor, PrecisionLightCursor, CinematicDarkCursor,
   LinearQualityCursor, EditorialDarkCursor,
-  NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor, GlassmorphicDarkCursor, MidnightGlassCursor, TactileMinimalCursor, LumenDarkCursor,
+  NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor, GlassmorphicDarkCursor, MidnightGlassCursor, TactileMinimalCursor, LumenDarkCursor, TvStyleCursor,
   MonoIndustrialSpinner,
 } from "./ds-registry"
 
@@ -333,6 +335,7 @@ const BUTTON_MAP: Record<string, AnyButton> = {
   "midnight-glass": MidnightGlassButton as AnyButton,
   "tactile-minimal": TactileMinimalButton as AnyButton,
   "lumen-dark": LumenDarkButton as AnyButton,
+  "tv-style": TvStyleButton as AnyButton,
 }
 
 const INPUT_MAP: Record<string, AnyInput> = {
@@ -359,6 +362,7 @@ const INPUT_MAP: Record<string, AnyInput> = {
   "midnight-glass": MidnightGlassInput as AnyInput,
   "tactile-minimal": TactileMinimalInput as AnyInput,
   "lumen-dark": LumenDarkInput as AnyInput,
+  "tv-style": TvStyleInput as AnyInput,
 }
 
 const BADGE_MAP: Record<string, AnyBadge> = {
@@ -385,6 +389,7 @@ const BADGE_MAP: Record<string, AnyBadge> = {
   "midnight-glass": MidnightGlassBadge as AnyBadge,
   "tactile-minimal": TactileMinimalBadge as AnyBadge,
   "lumen-dark": LumenDarkBadge as AnyBadge,
+  "tv-style": TvStyleBadge as AnyBadge,
 }
 
 const CARD_MAP: Record<string, {
@@ -414,6 +419,7 @@ const CARD_MAP: Record<string, {
   "midnight-glass": { Card: MidnightGlassCard as AnyCard, CardHeader: MidnightGlassCardHeader as AnyCardSub, CardTitle: MidnightGlassCardTitle as AnyCardSub, CardDescription: MidnightGlassCardDescription as AnyCardSub, CardContent: MidnightGlassCardContent as AnyCardSub, CardFooter: MidnightGlassCardFooter as AnyCardSub },
   "tactile-minimal": { Card: TactileMinimalCard as AnyCard, CardHeader: TactileMinimalCardHeader as AnyCardSub, CardTitle: TactileMinimalCardTitle as AnyCardSub, CardDescription: TactileMinimalCardDescription as AnyCardSub, CardContent: TactileMinimalCardContent as AnyCardSub, CardFooter: TactileMinimalCardFooter as AnyCardSub },
   "lumen-dark": { Card: LumenDarkCard as AnyCard, CardHeader: LumenDarkCardHeader as AnyCardSub, CardTitle: LumenDarkCardTitle as AnyCardSub, CardDescription: LumenDarkCardDescription as AnyCardSub, CardContent: LumenDarkCardContent as AnyCardSub, CardFooter: LumenDarkCardFooter as AnyCardSub },
+  "tv-style": { Card: TvStyleCard as AnyCard, CardHeader: TvStyleCardHeader as AnyCardSub, CardTitle: TvStyleCardTitle as AnyCardSub, CardDescription: TvStyleCardDescription as AnyCardSub, CardContent: TvStyleCardContent as AnyCardSub, CardFooter: TvStyleCardFooter as AnyCardSub },
 }
 
 type AnyCodeTabs = React.ComponentType<{ tabs: { label: string; lang: string; code: string }[]; defaultTab?: number; className?: string }>
@@ -443,6 +449,7 @@ const CODE_TABS_MAP: Record<string, AnyCodeTabs> = {
   "midnight-glass": MidnightGlassCodeTabs as AnyCodeTabs,
   "tactile-minimal": TactileMinimalCodeTabs as AnyCodeTabs,
   "lumen-dark": LumenDarkCodeTabs as AnyCodeTabs,
+  "tv-style": TvStyleCodeTabs as AnyCodeTabs,
 }
 
 const CURSOR_MAP: Record<string, AnyCursor> = {
@@ -628,7 +635,7 @@ function MobileTOCPill({
   )
 }
 
-export function ComponentShowcase({ id, tokens, name, description, iconPrefix, iconLibraryName }: ShowcaseProps) {
+export function ComponentShowcase({ id, tokens, name, description, theme, iconPrefix, iconLibraryName }: ShowcaseProps) {
   const hasFeatured = FEATURED_DS_IDS.has(id)
   const sections = [
     ...(hasFeatured ? [HIGHLIGHTS_SECTION] : []),
@@ -1079,16 +1086,39 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
               )}
               {/* Airbnb: destination search + property listings */}
               {id === "airbnb" && (<>
-                <DemoCard name="Destination Search" anchorId="feat-showcase" minH={100}>
-                  <div className="w-full space-y-3">
+                <DemoCard name="Destination Search" anchorId="feat-showcase" minH={140}>
+                  <div className="w-full space-y-4">
                     <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--foreground)", textAlign: "center" }}>Where to next?</h2>
-                    <div style={{ display: "flex", gap: "8px" }}>
-                      <Input placeholder="Search destinations..." className="flex-1" />
-                      <Button className="gap-1.5 shrink-0"><Icon icon="tabler:search" width={14} />Search</Button>
+                    {/* Airbnb-style multi-segment search pill */}
+                    <div style={{
+                      display: "flex", alignItems: "center",
+                      border: "1px solid var(--border)", borderRadius: "9999px",
+                      background: "var(--card)", overflow: "hidden",
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05)",
+                    }}>
+                      {[
+                        { label: "Where", placeholder: "Search destinations" },
+                        { label: "Check in", placeholder: "Add dates" },
+                        { label: "Check out", placeholder: "Add dates" },
+                        { label: "Who", placeholder: "Add guests" },
+                      ].map((field, i) => (
+                        <div key={field.label} style={{
+                          flex: i === 0 ? 1.3 : 1, padding: "10px 16px", cursor: "pointer",
+                          borderRight: i < 3 ? "1px solid var(--border)" : "none",
+                        }}>
+                          <div style={{ fontSize: "10px", fontWeight: 600, color: "var(--foreground)", lineHeight: 1 }}>{field.label}</div>
+                          <div style={{ fontSize: "12px", color: "var(--muted-foreground)", marginTop: "2px" }}>{field.placeholder}</div>
+                        </div>
+                      ))}
+                      <div style={{ padding: "6px 8px" }}>
+                        <Button size="icon" style={{ borderRadius: "9999px", width: "40px", height: "40px" }}>
+                          <Icon icon="tabler:search" width={16} />
+                        </Button>
+                      </div>
                     </div>
                     <div style={{ display: "flex", gap: "6px", justifyContent: "center", flexWrap: "wrap" as const }}>
                       {["Paris", "Tokyo", "New York", "Bali"].map(city => (
-                        <button key={city} style={{ fontSize: "12px", padding: "4px 12px", borderRadius: "999px", border: "1px solid var(--border)", background: "var(--card)", color: "var(--foreground)", cursor: "pointer" }}>{city}</button>
+                        <button key={city} style={{ fontSize: "12px", padding: "6px 14px", borderRadius: "999px", border: "1px solid var(--border)", background: "var(--card)", color: "var(--foreground)", cursor: "pointer" }}>{city}</button>
                       ))}
                     </div>
                   </div>
@@ -2324,7 +2354,7 @@ export function ComponentShowcase({ id, tokens, name, description, iconPrefix, i
                 anchorId="bl-analytics-map"
                 credit={{ name: "mapcn", url: "https://www.mapcn.dev/blocks" }}
               >
-                <MapBlock />
+                <MapBlock theme={theme} />
               </DemoCard>
             </Grid>
           </div>
