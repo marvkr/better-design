@@ -204,6 +204,7 @@ import {
   LinearQualityCursor, EditorialDarkCursor,
   NotionCursor, StripeCursor, VercelCursor, AppleCursor, FigmaCursor, MonoIndustrialCursor, GlassmorphicDarkCursor, MidnightGlassCursor, TactileMinimalCursor, LumenDarkCursor, TvStyleCursor,
   MonoIndustrialSpinner,
+  TvStyleFlipBoard,
 } from "./ds-registry"
 
 // ─── Sections ───
@@ -297,7 +298,7 @@ const SECTIONS: Section[] = [
 ]
 
 // ─── Per-design-system highlights ───
-const FEATURED_DS_IDS = new Set(["editorial-dark", "cinematic-dark", "linear-quality", "airbnb", "supabase", "linear"])
+const FEATURED_DS_IDS = new Set(["editorial-dark", "cinematic-dark", "linear-quality", "airbnb", "supabase", "linear", "tv-style"])
 const HIGHLIGHTS_SECTION: Section = {
   id: "highlights",
   title: "Highlights",
@@ -507,6 +508,53 @@ interface ShowcaseProps {
   theme: "light" | "dark"
   iconPrefix?: string
   iconLibraryName?: string
+}
+
+const TV_STYLE_MESSAGES: string[][] = [
+  [
+    "                        ",
+    "     GOD IS IN          ",
+    "     THE DETAILS .      ",
+    "     - LUDWIG MIES      ",
+    "                        ",
+  ],
+  [
+    "                        ",
+    "     STAY HUNGRY        ",
+    "     STAY FOOLISH       ",
+    "     - STEVE JOBS       ",
+    "                        ",
+  ],
+  [
+    "                        ",
+    "     GOOD DESIGN IS     ",
+    "     GOOD BUSINESS      ",
+    "     - THOMAS WATSON    ",
+    "                        ",
+  ],
+  [
+    "                        ",
+    "     LESS IS MORE       ",
+    "                        ",
+    "     - MIES VAN DER ROHE",
+    "                        ",
+  ],
+]
+
+function TvStyleFlipBoardDemo() {
+  const [idx, setIdx] = useState(0)
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % TV_STYLE_MESSAGES.length), 4000)
+    return () => clearInterval(t)
+  }, [])
+  return (
+    <TvStyleFlipBoard
+      rows={TV_STYLE_MESSAGES[idx]}
+      tileSize={26}
+      gap={3}
+      columns={24}
+    />
+  )
 }
 
 function Grid({ children, cols = 1 }: { children: ReactNode; cols?: number }) {
@@ -1243,6 +1291,39 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
                       </div>
                       <div style={{ fontSize: "10px", color: "var(--muted-foreground)" }}>3 days remaining · 24/35 issues</div>
                     </div>
+                  </DemoCard>
+                </Grid>
+              </>)}
+
+              {/* TV Style: split-flap terminal board with live animation */}
+              {id === "tv-style" && (<>
+                <DemoCard name="Split-Flap Board" anchorId="feat-showcase" minH={220} overflow="visible">
+                  <TvStyleFlipBoardDemo />
+                </DemoCard>
+                <Grid cols={3}>
+                  <DemoCard name="Departure" minH={120}>
+                    <TvStyleFlipBoard
+                      rows={["DEPARTING", "SFO - JFK", "GATE B17"]}
+                      tileSize={22}
+                      gap={2}
+                      columns={9}
+                    />
+                  </DemoCard>
+                  <DemoCard name="Score Tiles" minH={120}>
+                    <TvStyleFlipBoard
+                      rows={["HOME  AWAY", "  3 - 2   ", "FINAL SCORE"]}
+                      tileSize={22}
+                      gap={2}
+                      columns={11}
+                    />
+                  </DemoCard>
+                  <DemoCard name="Countdown" minH={120}>
+                    <TvStyleFlipBoard
+                      rows={["LIFT OFF IN", "  00:03:21 ", "  MINUTES  "]}
+                      tileSize={22}
+                      gap={2}
+                      columns={11}
+                    />
                   </DemoCard>
                 </Grid>
               </>)}
@@ -2117,6 +2198,29 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
                           <Button className="w-full text-xs h-7">Watch Now</Button>
                         </EditorialDarkCardContent>
                       </EditorialDarkCard>
+                    ))}
+                  </div>
+                </DemoCard>
+              ) : id === "airbnb" ? (
+                <DemoCard name="Card – Media" minH={200}>
+                  <div className="grid grid-cols-2 gap-4 w-full">
+                    {[
+                      { title: "Cooking class in Tuscany", host: "Hosted by Marco", rating: "4.97", img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=300&fit=crop&auto=format" },
+                      { title: "Sunset kayaking tour", host: "Hosted by Lina", rating: "4.92", img: "https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=400&h=300&fit=crop&auto=format" },
+                    ].map(({ title, host, rating, img }) => (
+                      <Card key={title} className="overflow-hidden">
+                        <div style={{ borderRadius: "12px", overflow: "hidden", aspectRatio: "4/3" }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={img} alt={title} className="w-full h-full object-cover" />
+                        </div>
+                        <CardContent className="px-1 pt-2.5 pb-1">
+                          <div className="flex items-center justify-between mb-0.5">
+                            <CardTitle className="text-[13px] font-medium">{title}</CardTitle>
+                            <span className="text-xs text-foreground flex items-center gap-0.5"><Icon icon="tabler:star-filled" width={10} />{rating}</span>
+                          </div>
+                          <CardDescription className="text-xs">{host}</CardDescription>
+                        </CardContent>
+                      </Card>
                     ))}
                   </div>
                 </DemoCard>
