@@ -5,7 +5,7 @@ pitch.md
 # packages/web - ignore build and deps
 packages/web/node_modules/
 packages/web/.next/
-packages/web/bun.lock
+# packages/web/bun.lock is tracked — Vercel needs it for frozen-lockfile installs
 
 # Claude
 .claude/
@@ -17,3 +17,5 @@ packages/web/bun.lock
 node_modules/
 packages/mcp/.env
 packages/mcp/dist/
+.vercel
+.env
