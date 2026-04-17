@@ -25,7 +25,13 @@ Monorepo with `packages/web` (Next.js app) and `packages/mcp` (MCP server).
    - Run `git diff --cached` after staging to review ALL changes that will be committed
    - Verify every import in the diff resolves to a file that exists or is also staged
 
-4. **If build or tests fail:**
+4. **Local build passing ≠ CI will pass. Before every push, run `git status` and check for unstaged changes from OTHER sessions.**
+   - The local build sees ALL files on disk (staged, unstaged, untracked). CI only sees what's committed.
+   - If `component-showcase.tsx` or `ds-registry.ts` imports a new DS (e.g. `TvStyleButton`), the DS files AND the registry exports AND the showcase imports ALL must be committed together — not just the ones you touched.
+   - Never `git add` files from another session without understanding what they are. If you find untracked DS directories or modified registry files you didn't write, ask before committing them.
+   - **Pre-push check**: `git diff --name-only` (unstaged) + `git ls-files --others --exclude-standard` (untracked) — if anything there is imported by files you ARE committing, stage it too or the build breaks on CI.
+
+5. **If build or tests fail:**
    - Fix the issues
    - Rebuild (`bun run build`)
    - Re-test
@@ -44,6 +50,7 @@ Monorepo with `packages/web` (Next.js app) and `packages/mcp` (MCP server).
 
 ## Generating Design Systems (`design-systems/<name>/`)
 
+- **Always generate the full component set** — every new DS ships with the same ~87 components as every other DS (accordion → typography, plus `_shared.ts`, `globals.css`, `utils.ts`). Never ship a partial DS with only a handful of components. The fastest path: copy an existing DS whose theme is closest (e.g. `lumen-dark` for dark DSes, `airbnb` for light) and re-skin its tokens + signature components.
 - Extract actual computed styles from the source site via Chrome DevTools. Don't guess.
 - Build only the primitives the source uses. Extrapolate the rest in the same language.
 - Use semantic tokens only: `bg-background`, `bg-card`, `bg-primary`, `text-foreground`, `text-muted-foreground`, `border-border`, `ring-ring`. No `dark:` variants, no raw `bg-white`/`bg-neutral-*`.
