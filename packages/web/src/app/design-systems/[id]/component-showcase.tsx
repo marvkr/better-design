@@ -476,6 +476,7 @@ const CURSOR_MAP: Record<string, AnyCursor> = {
   "midnight-glass": MidnightGlassCursor as AnyCursor,
   "tactile-minimal": TactileMinimalCursor as AnyCursor,
   "lumen-dark": LumenDarkCursor as AnyCursor,
+  "tv-style": TvStyleCursor as AnyCursor,
 }
 
 const BLOCKS_SECTION: Section = {
@@ -773,6 +774,7 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
   const Textarea = (
     id === "tactile-minimal" ? TactileMinimalTextarea :
     id === "lumen-dark" ? LumenDarkTextarea :
+    id === "tv-style" ? TvStyleTextarea :
     ShadcnTextarea
   ) as typeof ShadcnTextarea
   const CommandEmpty = (isTactile ? TactileMinimalCommandEmpty : ShadcnCommandEmpty) as typeof ShadcnCommandEmpty
@@ -1140,7 +1142,7 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
                         <div style={{ fontSize: "12px", color: "var(--muted-foreground)", marginBottom: "8px" }}>{meta}</div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                           <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--foreground)" }}>{price}</span>
-                          <Button size="sm" className="text-xs h-7 px-3">Book</Button>
+                          <Button size="sm">Book</Button>
                         </div>
                       </div>
                     </DemoCard>
