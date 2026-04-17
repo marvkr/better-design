@@ -1,5 +1,6 @@
 import { readFileSync, existsSync } from "fs"
 import { join } from "path"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { ComponentShowcase } from "./component-showcase"
 import { BackButton } from "./back-button"
@@ -28,6 +29,7 @@ const DS_META: Record<string, { name: string; description: string; theme: "light
   "midnight-glass":      { name: "Midnight Glass",      description: "Midnight blue glass — prismatic gradient borders, dual indigo-teal accents, frosted pills", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
   "tactile-minimal":     { name: "Tactile Minimal",     description: "Clean neutral with synthesized haptic sounds, ASCII cursor trail, staggered blur animations", theme: "light", iconPrefix: "ph", iconLibraryName: "Phosphor" },
   "lumen-dark":          { name: "Lumen Dark",          description: "Dark theme built on depth & surfaces principle — three-tier layered shadows, inset highlights, warm amber accent", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "tv-style":            { name: "TV Style",            description: "Split-flap terminal board — flat dark tiles, Helvetica uppercase, amber primary, mechanical seam motif", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
 }
 
 function parseTokens(css: string): Record<string, string> {
@@ -48,6 +50,33 @@ function normalizeValue(value: string): string {
     return `hsl(${value})`
   }
   return value
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const meta = DS_META[id]
+  if (!meta) return {}
+  const title = `${meta.name} — Better Design`
+  const ogImage = `/og/ds-${id}.png`
+  return {
+    title,
+    description: meta.description,
+    openGraph: {
+      title,
+      description: meta.description,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: meta.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: meta.description,
+      images: [ogImage],
+    },
+  }
 }
 
 export default async function DesignSystemDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -123,6 +152,25 @@ export default async function DesignSystemDetailPage({ params }: { params: Promi
               0 0 0 1px rgba(255,200,100,0.2),
               0 1px 3px rgba(0,0,0,0.5),
               0 4px 12px rgba(240,170,60,0.15);
+          }
+        `}</style>
+      )}
+      {id === "tv-style" && (
+        <style>{`
+          [data-ds="tv-style"],
+          [data-ds="tv-style"] * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+          }
+          [data-ds="tv-style"] h1 {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: -0.02em !important;
+          }
+          [data-ds="tv-style"] h2,
+          [data-ds="tv-style"] h3 {
+            text-transform: uppercase !important;
+            letter-spacing: 0.02em !important;
           }
         `}</style>
       )}
