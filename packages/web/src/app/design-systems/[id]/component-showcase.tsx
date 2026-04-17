@@ -1133,18 +1133,20 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
                     { title: "Loft in Brooklyn", meta: "3 guests · 2 beds", price: "$140/night", img: "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=400&h=400&fit=crop&auto=format" },
                   ].map(({ title, meta, price, img }) => (
                     <DemoCard key={title} name={title} minH={240}>
-                      <div className="w-full">
-                        <div style={{ borderRadius: "12px", overflow: "hidden", marginBottom: "10px", aspectRatio: "20/19" }}>
+                      <Card className="w-full overflow-hidden">
+                        <div style={{ borderRadius: "12px", overflow: "hidden", aspectRatio: "20/19" }}>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </div>
-                        <div style={{ fontSize: "13px", fontWeight: 500, color: "var(--foreground)", marginBottom: "2px" }}>{title}</div>
-                        <div style={{ fontSize: "12px", color: "var(--muted-foreground)", marginBottom: "8px" }}>{meta}</div>
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                          <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--foreground)" }}>{price}</span>
-                          <Button size="sm">Book</Button>
-                        </div>
-                      </div>
+                        <CardContent className="px-1 pt-3 pb-1">
+                          <CardTitle className="text-[13px] font-medium mb-0.5">{title}</CardTitle>
+                          <CardDescription className="text-xs mb-2">{meta}</CardDescription>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--foreground)" }}>{price}</span>
+                            <Button size="sm">Book</Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     </DemoCard>
                   ))}
                 </Grid>
@@ -2151,8 +2153,8 @@ export function ComponentShowcase({ id, tokens, name, description, theme, iconPr
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
                 </Carousel>
               </DemoCard>
               <DemoCard name="Collapsible" anchorId="ls-collapsible" minH={120}>
