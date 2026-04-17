@@ -183,18 +183,18 @@ export function DesignSystemsCarousel({ systems }: { systems: DesignSystemInfo[]
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute left-0 inset-y-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 inset-y-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+      <div className="absolute left-0 inset-y-0 w-16 md:w-32 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+      <div className="absolute right-0 inset-y-0 w-16 md:w-32 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
       <div
         ref={trackRef}
-        className="flex gap-5 w-max py-3 [data-dragging_&]:select-none"
+        className="flex gap-3 md:gap-5 w-max py-3 [data-dragging_&]:select-none"
         style={{ animation: `marquee ${ANIMATION_DURATION}s linear infinite` }}
       >
         {[...systems, ...systems].map((system, i) => (
           <Link
             key={i}
             href={`/design-systems/${system.slug ?? system.id}`}
-            className="block group w-[260px] shrink-0"
+            className="block group w-[180px] md:w-[260px] shrink-0"
             draggable={false}
           >
             <DesignSystemPreviewCard system={system} />
