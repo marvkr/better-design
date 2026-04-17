@@ -1,107 +1,23 @@
 "use client"
 
-import { useMemo } from "react"
+import "maplibre-gl/dist/maplibre-gl.css"
+
+import { useEffect, useRef } from "react"
 import type { CSSProperties } from "react"
 
-// Continents as compound rectangles on a 200x100 (2:1 world) grid.
-// Multiple rects per continent produce recognizable silhouettes.
-type Rect = [number, number, number, number] // x, y, w, h
-const CONTINENT_RECTS: Rect[] = [
-  // North America: Alaska + Canada + USA + Mexico + Central America
-  [14, 18, 12, 8],    // Alaska
-  [20, 22, 42, 6],    // N Canada
-  [22, 26, 40, 8],    // S Canada
-  [28, 32, 32, 8],    // USA
-  [32, 38, 24, 6],    // USA south
-  [38, 42, 12, 8],    // Mexico
-  [42, 48, 8, 6],     // Central America
-  [46, 52, 4, 4],     // Panama
+const STYLE_URLS = {
+  light: "https://tiles.openfreemap.org/styles/positron",
+  dark: "https://tiles.openfreemap.org/styles/liberty",
+} as const
 
-  // Greenland
-  [64, 14, 10, 8],
-  [66, 20, 8, 6],
+type Marker = { lng: number; lat: number; label: string; value: string }
 
-  // South America
-  [50, 56, 18, 8],
-  [54, 60, 16, 10],
-  [56, 68, 12, 10],
-  [54, 76, 10, 10],
-  [54, 84, 6, 6],
-
-  // Europe
-  [86, 20, 10, 4],    // UK/Scandinavia
-  [90, 22, 22, 6],    // N Europe
-  [88, 26, 26, 8],    // Central Europe
-  [96, 32, 18, 4],    // Mediterranean coast
-
-  // Africa
-  [94, 36, 28, 8],    // N Africa / Sahara
-  [96, 42, 26, 8],    // Sahel
-  [100, 48, 20, 10],  // Central Africa
-  [104, 56, 14, 8],   // Southern Africa
-  [108, 62, 8, 6],    // Tip
-
-  // Middle East
-  [114, 32, 12, 6],
-  [116, 36, 10, 6],
-
-  // Asia
-  [110, 18, 60, 6],   // Siberia N
-  [112, 22, 58, 8],   // Siberia
-  [114, 28, 52, 8],   // Central Asia
-  [124, 34, 38, 6],   // Mid Asia
-  [128, 38, 20, 6],   // China
-  [148, 34, 12, 8],   // East Asia
-  [158, 28, 8, 6],    // Far East
-
-  // India
-  [122, 40, 12, 10],
-
-  // SE Asia / Indochina
-  [138, 42, 14, 6],
-  [140, 46, 12, 4],
-
-  // Indonesia / Philippines
-  [146, 52, 18, 4],
-  [152, 48, 4, 4],
-
-  // Japan
-  [160, 30, 4, 8],
-
-  // Australia
-  [158, 64, 18, 10],
-  [160, 72, 14, 4],
-
-  // New Zealand
-  [178, 74, 4, 6],
-]
-
-function buildDotGrid(): Array<{ x: number; y: number; opacity: number }> {
-  const dots: Array<{ x: number; y: number; opacity: number }> = []
-  const step = 2
-  for (let y = 10; y <= 94; y += step) {
-    for (let x = 4; x <= 196; x += step) {
-      const inLand = CONTINENT_RECTS.some(
-        ([cx, cy, cw, ch]) => x >= cx && x <= cx + cw && y >= cy && y <= cy + ch
-      )
-      if (!inLand) continue
-      // Slight opacity variance for depth
-      const variance = (Math.sin(x * 2.1 + y * 3.3) + 1) / 2
-      dots.push({ x, y, opacity: 0.5 + variance * 0.25 })
-    }
-  }
-  return dots
-}
-
-type Marker = { x: number; y: number; label: string; value: string }
-
-// Marker coordinates in 200x100 space
 const MARKERS: Marker[] = [
-  { x: 36, y: 34, label: "San Francisco", value: "12.4k" },
-  { x: 96, y: 28, label: "Berlin", value: "8.1k" },
-  { x: 162, y: 32, label: "Tokyo", value: "9.6k" },
-  { x: 60, y: 68, label: "São Paulo", value: "3.2k" },
-  { x: 168, y: 68, label: "Sydney", value: "2.8k" },
+  { lng: -122.41, lat: 37.77, label: "San Francisco", value: "12.4k" },
+  { lng: 13.40, lat: 52.52, label: "Berlin", value: "8.1k" },
+  { lng: 139.69, lat: 35.68, label: "Tokyo", value: "9.6k" },
+  { lng: -46.63, lat: -23.55, label: "São Paulo", value: "3.2k" },
+  { lng: 151.21, lat: -33.86, label: "Sydney", value: "2.8k" },
 ]
 
 const STATS: Array<{ label: string; value: string; delta: string }> = [
@@ -113,10 +29,68 @@ const STATS: Array<{ label: string; value: string; delta: string }> = [
 interface MapBlockProps {
   className?: string
   style?: CSSProperties
+  theme?: "light" | "dark"
 }
 
-export function MapBlock({ className, style }: MapBlockProps) {
-  const dots = useMemo(buildDotGrid, [])
+export function MapBlock({ className, style, theme = "light" }: MapBlockProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    let cancelled = false
+    let mapInstance: { remove: () => void } | null = null
+
+    import("maplibre-gl").then(({ Map, Marker, NavigationControl }) => {
+      if (cancelled || !containerRef.current) return
+
+      const map = new Map({
+        container: containerRef.current,
+        style: STYLE_URLS[theme],
+        center: [10, 25],
+        zoom: 0.8,
+        scrollZoom: false,
+        attributionControl: { compact: true },
+      })
+      mapInstance = map
+
+      map.addControl(
+        new NavigationControl({ showCompass: false, visualizePitch: false }),
+        "top-right",
+      )
+
+      map.on("load", () => {
+        for (const m of MARKERS) {
+          const el = document.createElement("div")
+          el.style.cssText = [
+            "width:12px",
+            "height:12px",
+            "border-radius:50%",
+            "background-color:var(--primary)",
+            "box-shadow:0 0 0 2px var(--card), 0 0 0 3px var(--primary)",
+          ].join(";")
+
+          const pulse = document.createElement("span")
+          pulse.style.cssText = [
+            "position:absolute",
+            "inset:-4px",
+            "border-radius:50%",
+            "background-color:var(--primary)",
+            "opacity:0.35",
+            "animation:map-block-pulse 2.4s ease-out infinite",
+          ].join(";")
+          el.style.position = "relative"
+          el.appendChild(pulse)
+
+          new Marker({ element: el }).setLngLat([m.lng, m.lat]).addTo(map)
+        }
+      })
+    })
+
+    return () => {
+      cancelled = true
+      if (mapInstance) mapInstance.remove()
+    }
+  }, [theme])
 
   return (
     <div
@@ -145,44 +119,15 @@ export function MapBlock({ className, style }: MapBlockProps) {
           border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
         }}
       >
-        <svg
-          viewBox="0 0 200 100"
-          preserveAspectRatio="xMidYMid meet"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-          aria-hidden
-        >
-          {dots.map((d, i) => (
-            <circle
-              key={i}
-              cx={d.x}
-              cy={d.y}
-              r={0.7}
-              fill="currentColor"
-              opacity={d.opacity}
-            />
-          ))}
-          {MARKERS.map((m, i) => (
-            <g key={m.label} transform={`translate(${m.x} ${m.y})`}>
-              <circle
-                r={2.2}
-                fill="var(--primary)"
-                opacity={0.3}
-                style={{
-                  transformOrigin: "center",
-                  animation: `map-block-pulse 2.4s ease-out ${i * 0.4}s infinite`,
-                }}
-              />
-              <circle r={1.1} fill="var(--primary)" stroke="var(--card)" strokeWidth={0.4} />
-            </g>
-          ))}
-        </svg>
+        <div ref={containerRef} style={{ position: "absolute", inset: 0 }} />
 
         {/* Legend chip */}
         <div
           style={{
             position: "absolute",
             left: "10px",
-            bottom: "10px",
+            top: "10px",
+            zIndex: 1,
             display: "inline-flex",
             alignItems: "center",
             gap: "6px",
