@@ -30,6 +30,7 @@ Monorepo with `packages/web` (Next.js app) and `packages/mcp` (MCP server).
    - If `component-showcase.tsx` or `ds-registry.ts` imports a new DS (e.g. `TvStyleButton`), the DS files AND the registry exports AND the showcase imports ALL must be committed together — not just the ones you touched.
    - Never `git add` files from another session without understanding what they are. If you find untracked DS directories or modified registry files you didn't write, ask before committing them.
    - **Pre-push check**: `git diff --name-only` (unstaged) + `git ls-files --others --exclude-standard` (untracked) — if anything there is imported by files you ARE committing, stage it too or the build breaks on CI.
+   - **Always check `bun.lock`**: if `git diff bun.lock` shows changes, a dependency was added in another session. CI uses `--frozen-lockfile` so it will fail if the lock file is stale. Stage `bun.lock` alongside any new dependency.
 
 5. **If build or tests fail:**
    - Fix the issues
