@@ -1,0 +1,3 @@
+{
+  "installCommand": "cd ../.. && bun install --frozen-lockfile"
+}
