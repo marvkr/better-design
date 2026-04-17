@@ -32,10 +32,10 @@ function DatePicker({
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          variant="secondary"
+          variant="ghost"
           disabled={disabled}
           className={cn(
-            "w-full justify-start text-left font-normal",
+            "w-full justify-start text-left font-normal h-12",
             !value && "text-muted-foreground",
             className
           )}
