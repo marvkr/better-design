@@ -1,0 +1,14 @@
+{
+  "name": "search-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface SearchInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  onClear?: () => void\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, onClear, value, ...props }, ref) => {\n    const hasValue = value !== undefined && value !== \"\"\n\n    return (\n      <div className=\"relative\">\n        <Icon\n          icon=\"tabler:search\"\n          className=\"pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground\"\n        />\n        <input\n          ref={ref}\n          type=\"search\"\n          value={value}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"pl-9\",\n            hasValue && onClear && \"pr-9\",\n            \"[&::-webkit-search-cancel-button]:appearance-none\",\n            className\n          )}\n          {...props}\n        />\n        {hasValue && onClear && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            className={cn(\n              \"absolute right-2 top-1/2 -translate-y-1/2 rounded p-1\",\n              \"text-muted-foreground transition-colors duration-150\",\n              \"hover:text-foreground hover:bg-accent\",\n              \"focus:outline-none focus:ring-2 focus:ring-ring/40\"\n            )}\n            aria-label=\"Clear search\"\n          >\n            <Icon icon=\"tabler:x\" className=\"h-3.5 w-3.5\" />\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nSearchInput.displayName = \"SearchInput\"\n\nexport { SearchInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport { MetalRing } from \"./metal-ring\"\n\n/*\n * Metal FX Button — pill silhouette wrapped in an animated iridescent ring\n * (the signature of jakubantalik/metal-fx). Default + primary show the ring;\n * outline / ghost / link skip it for visual quietness.\n */\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-full cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform] duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-card text-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:[box-shadow:var(--shadow-button-hover)]\",\n        secondary:\n          \"bg-muted text-muted-foreground \" +\n          \"[box-shadow:var(--shadow-sm)] \" +\n          \"hover:bg-accent hover:text-accent-foreground hover:[box-shadow:var(--shadow-md)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/40\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-110 hover:[box-shadow:var(--shadow-button-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-4 text-xs\",\n        default: \"h-9 px-5\",\n        lg: \"h-11 px-7\",\n        icon: \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n  ring?: boolean\n}\n\nconst ringVariants = new Set([\"default\", \"primary\"])\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ring, children, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    const showRing = ring ?? ringVariants.has(variant ?? \"default\")\n\n    const button = (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      >\n        {children}\n      </Comp>\n    )\n\n    if (!showRing) return button\n\n    return <MetalRing shape=\"pill\">{button}</MetalRing>\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.13 0.005 260)",
+      "--foreground": "oklch(0.96 0.005 260)",
+      "--card": "oklch(0.17 0.008 260)",
+      "--card-foreground": "oklch(0.96 0.005 260)",
+      "--popover": "oklch(0.20 0.01 260)",
+      "--popover-foreground": "oklch(0.96 0.005 260)",
+      "--primary": "oklch(0.92 0 0)",
+      "--primary-foreground": "oklch(0.13 0.005 260)",
+      "--secondary": "oklch(0.24 0.008 260)",
+      "--secondary-foreground": "oklch(0.92 0.005 260)",
+      "--muted": "oklch(0.22 0.005 260)",
+      "--muted-foreground": "oklch(0.62 0.01 260)",
+      "--accent": "oklch(0.26 0.005 260)",
+      "--accent-foreground": "oklch(0.96 0.005 260)",
+      "--destructive": "oklch(0.65 0.22 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.10)",
+      "--input": "transparent",
+      "--ring": "oklch(0.92 0 0)",
+      "--radius": "0.625rem",
+      "--gradient-chromatic": "linear-gradient(\n      135deg,\n      oklch(0.78 0.16 320) 0%,\n      oklch(0.78 0.16 280) 25%,\n      oklch(0.78 0.14 220) 50%,\n      oklch(0.82 0.14 90) 75%,\n      oklch(0.78 0.16 320) 100%\n    )",
+      "--gradient-silver": "linear-gradient(\n      180deg,\n      oklch(0.45 0.005 260) 0%,\n      oklch(0.30 0.005 260) 50%,\n      oklch(0.20 0.005 260) 100%\n    )",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 1px rgba(0, 0, 0, 0.4),\n    0 1px 2px rgba(0, 0, 0, 0.18)",
+      "--shadow-sm": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.45),\n    0 2px 4px rgba(0, 0, 0, 0.22)",
+      "--shadow-md": "inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 8px rgba(0, 0, 0, 0.28)",
+      "--shadow-lg": "inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 4px 8px rgba(0, 0, 0, 0.65),\n    0 8px 18px rgba(0, 0, 0, 0.35)",
+      "--shadow-xl": "inset 0 1px 0 rgba(255, 255, 255, 0.20),\n    0 8px 16px rgba(0, 0, 0, 0.75),\n    0 16px 36px rgba(0, 0, 0, 0.4)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.4),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.04)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.28),\n    0 0 0 1px rgba(220, 140, 255, 0.25),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 14px rgba(180, 100, 240, 0.3),\n    0 8px 24px rgba(120, 200, 255, 0.18)",
+      "--shadow-button": "inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 1px 2px rgba(0, 0, 0, 0.5),\n    0 2px 6px rgba(0, 0, 0, 0.25)",
+      "--shadow-button-hover": "inset 0 1px 0 rgba(255, 255, 255, 0.16),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 12px rgba(0, 0, 0, 0.32)"
+    }
+  }
+}

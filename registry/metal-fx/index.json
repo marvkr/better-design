@@ -1,0 +1,526 @@
+{
+  "name": "metal-fx",
+  "label": "Metal Fx",
+  "description": "metal-fx design system",
+  "personality": [],
+  "industry": [],
+  "componentCount": 90,
+  "components": [
+    {
+      "name": "file-input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "steps",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "aspect-ratio"
+    },
+    {
+      "name": "alert-dialog",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "inline-edit",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "time-picker",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "pagination",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "data-table",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "search-input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tabs",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "cursor",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "button-group",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "card",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "slider",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "data-range-picker",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "input-group",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "popover",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "copy-button",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "progress",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toaster"
+    },
+    {
+      "name": "input-otp",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "chart",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "hover-card",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "sheet",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "field",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "status-indicator",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "empty-state",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "resizable",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "label",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "sonner"
+    },
+    {
+      "name": "navigation-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "accordion",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "typography",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "drawer",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "number-input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "empty",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "alert",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "combobox",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "avatar-group",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "use-toast"
+    },
+    {
+      "name": "_shared"
+    },
+    {
+      "name": "switch",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "calendar",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "timeline",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "icon-button",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "mega-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "password-input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "code-tabs",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-ring",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "native-select",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "command",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "item",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "avatar",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "menubar",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "kbd",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "color-swatch",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "section-header",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tag-input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "multi-select",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "dialog",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "badge",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "phone-input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "code-block",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "rating",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "table",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "notification",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "separator",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "button",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toggle",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "toast",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "spinner",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "collapsible"
+    },
+    {
+      "name": "dropdown-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "select",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "textarea",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "input",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "stat-card",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "context-menu",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "form",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "carousel",
+      "registryDependencies": [
+        "utils"
+      ]
+    }
+  ]
+}

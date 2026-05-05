@@ -1,0 +1,14 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface RatingProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number\n  max?: number\n  onRatingChange?: (value: number) => void\n  readOnly?: boolean\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizes = {\n  sm: \"h-4 w-4\",\n  default: \"h-5 w-5\",\n  lg: \"h-6 w-6\",\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  (\n    { className, value = 0, max = 5, onRatingChange, readOnly, size = \"default\", ...props },\n    ref\n  ) => {\n    const [hover, setHover] = React.useState<number | null>(null)\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        role=\"group\"\n        aria-label={`Rating: ${value} out of ${max}`}\n        {...props}\n      >\n        {Array.from({ length: max }).map((_, i) => {\n          const starValue = i + 1\n          const active = (hover ?? value) >= starValue\n\n          return (\n            <button\n              key={i}\n              type=\"button\"\n              disabled={readOnly}\n              onMouseEnter={() => !readOnly && setHover(starValue)}\n              onMouseLeave={() => !readOnly && setHover(null)}\n              onClick={() => !readOnly && onRatingChange?.(starValue)}\n              className={cn(\n                \"rounded-sm p-0.5 transition-[color,transform] duration-150\",\n                !readOnly && \"cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n                readOnly && \"cursor-default\"\n              )}\n              aria-label={`${starValue} star${starValue > 1 ? \"s\" : \"\"}`}\n            >\n              <Icon\n                icon={active ? \"tabler:star-filled\" : \"tabler:star\"}\n                className={cn(\n                  sizes[size],\n                  active ? \"text-primary\" : \"text-muted-foreground/40\"\n                )}\n              />\n            </button>\n          )\n        })}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

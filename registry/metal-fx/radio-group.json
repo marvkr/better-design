@@ -1,0 +1,17 @@
+{
+  "name": "radio-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst RadioGroup = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Root ref={ref} className={cn(\"grid gap-2\", className)} {...props} />\n))\nRadioGroup.displayName = RadioGroupPrimitive.Root.displayName\n\nconst RadioGroupItem = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"aspect-square h-4 w-4 shrink-0 rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-color,box-shadow,border-color] duration-150\",\n      \"hover:border-ring/40\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:border-primary\",\n      className\n    )}\n    {...props}\n  >\n    <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n      <span className=\"h-2 w-2 rounded-full bg-primary [box-shadow:var(--shadow-s)]\" />\n    </RadioGroupPrimitive.Indicator>\n  </RadioGroupPrimitive.Item>\n))\nRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-radio-group"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
