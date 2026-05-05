@@ -113,6 +113,10 @@
     {
       "name": "stripe",
       "label": "Stripe"
+    },
+    {
+      "name": "pillow-light",
+      "label": "Pillow Light"
     }
   ]
 }
