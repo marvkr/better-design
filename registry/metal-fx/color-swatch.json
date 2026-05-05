@@ -1,0 +1,14 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface ColorSwatchProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, \"onClick\"> {\n  color: string\n  name?: string\n  showValue?: boolean\n  onCopy?: () => void\n}\n\nconst ColorSwatch = React.forwardRef<HTMLButtonElement, ColorSwatchProps>(\n  ({ className, color, name, showValue = true, onCopy, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false)\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(color)\n        setCopied(true)\n        onCopy?.()\n        setTimeout(() => setCopied(false), 2000)\n      } catch {\n        // Silent fail — copy is best-effort\n      }\n    }\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        onClick={copy}\n        className={cn(\n          \"group flex flex-col items-start gap-2 rounded-lg p-3 text-left\",\n          \"bg-card text-card-foreground border border-border\",\n          \"[box-shadow:var(--shadow-s)]\",\n          \"transition-[background-color,box-shadow] duration-200\",\n          \"hover:bg-accent hover:[box-shadow:var(--shadow-m)]\",\n          \"active:translate-y-px\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n          className\n        )}\n        aria-label={`Copy color ${name ?? color}`}\n        {...props}\n      >\n        <div\n          className={cn(\n            \"w-full h-14 rounded-md border border-border\",\n            \"[box-shadow:var(--shadow-inset)]\"\n          )}\n          style={{ backgroundColor: color }}\n        />\n        <div className=\"w-full flex items-center justify-between gap-2\">\n          <div className=\"min-w-0 flex-1\">\n            {name && <div className=\"text-xs font-medium truncate\">{name}</div>}\n            {showValue && (\n              <div className=\"text-[10px] font-mono text-muted-foreground truncate\">{color}</div>\n            )}\n          </div>\n          <Icon\n            icon={copied ? \"tabler:check\" : \"tabler:copy\"}\n            className={cn(\n              \"h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity duration-150\",\n              \"group-hover:opacity-100\",\n              copied && \"opacity-100 text-primary\"\n            )}\n          />\n        </div>\n      </button>\n    )\n  }\n)\nColorSwatch.displayName = \"ColorSwatch\"\n\nexport { ColorSwatch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

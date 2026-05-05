@@ -1,0 +1,14 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface PhoneInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  countryCode?: string\n  onCountryCodeChange?: (code: string) => void\n}\n\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode = \"+1\", onCountryCodeChange, ...props }, ref) => {\n    return (\n      <div\n        className={cn(\n          \"flex items-stretch rounded-md overflow-hidden\",\n          \"bg-input border border-border [box-shadow:var(--shadow-inset)]\",\n          \"transition-[border-color,box-shadow] duration-150\",\n          \"focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/40\"\n        )}\n      >\n        <div className=\"flex items-center gap-1 pl-3 pr-2 border-r border-border text-sm text-muted-foreground\">\n          <Icon icon=\"tabler:phone\" className=\"h-4 w-4\" />\n          <input\n            type=\"tel\"\n            value={countryCode}\n            onChange={(e) => onCountryCodeChange?.(e.target.value)}\n            className=\"w-12 bg-transparent outline-none text-foreground\"\n            aria-label=\"Country code\"\n          />\n        </div>\n        <input\n          ref={ref}\n          type=\"tel\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"flex-1 border-0 bg-transparent [box-shadow:none] focus-visible:ring-0 focus-visible:border-0\",\n            className\n          )}\n          {...props}\n        />\n      </div>\n    )\n  }\n)\nPhoneInput.displayName = \"PhoneInput\"\n\nexport { PhoneInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
