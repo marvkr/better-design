@@ -1,0 +1,53 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Pillow Light Button\n// Pillowed 3D button: inset top highlight + inset bottom shadow (\"lip\") +\n// outer drop shadow tinted with the primary blue. Hover lifts the button.\n// Primary: vivid cobalt #1E66FF with a subtle vertical gradient\n// Secondary: white with hairline ring + same pillow shadow stack\n// Radius: 14px default — distinctive softly-rounded pill\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold tracking-[-0.005em]\",\n    \"rounded-[14px] transition-all duration-150 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary — vertical gradient mixed off --primary + inset highlight +\n        // tinted lift glow (color-mix retints if user overrides --primary).\n        default: [\n          \"text-primary-foreground\",\n          \"bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_85%,white)_0%,var(--primary)_55%,color-mix(in_oklch,var(--primary)_85%,black)_100%)]\",\n          \"shadow-[inset_0_1px_0_0_rgba(255,255,255,0.30),inset_0_-2px_0_0_rgba(0,0,0,0.18),0_1px_1px_0_rgba(15,23,42,0.08),0_4px_10px_-2px_color-mix(in_oklch,var(--primary)_35%,transparent)]\",\n          \"hover:-translate-y-px\",\n          \"hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.32),inset_0_-2px_0_0_rgba(0,0,0,0.20),0_2px_2px_0_rgba(15,23,42,0.10),0_8px_18px_-3px_color-mix(in_oklch,var(--primary)_45%,transparent)]\",\n        ].join(\" \"),\n        // Secondary — white pillow with hairline ring + ground shadow\n        secondary: [\n          \"text-foreground\",\n          \"bg-[linear-gradient(180deg,#FFFFFF_0%,#FAFAFB_100%)]\",\n          \"shadow-[inset_0_1px_0_0_rgba(255,255,255,1),inset_0_-1.5px_0_0_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.05),0_1px_1px_0_rgba(15,23,42,0.04),0_3px_8px_-2px_rgba(15,23,42,0.10)]\",\n          \"hover:-translate-y-px\",\n          \"hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,1),inset_0_-1.5px_0_0_rgba(15,23,42,0.08),0_0_0_1px_rgba(15,23,42,0.07),0_2px_2px_0_rgba(15,23,42,0.06),0_6px_14px_-3px_rgba(15,23,42,0.14)]\",\n        ].join(\" \"),\n        // Outline — minimal hairline, no pillow\n        outline:\n          \"border border-border bg-background text-foreground hover:bg-muted hover:border-foreground/20\",\n        // Ghost — flat\n        ghost: \"bg-transparent text-foreground hover:bg-muted\",\n        // Destructive — same pillow recipe, mixed off --destructive\n        destructive: [\n          \"text-destructive-foreground\",\n          \"bg-[linear-gradient(180deg,color-mix(in_oklch,var(--destructive)_85%,white)_0%,var(--destructive)_55%,color-mix(in_oklch,var(--destructive)_85%,black)_100%)]\",\n          \"shadow-[inset_0_1px_0_0_rgba(255,255,255,0.28),inset_0_-2px_0_0_rgba(0,0,0,0.20),0_1px_1px_0_rgba(15,23,42,0.08),0_4px_10px_-2px_color-mix(in_oklch,var(--destructive)_35%,transparent)]\",\n          \"hover:-translate-y-px\",\n          \"hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.30),inset_0_-2px_0_0_rgba(0,0,0,0.22),0_2px_2px_0_rgba(15,23,42,0.10),0_8px_18px_-3px_color-mix(in_oklch,var(--destructive)_45%,transparent)]\",\n        ].join(\" \"),\n        link: \"text-primary underline-offset-4 hover:underline shadow-none\",\n      },\n      size: {\n        default: \"h-11 px-5 py-2.5\",\n        sm: \"h-9 px-4 text-xs rounded-[10px]\",\n        lg: \"h-14 px-8 text-base rounded-[16px]\",\n        icon: \"h-11 w-11\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "#FFFFFF",
+      "--foreground": "#0F172A",
+      "--card": "#FFFFFF",
+      "--card-foreground": "#0F172A",
+      "--popover": "#FFFFFF",
+      "--popover-foreground": "#0F172A",
+      "--primary": "#1E66FF",
+      "--primary-foreground": "#FFFFFF",
+      "--secondary": "#F4F5F7",
+      "--secondary-foreground": "#0F172A",
+      "--muted": "#F4F5F7",
+      "--muted-foreground": "#5B6573",
+      "--accent": "#EEF2FF",
+      "--accent-foreground": "#1E66FF",
+      "--destructive": "#E11D48",
+      "--destructive-foreground": "#FFFFFF",
+      "--border": "#E5E7EB",
+      "--input": "#FFFFFF",
+      "--ring": "#1E66FF",
+      "--radius": "0.875rem",
+      "--shadow-pillow-primary": "inset 0 1px 0 0 rgba(255, 255, 255, 0.30),\n    inset 0 -2px 0 0 rgba(0, 0, 0, 0.18),\n    0 1px 1px 0 rgba(15, 23, 42, 0.08),\n    0 4px 10px -2px rgba(30, 102, 255, 0.35)",
+      "--shadow-pillow-primary-hover": "inset 0 1px 0 0 rgba(255, 255, 255, 0.32),\n    inset 0 -2px 0 0 rgba(0, 0, 0, 0.20),\n    0 2px 2px 0 rgba(15, 23, 42, 0.10),\n    0 8px 18px -3px rgba(30, 102, 255, 0.45)",
+      "--shadow-pillow-secondary": "inset 0 1px 0 0 rgba(255, 255, 255, 1),\n    inset 0 -1.5px 0 0 rgba(15, 23, 42, 0.06),\n    0 0 0 1px rgba(15, 23, 42, 0.05),\n    0 1px 1px 0 rgba(15, 23, 42, 0.04),\n    0 3px 8px -2px rgba(15, 23, 42, 0.10)",
+      "--shadow-pillow-secondary-hover": "inset 0 1px 0 0 rgba(255, 255, 255, 1),\n    inset 0 -1.5px 0 0 rgba(15, 23, 42, 0.08),\n    0 0 0 1px rgba(15, 23, 42, 0.07),\n    0 2px 2px 0 rgba(15, 23, 42, 0.06),\n    0 6px 14px -3px rgba(15, 23, 42, 0.14)",
+      "--shadow-2xs": "0 1px 1px rgba(15, 23, 42, 0.04)",
+      "--shadow-xs": "0 1px 2px rgba(15, 23, 42, 0.05)",
+      "--shadow-sm": "0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.04)",
+      "--shadow": "0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.06)",
+      "--shadow-md": "0 2px 4px rgba(15, 23, 42, 0.06), 0 8px 20px rgba(15, 23, 42, 0.08)",
+      "--shadow-lg": "0 4px 12px rgba(15, 23, 42, 0.08), 0 16px 32px rgba(15, 23, 42, 0.10)",
+      "--shadow-xl": "0 8px 24px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.04)"
+    }
+  }
+}
