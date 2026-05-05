@@ -91,7 +91,7 @@ Both stay in sync. If you fork or copy directly, grab the matching `globals.css`
 
 - **Want to browse the code?** Open `components/<design-system>/components/ui/` for any DS.
 - **Want a new theme?** Open an issue or PR — every DS is a folder under `registry/` plus a matching folder under `components/`.
-- **Found a bug or want to tweak a token?** PRs welcome. The full app (showcase, generator, MCP) lives at [`marvkr/better-design-app`](https://github.com/marvkr/better-design-app).
+- **Found a bug or want to tweak a token?** PRs welcome.
 
 ---
 
