@@ -4,9 +4,11 @@
 
 Browse and preview them all at **[better-design.com](https://www.better-design.com/design-systems)**.
 
+Every design system ships the same ~87 components (accordion → typography), themed end-to-end. Pick a style, install the components you need, keep iterating.
+
+
 <img width="1693" height="983" alt="Screenshot 2026-05-05 at 12 14 41" src="https://github.com/user-attachments/assets/94efdd7e-59f2-4e5d-a589-780249be3401" />
 
-Every design system ships the same ~87 components (accordion → typography), themed end-to-end. Pick a style, install the components you need, keep iterating.
 
 
 
