@@ -1,6 +1,6 @@
 # Better Design
 
-> 27 open-source design systems for [shadcn/ui](https://ui.shadcn.com). Drop any of them into your app with one command.
+> 29 open-source design systems for [shadcn/ui](https://ui.shadcn.com). Drop any of them into your app with one command.
 
 Browse and preview them all at **[better-design.com](https://www.better-design.com/design-systems)**.
 
@@ -49,11 +49,13 @@ The CLI handles dependencies, CSS variables, and `globals.css` automatically.
 | Linear | `linear` | [view](https://www.better-design.com/design-systems/linear) |
 | Linear Quality | `linear-quality` | [view](https://www.better-design.com/design-systems/linear-quality) |
 | Lumen Dark | `lumen-dark` | [view](https://www.better-design.com/design-systems/lumen-dark) |
+| Metal FX | `metal-fx` | [view](https://www.better-design.com/design-systems/metal-fx) |
 | Midnight Glass | `midnight-glass` | [view](https://www.better-design.com/design-systems/midnight-glass) |
 | Minimal Light | `minimal-light` | [view](https://www.better-design.com/design-systems/minimal-light) |
 | Monochrome Industrial | `monochrome-industrial` | [view](https://www.better-design.com/design-systems/monochrome-industrial) |
 | Neutral Monochrome | `neutral-monochrome` | [view](https://www.better-design.com/design-systems/neutral-monochrome) |
 | Notion | `notion` | [view](https://www.better-design.com/design-systems/notion) |
+| Pillow Light | `pillow-light` | [view](https://www.better-design.com/design-systems/pillow-light) |
 | Precision Light | `precision-light` | [view](https://www.better-design.com/design-systems/precision-light) |
 | Stripe | `stripe` | [view](https://www.better-design.com/design-systems/stripe) |
 | Supabase | `supabase` | [view](https://www.better-design.com/design-systems/supabase) |
