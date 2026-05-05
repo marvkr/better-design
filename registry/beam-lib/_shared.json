@@ -1,0 +1,11 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for beam-lib.\n *\n * Mirrors beam-custom's surface treatment (recessed inset, rounded-xl pill)\n * so the only visible difference between the two DSes is which engine\n * draws the rainbow beam — our hand-rolled CSS, or the npm `border-beam`.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-xl px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-150 \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/30 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[80px] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ]
+}

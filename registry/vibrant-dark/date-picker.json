@@ -1,0 +1,18 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { Calendar as CalendarIcon } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\ninterface DatePickerProps {\n  date?: Date\n  onDateChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction DatePicker({ date, onDateChange, placeholder = \"Pick a date\", disabled, className }: DatePickerProps) {\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button\n          variant=\"neutral\"\n          disabled={disabled}\n          className={cn(\n            \"w-full justify-start gap-2 font-normal\",\n            !date && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <CalendarIcon className=\"h-4 w-4\" />\n          {date ? format(date, \"PPP\") : placeholder}\n        </Button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0 rounded-xl bg-card border-border shadow-[0_8px_30px_0_rgba(0,0,0,0.5)]\">\n        <Calendar\n          mode=\"single\"\n          selected={date}\n          onSelect={onDateChange}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

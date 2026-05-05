@@ -1,0 +1,14 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe ButtonGroup: dark monochromatic, premium feel, rounded-xl outer edges\n// Inner buttons flatten where they meet; border separation via border-white/5\n// tracking-wide inherited from buttons; inset shadow on secondary group variant\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n  attached?: boolean\n  variant?: \"default\" | \"bordered\"\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  (\n    {\n      className,\n      orientation = \"horizontal\",\n      attached = true,\n      variant = \"default\",\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    const isHorizontal = orientation === \"horizontal\"\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\n          \"inline-flex\",\n          isHorizontal ? \"flex-row\" : \"flex-col\",\n          variant === \"bordered\" && [\n            \"rounded-xl border border-border overflow-hidden\",\n            \"shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]\",\n          ],\n          attached && [\n            \"*:rounded-none\",\n            isHorizontal\n              ? [\n                  \"[&>*:first-child]:rounded-l-xl [&>*:last-child]:rounded-r-xl\",\n                  \"[&>*:not(:first-child)]:-ml-px\",\n                ]\n              : [\n                  \"[&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl\",\n                  \"[&>*:not(:first-child)]:-mt-px\",\n                ],\n            \"*:relative [&>*:focus-visible]:z-10 [&>*:hover]:z-10\",\n            // Premium divider: very subtle white line\n            isHorizontal\n              ? \"[&>*:not(:first-child)]:border-l [&>*:not(:first-child)]:border-l-white/5\"\n              : \"[&>*:not(:first-child)]:border-t [&>*:not(:first-child)]:border-t-white/5\",\n          ],\n          !attached && [\n            isHorizontal ? \"gap-2\" : \"flex-col gap-2\",\n          ],\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    )\n  }\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\ninterface ButtonGroupItemProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ButtonGroupItem = React.forwardRef<HTMLDivElement, ButtonGroupItemProps>(\n  ({ className, children, ...props }, ref) => (\n    <div ref={ref} className={cn(\"contents\", className)} {...props}>\n      {children}\n    </div>\n  )\n)\nButtonGroupItem.displayName = \"ButtonGroupItem\"\n\nexport { ButtonGroup, ButtonGroupItem }\nexport type { ButtonGroupProps, ButtonGroupItemProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

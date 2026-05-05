@@ -1,0 +1,14 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Button Group — inline group of buttons\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nfunction ButtonGroup({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: ButtonGroupProps) {\n  return (\n    <div\n      role=\"group\"\n      className={cn(\n        \"inline-flex\",\n        orientation === \"horizontal\"\n          ? [\n              \"flex-row\",\n              \"*:rounded-none *:border-r-0\",\n              \"[&>*:first-child]:rounded-l-[6px] [&>*:last-child]:rounded-r-[6px] [&>*:last-child]:border-r\",\n            ]\n          : [\n              \"flex-col\",\n              \"*:rounded-none *:border-b-0\",\n              \"[&>*:first-child]:rounded-t-[6px] [&>*:last-child]:rounded-b-[6px] [&>*:last-child]:border-b\",\n            ],\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { ButtonGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

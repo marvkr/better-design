@@ -1,0 +1,14 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Supabase Kbd: keyboard shortcut display\n// Style: rounded-md border border-border bg-secondary px-1.5 py-0.5 text-xs font-mono\n\ninterface KbdProps extends React.HTMLAttributes<HTMLElement> {}\n\nfunction Kbd({ className, ...props }: KbdProps) {\n  return (\n    <kbd\n      className={cn(\n        \"inline-flex items-center justify-center rounded-md border border-border bg-secondary px-1.5 py-0.5 font-mono text-xs font-medium text-muted-foreground shadow-[0_1px_0_0_rgb(0_0_0/0.08)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Kbd }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

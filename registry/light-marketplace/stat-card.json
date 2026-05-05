@@ -1,0 +1,14 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: React.ReactNode\n  trend?: {\n    value: string | number\n    direction: \"up\" | \"down\" | \"neutral\"\n    label?: string\n  }\n  icon?: React.ReactNode\n  description?: string\n}\n\nconst StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(\n  ({ label, value, trend, icon, description, className, ...props }, ref) => {\n    const trendColor = {\n      up:      \"text-green-600\",\n      down:    \"text-red-500\",\n      neutral: \"text-muted-foreground\",\n    }\n\n    const trendIcon = {\n      up:      \"↑\",\n      down:    \"↓\",\n      neutral: \"→\",\n    }\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"rounded-[14px] border border-border bg-card shadow-sm p-6\",\n          className\n        )}\n        {...props}\n      >\n        <div className=\"flex items-start justify-between gap-4\">\n          <div className=\"flex-1 min-w-0\">\n            <p className=\"text-sm font-medium text-muted-foreground mb-1 truncate\">\n              {label}\n            </p>\n            <div className=\"text-2xl font-semibold text-foreground leading-tight\">\n              {value}\n            </div>\n            {trend && (\n              <div\n                className={cn(\n                  \"mt-2 flex items-center gap-1 text-xs font-medium\",\n                  trendColor[trend.direction]\n                )}\n              >\n                <span>{trendIcon[trend.direction]}</span>\n                <span>{trend.value}</span>\n                {trend.label && (\n                  <span className=\"text-muted-foreground font-normal\">\n                    {trend.label}\n                  </span>\n                )}\n              </div>\n            )}\n            {description && (\n              <p className=\"mt-1 text-xs text-muted-foreground\">{description}</p>\n            )}\n          </div>\n          {icon && (\n            <div className=\"flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-muted-foreground\">\n              {icon}\n            </div>\n          )}\n        </div>\n      </div>\n    )\n  }\n)\nStatCard.displayName = \"StatCard\"\n\nexport { StatCard }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

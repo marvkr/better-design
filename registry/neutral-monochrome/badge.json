@@ -1,0 +1,17 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst badgeVariants = cva(\n  [\n    \"inline-flex items-center justify-center rounded-full font-medium transition-colors\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:  \"bg-secondary text-foreground border border-border\",\n        primary:  \"bg-primary text-primary-foreground\",\n        outline:  \"border border-border text-foreground bg-transparent\",\n        muted:    \"bg-secondary/60 text-muted-foreground\",\n      },\n      size: {\n        sm:      \"px-2 py-0.5 text-[10px]\",\n        default: \"px-2.5 py-0.5 text-xs\",\n        lg:      \"px-3 py-1 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Glassmorphic Button — frosted glass pill with inset glow\n// Primary: glass fill + inset white glow + brightness hover\n// Outline: transparent with subtle white border\n// Ghost: transparent, no border, brightness hover only\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-full transition-all duration-200 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:brightness-90 active:scale-[0.98]\",\n    \"select-none\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"backdrop-blur-xl bg-white/10 text-white \" +\n          \"shadow-[inset_0_0_8px_rgba(255,255,255,0.15)] \" +\n          \"hover:brightness-125 hover:shadow-[inset_0_0_12px_rgba(255,255,255,0.2)]\",\n        primary:\n          \"backdrop-blur-xl bg-primary/80 text-primary-foreground \" +\n          \"shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_0_16px_oklch(0.65_0.19_250/0.2)] \" +\n          \"hover:brightness-110 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_0_24px_oklch(0.65_0.19_250/0.3)]\",\n        secondary:\n          \"backdrop-blur-xl bg-white/[0.06] text-secondary-foreground \" +\n          \"shadow-[inset_0_0_6px_rgba(255,255,255,0.08)] \" +\n          \"hover:bg-white/[0.1] hover:text-foreground\",\n        outline:\n          \"bg-transparent text-foreground \" +\n          \"border border-white/[0.15] \" +\n          \"hover:bg-white/[0.06] hover:border-white/[0.25]\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-white/[0.06] hover:text-foreground\",\n        destructive:\n          \"backdrop-blur-xl bg-destructive/80 text-destructive-foreground \" +\n          \"shadow-[inset_0_0_8px_rgba(255,100,100,0.15)] \" +\n          \"hover:brightness-110\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-10 px-4\",\n        lg: \"h-11 px-6 text-sm\",\n        icon: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.14 0 0)",
+      "--foreground": "oklch(1 0 0)",
+      "--card": "oklch(1 0 0 / 0.06)",
+      "--card-foreground": "oklch(0.98 0 0)",
+      "--popover": "oklch(1 0 0 / 0.08)",
+      "--popover-foreground": "oklch(1 0 0)",
+      "--primary": "oklch(0.65 0.19 250)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(1 0 0 / 0.08)",
+      "--secondary-foreground": "oklch(0.7 0 0)",
+      "--muted": "oklch(1 0 0 / 0.05)",
+      "--muted-foreground": "oklch(0.55 0 0)",
+      "--accent": "oklch(0.65 0.19 250 / 0.15)",
+      "--accent-foreground": "oklch(0.98 0 0)",
+      "--destructive": "oklch(0.58 0.22 27)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(1 0 0 / 0.12)",
+      "--input": "oklch(1 0 0 / 0.06)",
+      "--ring": "oklch(0.65 0.19 250)",
+      "--radius": "1.25rem"
+    }
+  }
+}

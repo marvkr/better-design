@@ -1,0 +1,20 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CalendarIcon } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"@/components/ui/popover\"\n\n// Linear Date Picker: calendar popover triggered by button\n\ninterface DatePickerProps {\n  value?: Date\n  onChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: DatePickerProps) {\n  const formatted = value\n    ? value.toLocaleDateString(\"en-US\", { year: \"numeric\", month: \"long\", day: \"numeric\" })\n    : null\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button\n          variant=\"secondary\"\n          disabled={disabled}\n          className={cn(\n            \"w-full justify-start text-left font-normal\",\n            !value && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <CalendarIcon className=\"mr-2 h-4 w-4\" />\n          {formatted ?? placeholder}\n        </Button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          mode=\"single\"\n          selected={value}\n          onSelect={onChange}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/registry/linear-quality/button.json",
+    "http://localhost:3000/registry/linear-quality/calendar.json",
+    "http://localhost:3000/registry/linear-quality/popover.json",
+    "utils"
+  ]
+}

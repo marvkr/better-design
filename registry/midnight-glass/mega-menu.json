@@ -1,0 +1,14 @@
+{
+  "name": "mega-menu",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute left-0 top-full z-50 w-full p-4\",\n      \"rounded-xl border border-white/[0.08]\",\n      \"backdrop-blur-2xl bg-white/[0.05]\",\n      \"shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,255,255,0.05)]\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenu.displayName = \"MegaMenu\"\n\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"space-y-3\", className)}\n    {...props}\n  />\n))\nMegaMenuGroup.displayName = \"MegaMenuGroup\"\n\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-xs font-medium uppercase tracking-wider text-muted-foreground\", className)}\n    {...props}\n  />\n))\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\"\n\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    className={cn(\n      \"block rounded-lg px-3 py-2 text-sm\",\n      \"transition-all duration-300\",\n      \"hover:bg-white/[0.05] hover:text-foreground\",\n      \"text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuItem.displayName = \"MegaMenuItem\"\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

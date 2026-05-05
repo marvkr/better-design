@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nimport { BorderBeam } from \"./border-beam\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  beam?: boolean\n}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, beam = true, ...props }, ref) => {\n    const input = (\n      <input\n        type={type}\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n\n    if (!beam) return input\n\n    return (\n      <BorderBeam size=\"line\" variant=\"colorful\" borderRadius={14} className=\"block w-full\">\n        {input}\n      </BorderBeam>\n    )\n  },\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

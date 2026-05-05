@@ -1,0 +1,11 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for tv-style.\n *\n * Form fields are styled as recessed \"tile wells\" — flat dark surface with a\n * deep inset shadow and a thin uppercase caret-label vibe. Amber focus ring\n * picks up the signature scramble accent.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-[3px] px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground placeholder:uppercase placeholder:tracking-wider \" +\n  \"font-mono tracking-wide \" +\n  \"transition-[color,box-shadow,border-color] duration-150 \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/40 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[80px] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "resizable",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ResizablePrimitive from \"react-resizable-panels\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe Resizable: react-resizable-panels wrapper — subtle drag handle, dark theme\n\nconst ResizablePanelGroup = React.forwardRef<\n  React.ComponentRef<typeof ResizablePrimitive.PanelGroup>,\n  React.ComponentPropsWithoutRef<typeof ResizablePrimitive.PanelGroup>\n>(({ className, ...props }, ref) => (\n  <ResizablePrimitive.PanelGroup\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full data-[panel-group-direction=vertical]:flex-col\",\n      className\n    )}\n    {...props}\n  />\n))\nResizablePanelGroup.displayName = \"ResizablePanelGroup\"\n\nconst ResizablePanel = ResizablePrimitive.Panel\n\nconst ResizableHandle = React.forwardRef<\n  React.ComponentRef<typeof ResizablePrimitive.PanelResizeHandle>,\n  React.ComponentPropsWithoutRef<typeof ResizablePrimitive.PanelResizeHandle> & {\n    withHandle?: boolean\n  }\n>(({ className, withHandle, ...props }, ref) => (\n  <ResizablePrimitive.PanelResizeHandle\n    ref={ref}\n    className={cn(\n      \"relative flex w-px items-center justify-center bg-border\",\n      \"after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2\",\n      \"focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1\",\n      \"data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1\",\n      \"data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2\",\n      \"data-[panel-group-direction=vertical]:after:translate-x-0\",\n      \"[&[data-panel-group-direction=vertical]>div]:rotate-90\",\n      \"transition-colors duration-200 hover:bg-border/80\",\n      className\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div className=\"z-10 flex h-6 w-3 items-center justify-center rounded-full border border-border bg-secondary shadow-sm\">\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"8\"\n          height=\"8\"\n          viewBox=\"0 0 24 24\"\n          fill=\"currentColor\"\n          className=\"text-muted-foreground\"\n        >\n          <circle cx=\"9\" cy=\"5\" r=\"1.5\" />\n          <circle cx=\"15\" cy=\"5\" r=\"1.5\" />\n          <circle cx=\"9\" cy=\"12\" r=\"1.5\" />\n          <circle cx=\"15\" cy=\"12\" r=\"1.5\" />\n          <circle cx=\"9\" cy=\"19\" r=\"1.5\" />\n          <circle cx=\"15\" cy=\"19\" r=\"1.5\" />\n        </svg>\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n))\nResizableHandle.displayName = \"ResizableHandle\"\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe Badge: pill-shaped, monochromatic — default is dark secondary bg,\n// primary is white (the premium accent), outline is border-only, muted is barely there\n\nconst badgeVariants = cva(\n  [\n    \"inline-flex items-center justify-center rounded-full\",\n    \"font-medium tracking-wide transition-colors duration-200\",\n    \"border border-transparent\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground border-border hover:bg-accent\",\n        primary:\n          \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        outline:\n          \"border-border bg-transparent text-foreground hover:bg-accent\",\n        muted:\n          \"bg-muted text-muted-foreground hover:bg-accent hover:text-foreground\",\n      },\n      size: {\n        sm:      \"h-4 px-2 text-[10px]\",\n        default: \"h-5 px-2.5 text-xs\",\n        lg:      \"h-6 px-3 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span className={cn(badgeVariants({ variant, size, className }))} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

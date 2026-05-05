@@ -1,0 +1,14 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\ninterface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n max?: number\n total?: number\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n ({ className, children, max, total, ...props }, ref) => {\n const childArray = React.Children.toArray(children)\n const visible = max ? childArray.slice(0, max) : childArray\n const hiddenCount = (total ?? childArray.length) - visible.length\n\n return (\n <div\n ref={ref}\n className={cn(\"flex items-center -space-x-2\", className)}\n {...props}\n >\n {visible.map((child, i) => (\n <div\n key={i}\n className=\"ring-2 ring-background rounded-full\"\n >\n {child}\n </div>\n ))}\n {hiddenCount > 0 && (\n <div\n className={cn(\n \"relative flex h-10 w-10 items-center justify-center rounded-full\",\n \"bg-muted text-xs font-medium text-muted-foreground\",\n \"ring-2 ring-background \"\n )}\n >\n +{hiddenCount}\n </div>\n )}\n </div>\n )\n }\n)\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

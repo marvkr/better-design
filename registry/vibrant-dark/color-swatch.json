@@ -1,0 +1,14 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Color Swatch: vibrant color chips with rounded-full style\n\ninterface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {\n  color: string\n  label?: string\n  size?: \"sm\" | \"md\" | \"lg\"\n  showHex?: boolean\n}\n\nconst sizeClasses = {\n  sm: \"h-6 w-6 rounded-full\",\n  md: \"h-9 w-9 rounded-full\",\n  lg: \"h-12 w-12 rounded-full\",\n}\n\nfunction ColorSwatch({ color, label, size = \"md\", showHex, className, ...props }: ColorSwatchProps) {\n  return (\n    <div className={cn(\"flex flex-col items-center gap-1.5\", className)} {...props}>\n      <div\n        className={cn(sizeClasses[size], \"ring-2 ring-background shadow-md\")}\n        style={{ backgroundColor: color }}\n        title={color}\n      />\n      {(label || showHex) && (\n        <div className=\"flex flex-col items-center gap-0.5\">\n          {label && <span className=\"text-xs font-medium text-foreground\">{label}</span>}\n          {showHex && <span className=\"font-mono text-[10px] text-muted-foreground\">{color}</span>}\n        </div>\n      )}\n    </div>\n  )\n}\n\ninterface ColorPaletteProps extends React.HTMLAttributes<HTMLDivElement> {\n  colors: Array<{ color: string; label?: string }>\n  size?: ColorSwatchProps[\"size\"]\n  showHex?: boolean\n}\n\nfunction ColorPalette({ colors, size, showHex, className, ...props }: ColorPaletteProps) {\n  return (\n    <div className={cn(\"flex flex-wrap gap-3\", className)} {...props}>\n      {colors.map((c, i) => (\n        <ColorSwatch key={i} color={c.color} label={c.label} size={size} showHex={showHex} />\n      ))}\n    </div>\n  )\n}\n\nexport { ColorSwatch, ColorPalette }\nexport type { ColorSwatchProps, ColorPaletteProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Beam Custom",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n/*\n * Beam Custom — hand-rolled rainbow border-beam effect.\n *\n * Inspired by beam.jakubantalik.com, this DS replicates the traveling\n * conic-gradient beam around interactive surfaces using pure CSS — no\n * runtime JS, no third-party library. Effect is built from:\n *   1. A masked conic gradient on ::after (the beam stroke)\n *   2. A blurred glow on ::before (the bloom layer)\n *   3. CSS @property + @keyframes to rotate the gradient\n *\n * Theme: deep neutral surface with magenta primary that pairs with the\n * rainbow spectrum. Cards and inputs sit on a near-black plane so the\n * beam reads cleanly without competing with surface color.\n */\n\n:root {\n  --background: oklch(0.12 0 0);\n  --foreground: oklch(0.97 0.005 280);\n\n  --card: oklch(0.15 0 0);\n  --card-foreground: oklch(0.97 0.005 280);\n\n  --popover: oklch(0.17 0 0);\n  --popover-foreground: oklch(0.97 0.005 280);\n\n  --primary: oklch(0.66 0.24 340);\n  --primary-foreground: oklch(0.99 0 0);\n\n  --secondary: oklch(0.2 0 0);\n  --secondary-foreground: oklch(0.92 0 0);\n\n  --muted: oklch(0.18 0 0);\n  --muted-foreground: oklch(0.62 0.005 280);\n\n  --accent: oklch(0.22 0.04 320);\n  --accent-foreground: oklch(0.97 0.01 320);\n\n  --destructive: oklch(0.64 0.22 25);\n  --destructive-foreground: oklch(0.97 0 0);\n\n  --border: oklch(1 0 0 / 0.08);\n  --input: oklch(1 0 0 / 0.05);\n  --ring: oklch(0.66 0.24 340);\n  --radius: 0.875rem;\n\n  --beam-1: rgb(255, 50, 100);\n  --beam-2: rgb(40, 140, 255);\n  --beam-3: rgb(50, 200, 80);\n  --beam-4: rgb(30, 185, 170);\n  --beam-5: rgb(100, 70, 255);\n  --beam-6: rgb(255, 120, 40);\n  --beam-7: rgb(240, 50, 180);\n  --beam-8: rgb(180, 40, 240);\n\n  --shadow-s:\n    inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 2px rgba(0, 0, 0, 0.4);\n  --shadow-m:\n    inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 8px rgba(0, 0, 0, 0.25);\n  --shadow-l:\n    inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 4px 8px rgba(0, 0, 0, 0.6),\n    0 8px 16px rgba(0, 0, 0, 0.3);\n  --shadow-inset:\n    inset 0 1px 2px rgba(0, 0, 0, 0.4),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03);\n  --shadow-button:\n    inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 0 0 1px rgba(255, 255, 255, 0.04),\n    0 1px 2px rgba(0, 0, 0, 0.5);\n  --shadow-button-hover:\n    inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 0 0 1px rgba(255, 255, 255, 0.06),\n    0 2px 4px rgba(0, 0, 0, 0.55);\n  --shadow-primary:\n    inset 0 1px 0 rgba(255, 255, 255, 0.22),\n    0 0 0 1px rgba(255, 80, 180, 0.25),\n    0 1px 3px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(255, 60, 160, 0.18);\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: var(--radius);\n  --radius-lg: calc(var(--radius) + 4px);\n  --radius-xl: calc(var(--radius) + 8px);\n  --shadow-inset: var(--shadow-inset);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.12 0 0)",
+      "--foreground": "oklch(0.97 0.005 280)",
+      "--card": "oklch(0.15 0 0)",
+      "--card-foreground": "oklch(0.97 0.005 280)",
+      "--popover": "oklch(0.17 0 0)",
+      "--popover-foreground": "oklch(0.97 0.005 280)",
+      "--primary": "oklch(0.66 0.24 340)",
+      "--primary-foreground": "oklch(0.99 0 0)",
+      "--secondary": "oklch(0.2 0 0)",
+      "--secondary-foreground": "oklch(0.92 0 0)",
+      "--muted": "oklch(0.18 0 0)",
+      "--muted-foreground": "oklch(0.62 0.005 280)",
+      "--accent": "oklch(0.22 0.04 320)",
+      "--accent-foreground": "oklch(0.97 0.01 320)",
+      "--destructive": "oklch(0.64 0.22 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(1 0 0 / 0.05)",
+      "--ring": "oklch(0.66 0.24 340)",
+      "--radius": "0.875rem",
+      "--beam-1": "rgb(255, 50, 100)",
+      "--beam-2": "rgb(40, 140, 255)",
+      "--beam-3": "rgb(50, 200, 80)",
+      "--beam-4": "rgb(30, 185, 170)",
+      "--beam-5": "rgb(100, 70, 255)",
+      "--beam-6": "rgb(255, 120, 40)",
+      "--beam-7": "rgb(240, 50, 180)",
+      "--beam-8": "rgb(180, 40, 240)",
+      "--shadow-s": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 2px rgba(0, 0, 0, 0.4)",
+      "--shadow-m": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 8px rgba(0, 0, 0, 0.25)",
+      "--shadow-l": "inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 4px 8px rgba(0, 0, 0, 0.6),\n    0 8px 16px rgba(0, 0, 0, 0.3)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.4),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03)",
+      "--shadow-button": "inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 0 0 1px rgba(255, 255, 255, 0.04),\n    0 1px 2px rgba(0, 0, 0, 0.5)",
+      "--shadow-button-hover": "inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 0 0 1px rgba(255, 255, 255, 0.06),\n    0 2px 4px rgba(0, 0, 0, 0.55)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.22),\n    0 0 0 1px rgba(255, 80, 180, 0.25),\n    0 1px 3px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(255, 60, 160, 0.18)"
+    }
+  }
+}

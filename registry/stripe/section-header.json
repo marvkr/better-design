@@ -1,0 +1,14 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Stripe Section Header: page/section title with optional subtitle and action\n\ninterface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {\n  title: string\n  description?: string\n  action?: React.ReactNode\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm: { title: \"text-lg font-semibold\", desc: \"text-sm\" },\n  md: { title: \"text-xl font-semibold\", desc: \"text-sm\" },\n  lg: { title: \"text-2xl font-bold tracking-tight\", desc: \"text-base\" },\n}\n\nfunction SectionHeader({\n  title,\n  description,\n  action,\n  size = \"md\",\n  className,\n  ...props\n}: SectionHeaderProps) {\n  const sizes = sizeClasses[size]\n\n  return (\n    <div\n      className={cn(\n        \"flex items-start justify-between gap-4\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex flex-col gap-1\">\n        <h2 className={cn(sizes.title, \"text-foreground\")}>{title}</h2>\n        {description && (\n          <p className={cn(sizes.desc, \"text-muted-foreground\")}>{description}</p>\n        )}\n      </div>\n      {action && <div className=\"shrink-0\">{action}</div>}\n    </div>\n  )\n}\n\nexport { SectionHeader }\nexport type { SectionHeaderProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

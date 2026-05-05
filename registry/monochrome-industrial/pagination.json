@@ -1,0 +1,17 @@
+{
+  "name": "pagination",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/pagination.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { buttonVariants } from \"./button\"\n\nconst Pagination = ({ className, ...props }: React.ComponentProps<\"nav\">) => (\n <nav\n role=\"navigation\"\n aria-label=\"pagination\"\n className={cn(\"mx-auto flex w-full justify-center\", className)}\n {...props}\n />\n)\nPagination.displayName = \"Pagination\"\n\nconst PaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<\"ul\">>(\n ({ className, ...props }, ref) => (\n <ul ref={ref} className={cn(\"flex flex-row items-center gap-1\", className)} {...props} />\n )\n)\nPaginationContent.displayName = \"PaginationContent\"\n\nconst PaginationItem = React.forwardRef<HTMLLIElement, React.ComponentProps<\"li\">>(\n ({ className, ...props }, ref) => (\n <li ref={ref} className={cn(\"\", className)} {...props} />\n )\n)\nPaginationItem.displayName = \"PaginationItem\"\n\ntype PaginationLinkProps = {\n isActive?: boolean\n} & Pick<React.ComponentProps<typeof buttonVariants>, \"size\"> &\n React.ComponentProps<\"a\">\n\nconst PaginationLink = ({ className, isActive, size = \"icon\", ...props }: PaginationLinkProps) => (\n <a\n aria-current={isActive ? \"page\" : undefined}\n className={cn(\n buttonVariants({ variant: isActive ? \"default\" : \"ghost\", size }),\n \"cursor-pointer\",\n className\n )}\n {...props}\n />\n)\nPaginationLink.displayName = \"PaginationLink\"\n\nconst PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (\n <PaginationLink\n aria-label=\"Go to previous page\"\n size=\"default\"\n className={cn(\"gap-1 pl-2.5\", className)}\n {...props}\n >\n <Icon icon=\"tabler:chevron-left\" className=\"h-4 w-4\" />\n <span>Previous</span>\n </PaginationLink>\n)\nPaginationPrevious.displayName = \"PaginationPrevious\"\n\nconst PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (\n <PaginationLink\n aria-label=\"Go to next page\"\n size=\"default\"\n className={cn(\"gap-1 pr-2.5\", className)}\n {...props}\n >\n <span>Next</span>\n <Icon icon=\"tabler:chevron-right\" className=\"h-4 w-4\" />\n </PaginationLink>\n)\nPaginationNext.displayName = \"PaginationNext\"\n\nconst PaginationEllipsis = ({ className, ...props }: React.ComponentProps<\"span\">) => (\n <span\n aria-hidden\n className={cn(\"flex h-9 w-9 items-center justify-center text-muted-foreground\", className)}\n {...props}\n >\n <Icon icon=\"tabler:dots\" className=\"h-4 w-4\" />\n <span className=\"sr-only\">More pages</span>\n </span>\n)\nPaginationEllipsis.displayName = \"PaginationEllipsis\"\n\nexport {\n Pagination,\n PaginationContent,\n PaginationLink,\n PaginationItem,\n PaginationPrevious,\n PaginationNext,\n PaginationEllipsis,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

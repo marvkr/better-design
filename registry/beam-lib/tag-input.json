@@ -1,0 +1,17 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface TagInputProps {\n  value: string[]\n  onValueChange: (tags: string[]) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n  maxTags?: number\n}\n\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  ({ value, onValueChange, placeholder = \"Add tag...\", className, disabled, maxTags }, ref) => {\n    const [input, setInput] = React.useState(\"\")\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim()\n      if (!trimmed || value.includes(trimmed)) return\n      if (maxTags && value.length >= maxTags) return\n      onValueChange([...value, trimmed])\n      setInput(\"\")\n    }\n\n    const removeTag = (tag: string) => {\n      onValueChange(value.filter((t) => t !== tag))\n    }\n\n    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n      if (e.key === \"Enter\" || e.key === \",\") {\n        e.preventDefault()\n        addTag(input)\n      } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n        removeTag(value[value.length - 1])\n      }\n    }\n\n    return (\n      <div\n        className={cn(\n          \"flex flex-wrap items-center gap-1.5 w-full min-h-9 rounded-md px-2 py-1.5\",\n          \"bg-input border border-border [box-shadow:var(--shadow-inset)]\",\n          \"transition-[border-color,box-shadow] duration-150\",\n          \"focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/40\",\n          disabled && \"opacity-50 cursor-not-allowed\",\n          className\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            className={cn(\n              \"inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs\",\n              \"bg-secondary text-secondary-foreground border border-border\",\n              \"[box-shadow:var(--shadow-s)]\"\n            )}\n          >\n            {tag}\n            <button\n              type=\"button\"\n              onClick={() => removeTag(tag)}\n              className={cn(\n                \"rounded-sm p-0.5 text-muted-foreground\",\n                \"transition-colors duration-150\",\n                \"hover:text-foreground hover:bg-accent\",\n                \"focus:outline-none focus:ring-1 focus:ring-ring/40\"\n              )}\n              aria-label={`Remove ${tag}`}\n              disabled={disabled}\n            >\n              <Icon icon=\"tabler:x\" className=\"h-3 w-3\" />\n            </button>\n          </span>\n        ))}\n        <input\n          ref={ref}\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyDown={onKeyDown}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          disabled={disabled}\n          className=\"flex-1 min-w-[80px] bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground\"\n        />\n      </div>\n    )\n  }\n)\nTagInput.displayName = \"TagInput\"\n\nexport { TagInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { CopyButton } from \"./copy-button\"\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  showLineNumbers?: boolean\n}\n\nfunction CodeBlock({\n  code,\n  language,\n  showLineNumbers = false,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const lines = code.split(\"\\n\")\n\n  return (\n    <div\n      className={cn(\n        \"group relative rounded-[10px] border border-border/40 bg-card overflow-hidden\",\n        className\n      )}\n      {...props}\n    >\n      {/* Header */}\n      {language && (\n        <div className=\"flex items-center justify-between border-b border-border/40 px-4 py-2\">\n          <span className=\"text-xs font-medium text-muted-foreground uppercase tracking-wide\">\n            {language}\n          </span>\n          <CopyButton value={code} />\n        </div>\n      )}\n\n      {/* Copy button (no header) */}\n      {!language && (\n        <div className=\"absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity z-10\">\n          <CopyButton value={code} />\n        </div>\n      )}\n\n      {/* Code */}\n      <div className=\"overflow-x-auto\">\n        <pre className=\"p-4 text-sm leading-relaxed text-foreground/90 font-mono\">\n          <code>\n            {showLineNumbers ? (\n              lines.map((line, i) => (\n                <div key={i} className=\"table-row\">\n                  <span className=\"table-cell select-none pr-4 text-right text-muted-foreground/40 min-w-[2rem] text-xs\">\n                    {i + 1}\n                  </span>\n                  <span className=\"table-cell\">{line}</span>\n                </div>\n              ))\n            ) : (\n              code\n            )}\n          </code>\n        </pre>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeBlock }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

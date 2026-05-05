@@ -1,0 +1,175 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Inset Dark — built around a tactile, recessed segmented-toggle aesthetic.
+ *
+ * Core ideas applied:
+ *   - Surfaces that "sit down into" their wells (deep top-edge inset shadow on tracks)
+ *   - Raised tiles use a top→bottom gradient (light hits the top, fades to the bottom)
+ *   - Hairline white-on-white borders (0.5px @ 8% white) keep edges crisp on near-black
+ *   - Active labels get a subtle text-shadow to feel pressed into a real pill
+ *   - Monochromatic — the only "accent" is a slightly brighter near-white
+ */
+
+:root {
+  /* ─── Surfaces (deepest → highest) ─── */
+  --background: oklch(0.13 0 0);          /* #0e0e0e — page */
+  --foreground: oklch(1 0 0);             /* pure white */
+
+  --card: oklch(0.17 0 0);                /* #1c1c1c — track/well */
+  --card-foreground: oklch(1 0 0);
+
+  --popover: oklch(0.21 0 0);             /* #2a2a2a — floating */
+  --popover-foreground: oklch(1 0 0);
+
+  /* ─── Primary: the raised pill itself, monochrome ─── */
+  --primary: oklch(0.27 0 0);             /* #383838 — pill top */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.17 0 0);           /* #1c1c1c — recessed surface */
+  --secondary-foreground: oklch(0.78 0 0);
+
+  --muted: oklch(0.17 0 0);
+  --muted-foreground: oklch(0.62 0 0);    /* dim white ~55% */
+
+  --accent: oklch(0.23 0 0);              /* hover surface */
+  --accent-foreground: oklch(1 0 0);
+
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.97 0 0);
+
+  --border: oklch(1 0 0 / 0.08);          /* hairline white 8% */
+  --input: oklch(0.17 0 0);               /* #1c1c1c — recessed well */
+  --ring: oklch(1 0 0 / 0.18);
+  --radius: 0.75rem;                      /* 12px — track radius */
+
+  /*
+   * ─── Shadow scale ───
+   *
+   * The toggle's pill stacks four box-shadow layers; the same recipe scales
+   * across the system. Wells go inward (recessed); tiles go outward (raised).
+   */
+
+  /* Raised pill — top highlight + hairline border + close + ambient */
+  --shadow-pill:
+    0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+
+  --shadow-pill-hover:
+    0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.3);
+
+  /* Raised surfaces — small / medium / large / extra-large */
+  --shadow-xs:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.35);
+
+  --shadow-sm:
+    0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+
+  --shadow-md:
+    0 0 0 0.5px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+
+  --shadow-lg:
+    0 0 0 0.5px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.55),
+    0 12px 24px rgba(0, 0, 0, 0.35);
+
+  --shadow-xl:
+    0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 12px 24px rgba(0, 0, 0, 0.65),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+
+  /* Recessed wells — deep top inset + soft bottom highlight */
+  --shadow-inset:
+    inset 0 1px 2px rgba(0, 0, 0, 0.6),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+
+  --shadow-inset-deep:
+    inset 0 2px 4px rgba(0, 0, 0, 0.7),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+
+  /* Pill gradient — exposed for components that need the pill background */
+  --pill-gradient: linear-gradient(180deg, oklch(0.27 0 0) 0%, oklch(0.21 0 0) 100%);
+  --pill-gradient-hover: linear-gradient(180deg, oklch(0.3 0 0) 0%, oklch(0.23 0 0) 100%);
+
+  /* Active text shadow — drops the label into the pill */
+  --text-shadow-pressed: 0 1px 1px rgba(0, 0, 0, 0.5);
+
+  /*
+   * ─── Legacy aliases ───
+   * The 80+ shadcn primitives in this DS reference --shadow-s/-m/-l and a
+   * few specialised tokens. Mapped here so each primitive picks up the
+   * inset-dark recipe without having to be touched individually.
+   */
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+  --shadow-button: var(--shadow-pill);
+  --shadow-button-hover: var(--shadow-pill-hover);
+  /* Primary buttons share the pill recipe — this DS is monochromatic */
+  --shadow-primary: var(--shadow-pill);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-pill: var(--shadow-pill);
+  --shadow-pill-hover: var(--shadow-pill-hover);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-inset-deep: var(--shadow-inset-deep);
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+}

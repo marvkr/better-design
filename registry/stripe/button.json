@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Stripe Button — light, indigo primary (#635BFF), 6px radius\n// Primary: solid indigo with lift shadow on hover + translateY(-1px)\n// Secondary: transparent outline, indigo border\n// Shadow: Stripe's characteristic rgba(50,50,93,...) navy-purple shadow\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium tracking-[-0.01em]\",\n    \"rounded-md transition-all duration-200 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[0_4px_6px_rgba(50,50,93,0.11),0_1px_3px_rgba(0,0,0,0.08)] \" +\n          \"hover:bg-primary/90 hover:-translate-y-px hover:shadow-[0_7px_14px_rgba(50,50,93,0.1),0_3px_6px_rgba(0,0,0,0.08)]\",\n        secondary:\n          \"bg-transparent text-primary \" +\n          \"border border-primary/60 \" +\n          \"hover:bg-primary/5 hover:border-primary\",\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"shadow-[0_1px_2px_rgba(50,50,93,0.06)] \" +\n          \"hover:bg-muted hover:border-border/80\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-muted hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[0_4px_6px_rgba(223,27,65,0.15)] \" +\n          \"hover:bg-destructive/90\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded\",\n        default: \"h-10 px-5\",\n        lg:      \"h-11 px-6\",\n        icon:    \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(1 0 0)",
+      "--foreground": "oklch(0.2651 0.0621 251.37)",
+      "--card": "oklch(0.9838 0.0035 247.86)",
+      "--card-foreground": "oklch(0.2651 0.0621 251.37)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.2651 0.0621 251.37)",
+      "--primary": "oklch(0.5803 0.2335 278.46)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9838 0.0035 247.86)",
+      "--secondary-foreground": "oklch(0.5546 0.032 264.27)",
+      "--muted": "oklch(0.9681 0.0052 247.88)",
+      "--muted-foreground": "oklch(0.5546 0.032 264.27)",
+      "--accent": "oklch(0.9521 0.0079 247.91)",
+      "--accent-foreground": "oklch(0.2651 0.0621 251.37)",
+      "--destructive": "oklch(0.5903 0.2299 19.34)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9292 0.0072 247.9)",
+      "--input": "oklch(1 0 0)",
+      "--ring": "oklch(0.5803 0.2335 278.46)",
+      "--radius": "0.375rem"
+    }
+  }
+}

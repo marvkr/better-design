@@ -1,0 +1,14 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Stripe Color Swatch: displays a color with optional label\n\ninterface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {\n  color: string\n  label?: string\n  size?: \"sm\" | \"md\" | \"lg\"\n  showHex?: boolean\n}\n\nconst sizeClasses = {\n  sm: \"h-6 w-6 rounded-lg\",\n  md: \"h-8 w-8 rounded-[10px]\",\n  lg: \"h-12 w-12 rounded-[12px]\",\n}\n\nfunction ColorSwatch({\n  color,\n  label,\n  size = \"md\",\n  showHex,\n  className,\n  ...props\n}: ColorSwatchProps) {\n  return (\n    <div className={cn(\"flex flex-col items-center gap-1.5\", className)} {...props}>\n      <div\n        className={cn(\n          sizeClasses[size],\n          \"ring-1 ring-border/50 shadow-[0_1px_2px_0_rgb(0_0_0/0.08)]\"\n        )}\n        style={{ backgroundColor: color }}\n        title={color}\n      />\n      {(label || showHex) && (\n        <div className=\"flex flex-col items-center gap-0.5\">\n          {label && (\n            <span className=\"text-xs font-medium text-foreground\">{label}</span>\n          )}\n          {showHex && (\n            <span className=\"font-mono text-[10px] text-muted-foreground\">{color}</span>\n          )}\n        </div>\n      )}\n    </div>\n  )\n}\n\ninterface ColorPaletteProps extends React.HTMLAttributes<HTMLDivElement> {\n  colors: Array<{ color: string; label?: string }>\n  size?: ColorSwatchProps[\"size\"]\n  showHex?: boolean\n}\n\nfunction ColorPalette({ colors, size, showHex, className, ...props }: ColorPaletteProps) {\n  return (\n    <div className={cn(\"flex flex-wrap gap-3\", className)} {...props}>\n      {colors.map((c, i) => (\n        <ColorSwatch key={i} color={c.color} label={c.label} size={size} showHex={showHex} />\n      ))}\n    </div>\n  )\n}\n\nexport { ColorSwatch, ColorPalette }\nexport type { ColorSwatchProps, ColorPaletteProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

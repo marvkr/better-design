@@ -1,0 +1,14 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Empty — compositional empty-state primitive. Use when you need more layout\n * control than EmptyState provides. Just structural slots, no icon baked in.\n */\n\nconst Empty = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 p-8 text-center\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nEmpty.displayName = \"Empty\"\n\nconst EmptyIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex h-12 w-12 items-center justify-center rounded-full\",\n        \"bg-muted text-muted-foreground\",\n        \"[box-shadow:var(--shadow-s)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nEmptyIcon.displayName = \"EmptyIcon\"\n\nconst EmptyTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"text-base font-semibold text-foreground\", className)}\n      {...props}\n    />\n  )\n)\nEmptyTitle.displayName = \"EmptyTitle\"\n\nconst EmptyDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground leading-relaxed max-w-md\", className)}\n    {...props}\n  />\n))\nEmptyDescription.displayName = \"EmptyDescription\"\n\nconst EmptyActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex items-center gap-2 pt-1\", className)} {...props} />\n  )\n)\nEmptyActions.displayName = \"EmptyActions\"\n\nexport { Empty, EmptyIcon, EmptyTitle, EmptyDescription, EmptyActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

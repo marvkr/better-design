@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Library of Minds Input — dark flat, generous radius, subtle white focus\n// No inset shadow (editorial flatness), clean minimal style\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-9 w-full bg-input px-3 py-2 text-sm text-foreground\",\n          \"border border-border\",\n          \"rounded-[calc(1rem-2px)]\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color,box-shadow] duration-150 ease-out\",\n          \"hover:border-border/80\",\n          \"focus-visible:outline-none focus-visible:border-foreground/20\",\n          \"focus-visible:shadow-[0_0_0_3px_rgba(255,255,255,0.06)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

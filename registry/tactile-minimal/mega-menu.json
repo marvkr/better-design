@@ -1,0 +1,14 @@
+{
+  "name": "mega-menu",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Mega Menu — large dropdown panel.\n// Flat popover surface with soft border. No glass, no gradients.\n\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute left-0 top-full z-50 w-full p-4\",\n      \"rounded-[10px] border border-border bg-popover text-popover-foreground\",\n      \"\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenu.displayName = \"MegaMenu\"\n\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"space-y-2\", className)} {...props} />\n))\nMegaMenuGroup.displayName = \"MegaMenuGroup\"\n\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\n      \"text-xs font-semibold uppercase tracking-wider text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\"\n\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    className={cn(\n      \"block rounded-[6px] px-3 py-2 text-sm\",\n      \"text-muted-foreground\",\n      \"transition-all duration-150\",\n      \"hover:bg-accent hover:text-accent-foreground\",\n      \"active:scale-[0.98]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuItem.displayName = \"MegaMenuItem\"\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

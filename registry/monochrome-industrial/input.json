@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Monochrome Industrial Input — flat surface, hairline border, sharp corners.\n// Mono-font value text reads as \"instrument panel\" data entry.\n// Focus = border becomes the accent red.\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-10 w-full rounded-none border border-[var(--mono-border-visible)] bg-[var(--mono-surface)] px-3 py-2\",\n          \"font-[family-name:var(--font-mono)] text-[13px] text-foreground\",\n          \"placeholder:font-[family-name:var(--font-mono)] placeholder:uppercase placeholder:tracking-[0.08em] placeholder:text-[11px] placeholder:text-muted-foreground\",\n          \"transition-colors duration-150 ease-out\",\n          \"hover:border-foreground/60\",\n          \"focus-visible:outline-none focus-visible:border-[var(--mono-accent)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

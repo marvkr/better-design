@@ -1,0 +1,11 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for form-field components in tactile-minimal.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, etc.) MUST import these\n * constants instead of re-declaring classes. This guarantees identical\n * background, border, focus ring, hover, disabled, and transition behavior\n * across every form field in the design system.\n *\n * Do NOT copy-paste these classes into individual components — always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full rounded-[6px] px-3 text-sm \" +\n  \"bg-background text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-colors duration-150 \" +\n  \"hover:border-ring/50 \" +\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\";\n\n/** Height + vertical padding for single-line form fields (h-9) */\nexport const formFieldSingleLine = \"flex h-9 py-1.5\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-[80px] py-2 resize-y\";\n",
+      "type": "registry:ui"
+    }
+  ]
+}

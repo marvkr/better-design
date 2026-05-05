@@ -1,0 +1,14 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n ({ className, ...props }, ref) => (\n <div\n ref={ref}\n className={cn(\"animate-pulse rounded-none bg-muted\", className)}\n {...props}\n />\n )\n)\nSkeleton.displayName = \"Skeleton\"\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

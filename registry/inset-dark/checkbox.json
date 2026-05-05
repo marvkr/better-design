@@ -1,0 +1,18 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-[18px] w-[18px] shrink-0 rounded-[5px]\",\n      \"bg-card [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background,box-shadow] duration-150\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:[background:var(--pill-gradient)] data-[state=checked]:text-foreground data-[state=checked]:[box-shadow:var(--shadow-pill)]\",\n      \"data-[state=indeterminate]:[background:var(--pill-gradient)] data-[state=indeterminate]:text-foreground data-[state=indeterminate]:[box-shadow:var(--shadow-pill)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator className=\"flex items-center justify-center text-current\">\n      {props.checked === \"indeterminate\" ? (\n        <Icon icon=\"tabler:minus\" className=\"h-3 w-3\" />\n      ) : (\n        <Icon icon=\"tabler:check\" className=\"h-3 w-3\" />\n      )}\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox",
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

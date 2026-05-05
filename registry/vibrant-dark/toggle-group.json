@@ -1,0 +1,25 @@
+{
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\nimport { AnimatePresence, motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants } from \"@/components/ui/toggle\"\nimport { useDataState, springInteraction } from \"@/lib/motion\"\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants> & { uid: string; isSingle: boolean }\n>({\n  size: \"default\",\n  variant: \"default\",\n  uid: \"\",\n  isSingle: false,\n})\n\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  children,\n  ...props\n}: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &\n  VariantProps<typeof toggleVariants>) {\n  const uid = React.useId()\n  const isSingle = (props as { type?: string }).type === \"single\"\n\n  return (\n    <ToggleGroupPrimitive.Root\n      className={cn(\n        \"flex items-center gap-1 rounded-[10px] border border-border bg-secondary p-1\",\n        className\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size, uid, isSingle }}>\n        {children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive.Root>\n  )\n}\nToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName\n\nfunction ToggleGroupItem({\n  className,\n  children,\n  variant,\n  size,\n  ...props\n}: React.ComponentProps<typeof ToggleGroupPrimitive.Item> &\n  VariantProps<typeof toggleVariants>) {\n  const context = React.useContext(ToggleGroupContext)\n  const ref = React.useRef<HTMLButtonElement>(null)\n  const dataState = useDataState(ref)\n  const isOn = dataState === \"on\"\n\n  return (\n    <ToggleGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        \"relative inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors\",\n        \"text-muted-foreground hover:text-foreground\",\n        \"data-[state=on]:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        className\n      )}\n      {...props}\n    >\n      <AnimatePresence initial={false}>\n        {isOn && (\n          <motion.div\n            key=\"indicator\"\n            layoutId={context.isSingle ? `toggle-indicator-${context.uid}` : undefined}\n            className=\"absolute inset-0 rounded-lg bg-background shadow-sm\"\n            initial={context.isSingle ? false : { opacity: 0, scale: 0.8 }}\n            animate={{ opacity: 1, scale: 1 }}\n            exit={context.isSingle ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}\n            transition={springInteraction}\n          />\n        )}\n      </AnimatePresence>\n      <span className=\"relative z-10\">{children}</span>\n    </ToggleGroupPrimitive.Item>\n  )\n}\nToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/motion.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle-group",
+    "class-variance-authority",
+    "motion"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/registry/vibrant-dark/toggle.json",
+    "utils"
+  ]
+}

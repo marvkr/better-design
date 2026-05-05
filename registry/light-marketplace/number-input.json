@@ -1,0 +1,17 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Minus, Plus } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  (\n    {\n      value: controlledValue,\n      onChange,\n      min = -Infinity,\n      max = Infinity,\n      step = 1,\n      className,\n      disabled,\n      ...props\n    },\n    ref\n  ) => {\n    const [internalValue, setInternalValue] = React.useState(controlledValue ?? 0)\n    const value = controlledValue ?? internalValue\n\n    const set = (next: number) => {\n      const clamped = Math.min(max, Math.max(min, next))\n      setInternalValue(clamped)\n      onChange?.(clamped)\n    }\n\n    const decrement = () => set(value - step)\n    const increment = () => set(value + step)\n\n    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n      const parsed = parseFloat(e.target.value)\n      if (!isNaN(parsed)) set(parsed)\n    }\n\n    const btnClass = cn(\n      \"flex h-8 w-8 shrink-0 items-center justify-center rounded-lg\",\n      \"bg-background text-foreground border border-border\",\n      \"hover:bg-secondary transition-colors\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\n      \"disabled:opacity-50 disabled:pointer-events-none\",\n      \"active:scale-[0.96]\",\n    )\n\n    return (\n      <div\n        className={cn(\n          \"inline-flex items-center gap-2 rounded-[14px] border border-border bg-background px-2 py-1.5\",\n          className\n        )}\n      >\n        <button\n          type=\"button\"\n          onClick={decrement}\n          disabled={disabled || value <= min}\n          aria-label=\"Decrease\"\n          className={btnClass}\n        >\n          <Minus className=\"h-3.5 w-3.5\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          value={value}\n          onChange={handleInputChange}\n          disabled={disabled}\n          className={cn(\n            \"w-16 bg-transparent text-center text-sm font-semibold text-foreground\",\n            \"focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none\",\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={increment}\n          disabled={disabled || value >= max}\n          aria-label=\"Increase\"\n          className={btnClass}\n        >\n          <Plus className=\"h-3.5 w-3.5\" />\n        </button>\n      </div>\n    )\n  }\n)\nNumberInput.displayName = \"NumberInput\"\n\nexport { NumberInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

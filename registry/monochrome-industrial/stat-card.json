@@ -1,0 +1,17 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n label: string\n value: React.ReactNode\n icon?: string\n change?: {\n value: string | number\n direction?: \"up\" | \"down\" | \"neutral\"\n }\n description?: React.ReactNode\n}\n\nconst StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(\n ({ className, label, value, icon, change, description, ...props }, ref) => {\n const direction = change?.direction ?? (typeof change?.value === \"number\" && change.value < 0 ? \"down\" : \"up\")\n const changeColor =\n direction === \"up\"\n ? \"text-[oklch(0.78_0.15_145)]\"\n : direction === \"down\"\n ? \"text-destructive\"\n : \"text-muted-foreground\"\n const changeIcon =\n direction === \"up\" ? \"tabler:arrow-up\" : direction === \"down\" ? \"tabler:arrow-down\" : \"tabler:minus\"\n\n return (\n <div\n ref={ref}\n className={cn(\n \"rounded-none p-5 bg-card text-card-foreground\",\n \"\",\n \"transition-[background-color,box-shadow] duration-200\",\n \"hover:\",\n className\n )}\n {...props}\n >\n <div className=\"flex items-start justify-between gap-4\">\n <div className=\"text-xs font-semibold uppercase tracking-wider text-muted-foreground\">\n {label}\n </div>\n {icon && (\n <div className=\"flex h-8 w-8 items-center justify-center rounded-none bg-muted text-primary \">\n <Icon icon={icon} className=\"h-4 w-4\" />\n </div>\n )}\n </div>\n <div className=\"mt-3 text-2xl font-semibold tracking-tight\">{value}</div>\n {(change || description) && (\n <div className=\"mt-2 flex items-center gap-2 text-xs\">\n {change && (\n <span className={cn(\"inline-flex items-center gap-0.5 font-medium\", changeColor)}>\n <Icon icon={changeIcon} className=\"h-3 w-3\" />\n {change.value}\n </span>\n )}\n {description && <span className=\"text-muted-foreground\">{description}</span>}\n </div>\n )}\n </div>\n )\n }\n)\nStatCard.displayName = \"StatCard\"\n\nexport { StatCard }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

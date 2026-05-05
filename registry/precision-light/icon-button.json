@@ -1,0 +1,18 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Sharp Light Icon Button: square/circle button for icon-only actions\n// Based on Sharp Light's button pattern with icon sizes\n\nconst iconButtonVariants = cva(\n  \"relative inline-flex items-center justify-center shrink-0 outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground hover:bg-primary/85 focus-visible:ring-2 focus-visible:ring-primary/30\",\n        secondary: \"bg-secondary text-foreground hover:bg-secondary/80 ring-1 ring-border focus-visible:ring-2 focus-visible:ring-foreground/20\",\n        ghost: \"text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        destructive: \"bg-destructive text-destructive-foreground hover:bg-destructive/85\",\n        outline: \"border border-border bg-background text-foreground hover:bg-secondary\",\n      },\n      size: {\n        xs: \"h-7 w-7 rounded-lg text-xs\",\n        sm: \"h-8 w-8 rounded-lg text-sm\",\n        default: \"h-9 w-9 rounded-[10px] text-sm\",\n        lg: \"h-10 w-10 rounded-[10px] text-base\",\n        xl: \"h-11 w-11 rounded-[12px] text-base\",\n      },\n      shape: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"ghost\",\n      size: \"default\",\n      shape: \"square\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(iconButtonVariants({ variant, size, shape, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

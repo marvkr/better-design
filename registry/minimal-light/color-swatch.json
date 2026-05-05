@@ -1,0 +1,14 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe ColorSwatch: color chip with hex/name label — useful in design system docs\n// ColorPalette groups multiple swatches in a responsive grid\n\nexport interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {\n  color: string\n  label?: string\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst swatchSizeMap = {\n  sm:      \"h-8 w-8\",\n  default: \"h-12 w-12\",\n  lg:      \"h-16 w-16\",\n}\n\nfunction ColorSwatch({\n  color,\n  label,\n  size = \"default\",\n  className,\n  ...props\n}: ColorSwatchProps) {\n  return (\n    <div className={cn(\"flex flex-col items-center gap-1.5\", className)} {...props}>\n      <div\n        className={cn(\n          swatchSizeMap[size],\n          \"rounded-xl border border-border/60 shadow-inner\"\n        )}\n        style={{ backgroundColor: color }}\n        aria-label={label ?? color}\n        title={label ?? color}\n      />\n      {label && (\n        <div className=\"text-center\">\n          <p className=\"text-xs font-medium text-foreground tracking-wide\">{label}</p>\n          <p className=\"text-[10px] font-mono text-muted-foreground\">{color}</p>\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport interface ColorPaletteProps extends React.HTMLAttributes<HTMLDivElement> {\n  colors: Array<{ color: string; label?: string }>\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nfunction ColorPalette({\n  colors,\n  size = \"default\",\n  className,\n  ...props\n}: ColorPaletteProps) {\n  return (\n    <div\n      className={cn(\"flex flex-wrap gap-4\", className)}\n      {...props}\n    >\n      {colors.map((item, i) => (\n        <ColorSwatch\n          key={i}\n          color={item.color}\n          label={item.label}\n          size={size}\n        />\n      ))}\n    </div>\n  )\n}\n\nexport { ColorSwatch, ColorPalette }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

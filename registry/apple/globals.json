@@ -1,0 +1,36 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Apple",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n:root {\n  --background: oklch(0.9751 0.0022 286.36);\n  --foreground: oklch(0.2344 0.0035 286.13);\n\n  --card: oklch(1 0 0);\n  --card-foreground: oklch(0.2344 0.0035 286.13);\n\n  --popover: oklch(1 0 0);\n  --popover-foreground: oklch(0.2344 0.0035 286.13);\n\n  --primary: oklch(0.5604 0.1989 257);\n  --primary-foreground: oklch(1 0 0);\n\n  --secondary: oklch(0.9751 0.0022 286.36);\n  --secondary-foreground: oklch(0.5364 0.0104 286.04);\n\n  --muted: oklch(0.9512 0.0033 286.34);\n  --muted-foreground: oklch(0.5364 0.0104 286.04);\n\n  --accent: oklch(0.9349 0.0044 286.31);\n  --accent-foreground: oklch(0.2344 0.0035 286.13);\n\n  --destructive: oklch(0.6356 0.2082 25.38);\n  --destructive-foreground: oklch(1 0 0);\n\n  --border: oklch(0.9079 0 0);\n  --input: oklch(1 0 0);\n  --ring: oklch(0.5604 0.1989 257);\n  --radius: 1.125rem;\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: calc(var(--radius) - 2px);\n  --radius-lg: var(--radius);\n  --radius-xl: calc(var(--radius) + 4px);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  html {\n    font-family: -apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro Display\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.9751 0.0022 286.36)",
+      "--foreground": "oklch(0.2344 0.0035 286.13)",
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.2344 0.0035 286.13)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.2344 0.0035 286.13)",
+      "--primary": "oklch(0.5604 0.1989 257)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9751 0.0022 286.36)",
+      "--secondary-foreground": "oklch(0.5364 0.0104 286.04)",
+      "--muted": "oklch(0.9512 0.0033 286.34)",
+      "--muted-foreground": "oklch(0.5364 0.0104 286.04)",
+      "--accent": "oklch(0.9349 0.0044 286.31)",
+      "--accent-foreground": "oklch(0.2344 0.0035 286.13)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9079 0 0)",
+      "--input": "oklch(1 0 0)",
+      "--ring": "oklch(0.5604 0.1989 257)",
+      "--radius": "1.125rem"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { CopyButton } from \"./copy-button\"\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  showLineNumbers?: boolean\n  filename?: string\n}\n\nconst CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(\n  ({ code, language, showLineNumbers = false, filename, className, ...props }, ref) => {\n    const lines = code.split(\"\\n\")\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"relative rounded-xl border border-border bg-secondary overflow-hidden\",\n          className\n        )}\n        {...props}\n      >\n        {/* Header */}\n        {(filename || language) && (\n          <div className=\"flex items-center justify-between px-4 py-2.5 border-b border-border bg-secondary/80\">\n            <div className=\"flex items-center gap-2\">\n              {filename && (\n                <span className=\"text-xs font-medium text-foreground\">{filename}</span>\n              )}\n              {language && (\n                <span className=\"text-xs text-muted-foreground\">{language}</span>\n              )}\n            </div>\n          </div>\n        )}\n\n        {/* Copy button */}\n        <div className=\"absolute top-2.5 right-3 z-10\">\n          <CopyButton value={code} />\n        </div>\n\n        {/* Code */}\n        <div className=\"overflow-x-auto\">\n          <pre className=\"p-4 text-sm font-mono text-foreground leading-relaxed\">\n            {showLineNumbers ? (\n              <code>\n                {lines.map((line, i) => (\n                  <span key={i} className=\"table-row\">\n                    <span className=\"table-cell pr-4 select-none text-muted-foreground text-right w-6\">\n                      {i + 1}\n                    </span>\n                    <span className=\"table-cell\">{line}</span>\n                  </span>\n                ))}\n              </code>\n            ) : (\n              <code>{code}</code>\n            )}\n          </pre>\n        </div>\n      </div>\n    )\n  }\n)\nCodeBlock.displayName = \"CodeBlock\"\n\nexport { CodeBlock }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

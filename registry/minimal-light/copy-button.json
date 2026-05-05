@@ -1,0 +1,14 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe CopyButton: icon button for clipboard — check animation on success\n// Used standalone or inside CodeBlock\n\nexport interface CopyButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string\n  onCopied?: () => void\n  timeout?: number\n}\n\nfunction CopyButton({\n  value,\n  onCopied,\n  timeout = 2000,\n  className,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value)\n      setCopied(true)\n      onCopied?.()\n      setTimeout(() => setCopied(false), timeout)\n    } catch {\n      // silently fail in non-secure contexts\n    }\n  }, [value, onCopied, timeout])\n\n  return (\n    <button\n      type=\"button\"\n      onClick={handleCopy}\n      aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n      className={cn(\n        \"inline-flex h-8 w-8 items-center justify-center rounded-lg\",\n        \"bg-secondary border border-border text-muted-foreground\",\n        \"transition-all duration-200 hover:bg-accent hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring\",\n        \"active:scale-[0.96]\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? (\n        // Checkmark icon\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"14\"\n          height=\"14\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2.5\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n          className=\"text-foreground\"\n        >\n          <polyline points=\"20 6 9 17 4 12\" />\n        </svg>\n      ) : (\n        // Copy icon\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"14\"\n          height=\"14\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n        >\n          <rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" />\n          <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />\n        </svg>\n      )}\n    </button>\n  )\n}\n\nexport { CopyButton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

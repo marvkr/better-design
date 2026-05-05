@@ -1,0 +1,18 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { motion, useMotionValue, useTransform } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({\n  className,\n  checked,\n  defaultChecked,\n  onCheckedChange,\n  ...props\n}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {\n  const [isChecked, setIsChecked] = React.useState(\n    checked ?? defaultChecked ?? false\n  )\n  const pathLength = useMotionValue(isChecked ? 1 : 0)\n  const strokeLinecap = useTransform(() =>\n    pathLength.get() === 0 ? \"none\" : \"round\"\n  )\n\n  React.useEffect(() => {\n    if (checked !== undefined) setIsChecked(!!checked)\n  }, [checked])\n\n  return (\n    <CheckboxPrimitive.Root\n      className={cn(\n        \"peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground\",\n        className\n      )}\n      checked={isChecked}\n      onCheckedChange={(value) => {\n        setIsChecked(!!value)\n        onCheckedChange?.(value)\n      }}\n      asChild\n      {...props}\n    >\n      <motion.button\n        className=\"flex items-center justify-center p-0\"\n        whileHover={{ scale: 1.05 }}\n        whileTap={{ scale: 0.95 }}\n      >\n        <svg\n          viewBox=\"0 0 14 14\"\n          className=\"h-4 w-4\"\n          fill=\"none\"\n          strokeWidth={2}\n          stroke=\"currentColor\"\n          strokeLinejoin=\"round\"\n        >\n          <motion.path\n            d=\"M2 6l4 4 6-6\"\n            animate={{ pathLength: isChecked ? 1 : 0 }}\n            transition={{\n              type: \"spring\",\n              bounce: 0,\n              duration: isChecked ? 0.3 : 0.1,\n            }}\n            style={{ pathLength, strokeLinecap }}\n          />\n        </svg>\n      </motion.button>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox",
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Notion Button — minimal, near-black primary, very small radius (rounded-sm)\n// Matches actual Notion app: dark primary CTA, light secondary/ghost\n// Transition: 100ms colors (snappy Notion feel)\n// Uses `rounded-sm` (2px) like the Notion clone — ultra-tight radius\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-sm transition-colors duration-100\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        secondary:\n          \"bg-secondary text-secondary-foreground hover:bg-secondary/80\",\n        outline:\n          \"border border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n        ghost:\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        link: \"text-[#2383e2] underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-9 rounded-md px-3 text-xs\",\n        default: \"h-10 px-4 py-2\",\n        lg:      \"h-11 rounded-md px-8\",\n        icon:    \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(1 0 0)",
+      "--foreground": "oklch(0.292 0.0023 87.46)",
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.292 0.0023 87.46)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.292 0.0023 87.46)",
+      "--primary": "oklch(0.2044 0 0)",
+      "--primary-foreground": "oklch(0.9848 0 0)",
+      "--secondary": "oklch(0.9784 0.002 84.56)",
+      "--secondary-foreground": "oklch(0.292 0.0023 87.46)",
+      "--muted": "oklch(0.9784 0.002 84.56)",
+      "--muted-foreground": "oklch(0.4783 0.0064 87.49)",
+      "--accent": "oklch(0.956 0.0029 84.56)",
+      "--accent-foreground": "oklch(0.292 0.0023 87.46)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(0.9848 0 0)",
+      "--border": "oklch(0.9338 0.0044 84.56)",
+      "--input": "oklch(0.9338 0.0044 84.56)",
+      "--ring": "oklch(0.6036 0.169 252.99)",
+      "--radius": "0rem"
+    }
+  }
+}

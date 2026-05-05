@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Spinner: rounded circle with colored border-t, scale press animation\n\ninterface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  size?: \"sm\" | \"md\" | \"lg\" | \"xl\"\n  color?: \"default\" | \"primary\" | \"secondary\" | \"success\" | \"warning\" | \"destructive\"\n}\n\nconst sizeClasses = {\n  sm: \"h-4 w-4 border-2\",\n  md: \"h-6 w-6 border-2\",\n  lg: \"h-8 w-8 border-[3px]\",\n  xl: \"h-10 w-10 border-[3px]\",\n}\n\nconst colorClasses = {\n  default:     \"border-secondary border-t-foreground\",\n  primary:     \"border-primary/30 border-t-primary\",\n  secondary:   \"border-accent/30 border-t-accent\",\n  success:     \"border-[hsl(var(--success)/0.3)] border-t-[hsl(var(--success))]\",\n  warning:     \"border-[hsl(var(--warning)/0.3)] border-t-[hsl(var(--warning))]\",\n  destructive: \"border-destructive/30 border-t-destructive\",\n}\n\nfunction Spinner({ size = \"md\", color = \"primary\", className, ...props }: SpinnerProps) {\n  return (\n    <span\n      className={cn(\n        \"inline-block animate-spin rounded-full\",\n        sizeClasses[size],\n        colorClasses[color],\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Spinner }\nexport type { SpinnerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nconst StatCard = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"rounded-2xl p-6\",\n      \"backdrop-blur-xl bg-white/[0.06] border border-white/10\",\n      \"shadow-[inset_0_0_8px_rgba(255,255,255,0.06)]\",\n      className\n    )}\n    {...props}\n  />\n))\nStatCard.displayName = \"StatCard\"\n\nconst StatCardLabel = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nStatCardLabel.displayName = \"StatCardLabel\"\n\nconst StatCardValue = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-3xl font-bold tracking-tight\", className)}\n    {...props}\n  />\n))\nStatCardValue.displayName = \"StatCardValue\"\n\nconst StatCardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-xs text-muted-foreground mt-1\", className)}\n    {...props}\n  />\n))\nStatCardDescription.displayName = \"StatCardDescription\"\n\nexport { StatCard, StatCardLabel, StatCardValue, StatCardDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

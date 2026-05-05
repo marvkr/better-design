@@ -1,0 +1,17 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Item — a list row with elevation. Use for navigation lists, file rows, results, etc.\n * Hover raises it; active state flattens it (pressed).\n */\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n asChild?: boolean\n interactive?: boolean\n selected?: boolean\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n const Comp = asChild ? Slot : \"div\"\n return (\n <Comp\n ref={ref}\n className={cn(\n \"flex items-center gap-3 rounded-none px-3 py-2\",\n \"bg-card text-card-foreground border border-border\",\n \"\",\n \"transition-[background-color,box-shadow,border-color,transform] duration-150\",\n interactive &&\n \"cursor-pointer hover:bg-accent hover: active:translate-y-px active:\",\n selected && \"border-primary/40 bg-accent \",\n className\n )}\n {...props}\n />\n )\n }\n)\nItem.displayName = \"Item\"\n\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n ({ className, ...props }, ref) => (\n <div\n ref={ref}\n className={cn(\n \"flex h-8 w-8 shrink-0 items-center justify-center rounded-none bg-muted text-muted-foreground\",\n \"\",\n className\n )}\n {...props}\n />\n )\n)\nItemIcon.displayName = \"ItemIcon\"\n\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n ({ className, ...props }, ref) => (\n <div ref={ref} className={cn(\"flex-1 min-w-0\", className)} {...props} />\n )\n)\nItemContent.displayName = \"ItemContent\"\n\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n ({ className, ...props }, ref) => (\n <div ref={ref} className={cn(\"text-sm font-medium text-foreground truncate\", className)} {...props} />\n )\n)\nItemTitle.displayName = \"ItemTitle\"\n\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n ({ className, ...props }, ref) => (\n <div ref={ref} className={cn(\"text-xs text-muted-foreground truncate\", className)} {...props} />\n )\n)\nItemDescription.displayName = \"ItemDescription\"\n\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n ({ className, ...props }, ref) => (\n <div ref={ref} className={cn(\"flex items-center gap-1 shrink-0\", className)} {...props} />\n )\n)\nItemActions.displayName = \"ItemActions\"\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

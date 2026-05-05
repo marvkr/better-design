@@ -1,0 +1,18 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Notification — inline notification/banner with icon, title, description, and dismiss.\n * More prominent than Alert (shadow-m), typically used at the top of a page.\n */\n\nconst notificationVariants = cva(\n \"relative flex gap-3 rounded-none p-4 border \" +\n \" \" +\n \"transition-[background-color,box-shadow] duration-150\",\n {\n variants: {\n variant: {\n default: \"bg-card text-card-foreground border-border\",\n info: \"bg-card text-card-foreground border-primary/30\",\n success: \"bg-card text-card-foreground border-[oklch(0.5_0.15_145)]/30\",\n warning: \"bg-card text-card-foreground border-[oklch(0.55_0.18_55)]/30\",\n destructive: \"bg-card text-card-foreground border-destructive/30\",\n },\n },\n defaultVariants: {\n variant: \"default\",\n },\n }\n)\n\nconst iconMap = {\n default: { icon: \"tabler:bell\", color: \"text-muted-foreground\" },\n info: { icon: \"tabler:info-circle\", color: \"text-primary\" },\n success: { icon: \"tabler:circle-check\", color: \"text-[oklch(0.78_0.15_145)]\" },\n warning: { icon: \"tabler:alert-triangle\", color: \"text-[oklch(0.82_0.14_80)]\" },\n destructive: { icon: \"tabler:alert-circle\", color: \"text-destructive\" },\n} as const\n\nexport interface NotificationProps\n extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">,\n VariantProps<typeof notificationVariants> {\n title?: React.ReactNode\n description?: React.ReactNode\n icon?: React.ReactNode\n onDismiss?: () => void\n actions?: React.ReactNode\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n (\n { className, variant = \"default\", title, description, icon, onDismiss, actions, children, ...props },\n ref\n ) => {\n const meta = iconMap[variant ?? \"default\"]\n return (\n <div ref={ref} className={cn(notificationVariants({ variant }), className)} {...props}>\n <div className={cn(\"mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center\", meta.color)}>\n {icon ?? <Icon icon={meta.icon} className=\"h-5 w-5\" />}\n </div>\n <div className=\"flex-1 min-w-0\">\n {title && <div className=\"text-sm font-semibold leading-none\">{title}</div>}\n {description && (\n <div className={cn(\"text-sm text-muted-foreground leading-relaxed\", title && \"mt-1\")}>\n {description}\n </div>\n )}\n {children}\n {actions && <div className=\"mt-3 flex items-center gap-2\">{actions}</div>}\n </div>\n {onDismiss && (\n <button\n type=\"button\"\n onClick={onDismiss}\n className={cn(\n \"shrink-0 rounded-none p-1 text-muted-foreground\",\n \"transition-[background-color,color] duration-150\",\n \"hover:bg-accent hover:text-foreground\",\n \"focus:outline-none focus:ring-2 focus:ring-ring/40\"\n )}\n aria-label=\"Dismiss\"\n >\n <Icon icon=\"tabler:x\" className=\"h-4 w-4\" />\n </button>\n )}\n </div>\n )\n }\n)\nNotification.displayName = \"Notification\"\n\nexport { Notification }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

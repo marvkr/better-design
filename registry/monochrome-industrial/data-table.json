@@ -1,0 +1,14 @@
+{
+  "name": "data-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-table.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport {\n Table,\n TableBody,\n TableCell,\n TableHead,\n TableHeader,\n TableRow,\n} from \"./table\"\n\nexport interface DataTableColumn<T> {\n key: string\n header: React.ReactNode\n cell: (row: T) => React.ReactNode\n className?: string\n}\n\nexport interface DataTableProps<T> {\n columns: DataTableColumn<T>[]\n data: T[]\n getRowKey?: (row: T, index: number) => string | number\n emptyMessage?: React.ReactNode\n className?: string\n onRowClick?: (row: T) => void\n}\n\nfunction DataTable<T>({\n columns,\n data,\n getRowKey,\n emptyMessage = \"No results.\",\n className,\n onRowClick,\n}: DataTableProps<T>) {\n return (\n <div className={cn(\"w-full\", className)}>\n <Table>\n <TableHeader>\n <TableRow>\n {columns.map((col) => (\n <TableHead key={col.key} className={col.className}>\n {col.header}\n </TableHead>\n ))}\n </TableRow>\n </TableHeader>\n <TableBody>\n {data.length === 0 ? (\n <TableRow>\n <TableCell\n colSpan={columns.length}\n className=\"h-24 text-center text-muted-foreground\"\n >\n {emptyMessage}\n </TableCell>\n </TableRow>\n ) : (\n data.map((row, i) => (\n <TableRow\n key={getRowKey ? getRowKey(row, i) : i}\n onClick={onRowClick ? () => onRowClick(row) : undefined}\n className={onRowClick ? \"cursor-pointer\" : undefined}\n >\n {columns.map((col) => (\n <TableCell key={col.key} className={col.className}>\n {col.cell(row)}\n </TableCell>\n ))}\n </TableRow>\n ))\n )}\n </TableBody>\n </Table>\n </div>\n )\n}\n\nexport { DataTable }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

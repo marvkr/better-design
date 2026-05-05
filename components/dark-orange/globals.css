@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Sharp Dark — dark landing page style extracted from the original site */
+  /* Brand orange: #F05023 = oklch(0.6469 0.2036 35.49) */
+  /* Background: #1c1c1c = oklch(0.2267 0 0) */
+  /* Surface: #191919 = oklch(0.2156 0 0) */
+  /* Border: #262626 = oklch(0.2697 0 0) */
+
+  --background: oklch(0.2267 0 0);          /* #1c1c1c */
+  --foreground: oklch(0.9696 0 0);          /* near-white */
+
+  --card: oklch(0.2156 0 0);                /* #191919 */
+  --card-foreground: oklch(0.9696 0 0);
+
+  --popover: oklch(0.2156 0 0);
+  --popover-foreground: oklch(0.9696 0 0);
+
+  /* Brand orange: #F05023 */
+  --primary: oklch(0.6469 0.2036 35.49);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.2697 0 0);           /* #262626 */
+  --secondary-foreground: oklch(0.8054 0 0);
+
+  --muted: oklch(0.2591 0 0);
+  --muted-foreground: oklch(0.5982 0 0);
+
+  --accent: oklch(0.2905 0 0);
+  --accent-foreground: oklch(0.9696 0 0);
+
+  --destructive: oklch(0.6469 0.2287 22.64);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.2697 0 0);              /* #262626 */
+  --input: oklch(0.2484 0 0);
+  --ring: oklch(0.6469 0.2036 35.49);              /* orange ring */
+
+  /* 10px radius — Sharp Dark's signature rounded-10 */
+  --radius: 0.625rem;
+
+  /* Shadow overrides — dark theme: deeper shadows that pop on near-black bg */
+  --shadow-2xs: 0 1px 2px 0 rgba(0,0,0,0.4);
+  --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+  --shadow-sm:  0 1px 3px 0 rgba(0,0,0,0.5), 0 1px 2px -1px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+  --shadow:     0 2px 4px 0 rgba(0,0,0,0.5), 0 1px 2px -1px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+  --shadow-md:  0 4px 8px -1px rgba(0,0,0,0.6), 0 2px 4px -2px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+  --shadow-lg:  0 10px 20px -2px rgba(0,0,0,0.7), 0 4px 8px -4px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  --shadow-xl:  0 20px 32px -4px rgba(0,0,0,0.8), 0 8px 12px -6px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.07);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

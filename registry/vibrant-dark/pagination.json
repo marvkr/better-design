@@ -1,0 +1,17 @@
+{
+  "name": "pagination",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/pagination.tsx",
+      "content": "import * as React from \"react\"\nimport { ChevronLeft, ChevronRight, MoreHorizontal } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Pagination: pill-shaped, solid primary for active page\n\ninterface PaginationProps {\n  page: number\n  total: number\n  onChange?: (page: number) => void\n  siblings?: number\n  className?: string\n}\n\nfunction getPages(page: number, total: number, siblings: number) {\n  const range = (start: number, end: number) =>\n    Array.from({ length: end - start + 1 }, (_, i) => start + i)\n\n  const totalShown = siblings * 2 + 5\n  if (total <= totalShown) return range(1, total)\n\n  const leftStart = Math.max(2, page - siblings)\n  const rightEnd = Math.min(total - 1, page + siblings)\n  const showLeft = leftStart > 2\n  const showRight = rightEnd < total - 1\n\n  const pages: (number | \"...\")[] = [1]\n  if (showLeft) pages.push(\"...\")\n  pages.push(...range(leftStart, rightEnd))\n  if (showRight) pages.push(\"...\")\n  pages.push(total)\n  return pages\n}\n\nfunction Pagination({ page, total, onChange, siblings = 1, className }: PaginationProps) {\n  const pages = getPages(page, total, siblings)\n\n  return (\n    <nav className={cn(\"flex items-center gap-1\", className)} aria-label=\"Pagination\">\n      <button\n        onClick={() => onChange?.(page - 1)}\n        disabled={page <= 1}\n        className=\"flex h-9 w-9 items-center justify-center rounded-xl bg-secondary text-foreground transition-all hover:bg-secondary/80 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40\"\n      >\n        <ChevronLeft className=\"h-4 w-4\" />\n      </button>\n\n      {pages.map((p, i) =>\n        p === \"...\" ? (\n          <span key={i} className=\"flex h-9 w-9 items-center justify-center text-sm text-muted-foreground\">\n            <MoreHorizontal className=\"h-4 w-4\" />\n          </span>\n        ) : (\n          <button\n            key={i}\n            onClick={() => onChange?.(p)}\n            className={cn(\n              \"flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium\",\n              \"transition-all duration-150 active:scale-[0.97]\",\n              p === page\n                ? \"bg-primary text-primary-foreground shadow-[0_4px_14px_0_hsl(212_100%_47%/0.4)]\"\n                : \"bg-secondary text-foreground hover:bg-secondary/80\"\n            )}\n          >\n            {p}\n          </button>\n        )\n      )}\n\n      <button\n        onClick={() => onChange?.(page + 1)}\n        disabled={page >= total}\n        className=\"flex h-9 w-9 items-center justify-center rounded-xl bg-secondary text-foreground transition-all hover:bg-secondary/80 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40\"\n      >\n        <ChevronRight className=\"h-4 w-4\" />\n      </button>\n    </nav>\n  )\n}\n\nexport { Pagination }\nexport type { PaginationProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

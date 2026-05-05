@@ -1,0 +1,18 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { CalendarIcon } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\nexport interface DatePickerProps {\n  value?: Date\n  onChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nconst DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(\n  ({ value, onChange, placeholder = \"Pick a date\", disabled = false, className }, ref) => {\n    const [open, setOpen] = React.useState(false)\n\n    return (\n      <Popover open={open} onOpenChange={setOpen}>\n        <PopoverTrigger asChild>\n          <Button\n            ref={ref}\n            variant=\"outline\"\n            disabled={disabled}\n            className={cn(\n              \"w-full justify-start text-left font-normal\",\n              !value && \"text-muted-foreground\",\n              className\n            )}\n          >\n            <CalendarIcon className=\"mr-2 h-4 w-4 shrink-0\" />\n            {value ? format(value, \"PPP\") : <span>{placeholder}</span>}\n          </Button>\n        </PopoverTrigger>\n        <PopoverContent\n          align=\"start\"\n          className=\"w-auto p-0 rounded-[14px] border border-border bg-card shadow-md\"\n        >\n          <Calendar\n            mode=\"single\"\n            selected={value}\n            onSelect={(date) => {\n              onChange?.(date)\n              setOpen(false)\n            }}\n            initialFocus\n          />\n        </PopoverContent>\n      </Popover>\n    )\n  }\n)\nDatePicker.displayName = \"DatePicker\"\n\nexport { DatePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

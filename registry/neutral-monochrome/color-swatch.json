@@ -1,0 +1,14 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// ---------------------------------------------------------------------------\n// Individual swatch\n// ---------------------------------------------------------------------------\n\nexport interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {\n  color: string\n  label?: string\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nfunction ColorSwatch({\n  color,\n  label,\n  size = \"default\",\n  className,\n  ...props\n}: ColorSwatchProps) {\n  return (\n    <div\n      className={cn(\"inline-flex flex-col items-center gap-1.5\", className)}\n      {...props}\n    >\n      <div\n        className={cn(\n          \"rounded-[10px] border border-border/50\",\n          size === \"sm\"      && \"h-8 w-8\",\n          size === \"default\" && \"h-10 w-10\",\n          size === \"lg\"      && \"h-14 w-14\"\n        )}\n        style={{ background: color }}\n        aria-label={label ?? color}\n        title={label ?? color}\n      />\n      {label && (\n        <span className=\"text-[10px] font-medium text-muted-foreground\">\n          {label}\n        </span>\n      )}\n    </div>\n  )\n}\n\n// ---------------------------------------------------------------------------\n// Palette group\n// ---------------------------------------------------------------------------\n\nexport interface ColorPaletteProps extends React.HTMLAttributes<HTMLDivElement> {\n  swatches: Array<{ color: string; label?: string }>\n  size?: ColorSwatchProps[\"size\"]\n  label?: string\n}\n\nfunction ColorPalette({\n  swatches,\n  size = \"default\",\n  label,\n  className,\n  ...props\n}: ColorPaletteProps) {\n  return (\n    <div className={cn(\"space-y-2\", className)} {...props}>\n      {label && (\n        <p className=\"text-xs font-medium text-muted-foreground\">{label}</p>\n      )}\n      <div className=\"flex flex-wrap gap-2\">\n        {swatches.map((s, i) => (\n          <ColorSwatch key={i} color={s.color} label={s.label} size={size} />\n        ))}\n      </div>\n    </div>\n  )\n}\n\nexport { ColorSwatch, ColorPalette }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

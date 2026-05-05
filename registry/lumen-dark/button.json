@@ -1,0 +1,49 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Lumen Dark Button — elevated surface with three-layer shadow.\n * Depth principle applied:\n *   - Inset top-edge highlight (light from above)\n *   - Contact shadow (sharp, close)\n *   - Ambient shadow (soft, diffused)\n * Hover grows all three layers proportionally + background lightens.\n * Active flattens the shadow to simulate the button being pressed down.\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-md cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform] duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-s)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover),0_6px_16px_color-mix(in_oklch,var(--primary)_20%,transparent)]\",\n        secondary:\n          \"bg-muted text-muted-foreground \" +\n          \"[box-shadow:var(--shadow-s)] \" +\n          \"hover:bg-accent hover:text-accent-foreground hover:[box-shadow:var(--shadow-m)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/30\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.14 0 0)",
+      "--foreground": "oklch(0.97 0.01 85)",
+      "--card": "oklch(0.17 0 0)",
+      "--card-foreground": "oklch(0.97 0.01 85)",
+      "--popover": "oklch(0.19 0 0)",
+      "--popover-foreground": "oklch(0.97 0.01 85)",
+      "--primary": "oklch(0.78 0.14 85)",
+      "--primary-foreground": "oklch(0.16 0.02 85)",
+      "--secondary": "oklch(0.22 0 0)",
+      "--secondary-foreground": "oklch(0.85 0 0)",
+      "--muted": "oklch(0.2 0 0)",
+      "--muted-foreground": "oklch(0.6 0 0)",
+      "--accent": "oklch(0.25 0.015 85)",
+      "--accent-foreground": "oklch(0.97 0.01 85)",
+      "--destructive": "oklch(0.64 0.22 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(1 0 0 / 0.06)",
+      "--ring": "oklch(0.78 0.14 85)",
+      "--radius": "0.5rem",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.03),\n    0 1px 1px rgba(0, 0, 0, 0.35),\n    0 1px 2px rgba(0, 0, 0, 0.15)",
+      "--shadow-sm": "inset 0 1px 0 rgba(255, 255, 255, 0.05),\n    0 1px 2px rgba(0, 0, 0, 0.4),\n    0 2px 4px rgba(0, 0, 0, 0.2)",
+      "--shadow-md": "inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 8px rgba(0, 0, 0, 0.25)",
+      "--shadow-lg": "inset 0 1px 0 rgba(255, 255, 255, 0.12),\n    0 4px 8px rgba(0, 0, 0, 0.6),\n    0 8px 16px rgba(0, 0, 0, 0.3)",
+      "--shadow-xl": "inset 0 1px 0 rgba(255, 255, 255, 0.18),\n    0 8px 16px rgba(0, 0, 0, 0.7),\n    0 16px 32px rgba(0, 0, 0, 0.35)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.35),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.25),\n    0 0 0 1px rgba(255, 200, 100, 0.2),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(240, 170, 60, 0.18)"
+    }
+  }
+}

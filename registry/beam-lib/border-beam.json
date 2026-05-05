@@ -1,0 +1,11 @@
+{
+  "name": "border-beam",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/border-beam.tsx",
+      "content": "\"use client\"\n\nimport { BorderBeam as LibBorderBeam } from \"border-beam\"\nimport * as React from \"react\"\n\n/*\n * Thin re-export of the official `border-beam` package.\n *\n * This DS exists to demonstrate the same visual language as `beam-custom`\n * but using the published library at https://beam.jakubantalik.com (npm\n * package `border-beam`) rather than a hand-rolled CSS implementation.\n * The library auto-detects the wrapped child's border-radius and renders\n * the conic-gradient beam, masked stroke, and bloom layer for us.\n */\n\ntype BorderBeamProps = React.ComponentProps<typeof LibBorderBeam>\n\nconst BorderBeam = React.forwardRef<HTMLDivElement, BorderBeamProps>((props, ref) => (\n  <LibBorderBeam ref={ref} {...props} />\n))\nBorderBeam.displayName = \"BorderBeam\"\n\nexport { BorderBeam }\nexport type { BorderBeamProps }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

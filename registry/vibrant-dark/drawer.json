@@ -1,0 +1,18 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Drawer as DrawerPrimitive } from \"vaul\"\nimport { X } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Drawer: rounded-t-2xl, card bg, dark overlay\n\nconst Drawer = ({ shouldScaleBackground = true, ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />\n)\nDrawer.displayName = \"Drawer\"\n\nconst DrawerTrigger = DrawerPrimitive.Trigger\nconst DrawerPortal = DrawerPrimitive.Portal\nconst DrawerClose = DrawerPrimitive.Close\n\nconst DrawerOverlay = React.forwardRef<\n  React.ComponentRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    className={cn(\"fixed inset-0 z-50 bg-black/70 backdrop-blur-sm\", className)}\n    {...props}\n  />\n))\nDrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName\n\nconst DrawerContent = React.forwardRef<\n  React.ComponentRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-2xl bg-card\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"mx-auto mt-3 h-1 w-10 rounded-full bg-border\" />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n))\nDrawerContent.displayName = DrawerPrimitive.Content.displayName\n\nconst DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"flex flex-col gap-1.5 p-5 text-center sm:text-left\", className)} {...props} />\n)\n\nconst DrawerFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"mt-auto flex flex-col gap-2 p-5\", className)} {...props} />\n)\n\nconst DrawerTitle = React.forwardRef<\n  React.ComponentRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    className={cn(\"text-lg font-semibold text-foreground\", className)}\n    {...props}\n  />\n))\nDrawerTitle.displayName = DrawerPrimitive.Title.displayName\n\nconst DrawerDescription = React.forwardRef<\n  React.ComponentRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nDrawerDescription.displayName = DrawerPrimitive.Description.displayName\n\nexport { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

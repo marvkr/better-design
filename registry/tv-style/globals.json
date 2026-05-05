@@ -1,0 +1,51 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Tv Style",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n/*\n * TV Style — inspired by classic split-flap airport/train terminal boards\n * (see: magnum6actual/flipoff). The aesthetic is a retro mechanical display:\n * dark deep canvas, near-black tile surfaces with a thin horizontal seam,\n * bright Helvetica characters, and vivid \"scramble\" accent colors (amber,\n * cyan, magenta, red) borrowed from the flipoff scramble palette.\n *\n * Principles:\n *  - Flat dark surfaces (no heavy shadows) — tiles are recessed, not raised\n *  - Tiny 3px radius — mirrors the real flip-tile's near-square geometry\n *  - Amber primary (#FFCC00) — the strongest hue in the scramble set\n *  - Inset top-edge \"seam\" highlights via box-shadow tokens\n *  - Uppercase, bold, letter-spaced display text for headings\n */\n\n:root {\n  /* ─── Surfaces ─── */\n  --background: oklch(0.14 0 0);              /* Deep canvas — the \"off\" screen */\n  --foreground: oklch(0.985 0 0);             /* Pure white tile text */\n\n  --card: oklch(0.2 0 0);                     /* Tile face ~#222 — raised over canvas */\n  --card-foreground: oklch(0.985 0 0);\n\n  --popover: oklch(0.22 0 0);                 /* Floating surfaces */\n  --popover-foreground: oklch(0.985 0 0);\n\n  /* ─── Primary: amber #FFCC00 — the dominant scramble hue ─── */\n  --primary: oklch(0.87 0.17 95);\n  --primary-foreground: oklch(0.14 0 0);\n\n  --secondary: oklch(0.24 0 0);               /* Slightly raised tile */\n  --secondary-foreground: oklch(0.985 0 0);\n\n  --muted: oklch(0.22 0 0);\n  --muted-foreground: oklch(0.64 0 0);\n\n  --accent: oklch(0.26 0 0);\n  --accent-foreground: oklch(0.985 0 0);\n\n  --destructive: oklch(0.62 0.25 25);          /* #FF2D00 scramble red */\n  --destructive-foreground: oklch(0.985 0 0);\n\n  --border: oklch(1 0 0 / 0.08);               /* Subtle white 8% — tile gap */\n  --input: oklch(0.17 0 0);                    /* Recessed input well */\n  --ring: oklch(0.87 0.17 95);                 /* Amber ring matches primary */\n  --radius: 0.1875rem;                          /* 3px — tile radius from flipoff */\n\n  /* ─── Flipboard scramble palette (accent hues for charts/badges) ─── */\n  --tv-cyan: oklch(0.78 0.16 220);             /* #00AAFF */\n  --tv-teal: oklch(0.88 0.15 175);             /* #00FFCC */\n  --tv-magenta: oklch(0.57 0.27 305);           /* #AA00FF */\n  --tv-red: oklch(0.62 0.25 25);                /* #FF2D00 */\n  --tv-amber: oklch(0.87 0.17 95);              /* #FFCC00 */\n  --tv-green: oklch(0.86 0.24 145);             /* #00FF7F — accent bar */\n\n  /*\n   * ─── Shadow scale ───\n   * Flipoff boards are flat-dark; we avoid bloom/ambient shadows and instead\n   * emphasise the inset mechanical \"seam\" that runs across every tile.\n   * Shadows below use a thin contact line + a subtle inset top-edge highlight\n   * (light from above is implied by the bright foreground on dark surfaces).\n   */\n  --shadow-xs:\n    inset 0 1px 0 rgba(255, 255, 255, 0.02),\n    0 1px 1px rgba(0, 0, 0, 0.5);\n\n  --shadow-sm:\n    inset 0 1px 0 rgba(255, 255, 255, 0.03),\n    0 1px 2px rgba(0, 0, 0, 0.5);\n\n  --shadow-md:\n    inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 2px 4px rgba(0, 0, 0, 0.55);\n\n  --shadow-lg:\n    inset 0 1px 0 rgba(255, 255, 255, 0.05),\n    0 4px 8px rgba(0, 0, 0, 0.6);\n\n  --shadow-xl:\n    inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 8px 16px rgba(0, 0, 0, 0.65);\n\n  --shadow-inset:\n    inset 0 1px 2px rgba(0, 0, 0, 0.55),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.02);\n\n  /* Amber-glow variant — primary button bloom, borrowed from flipoff's accent bar */\n  --shadow-primary:\n    inset 0 1px 0 rgba(255, 255, 255, 0.35),\n    0 0 0 1px rgba(255, 204, 0, 0.28),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 14px rgba(255, 204, 0, 0.22);\n\n  /* Button-specific shadows (pressed vs resting) */\n  --shadow-button:\n    inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.55);\n\n  --shadow-button-hover:\n    inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.6);\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: var(--radius);\n  --radius-md: var(--radius);\n  --radius-lg: calc(var(--radius) + 1px);\n  --radius-xl: calc(var(--radius) + 3px);\n\n  --shadow-s: var(--shadow-sm);\n  --shadow-m: var(--shadow-md);\n  --shadow-l: var(--shadow-lg);\n  --shadow-inset: var(--shadow-inset);\n  --shadow-button: var(--shadow-button);\n  --shadow-button-hover: var(--shadow-button-hover);\n  --shadow-primary: var(--shadow-primary);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n    font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.14 0 0)",
+      "--foreground": "oklch(0.985 0 0)",
+      "--card": "oklch(0.2 0 0)",
+      "--card-foreground": "oklch(0.985 0 0)",
+      "--popover": "oklch(0.22 0 0)",
+      "--popover-foreground": "oklch(0.985 0 0)",
+      "--primary": "oklch(0.87 0.17 95)",
+      "--primary-foreground": "oklch(0.14 0 0)",
+      "--secondary": "oklch(0.24 0 0)",
+      "--secondary-foreground": "oklch(0.985 0 0)",
+      "--muted": "oklch(0.22 0 0)",
+      "--muted-foreground": "oklch(0.64 0 0)",
+      "--accent": "oklch(0.26 0 0)",
+      "--accent-foreground": "oklch(0.985 0 0)",
+      "--destructive": "oklch(0.62 0.25 25)",
+      "--destructive-foreground": "oklch(0.985 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(0.17 0 0)",
+      "--ring": "oklch(0.87 0.17 95)",
+      "--radius": "0.1875rem",
+      "--tv-cyan": "oklch(0.78 0.16 220)",
+      "--tv-teal": "oklch(0.88 0.15 175)",
+      "--tv-magenta": "oklch(0.57 0.27 305)",
+      "--tv-red": "oklch(0.62 0.25 25)",
+      "--tv-amber": "oklch(0.87 0.17 95)",
+      "--tv-green": "oklch(0.86 0.24 145)",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.02),\n    0 1px 1px rgba(0, 0, 0, 0.5)",
+      "--shadow-sm": "inset 0 1px 0 rgba(255, 255, 255, 0.03),\n    0 1px 2px rgba(0, 0, 0, 0.5)",
+      "--shadow-md": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 2px 4px rgba(0, 0, 0, 0.55)",
+      "--shadow-lg": "inset 0 1px 0 rgba(255, 255, 255, 0.05),\n    0 4px 8px rgba(0, 0, 0, 0.6)",
+      "--shadow-xl": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 8px 16px rgba(0, 0, 0, 0.65)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.55),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.02)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.35),\n    0 0 0 1px rgba(255, 204, 0, 0.28),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 14px rgba(255, 204, 0, 0.22)",
+      "--shadow-button": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.55)",
+      "--shadow-button-hover": "inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.6)"
+    }
+  }
+}

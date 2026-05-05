@@ -1,0 +1,17 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { X } from \"lucide-react\"\n\n// Figma Notification: alert/notification item component\n\ninterface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n  onDismiss?: () => void\n  variant?: \"default\" | \"success\" | \"warning\" | \"destructive\"\n  unread?: boolean\n}\n\nconst variantClasses = {\n  default: \"border-border\",\n  success: \"border-emerald-200 bg-emerald-50/50\",\n  warning: \"border-orange-200 bg-orange-50/50\",\n  destructive: \"border-destructive/20 bg-destructive/5\",\n}\n\nfunction Notification({\n  icon,\n  title,\n  description,\n  action,\n  onDismiss,\n  variant = \"default\",\n  unread,\n  className,\n  ...props\n}: NotificationProps) {\n  return (\n    <div\n      className={cn(\n        \"relative flex gap-3 rounded-[12px] border bg-background p-4\",\n        \"shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\",\n        variantClasses[variant],\n        className\n      )}\n      {...props}\n    >\n      {unread && (\n        <div className=\"absolute right-3 top-3 h-2 w-2 rounded-full bg-primary\" />\n      )}\n      {icon && (\n        <div className=\"flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-muted-foreground\">\n          {icon}\n        </div>\n      )}\n      <div className=\"flex flex-1 flex-col gap-1 min-w-0\">\n        <p className=\"text-sm font-medium text-foreground\">{title}</p>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n        {action && <div className=\"mt-2\">{action}</div>}\n      </div>\n      {onDismiss && (\n        <button\n          onClick={onDismiss}\n          className=\"shrink-0 text-muted-foreground hover:text-foreground transition-colors\"\n        >\n          <X className=\"h-4 w-4\" />\n          <span className=\"sr-only\">Dismiss</span>\n        </button>\n      )}\n    </div>\n  )\n}\n\nexport { Notification }\nexport type { NotificationProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

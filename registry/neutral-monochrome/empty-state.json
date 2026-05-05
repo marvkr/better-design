@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nfunction EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  className,\n  ...props\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-[10px]\",\n        \"border border-dashed border-border bg-card/50\",\n        \"px-6 py-12 text-center\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <div className=\"flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-muted-foreground\">\n          {icon}\n        </div>\n      )}\n      <div className=\"space-y-1.5 max-w-sm\">\n        <h3 className=\"text-sm font-semibold text-foreground\">{title}</h3>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {action && <div className=\"mt-1\">{action}</div>}\n    </div>\n  )\n}\n\nexport { EmptyState }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

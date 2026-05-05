@@ -1,0 +1,17 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { TrendingUp, TrendingDown } from \"lucide-react\"\n\n// Dynamic Stat Card: metric display with card bg and colored trend badge\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: string | number\n  change?: number\n  changeLabel?: string\n  icon?: React.ReactNode\n}\n\nfunction StatCard({ label, value, change, changeLabel, icon, className, ...props }: StatCardProps) {\n  const isPositive = change !== undefined && change >= 0\n  const TrendIcon = isPositive ? TrendingUp : TrendingDown\n\n  return (\n    <div\n      className={cn(\n        \"flex flex-col gap-4 rounded-[14px] bg-card p-5\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-start justify-between gap-2\">\n        <p className=\"text-sm text-muted-foreground\">{label}</p>\n        {icon && (\n          <div className=\"flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-secondary text-muted-foreground\">\n            {icon}\n          </div>\n        )}\n      </div>\n      <div className=\"flex items-end justify-between gap-2\">\n        <span className=\"text-2xl font-semibold text-foreground\">{value}</span>\n        {change !== undefined && (\n          <span\n            className={cn(\n              \"flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium\",\n              isPositive\n                ? \"bg-[hsl(var(--success)/0.15)] text-[hsl(var(--success))]\"\n                : \"bg-destructive/15 text-destructive\"\n            )}\n          >\n            <TrendIcon className=\"h-3 w-3\" />\n            {Math.abs(change)}%\n            {changeLabel && <span className=\"text-muted-foreground\">{changeLabel}</span>}\n          </span>\n        )}\n      </div>\n    </div>\n  )\n}\n\nexport { StatCard }\nexport type { StatCardProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

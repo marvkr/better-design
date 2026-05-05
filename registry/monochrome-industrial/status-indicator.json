@@ -1,0 +1,17 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * StatusIndicator — dot + label. Uses semantic colors with optional pulse animation.\n */\n\nconst dotVariants = cva(\"h-2 w-2 rounded-full shrink-0 \", {\n variants: {\n status: {\n online: \"bg-[oklch(0.78_0.15_145)]\",\n offline: \"bg-muted-foreground/60\",\n busy: \"bg-destructive\",\n away: \"bg-[oklch(0.82_0.14_80)]\",\n idle: \"bg-muted-foreground/40\",\n },\n },\n defaultVariants: {\n status: \"online\",\n },\n})\n\nexport interface StatusIndicatorProps\n extends React.HTMLAttributes<HTMLSpanElement>,\n VariantProps<typeof dotVariants> {\n label?: React.ReactNode\n pulse?: boolean\n}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n ({ className, status, label, pulse, ...props }, ref) => (\n <span\n ref={ref}\n className={cn(\"inline-flex items-center gap-2 text-xs text-muted-foreground\", className)}\n {...props}\n >\n <span className=\"relative inline-flex\">\n <span className={cn(dotVariants({ status }))} />\n {pulse && (\n <span\n className={cn(\n \"absolute inset-0 rounded-full animate-ping\",\n dotVariants({ status }),\n \"opacity-60 [box-shadow:none]\"\n )}\n />\n )}\n </span>\n {label && <span className=\"font-medium text-foreground\">{label}</span>}\n </span>\n )\n)\nStatusIndicator.displayName = \"StatusIndicator\"\n\nexport { StatusIndicator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

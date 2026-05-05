@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Apple Spinner: circular loading indicator\n// Sizes: sm (16px), md (20px), lg (24px), xl (32px)\n\ninterface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"md\" | \"lg\" | \"xl\"\n}\n\nconst sizeClasses = {\n  sm: \"h-4 w-4 border-2\",\n  md: \"h-5 w-5 border-2\",\n  lg: \"h-6 w-6 border-2\",\n  xl: \"h-8 w-8 border-[3px]\",\n}\n\nfunction Spinner({ size = \"md\", className, ...props }: SpinnerProps) {\n  return (\n    <div\n      role=\"status\"\n      className={cn(\n        \"animate-spin rounded-full border-border border-t-foreground\",\n        sizeClasses[size],\n        className\n      )}\n      {...props}\n    >\n      <span className=\"sr-only\">Loading...</span>\n    </div>\n  )\n}\n\nexport { Spinner }\nexport type { SpinnerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

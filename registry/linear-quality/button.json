@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Linear Quality Button — precision-crafted, purple (#5e6ad2) primary\n// Precise ring + drop shadow treatment, tight 0.5rem radius\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-md transition-all duration-150 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98] active:brightness-95\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Purple primary — precise multi-layer ring + drop shadow\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_55%,transparent),0_1px_3px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)] \" +\n          \"hover:bg-primary/90 hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_70%,transparent),0_2px_6px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15)]\",\n        // Secondary: very dark panel, border\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"border border-border \" +\n          \"shadow-[0_1px_2px_rgba(0,0,0,0.25)] \" +\n          \"hover:bg-accent hover:border-border/60 hover:shadow-[0_1px_4px_rgba(0,0,0,0.35)]\",\n        // Outline: transparent with full border\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary hover:border-border/80\",\n        // Ghost: understated\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-secondary hover:text-foreground\",\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[0_0_0_1px_rgba(239,68,68,0.4),0_1px_3px_rgba(0,0,0,0.3)] \" +\n          \"hover:bg-destructive/90\",\n        // Link\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-4\",\n        lg:      \"h-10 px-6 text-sm\",\n        icon:    \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.1371 0.0025 286.07)",
+      "--foreground": "oklch(0.9619 0 0)",
+      "--card": "oklch(0.1669 0.0032 286.05)",
+      "--card-foreground": "oklch(0.9619 0 0)",
+      "--popover": "oklch(0.1612 0.0029 286.07)",
+      "--popover-foreground": "oklch(0.9619 0 0)",
+      "--primary": "oklch(0.5966 0.167 278.56)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.212 0.004 286.06)",
+      "--secondary-foreground": "oklch(0.7244 0 0)",
+      "--muted": "oklch(0.2439 0.005 286.02)",
+      "--muted-foreground": "oklch(0.5843 0.0154 285.91)",
+      "--accent": "oklch(0.2543 0.0053 286.02)",
+      "--accent-foreground": "oklch(0.9619 0 0)",
+      "--destructive": "oklch(0.5786 0.2137 27.17)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.2555 0.004 286.11)",
+      "--input": "oklch(0.1894 0.0041 286)",
+      "--ring": "oklch(0.5966 0.167 278.56)",
+      "--radius": "0.5rem"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Empty State: card bg with dashed border treatment\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nfunction EmptyState({ icon, title, description, action, className, ...props }: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/50 bg-card/30 p-10 text-center\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <div className=\"mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-muted-foreground\">\n          {icon}\n        </div>\n      )}\n      <p className=\"text-sm font-medium text-foreground\">{title}</p>\n      {description && (\n        <p className=\"mt-1 text-sm text-muted-foreground\">{description}</p>\n      )}\n      {action && <div className=\"mt-6\">{action}</div>}\n    </div>\n  )\n}\n\nexport { EmptyState }\nexport type { EmptyStateProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

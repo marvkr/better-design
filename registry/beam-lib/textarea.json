@@ -1,0 +1,14 @@
+{
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport { BorderBeam } from \"./border-beam\"\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\"\n\nexport interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  beam?: boolean\n}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, beam = true, ...props }, ref) => {\n    const textarea = (\n      <textarea\n        ref={ref}\n        className={cn(formFieldBase, formFieldMultiLine, className)}\n        {...props}\n      />\n    )\n\n    if (!beam) return textarea\n\n    return (\n      <BorderBeam size=\"md\" colorVariant=\"colorful\" theme=\"dark\" className=\"block w-full\">\n        {textarea}\n      </BorderBeam>\n    )\n  },\n)\nTextarea.displayName = \"Textarea\"\n\nexport { Textarea }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

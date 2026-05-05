@@ -1,0 +1,43 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Light Marketplace",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n:root {\n  --background: oklch(1 0 0);\n  --foreground: oklch(0.1788 0.0047 264.45);\n\n  /* Card: rgb(240,240,240) — browser-extracted from the original site/jaydwivedi */\n  /* Energetic uses bg color contrast for cards, zero shadow anywhere */\n  --card: oklch(0.9542 0 0);\n  --card-foreground: oklch(0.1788 0.0047 264.45);\n\n  --popover: oklch(1 0 0);\n  --popover-foreground: oklch(0.1788 0.0047 264.45);\n\n  --primary: oklch(0.2244 0.0039 264.49);\n  --primary-foreground: oklch(1 0 0);\n\n  --secondary: oklch(0.9619 0 0);\n  --secondary-foreground: oklch(0.2244 0.0039 264.49);\n\n  --muted: oklch(0.9696 0 0);\n  --muted-foreground: oklch(0.5547 0 0);\n\n  --accent: oklch(0.9696 0 0);\n  --accent-foreground: oklch(0.2244 0.0039 264.49);\n\n  --destructive: oklch(0.6356 0.2082 25.38);\n  --destructive-foreground: oklch(1 0 0);\n\n  --border: oklch(0.9234 0 0);\n  --input: oklch(0.9234 0 0);\n  --ring: oklch(0.2244 0.0039 264.49);\n  --radius: 0.875rem;\n\n  /* Shadow overrides — light theme: minimal, borderless aesthetic */\n  --shadow-2xs: 0 1px 2px 0 rgba(0,0,0,0.04);\n  --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.06);\n  --shadow-sm:  0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05);\n  --shadow:     0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);\n  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);\n  --shadow-lg:  0 8px 16px -2px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);\n  --shadow-xl:  0 16px 24px -4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04);\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: calc(var(--radius) - 2px);\n  --radius-lg: var(--radius);\n  --radius-xl: calc(var(--radius) + 4px);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  html {\n    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(1 0 0)",
+      "--foreground": "oklch(0.1788 0.0047 264.45)",
+      "--card": "oklch(0.9542 0 0)",
+      "--card-foreground": "oklch(0.1788 0.0047 264.45)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.1788 0.0047 264.45)",
+      "--primary": "oklch(0.2244 0.0039 264.49)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9619 0 0)",
+      "--secondary-foreground": "oklch(0.2244 0.0039 264.49)",
+      "--muted": "oklch(0.9696 0 0)",
+      "--muted-foreground": "oklch(0.5547 0 0)",
+      "--accent": "oklch(0.9696 0 0)",
+      "--accent-foreground": "oklch(0.2244 0.0039 264.49)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9234 0 0)",
+      "--input": "oklch(0.9234 0 0)",
+      "--ring": "oklch(0.2244 0.0039 264.49)",
+      "--radius": "0.875rem",
+      "--shadow-2xs": "0 1px 2px 0 rgba(0,0,0,0.04)",
+      "--shadow-xs": "0 1px 2px 0 rgba(0,0,0,0.06)",
+      "--shadow-sm": "0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05)",
+      "--shadow": "0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)",
+      "--shadow-md": "0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05)",
+      "--shadow-lg": "0 8px 16px -2px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)",
+      "--shadow-xl": "0 16px 24px -4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04)"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Glassmorphic Dark Code Block: syntax-highlighted code display with copy button\n\ninterface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  showLineNumbers?: boolean\n  filename?: string\n}\n\nfunction CodeBlock({\n  code,\n  language,\n  showLineNumbers = false,\n  filename,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  const lines = code.split(\"\\n\")\n\n  return (\n    <div\n      className={cn(\n        \"relative rounded-xl overflow-hidden\",\n        \"backdrop-blur-xl bg-white/[0.04] border border-white/10\",\n        \"shadow-[inset_0_0_8px_rgba(255,255,255,0.08)]\",\n        className\n      )}\n      {...props}\n    >\n      {filename && (\n        <div className=\"flex items-center justify-between border-b border-white/[0.06] px-4 py-2.5 backdrop-blur-md bg-white/[0.03]\">\n          <span className=\"text-xs font-medium text-white/50\">{filename}</span>\n          {language && (\n            <span className=\"text-xs text-white/30 rounded-full px-2 py-0.5 bg-white/[0.06]\">\n              {language}\n            </span>\n          )}\n        </div>\n      )}\n      <div className=\"relative\">\n        <pre className=\"overflow-x-auto p-4 text-sm text-white/80\">\n          <code>\n            {showLineNumbers\n              ? lines.map((line, i) => (\n                  <span key={i} className=\"flex\">\n                    <span className=\"mr-4 w-6 shrink-0 select-none text-right text-white/20\">\n                      {i + 1}\n                    </span>\n                    <span>{line}</span>\n                  </span>\n                ))\n              : code}\n          </code>\n        </pre>\n        <button\n          onClick={handleCopy}\n          className={cn(\n            \"absolute right-2 top-2\",\n            \"inline-flex items-center gap-1.5 rounded-full px-2.5 py-1\",\n            \"backdrop-blur-md bg-white/[0.08] border border-white/10\",\n            \"text-xs text-white/50 transition-all duration-200\",\n            \"hover:bg-white/[0.14] hover:text-white/80\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.65_0.19_250)]/40\"\n          )}\n        >\n          <Icon\n            icon={copied ? \"tabler:check\" : \"tabler:copy\"}\n            className={cn(\"h-3 w-3\", copied && \"text-emerald-400\")}\n          />\n          {copied ? \"Copied!\" : \"Copy\"}\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeBlock }\nexport type { CodeBlockProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

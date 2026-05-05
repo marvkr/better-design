@@ -1,0 +1,14 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Stripe ButtonGroup: groups buttons horizontally, removes inner rounded edges\n// Outer buttons keep rounded-[10px], inner buttons get flat edges where they meet\n// Divider between buttons via ring-inset on adjacent elements\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n  attached?: boolean\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", attached = true, children, ...props }, ref) => {\n    const isHorizontal = orientation === \"horizontal\"\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\n          \"inline-flex\",\n          isHorizontal ? \"flex-row\" : \"flex-col\",\n          attached && [\n            // For attached groups, clip children and merge borders\n            \"rounded-[10px]\",\n            \"*:rounded-none\",\n            // First child\n            isHorizontal\n              ? \"[&>*:first-child]:rounded-l-[10px] [&>*:last-child]:rounded-r-[10px]\"\n              : \"[&>*:first-child]:rounded-t-[10px] [&>*:last-child]:rounded-b-[10px]\",\n            // Collapse adjacent borders\n            isHorizontal\n              ? \"[&>*:not(:first-child)]:-ml-px\"\n              : \"[&>*:not(:first-child)]:-mt-px\",\n            // Stacking context so focused button appears on top\n            \"*:relative [&>*:focus-visible]:z-10 [&>*:hover]:z-10\",\n          ],\n          !attached && [\n            isHorizontal ? \"gap-2\" : \"gap-2 flex-col\",\n          ],\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    )\n  }\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\n// Convenience item wrapper — just passes through, group handles styling\ninterface ButtonGroupItemProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ButtonGroupItem = React.forwardRef<HTMLDivElement, ButtonGroupItemProps>(\n  ({ className, children, ...props }, ref) => {\n    return (\n      <div ref={ref} className={cn(\"contents\", className)} {...props}>\n        {children}\n      </div>\n    )\n  }\n)\nButtonGroupItem.displayName = \"ButtonGroupItem\"\n\nexport { ButtonGroup, ButtonGroupItem }\nexport type { ButtonGroupProps, ButtonGroupItemProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

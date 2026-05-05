@@ -1,0 +1,17 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Check, Copy } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Apple Copy Button: icon button that copies text to clipboard\n\ninterface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string\n  timeout?: number\n}\n\nfunction CopyButton({\n  value,\n  timeout = 2000,\n  className,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(value)\n    setCopied(true)\n    setTimeout(() => setCopied(false), timeout)\n  }\n\n  return (\n    <button\n      onClick={handleCopy}\n      className={cn(\n        \"inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground\",\n        \"transition-colors hover:bg-secondary hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? (\n        <Check className=\"h-3.5 w-3.5 text-emerald-600\" />\n      ) : (\n        <Copy className=\"h-3.5 w-3.5\" />\n      )}\n      <span className=\"sr-only\">{copied ? \"Copied\" : \"Copy to clipboard\"}</span>\n    </button>\n  )\n}\n\nexport { CopyButton }\nexport type { CopyButtonProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

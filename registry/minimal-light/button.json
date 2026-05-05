@@ -1,0 +1,49 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe Button — browser-extracted from the original site (2026)\n// Light theme: #f5f5f5 bg, #4a4c52 text, black primary buttons\n// Key trait: NO box-shadows on buttons — clean minimal border-only styling\n// Primary: black fill (site uses oklab(0 0 0/0.8) ~ near-black), white text, fontWeight 600\n// Secondary: light gray bg, dark text, 1px border, no shadow\n// Radius: 12px throughout\n// Transitions smooth (200ms)\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold\",\n    \"outline-none transition-all duration-200 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary: black fill — no shadow (luxeui's clean signature)\n        default:\n          \"rounded-xl bg-primary text-primary-foreground \" +\n          \"hover:bg-primary/80 active:bg-primary/70\",\n\n        // Secondary: light gray, 1px border, no shadow\n        secondary:\n          \"rounded-xl bg-secondary text-secondary-foreground border border-border \" +\n          \"hover:bg-accent hover:border-border/60\",\n\n        // Outline: border only — luxeui's minimal style\n        outline:\n          \"rounded-xl border border-border bg-transparent text-foreground \" +\n          \"hover:bg-accent hover:border-border/80\",\n\n        // Ghost: no border, no shadow\n        ghost:\n          \"rounded-xl text-muted-foreground \" +\n          \"hover:bg-accent hover:text-foreground\",\n\n        // Destructive\n        destructive:\n          \"rounded-xl bg-destructive text-destructive-foreground \" +\n          \"hover:bg-destructive/90\",\n\n        // Link\n        link:\n          \"text-foreground underline-offset-4 hover:underline\",\n\n        // Muted\n        muted:\n          \"rounded-xl bg-muted text-muted-foreground \" +\n          \"hover:bg-accent hover:text-foreground\",\n      },\n      size: {\n        sm:      \"h-8 px-4 text-xs rounded-lg\",\n        default: \"h-[38px] px-4\",\n        lg:      \"h-[44px] px-4 text-base\",\n        xl:      \"h-14 px-10 text-base\",\n        icon:    \"h-[38px] w-[38px] rounded-xl\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.9696 0 0)",
+      "--foreground": "oklch(0.4208 0.0101 271.17)",
+      "--card": "oklch(0.9772 0 0)",
+      "--card-foreground": "oklch(0.4208 0.0101 271.17)",
+      "--popover": "oklch(0.9772 0 0)",
+      "--popover-foreground": "oklch(0.4208 0.0101 271.17)",
+      "--primary": "oklch(0 0 0)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9466 0 0)",
+      "--secondary-foreground": "oklch(0.4751 0.0117 271.16)",
+      "--muted": "oklch(0.9696 0 0)",
+      "--muted-foreground": "oklch(0.5459 0 0)",
+      "--accent": "oklch(0.9466 0 0)",
+      "--accent-foreground": "oklch(0.4208 0.0101 271.17)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.8845 0 0)",
+      "--input": "oklch(0.9696 0 0)",
+      "--ring": "oklch(0 0 0)",
+      "--radius": "0.75rem",
+      "--shadow-2xs": "0 1px 2px 0 rgba(0,0,0,0.03)",
+      "--shadow-xs": "0 1px 2px 0 rgba(0,0,0,0.05)",
+      "--shadow-sm": "0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04)",
+      "--shadow": "0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)",
+      "--shadow-md": "0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06)",
+      "--shadow-lg": "0 8px 16px -2px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)",
+      "--shadow-xl": "0 16px 24px -4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04)"
+    }
+  }
+}

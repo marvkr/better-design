@@ -1,0 +1,15 @@
+{
+  "name": "toaster",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toaster.tsx",
+      "content": "\"use client\"\n\nimport {\n  Toast,\n  ToastClose,\n  ToastDescription,\n  ToastProvider,\n  ToastTitle,\n  ToastViewport,\n} from \"@/components/ui/toast\"\nimport { useToast } from \"@/components/ui/use-toast\"\n\nexport function Toaster() {\n  const { toasts } = useToast()\n\n  return (\n    <ToastProvider>\n      {toasts.map(function ({ id, title, description, action, ...props }) {\n        return (\n          <Toast key={id} {...props}>\n            <div className=\"grid gap-1\">\n              {title && <ToastTitle>{title}</ToastTitle>}\n              {description && (\n                <ToastDescription>{description}</ToastDescription>\n              )}\n            </div>\n            {action}\n            <ToastClose />\n          </Toast>\n        )\n      })}\n      <ToastViewport />\n    </ToastProvider>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/registry/linear/toast.json",
+    "http://localhost:3000/registry/linear/use-toast.json"
+  ]
+}

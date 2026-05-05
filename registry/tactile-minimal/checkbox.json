@@ -1,0 +1,18 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSound } from \"./sound-provider\"\n\n// Tactile Minimal Checkbox — flat square with clean check state + tick sound\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, onCheckedChange, ...props }, ref) => {\n  const { playClick } = useSound()\n  return (\n    <CheckboxPrimitive.Root\n      ref={ref}\n      className={cn(\n        \"peer h-4 w-4 shrink-0 rounded-[4px]\",\n        \"border border-border bg-background\",\n        \"transition-all duration-150\",\n        \"active:scale-[0.95]\",\n        \"hover:border-ring/50\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground\",\n        className\n      )}\n      onCheckedChange={(checked) => {\n        playClick()\n        onCheckedChange?.(checked)\n      }}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator className=\"flex items-center justify-center text-current\">\n        <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n})\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox",
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

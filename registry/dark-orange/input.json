@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Sharp Dark Input — from the original site:\n// Wrapper has rounded-[10px] bg-background shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\n// Ring border via before: pseudo (ring-1 ring-inset ring-stroke-soft-200)\n// Focus: before:ring-stroke-strong-950 + shadow-button-important-focus\n// Input: h-10 px-3 bg-transparent text-foreground placeholder:text-muted-foreground\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-10 w-full rounded-[10px] border border-border bg-background px-3 py-2 text-sm\",\n          \"shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"placeholder:text-muted-foreground\",\n          \"transition duration-200 ease-out\",\n          \"hover:border-foreground/30\",\n          \"focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]\",\n          \"disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

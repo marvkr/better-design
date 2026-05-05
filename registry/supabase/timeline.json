@@ -1,0 +1,14 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Supabase Timeline: vertical list of events with connector lines\n\ninterface TimelineItem {\n  title: string\n  description?: string\n  date?: string\n  icon?: React.ReactNode\n  variant?: \"default\" | \"success\" | \"warning\" | \"destructive\"\n}\n\ninterface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {\n  items: TimelineItem[]\n}\n\nconst variantDotClass = {\n  default: \"bg-border\",\n  success: \"bg-emerald-500\",\n  warning: \"bg-orange-500\",\n  destructive: \"bg-destructive\",\n}\n\nfunction Timeline({ items, className, ...props }: TimelineProps) {\n  return (\n    <div className={cn(\"flex flex-col\", className)} {...props}>\n      {items.map((item, index) => {\n        const isLast = index === items.length - 1\n        const variant = item.variant ?? \"default\"\n\n        return (\n          <div key={index} className=\"flex gap-3\">\n            {/* Left column: dot + line */}\n            <div className=\"flex flex-col items-center\">\n              <div\n                className={cn(\n                  \"flex h-7 w-7 shrink-0 items-center justify-center rounded-full ring-2 ring-background\",\n                  item.icon ? \"bg-secondary\" : variantDotClass[variant]\n                )}\n              >\n                {item.icon ? (\n                  <span className=\"text-muted-foreground [&>svg]:h-3.5 [&>svg]:w-3.5\">\n                    {item.icon}\n                  </span>\n                ) : null}\n              </div>\n              {!isLast && (\n                <div className=\"mt-1 h-full w-px bg-border\" />\n              )}\n            </div>\n\n            {/* Right column: content */}\n            <div className={cn(\"pb-6\", isLast && \"pb-0\")}>\n              <div className=\"flex items-baseline gap-2\">\n                <p className=\"text-sm font-medium text-foreground\">{item.title}</p>\n                {item.date && (\n                  <span className=\"text-xs text-muted-foreground\">{item.date}</span>\n                )}\n              </div>\n              {item.description && (\n                <p className=\"mt-1 text-sm text-muted-foreground\">{item.description}</p>\n              )}\n            </div>\n          </div>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { Timeline }\nexport type { TimelineProps, TimelineItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

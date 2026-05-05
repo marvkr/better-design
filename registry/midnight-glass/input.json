@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n// Midnight Glass Input — frosted glass field with pill shape\n// Glass bg over midnight blue, inset glow, indigo focus ring\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-12 w-full rounded-full px-5 py-2 text-[15px] text-foreground\",\n          \"backdrop-blur-xl bg-white/[0.05]\",\n          \"border border-white/[0.12]\",\n          \"shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-all duration-300 ease-out\",\n          \"hover:bg-white/[0.08] hover:border-white/[0.18]\",\n          \"focus-visible:outline-none focus-visible:border-primary/50\",\n          \"focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

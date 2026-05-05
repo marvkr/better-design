@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Earthy — neutral dark, near-black bg, pure white primary */
+  /* Actual site: the original site — dark mode default, 8px radius */
+  /* Background: lab(2.51% .24 -.89) ≈ #09090b near-black with slight cool */
+  /* Secondary: lab(15.73% .61 -2.17) ≈ #1c1c22 dark cool gray panel */
+  /* Border: same as secondary */
+  /* Primary: #fff pure white — monochromatic like Luxe but sharper */
+  /* Radius: 0.5rem = 8px (vs Luxe 12px, Energetic 14px) */
+
+  --background: oklch(0.1417 0.0044 285.82);           /* #09090b near-black */
+  --foreground: oklch(0.9848 0 0);             /* near-white */
+
+  --card: oklch(0.1417 0.0044 285.82);                 /* same as background */
+  --card-foreground: oklch(0.9848 0 0);
+
+  --popover: oklch(0.1417 0.0044 285.82);
+  --popover-foreground: oklch(0.9848 0 0);
+
+  --primary: oklch(0.9848 0 0);               /* near-white — monochromatic */
+  --primary-foreground: oklch(0.1417 0.0044 285.82);  /* near-black on white */
+
+  --secondary: oklch(0.2747 0.006 286);           /* dark cool gray panel #25252e */
+  --secondary-foreground: oklch(0.9848 0 0);
+
+  --muted: oklch(0.2747 0.006 286);
+  --muted-foreground: oklch(0.7127 0.0128 286.07);    /* medium gray #9b9ba8 */
+
+  --accent: oklch(0.3146 0.0072 285.98);              /* slightly lighter than secondary */
+  --accent-foreground: oklch(0.9848 0 0);
+
+  --destructive: oklch(0.6356 0.2082 25.38);
+  --destructive-foreground: oklch(0.9848 0 0);
+
+  --border: oklch(0.2747 0.006 286);              /* same as secondary */
+  --input: oklch(0.2747 0.006 286);
+  --ring: oklch(0.9848 0 0);                  /* white ring */
+  --radius: 0.5rem;                  /* 8px — sharper than Luxe(12) Energetic(14) */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

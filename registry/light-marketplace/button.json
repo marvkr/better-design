@@ -1,0 +1,49 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Energetic Button: clean light/neutral marketplace aesthetic\n// Charcoal primary (#1b1c1e), 14px radius, heavier font-semibold\n// Treatment: charcoal CTA with subtle outer shadow + inset top highlight\n// Secondary: light gray #f0f0f0 — no border (browser-confirmed)\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold\",\n    \"rounded-[14px] transition-all duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Charcoal primary — marketplace \"buy/sign-up\" CTA with subtle depth\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[0_1px_3px_rgba(0,0,0,0.2),0_2px_8px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.08)] \" +\n          \"hover:bg-primary/90 hover:shadow-[0_2px_6px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12)]\",\n        // Light gray secondary — #f0f0f0 NO border (browser-confirmed)\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"shadow-[0_1px_2px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)] \" +\n          \"hover:bg-secondary/80\",\n        // Outline\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary\",\n        // Ghost\n        ghost:\n          \"text-foreground hover:bg-accent hover:text-accent-foreground\",\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[0_1px_3px_rgba(0,0,0,0.2)] \" +\n          \"hover:bg-destructive/90\",\n        link:\n          \"text-primary underline-offset-4 hover:underline\",\n        // Muted\n        muted:\n          \"bg-muted text-muted-foreground hover:bg-accent hover:text-foreground\",\n      },\n      size: {\n        sm:      \"h-9 px-4 text-xs rounded-xl\",\n        default: \"h-11 px-5\",\n        lg:      \"h-12 px-8 text-base rounded-[14px]\",\n        icon:    \"h-11 w-11\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(1 0 0)",
+      "--foreground": "oklch(0.1788 0.0047 264.45)",
+      "--card": "oklch(0.9542 0 0)",
+      "--card-foreground": "oklch(0.1788 0.0047 264.45)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.1788 0.0047 264.45)",
+      "--primary": "oklch(0.2244 0.0039 264.49)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9619 0 0)",
+      "--secondary-foreground": "oklch(0.2244 0.0039 264.49)",
+      "--muted": "oklch(0.9696 0 0)",
+      "--muted-foreground": "oklch(0.5547 0 0)",
+      "--accent": "oklch(0.9696 0 0)",
+      "--accent-foreground": "oklch(0.2244 0.0039 264.49)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9234 0 0)",
+      "--input": "oklch(0.9234 0 0)",
+      "--ring": "oklch(0.2244 0.0039 264.49)",
+      "--radius": "0.875rem",
+      "--shadow-2xs": "0 1px 2px 0 rgba(0,0,0,0.04)",
+      "--shadow-xs": "0 1px 2px 0 rgba(0,0,0,0.06)",
+      "--shadow-sm": "0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05)",
+      "--shadow": "0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)",
+      "--shadow-md": "0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05)",
+      "--shadow-lg": "0 8px 16px -2px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)",
+      "--shadow-xl": "0 16px 24px -4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04)"
+    }
+  }
+}

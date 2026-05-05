@@ -1,0 +1,14 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Steps: step wizard with numbered indicators\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  currentStep?: number\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, currentStep = 0, children, ...props }, ref) => {\n    const steps = React.Children.toArray(children)\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex items-center gap-2\", className)}\n        {...props}\n      >\n        {steps.map((child, index) => (\n          <React.Fragment key={index}>\n            {index > 0 && (\n              <div\n                className={cn(\n                  \"h-px flex-1 transition-colors duration-150\",\n                  index <= currentStep ? \"bg-primary\" : \"bg-border\"\n                )}\n              />\n            )}\n            <div\n              className={cn(\n                \"flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium\",\n                \"transition-all duration-150\",\n                index < currentStep &&\n                  \"bg-primary text-primary-foreground\",\n                index === currentStep &&\n                  \"bg-background text-foreground border border-border ring-2 ring-primary ring-offset-2 ring-offset-background\",\n                index > currentStep &&\n                  \"bg-muted text-muted-foreground border border-border\"\n              )}\n            >\n              {index + 1}\n            </div>\n          </React.Fragment>\n        ))}\n      </div>\n    )\n  }\n)\nSteps.displayName = \"Steps\"\n\nconst Step = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"\", className)} {...props} />\n))\nStep.displayName = \"Step\"\n\nexport { Steps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

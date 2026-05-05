@@ -1,0 +1,14 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Linear Status Indicator: presence/status dot with optional label\n\ntype StatusType = \"online\" | \"offline\" | \"busy\" | \"away\" | \"idle\"\n\nconst statusConfig: Record<StatusType, { label: string; className: string }> = {\n  online: { label: \"Online\", className: \"bg-emerald-500\" },\n  offline: { label: \"Offline\", className: \"bg-muted-foreground/40\" },\n  busy: { label: \"Busy\", className: \"bg-destructive\" },\n  away: { label: \"Away\", className: \"bg-orange-400\" },\n  idle: { label: \"Idle\", className: \"bg-yellow-400\" },\n}\n\ninterface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  status: StatusType\n  showLabel?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n  pulse?: boolean\n}\n\nconst dotSizes = {\n  sm: \"h-1.5 w-1.5\",\n  md: \"h-2.5 w-2.5\",\n  lg: \"h-3.5 w-3.5\",\n}\n\nfunction StatusIndicator({\n  status,\n  showLabel,\n  size = \"md\",\n  pulse,\n  className,\n  ...props\n}: StatusIndicatorProps) {\n  const config = statusConfig[status]\n\n  return (\n    <div className={cn(\"flex items-center gap-1.5\", className)} {...props}>\n      <span className=\"relative flex shrink-0\">\n        {pulse && status === \"online\" && (\n          <span\n            className={cn(\n              \"absolute inline-flex h-full w-full animate-ping rounded-full opacity-75\",\n              config.className\n            )}\n          />\n        )}\n        <span className={cn(\"relative inline-flex rounded-full\", dotSizes[size], config.className)} />\n      </span>\n      {showLabel && (\n        <span className=\"text-xs font-medium text-muted-foreground\">{config.label}</span>\n      )}\n    </div>\n  )\n}\n\n// AvatarStatus: overlays a status dot on an avatar\ninterface AvatarStatusProps {\n  status: StatusType\n  className?: string\n}\n\nfunction AvatarStatus({ status, className }: AvatarStatusProps) {\n  const config = statusConfig[status]\n\n  return (\n    <span\n      className={cn(\n        \"absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-background\",\n        config.className,\n        className\n      )}\n    />\n  )\n}\n\nexport { StatusIndicator, AvatarStatus }\nexport type { StatusIndicatorProps, AvatarStatusProps, StatusType }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

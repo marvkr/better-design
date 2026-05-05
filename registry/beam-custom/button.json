@@ -1,0 +1,57 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport { BorderBeam } from \"./border-beam\"\n\n/*\n * Beam Custom Button — pill-shaped surface wrapped with a hand-rolled\n * conic-gradient beam. The \"primary\" and \"default\" variants render the\n * beam; outline/ghost/link skip it for visual quietness. The beam itself\n * is opt-in per-call via the `beam` prop (defaults to true on default + primary).\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap relative\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-full cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform] duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:text-foreground\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-110\",\n        secondary:\n          \"bg-muted text-muted-foreground \" +\n          \"[box-shadow:var(--shadow-s)] \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/30\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-105\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3.5 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n  beam?: boolean\n}\n\nconst beamVariants = new Set([\"default\", \"primary\"])\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, beam, children, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    const showBeam = beam ?? beamVariants.has(variant ?? \"default\")\n    const button = (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      >\n        {children}\n      </Comp>\n    )\n\n    if (!showBeam) return button\n\n    return (\n      <BorderBeam size=\"sm\" variant=\"colorful\" borderRadius={9999} className=\"inline-flex align-middle\">\n        {button}\n      </BorderBeam>\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.12 0 0)",
+      "--foreground": "oklch(0.97 0.005 280)",
+      "--card": "oklch(0.15 0 0)",
+      "--card-foreground": "oklch(0.97 0.005 280)",
+      "--popover": "oklch(0.17 0 0)",
+      "--popover-foreground": "oklch(0.97 0.005 280)",
+      "--primary": "oklch(0.66 0.24 340)",
+      "--primary-foreground": "oklch(0.99 0 0)",
+      "--secondary": "oklch(0.2 0 0)",
+      "--secondary-foreground": "oklch(0.92 0 0)",
+      "--muted": "oklch(0.18 0 0)",
+      "--muted-foreground": "oklch(0.62 0.005 280)",
+      "--accent": "oklch(0.22 0.04 320)",
+      "--accent-foreground": "oklch(0.97 0.01 320)",
+      "--destructive": "oklch(0.64 0.22 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(1 0 0 / 0.05)",
+      "--ring": "oklch(0.66 0.24 340)",
+      "--radius": "0.875rem",
+      "--beam-1": "rgb(255, 50, 100)",
+      "--beam-2": "rgb(40, 140, 255)",
+      "--beam-3": "rgb(50, 200, 80)",
+      "--beam-4": "rgb(30, 185, 170)",
+      "--beam-5": "rgb(100, 70, 255)",
+      "--beam-6": "rgb(255, 120, 40)",
+      "--beam-7": "rgb(240, 50, 180)",
+      "--beam-8": "rgb(180, 40, 240)",
+      "--shadow-s": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 2px rgba(0, 0, 0, 0.4)",
+      "--shadow-m": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 8px rgba(0, 0, 0, 0.25)",
+      "--shadow-l": "inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 4px 8px rgba(0, 0, 0, 0.6),\n    0 8px 16px rgba(0, 0, 0, 0.3)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.4),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03)",
+      "--shadow-button": "inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 0 0 1px rgba(255, 255, 255, 0.04),\n    0 1px 2px rgba(0, 0, 0, 0.5)",
+      "--shadow-button-hover": "inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 0 0 1px rgba(255, 255, 255, 0.06),\n    0 2px 4px rgba(0, 0, 0, 0.55)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.22),\n    0 0 0 1px rgba(255, 80, 180, 0.25),\n    0 1px 3px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(255, 60, 160, 0.18)"
+    }
+  }
+}

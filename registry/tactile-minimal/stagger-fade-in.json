@@ -1,0 +1,14 @@
+{
+  "name": "stagger-fade-in",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stagger-fade-in.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\ninterface StaggerFadeInProps {\n  children: React.ReactNode\n  staggerMs?: number\n  durationMs?: number\n  className?: string\n}\n\nfunction StaggerFadeIn({\n  children,\n  staggerMs = 20,\n  durationMs = 400,\n  className,\n}: StaggerFadeInProps) {\n  const items = React.Children.toArray(children)\n\n  return (\n    <div className={cn(\"flex flex-col\", className)}>\n      {items.map((child, index) => (\n        <div\n          key={index}\n          style={{\n            opacity: 0,\n            transform: \"translateY(8px)\",\n            filter: \"blur(4px)\",\n            animation: `staggerFadeIn ${durationMs}ms cubic-bezier(0.34, 1.56, 0.64, 1) ${index * staggerMs}ms forwards`,\n          }}\n        >\n          {child}\n        </div>\n      ))}\n      <style>{`\n        @keyframes staggerFadeIn {\n          to {\n            opacity: 1;\n            transform: translateY(0px);\n            filter: blur(0px);\n          }\n        }\n      `}</style>\n    </div>\n  )\n}\n\ninterface TextRevealProps {\n  text: string\n  className?: string\n  charDelayMs?: number\n}\n\nfunction TextReveal({ text, className, charDelayMs = 20 }: TextRevealProps) {\n  return (\n    <span className={className}>\n      {text.split(\"\").map((char, i) => (\n        <span\n          key={i}\n          style={{\n            display: \"inline-block\",\n            opacity: 0,\n            filter: \"blur(4px)\",\n            transform: \"translateY(2px)\",\n            animation: `charReveal 150ms cubic-bezier(0.215, 0.61, 0.355, 1) ${i * charDelayMs}ms forwards`,\n            ...(char === \" \" ? { width: \"0.25em\" } : {}),\n          }}\n        >\n          {char === \" \" ? \"\\u00A0\" : char}\n        </span>\n      ))}\n      <style>{`\n        @keyframes charReveal {\n          to {\n            opacity: 1;\n            filter: blur(0px);\n            transform: translateY(0px);\n          }\n        }\n      `}</style>\n    </span>\n  )\n}\n\nexport { StaggerFadeIn, TextReveal }\nexport type { StaggerFadeInProps, TextRevealProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

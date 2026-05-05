@@ -1,0 +1,17 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button, type ButtonProps } from \"./button\"\n\nexport interface CopyButtonProps extends Omit<ButtonProps, \"children\"> {\n  value: string\n  copiedLabel?: string\n  label?: string\n}\n\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  ({ value, copiedLabel = \"Copied\", label = \"Copy\", size = \"icon\", ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false)\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(value)\n        setCopied(true)\n        setTimeout(() => setCopied(false), 2000)\n      } catch {\n        // Silent fail — copy is best-effort\n      }\n    }\n\n    return (\n      <Button\n        ref={ref}\n        size={size}\n        onClick={copy}\n        aria-label={copied ? copiedLabel : label}\n        {...props}\n      >\n        <Icon\n          icon={copied ? \"tabler:check\" : \"tabler:copy\"}\n          className={cn(\"h-4 w-4\", copied && \"text-primary\")}\n        />\n        {size !== \"icon\" && <span className=\"ml-2\">{copied ? copiedLabel : label}</span>}\n      </Button>\n    )\n  }\n)\nCopyButton.displayName = \"CopyButton\"\n\nexport { CopyButton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

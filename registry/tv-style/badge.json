@@ -1,0 +1,17 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * TV Style Badge — a mini flipboard tile. Sharp 2px radius, uppercase\n * tracked text, hairline inset ring. Semantic variants map to the flipoff\n * scramble palette (cyan, teal, magenta, red, amber, green).\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-[2px] px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.08em] \" +\n    \"ring-1 ring-inset transition-colors duration-150\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-secondary-foreground ring-border\",\n        primary: \"bg-primary/15 text-primary ring-primary/30\",\n        secondary: \"bg-muted text-muted-foreground ring-border\",\n        outline: \"bg-transparent text-foreground ring-border\",\n        success: \"bg-[var(--tv-green)]/15 text-[var(--tv-green)] ring-[var(--tv-green)]/30\",\n        warning: \"bg-[var(--tv-amber)]/15 text-[var(--tv-amber)] ring-[var(--tv-amber)]/35\",\n        info: \"bg-[var(--tv-cyan)]/15 text-[var(--tv-cyan)] ring-[var(--tv-cyan)]/30\",\n        destructive: \"bg-destructive/15 text-destructive ring-destructive/30\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

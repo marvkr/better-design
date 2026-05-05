@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Figma Button — light, Electric Violet (#a259ff) primary, 8px radius\n// Light theme matching figma.com marketing site\n// Primary: solid purple, slight shadow on hover\n// Secondary: light purple tint bg\n// Transition: 200ms cubic-bezier(0.4, 0, 0.2, 1)\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-lg transition-all duration-200\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"hover:bg-primary/90 hover:shadow-[0_4px_16px_color-mix(in_oklch,var(--primary)_30%,transparent)]\",\n        secondary:\n          \"bg-secondary text-foreground \" +\n          \"border border-border \" +\n          \"hover:bg-accent hover:border-border/80\",\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"hover:bg-destructive/90\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-10 px-5\",\n        lg:      \"h-12 px-6\",\n        icon:    \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(1 0 0)",
+      "--foreground": "oklch(0.2376 0 0)",
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.2376 0 0)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.2376 0 0)",
+      "--primary": "oklch(0.6256 0.2374 299.29)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.9662 0.0058 308.39)",
+      "--secondary-foreground": "oklch(0.2376 0 0)",
+      "--muted": "oklch(0.9587 0.0055 308.4)",
+      "--muted-foreground": "oklch(0.5547 0 0)",
+      "--accent": "oklch(0.9337 0.0088 308.36)",
+      "--accent-foreground": "oklch(0.2376 0 0)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9002 0.0133 308.3)",
+      "--input": "oklch(0.9587 0.0055 308.4)",
+      "--ring": "oklch(0.6256 0.2374 299.29)",
+      "--radius": "0.5rem"
+    }
+  }
+}

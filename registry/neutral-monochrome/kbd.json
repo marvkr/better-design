@@ -1,0 +1,14 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface KbdProps extends React.HTMLAttributes<HTMLElement> {}\n\nconst Kbd = React.forwardRef<HTMLElement, KbdProps>(\n  ({ className, children, ...props }, ref) => {\n    return (\n      <kbd\n        ref={ref}\n        className={cn(\n          \"inline-flex items-center justify-center\",\n          \"rounded-md border border-border bg-card px-1.5 py-0.5\",\n          \"text-[11px] font-mono font-medium text-muted-foreground\",\n          \"shadow-[0_1px_0_1px_hsl(0_0%_10%)] shadow-border/60\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </kbd>\n    )\n  }\n)\nKbd.displayName = \"Kbd\"\n\nexport { Kbd }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * TV Style — inspired by classic split-flap airport/train terminal boards
+ * (see: magnum6actual/flipoff). The aesthetic is a retro mechanical display:
+ * dark deep canvas, near-black tile surfaces with a thin horizontal seam,
+ * bright Helvetica characters, and vivid "scramble" accent colors (amber,
+ * cyan, magenta, red) borrowed from the flipoff scramble palette.
+ *
+ * Principles:
+ *  - Flat dark surfaces (no heavy shadows) — tiles are recessed, not raised
+ *  - Tiny 3px radius — mirrors the real flip-tile's near-square geometry
+ *  - Amber primary (#FFCC00) — the strongest hue in the scramble set
+ *  - Inset top-edge "seam" highlights via box-shadow tokens
+ *  - Uppercase, bold, letter-spaced display text for headings
+ */
+
+:root {
+  /* ─── Surfaces ─── */
+  --background: oklch(0.14 0 0);              /* Deep canvas — the "off" screen */
+  --foreground: oklch(0.985 0 0);             /* Pure white tile text */
+
+  --card: oklch(0.2 0 0);                     /* Tile face ~#222 — raised over canvas */
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.22 0 0);                 /* Floating surfaces */
+  --popover-foreground: oklch(0.985 0 0);
+
+  /* ─── Primary: amber #FFCC00 — the dominant scramble hue ─── */
+  --primary: oklch(0.87 0.17 95);
+  --primary-foreground: oklch(0.14 0 0);
+
+  --secondary: oklch(0.24 0 0);               /* Slightly raised tile */
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.64 0 0);
+
+  --accent: oklch(0.26 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.62 0.25 25);          /* #FF2D00 scramble red */
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(1 0 0 / 0.08);               /* Subtle white 8% — tile gap */
+  --input: oklch(0.17 0 0);                    /* Recessed input well */
+  --ring: oklch(0.87 0.17 95);                 /* Amber ring matches primary */
+  --radius: 0.1875rem;                          /* 3px — tile radius from flipoff */
+
+  /* ─── Flipboard scramble palette (accent hues for charts/badges) ─── */
+  --tv-cyan: oklch(0.78 0.16 220);             /* #00AAFF */
+  --tv-teal: oklch(0.88 0.15 175);             /* #00FFCC */
+  --tv-magenta: oklch(0.57 0.27 305);           /* #AA00FF */
+  --tv-red: oklch(0.62 0.25 25);                /* #FF2D00 */
+  --tv-amber: oklch(0.87 0.17 95);              /* #FFCC00 */
+  --tv-green: oklch(0.86 0.24 145);             /* #00FF7F — accent bar */
+
+  /*
+   * ─── Shadow scale ───
+   * Flipoff boards are flat-dark; we avoid bloom/ambient shadows and instead
+   * emphasise the inset mechanical "seam" that runs across every tile.
+   * Shadows below use a thin contact line + a subtle inset top-edge highlight
+   * (light from above is implied by the bright foreground on dark surfaces).
+   */
+  --shadow-xs:
+    inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    0 1px 1px rgba(0, 0, 0, 0.5);
+
+  --shadow-sm:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 1px 2px rgba(0, 0, 0, 0.5);
+
+  --shadow-md:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 2px 4px rgba(0, 0, 0, 0.55);
+
+  --shadow-lg:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.6);
+
+  --shadow-xl:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.65);
+
+  --shadow-inset:
+    inset 0 1px 2px rgba(0, 0, 0, 0.55),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+
+  /* Amber-glow variant — primary button bloom, borrowed from flipoff's accent bar */
+  --shadow-primary:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 0 1px rgba(255, 204, 0, 0.28),
+    0 2px 4px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(255, 204, 0, 0.22);
+
+  /* Button-specific shadows (pressed vs resting) */
+  --shadow-button:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.55);
+
+  --shadow-button-hover:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 1px);
+  --radius-xl: calc(var(--radius) + 3px);
+
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+}

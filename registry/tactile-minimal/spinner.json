@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Spinner — SVG circle spinner using currentColor\n\ninterface SpinnerProps extends React.SVGAttributes<SVGElement> {\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nfunction Spinner({ className, size = \"default\", ...props }: SpinnerProps) {\n  const sizes = {\n    sm: \"h-4 w-4\",\n    default: \"h-5 w-5\",\n    lg: \"h-8 w-8\",\n  }\n\n  return (\n    <svg\n      className={cn(\"animate-spin text-primary\", sizes[size], className)}\n      xmlns=\"http://www.w3.org/2000/svg\"\n      fill=\"none\"\n      viewBox=\"0 0 24 24\"\n      {...props}\n    >\n      <circle\n        className=\"opacity-25\"\n        cx=\"12\"\n        cy=\"12\"\n        r=\"10\"\n        stroke=\"currentColor\"\n        strokeWidth=\"4\"\n      />\n      <path\n        className=\"opacity-75\"\n        fill=\"currentColor\"\n        d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z\"\n      />\n    </svg>\n  )\n}\n\nexport { Spinner }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

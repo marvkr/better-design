@@ -1,0 +1,17 @@
+{
+  "name": "slider",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SliderPrimitive from \"@radix-ui/react-slider\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Slider = React.forwardRef<\n  React.ElementRef<typeof SliderPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SliderPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex w-full touch-none select-none items-center\",\n      className\n    )}\n    {...props}\n  >\n    <SliderPrimitive.Track\n      className=\"relative h-2 w-full grow overflow-hidden rounded-full backdrop-blur-xl bg-white/[0.08] shadow-[inset_0_0_4px_rgba(255,255,255,0.06)]\"\n    >\n      <SliderPrimitive.Range className=\"absolute h-full bg-primary/70 shadow-[0_0_8px_oklch(0.65_0.19_250/0.3)]\" />\n    </SliderPrimitive.Track>\n    <SliderPrimitive.Thumb\n      className={cn(\n        \"block h-5 w-5 rounded-full\",\n        \"bg-white shadow-[0_0_8px_rgba(0,0,0,0.3),0_0_12px_oklch(0.65_0.19_250/0.2)]\",\n        \"transition-[box-shadow] duration-200\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n        \"hover:shadow-[0_0_8px_rgba(0,0,0,0.3),0_0_16px_oklch(0.65_0.19_250/0.35)]\",\n        \"disabled:pointer-events-none disabled:opacity-50\"\n      )}\n    />\n  </SliderPrimitive.Root>\n))\nSlider.displayName = SliderPrimitive.Root.displayName\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slider"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

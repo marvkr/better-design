@@ -1,0 +1,17 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Tactile Minimal Rating: star rating with amber active stars\n\nexport interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number\n  max?: number\n  onRatingChange?: (value: number) => void\n  readonly?: boolean\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  ({ className, value = 0, max = 5, onRatingChange, readonly = false, ...props }, ref) => {\n    const [hovered, setHovered] = React.useState(-1)\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        {...props}\n      >\n        {Array.from({ length: max }, (_, i) => (\n          <button\n            key={i}\n            type=\"button\"\n            disabled={readonly}\n            className={cn(\n              \"rounded-[6px] p-0.5\",\n              \"transition-all duration-150\",\n              \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n              !readonly && \"cursor-pointer active:scale-[0.98] hover:scale-110\",\n              \"disabled:cursor-default\"\n            )}\n            onMouseEnter={() => !readonly && setHovered(i)}\n            onMouseLeave={() => !readonly && setHovered(-1)}\n            onClick={() => onRatingChange?.(i + 1)}\n          >\n            <Icon\n              icon={i < (hovered >= 0 ? hovered + 1 : value) ? \"tabler:star-filled\" : \"tabler:star\"}\n              className={cn(\n                \"h-5 w-5\",\n                i < (hovered >= 0 ? hovered + 1 : value)\n                  ? \"text-amber-500\"\n                  : \"text-muted\"\n              )}\n            />\n          </button>\n        ))}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { AlertCircle, CheckCircle2, Info, X, XCircle } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport type NotificationVariant = \"default\" | \"info\" | \"success\" | \"warning\" | \"error\"\n\nexport interface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {\n  variant?: NotificationVariant\n  title?: string\n  description?: string\n  icon?: React.ReactNode\n  onDismiss?: () => void\n  action?: React.ReactNode\n}\n\nconst variantStyles: Record<\n  NotificationVariant,\n  { container: string; icon: React.ReactNode; accent: string }\n> = {\n  default: {\n    container: \"border-border\",\n    icon: <Info className=\"h-4 w-4 text-foreground\" />,\n    accent: \"bg-foreground\",\n  },\n  info: {\n    container: \"border-blue-200\",\n    icon: <Info className=\"h-4 w-4 text-blue-500\" />,\n    accent: \"bg-blue-500\",\n  },\n  success: {\n    container: \"border-green-200\",\n    icon: <CheckCircle2 className=\"h-4 w-4 text-green-600\" />,\n    accent: \"bg-green-500\",\n  },\n  warning: {\n    container: \"border-amber-200\",\n    icon: <AlertCircle className=\"h-4 w-4 text-amber-500\" />,\n    accent: \"bg-amber-400\",\n  },\n  error: {\n    container: \"border-red-200\",\n    icon: <XCircle className=\"h-4 w-4 text-destructive\" />,\n    accent: \"bg-destructive\",\n  },\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    {\n      variant = \"default\",\n      title,\n      description,\n      icon,\n      onDismiss,\n      action,\n      className,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    const styles = variantStyles[variant]\n\n    return (\n      <div\n        ref={ref}\n        role=\"alert\"\n        className={cn(\n          \"relative flex gap-3 overflow-hidden rounded-[14px] border bg-card p-4 shadow-sm\",\n          styles.container,\n          className\n        )}\n        {...props}\n      >\n        {/* Colored left accent bar */}\n        <div\n          className={cn(\"absolute left-0 inset-y-0 w-1 rounded-l-[14px]\", styles.accent)}\n        />\n\n        {/* Icon */}\n        <div className=\"mt-0.5 shrink-0 pl-1\">{icon ?? styles.icon}</div>\n\n        {/* Body */}\n        <div className=\"flex-1 min-w-0\">\n          {title && (\n            <p className=\"text-sm font-semibold text-foreground\">{title}</p>\n          )}\n          {description && (\n            <p className={cn(\"text-sm text-muted-foreground\", title && \"mt-0.5\")}>\n              {description}\n            </p>\n          )}\n          {children}\n          {action && <div className=\"mt-3\">{action}</div>}\n        </div>\n\n        {/* Dismiss */}\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            aria-label=\"Dismiss notification\"\n            className=\"shrink-0 rounded-lg p-0.5 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n          >\n            <X className=\"h-4 w-4\" />\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nNotification.displayName = \"Notification\"\n\nexport { Notification }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

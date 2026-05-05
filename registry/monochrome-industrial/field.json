@@ -1,0 +1,14 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Field — small composition primitive that groups a label, control, helper/error text.\n * Use inside forms when you want consistent spacing without react-hook-form.\n */\n\ninterface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst Field = React.forwardRef<HTMLDivElement, FieldProps>(\n ({ className, ...props }, ref) => (\n <div ref={ref} className={cn(\"flex flex-col gap-1.5\", className)} {...props} />\n )\n)\nField.displayName = \"Field\"\n\nconst FieldLabel = React.forwardRef<\n HTMLLabelElement,\n React.LabelHTMLAttributes<HTMLLabelElement> & { required?: boolean }\n>(({ className, children, required, ...props }, ref) => (\n <label\n ref={ref}\n className={cn(\n \"text-sm font-medium leading-none text-foreground\",\n \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n className\n )}\n {...props}\n >\n {children}\n {required && <span className=\"ml-0.5 text-destructive\">*</span>}\n </label>\n))\nFieldLabel.displayName = \"FieldLabel\"\n\nconst FieldDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(\n ({ className, ...props }, ref) => (\n <p ref={ref} className={cn(\"text-xs text-muted-foreground leading-relaxed\", className)} {...props} />\n )\n)\nFieldDescription.displayName = \"FieldDescription\"\n\nconst FieldError = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(\n ({ className, ...props }, ref) => (\n <p ref={ref} className={cn(\"text-xs font-medium text-destructive\", className)} {...props} />\n )\n)\nFieldError.displayName = \"FieldError\"\n\nexport { Field, FieldLabel, FieldDescription, FieldError }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Airbnb — extracted from airbnb.com production (2026-04) */
+
+  --background: #FFFFFF;
+  --foreground: #222222;
+
+  --card: #FFFFFF;
+  --card-foreground: #222222;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #222222;
+
+  /* Rausch — Airbnb's brand coral */
+  --primary: #FF385C;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #222222;
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #F7F7F7;
+  --muted-foreground: #6A6A6A;
+
+  --accent: #F7F7F7;
+  --accent-foreground: #222222;
+
+  --destructive: #C13515;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #DDDDDD;
+  --input: #F7F7F7;
+  --ring: #222222;
+
+  --radius: 0.75rem;
+
+  /* Airbnb radial gradient — used on CTA buttons, hero accents */
+  --rausch-gradient: radial-gradient(
+    circle at center,
+    #FF385C 0%,
+    #E61E4D 27.5%,
+    #E31C5F 40%,
+    #D70466 57.5%,
+    #BD1E59 75%,
+    #BD1E59 100%
+  );
+
+  /* Shadows — Airbnb uses very subtle shadows, border-based elevation */
+  --shadow-2xs: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.06);
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  --shadow:     0 2px 4px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-md:  0 2px 8px rgba(0,0,0,0.08), 0 6px 20px rgba(0,0,0,0.06);
+  --shadow-lg:  0 6px 20px rgba(0,0,0,0.2);
+  --shadow-xl:  0 6px 20px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: "Airbnb Cereal VF", Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

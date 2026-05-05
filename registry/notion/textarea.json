@@ -1,0 +1,14 @@
+{
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(\n          \"flex min-h-[80px] w-full rounded-md border border-border bg-secondary px-3 py-2 text-sm\",\n          \"shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)]\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color,box-shadow] duration-150\",\n          \"hover:border-border/80\",\n          \"focus-visible:outline-none focus-visible:border-primary/60\",\n          \"focus-visible:shadow-[inset_0_1px_2px_rgba(0,0,0,0.1),0_0_0_3px_hsl(235_100%_71%/0.2)]\",\n          \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

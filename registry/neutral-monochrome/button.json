@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Earthy Button: neutral monochromatic — near-white primary on near-black bg\n// 8px radius, precise shadows, understated depth\n// Primary: white CTA with subtle ring + depth shadow\n// Secondary: dark panel with border + inset shadow\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium\",\n    \"rounded-lg transition-all duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary: near-white on near-black with ring + shadow depth\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_1px_3px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.85)] \" +\n          \"hover:bg-primary/95 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.15),0_2px_6px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.85)]\",\n        // Secondary: dark panel with border + depth\n        secondary:\n          \"bg-secondary text-secondary-foreground border border-border \" +\n          \"shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] \" +\n          \"hover:bg-accent hover:border-border/60\",\n        // Outline: border only\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary hover:border-border/60\",\n        // Ghost\n        ghost:\n          \"text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[0_1px_2px_rgba(0,0,0,0.3)] \" +\n          \"hover:bg-destructive/90\",\n        // Link\n        link:\n          \"text-foreground underline-offset-4 hover:underline\",\n        // Muted\n        muted:\n          \"bg-muted text-muted-foreground \" +\n          \"hover:bg-accent hover:text-foreground\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-4\",\n        lg:      \"h-10 px-6 text-base\",\n        icon:    \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.1417 0.0044 285.82)",
+      "--foreground": "oklch(0.9848 0 0)",
+      "--card": "oklch(0.1417 0.0044 285.82)",
+      "--card-foreground": "oklch(0.9848 0 0)",
+      "--popover": "oklch(0.1417 0.0044 285.82)",
+      "--popover-foreground": "oklch(0.9848 0 0)",
+      "--primary": "oklch(0.9848 0 0)",
+      "--primary-foreground": "oklch(0.1417 0.0044 285.82)",
+      "--secondary": "oklch(0.2747 0.006 286)",
+      "--secondary-foreground": "oklch(0.9848 0 0)",
+      "--muted": "oklch(0.2747 0.006 286)",
+      "--muted-foreground": "oklch(0.7127 0.0128 286.07)",
+      "--accent": "oklch(0.3146 0.0072 285.98)",
+      "--accent-foreground": "oklch(0.9848 0 0)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(0.9848 0 0)",
+      "--border": "oklch(0.2747 0.006 286)",
+      "--input": "oklch(0.2747 0.006 286)",
+      "--ring": "oklch(0.9848 0 0)",
+      "--radius": "0.5rem"
+    }
+  }
+}

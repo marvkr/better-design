@@ -1,0 +1,14 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n title: React.ReactNode\n description?: React.ReactNode\n eyebrow?: React.ReactNode\n actions?: React.ReactNode\n}\n\nconst SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps>(\n ({ className, title, description, eyebrow, actions, ...props }, ref) => (\n <div\n ref={ref}\n className={cn(\"flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between\", className)}\n {...props}\n >\n <div className=\"min-w-0 flex-1\">\n {eyebrow && (\n <div className=\"mb-2 text-xs font-semibold uppercase tracking-wider text-primary\">\n {eyebrow}\n </div>\n )}\n <h2 className=\"text-xl font-semibold tracking-tight text-foreground\">{title}</h2>\n {description && (\n <p className=\"mt-1.5 text-sm text-muted-foreground leading-relaxed max-w-2xl\">\n {description}\n </p>\n )}\n </div>\n {actions && <div className=\"flex items-center gap-2 shrink-0\">{actions}</div>}\n </div>\n )\n)\nSectionHeader.displayName = \"SectionHeader\"\n\nexport { SectionHeader }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

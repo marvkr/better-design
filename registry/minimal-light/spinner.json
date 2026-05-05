@@ -1,0 +1,17 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Luxe Spinner: animated circle, white border-t on dark ring — clean and premium\n// Sizes follow Luxe scale; track is always dim border color\n\nconst spinnerVariants = cva(\n  \"inline-block rounded-full border-2 border-border animate-spin\",\n  {\n    variants: {\n      size: {\n        xs:      \"h-3 w-3 border-[1.5px]\",\n        sm:      \"h-4 w-4\",\n        default: \"h-6 w-6 border-2\",\n        lg:      \"h-8 w-8 border-[3px]\",\n        xl:      \"h-12 w-12 border-[3px]\",\n      },\n      variant: {\n        default: \"border-t-primary\",\n        muted:   \"border-t-muted-foreground\",\n        white:   \"border-t-white\",\n      },\n    },\n    defaultVariants: {\n      size: \"default\",\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface SpinnerProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof spinnerVariants> {\n  label?: string\n}\n\nfunction Spinner({ className, size, variant, label = \"Loading…\", ...props }: SpinnerProps) {\n  return (\n    <span\n      role=\"status\"\n      aria-label={label}\n      className={cn(\"inline-flex items-center justify-center\", className)}\n      {...props}\n    >\n      <span className={cn(spinnerVariants({ size, variant }))} />\n      <span className=\"sr-only\">{label}</span>\n    </span>\n  )\n}\n\nexport { Spinner, spinnerVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

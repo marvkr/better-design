@@ -1,0 +1,14 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Dynamic Empty: dark theme, vibrant accent circle for icon, rounded-2xl container\n// Glowing icon area with colored shadow, pill action button\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n  color?: \"primary\" | \"secondary\" | \"success\" | \"warning\" | \"destructive\"\n}\n\nconst colorMap = {\n  primary: {\n    icon: \"bg-primary/20 text-primary\",\n    glow: \"shadow-[0_0_24px_hsl(212_100%_47%/0.25)]\",\n    ring: \"ring-primary/20\",\n  },\n  secondary: {\n    icon: \"bg-accent/30 text-accent-foreground\",\n    glow: \"shadow-[0_0_24px_hsl(270_59%_58%/0.25)]\",\n    ring: \"ring-accent/20\",\n  },\n  success: {\n    icon: \"bg-[hsl(var(--success)/0.2)] text-[hsl(var(--success))]\",\n    glow: \"shadow-[0_0_24px_hsl(146_80%_44%/0.25)]\",\n    ring: \"ring-[hsl(var(--success)/0.2)]\",\n  },\n  warning: {\n    icon: \"bg-[hsl(var(--warning)/0.2)] text-[hsl(var(--warning))]\",\n    glow: \"\",\n    ring: \"ring-[hsl(var(--warning)/0.2)]\",\n  },\n  destructive: {\n    icon: \"bg-destructive/20 text-destructive\",\n    glow: \"shadow-[0_0_24px_hsl(339_90%_51%/0.25)]\",\n    ring: \"ring-destructive/20\",\n  },\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ icon, title, description, action, color = \"primary\", className, ...props }, ref) => {\n    const colors = colorMap[color]\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center gap-6\",\n          \"rounded-2xl border border-border bg-card/50 p-12 text-center\",\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div\n            className={cn(\n              \"flex h-16 w-16 items-center justify-center rounded-full\",\n              \"ring-2\",\n              colors.icon,\n              colors.glow,\n              colors.ring,\n              \"[&>svg]:h-7 [&>svg]:w-7\"\n            )}\n          >\n            {icon}\n          </div>\n        )}\n\n        <div className=\"flex flex-col gap-2 max-w-xs\">\n          <p className=\"text-base font-semibold text-foreground\">{title}</p>\n          {description && (\n            <p className=\"text-sm text-muted-foreground leading-relaxed\">{description}</p>\n          )}\n        </div>\n\n        {action && (\n          <div className=\"flex items-center gap-3\">\n            {action}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for lumen-dark.\n *\n * Inputs use the \"inset shadow\" direction (light source from above still applies,\n * but fields are pressed INTO the surface, so the contact shadow is on top/inside).\n * This creates the depth contrast: buttons feel raised, inputs feel recessed.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-none px-3 text-sm \" +\n  \"bg-[var(--mono-surface)] text-foreground \" +\n  \"border border-[var(--mono-border-visible)] \" +\n  \"font-[family-name:var(--font-mono)] \" +\n  \"placeholder:text-muted-foreground placeholder:uppercase placeholder:tracking-[0.08em] \" +\n  \"transition-colors duration-150 ease-out \" +\n  \"hover:border-foreground/60 \" +\n  \"focus-visible:outline-none focus-visible:border-[var(--mono-accent)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[80px] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ]
+}

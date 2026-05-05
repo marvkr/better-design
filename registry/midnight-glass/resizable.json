@@ -1,0 +1,18 @@
+{
+  "name": "resizable",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport { Icon } from \"@iconify/react\"\nimport * as ResizablePrimitive from \"react-resizable-panels\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Midnight Glass Resizable panels\n\nconst ResizablePanelGroup = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (\n  <ResizablePrimitive.PanelGroup\n    className={cn(\n      \"flex h-full w-full data-[panel-group-direction=vertical]:flex-col\",\n      className\n    )}\n    {...props}\n  />\n)\n\nconst ResizablePanel = ResizablePrimitive.Panel\n\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {\n  withHandle?: boolean\n}) => (\n  <ResizablePrimitive.PanelResizeHandle\n    className={cn(\n      \"relative flex w-px items-center justify-center\",\n      \"bg-white/[0.07]\",\n      \"after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2\",\n      \"hover:bg-[rgba(255,255,255)]/30 transition-colors duration-300\",\n      \"focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[rgba(255,255,255)]/50 focus-visible:ring-offset-1\",\n      \"data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1\",\n      \"data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2\",\n      \"data-[panel-group-direction=vertical]:after:translate-x-0 [&[data-panel-group-direction=vertical]>div]:rotate-90\",\n      className\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div\n        className={cn(\n          \"z-10 flex h-5 w-4 items-center justify-center rounded-full\",\n          \"backdrop-blur-xl bg-white/[0.09] border border-white/[0.08]\",\n          \"shadow-[0_0_8px_rgba(255,255,255,0.2),inset_0_0_4px_rgba(255,255,255,0.05)]\",\n          \"transition-all duration-300\",\n          \"hover:bg-white/[0.15] hover:shadow-[0_0_12px_rgba(255,255,255,0.35)]\"\n        )}\n      >\n        <Icon icon=\"tabler:grip-vertical\" className=\"h-2.5 w-2.5 text-white/50\" />\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n)\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react",
+    "react-resizable-panels"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

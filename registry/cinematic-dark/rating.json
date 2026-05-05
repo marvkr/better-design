@@ -1,0 +1,17 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Star } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Cinema Rating: star rating component\n\ninterface RatingProps extends React.HTMLAttributes<HTMLDivElement> {\n  value?: number\n  max?: number\n  onChange?: (value: number) => void\n  readonly?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm: \"h-4 w-4\",\n  md: \"h-5 w-5\",\n  lg: \"h-6 w-6\",\n}\n\nfunction Rating({\n  value = 0,\n  max = 5,\n  onChange,\n  readonly = false,\n  size = \"md\",\n  className,\n  ...props\n}: RatingProps) {\n  const [hovered, setHovered] = React.useState<number | null>(null)\n\n  return (\n    <div\n      className={cn(\"flex items-center gap-0.5\", className)}\n      role=\"radiogroup\"\n      {...props}\n    >\n      {Array.from({ length: max }, (_, i) => {\n        const starValue = i + 1\n        const isFilled = hovered !== null ? starValue <= hovered : starValue <= value\n\n        return (\n          <button\n            key={i}\n            type=\"button\"\n            role=\"radio\"\n            aria-checked={starValue === value}\n            aria-label={`${starValue} star${starValue !== 1 ? \"s\" : \"\"}`}\n            disabled={readonly}\n            onClick={() => onChange?.(starValue)}\n            onMouseEnter={() => !readonly && setHovered(starValue)}\n            onMouseLeave={() => !readonly && setHovered(null)}\n            className={cn(\n              \"transition-colors\",\n              !readonly && \"cursor-pointer hover:scale-110\",\n              readonly && \"cursor-default\"\n            )}\n          >\n            <Star\n              className={cn(\n                sizeClasses[size],\n                \"transition-colors\",\n                isFilled\n                  ? \"fill-amber-400 text-amber-400\"\n                  : \"fill-transparent text-border\"\n              )}\n            />\n          </button>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { Rating }\nexport type { RatingProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

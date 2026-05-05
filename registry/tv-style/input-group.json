@@ -1,0 +1,14 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * InputGroup — composes an input with addons (icons, text, buttons) on either side.\n * Uses the same inset aesthetic as a regular input, but the group container takes\n * the shadow so all children sit \"inside\" the recessed surface.\n */\n\ninterface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex items-stretch w-full rounded-md overflow-hidden\",\n        \"bg-input border border-border [box-shadow:var(--shadow-inset)]\",\n        \"transition-[border-color,box-shadow] duration-150\",\n        \"focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nInputGroup.displayName = \"InputGroup\"\n\nconst InputGroupAddon = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { side?: \"left\" | \"right\" }\n>(({ className, side = \"left\", ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"flex items-center px-3 text-sm text-muted-foreground bg-muted/30\",\n      side === \"left\" ? \"border-r border-border\" : \"border-l border-border\",\n      className\n    )}\n    {...props}\n  />\n))\nInputGroupAddon.displayName = \"InputGroupAddon\"\n\nconst InputGroupInput = React.forwardRef<\n  HTMLInputElement,\n  React.InputHTMLAttributes<HTMLInputElement>\n>(({ className, ...props }, ref) => (\n  <input\n    ref={ref}\n    className={cn(\n      \"flex h-9 flex-1 min-w-0 bg-transparent px-3 py-1.5 text-sm text-foreground\",\n      \"placeholder:text-muted-foreground\",\n      \"outline-none disabled:cursor-not-allowed disabled:opacity-50\",\n      className\n    )}\n    {...props}\n  />\n))\nInputGroupInput.displayName = \"InputGroupInput\"\n\nexport { InputGroup, InputGroupAddon, InputGroupInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

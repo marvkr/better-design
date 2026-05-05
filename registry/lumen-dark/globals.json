@@ -1,0 +1,43 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Lumen Dark",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n/*\n * Lumen Dark — built around Better Design's Depth & Surfaces principle.\n *\n * Core ideas applied:\n * - Light source from above (inset top-edge highlights simulate light hitting surfaces)\n * - Three-tier shadow scale (s/m/l) with 3 layers each: inset highlight + contact + ambient\n * - Elevation via BOTH background shift and shadow layering (higher surfaces are lighter)\n * - Shadows over borders on interactive surfaces\n * - Color transitions paired with shadow transitions on hover (depth principle §\"Combining Color and Shadows\")\n */\n\n:root {\n  /* ─── Surfaces (elevation = lighter bg) ─── */\n  --background: oklch(0.14 0 0);          /* Deepest plane */\n  --foreground: oklch(0.97 0.01 85);      /* Warm white */\n\n  --card: oklch(0.17 0 0);                 /* Raised surface */\n  --card-foreground: oklch(0.97 0.01 85);\n\n  --popover: oklch(0.19 0 0);              /* Floating surface */\n  --popover-foreground: oklch(0.97 0.01 85);\n\n  /* ─── Primary: warm amber (named \"lumen\" for the warm light metaphor) ─── */\n  --primary: oklch(0.78 0.14 85);          /* Amber */\n  --primary-foreground: oklch(0.16 0.02 85);\n\n  --secondary: oklch(0.22 0 0);\n  --secondary-foreground: oklch(0.85 0 0);\n\n  --muted: oklch(0.2 0 0);\n  --muted-foreground: oklch(0.6 0 0);\n\n  --accent: oklch(0.25 0.015 85);          /* Warm-tinted accent bg */\n  --accent-foreground: oklch(0.97 0.01 85);\n\n  --destructive: oklch(0.64 0.22 25);\n  --destructive-foreground: oklch(0.97 0 0);\n\n  --border: oklch(1 0 0 / 0.08);           /* Subtle white 8% */\n  --input: oklch(1 0 0 / 0.06);\n  --ring: oklch(0.78 0.14 85);             /* Amber ring matches primary */\n  --radius: 0.5rem;\n\n  /*\n   * ─── Shadow scale (5 tiers following Better Design's depth principle) ───\n   *\n   * Each tier stacks three layers:\n   *   1. Inset highlight  — light from above hitting the top edge\n   *   2. Contact shadow   — sharp, close, where the element \"touches\" the surface\n   *   3. Ambient shadow   — soft, diffused, environmental\n   *\n   * The principle doc prescribes highlight opacities of 30/50/70% and contact/ambient\n   * at 30%/15% black — those values target LIGHT themes. Dark themes need lower\n   * highlights (bright whites read as gaudy on dark bg) and deeper shadows (higher\n   * opacity to register against dark canvas). The progression below keeps the 1:2\n   * offset/blur ratio between contact and ambient layers per the spec.\n   *\n   * Tier usage:\n   *   xs  → dots, chips, status pills (barely-there lift)\n   *   sm  → buttons, small cards (resting elevation)\n   *   md  → hover state of sm, interactive cards, elevated buttons\n   *   lg  → dropdowns, popovers, tooltips (floating)\n   *   xl  → dialogs, sheets, modals (maximum elevation)\n   */\n  --shadow-xs:\n    inset 0 1px 0 rgba(255, 255, 255, 0.03),\n    0 1px 1px rgba(0, 0, 0, 0.35),\n    0 1px 2px rgba(0, 0, 0, 0.15);\n\n  --shadow-sm:\n    inset 0 1px 0 rgba(255, 255, 255, 0.05),\n    0 1px 2px rgba(0, 0, 0, 0.4),\n    0 2px 4px rgba(0, 0, 0, 0.2);\n\n  --shadow-md:\n    inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 8px rgba(0, 0, 0, 0.25);\n\n  --shadow-lg:\n    inset 0 1px 0 rgba(255, 255, 255, 0.12),\n    0 4px 8px rgba(0, 0, 0, 0.6),\n    0 8px 16px rgba(0, 0, 0, 0.3);\n\n  --shadow-xl:\n    inset 0 1px 0 rgba(255, 255, 255, 0.18),\n    0 8px 16px rgba(0, 0, 0, 0.7),\n    0 16px 32px rgba(0, 0, 0, 0.35);\n\n  /* Inset/pressed — inputs sit BELOW the surface plane (light falls into the recess) */\n  --shadow-inset:\n    inset 0 1px 2px rgba(0, 0, 0, 0.35),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03);\n\n  /* Amber-glow variant for primary buttons — shadow-md + warm color bloom layer */\n  --shadow-primary:\n    inset 0 1px 0 rgba(255, 255, 255, 0.25),\n    0 0 0 1px rgba(255, 200, 100, 0.2),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(240, 170, 60, 0.18);\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 2px);\n  --radius-md: var(--radius);\n  --radius-lg: calc(var(--radius) + 2px);\n  --radius-xl: calc(var(--radius) + 6px);\n\n  --shadow-s: var(--shadow-s);\n  --shadow-m: var(--shadow-m);\n  --shadow-l: var(--shadow-l);\n  --shadow-inset: var(--shadow-inset);\n  --shadow-button: var(--shadow-button);\n  --shadow-button-hover: var(--shadow-button-hover);\n  --shadow-primary: var(--shadow-primary);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.14 0 0)",
+      "--foreground": "oklch(0.97 0.01 85)",
+      "--card": "oklch(0.17 0 0)",
+      "--card-foreground": "oklch(0.97 0.01 85)",
+      "--popover": "oklch(0.19 0 0)",
+      "--popover-foreground": "oklch(0.97 0.01 85)",
+      "--primary": "oklch(0.78 0.14 85)",
+      "--primary-foreground": "oklch(0.16 0.02 85)",
+      "--secondary": "oklch(0.22 0 0)",
+      "--secondary-foreground": "oklch(0.85 0 0)",
+      "--muted": "oklch(0.2 0 0)",
+      "--muted-foreground": "oklch(0.6 0 0)",
+      "--accent": "oklch(0.25 0.015 85)",
+      "--accent-foreground": "oklch(0.97 0.01 85)",
+      "--destructive": "oklch(0.64 0.22 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(1 0 0 / 0.06)",
+      "--ring": "oklch(0.78 0.14 85)",
+      "--radius": "0.5rem",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.03),\n    0 1px 1px rgba(0, 0, 0, 0.35),\n    0 1px 2px rgba(0, 0, 0, 0.15)",
+      "--shadow-sm": "inset 0 1px 0 rgba(255, 255, 255, 0.05),\n    0 1px 2px rgba(0, 0, 0, 0.4),\n    0 2px 4px rgba(0, 0, 0, 0.2)",
+      "--shadow-md": "inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 8px rgba(0, 0, 0, 0.25)",
+      "--shadow-lg": "inset 0 1px 0 rgba(255, 255, 255, 0.12),\n    0 4px 8px rgba(0, 0, 0, 0.6),\n    0 8px 16px rgba(0, 0, 0, 0.3)",
+      "--shadow-xl": "inset 0 1px 0 rgba(255, 255, 255, 0.18),\n    0 8px 16px rgba(0, 0, 0, 0.7),\n    0 16px 32px rgba(0, 0, 0, 0.35)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.35),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.25),\n    0 0 0 1px rgba(255, 200, 100, 0.2),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(240, 170, 60, 0.18)"
+    }
+  }
+}

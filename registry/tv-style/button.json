@@ -1,0 +1,57 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * TV Style Button — rendered as a split-flap \"tile\" button.\n *\n * Visual: uppercase, tracking-wide Helvetica text mirrors the character plates\n * on a classic airport terminal board. A thin horizontal pseudo-seam at 50%\n * height simulates the mechanical flip line. Primary variant glows amber like\n * the board's accent bar.\n *\n * Behaviour: on click, if the button label is a plain string, each character\n * scrambles through random characters (with cycling scramble-palette\n * backgrounds) before settling back — the same animation the FlipBoard runs\n * on its tiles. Buttons with JSX children (icon + label, etc.) skip the\n * scramble and fall back to the press transform.\n */\n\nconst SCRAMBLE_CHARS = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?\"\nconst SCRAMBLE_TICKS = 8\nconst TICK_MS = 40\n\nconst pickScramble = () =>\n  SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]\n\n// Only filled \"tile-face\" variants get the mechanical seam. Transparent\n// variants (outline, ghost, link) render text directly on the canvas — the\n// seam would cut straight through glyph descenders/crossbars and look like\n// a strikethrough, not a flip-board seam.\nconst SEAM =\n  \"before:pointer-events-none before:absolute before:inset-x-0 before:top-1/2 before:h-px\"\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-bold uppercase tracking-[0.06em] leading-none\",\n    \"rounded-[3px] cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform,color] duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          `${SEAM} before:bg-black/35 ` +\n          \"bg-card text-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          `${SEAM} before:bg-black/45 ` +\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:brightness-105\",\n        secondary:\n          `${SEAM} before:bg-black/35 ` +\n          \"bg-secondary text-secondary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:[box-shadow:var(--shadow-button-hover)]\",\n        destructive:\n          `${SEAM} before:bg-black/40 ` +\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/30\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        link:\n          \"text-primary underline-offset-4 hover:underline normal-case tracking-normal\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, onClick, style, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    const label = typeof children === \"string\" ? children : null\n\n    const [scrambled, setScrambled] = React.useState<string | null>(null)\n    const [lockedWidth, setLockedWidth] = React.useState<number | undefined>()\n    const timerRef = React.useRef<ReturnType<typeof setInterval> | null>(null)\n    const innerRef = React.useRef<HTMLButtonElement | null>(null)\n\n    React.useImperativeHandle(ref, () => innerRef.current as HTMLButtonElement)\n\n    // Measure the natural label width so the scramble (variable-width random\n    // chars — Helvetica is proportional, so \"OK\" and \"WM\" render different\n    // widths) can neither shrink nor GROW the button shell during animation.\n    // Follows the \"Loading Button Width Stability\" rule in\n    // docs/interactions.md — the user just clicked and the control must not\n    // feel like it's squirming under pressure.\n    React.useLayoutEffect(() => {\n      if (!innerRef.current || !label || lockedWidth !== undefined) return\n      setLockedWidth(innerRef.current.offsetWidth)\n    }, [label, lockedWidth])\n\n    React.useEffect(() => {\n      return () => {\n        if (timerRef.current) clearInterval(timerRef.current)\n      }\n    }, [])\n\n    const triggerScramble = React.useCallback(() => {\n      if (!label) return\n      if (timerRef.current) clearInterval(timerRef.current)\n      let tick = 0\n      timerRef.current = setInterval(() => {\n        tick += 1\n        if (tick >= SCRAMBLE_TICKS) {\n          setScrambled(null)\n          if (timerRef.current) {\n            clearInterval(timerRef.current)\n            timerRef.current = null\n          }\n          return\n        }\n        const next = Array.from(label, () => pickScramble()).join(\"\")\n        setScrambled(next)\n      }, TICK_MS)\n    }, [label])\n\n    const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {\n      triggerScramble()\n      onClick?.(e)\n    }\n\n    // Apply an exact width — not just min-width — so the button shell stays\n    // frozen when scramble characters happen to be wider than the original\n    // label. min-width alone only prevents shrinking, not growing.\n    const mergedStyle =\n      lockedWidth !== undefined\n        ? { ...style, width: `${lockedWidth}px` }\n        : style\n\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={innerRef}\n        onClick={handleClick}\n        style={mergedStyle}\n        {...props}\n      >\n        {scrambled ?? children}\n      </Comp>\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.14 0 0)",
+      "--foreground": "oklch(0.985 0 0)",
+      "--card": "oklch(0.2 0 0)",
+      "--card-foreground": "oklch(0.985 0 0)",
+      "--popover": "oklch(0.22 0 0)",
+      "--popover-foreground": "oklch(0.985 0 0)",
+      "--primary": "oklch(0.87 0.17 95)",
+      "--primary-foreground": "oklch(0.14 0 0)",
+      "--secondary": "oklch(0.24 0 0)",
+      "--secondary-foreground": "oklch(0.985 0 0)",
+      "--muted": "oklch(0.22 0 0)",
+      "--muted-foreground": "oklch(0.64 0 0)",
+      "--accent": "oklch(0.26 0 0)",
+      "--accent-foreground": "oklch(0.985 0 0)",
+      "--destructive": "oklch(0.62 0.25 25)",
+      "--destructive-foreground": "oklch(0.985 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(0.17 0 0)",
+      "--ring": "oklch(0.87 0.17 95)",
+      "--radius": "0.1875rem",
+      "--tv-cyan": "oklch(0.78 0.16 220)",
+      "--tv-teal": "oklch(0.88 0.15 175)",
+      "--tv-magenta": "oklch(0.57 0.27 305)",
+      "--tv-red": "oklch(0.62 0.25 25)",
+      "--tv-amber": "oklch(0.87 0.17 95)",
+      "--tv-green": "oklch(0.86 0.24 145)",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.02),\n    0 1px 1px rgba(0, 0, 0, 0.5)",
+      "--shadow-sm": "inset 0 1px 0 rgba(255, 255, 255, 0.03),\n    0 1px 2px rgba(0, 0, 0, 0.5)",
+      "--shadow-md": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 2px 4px rgba(0, 0, 0, 0.55)",
+      "--shadow-lg": "inset 0 1px 0 rgba(255, 255, 255, 0.05),\n    0 4px 8px rgba(0, 0, 0, 0.6)",
+      "--shadow-xl": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 8px 16px rgba(0, 0, 0, 0.65)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.55),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.02)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.35),\n    0 0 0 1px rgba(255, 204, 0, 0.28),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 14px rgba(255, 204, 0, 0.22)",
+      "--shadow-button": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.55)",
+      "--shadow-button-hover": "inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.6)"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { CodeBlock } from \"./code-block\"\n\nexport interface CodeTabsItem {\n  label: string\n  code: string\n  language?: string\n  filename?: string\n}\n\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[]\n  defaultTab?: string\n  className?: string\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label)\n  const current = tabs.find((t) => t.label === active) ?? tabs[0]\n\n  if (!current) return null\n\n  return (\n    <div\n      className={cn(\n        \"rounded-lg overflow-hidden\",\n        \"bg-card border border-border [box-shadow:var(--shadow-s)]\",\n        className\n      )}\n    >\n      <div className=\"flex items-center gap-0.5 px-2 pt-2 border-b border-border bg-muted/30\">\n        {tabs.map((tab) => (\n          <button\n            key={tab.label}\n            type=\"button\"\n            onClick={() => setActive(tab.label)}\n            className={cn(\n              \"relative px-3 py-1.5 text-xs font-medium rounded-t-md\",\n              \"transition-[background-color,color] duration-150\",\n              active === tab.label\n                ? \"bg-card text-foreground\"\n                : \"text-muted-foreground hover:text-foreground hover:bg-accent/40\"\n            )}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      <CodeBlock\n        code={current.code}\n        language={current.language}\n        filename={current.filename}\n        className=\"rounded-none border-0 [box-shadow:none]\"\n      />\n    </div>\n  )\n}\nCodeTabs.displayName = \"CodeTabs\"\n\nexport { CodeTabs }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

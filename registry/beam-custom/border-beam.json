@@ -1,0 +1,14 @@
+{
+  "name": "border-beam",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/border-beam.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Hand-rolled border beam — replicates beam.jakubantalik.com without a\n * runtime dependency. The effect is two stacked layers:\n *\n *   1. ::after — the masked beam stroke. A conic-gradient fills the wrapper,\n *      then a CSS mask (matrix subtract: full minus inner) clips it to the\n *      border-only region. CSS @property + @keyframes rotate the gradient.\n *\n *   2. ::before — the outer bloom. A radial-gradient + blur creates a soft\n *      glow around the wrapper that bleeds out beyond the element bounds.\n *\n * Both layers use pointer-events: none so they never intercept input.\n * The effect respects prefers-reduced-motion via `data-beam-static`.\n */\n\ntype BeamSize = \"sm\" | \"md\" | \"line\"\ntype BeamVariant = \"colorful\" | \"mono\" | \"ocean\" | \"sunset\"\n\ninterface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {\n  children: React.ReactNode\n  size?: BeamSize\n  variant?: BeamVariant\n  active?: boolean\n  borderRadius?: number\n}\n\nconst BorderBeam = React.forwardRef<HTMLDivElement, BorderBeamProps>(\n  (\n    { children, size = \"md\", variant = \"colorful\", active = true, borderRadius, className, style, ...props },\n    ref,\n  ) => {\n    const radius = borderRadius != null ? `${borderRadius}px` : undefined\n    return (\n      <div\n        ref={ref}\n        data-beam-size={size}\n        data-beam-variant={variant}\n        data-beam-active={active ? \"true\" : \"false\"}\n        className={cn(\"beam-custom-wrap\", className)}\n        style={{ ...(radius ? { [\"--beam-radius\" as string]: radius } : null), ...style }}\n        {...props}\n      >\n        {children}\n      </div>\n    )\n  },\n)\nBorderBeam.displayName = \"BorderBeam\"\n\nexport { BorderBeam }\nexport type { BorderBeamProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

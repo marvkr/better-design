@@ -1,0 +1,11 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for inset-dark.\n *\n * Fields use the same \"recessed well\" treatment as the toggle track:\n * deep top inset shadow + a faint bottom highlight. Buttons feel raised\n * (gradient + outer shadows); fields feel pressed into the surface.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-[9px] px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border-0 \" +\n  \"placeholder:text-[rgba(255,255,255,0.35)] \" +\n  \"transition-[color,box-shadow] duration-150 \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:[box-shadow:var(--shadow-inset-deep)] \" +\n  \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-inset),0_0_0_2px_rgba(255,255,255,0.18)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[80px] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ]
+}

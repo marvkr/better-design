@@ -1,0 +1,14 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {\n  title: string\n  description?: string\n  action?: React.ReactNode\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizeConfig = {\n  sm: {\n    title: \"text-base font-semibold\",\n    description: \"text-xs\",\n  },\n  default: {\n    title: \"text-lg font-semibold\",\n    description: \"text-sm\",\n  },\n  lg: {\n    title: \"text-2xl font-bold tracking-tight\",\n    description: \"text-base\",\n  },\n}\n\nfunction SectionHeader({\n  title,\n  description,\n  action,\n  size = \"default\",\n  className,\n  ...props\n}: SectionHeaderProps) {\n  const styles = sizeConfig[size]\n\n  return (\n    <div\n      className={cn(\"flex items-start justify-between gap-4\", className)}\n      {...props}\n    >\n      <div className=\"space-y-1 min-w-0\">\n        <h2 className={cn(\"text-foreground\", styles.title)}>{title}</h2>\n        {description && (\n          <p className={cn(\"text-muted-foreground\", styles.description)}>\n            {description}\n          </p>\n        )}\n      </div>\n      {action && (\n        <div className=\"shrink-0\">{action}</div>\n      )}\n    </div>\n  )\n}\n\nexport { SectionHeader }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

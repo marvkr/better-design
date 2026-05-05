@@ -1,0 +1,60 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Inset Dark Button — built on the same pill recipe as the toggle.\n *   - Top→bottom gradient (light from above)\n *   - 0.5px hairline border at 8% white\n *   - Inset top-edge highlight + outer drop shadow\n *   - Active label gets a 1px text-shadow to drop into the surface\n *   - Pressed state flattens: shadow shrinks, transform nudges down\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none tracking-[-0.01em]\",\n    \"rounded-[9px] cursor-pointer select-none\",\n    \"transition-[background,box-shadow,transform,color] duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"[background:var(--pill-gradient)] text-foreground \" +\n          \"[text-shadow:var(--text-shadow-pressed)] \" +\n          \"[box-shadow:var(--shadow-pill)] \" +\n          \"hover:[background:var(--pill-gradient-hover)] hover:[box-shadow:var(--shadow-pill-hover)] \" +\n          \"active:[box-shadow:var(--shadow-sm)]\",\n        primary:\n          \"[background:var(--pill-gradient)] text-foreground \" +\n          \"[text-shadow:var(--text-shadow-pressed)] \" +\n          \"[box-shadow:var(--shadow-pill)] \" +\n          \"hover:[background:var(--pill-gradient-hover)] hover:[box-shadow:var(--shadow-pill-hover)] \" +\n          \"active:[box-shadow:var(--shadow-sm)]\",\n        secondary:\n          \"bg-card text-[rgba(255,255,255,0.78)] \" +\n          \"[box-shadow:var(--shadow-sm)] \" +\n          \"hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-md)] \" +\n          \"active:[box-shadow:var(--shadow-xs)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-[rgba(255,255,255,0.16)]\",\n        ghost:\n          \"bg-transparent text-[rgba(255,255,255,0.55)] \" +\n          \"hover:bg-accent hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-pill)] \" +\n          \"hover:brightness-110 hover:[box-shadow:var(--shadow-pill-hover)]\",\n        link: \"text-foreground underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs rounded-[7px]\",\n        default: \"h-9 px-4\",\n        lg: \"h-11 px-6 rounded-[11px]\",\n        icon: \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.13 0 0)",
+      "--foreground": "oklch(1 0 0)",
+      "--card": "oklch(0.17 0 0)",
+      "--card-foreground": "oklch(1 0 0)",
+      "--popover": "oklch(0.21 0 0)",
+      "--popover-foreground": "oklch(1 0 0)",
+      "--primary": "oklch(0.27 0 0)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(0.17 0 0)",
+      "--secondary-foreground": "oklch(0.78 0 0)",
+      "--muted": "oklch(0.17 0 0)",
+      "--muted-foreground": "oklch(0.62 0 0)",
+      "--accent": "oklch(0.23 0 0)",
+      "--accent-foreground": "oklch(1 0 0)",
+      "--destructive": "oklch(0.62 0.21 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.08)",
+      "--input": "oklch(0.17 0 0)",
+      "--ring": "oklch(1 0 0 / 0.18)",
+      "--radius": "0.75rem",
+      "--shadow-pill": "0 0 0 0.5px rgba(255, 255, 255, 0.08),\n    inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 1px 2px rgba(0, 0, 0, 0.4),\n    0 4px 12px rgba(0, 0, 0, 0.25)",
+      "--shadow-pill-hover": "0 0 0 0.5px rgba(255, 255, 255, 0.12),\n    inset 0 1px 0 rgba(255, 255, 255, 0.12),\n    0 2px 4px rgba(0, 0, 0, 0.45),\n    0 6px 16px rgba(0, 0, 0, 0.3)",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 1px rgba(0, 0, 0, 0.35)",
+      "--shadow-sm": "0 0 0 0.5px rgba(255, 255, 255, 0.06),\n    inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.4),\n    0 2px 4px rgba(0, 0, 0, 0.2)",
+      "--shadow-md": "0 0 0 0.5px rgba(255, 255, 255, 0.08),\n    inset 0 1px 0 rgba(255, 255, 255, 0.08),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 12px rgba(0, 0, 0, 0.25)",
+      "--shadow-lg": "0 0 0 0.5px rgba(255, 255, 255, 0.1),\n    inset 0 1px 0 rgba(255, 255, 255, 0.1),\n    0 6px 12px rgba(0, 0, 0, 0.55),\n    0 12px 24px rgba(0, 0, 0, 0.35)",
+      "--shadow-xl": "0 0 0 0.5px rgba(255, 255, 255, 0.12),\n    inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 12px 24px rgba(0, 0, 0, 0.65),\n    0 24px 48px rgba(0, 0, 0, 0.4)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.6),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.03)",
+      "--shadow-inset-deep": "inset 0 2px 4px rgba(0, 0, 0, 0.7),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.04)",
+      "--pill-gradient": "linear-gradient(180deg, oklch(0.27 0 0) 0%, oklch(0.21 0 0) 100%)",
+      "--pill-gradient-hover": "linear-gradient(180deg, oklch(0.3 0 0) 0%, oklch(0.23 0 0) 100%)",
+      "--text-shadow-pressed": "0 1px 1px rgba(0, 0, 0, 0.5)",
+      "--shadow-s": "var(--shadow-sm)",
+      "--shadow-m": "var(--shadow-md)",
+      "--shadow-l": "var(--shadow-lg)",
+      "--shadow-button": "var(--shadow-pill)",
+      "--shadow-button-hover": "var(--shadow-pill-hover)",
+      "--shadow-primary": "var(--shadow-pill)"
+    }
+  }
+}

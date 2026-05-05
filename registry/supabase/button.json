@@ -1,0 +1,42 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Supabase Button — dark developer platform, green (#3ecf8e) primary\n// Real supabase.com treatment: green with border ring, depth shadow, inset top highlight\n// Secondary: dark surface with subtle border\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-md transition-all duration-150 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary green — semi-transparent fill + solid border (from supabase-shadcn reference)\n        default:\n          \"bg-primary/70 text-primary-foreground \" +\n          \"border border-primary \" +\n          \"hover:bg-primary/90\",\n        // Secondary: dark panel with border + subtle shadow\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"border border-border \" +\n          \"shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.04)] \" +\n          \"hover:bg-accent hover:border-border/70\",\n        // Outline\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary hover:border-primary/30\",\n        // Ghost\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-secondary hover:text-foreground\",\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"border border-destructive/50 \" +\n          \"shadow-[0_1px_3px_rgba(0,0,0,0.3)] \" +\n          \"hover:bg-destructive/90\",\n        // Link\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-4\",\n        lg:      \"h-10 px-6\",\n        icon:    \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.2267 0 0)",
+      "--foreground": "oklch(0.9619 0 0)",
+      "--card": "oklch(0.2591 0 0)",
+      "--card-foreground": "oklch(0.9619 0 0)",
+      "--popover": "oklch(0.2044 0 0)",
+      "--popover-foreground": "oklch(0.9619 0 0)",
+      "--primary": "oklch(0.7629 0.1537 159.36)",
+      "--primary-foreground": "oklch(0.9911 0.0123 167.47)",
+      "--secondary": "oklch(0.2741 0.0055 286.03)",
+      "--secondary-foreground": "oklch(0.9848 0 0)",
+      "--muted": "oklch(0.3008 0 0)",
+      "--muted-foreground": "oklch(0.7119 0.0129 286.07)",
+      "--accent": "oklch(0.2685 0.0063 34.3)",
+      "--accent-foreground": "oklch(0.9848 0 0)",
+      "--destructive": "oklch(0.3959 0.1331 25.72)",
+      "--destructive-foreground": "oklch(0.971 0.0127 17.38)",
+      "--border": "oklch(0.3008 0 0)",
+      "--input": "oklch(0.3008 0 0)",
+      "--ring": "oklch(0.6154 0.1157 159.63)",
+      "--radius": "0.5rem"
+    }
+  }
+}

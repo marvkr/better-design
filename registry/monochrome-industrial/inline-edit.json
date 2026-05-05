@@ -1,0 +1,17 @@
+{
+  "name": "inline-edit",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface InlineEditProps {\n value: string\n onValueChange: (value: string) => void\n placeholder?: string\n className?: string\n displayClassName?: string\n disabled?: boolean\n}\n\nconst InlineEdit = React.forwardRef<HTMLInputElement, InlineEditProps>(\n ({ value, onValueChange, placeholder = \"Click to edit\", className, displayClassName, disabled }, ref) => {\n const [editing, setEditing] = React.useState(false)\n const [draft, setDraft] = React.useState(value)\n const inputRef = React.useRef<HTMLInputElement>(null)\n\n React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)\n\n React.useEffect(() => {\n if (editing) inputRef.current?.focus()\n }, [editing])\n\n const commit = () => {\n onValueChange(draft)\n setEditing(false)\n }\n\n const cancel = () => {\n setDraft(value)\n setEditing(false)\n }\n\n if (editing) {\n return (\n <input\n ref={inputRef}\n value={draft}\n onChange={(e) => setDraft(e.target.value)}\n onBlur={commit}\n onKeyDown={(e) => {\n if (e.key === \"Enter\") commit()\n else if (e.key === \"Escape\") cancel()\n }}\n placeholder={placeholder}\n className={cn(formFieldBase, formFieldSingleLine, className)}\n />\n )\n }\n\n return (\n <button\n type=\"button\"\n onClick={() => !disabled && setEditing(true)}\n disabled={disabled}\n className={cn(\n \"group inline-flex items-center gap-2 rounded-none px-2 py-1 text-sm text-left\",\n \"transition-[background-color,box-shadow] duration-150\",\n \"hover:bg-accent hover:\",\n \"focus:outline-none focus:ring-2 focus:ring-ring/40\",\n \"disabled:cursor-not-allowed disabled:opacity-50\",\n displayClassName\n )}\n >\n <span className={cn(!value && \"text-muted-foreground\")}>{value || placeholder}</span>\n <Icon\n icon=\"tabler:pencil\"\n className=\"h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100\"\n />\n </button>\n )\n }\n)\nInlineEdit.displayName = \"InlineEdit\"\n\nexport { InlineEdit }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

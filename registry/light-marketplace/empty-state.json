@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title?: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ icon, title, description, action, className, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center text-center\",\n          \"rounded-[14px] border-2 border-dashed border-border\",\n          \"bg-secondary/30 px-8 py-12\",\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div className=\"mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-muted-foreground\">\n            {icon}\n          </div>\n        )}\n        {title && (\n          <h3 className=\"mb-1.5 text-base font-semibold text-foreground\">\n            {title}\n          </h3>\n        )}\n        {description && (\n          <p className=\"mb-6 max-w-sm text-sm text-muted-foreground\">\n            {description}\n          </p>\n        )}\n        {action && <div>{action}</div>}\n        {children}\n      </div>\n    )\n  }\n)\nEmptyState.displayName = \"EmptyState\"\n\nexport { EmptyState }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

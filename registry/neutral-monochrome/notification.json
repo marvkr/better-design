@@ -1,0 +1,18 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { X, Info, CheckCircle, AlertTriangle, AlertCircle } from \"lucide-react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst notificationVariants = cva(\n  [\n    \"relative flex gap-3 rounded-[10px] border border-border bg-card px-4 py-3\",\n    \"border-l-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:     \"border-l-primary\",\n        success:     \"border-l-emerald-500\",\n        warning:     \"border-l-orange-500\",\n        destructive: \"border-l-destructive\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst iconMap = {\n  default:     Info,\n  success:     CheckCircle,\n  warning:     AlertTriangle,\n  destructive: AlertCircle,\n}\n\nconst iconColorMap = {\n  default:     \"text-primary\",\n  success:     \"text-emerald-500\",\n  warning:     \"text-orange-500\",\n  destructive: \"text-destructive\",\n}\n\nexport interface NotificationProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  title?: string\n  description?: string\n  onDismiss?: () => void\n  icon?: React.ReactNode\n  action?: React.ReactNode\n}\n\nfunction Notification({\n  variant = \"default\",\n  title,\n  description,\n  onDismiss,\n  icon,\n  action,\n  className,\n  children,\n  ...props\n}: NotificationProps) {\n  const key = variant ?? \"default\"\n  const DefaultIcon = iconMap[key]\n  const iconColor = iconColorMap[key]\n\n  return (\n    <div\n      role=\"alert\"\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className={cn(\"mt-0.5 shrink-0\", iconColor)}>\n        {icon ?? <DefaultIcon className=\"h-4 w-4\" />}\n      </div>\n      <div className=\"flex-1 space-y-0.5 min-w-0\">\n        {title && (\n          <p className=\"text-sm font-semibold text-foreground\">{title}</p>\n        )}\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n        {children}\n        {action && <div className=\"mt-2\">{action}</div>}\n      </div>\n      {onDismiss && (\n        <button\n          type=\"button\"\n          aria-label=\"Dismiss notification\"\n          onClick={onDismiss}\n          className=\"shrink-0 text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm\"\n        >\n          <X className=\"h-4 w-4\" />\n        </button>\n      )}\n    </div>\n  )\n}\n\nexport { Notification, notificationVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

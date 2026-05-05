@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst EmptyState = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"flex flex-col items-center justify-center py-12 text-center\",\n      className\n    )}\n    {...props}\n  />\n))\nEmptyState.displayName = \"EmptyState\"\n\nconst EmptyStateIcon = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"mb-4 flex h-14 w-14 items-center justify-center rounded-full\",\n      \"backdrop-blur-xl bg-white/[0.06]\",\n      \"shadow-[inset_0_0_8px_rgba(255,255,255,0.08)]\",\n      \"[&>svg]:h-6 [&>svg]:w-6 [&>svg]:text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nEmptyStateIcon.displayName = \"EmptyStateIcon\"\n\nconst EmptyStateTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    className={cn(\"mb-1 text-lg font-semibold tracking-tight\", className)}\n    {...props}\n  />\n))\nEmptyStateTitle.displayName = \"EmptyStateTitle\"\n\nconst EmptyStateDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"mb-4 max-w-sm text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nEmptyStateDescription.displayName = \"EmptyStateDescription\"\n\nexport { EmptyState, EmptyStateIcon, EmptyStateTitle, EmptyStateDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

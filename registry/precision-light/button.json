@@ -1,0 +1,49 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Sharp Light — browser-extracted from the original site (2026)\n// Primary: charcoal near-black #2e2e2e (rgb 46,46,46 — same as body text)\n// Shadow: precision multi-layer upward diffuse + 1px outer ring + inset white highlight\n// Extracted exact shadow: rgba(31,31,31,0.01) 0px 16px 8px, rgba(31,31,31,0.04) 0px 12px 6px,\n//   rgba(31,31,31,0.07) 0px 4px 4px, rgba(31,31,31,0.08) 0px 1.5px 3px,\n//   rgb(15,15,15) 0px 0px 0px 1px, rgba(255,255,255,0.12) 0px 1px 2px inset\n// Neutral/white surface button: white bg + same card shadow pattern\n// Radius: 10px default, 13px for xl (CTA size)\n// Ring/focus: blue #335cff = hsl(228,100%,60%)\n\nconst buttonVariants = cva(\n  \"relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground font-medium\",\n  {\n    variants: {\n      variant: {\n        // Primary: charcoal (#2e2e2e) — precision multi-layer upward shadow + 1px outer ring\n        default:\n          \"bg-primary text-primary-foreground hover:bg-primary/85 active:bg-primary/90 \" +\n          \"shadow-[0_16px_8px_rgba(31,31,31,0.01),0_12px_6px_rgba(31,31,31,0.04),0_4px_4px_rgba(31,31,31,0.07),0_1.5px_3px_rgba(31,31,31,0.08),0_0_0_1px_rgb(15,15,15),inset_0_1px_2px_rgba(255,255,255,0.12)] \" +\n          \"hover:shadow-[0_16px_8px_rgba(31,31,31,0.02),0_12px_6px_rgba(31,31,31,0.06),0_4px_4px_rgba(31,31,31,0.10),0_1.5px_3px_rgba(31,31,31,0.12),0_0_0_1px_rgb(15,15,15),inset_0_1px_2px_rgba(255,255,255,0.14)] \" +\n          \"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n\n        // Neutral/white surface button with layered card shadow + 1px outer ring\n        neutral:\n          \"bg-secondary text-secondary-foreground hover:bg-secondary/70 active:bg-secondary/80 \" +\n          \"shadow-[0_1px_1px_0.5px_rgba(51,51,51,0.04),0_3px_3px_-1.5px_rgba(51,51,51,0.02),0_6px_6px_-3px_rgba(51,51,51,0.04),0_12px_12px_-6px_rgba(51,51,51,0.04),0_24px_24px_-12px_rgba(51,51,51,0.04),0_0_0_1px_rgba(51,51,51,0.1),inset_0_-1px_1px_-0.5px_rgba(51,51,51,0.06)] \" +\n          \"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/85 active:bg-destructive/90 focus-visible:ring-2 focus-visible:ring-destructive/30\",\n\n        // Outline: 1px ring border (stroke-soft-200 equivalent)\n        outline:\n          \"ring-1 ring-inset ring-border bg-background text-foreground hover:bg-accent hover:ring-foreground/20 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n\n        // Secondary: muted bg, foreground text\n        secondary:\n          \"bg-muted text-foreground ring-1 ring-inset ring-border hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring\",\n\n        // Ghost\n        ghost:\n          \"bg-transparent text-foreground/70 hover:bg-accent hover:text-foreground focus-visible:bg-accent focus-visible:ring-2 focus-visible:ring-ring\",\n\n        // Link (uses ring color = blue)\n        link: \"bg-transparent text-ring underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-10 gap-3 rounded-[10px] px-3.5 text-sm\",\n        sm:      \"h-9 gap-3 rounded-lg px-3 text-sm\",\n        xs:      \"h-8 gap-2.5 rounded-lg px-2.5 text-sm\",\n        xxs:     \"h-7 gap-2.5 rounded-lg px-2 text-xs\",\n        lg:      \"h-11 gap-3 rounded-[10px] px-4 text-sm\",\n        xl:      \"h-[44px] gap-3 rounded-[13px] px-[18px] text-sm\",\n        icon:    \"h-10 w-10 rounded-[10px]\",\n        \"icon-sm\": \"h-9 w-9 rounded-lg\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.9772 0 0)",
+      "--foreground": "oklch(0.3008 0 0)",
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.3008 0 0)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.3008 0 0)",
+      "--primary": "oklch(0.3008 0 0)",
+      "--primary-foreground": "oklch(1 0 0)",
+      "--secondary": "oklch(1 0 0)",
+      "--secondary-foreground": "oklch(0.3008 0 0)",
+      "--muted": "oklch(0.9696 0 0)",
+      "--muted-foreground": "oklch(0.4741 0 0)",
+      "--accent": "oklch(0.9619 0 0)",
+      "--accent-foreground": "oklch(0.3008 0 0)",
+      "--destructive": "oklch(0.6356 0.2082 25.38)",
+      "--destructive-foreground": "oklch(1 0 0)",
+      "--border": "oklch(0.9389 0 0)",
+      "--input": "oklch(0.9772 0 0)",
+      "--ring": "oklch(0.5547 0.2451 266.71)",
+      "--radius": "0.625rem",
+      "--shadow-2xs": "0 1px 2px 0 rgba(0,0,0,0.04)",
+      "--shadow-xs": "0 1px 2px 0 rgba(0,0,0,0.06)",
+      "--shadow-sm": "0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)",
+      "--shadow": "0 1px 3px 0 rgba(0,0,0,0.1),  0 1px 2px -1px rgba(0,0,0,0.08)",
+      "--shadow-md": "0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06)",
+      "--shadow-lg": "0 8px 16px -2px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)",
+      "--shadow-xl": "0 16px 24px -4px rgba(0,0,0,0.12), 0 8px 10px -6px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)"
+    }
+  }
+}

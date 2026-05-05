@@ -1,0 +1,11 @@
+{
+  "name": "toaster",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toaster.tsx",
+      "content": "\"use client\"\n\nimport {\n Toast,\n ToastClose,\n ToastDescription,\n ToastProvider,\n ToastTitle,\n ToastViewport,\n} from \"./toast\"\nimport { useToast } from \"./use-toast\"\n\nexport function Toaster() {\n const { toasts } = useToast()\n\n return (\n <ToastProvider>\n {toasts.map(({ id, title, description, action, ...props }) => (\n <Toast key={id} {...props}>\n <div className=\"grid gap-1\">\n {title && <ToastTitle>{title}</ToastTitle>}\n {description && <ToastDescription>{description}</ToastDescription>}\n </div>\n {action}\n <ToastClose />\n </Toast>\n ))}\n <ToastViewport />\n </ToastProvider>\n )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
