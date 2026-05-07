@@ -1,0 +1,47 @@
+{
+  "name": "globals",
+  "type": "registry:style",
+  "description": "Global CSS styles and design tokens for Metal Fx",
+  "files": [
+    {
+      "path": "globals.css",
+      "content": "@import \"tailwindcss\";\n@import \"tw-animate-css\";\n\n@custom-variant dark (&:is(.dark *));\n\n/*\n * Metal FX — inspired by jakubantalik/metal-fx liquid-metal WebGL effect.\n *\n * Visual identity:\n * - Polished dark obsidian base, like a brushed-steel anvil\n * - Iridescent chromatic accent (rainbow sheen) for the primary signature\n * - Silver / chromium surfaces with reflective top-edge highlights\n * - Mercury-style fluid borders (gradient strokes)\n * - Pill geometry on buttons (the source effect wraps pill silhouettes)\n */\n\n:root {\n  /* ─── Surfaces (dark obsidian → polished steel) ─── */\n  --background: oklch(0.13 0.005 260);          /* Deep obsidian, slight cool cast */\n  --foreground: oklch(0.96 0.005 260);          /* Cool white */\n\n  --card: oklch(0.17 0.008 260);                /* Brushed steel raised */\n  --card-foreground: oklch(0.96 0.005 260);\n\n  --popover: oklch(0.20 0.01 260);              /* Polished chrome floating */\n  --popover-foreground: oklch(0.96 0.005 260);\n\n  /* ─── Primary: polished silver — the iridescence lives in the metal ring, not the fill ─── */\n  --primary: oklch(0.92 0 0);                   /* Polished silver / chrome white */\n  --primary-foreground: oklch(0.13 0.005 260);\n\n  --secondary: oklch(0.24 0.008 260);           /* Steel grey */\n  --secondary-foreground: oklch(0.92 0.005 260);\n\n  --muted: oklch(0.22 0.005 260);\n  --muted-foreground: oklch(0.62 0.01 260);\n\n  --accent: oklch(0.26 0.005 260);              /* Neutral steel accent */\n  --accent-foreground: oklch(0.96 0.005 260);\n\n  --destructive: oklch(0.65 0.22 25);\n  --destructive-foreground: oklch(0.97 0 0);\n\n  --border: oklch(1 0 0 / 0.10);                /* Soft chrome edge */\n  --input: transparent;                          /* Transparent — wrapper paints the surface so icons stay visible */\n  --ring: oklch(0.92 0 0);                      /* Silver focus ring */\n  --radius: 0.625rem;\n\n  /* ─── Iridescent gradients (chromatic palette = signature of metal-fx) ─── */\n  --gradient-chromatic:\n    linear-gradient(\n      135deg,\n      oklch(0.78 0.16 320) 0%,\n      oklch(0.78 0.16 280) 25%,\n      oklch(0.78 0.14 220) 50%,\n      oklch(0.82 0.14 90) 75%,\n      oklch(0.78 0.16 320) 100%\n    );\n\n  --gradient-silver:\n    linear-gradient(\n      180deg,\n      oklch(0.45 0.005 260) 0%,\n      oklch(0.30 0.005 260) 50%,\n      oklch(0.20 0.005 260) 100%\n    );\n\n  /* ─── Shadow scale (dark, metallic — sharp top-edge highlights) ─── */\n  --shadow-xs:\n    inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 1px rgba(0, 0, 0, 0.4),\n    0 1px 2px rgba(0, 0, 0, 0.18);\n\n  --shadow-sm:\n    inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.45),\n    0 2px 4px rgba(0, 0, 0, 0.22);\n\n  --shadow-md:\n    inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 8px rgba(0, 0, 0, 0.28);\n\n  --shadow-lg:\n    inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 4px 8px rgba(0, 0, 0, 0.65),\n    0 8px 18px rgba(0, 0, 0, 0.35);\n\n  --shadow-xl:\n    inset 0 1px 0 rgba(255, 255, 255, 0.20),\n    0 8px 16px rgba(0, 0, 0, 0.75),\n    0 16px 36px rgba(0, 0, 0, 0.4);\n\n  --shadow-inset:\n    inset 0 1px 2px rgba(0, 0, 0, 0.4),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.04);\n\n  /* Iridescent glow — chromatic bloom around primary buttons */\n  --shadow-primary:\n    inset 0 1px 0 rgba(255, 255, 255, 0.28),\n    0 0 0 1px rgba(220, 140, 255, 0.25),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 14px rgba(180, 100, 240, 0.3),\n    0 8px 24px rgba(120, 200, 255, 0.18);\n\n  /* Chrome resting button shadow — silvery contact */\n  --shadow-button:\n    inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 1px 2px rgba(0, 0, 0, 0.5),\n    0 2px 6px rgba(0, 0, 0, 0.25);\n\n  --shadow-button-hover:\n    inset 0 1px 0 rgba(255, 255, 255, 0.16),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 12px rgba(0, 0, 0, 0.32);\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-card: var(--card);\n  --color-card-foreground: var(--card-foreground);\n  --color-popover: var(--popover);\n  --color-popover-foreground: var(--popover-foreground);\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n  --radius-sm: calc(var(--radius) - 2px);\n  --radius-md: var(--radius);\n  --radius-lg: calc(var(--radius) + 2px);\n  --radius-xl: calc(var(--radius) + 6px);\n\n  --shadow-xs: var(--shadow-xs);\n  --shadow-sm: var(--shadow-sm);\n  --shadow-md: var(--shadow-md);\n  --shadow-lg: var(--shadow-lg);\n  --shadow-xl: var(--shadow-xl);\n  --shadow-inset: var(--shadow-inset);\n  --shadow-button: var(--shadow-button);\n  --shadow-button-hover: var(--shadow-button-hover);\n  --shadow-primary: var(--shadow-primary);\n}\n\n@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground antialiased;\n  }\n}\n",
+      "type": "registry:style"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--background": "oklch(0.13 0.005 260)",
+      "--foreground": "oklch(0.96 0.005 260)",
+      "--card": "oklch(0.17 0.008 260)",
+      "--card-foreground": "oklch(0.96 0.005 260)",
+      "--popover": "oklch(0.20 0.01 260)",
+      "--popover-foreground": "oklch(0.96 0.005 260)",
+      "--primary": "oklch(0.92 0 0)",
+      "--primary-foreground": "oklch(0.13 0.005 260)",
+      "--secondary": "oklch(0.24 0.008 260)",
+      "--secondary-foreground": "oklch(0.92 0.005 260)",
+      "--muted": "oklch(0.22 0.005 260)",
+      "--muted-foreground": "oklch(0.62 0.01 260)",
+      "--accent": "oklch(0.26 0.005 260)",
+      "--accent-foreground": "oklch(0.96 0.005 260)",
+      "--destructive": "oklch(0.65 0.22 25)",
+      "--destructive-foreground": "oklch(0.97 0 0)",
+      "--border": "oklch(1 0 0 / 0.10)",
+      "--input": "transparent",
+      "--ring": "oklch(0.92 0 0)",
+      "--radius": "0.625rem",
+      "--gradient-chromatic": "linear-gradient(\n      135deg,\n      oklch(0.78 0.16 320) 0%,\n      oklch(0.78 0.16 280) 25%,\n      oklch(0.78 0.14 220) 50%,\n      oklch(0.82 0.14 90) 75%,\n      oklch(0.78 0.16 320) 100%\n    )",
+      "--gradient-silver": "linear-gradient(\n      180deg,\n      oklch(0.45 0.005 260) 0%,\n      oklch(0.30 0.005 260) 50%,\n      oklch(0.20 0.005 260) 100%\n    )",
+      "--shadow-xs": "inset 0 1px 0 rgba(255, 255, 255, 0.04),\n    0 1px 1px rgba(0, 0, 0, 0.4),\n    0 1px 2px rgba(0, 0, 0, 0.18)",
+      "--shadow-sm": "inset 0 1px 0 rgba(255, 255, 255, 0.06),\n    0 1px 2px rgba(0, 0, 0, 0.45),\n    0 2px 4px rgba(0, 0, 0, 0.22)",
+      "--shadow-md": "inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 8px rgba(0, 0, 0, 0.28)",
+      "--shadow-lg": "inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    0 4px 8px rgba(0, 0, 0, 0.65),\n    0 8px 18px rgba(0, 0, 0, 0.35)",
+      "--shadow-xl": "inset 0 1px 0 rgba(255, 255, 255, 0.20),\n    0 8px 16px rgba(0, 0, 0, 0.75),\n    0 16px 36px rgba(0, 0, 0, 0.4)",
+      "--shadow-inset": "inset 0 1px 2px rgba(0, 0, 0, 0.4),\n    inset 0 -1px 0 rgba(255, 255, 255, 0.04)",
+      "--shadow-primary": "inset 0 1px 0 rgba(255, 255, 255, 0.28),\n    0 0 0 1px rgba(220, 140, 255, 0.25),\n    0 2px 4px rgba(0, 0, 0, 0.5),\n    0 4px 14px rgba(180, 100, 240, 0.3),\n    0 8px 24px rgba(120, 200, 255, 0.18)",
+      "--shadow-button": "inset 0 1px 0 rgba(255, 255, 255, 0.10),\n    0 1px 2px rgba(0, 0, 0, 0.5),\n    0 2px 6px rgba(0, 0, 0, 0.25)",
+      "--shadow-button-hover": "inset 0 1px 0 rgba(255, 255, 255, 0.16),\n    0 2px 4px rgba(0, 0, 0, 0.55),\n    0 4px 12px rgba(0, 0, 0, 0.32)"
+    }
+  }
+}

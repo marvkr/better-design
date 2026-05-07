@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  action?: React.ReactNode\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon = \"tabler:box-off\", title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-lg p-8 text-center\",\n        \"bg-card text-card-foreground border border-dashed border-border\",\n        className\n      )}\n      {...props}\n    >\n      <div\n        className={cn(\n          \"flex h-12 w-12 items-center justify-center rounded-full\",\n          \"bg-muted text-muted-foreground\",\n          \"[box-shadow:var(--shadow-s)]\"\n        )}\n      >\n        <Icon icon={icon} className=\"h-5 w-5\" />\n      </div>\n      <div className=\"space-y-1 max-w-md\">\n        <div className=\"text-base font-semibold text-foreground\">{title}</div>\n        {description && (\n          <div className=\"text-sm text-muted-foreground leading-relaxed\">{description}</div>\n        )}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  )\n)\nEmptyState.displayName = \"EmptyState\"\n\nexport { EmptyState }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

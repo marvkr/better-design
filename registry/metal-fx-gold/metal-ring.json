@@ -1,0 +1,17 @@
+{
+  "name": "metal-ring",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/metal-ring.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { MetalFx } from \"metal-fx\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Metal Ring — animated WebGL liquid-metal frame from `metal-fx` (the\n * official npm package by Jakub Antalik). The shader paints a gold ring\n * with proximity reflections; the wrapped child stays the actual\n * interactive element.\n *\n * `shape=\"rect\"` falls back to no ring — `metal-fx` only ships button\n * (pill) and circle variants, and the rect/input use case isn't part of\n * the library's design.\n */\n\ntype RingShape = \"pill\" | \"rect\"\n\ninterface MetalRingProps extends React.HTMLAttributes<HTMLDivElement> {\n  children: React.ReactNode\n  shape?: RingShape\n  active?: boolean\n  block?: boolean\n}\n\nconst MetalRing = React.forwardRef<HTMLDivElement, MetalRingProps>(\n  ({ children, shape = \"pill\", active = true, block = false, className, ...props }, ref) => {\n    if (shape === \"rect\") {\n      return (\n        <div\n          ref={ref}\n          className={cn(block ? \"block w-full\" : \"inline-flex align-middle\", className)}\n          {...props}\n        >\n          {children}\n        </div>\n      )\n    }\n    return (\n      <div\n        ref={ref}\n        className={cn(block ? \"block w-full\" : \"inline-flex align-middle\", className)}\n        {...props}\n      >\n        <MetalFx variant=\"button\" preset=\"gold\" theme=\"dark\" paused={!active} disableGlow>\n          {children}\n        </MetalFx>\n      </div>\n    )\n  },\n)\nMetalRing.displayName = \"MetalRing\"\n\nexport { MetalRing }\nexport type { MetalRingProps }",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "dependencies": [
+    "metal-fx"
+  ]
+}

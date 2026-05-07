@@ -99,10 +99,6 @@
       "label": "Lumen Dark"
     },
     {
-      "name": "metal-fx",
-      "label": "Metal Fx"
-    },
-    {
       "name": "beam-custom",
       "label": "Beam Custom"
     },
@@ -115,8 +111,16 @@
       "label": "Stripe"
     },
     {
-      "name": "pillow-light",
-      "label": "Pillow Light"
+      "name": "metal-fx-gold",
+      "label": "Metal FX Gold"
+    },
+    {
+      "name": "metal-fx-silver",
+      "label": "Metal FX Silver"
+    },
+    {
+      "name": "metal-fx-chromatic",
+      "label": "Metal FX Chromatic"
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\nexport interface DatePickerProps {\n  value?: Date\n  onValueChange?: (date: Date | undefined) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n}\n\nconst DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(\n  ({ value, onValueChange, placeholder = \"Pick a date\", className, disabled }, ref) => (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button\n          ref={ref}\n          variant=\"outline\"\n          disabled={disabled}\n          className={cn(\n            \"w-full justify-start text-left font-normal\",\n            !value && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <Icon icon=\"tabler:calendar\" className=\"mr-2 h-4 w-4\" />\n          {value ? format(value, \"PPP\") : <span>{placeholder}</span>}\n        </Button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar mode=\"single\" selected={value} onSelect={onValueChange} initialFocus />\n      </PopoverContent>\n    </Popover>\n  )\n)\nDatePicker.displayName = \"DatePicker\"\n\nexport { DatePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

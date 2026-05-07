@@ -1,0 +1,17 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * IconButton — square button meant for a single icon. Mirrors Button's shadow language\n * but sized for icons. Provide `aria-label` for accessibility.\n */\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center shrink-0\",\n    \"rounded-md cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform,color] duration-150\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-s)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground [box-shadow:var(--shadow-button)] hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] hover:brightness-105\",\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground\",\n        outline:\n          \"bg-transparent text-foreground border border-border hover:bg-accent hover:border-ring/30\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-button)] hover:brightness-105\",\n      },\n      size: {\n        sm: \"h-7 w-7 [&>svg]:h-3.5 [&>svg]:w-3.5\",\n        default: \"h-9 w-9 [&>svg]:h-4 [&>svg]:w-4\",\n        lg: \"h-10 w-10 [&>svg]:h-5 [&>svg]:w-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <button\n      ref={ref}\n      type={props.type ?? \"button\"}\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

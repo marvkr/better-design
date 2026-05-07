@@ -1,0 +1,14 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Metal FX Card — brushed steel surface.\n * Sharp top-edge highlight (chrome reflection from above) + subtle ambient shadow.\n * On hover, elevation lifts and a faint chromatic ring appears at the top edge.\n */\n\ninterface CardProps extends React.HTMLAttributes<HTMLDivElement> {\n  interactive?: boolean\n}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, interactive, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"rounded-xl bg-card text-card-foreground border border-white/5\",\n        \"[box-shadow:var(--shadow-sm)]\",\n        \"transition-[background-color,box-shadow,border-color] duration-200\",\n        interactive && \"cursor-pointer hover:bg-accent/40 hover:border-white/10 hover:[box-shadow:var(--shadow-md)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nCard.displayName = \"Card\"\n\nconst CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex flex-col gap-1.5 p-5\", className)} {...props} />\n  )\n)\nCardHeader.displayName = \"CardHeader\"\n\nconst CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-base font-semibold text-foreground leading-snug\", className)} {...props} />\n  )\n)\nCardTitle.displayName = \"CardTitle\"\n\nconst CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-sm text-muted-foreground\", className)} {...props} />\n  )\n)\nCardDescription.displayName = \"CardDescription\"\n\nconst CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"px-5 pb-5\", className)} {...props} />\n  )\n)\nCardContent.displayName = \"CardContent\"\n\nconst CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex items-center gap-2 px-5 pb-5\", className)} {...props} />\n  )\n)\nCardFooter.displayName = \"CardFooter\"\n\nexport { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

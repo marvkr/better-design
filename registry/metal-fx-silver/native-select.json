@@ -1,0 +1,14 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, children, ...props }, ref) => (\n    <div className=\"relative\">\n      <select\n        ref={ref}\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"appearance-none pr-9 cursor-pointer\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </select>\n      <Icon\n        icon=\"tabler:chevron-down\"\n        className=\"pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground opacity-70\"\n      />\n    </div>\n  )\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}

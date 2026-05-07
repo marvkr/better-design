@@ -1,6 +1,6 @@
 # Better Design
 
-> 29 open-source design systems for [shadcn/ui](https://ui.shadcn.com). Drop any of them into your app with one command.
+> 31 open-source design systems for [shadcn/ui](https://ui.shadcn.com). Drop any of them into your app with one command.
 
 Browse and preview them all at **[better-design.com](https://www.better-design.com/design-systems)**.
 
@@ -49,7 +49,9 @@ The CLI handles dependencies, CSS variables, and `globals.css` automatically.
 | Linear | `linear` | [view](https://www.better-design.com/design-systems/linear) |
 | Linear Quality | `linear-quality` | [view](https://www.better-design.com/design-systems/linear-quality) |
 | Lumen Dark | `lumen-dark` | [view](https://www.better-design.com/design-systems/lumen-dark) |
-| Metal FX | `metal-fx` | [view](https://www.better-design.com/design-systems/metal-fx) |
+| Metal FX Gold | `metal-fx-gold` | [view](https://www.better-design.com/design-systems/metal-fx-gold) |
+| Metal FX Silver | `metal-fx-silver` | [view](https://www.better-design.com/design-systems/metal-fx-silver) |
+| Metal FX Chromatic | `metal-fx-chromatic` | [view](https://www.better-design.com/design-systems/metal-fx-chromatic) |
 | Midnight Glass | `midnight-glass` | [view](https://www.better-design.com/design-systems/midnight-glass) |
 | Minimal Light | `minimal-light` | [view](https://www.better-design.com/design-systems/minimal-light) |
 | Monochrome Industrial | `monochrome-industrial` | [view](https://www.better-design.com/design-systems/monochrome-industrial) |
