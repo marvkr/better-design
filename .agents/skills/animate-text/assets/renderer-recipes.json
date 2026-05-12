@@ -1,0 +1,356 @@
+{
+  "generic-stagger": {
+    "id": "generic-stagger",
+    "summary": "Split text by target, animate each animated unit from enter.from to enter.to, hold, animate current units from exit.from to exit.to, then replace content.",
+    "required_dom": [
+      "one h3.text-animation-title per phrase",
+      "one span.text-animation-unit per split part",
+      "animate only non-space parts for per-word targets",
+      "span.text-animation-unit.line uses display:block for per-line targets"
+    ],
+    "split_rules": {
+      "whole": "single animated unit containing the full text",
+      "per-character": "Array.from(text), preserving punctuation and spaces as animated visual units",
+      "per-word": "regex /(\\S+|\\s+)/g; create spans for words and whitespace, but animate only non-whitespace spans",
+      "per-line": "split on explicit \"\\n\"; each line is an animated block span"
+    },
+    "stagger_rank_algorithms": {
+      "normal": "rank equals DOM unit index",
+      "reverse": "rank 0 starts at last animated unit and proceeds backward",
+      "center-out": "sort animated indices by absolute distance from center, ties by lower index",
+      "edges-in": "alternate left edge, right edge, then move inward"
+    },
+    "frame_materialization": {
+      "transform_order": "translate3d(x_px, y_px * runtime.y_travel_multiplier, z_px) rotateX(rotate_x_deg) rotateY(rotate_y_deg) rotate(rotate_deg) scale(scale)",
+      "filter": "blur(blur_px)",
+      "opacity_default": 1,
+      "scale_default": 1,
+      "letter_spacing": "for per-character targets, split letter_spacing_em across marginLeft/marginRight halves on glyphs; otherwise assign letterSpacing directly",
+      "fill": "final frame must remain applied after each phase completes"
+    },
+    "loop_algorithm": [
+      "Wait initial_delay_ms before starting the first enter.",
+      "Create current phrase, apply enter.from to every animated unit, append it, then animate enter.",
+      "After the first enter completes, wait hold_ms.",
+      "Loop from the visible phrase: animate current units through exit.",
+      "Create next phrase off-DOM and apply enter.from.",
+      "After the exit completes, wait micro_delay_ms.",
+      "Replace the stage contents with the next phrase and animate enter.",
+      "After the next enter completes, wait gap_ms.",
+      "Continue the loop by exiting the currently visible phrase; do not run another enter for a phrase that is already visible."
+    ],
+    "canonical_loop_pseudocode": [
+      "current = createPhrase(firstText); append(current); await enter(current);",
+      "while active:",
+      "  await sleep(hold_ms);",
+      "  await exit(current);",
+      "  next = createPhrase(nextText); applyEnterFrom(next);",
+      "  await sleep(micro_delay_ms);",
+      "  replaceStage(next);",
+      "  current = next;",
+      "  await enter(current);",
+      "  await sleep(gap_ms);",
+      "Do not put await enter(current) at the top of the while loop; that double-enters the phrase that just entered before gap_ms."
+    ],
+    "loop_invariants": [
+      "The initial phrase enters exactly once before the loop body.",
+      "Every later phrase enters exactly once immediately after replacement.",
+      "If implementation awaits an animation or tween promise, do not also sleep for that phase total; use either await completion or sleep(total), not both.",
+      "Do not implement an enter-only demo when exact playback is requested; preserve exit, replacement, micro-delay, gap, cancellation, and final-frame snapping."
+    ],
+    "current_site_swap_support": {
+      "uses_micro_delay_ms": true,
+      "uses_overlap_ms": false,
+      "branches_on_swap_mode": false,
+      "note": "The portable swap block may describe broader intent; the current site showcase uses the playback recipe here as the exact behavior."
+    }
+  },
+  "shared-slide-opacity-stage": {
+    "id": "shared-slide-opacity-stage",
+    "summary": "Move the full phrase as one title-level transform while staggering only word opacity.",
+    "required_dom": [
+      "one h3.text-animation-title for the full phrase transform",
+      "word spans are nested inside the title and only receive opacity animation"
+    ],
+    "algorithm": [
+      "Split text as per-word by default.",
+      "Apply titleFrame(enter.from) to the h3 and word_opacity_from to each word span.",
+      "Start the h3 transform animation and every word opacity animation in the same tick; do not wait for the title transform to finish before starting word opacity.",
+      "Animate the h3 once from enter.from to enter.to using scaled enter duration.",
+      "Animate every word opacity from word_opacity_from to word_opacity_to with index * scaled enter.stagger_ms delay.",
+      "Hold, then animate only the h3 from exit.from to exit.to, clear the stage, wait gap_ms, advance to the next phrase, and repeat."
+    ],
+    "frame_materialization": {
+      "title_transform": "translate3d(x_px, y_px * runtime.y_travel_multiplier, 0) scale(scale)",
+      "title_filter": "blur(blur_px)",
+      "word_animation_properties": ["opacity"]
+    },
+    "initial_state": {
+      "before_enter": [
+        "Set the title element to titleFrame(enter.from).",
+        "Set every non-space word span opacity to build.word_opacity_from before starting any enter tween.",
+        "Whitespace spans should preserve layout but do not receive opacity tweens."
+      ],
+      "before_exit": ["Set the title element to titleFrame(exit.from)."]
+    },
+    "verification": [
+      "A GSAP implementation must call gsap.set(wordNodes, { opacity: word_opacity_from }) or assign equivalent inline styles before gsap.to(wordNodes, { opacity: word_opacity_to, ... }).",
+      "A Motion implementation must initialize every word span opacity to word_opacity_from before animate(... opacity: [word_opacity_from, word_opacity_to] ...).",
+      "A loop implementation must preserve exit and gap timing; an enter-only reveal is not an exact reproduction."
+    ]
+  },
+  "kinetic-center-build": {
+    "id": "kinetic-center-build",
+    "summary": "Build a centered horizontal phrase word by word; each incoming word enters from the right and pushes existing words into newly centered positions.",
+    "required_measurements": ["offsetWidth for every word after appending the incoming word"],
+    "algorithm": [
+      "Create a relative kinetic line container using the kinetic-line-host stage preset.",
+      "For each phrase word, append an absolutely centered word span.",
+      "Measure all child widths and compute centered x positions: totalWidth = sum(widths) + word_gap_px * (count - 1); cursor starts at -totalWidth / 2; each word position is cursor + width / 2.",
+      "First word enters at x=0 with first_word_y_px, entry_scale, entry_blur_px, and opacity 0, then settles to x=0/y=0/scale=1/blur=0/opacity=1.",
+      "For later words, animate existing words from previous x positions to next centered x positions while the incoming word starts at targetX + entry_offset_px and lands at targetX.",
+      "Use an intermediate keyframe around offset 0.52 for existing-word reflow blur and 0.6 for incoming-word settle blur.",
+      "After every push, snap all words to exact final poses to avoid accumulated engine drift.",
+      "Exit all words together from current centered x positions with exit_y_px and exit_blur_px, then clear the line."
+    ],
+    "frame_materialization": {
+      "coordinate_space": "x/y values are renderer pixel coordinates and are not multiplied by runtime.y_travel_multiplier.",
+      "transform": "translate(-50%, -50%) translate3d(x, y, 0) scale(scale)",
+      "filter": "blur(blur)",
+      "opacity": "unit opacity"
+    },
+    "keyframe_recipe": {
+      "first_word": [
+        {
+          "offset": 0,
+          "x": 0,
+          "y": "build.first_word_y_px",
+          "scale": "build.entry_scale",
+          "blur": "build.entry_blur_px",
+          "opacity": 0
+        },
+        {
+          "offset": 0.58,
+          "x": 0,
+          "y": "build.first_word_y_px * 0.35",
+          "scale": 0.998,
+          "blur": "build.entry_blur_px * 0.45",
+          "opacity": 0.78
+        },
+        {
+          "offset": 1,
+          "x": 0,
+          "y": 0,
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        }
+      ],
+      "existing_word_push": [
+        {
+          "offset": 0,
+          "x": "currentX",
+          "y": 0,
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        },
+        {
+          "offset": 0.52,
+          "x": "mix(currentX, nextX, 0.58)",
+          "y": 0,
+          "scale": 1,
+          "blur": "build.reflow_blur_px",
+          "opacity": 1
+        },
+        {
+          "offset": 1,
+          "x": "nextX",
+          "y": 0,
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        }
+      ],
+      "incoming_word_push": [
+        {
+          "offset": 0,
+          "x": "targetX + build.entry_offset_px",
+          "y": 0,
+          "scale": "build.entry_scale",
+          "blur": "build.entry_blur_px",
+          "opacity": 0
+        },
+        {
+          "offset": 0.6,
+          "x": "mix(targetX + build.entry_offset_px, targetX, 0.72)",
+          "y": 0,
+          "scale": 0.998,
+          "blur": "build.entry_blur_px * 0.38",
+          "opacity": 0.84
+        },
+        {
+          "offset": 1,
+          "x": "targetX",
+          "y": 0,
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        }
+      ],
+      "exit_word": [
+        {
+          "offset": 0,
+          "x": "position",
+          "y": 0,
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        },
+        {
+          "offset": 0.52,
+          "x": "position",
+          "y": "build.exit_y_px * 0.45",
+          "scale": 1,
+          "blur": "build.exit_blur_px * 0.55",
+          "opacity": 0.62
+        },
+        {
+          "offset": 1,
+          "x": "position",
+          "y": "build.exit_y_px",
+          "scale": 1,
+          "blur": "build.exit_blur_px",
+          "opacity": 0
+        }
+      ]
+    }
+  },
+  "kinetic-top-build": {
+    "id": "kinetic-top-build",
+    "summary": "Build a centered vertical stack word by word; each incoming word drops from above and pushes existing words into newly centered y positions.",
+    "required_measurements": ["offsetHeight for every word after appending the incoming word"],
+    "algorithm": [
+      "Create a relative kinetic stack container using the kinetic-stack-host stage preset.",
+      "For each phrase word, append an absolutely centered word span.",
+      "Measure all child heights and compute centered y positions: totalHeight = sum(heights) + line_gap_px * (count - 1); cursor starts at -totalHeight / 2; each word position is cursor + height / 2.",
+      "First word enters at y=first_word_y_px with entry_scale, entry_blur_px, and opacity 0, then settles to y=0/scale=1/blur=0/opacity=1.",
+      "For later words, animate existing words from previous y positions to next centered y positions while the incoming word starts at targetY + entry_offset_y_px and lands at targetY.",
+      "Use an intermediate keyframe around offset 0.52 for existing-word reflow blur and 0.6 for incoming-word settle blur.",
+      "After every push, snap all words to exact final poses to avoid accumulated engine drift.",
+      "Exit all words together from current centered y positions with exit_y_px and exit_blur_px, then clear the stack."
+    ],
+    "frame_materialization": {
+      "coordinate_space": "x/y values are renderer pixel coordinates and are not multiplied by runtime.y_travel_multiplier.",
+      "transform": "translate(-50%, -50%) translate3d(0, y, 0) scale(scale)",
+      "filter": "blur(blur)",
+      "opacity": "unit opacity"
+    },
+    "keyframe_recipe": {
+      "first_word": [
+        {
+          "offset": 0,
+          "x": 0,
+          "y": "build.first_word_y_px",
+          "scale": "build.entry_scale",
+          "blur": "build.entry_blur_px",
+          "opacity": 0
+        },
+        {
+          "offset": 0.58,
+          "x": 0,
+          "y": "build.first_word_y_px * 0.35",
+          "scale": 0.998,
+          "blur": "build.entry_blur_px * 0.45",
+          "opacity": 0.78
+        },
+        {
+          "offset": 1,
+          "x": 0,
+          "y": 0,
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        }
+      ],
+      "existing_word_push": [
+        {
+          "offset": 0,
+          "x": 0,
+          "y": "currentY",
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        },
+        {
+          "offset": 0.52,
+          "x": 0,
+          "y": "mix(currentY, nextY, 0.58)",
+          "scale": 1,
+          "blur": "build.reflow_blur_px",
+          "opacity": 1
+        },
+        {
+          "offset": 1,
+          "x": 0,
+          "y": "nextY",
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        }
+      ],
+      "incoming_word_push": [
+        {
+          "offset": 0,
+          "x": 0,
+          "y": "targetY + build.entry_offset_y_px",
+          "scale": "build.entry_scale",
+          "blur": "build.entry_blur_px",
+          "opacity": 0
+        },
+        {
+          "offset": 0.6,
+          "x": 0,
+          "y": "mix(targetY + build.entry_offset_y_px, targetY, 0.72)",
+          "scale": 0.998,
+          "blur": "build.entry_blur_px * 0.38",
+          "opacity": 0.84
+        },
+        {
+          "offset": 1,
+          "x": 0,
+          "y": "targetY",
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        }
+      ],
+      "exit_word": [
+        {
+          "offset": 0,
+          "x": 0,
+          "y": "position",
+          "scale": 1,
+          "blur": 0,
+          "opacity": 1
+        },
+        {
+          "offset": 0.52,
+          "x": 0,
+          "y": "position + build.exit_y_px * 0.45",
+          "scale": 1,
+          "blur": "build.exit_blur_px * 0.55",
+          "opacity": 0.62
+        },
+        {
+          "offset": 1,
+          "x": 0,
+          "y": "position + build.exit_y_px",
+          "scale": 1,
+          "blur": "build.exit_blur_px",
+          "opacity": 0
+        }
+      ]
+    }
+  }
+}

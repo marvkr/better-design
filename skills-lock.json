@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "animate-text": {
+      "source": "pixel-point/animate-text",
+      "sourceType": "github",
+      "skillPath": "skills/animate-text/SKILL.md",
+      "computedHash": "7724b6f42dc2c33a98d48ca592402aed596830a55d469e83b3c5970d478e25ed"
+    }
+  }
+}

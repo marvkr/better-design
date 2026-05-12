@@ -1,0 +1,149 @@
+{
+  "waapi": {
+    "target_library": "Web Animations API",
+    "install": "none; native browser Element.animate",
+    "import_statement": null,
+    "time_unit": "milliseconds",
+    "start_animation": "element.animate(keyframes, { delay: delay_ms, duration: duration_ms, easing, fill: \"forwards\" })",
+    "keyframe_shape": "Use CSS-style Keyframe[] objects with transform, filter, opacity, letterSpacing, and optional offset fields.",
+    "easing": "Pass CSS easing strings directly, including cubic-bezier(...) and steps(...).",
+    "completion": "await animation.finished, then assign the final keyframe styles before replacing content.",
+    "cancellation": "cancel active Animation objects and clear pending timers on teardown.",
+    "renderers": {
+      "generic-stagger": [
+        "Create split units from target and animate only the animated units.",
+        "Delay each unit by stagger rank * scaled_stagger_ms.",
+        "Use materialized transform/filter/opacity keyframes from rendering_contract.transform_order.",
+        "Implement the complete playback loop from renderer.recipe.loop_algorithm: initial enter once, hold, exit current, micro-delay, replace next, enter next, gap, then exit that visible phrase.",
+        "Do not restart enter on a phrase that is already visible after gap; the next cycle starts with exit for the current phrase.",
+        "When awaiting animation completion promises, wait hold_ms/micro_delay_ms/gap_ms only; do not also sleep enter_total_ms or exit_total_ms.",
+        "Reject the code shape `while (...) { await enter(current); ... await enter(next); await sleep(gap); }`; it double-enters the visible phrase. Use renderer.recipe.canonical_loop_pseudocode instead."
+      ],
+      "shared-slide-opacity-stage": [
+        "Animate the title-level transform and every word opacity animation concurrently.",
+        "Before starting enter animations, set every non-space word span to build.word_opacity_from; otherwise the opacity reveal will be invisible.",
+        "For GSAP, call gsap.set(wordNodes, { opacity: build.word_opacity_from }) before one batched gsap.to(wordNodes, { opacity: build.word_opacity_to, stagger, ... }) tween; do not create one opacity tween per word unless the delays are non-uniform.",
+        "For Motion, assign style.opacity = build.word_opacity_from before animate(wordNode, { opacity: [from, to] }, ...).",
+        "Use enter_title for the phrase transform and enter_word_opacity for word fades.",
+        "Exit animates only the title-level frame, then clears/replaces content according to playback.",
+        "Do not ship an enter-only reveal when exact playback is requested; include hold, exit, gap, phrase advance, cancellation, and final-frame snapping."
+      ],
+      "kinetic-center-build": [
+        "Measure word widths after appending each incoming word.",
+        "Compute centered x positions from measured widths and word_gap_px.",
+        "Use raw renderer-pixel build x/y values; do not apply y_travel_multiplier to kinetic coordinates.",
+        "Use renderer.recipe.keyframe_recipe exactly: existing-word reflow x is mix(currentX, nextX, 0.58) at offset 0.52; incoming-word settle x is mix(startX, targetX, 0.72) at offset 0.6.",
+        "Exit uses a three-keyframe path with offset 0.52 at y = exit_y_px * 0.45 and opacity 0.62, not a two-keyframe fade."
+      ],
+      "kinetic-top-build": [
+        "Measure word heights after appending each incoming word.",
+        "Compute centered y positions from measured heights and line_gap_px.",
+        "Use raw renderer-pixel build x/y values; do not apply y_travel_multiplier to kinetic coordinates.",
+        "Use renderer.recipe.keyframe_recipe exactly: existing-word reflow y is mix(currentY, nextY, 0.58) at offset 0.52; incoming-word settle y is mix(startY, targetY, 0.72) at offset 0.6.",
+        "Exit uses a three-keyframe path with offset 0.52 at y = position + exit_y_px * 0.45 and opacity 0.62, not a two-keyframe fade."
+      ]
+    }
+  },
+  "motion": {
+    "target_library": "Motion for React / motion.dev",
+    "install": "pnpm add motion",
+    "import_statement": "import { animate, cubicBezier, steps } from \"motion/react\";",
+    "time_unit": "seconds for delay and duration options",
+    "start_animation": "animate(element, propertyKeyframes, { delay: delay_ms / 1000, duration: duration_ms / 1000, ease, times })",
+    "keyframe_shape": "Convert Keyframe[] into property arrays, for example { opacity: [0, 1], transform: [\"...\", \"...\"], filter: [\"...\", \"...\"] }. Convert keyframe offset values into the times array.",
+    "verification": [
+      "When offsets are present, pass times in the Motion options object, not inside the propertyKeyframes object.",
+      "The Motion times array length must match each animated property array length for that tween.",
+      "Motion TypeScript may reject CSS transform/filter property arrays; use a local typed helper/cast at the animate boundary instead of changing the keyframe shape.",
+      "Exact reproduction must include exit/replacement playback, not only initial enter tweens."
+    ],
+    "easing": "Convert cubic-bezier(a,b,c,d) to cubicBezier(a,b,c,d). Convert steps(n,start|end) to steps(n, \"start\"|\"end\"). Map CSS ease-in/ease-out/ease-in-out to Motion easeIn/easeOut/easeInOut.",
+    "completion": "Use controls.then(...) or await the returned controls in an async loop, then assign final styles before content replacement.",
+    "cancellation": "call controls.stop?.() and controls.cancel?.() for active Motion animations when available, and clear timers on teardown.",
+    "renderers": {
+      "generic-stagger": [
+        "Create split units from target and animate only the animated units.",
+        "Delay each unit by stagger rank * scaled_stagger_ms.",
+        "Use materialized transform/filter/opacity keyframes from rendering_contract.transform_order.",
+        "Implement the complete playback loop from renderer.recipe.loop_algorithm: initial enter once, hold, exit current, micro-delay, replace next, enter next, gap, then exit that visible phrase.",
+        "Do not restart enter on a phrase that is already visible after gap; the next cycle starts with exit for the current phrase.",
+        "When awaiting animation completion promises, wait hold_ms/micro_delay_ms/gap_ms only; do not also sleep enter_total_ms or exit_total_ms.",
+        "Reject the code shape `while (...) { await enter(current); ... await enter(next); await sleep(gap); }`; it double-enters the visible phrase. Use renderer.recipe.canonical_loop_pseudocode instead."
+      ],
+      "shared-slide-opacity-stage": [
+        "Animate the title-level transform and every word opacity animation concurrently.",
+        "Before starting enter animations, set every non-space word span to build.word_opacity_from; otherwise the opacity reveal will be invisible.",
+        "For GSAP, call gsap.set(wordNodes, { opacity: build.word_opacity_from }) before one batched gsap.to(wordNodes, { opacity: build.word_opacity_to, stagger, ... }) tween; do not create one opacity tween per word unless the delays are non-uniform.",
+        "For Motion, assign style.opacity = build.word_opacity_from before animate(wordNode, { opacity: [from, to] }, ...).",
+        "Use enter_title for the phrase transform and enter_word_opacity for word fades.",
+        "Exit animates only the title-level frame, then clears/replaces content according to playback.",
+        "Do not ship an enter-only reveal when exact playback is requested; include hold, exit, gap, phrase advance, cancellation, and final-frame snapping."
+      ],
+      "kinetic-center-build": [
+        "Measure word widths after appending each incoming word.",
+        "Compute centered x positions from measured widths and word_gap_px.",
+        "Use raw renderer-pixel build x/y values; do not apply y_travel_multiplier to kinetic coordinates.",
+        "Use renderer.recipe.keyframe_recipe exactly: existing-word reflow x is mix(currentX, nextX, 0.58) at offset 0.52; incoming-word settle x is mix(startX, targetX, 0.72) at offset 0.6.",
+        "Exit uses a three-keyframe path with offset 0.52 at y = exit_y_px * 0.45 and opacity 0.62, not a two-keyframe fade."
+      ],
+      "kinetic-top-build": [
+        "Measure word heights after appending each incoming word.",
+        "Compute centered y positions from measured heights and line_gap_px.",
+        "Use raw renderer-pixel build x/y values; do not apply y_travel_multiplier to kinetic coordinates.",
+        "Use renderer.recipe.keyframe_recipe exactly: existing-word reflow y is mix(currentY, nextY, 0.58) at offset 0.52; incoming-word settle y is mix(startY, targetY, 0.72) at offset 0.6.",
+        "Exit uses a three-keyframe path with offset 0.52 at y = position + exit_y_px * 0.45 and opacity 0.62, not a two-keyframe fade."
+      ]
+    }
+  },
+  "gsap": {
+    "target_library": "GSAP",
+    "install": "pnpm add gsap",
+    "import_statement": "import { gsap } from \"gsap\"; import { CustomEase } from \"gsap/CustomEase\"; gsap.registerPlugin(CustomEase);",
+    "time_unit": "seconds for delay and duration options",
+    "start_animation": "gsap.set(element, firstKeyframe); gsap.to(element, { keyframes: remainingKeyframesWithSegmentDurations, delay: delay_ms / 1000, ease, overwrite: \"auto\" })",
+    "keyframe_shape": "Use GSAP property objects with transform, filter, opacity, letterSpacing. For offset keyframes, convert adjacent offset gaps into absolute per-keyframe segment durations in seconds.",
+    "verification": [
+      "Initialize first-frame styles with gsap.set before starting a tween.",
+      "Do not pass both per-keyframe segment durations and a top-level gsap.to duration; that retimes the tween and makes the GSAP reproduction feel slower than the spec.",
+      "For renderer keyframe_recipe offsets, use GSAP keyframes with equivalent segment durations or a timeline that preserves the same absolute offsets.",
+      "For generic-stagger loops, do not enter the same visible phrase twice; after gap, the next action is exit of the current phrase."
+    ],
+    "easing": "Convert cubic-bezier(a,b,c,d) with CustomEase.create(...). Use \"none\" for linear. Convert steps(n,end) to GSAP steps(n).",
+    "completion": "Wrap tweens/timelines in a Promise resolved by onComplete, then assign final styles before replacing content.",
+    "cancellation": "kill active tweens/timelines and clear timers on teardown.",
+    "renderers": {
+      "generic-stagger": [
+        "Create split units from target and animate only the animated units.",
+        "Delay each unit by stagger rank * scaled_stagger_ms.",
+        "Use materialized transform/filter/opacity keyframes from rendering_contract.transform_order.",
+        "Implement the complete playback loop from renderer.recipe.loop_algorithm: initial enter once, hold, exit current, micro-delay, replace next, enter next, gap, then exit that visible phrase.",
+        "Do not restart enter on a phrase that is already visible after gap; the next cycle starts with exit for the current phrase.",
+        "When awaiting animation completion promises, wait hold_ms/micro_delay_ms/gap_ms only; do not also sleep enter_total_ms or exit_total_ms.",
+        "Reject the code shape `while (...) { await enter(current); ... await enter(next); await sleep(gap); }`; it double-enters the visible phrase. Use renderer.recipe.canonical_loop_pseudocode instead."
+      ],
+      "shared-slide-opacity-stage": [
+        "Animate the title-level transform and every word opacity animation concurrently.",
+        "Before starting enter animations, set every non-space word span to build.word_opacity_from; otherwise the opacity reveal will be invisible.",
+        "For GSAP, call gsap.set(wordNodes, { opacity: build.word_opacity_from }) before one batched gsap.to(wordNodes, { opacity: build.word_opacity_to, stagger, ... }) tween; do not create one opacity tween per word unless the delays are non-uniform.",
+        "For Motion, assign style.opacity = build.word_opacity_from before animate(wordNode, { opacity: [from, to] }, ...).",
+        "Use enter_title for the phrase transform and enter_word_opacity for word fades.",
+        "Exit animates only the title-level frame, then clears/replaces content according to playback.",
+        "Do not ship an enter-only reveal when exact playback is requested; include hold, exit, gap, phrase advance, cancellation, and final-frame snapping."
+      ],
+      "kinetic-center-build": [
+        "Measure word widths after appending each incoming word.",
+        "Compute centered x positions from measured widths and word_gap_px.",
+        "Use raw renderer-pixel build x/y values; do not apply y_travel_multiplier to kinetic coordinates.",
+        "Use renderer.recipe.keyframe_recipe exactly: existing-word reflow x is mix(currentX, nextX, 0.58) at offset 0.52; incoming-word settle x is mix(startX, targetX, 0.72) at offset 0.6.",
+        "Exit uses a three-keyframe path with offset 0.52 at y = exit_y_px * 0.45 and opacity 0.62, not a two-keyframe fade."
+      ],
+      "kinetic-top-build": [
+        "Measure word heights after appending each incoming word.",
+        "Compute centered y positions from measured heights and line_gap_px.",
+        "Use raw renderer-pixel build x/y values; do not apply y_travel_multiplier to kinetic coordinates.",
+        "Use renderer.recipe.keyframe_recipe exactly: existing-word reflow y is mix(currentY, nextY, 0.58) at offset 0.52; incoming-word settle y is mix(startY, targetY, 0.72) at offset 0.6.",
+        "Exit uses a three-keyframe path with offset 0.52 at y = position + exit_y_px * 0.45 and opacity 0.62, not a two-keyframe fade."
+      ]
+    }
+  }
+}
