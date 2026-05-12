@@ -4,7 +4,7 @@
   "description": "monochrome-industrial design system",
   "personality": [],
   "industry": [],
-  "componentCount": 89,
+  "componentCount": 90,
   "components": [
     {
       "name": "file-input",
@@ -509,6 +509,12 @@
     },
     {
       "name": "carousel",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "animate-text",
       "registryDependencies": [
         "utils"
       ]

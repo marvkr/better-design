@@ -4,7 +4,7 @@
   "description": "precision-light design system",
   "personality": [],
   "industry": [],
-  "componentCount": 87,
+  "componentCount": 88,
   "components": [
     {
       "name": "file-input",
@@ -526,6 +526,12 @@
       "name": "carousel",
       "registryDependencies": [
         "button",
+        "utils"
+      ]
+    },
+    {
+      "name": "animate-text",
+      "registryDependencies": [
         "utils"
       ]
     }

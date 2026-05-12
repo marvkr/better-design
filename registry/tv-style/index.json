@@ -4,7 +4,7 @@
   "description": "tv-style design system",
   "personality": [],
   "industry": [],
-  "componentCount": 90,
+  "componentCount": 91,
   "components": [
     {
       "name": "file-input",
@@ -518,6 +518,12 @@
     },
     {
       "name": "carousel",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "animate-text",
       "registryDependencies": [
         "utils"
       ]

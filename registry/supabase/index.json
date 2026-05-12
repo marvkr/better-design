@@ -15,7 +15,7 @@
     "backend",
     "saas"
   ],
-  "componentCount": 88,
+  "componentCount": 89,
   "components": [
     {
       "name": "file-input",
@@ -543,6 +543,12 @@
       "name": "carousel",
       "registryDependencies": [
         "button",
+        "utils"
+      ]
+    },
+    {
+      "name": "animate-text",
+      "registryDependencies": [
         "utils"
       ]
     }

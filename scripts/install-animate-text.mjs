@@ -5,10 +5,15 @@
 // are distilled from the pixel-point/animate-text catalog under
 // .agents/skills/animate-text/.
 //
+// Also patches each registry/<ds>/index.json:
+//   - inserts an { name: "animate-text", registryDependencies: ["utils"] } entry
+//   - bumps componentCount accordingly
+//
 // Usage: node scripts/install-animate-text.mjs
-//        (idempotent — overwrites existing animate-text.tsx and .json)
+//        (idempotent — overwrites existing animate-text.tsx and .json, and
+//         only adds the index entry if missing)
 
-import { readdir, mkdir, writeFile } from "node:fs/promises"
+import { readdir, mkdir, writeFile, readFile } from "node:fs/promises"
 import { existsSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -25,8 +30,8 @@ import { motion, useReducedMotion, type Easing } from "motion/react"
 import { cn } from "@/lib/utils"
 
 // AnimateText — six text reveal variants distilled from the
-// pixel-point/animate-text catalog. Per-spec durations, staggers, and
-// easings are preserved verbatim.
+// pixel-point/animate-text catalog: https://github.com/pixel-point/animate-text
+// Per-spec durations, staggers, and easings are preserved verbatim.
 
 export type AnimateTextVariant =
   | "soft-blur-in"
@@ -232,11 +237,40 @@ const designSystems = (await readdir(componentsRoot, { withFileTypes: true }))
   .map((d) => d.name)
   .sort()
 
+async function patchIndex(indexPath) {
+  const raw = await readFile(indexPath, "utf8")
+  const data = JSON.parse(raw)
+
+  if (!Array.isArray(data.components)) data.components = []
+
+  const existing = data.components.find((c) => c?.name === "animate-text")
+  if (existing) {
+    existing.registryDependencies = ["utils"]
+    return { added: false, total: data.components.length }
+  }
+
+  data.components.push({
+    name: "animate-text",
+    registryDependencies: ["utils"],
+  })
+
+  if (typeof data.componentCount === "number") {
+    data.componentCount += 1
+  } else {
+    data.componentCount = data.components.length
+  }
+
+  await writeFile(indexPath, JSON.stringify(data, null, 2) + "\n", "utf8")
+  return { added: true, total: data.components.length }
+}
+
 let written = 0
+let indexed = 0
 
 for (const ds of designSystems) {
   const tsxDir = join(componentsRoot, ds, "components", "ui")
   const jsonDir = join(registryRoot, ds)
+  const indexPath = join(jsonDir, "index.json")
 
   if (!existsSync(tsxDir) || !existsSync(jsonDir)) {
     console.warn(`skip ${ds}: missing tree (${tsxDir} or ${jsonDir})`)
@@ -253,7 +287,15 @@ for (const ds of designSystems) {
     "utf8",
   )
 
+  if (existsSync(indexPath)) {
+    const result = await patchIndex(indexPath)
+    if (result.added) indexed += 1
+  }
+
   written += 1
 }
 
-console.log(`Installed animate-text into ${written} design systems.`)
+console.log(
+  `Installed animate-text into ${written} design systems; ` +
+    `added to ${indexed} index.json files.`,
+)
