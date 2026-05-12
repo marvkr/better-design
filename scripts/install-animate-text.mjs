@@ -30,7 +30,7 @@ import { motion, useReducedMotion, type Easing } from "motion/react"
 import { cn } from "@/lib/utils"
 
 // AnimateText — six text reveal variants distilled from the
-// pixel-point/animate-text catalog: https://github.com/pixel-point/animate-text
+// pixel-point animate-text catalog: https://pixelpoint.io/skills/animate-text/
 // Per-spec durations, staggers, and easings are preserved verbatim.
 
 export type AnimateTextVariant =
