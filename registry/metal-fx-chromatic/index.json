@@ -4,7 +4,7 @@
   "description": "metal-fx design system",
   "personality": [],
   "industry": [],
-  "componentCount": 91,
+  "componentCount": 92,
   "components": [
     {
       "name": "file-input",
@@ -524,6 +524,12 @@
     },
     {
       "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
       ]

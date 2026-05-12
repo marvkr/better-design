@@ -4,7 +4,7 @@
   "description": "lumen-dark design system",
   "personality": [],
   "industry": [],
-  "componentCount": 90,
+  "componentCount": 91,
   "components": [
     {
       "name": "file-input",
@@ -518,6 +518,12 @@
     },
     {
       "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
       ]

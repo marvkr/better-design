@@ -4,7 +4,7 @@
   "description": "tactile-minimal design system",
   "personality": [],
   "industry": [],
-  "componentCount": 93,
+  "componentCount": 94,
   "components": [
     {
       "name": "file-input",
@@ -533,6 +533,12 @@
     },
     {
       "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
       ]

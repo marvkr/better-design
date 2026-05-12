@@ -4,7 +4,7 @@
   "description": "pillow-light design system",
   "personality": [],
   "industry": [],
-  "componentCount": 89,
+  "componentCount": 90,
   "components": [
     {
       "name": "file-input",
@@ -537,6 +537,12 @@
     },
     {
       "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
       ]

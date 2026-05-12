@@ -4,7 +4,7 @@
   "description": "stripe design system",
   "personality": [],
   "industry": [],
-  "componentCount": 88,
+  "componentCount": 89,
   "components": [
     {
       "name": "file-input",
@@ -531,6 +531,12 @@
     },
     {
       "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
       ]
