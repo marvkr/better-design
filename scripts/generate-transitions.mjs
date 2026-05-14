@@ -55,6 +55,13 @@ const templates = TRANSITIONS.map((t) => ({
   ),
 }))
 
+const SOURCE = {
+  name: "transitions.dev",
+  url: "https://github.com/Jakubantalik/transitions.dev",
+  license: "MIT",
+  author: "Jakub Antalík",
+}
+
 function registryEntry({ slug, content }) {
   return {
     name: slug,
@@ -67,6 +74,7 @@ function registryEntry({ slug, content }) {
       },
     ],
     registryDependencies: ["utils"],
+    meta: { source: SOURCE },
   }
 }
 
@@ -76,6 +84,7 @@ function metaEntry() {
     type: "registry:ui",
     files: [],
     registryDependencies: TRANSITIONS.map((t) => t.slug),
+    meta: { source: SOURCE },
   }
 }
 

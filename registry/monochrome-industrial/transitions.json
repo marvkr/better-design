@@ -12,5 +12,13 @@
     "modal-transition",
     "page-slide",
     "number-pop-in"
-  ]
+  ],
+  "meta": {
+    "source": {
+      "name": "transitions.dev",
+      "url": "https://github.com/Jakubantalik/transitions.dev",
+      "license": "MIT",
+      "author": "Jakub Antalík"
+    }
+  }
 }
