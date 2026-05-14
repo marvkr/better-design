@@ -1,0 +1,13 @@
+{
+  "website-default": {
+    "speed_multiplier": 0.72,
+    "hold_ms": 550,
+    "gap_ms": 320,
+    "y_travel_multiplier": 0.58,
+    "initial_delay_ms": {
+      "mode": "random-range",
+      "min": 0,
+      "max": 400
+    }
+  }
+}

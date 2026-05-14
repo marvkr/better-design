@@ -1,0 +1,58 @@
+{
+  "default-text-host": {
+    "purpose": "Animation-only host requirements. Typography, color, card chrome, padding, and responsive sizing are intentionally excluded so the skill stays portable.",
+    "container": {
+      "requirement": "Provide a host element for the animated title.",
+      "perspective_px": 900,
+      "perspective_note": "Needed when effects use z_px, rotate_x_deg, or rotate_y_deg. Host layout and size are application-owned."
+    },
+    "title": {
+      "requirement": "Animate the phrase container when the renderer recipe uses title frames.",
+      "display": "inline-block",
+      "transform_style": "preserve-3d",
+      "layout_note": "Do not force flex-direction: column on the title globally; line breaks come from span.text-animation-unit.line using display:block."
+    },
+    "unit": {
+      "backface_visibility": "hidden",
+      "display": "inline-block",
+      "line_display": "block",
+      "transform_origin": "50% 55%",
+      "white_space": "pre",
+      "will_change": ["transform", "opacity", "filter"]
+    }
+  },
+  "kinetic-line-host": {
+    "base_preset": "default-text-host",
+    "kinetic_container": {
+      "requirement": "Use a relative-positioned inline host large enough for the phrase; exact dimensions belong to the consuming UI.",
+      "position": "relative",
+      "coordinate_origin": "center"
+    },
+    "kinetic_word": {
+      "backface_visibility": "hidden",
+      "left": "50%",
+      "position": "absolute",
+      "top": "50%",
+      "white_space": "nowrap",
+      "absolute_centered": true,
+      "will_change": ["transform", "opacity", "filter"]
+    }
+  },
+  "kinetic-stack-host": {
+    "base_preset": "default-text-host",
+    "kinetic_container": {
+      "requirement": "Use a relative-positioned block host large enough for the stack; exact dimensions belong to the consuming UI.",
+      "position": "relative",
+      "coordinate_origin": "center"
+    },
+    "kinetic_word": {
+      "backface_visibility": "hidden",
+      "left": "50%",
+      "position": "absolute",
+      "top": "50%",
+      "white_space": "nowrap",
+      "absolute_centered": true,
+      "will_change": ["transform", "opacity", "filter"]
+    }
+  }
+}

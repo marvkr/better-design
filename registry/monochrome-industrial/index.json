@@ -4,7 +4,7 @@
   "description": "monochrome-industrial design system",
   "personality": [],
   "industry": [],
-  "componentCount": 89,
+  "componentCount": 91,
   "components": [
     {
       "name": "file-input",
@@ -509,6 +509,18 @@
     },
     {
       "name": "carousel",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
       ]
