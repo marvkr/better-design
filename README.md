@@ -4,7 +4,7 @@
 
 Browse and preview them all at **[better-design.com](https://www.better-design.com/design-systems)**.
 
-Every design system ships the same ~87 components (accordion → typography), themed end-to-end. Pick a style, install the components you need, keep iterating.
+Every design system ships the same ~99 components (accordion → typography, plus 9 [transitions.dev](https://github.com/Jakubantalik/transitions.dev) ports), themed end-to-end. Pick a style, install the components you need, keep iterating.
 
 
 <img width="1693" height="983" alt="Screenshot 2026-05-05 at 12 14 41" src="https://github.com/user-attachments/assets/94efdd7e-59f2-4e5d-a589-780249be3401" />
@@ -24,6 +24,12 @@ Example — install Linear's button:
 
 ```bash
 npx shadcn@latest add https://www.better-design.com/registry/linear/button.json
+```
+
+Or grab all 9 [transitions.dev](https://github.com/Jakubantalik/transitions.dev) ports at once (`notification-badge`, `menu-dropdown`, `panel-reveal`, `card-resize`, `icon-swap`, `text-swap`, `modal-transition`, `page-slide`, `number-pop-in`):
+
+```bash
+npx shadcn@latest add https://www.better-design.com/registry/linear/transitions.json
 ```
 
 The CLI handles dependencies, CSS variables, and `globals.css` automatically.
