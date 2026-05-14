@@ -2,7 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
-import { resolve, extname, basename } from "node:path";
+import { resolve, extname } from "node:path";
 import { analyzeFiles } from "./analyzer.js";
 import {
   calculateScore,
@@ -59,7 +59,7 @@ function readFiles(paths: string[]): { path: string; content: string }[] {
   for (const p of paths) {
     try {
       const content = readFileSync(p, "utf-8");
-      files.push({ path: basename(p), content });
+      files.push({ path: p, content });
     } catch {
       console.error(`Warning: Could not read ${p}, skipping`);
     }

@@ -3,7 +3,7 @@
 // src/index.ts
 import { readFileSync } from "fs";
 import { execSync } from "child_process";
-import { resolve, extname, basename } from "path";
+import { resolve, extname } from "path";
 
 // src/rules.ts
 var REVIEW_RULES = `
@@ -313,7 +313,7 @@ function readFiles(paths) {
   for (const p of paths) {
     try {
       const content = readFileSync(p, "utf-8");
-      files.push({ path: basename(p), content });
+      files.push({ path: p, content });
     } catch {
       console.error(`Warning: Could not read ${p}, skipping`);
     }

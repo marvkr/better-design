@@ -89,6 +89,11 @@ async function getChangedFiles() {
     return [];
   }
 
+  if (!/^[0-9a-f]{40}$/i.test(base)) {
+    console.error(`::error::Invalid base SHA format: ${base}`);
+    return [];
+  }
+
   try {
     execSync(`git fetch origin ${base} --depth=1`, { stdio: "pipe" });
   } catch {
