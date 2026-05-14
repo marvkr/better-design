@@ -91,6 +91,36 @@ function base64UrlEncode(data) {
     .replace(/=+$/, "");
 }
 
+// Wraps a PKCS#1 RSAPrivateKey DER in the PKCS#8 PrivateKeyInfo envelope
+// so it can be imported via crypto.subtle.importKey("pkcs8", ...)
+function wrapPkcs1InPkcs8(pkcs1Bytes) {
+  const rsaOid = new Uint8Array([
+    0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
+    0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00,
+  ]);
+  function encodeLength(len) {
+    if (len < 0x80) return new Uint8Array([len]);
+    if (len < 0x100) return new Uint8Array([0x81, len]);
+    return new Uint8Array([0x82, (len >> 8) & 0xff, len & 0xff]);
+  }
+  const version = new Uint8Array([0x02, 0x01, 0x00]);
+  const octetTag = new Uint8Array([0x04]);
+  const octetLen = encodeLength(pkcs1Bytes.length);
+  const innerLen = version.length + rsaOid.length + octetTag.length + octetLen.length + pkcs1Bytes.length;
+  const seqTag = new Uint8Array([0x30]);
+  const seqLen = encodeLength(innerLen);
+  const result = new Uint8Array(seqTag.length + seqLen.length + innerLen);
+  let offset = 0;
+  result.set(seqTag, offset); offset += seqTag.length;
+  result.set(seqLen, offset); offset += seqLen.length;
+  result.set(version, offset); offset += version.length;
+  result.set(rsaOid, offset); offset += rsaOid.length;
+  result.set(octetTag, offset); offset += octetTag.length;
+  result.set(octetLen, offset); offset += octetLen.length;
+  result.set(pkcs1Bytes, offset);
+  return result;
+}
+
 async function createJWT(appId, privateKeyPem) {
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: "RS256", typ: "JWT" };
@@ -101,11 +131,16 @@ async function createJWT(appId, privateKeyPem) {
   const payloadB64 = base64UrlEncode(encoder.encode(JSON.stringify(payload)));
   const signingInput = `${headerB64}.${payloadB64}`;
 
+  // GitHub App keys are PKCS#1 (BEGIN RSA PRIVATE KEY). Accept either format.
   const pemBody = privateKeyPem
-    .replace(/-----BEGIN RSA PRIVATE KEY-----/, "")
-    .replace(/-----END RSA PRIVATE KEY-----/, "")
+    .replace(/-----BEGIN (RSA )?PRIVATE KEY-----/, "")
+    .replace(/-----END (RSA )?PRIVATE KEY-----/, "")
     .replace(/\s/g, "");
-  const keyData = Uint8Array.from(atob(pemBody), (c) => c.charCodeAt(0));
+  const derBytes = Uint8Array.from(atob(pemBody), (c) => c.charCodeAt(0));
+
+  // If PKCS#1, wrap in PKCS#8 ASN.1 envelope for WebCrypto compatibility
+  const isPkcs1 = privateKeyPem.includes("BEGIN RSA PRIVATE KEY");
+  const keyData = isPkcs1 ? wrapPkcs1InPkcs8(derBytes) : derBytes;
 
   const key = await crypto.subtle.importKey(
     "pkcs8",
@@ -175,6 +210,27 @@ async function getPRFiles(token, owner, repo, prNumber) {
   return files
     .filter((f) => UI_EXTENSIONS.some((ext) => f.filename.endsWith(ext)))
     .filter((f) => f.status !== "removed");
+}
+
+function parseDiffLines(patch) {
+  if (!patch) return new Set();
+  const lines = new Set();
+  let lineNum = 0;
+  for (const line of patch.split("\n")) {
+    const hunkMatch = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
+    if (hunkMatch) {
+      lineNum = parseInt(hunkMatch[1], 10);
+      continue;
+    }
+    if (line.startsWith("-")) continue;
+    if (line.startsWith("+")) {
+      lines.add(lineNum);
+      lineNum++;
+    } else {
+      lineNum++;
+    }
+  }
+  return lines;
 }
 
 async function getFileContent(token, owner, repo, path, ref) {
@@ -315,6 +371,7 @@ async function handlePullRequest(event, env) {
   const changedFiles = await getPRFiles(token, owner, repoName, prNumber);
   if (changedFiles.length === 0) return;
 
+  const commentableLines = new Map();
   const files = [];
   for (const f of changedFiles.slice(0, 20)) {
     try {
@@ -326,6 +383,7 @@ async function handlePullRequest(event, env) {
         headSha,
       );
       files.push({ path: f.filename, content });
+      commentableLines.set(f.filename, parseDiffLines(f.patch));
     } catch {
       // skip unreadable files
     }
@@ -335,6 +393,11 @@ async function handlePullRequest(event, env) {
 
   const findings = await analyzeFiles(files, env.OPENAI_API_KEY);
   const score = calculateScore(findings);
+
+  const commentable = findings.filter((f) => {
+    const lines = commentableLines.get(f.file);
+    return lines && lines.has(f.line);
+  });
 
   const hasCritical = findings.some((f) => f.severity === "critical");
   const reviewEvent =
@@ -352,7 +415,7 @@ async function handlePullRequest(event, env) {
       commit_id: headSha,
       body: buildReviewBody(findings, score, files.length),
       event: reviewEvent,
-      comments: buildInlineComments(findings),
+      comments: buildInlineComments(commentable),
     },
   );
 }
@@ -360,7 +423,7 @@ async function handlePullRequest(event, env) {
 // ── Cloudflare Worker entrypoint ─────────────────────────────────────────────
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === "GET") {
       return new Response(
         JSON.stringify({
@@ -399,14 +462,7 @@ export default {
 
     if (eventType === "pull_request") {
       const event = JSON.parse(body);
-      // Run review in the background so we respond to GitHub within 10s
-      const ctx = { waitUntil: (p) => p };
-      if (typeof globalThis.ctx?.waitUntil === "function") {
-        globalThis.ctx.waitUntil(handlePullRequest(event, env));
-      } else {
-        // Fallback: await directly (may timeout on slow reviews)
-        await handlePullRequest(event, env);
-      }
+      ctx.waitUntil(handlePullRequest(event, env));
       return new Response("ok", { status: 200 });
     }
 

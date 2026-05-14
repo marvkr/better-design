@@ -1,7 +1,7 @@
 // GitHub Action entrypoint for Better Design Review
 // Reviews PR diffs for accessibility + visual design issues using GPT-5.4-mini
 
-const { execSync } = require("node:child_process");
+const { execFileSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -95,12 +95,12 @@ async function getChangedFiles() {
   }
 
   try {
-    execSync(`git fetch origin ${base} --depth=1`, { stdio: "pipe" });
+    execFileSync("git", ["fetch", "origin", base, "--depth=1"], { stdio: "pipe" });
   } catch {
     // may already be fetched
   }
 
-  const diff = execSync(`git diff --name-only ${base}...HEAD`, {
+  const diff = execFileSync("git", ["diff", "--name-only", `${base}...HEAD`], {
     encoding: "utf-8",
   });
 
@@ -271,7 +271,7 @@ async function postReview(findings, score, filesReviewed) {
     return;
   }
 
-  const commitSha = execSync("git rev-parse HEAD", {
+  const commitSha = execFileSync("git", ["rev-parse", "HEAD"], {
     encoding: "utf-8",
   }).trim();
 
@@ -323,15 +323,22 @@ async function main() {
   const severity = getInput("severity") || "all";
   const failOn = getInput("fail-on") || "critical";
 
+  const MAX_FILES = 20;
   const changedFiles = await getChangedFiles();
   if (changedFiles.length === 0) {
     console.log("No UI files changed in this PR.");
     return;
   }
 
-  console.log(`Reviewing ${changedFiles.length} UI file(s)...`);
+  const filesToReview = changedFiles.slice(0, MAX_FILES);
+  if (changedFiles.length > MAX_FILES) {
+    console.log(
+      `::warning::Found ${changedFiles.length} changed UI files; reviewing first ${MAX_FILES}.`,
+    );
+  }
+  console.log(`Reviewing ${filesToReview.length} UI file(s)...`);
 
-  const files = readFiles(changedFiles);
+  const files = readFiles(filesToReview);
   if (files.length === 0) {
     console.log("No files could be read.");
     return;

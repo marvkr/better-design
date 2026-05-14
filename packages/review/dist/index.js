@@ -303,9 +303,11 @@ function getGitChangedFiles() {
       if (trimmed) all.add(resolve(trimmed));
     }
     return [...all].filter(isUIFile);
-  } catch {
-    console.error("Failed to get git diff. Are you in a git repository?");
-    return [];
+  } catch (err) {
+    throw new Error(
+      `Failed to get git diff. Are you in a git repository?
+${err instanceof Error ? err.message : err}`
+    );
   }
 }
 function readFiles(paths) {
@@ -376,14 +378,25 @@ function parseArgs(argv) {
       case "--json":
         opts.json = true;
         break;
-      case "--severity":
+      case "--severity": {
         i++;
-        opts.severity = argv[i] ?? "all";
-        break;
-      default:
-        if (!arg.startsWith("-")) {
-          opts.files.push(resolve(arg));
+        const value = argv[i];
+        const allowed = /* @__PURE__ */ new Set(["all", "critical", "critical+serious"]);
+        if (!value || !allowed.has(value)) {
+          console.error(
+            `Invalid --severity value: ${value ?? "(missing)"} (use: all | critical | critical+serious)`
+          );
+          process.exit(1);
         }
+        opts.severity = value;
+        break;
+      }
+      default:
+        if (arg.startsWith("-")) {
+          console.error(`Unknown option: ${arg}`);
+          process.exit(1);
+        }
+        opts.files.push(resolve(arg));
         break;
     }
     i++;
