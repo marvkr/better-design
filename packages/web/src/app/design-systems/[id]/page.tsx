@@ -30,6 +30,15 @@ const DS_META: Record<string, { name: string; description: string; theme: "light
   "tactile-minimal":     { name: "Tactile Minimal",     description: "Clean neutral with synthesized haptic sounds, ASCII cursor trail, staggered blur animations", theme: "light", iconPrefix: "ph", iconLibraryName: "Phosphor" },
   "lumen-dark":          { name: "Lumen Dark",          description: "Dark theme built on depth & surfaces principle — three-tier layered shadows, inset highlights, warm amber accent", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
   "tv-style":            { name: "TV Style",            description: "Split-flap terminal board — flat dark tiles, Helvetica uppercase, amber primary, mechanical seam motif", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-punchy":        { name: "Sonic Punchy",        description: "Mechanical dark — zero-attack lime click via @web-kits/audio, monospace, sharp 4px corners", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-glassy":        { name: "Sonic Glassy",        description: "Frosted midnight — bell-like FM clicks with reverb, soft cyan, generous 12px radius", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-warm":          { name: "Sonic Warm",          description: "Cream serif — lowpass-warmed clicks with light reverb, amber primary, 8px radius", theme: "light", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-lofi":          { name: "Sonic Lo-fi",         description: "Sepia tape — bitcrushed clicks through narrow lowpass, monospace, vintage warmth", theme: "light", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-airy":          { name: "Sonic Airy",          description: "Pristine white — noise-bursts through bandpass, sky-blue primary, expansive 14px radius", theme: "light", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-metallic":      { name: "Sonic Metallic",      description: "Brutalist chrome — inharmonic FM 2.76 ratio, near-zero radius, machined surface feel", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-bright":        { name: "Sonic Bright",        description: "Crisp white — sparkly FM clicks with no lowpass, electric blue primary, 8px radius", theme: "light", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-organic":       { name: "Sonic Organic",       description: "Sage beige — detuned triangle waves with light reverb, soft attack onset, natural feel", theme: "light", iconPrefix: "tabler", iconLibraryName: "Tabler" },
+  "sonic-retro":         { name: "Sonic Retro",         description: "80s synthwave — bitcrushed square waves through lowpass, hot pink on dark purple", theme: "dark", iconPrefix: "tabler", iconLibraryName: "Tabler" },
 }
 
 function parseTokens(css: string): Record<string, string> {

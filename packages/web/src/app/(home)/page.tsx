@@ -171,6 +171,78 @@ const DS_META = [
     theme: "dark" as const,
   },
   {
+    id: "sonic-punchy",
+    slug: "sonic-punchy",
+    name: "Sonic Punchy",
+    description:
+      "Mechanical dark — zero-attack lime click via @web-kits/audio, monospace, sharp 4px corners",
+    theme: "dark" as const,
+  },
+  {
+    id: "sonic-glassy",
+    slug: "sonic-glassy",
+    name: "Sonic Glassy",
+    description:
+      "Frosted midnight — bell-like FM clicks with reverb, soft cyan, generous 12px radius",
+    theme: "dark" as const,
+  },
+  {
+    id: "sonic-warm",
+    slug: "sonic-warm",
+    name: "Sonic Warm",
+    description:
+      "Cream serif — lowpass-warmed clicks with light reverb, amber primary, 8px radius",
+    theme: "light" as const,
+  },
+  {
+    id: "sonic-lofi",
+    slug: "sonic-lofi",
+    name: "Sonic Lo-fi",
+    description:
+      "Sepia tape — bitcrushed clicks through narrow lowpass, monospace, vintage warmth",
+    theme: "light" as const,
+  },
+  {
+    id: "sonic-airy",
+    slug: "sonic-airy",
+    name: "Sonic Airy",
+    description:
+      "Pristine white — noise-bursts through bandpass, sky-blue primary, expansive 14px radius",
+    theme: "light" as const,
+  },
+  {
+    id: "sonic-metallic",
+    slug: "sonic-metallic",
+    name: "Sonic Metallic",
+    description:
+      "Brutalist chrome — inharmonic FM 2.76 ratio, near-zero radius, machined surface feel",
+    theme: "dark" as const,
+  },
+  {
+    id: "sonic-bright",
+    slug: "sonic-bright",
+    name: "Sonic Bright",
+    description:
+      "Crisp white — sparkly FM clicks with no lowpass, electric blue primary, 8px radius",
+    theme: "light" as const,
+  },
+  {
+    id: "sonic-organic",
+    slug: "sonic-organic",
+    name: "Sonic Organic",
+    description:
+      "Sage beige — detuned triangle waves with light reverb, soft attack onset, natural feel",
+    theme: "light" as const,
+  },
+  {
+    id: "sonic-retro",
+    slug: "sonic-retro",
+    name: "Sonic Retro",
+    description:
+      "80s synthwave — bitcrushed square waves through lowpass, hot pink on dark purple",
+    theme: "dark" as const,
+  },
+  {
     id: "tv-style",
     slug: "tv-style",
     name: "TV Style",

@@ -51,3 +51,6 @@ next-env.d.ts
 
 # test results
 /test-results/
+
+# Inngest dev daemon — contains local secrets, never commit
+.inngest/

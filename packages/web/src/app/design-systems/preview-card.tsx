@@ -10,6 +10,8 @@ import {
   NotionButton, StripeButton, VercelButton, AppleButton, FigmaButton,
   MonoIndustrialButton, GlassmorphicDarkButton, MidnightGlassButton,
   TactileMinimalButton, LumenDarkButton, TvStyleButton,
+  SonicPunchyButton, SonicGlassyButton, SonicWarmButton, SonicLofiButton, SonicAiryButton,
+  SonicMetallicButton, SonicBrightButton, SonicOrganicButton, SonicRetroButton,
 
   LinearCard, AirbnbCard, SupabaseCard, CorporateFintechCard,
   DarkOrangeCard, VibrantDarkCard, MinimalLightCard, NeutralMonochromeCard,
@@ -18,6 +20,8 @@ import {
   NotionCard, StripeCard, VercelCard, AppleCard, FigmaCard,
   MonoIndustrialCard, GlassmorphicDarkCard, MidnightGlassCard,
   TactileMinimalCard, LumenDarkCard, TvStyleCard,
+  SonicPunchyCard, SonicGlassyCard, SonicWarmCard, SonicLofiCard, SonicAiryCard,
+  SonicMetallicCard, SonicBrightCard, SonicOrganicCard, SonicRetroCard,
 
   LinearInput, AirbnbInput, SupabaseInput, CorporateFintechInput,
   DarkOrangeInput, VibrantDarkInput, MinimalLightInput, NeutralMonochromeInput,
@@ -26,6 +30,8 @@ import {
   NotionInput, StripeInput, VercelInput, AppleInput, FigmaInput,
   MonoIndustrialInput, GlassmorphicDarkInput, MidnightGlassInput,
   TactileMinimalInput, LumenDarkInput, TvStyleInput,
+  SonicPunchyInput, SonicGlassyInput, SonicWarmInput, SonicLofiInput, SonicAiryInput,
+  SonicMetallicInput, SonicBrightInput, SonicOrganicInput, SonicRetroInput,
 
 } from "./[id]/ds-registry"
 
@@ -71,6 +77,15 @@ const BUTTON_MAP: Record<string, AnyButton> = {
   "tactile-minimal": TactileMinimalButton as AnyButton,
   "lumen-dark": LumenDarkButton as AnyButton,
   "tv-style": TvStyleButton as AnyButton,
+  "sonic-punchy": SonicPunchyButton as AnyButton,
+  "sonic-glassy": SonicGlassyButton as AnyButton,
+  "sonic-warm": SonicWarmButton as AnyButton,
+  "sonic-lofi": SonicLofiButton as AnyButton,
+  "sonic-airy": SonicAiryButton as AnyButton,
+  "sonic-metallic": SonicMetallicButton as AnyButton,
+  "sonic-bright": SonicBrightButton as AnyButton,
+  "sonic-organic": SonicOrganicButton as AnyButton,
+  "sonic-retro": SonicRetroButton as AnyButton,
 }
 
 const CARD_MAP: Record<string, AnyCard> = {
@@ -98,6 +113,15 @@ const CARD_MAP: Record<string, AnyCard> = {
   "tactile-minimal": TactileMinimalCard as AnyCard,
   "lumen-dark": LumenDarkCard as AnyCard,
   "tv-style": TvStyleCard as AnyCard,
+  "sonic-punchy": SonicPunchyCard as AnyCard,
+  "sonic-glassy": SonicGlassyCard as AnyCard,
+  "sonic-warm": SonicWarmCard as AnyCard,
+  "sonic-lofi": SonicLofiCard as AnyCard,
+  "sonic-airy": SonicAiryCard as AnyCard,
+  "sonic-metallic": SonicMetallicCard as AnyCard,
+  "sonic-bright": SonicBrightCard as AnyCard,
+  "sonic-organic": SonicOrganicCard as AnyCard,
+  "sonic-retro": SonicRetroCard as AnyCard,
 }
 
 const INPUT_MAP: Record<string, AnyInput> = {
@@ -125,6 +149,15 @@ const INPUT_MAP: Record<string, AnyInput> = {
   "tactile-minimal": TactileMinimalInput as AnyInput,
   "lumen-dark": LumenDarkInput as AnyInput,
   "tv-style": TvStyleInput as AnyInput,
+  "sonic-punchy": SonicPunchyInput as AnyInput,
+  "sonic-glassy": SonicGlassyInput as AnyInput,
+  "sonic-warm": SonicWarmInput as AnyInput,
+  "sonic-lofi": SonicLofiInput as AnyInput,
+  "sonic-airy": SonicAiryInput as AnyInput,
+  "sonic-metallic": SonicMetallicInput as AnyInput,
+  "sonic-bright": SonicBrightInput as AnyInput,
+  "sonic-organic": SonicOrganicInput as AnyInput,
+  "sonic-retro": SonicRetroInput as AnyInput,
 }
 
 export function DesignSystemPreviewCard({ system }: { system: DesignSystemInfo }) {
