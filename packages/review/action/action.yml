@@ -1,0 +1,24 @@
+name: "Better Design Review"
+description: "Review pull requests for accessibility (WCAG 2.1) and visual design issues using AI"
+author: "Better Design"
+
+branding:
+  icon: "eye"
+  color: "purple"
+
+inputs:
+  openai-api-key:
+    description: "OpenAI API key for running the review"
+    required: true
+  severity:
+    description: "Minimum severity to report: all | critical | critical+serious"
+    required: false
+    default: "all"
+  fail-on:
+    description: "Fail the check if issues at this severity exist: critical | serious | none"
+    required: false
+    default: "critical"
+
+runs:
+  using: "node20"
+  main: "index.js"

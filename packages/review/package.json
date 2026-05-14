@@ -1,0 +1,41 @@
+{
+  "name": "@better-design/review",
+  "version": "0.1.0",
+  "description": "CLI reviewer for accessibility (WCAG 2.1) and visual design issues in AI-generated code",
+  "type": "module",
+  "bin": {
+    "better-design-review": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --clean --shims",
+    "dev": "tsup src/index.ts --format esm --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "design",
+    "accessibility",
+    "wcag",
+    "review",
+    "ai",
+    "claude",
+    "cursor",
+    "lint",
+    "shadcn"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marvkr/better-design",
+    "directory": "packages/review"
+  },
+  "files": [
+    "dist",
+    "action",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsup": "^8.4.0",
+    "typescript": "^5"
+  }
+}
