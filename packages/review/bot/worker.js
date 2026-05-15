@@ -234,11 +234,12 @@ function parseDiffLines(patch) {
 }
 
 async function getFileContent(token, owner, repo, path, ref) {
+  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
   const data = await githubAPI(
     token,
-    `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${ref}`,
+    `https://api.github.com/repos/${owner}/${repo}/contents/${encodedPath}?ref=${ref}`,
   );
-  return atob(data.content);
+  return atob(data.content.replace(/\s/g, ""));
 }
 
 // ── OpenAI review ────────────────────────────────────────────────────────────
