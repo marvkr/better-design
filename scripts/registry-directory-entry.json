@@ -2,5 +2,5 @@
   "name": "@better-design",
   "homepage": "https://www.better-design.com",
   "url": "https://www.better-design.com/registry/{name}.json",
-  "description": "31 open-source design systems for shadcn/ui — Apple, Linear, Vercel, Stripe, Notion and more. Every system ships the same ~89 components, themed end-to-end. Install any with one command."
+  "description": "Open-source design systems for shadcn/ui — Apple, Linear, Vercel, Stripe, Notion and more. Every system ships the same component set, themed end-to-end. Install any with one command."
 }

@@ -2761,6 +2761,21 @@
       ]
     },
     {
+      "name": "apple/use-toast",
+      "type": "registry:ui",
+      "title": "Apple — Use Toast",
+      "description": "Use Toast component themed for Apple.",
+      "files": [
+        {
+          "path": "components/ui/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "apple/toast"
+      ]
+    },
+    {
       "name": "beam-custom/_shared",
       "type": "registry:ui",
       "title": "Beam Custom — _shared",
@@ -12386,6 +12401,21 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "figma/use-toast",
+      "type": "registry:ui",
+      "title": "Figma — Use Toast",
+      "description": "Use Toast component themed for Figma.",
+      "files": [
+        {
+          "path": "components/ui/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "figma/toast"
       ]
     },
     {
@@ -31491,6 +31521,21 @@
       ]
     },
     {
+      "name": "notion/use-toast",
+      "type": "registry:ui",
+      "title": "Notion — Use Toast",
+      "description": "Use Toast component themed for Notion.",
+      "files": [
+        {
+          "path": "components/ui/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "notion/toast"
+      ]
+    },
+    {
       "name": "pillow-light/accordion",
       "type": "registry:ui",
       "title": "Pillow Light — Accordion",
@@ -34248,6 +34293,21 @@
       ]
     },
     {
+      "name": "precision-light/use-toast",
+      "type": "registry:ui",
+      "title": "Precision Light — Use Toast",
+      "description": "Use Toast component themed for Precision Light.",
+      "files": [
+        {
+          "path": "components/ui/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "precision-light/toast"
+      ]
+    },
+    {
       "name": "stripe/accordion",
       "type": "registry:ui",
       "title": "Stripe — Accordion",
@@ -35616,6 +35676,21 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "stripe/use-toast",
+      "type": "registry:ui",
+      "title": "Stripe — Use Toast",
+      "description": "Use Toast component themed for Stripe.",
+      "files": [
+        {
+          "path": "components/ui/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "stripe/toast"
       ]
     },
     {
@@ -41118,6 +41193,21 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "vercel/use-toast",
+      "type": "registry:ui",
+      "title": "Vercel — Use Toast",
+      "description": "Use Toast component themed for Vercel.",
+      "files": [
+        {
+          "path": "components/ui/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "vercel/toast"
       ]
     },
     {

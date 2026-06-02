@@ -540,6 +540,12 @@
       "registryDependencies": [
         "utils"
       ]
+    },
+    {
+      "name": "use-toast",
+      "registryDependencies": [
+        "toast"
+      ]
     }
   ]
 }
