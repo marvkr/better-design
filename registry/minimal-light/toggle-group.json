@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/minimal-light/toggle.json",
+    "https://www.better-design.com/registry/minimal-light/toggle.json",
     "utils"
   ]
 }

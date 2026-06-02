@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vercel/toast.json",
-    "http://localhost:3000/registry/vercel/use-toast.json"
+    "https://www.better-design.com/registry/vercel/toast.json",
+    "https://www.better-design.com/registry/vercel/use-toast.json"
   ]
 }

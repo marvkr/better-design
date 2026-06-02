@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/light-marketplace/toast.json"
+    "https://www.better-design.com/registry/light-marketplace/toast.json"
   ]
 }

@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/neutral-monochrome/toast.json",
-    "http://localhost:3000/registry/neutral-monochrome/use-toast.json"
+    "https://www.better-design.com/registry/neutral-monochrome/toast.json",
+    "https://www.better-design.com/registry/neutral-monochrome/use-toast.json"
   ]
 }

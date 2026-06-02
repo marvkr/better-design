@@ -12,7 +12,7 @@
     "@radix-ui/react-alert-dialog"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/light-marketplace/button.json",
+    "https://www.better-design.com/registry/light-marketplace/button.json",
     "utils"
   ]
 }

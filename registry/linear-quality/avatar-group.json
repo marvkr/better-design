@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/linear-quality/avatar.json",
+    "https://www.better-design.com/registry/linear-quality/avatar.json",
     "utils"
   ]
 }

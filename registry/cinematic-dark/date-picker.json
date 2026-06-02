@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/cinematic-dark/button.json",
-    "http://localhost:3000/registry/cinematic-dark/calendar.json",
-    "http://localhost:3000/registry/cinematic-dark/popover.json",
+    "https://www.better-design.com/registry/cinematic-dark/button.json",
+    "https://www.better-design.com/registry/cinematic-dark/calendar.json",
+    "https://www.better-design.com/registry/cinematic-dark/popover.json",
     "utils"
   ]
 }

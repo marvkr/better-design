@@ -13,7 +13,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/apple/button.json",
+    "https://www.better-design.com/registry/apple/button.json",
     "utils"
   ]
 }

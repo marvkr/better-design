@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/apple/dialog.json",
+    "https://www.better-design.com/registry/apple/dialog.json",
     "utils"
   ]
 }

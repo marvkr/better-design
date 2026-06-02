@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/airbnb/button.json",
-    "http://localhost:3000/registry/airbnb/command.json",
-    "http://localhost:3000/registry/airbnb/popover.json",
+    "https://www.better-design.com/registry/airbnb/button.json",
+    "https://www.better-design.com/registry/airbnb/command.json",
+    "https://www.better-design.com/registry/airbnb/popover.json",
     "utils"
   ]
 }

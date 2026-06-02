@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/airbnb/card.json",
+    "https://www.better-design.com/registry/airbnb/card.json",
     "utils"
   ]
 }

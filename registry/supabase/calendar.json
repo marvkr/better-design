@@ -13,7 +13,7 @@
     "react-day-picker"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/supabase/button.json",
+    "https://www.better-design.com/registry/supabase/button.json",
     "utils"
   ]
 }

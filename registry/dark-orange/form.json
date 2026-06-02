@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/dark-orange/label.json",
+    "https://www.better-design.com/registry/dark-orange/label.json",
     "utils"
   ]
 }

@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/notion/button.json",
-    "http://localhost:3000/registry/notion/calendar.json",
-    "http://localhost:3000/registry/notion/popover.json",
+    "https://www.better-design.com/registry/notion/button.json",
+    "https://www.better-design.com/registry/notion/calendar.json",
+    "https://www.better-design.com/registry/notion/popover.json",
     "utils"
   ]
 }

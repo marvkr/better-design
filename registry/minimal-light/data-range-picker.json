@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/minimal-light/button.json",
-    "http://localhost:3000/registry/minimal-light/calendar.json",
-    "http://localhost:3000/registry/minimal-light/popover.json",
+    "https://www.better-design.com/registry/minimal-light/button.json",
+    "https://www.better-design.com/registry/minimal-light/calendar.json",
+    "https://www.better-design.com/registry/minimal-light/popover.json",
     "utils"
   ]
 }

@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/corporate-fintech/button.json",
-    "http://localhost:3000/registry/corporate-fintech/calendar.json",
-    "http://localhost:3000/registry/corporate-fintech/popover.json",
+    "https://www.better-design.com/registry/corporate-fintech/button.json",
+    "https://www.better-design.com/registry/corporate-fintech/calendar.json",
+    "https://www.better-design.com/registry/corporate-fintech/popover.json",
     "utils"
   ]
 }

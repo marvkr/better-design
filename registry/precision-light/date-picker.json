@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/precision-light/button.json",
-    "http://localhost:3000/registry/precision-light/calendar.json",
-    "http://localhost:3000/registry/precision-light/popover.json",
+    "https://www.better-design.com/registry/precision-light/button.json",
+    "https://www.better-design.com/registry/precision-light/calendar.json",
+    "https://www.better-design.com/registry/precision-light/popover.json",
     "utils"
   ]
 }
