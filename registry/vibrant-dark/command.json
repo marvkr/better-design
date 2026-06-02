@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vibrant-dark/dialog.json",
+    "https://www.better-design.com/registry/vibrant-dark/dialog.json",
     "utils"
   ]
 }

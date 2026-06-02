@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/midnight-glass/toast.json"
+    "https://www.better-design.com/registry/midnight-glass/toast.json"
   ]
 }

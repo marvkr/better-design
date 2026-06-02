@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/glassmorphic-dark/toast.json"
+    "https://www.better-design.com/registry/glassmorphic-dark/toast.json"
   ]
 }

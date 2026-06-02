@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/light-marketplace/dialog.json",
+    "https://www.better-design.com/registry/light-marketplace/dialog.json",
     "utils"
   ]
 }

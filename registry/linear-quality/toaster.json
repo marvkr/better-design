@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/linear-quality/toast.json",
-    "http://localhost:3000/registry/linear-quality/use-toast.json"
+    "https://www.better-design.com/registry/linear-quality/toast.json",
+    "https://www.better-design.com/registry/linear-quality/use-toast.json"
   ]
 }

@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/supabase/dialog.json",
+    "https://www.better-design.com/registry/supabase/dialog.json",
     "utils"
   ]
 }

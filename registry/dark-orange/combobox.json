@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/dark-orange/button.json",
-    "http://localhost:3000/registry/dark-orange/command.json",
-    "http://localhost:3000/registry/dark-orange/popover.json",
+    "https://www.better-design.com/registry/dark-orange/button.json",
+    "https://www.better-design.com/registry/dark-orange/command.json",
+    "https://www.better-design.com/registry/dark-orange/popover.json",
     "utils"
   ]
 }

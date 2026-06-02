@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vercel/label.json",
+    "https://www.better-design.com/registry/vercel/label.json",
     "utils"
   ]
 }

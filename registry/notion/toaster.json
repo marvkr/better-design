@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/notion/toast.json",
-    "http://localhost:3000/registry/notion/use-toast.json"
+    "https://www.better-design.com/registry/notion/toast.json",
+    "https://www.better-design.com/registry/notion/use-toast.json"
   ]
 }

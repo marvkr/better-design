@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/corporate-fintech/toggle.json",
+    "https://www.better-design.com/registry/corporate-fintech/toggle.json",
     "utils"
   ]
 }

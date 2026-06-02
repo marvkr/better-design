@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/figma/button.json",
-    "http://localhost:3000/registry/figma/calendar.json",
-    "http://localhost:3000/registry/figma/popover.json",
+    "https://www.better-design.com/registry/figma/button.json",
+    "https://www.better-design.com/registry/figma/calendar.json",
+    "https://www.better-design.com/registry/figma/popover.json",
     "utils"
   ]
 }

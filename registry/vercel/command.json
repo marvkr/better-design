@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vercel/dialog.json",
+    "https://www.better-design.com/registry/vercel/dialog.json",
     "utils"
   ]
 }

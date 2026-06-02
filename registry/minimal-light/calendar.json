@@ -13,7 +13,7 @@
     "react-day-picker"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/minimal-light/button.json",
+    "https://www.better-design.com/registry/minimal-light/button.json",
     "utils"
   ]
 }

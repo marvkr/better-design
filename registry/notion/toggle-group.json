@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/notion/toggle.json",
+    "https://www.better-design.com/registry/notion/toggle.json",
     "utils"
   ]
 }

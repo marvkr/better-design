@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/dark-orange/toggle.json",
+    "https://www.better-design.com/registry/dark-orange/toggle.json",
     "utils"
   ]
 }

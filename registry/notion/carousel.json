@@ -13,7 +13,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/notion/button.json",
+    "https://www.better-design.com/registry/notion/button.json",
     "utils"
   ]
 }

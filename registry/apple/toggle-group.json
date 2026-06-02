@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/apple/toggle.json",
+    "https://www.better-design.com/registry/apple/toggle.json",
     "utils"
   ]
 }

@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/stripe/toggle.json",
+    "https://www.better-design.com/registry/stripe/toggle.json",
     "utils"
   ]
 }
