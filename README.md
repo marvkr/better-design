@@ -2,9 +2,7 @@
 
 > **Turn your AI coding IDE into a design engineer.** Better Design works with MCP-compatible agents and editors like Claude Code, Cursor, VS Code/GitHub Copilot, Claude Desktop, and claude.ai. It is a design MCP server, AI design-system registry, and UI review layer for generating polished product interfaces from prompts.
 
-![Better Design — AI design systems for Claude Code, Cursor, GitHub Copilot, and MCP](packages/web/public/og.png)
-
-[Website](https://better-design.com) · [MCP server](packages/mcp) · [Design systems](#available-design-systems) · [Setup](#setup) · [Architecture](#architecture)
+[Website](https://better-design.com) · [Design systems](#available-design-systems) · [Setup](#setup) · [Architecture](#architecture)
 
 ![MCP server](https://img.shields.io/badge/MCP-design%20server-8b5cf6?style=flat)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-111827?style=flat)
@@ -465,7 +463,7 @@ better-design/
 │   │   └── utils.ts         # cn() helper
 │   ├── supabase/
 │   ├── airbnb/
-│   └── ...                  # 18 systems total
+│   └── ...                  # 31 systems total
 ├── docs/                    # Design foundations (colors, animation, principles)
 ├── packages/
 │   ├── shared/              # Shared MCP server definition (tools, instructions, types)
