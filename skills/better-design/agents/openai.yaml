@@ -1,0 +1,12 @@
+interface:
+  display_name: "Better Design"
+  short_description: "Build and review interfaces with Better Design"
+  default_prompt: "Use $better-design to build and review this interface with the Better Design MCP."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "better-design"
+      description: "Better Design MCP server"
+      transport: "streamable_http"
+      url: "https://better-design.com/api/mcp"

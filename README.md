@@ -136,7 +136,16 @@ Once connected to your MCP client, ask your agent for design help directly:
 
 ## Setup
 
-### Connect via Remote MCP (recommended)
+Install the Better Design agent skill, then connect its MCP tools:
+
+```bash
+npx skills add marvkr/better-design --skill better-design
+npx better-design
+```
+
+Run each command once, then restart your coding agent. The skill tells supported agents when to use Better Design. The installer detects your coding tools and connects the MCP without replacing their existing configuration. No account is required.
+
+### Connect via Remote MCP manually
 
 Connect any MCP-compatible client to the hosted endpoint — no local setup needed.
 
@@ -185,7 +194,8 @@ better-design/
 │   ├── apple/
 │   └── ...
 ├── scripts/             # Build and seed scripts
-├── .agents/             # AI agent skill definitions
+├── skills/              # Installable Better Design agent skill
+├── .agents/             # Other installed agent skills
 └── README.md
 ```
 
