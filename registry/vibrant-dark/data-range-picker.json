@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vibrant-dark/button.json",
-    "http://localhost:3000/registry/vibrant-dark/calendar.json",
-    "http://localhost:3000/registry/vibrant-dark/popover.json",
+    "https://www.better-design.com/registry/vibrant-dark/button.json",
+    "https://www.better-design.com/registry/vibrant-dark/calendar.json",
+    "https://www.better-design.com/registry/vibrant-dark/popover.json",
     "utils"
   ]
 }

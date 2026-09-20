@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/corporate-fintech/label.json",
+    "https://www.better-design.com/registry/corporate-fintech/label.json",
     "utils"
   ]
 }

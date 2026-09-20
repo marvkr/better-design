@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vibrant-dark/toggle.json",
+    "https://www.better-design.com/registry/vibrant-dark/toggle.json",
     "utils"
   ]
 }

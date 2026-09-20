@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/apple/label.json",
+    "https://www.better-design.com/registry/apple/label.json",
     "utils"
   ]
 }

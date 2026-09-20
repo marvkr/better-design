@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/supabase/toast.json",
-    "http://localhost:3000/registry/supabase/use-toast.json"
+    "https://www.better-design.com/registry/supabase/toast.json",
+    "https://www.better-design.com/registry/supabase/use-toast.json"
   ]
 }

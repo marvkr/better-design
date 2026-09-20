@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/minimal-light/dialog.json",
+    "https://www.better-design.com/registry/minimal-light/dialog.json",
     "utils"
   ]
 }

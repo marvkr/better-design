@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/corporate-fintech/toast.json"
+    "https://www.better-design.com/registry/corporate-fintech/toast.json"
   ]
 }

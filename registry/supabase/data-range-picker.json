@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/supabase/button.json",
-    "http://localhost:3000/registry/supabase/calendar.json",
-    "http://localhost:3000/registry/supabase/popover.json",
+    "https://www.better-design.com/registry/supabase/button.json",
+    "https://www.better-design.com/registry/supabase/calendar.json",
+    "https://www.better-design.com/registry/supabase/popover.json",
     "utils"
   ]
 }

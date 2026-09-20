@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/supabase/card.json",
+    "https://www.better-design.com/registry/supabase/card.json",
     "utils"
   ]
 }

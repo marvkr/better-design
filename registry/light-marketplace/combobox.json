@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/light-marketplace/button.json",
-    "http://localhost:3000/registry/light-marketplace/command.json",
-    "http://localhost:3000/registry/light-marketplace/popover.json",
+    "https://www.better-design.com/registry/light-marketplace/button.json",
+    "https://www.better-design.com/registry/light-marketplace/command.json",
+    "https://www.better-design.com/registry/light-marketplace/popover.json",
     "utils"
   ]
 }

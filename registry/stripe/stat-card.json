@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/stripe/card.json",
+    "https://www.better-design.com/registry/stripe/card.json",
     "utils"
   ]
 }

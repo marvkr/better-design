@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/neutral-monochrome/button.json",
-    "http://localhost:3000/registry/neutral-monochrome/calendar.json",
-    "http://localhost:3000/registry/neutral-monochrome/popover.json",
+    "https://www.better-design.com/registry/neutral-monochrome/button.json",
+    "https://www.better-design.com/registry/neutral-monochrome/calendar.json",
+    "https://www.better-design.com/registry/neutral-monochrome/popover.json",
     "utils"
   ]
 }

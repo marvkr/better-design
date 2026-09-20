@@ -12,7 +12,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/dark-orange/button.json",
+    "https://www.better-design.com/registry/dark-orange/button.json",
     "utils"
   ]
 }

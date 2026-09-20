@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vercel/avatar.json",
+    "https://www.better-design.com/registry/vercel/avatar.json",
     "utils"
   ]
 }

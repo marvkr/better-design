@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/stripe/avatar.json",
+    "https://www.better-design.com/registry/stripe/avatar.json",
     "utils"
   ]
 }

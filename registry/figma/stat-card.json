@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/figma/card.json",
+    "https://www.better-design.com/registry/figma/card.json",
     "utils"
   ]
 }

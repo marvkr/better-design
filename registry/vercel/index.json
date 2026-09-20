@@ -4,7 +4,7 @@
   "description": "vercel design system",
   "personality": [],
   "industry": [],
-  "componentCount": 87,
+  "componentCount": 89,
   "components": [
     {
       "name": "file-input",
@@ -527,6 +527,24 @@
       "registryDependencies": [
         "button",
         "utils"
+      ]
+    },
+    {
+      "name": "animate-text",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple-hello-effect",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "use-toast",
+      "registryDependencies": [
+        "toast"
       ]
     }
   ]

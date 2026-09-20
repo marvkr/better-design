@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/airbnb/toggle.json",
+    "https://www.better-design.com/registry/airbnb/toggle.json",
     "utils"
   ]
 }

@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/cinematic-dark/label.json",
+    "https://www.better-design.com/registry/cinematic-dark/label.json",
     "utils"
   ]
 }

@@ -1,0 +1,98 @@
+{
+  "soft-blur-in": {
+    "sample": "Think different.",
+    "samples": ["Think different.", "Built to flow.", "Motion with intent."]
+  },
+  "per-character-rise": {
+    "sample": "One more thing.",
+    "samples": ["One more thing.", "Fast and fluid.", "Sharp by design."]
+  },
+  "per-word-crossfade": {
+    "sample": "Beautifully, unmistakably simple.",
+    "samples": ["Beautifully simple.", "Designed for focus.", "Built for people."]
+  },
+  "spring-scale-in": {
+    "sample": "Fast. Crisp. Fluid.",
+    "samples": ["Fast. Crisp. Fluid.", "Pop into place.", "Smooth by default."]
+  },
+  "mask-reveal-up": {
+    "sample": "Designed to move.\nBuilt to focus.",
+    "samples": [
+      "Designed to move.\nBuilt to focus.",
+      "Quiet motion.\nStrong hierarchy.",
+      "Premium feel.\nEvery frame."
+    ]
+  },
+  "line-by-line-slide": {
+    "sample": "Think different.\nDo more.",
+    "samples": [
+      "Think different.\nDo more.",
+      "Built for speed.\nMade to last.",
+      "Clear ideas.\nClean motion."
+    ]
+  },
+  "typewriter": {
+    "sample": "Precision in motion.",
+    "samples": ["Precision in motion.", "Write. Pause. Continue."]
+  },
+  "micro-scale-fade": {
+    "sample": "Welcome to motion.",
+    "samples": ["Welcome to motion.", "Small details matter.", "Quietly premium."]
+  },
+  "shimmer-sweep": {
+    "sample": "Shiny details.",
+    "samples": ["Shiny details.", "Glide with intent.", "Soft and precise."]
+  },
+  "fade-through": {
+    "sample": "Calm transitions.",
+    "samples": ["Calm transitions.", "Fade through content.", "Focus shifts smoothly."]
+  },
+  "shared-axis-y": {
+    "sample": "Layered navigation.",
+    "samples": ["Layered navigation.", "Hierarchy made clear.", "Depth with restraint."]
+  },
+  "shared-axis-z": {
+    "sample": "Zooming between states.",
+    "samples": ["Zooming between states.", "Elevate and settle.", "Scale with purpose."]
+  },
+  "blur-out-up": {
+    "sample": "Clear in, airy out.",
+    "samples": ["Clear in, airy out.", "Lightweight typography.", "Exit with grace."]
+  },
+  "scale-down-fade": {
+    "sample": "Quietly refined.",
+    "samples": ["Quietly refined.", "Polished transitions.", "A soft close."]
+  },
+  "focus-blur-resolve": {
+    "sample": "Focus resolves clearly.",
+    "samples": ["Focus resolves clearly.", "Detail emerges.", "Then softly recedes."]
+  },
+  "bottom-up-letters": {
+    "sample": "Shift",
+    "samples": ["Shift", "Stage", "Letter"]
+  },
+  "top-down-letters": {
+    "sample": "Signal",
+    "samples": ["Signal", "Header", "Vector"]
+  },
+  "kinetic-center-build": {
+    "sample": "Words push left.",
+    "phrases": [
+      ["Words", "push", "left"],
+      ["Type", "locks", "center"],
+      ["Build", "the", "line"]
+    ]
+  },
+  "short-slide-right": {
+    "sample": "Move with intent.",
+    "samples": ["Move with intent.", "Words glide across.", "Build the rhythm."]
+  },
+  "short-slide-down": {
+    "sample": "Build from above.",
+    "phrases": [
+      ["Drop", "into", "place"],
+      ["Words", "settle", "lower"],
+      ["Build", "from", "above"]
+    ]
+  }
+}

@@ -12,7 +12,7 @@
     "@radix-ui/react-alert-dialog"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/corporate-fintech/button.json",
+    "https://www.better-design.com/registry/corporate-fintech/button.json",
     "utils"
   ]
 }

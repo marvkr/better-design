@@ -12,7 +12,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/cinematic-dark/button.json",
+    "https://www.better-design.com/registry/cinematic-dark/button.json",
     "utils"
   ]
 }

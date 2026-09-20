@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/precision-light/toggle.json",
+    "https://www.better-design.com/registry/precision-light/toggle.json",
     "utils"
   ]
 }

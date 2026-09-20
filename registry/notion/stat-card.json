@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/notion/card.json",
+    "https://www.better-design.com/registry/notion/card.json",
     "utils"
   ]
 }

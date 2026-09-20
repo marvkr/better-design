@@ -1,0 +1,27 @@
+{
+  "visible_ids": [
+    "soft-blur-in",
+    "per-character-rise",
+    "per-word-crossfade",
+    "spring-scale-in",
+    "mask-reveal-up",
+    "line-by-line-slide",
+    "typewriter",
+    "micro-scale-fade",
+    "shimmer-sweep",
+    "fade-through",
+    "shared-axis-y",
+    "shared-axis-z",
+    "blur-out-up",
+    "scale-down-fade",
+    "focus-blur-resolve",
+    "bottom-up-letters",
+    "top-down-letters",
+    "kinetic-center-build",
+    "short-slide-right",
+    "short-slide-down"
+  ],
+  "renderer_overrides": {
+    "kinetic-center-build": "kinetic-center-build"
+  }
+}

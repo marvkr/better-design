@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/precision-light/avatar.json",
+    "https://www.better-design.com/registry/precision-light/avatar.json",
     "utils"
   ]
 }

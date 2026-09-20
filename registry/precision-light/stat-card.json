@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/precision-light/card.json",
+    "https://www.better-design.com/registry/precision-light/card.json",
     "utils"
   ]
 }

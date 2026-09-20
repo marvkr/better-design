@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/supabase/toast.json"
+    "https://www.better-design.com/registry/supabase/toast.json"
   ]
 }

@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/airbnb/label.json",
+    "https://www.better-design.com/registry/airbnb/label.json",
     "utils"
   ]
 }

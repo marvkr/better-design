@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/airbnb/toast.json",
-    "http://localhost:3000/registry/airbnb/use-toast.json"
+    "https://www.better-design.com/registry/airbnb/toast.json",
+    "https://www.better-design.com/registry/airbnb/use-toast.json"
   ]
 }

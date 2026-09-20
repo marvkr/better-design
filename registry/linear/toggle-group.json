@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/linear/toggle.json",
+    "https://www.better-design.com/registry/linear/toggle.json",
     "utils"
   ]
 }

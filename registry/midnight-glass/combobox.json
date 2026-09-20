@@ -12,9 +12,9 @@
     "@iconify/react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/midnight-glass/button.json",
-    "http://localhost:3000/registry/midnight-glass/command.json",
-    "http://localhost:3000/registry/midnight-glass/popover.json",
+    "https://www.better-design.com/registry/midnight-glass/button.json",
+    "https://www.better-design.com/registry/midnight-glass/command.json",
+    "https://www.better-design.com/registry/midnight-glass/popover.json",
     "utils"
   ]
 }

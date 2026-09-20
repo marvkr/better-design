@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/cinematic-dark/toast.json",
-    "http://localhost:3000/registry/cinematic-dark/use-toast.json"
+    "https://www.better-design.com/registry/cinematic-dark/toast.json",
+    "https://www.better-design.com/registry/cinematic-dark/use-toast.json"
   ]
 }

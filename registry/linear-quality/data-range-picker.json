@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/linear-quality/button.json",
-    "http://localhost:3000/registry/linear-quality/calendar.json",
-    "http://localhost:3000/registry/linear-quality/popover.json",
+    "https://www.better-design.com/registry/linear-quality/button.json",
+    "https://www.better-design.com/registry/linear-quality/calendar.json",
+    "https://www.better-design.com/registry/linear-quality/popover.json",
     "utils"
   ]
 }

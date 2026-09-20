@@ -12,9 +12,9 @@
     "@iconify/react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/glassmorphic-dark/button.json",
-    "http://localhost:3000/registry/glassmorphic-dark/calendar.json",
-    "http://localhost:3000/registry/glassmorphic-dark/popover.json",
+    "https://www.better-design.com/registry/glassmorphic-dark/button.json",
+    "https://www.better-design.com/registry/glassmorphic-dark/calendar.json",
+    "https://www.better-design.com/registry/glassmorphic-dark/popover.json",
     "utils"
   ]
 }

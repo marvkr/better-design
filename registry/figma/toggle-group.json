@@ -19,7 +19,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/figma/toggle.json",
+    "https://www.better-design.com/registry/figma/toggle.json",
     "utils"
   ]
 }

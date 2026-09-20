@@ -14,7 +14,7 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/figma/label.json",
+    "https://www.better-design.com/registry/figma/label.json",
     "utils"
   ]
 }

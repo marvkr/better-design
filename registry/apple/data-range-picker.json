@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/apple/button.json",
-    "http://localhost:3000/registry/apple/calendar.json",
-    "http://localhost:3000/registry/apple/popover.json",
+    "https://www.better-design.com/registry/apple/button.json",
+    "https://www.better-design.com/registry/apple/calendar.json",
+    "https://www.better-design.com/registry/apple/popover.json",
     "utils"
   ]
 }

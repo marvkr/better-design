@@ -13,9 +13,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/editorial-dark/button.json",
-    "http://localhost:3000/registry/editorial-dark/calendar.json",
-    "http://localhost:3000/registry/editorial-dark/popover.json",
+    "https://www.better-design.com/registry/editorial-dark/button.json",
+    "https://www.better-design.com/registry/editorial-dark/calendar.json",
+    "https://www.better-design.com/registry/editorial-dark/popover.json",
     "utils"
   ]
 }

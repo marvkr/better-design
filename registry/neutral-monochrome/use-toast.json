@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/neutral-monochrome/toast.json"
+    "https://www.better-design.com/registry/neutral-monochrome/toast.json"
   ]
 }

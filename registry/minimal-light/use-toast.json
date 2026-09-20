@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/minimal-light/toast.json"
+    "https://www.better-design.com/registry/minimal-light/toast.json"
   ]
 }

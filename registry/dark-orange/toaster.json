@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/dark-orange/toast.json",
-    "http://localhost:3000/registry/dark-orange/use-toast.json"
+    "https://www.better-design.com/registry/dark-orange/toast.json",
+    "https://www.better-design.com/registry/dark-orange/use-toast.json"
   ]
 }

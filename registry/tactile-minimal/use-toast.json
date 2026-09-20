@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/tactile-minimal/toast.json"
+    "https://www.better-design.com/registry/tactile-minimal/toast.json"
   ]
 }

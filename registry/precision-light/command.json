@@ -14,7 +14,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/precision-light/dialog.json",
+    "https://www.better-design.com/registry/precision-light/dialog.json",
     "utils"
   ]
 }

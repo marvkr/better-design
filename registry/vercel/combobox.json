@@ -12,9 +12,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/vercel/button.json",
-    "http://localhost:3000/registry/vercel/command.json",
-    "http://localhost:3000/registry/vercel/popover.json",
+    "https://www.better-design.com/registry/vercel/button.json",
+    "https://www.better-design.com/registry/vercel/command.json",
+    "https://www.better-design.com/registry/vercel/popover.json",
     "utils"
   ]
 }

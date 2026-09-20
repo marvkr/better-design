@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "http://localhost:3000/registry/precision-light/toast.json",
-    "http://localhost:3000/registry/precision-light/use-toast.json"
+    "https://www.better-design.com/registry/precision-light/toast.json",
+    "https://www.better-design.com/registry/precision-light/use-toast.json"
   ]
 }
