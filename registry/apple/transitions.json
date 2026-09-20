@@ -3,15 +3,15 @@
   "type": "registry:ui",
   "files": [],
   "registryDependencies": [
-    "notification-badge",
-    "menu-dropdown",
-    "panel-reveal",
-    "card-resize",
-    "icon-swap",
-    "text-swap",
-    "modal-transition",
-    "page-slide",
-    "number-pop-in"
+    "https://www.better-design.com/registry/apple/notification-badge.json",
+    "https://www.better-design.com/registry/apple/menu-dropdown.json",
+    "https://www.better-design.com/registry/apple/panel-reveal.json",
+    "https://www.better-design.com/registry/apple/card-resize.json",
+    "https://www.better-design.com/registry/apple/icon-swap.json",
+    "https://www.better-design.com/registry/apple/text-swap.json",
+    "https://www.better-design.com/registry/apple/modal-transition.json",
+    "https://www.better-design.com/registry/apple/page-slide.json",
+    "https://www.better-design.com/registry/apple/number-pop-in.json"
   ],
   "meta": {
     "source": {

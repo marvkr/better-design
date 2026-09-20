@@ -3,15 +3,15 @@
   "type": "registry:ui",
   "files": [],
   "registryDependencies": [
-    "notification-badge",
-    "menu-dropdown",
-    "panel-reveal",
-    "card-resize",
-    "icon-swap",
-    "text-swap",
-    "modal-transition",
-    "page-slide",
-    "number-pop-in"
+    "https://www.better-design.com/registry/midnight-glass/notification-badge.json",
+    "https://www.better-design.com/registry/midnight-glass/menu-dropdown.json",
+    "https://www.better-design.com/registry/midnight-glass/panel-reveal.json",
+    "https://www.better-design.com/registry/midnight-glass/card-resize.json",
+    "https://www.better-design.com/registry/midnight-glass/icon-swap.json",
+    "https://www.better-design.com/registry/midnight-glass/text-swap.json",
+    "https://www.better-design.com/registry/midnight-glass/modal-transition.json",
+    "https://www.better-design.com/registry/midnight-glass/page-slide.json",
+    "https://www.better-design.com/registry/midnight-glass/number-pop-in.json"
   ],
   "meta": {
     "source": {

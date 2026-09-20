@@ -78,12 +78,18 @@ function registryEntry({ slug, content }) {
   }
 }
 
-function metaEntry() {
+// Intra-registry dependencies must be absolute production URLs. A bare slug
+// resolves against the shadcn default registry, not this one, and 404s.
+const REGISTRY_BASE = "https://www.better-design.com/registry"
+
+function metaEntry(ds) {
   return {
     name: "transitions",
     type: "registry:ui",
     files: [],
-    registryDependencies: TRANSITIONS.map((t) => t.slug),
+    registryDependencies: TRANSITIONS.map(
+      (t) => `${REGISTRY_BASE}/${ds}/${t.slug}.json`,
+    ),
     meta: { source: SOURCE },
   }
 }
@@ -106,7 +112,7 @@ for (const ds of dsList) {
 
   writeFileSync(
     join(regDsDir, "transitions.json"),
-    JSON.stringify(metaEntry(), null, 2) + "\n",
+    JSON.stringify(metaEntry(ds), null, 2) + "\n",
   )
 
   const legacyTsx = join(uiDir, LEGACY)

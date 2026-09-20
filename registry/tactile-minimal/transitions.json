@@ -3,15 +3,15 @@
   "type": "registry:ui",
   "files": [],
   "registryDependencies": [
-    "notification-badge",
-    "menu-dropdown",
-    "panel-reveal",
-    "card-resize",
-    "icon-swap",
-    "text-swap",
-    "modal-transition",
-    "page-slide",
-    "number-pop-in"
+    "https://www.better-design.com/registry/tactile-minimal/notification-badge.json",
+    "https://www.better-design.com/registry/tactile-minimal/menu-dropdown.json",
+    "https://www.better-design.com/registry/tactile-minimal/panel-reveal.json",
+    "https://www.better-design.com/registry/tactile-minimal/card-resize.json",
+    "https://www.better-design.com/registry/tactile-minimal/icon-swap.json",
+    "https://www.better-design.com/registry/tactile-minimal/text-swap.json",
+    "https://www.better-design.com/registry/tactile-minimal/modal-transition.json",
+    "https://www.better-design.com/registry/tactile-minimal/page-slide.json",
+    "https://www.better-design.com/registry/tactile-minimal/number-pop-in.json"
   ],
   "meta": {
     "source": {

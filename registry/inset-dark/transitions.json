@@ -3,15 +3,15 @@
   "type": "registry:ui",
   "files": [],
   "registryDependencies": [
-    "notification-badge",
-    "menu-dropdown",
-    "panel-reveal",
-    "card-resize",
-    "icon-swap",
-    "text-swap",
-    "modal-transition",
-    "page-slide",
-    "number-pop-in"
+    "https://www.better-design.com/registry/inset-dark/notification-badge.json",
+    "https://www.better-design.com/registry/inset-dark/menu-dropdown.json",
+    "https://www.better-design.com/registry/inset-dark/panel-reveal.json",
+    "https://www.better-design.com/registry/inset-dark/card-resize.json",
+    "https://www.better-design.com/registry/inset-dark/icon-swap.json",
+    "https://www.better-design.com/registry/inset-dark/text-swap.json",
+    "https://www.better-design.com/registry/inset-dark/modal-transition.json",
+    "https://www.better-design.com/registry/inset-dark/page-slide.json",
+    "https://www.better-design.com/registry/inset-dark/number-pop-in.json"
   ],
   "meta": {
     "source": {
