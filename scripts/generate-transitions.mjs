@@ -3,11 +3,18 @@
  * Distributes the 9 transition components (ported from transitions.dev) to
  * every design system and generates matching shadcn registry JSON files.
  *
- * Source of truth: components/airbnb/components/ui/<slug>.tsx
+ * Source of truth: scripts/transitions-src/<slug>.tsx
  * Output per DS:
- *   - components/<ds>/components/ui/<slug>.tsx       (identical copy)
+ *   - components/<ds>/components/ui/<slug>.tsx       (generated copy)
  *   - registry/<ds>/<slug>.json                       (shadcn registry entry)
  *   - registry/<ds>/transitions.json                  (meta — installs all 9)
+ *
+ * These 9 are token-themed, so every design system gets the same bytes. That
+ * is why each emitted file carries a generated banner: it looks exactly like
+ * its hand-authored neighbours and would otherwise invite direct edits.
+ *
+ * Regenerates registry/registry.json at the end, so one run leaves the tree
+ * consistent.
  *
  * Run: node scripts/generate-transitions.mjs
  */
@@ -20,11 +27,16 @@ import {
   unlinkSync,
   existsSync,
 } from "node:fs"
+import { mkdirSync } from "node:fs"
 import { join, dirname } from "node:path"
+import { execFileSync } from "node:child_process"
 import { fileURLToPath } from "node:url"
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..")
-const TEMPLATE_DS = "airbnb"
+// The canonical sources live here, outside components/, because this script
+// overwrites every design system. Keeping them in one of those systems made
+// the template indistinguishable from its own output and silently clobbered.
+const SRC_DIR = join(root, "scripts", "transitions-src")
 
 // Order matches transitions.dev numbering (P1 … P9).
 const TRANSITIONS = [
@@ -47,12 +59,14 @@ const dsList = readdirSync(componentsDir).filter((name) => {
   return stat.isDirectory()
 })
 
+const banner = (slug) =>
+  `// GENERATED FILE - do not edit.\n` +
+  `// Source: scripts/transitions-src/${slug}.tsx\n` +
+  `// Re-generate: node scripts/generate-transitions.mjs\n`
+
 const templates = TRANSITIONS.map((t) => ({
   ...t,
-  content: readFileSync(
-    join(componentsDir, TEMPLATE_DS, "components/ui", `${t.slug}.tsx`),
-    "utf-8",
-  ),
+  content: banner(t.slug) + readFileSync(join(SRC_DIR, `${t.slug}.tsx`), "utf-8"),
 }))
 
 const SOURCE = {
@@ -74,7 +88,7 @@ function registryEntry({ slug, content }) {
       },
     ],
     registryDependencies: ["utils"],
-    meta: { source: SOURCE },
+    meta: { shared: true, source: SOURCE },
   }
 }
 
@@ -90,7 +104,7 @@ function metaEntry(ds) {
     registryDependencies: TRANSITIONS.map(
       (t) => `${REGISTRY_BASE}/${ds}/${t.slug}.json`,
     ),
-    meta: { source: SOURCE },
+    meta: { shared: true, source: SOURCE },
   }
 }
 
@@ -101,6 +115,8 @@ let dsCount = 0
 for (const ds of dsList) {
   const uiDir = join(componentsDir, ds, "components/ui")
   const regDsDir = join(registryDir, ds)
+  mkdirSync(uiDir, { recursive: true })
+  mkdirSync(regDsDir, { recursive: true })
 
   for (const t of templates) {
     writeFileSync(join(uiDir, `${t.slug}.tsx`), t.content)
@@ -124,3 +140,9 @@ for (const ds of dsList) {
 console.log(
   `Wrote ${TRANSITIONS.length} transition components + 1 meta entry to ${dsCount} design systems.`,
 )
+
+// The root discovery index is derived from the files just written, so refresh
+// it here rather than relying on the next person remembering a second script.
+execFileSync(process.execPath, [join(root, "scripts", "generate-registry-json.mjs")], {
+  stdio: "inherit",
+})

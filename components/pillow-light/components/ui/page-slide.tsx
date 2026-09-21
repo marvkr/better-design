@@ -1,3 +1,6 @@
+// GENERATED FILE - do not edit.
+// Source: scripts/transitions-src/page-slide.tsx
+// Re-generate: node scripts/generate-transitions.mjs
 "use client"
 
 import * as React from "react"
