@@ -43,23 +43,31 @@ const TEXT_SWAP_CSS = `
 }
 `
 
-let injected = false
+// useInsertionEffect runs before the browser paints, so the resting state
+// these rules define lands on the first frame instead of after it. The DOM
+// query replaces a module-level flag, which stayed true if the tag was ever
+// removed and never fired for a second document.
 function useStyles() {
-  React.useEffect(() => {
-    if (injected || typeof document === "undefined") return
+  React.useInsertionEffect(() => {
+    if (typeof document === "undefined") return
+    if (document.querySelector('style[data-t-text-swap]')) return
     const el = document.createElement("style")
     el.setAttribute("data-t-text-swap", "")
     el.textContent = TEXT_SWAP_CSS
     document.head.appendChild(el)
-    injected = true
   }, [])
 }
 
-function readMs(name: string, fallback: number) {
-  if (typeof window === "undefined") return fallback
-  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+// The duration variables live on the .t-*-scope wrapper, not on :root, so the
+// lookup has to start from the scope element. Custom properties inherit
+// downwards, so reading documentElement never sees them.
+function readMs(el: Element | null, name: string, fallback: number) {
+  if (typeof window === "undefined" || !el) return fallback
+  const raw = getComputedStyle(el).getPropertyValue(name).trim()
+  if (!raw) return fallback
   const n = parseFloat(raw)
-  return Number.isFinite(n) ? n : fallback
+  if (!Number.isFinite(n)) return fallback
+  return raw.endsWith("ms") ? n : raw.endsWith("s") ? n * 1000 : n
 }
 
 const DEFAULT_MESSAGES = ["Transaction processing…", "Transaction completed"]
@@ -72,19 +80,24 @@ export function TextStatesSwap({
   className?: string
 }) {
   useStyles()
+  const scopeRef = React.useRef<HTMLDivElement>(null)
   const [index, setIndex] = React.useState(0)
   const ref = React.useRef<HTMLSpanElement>(null)
   const busy = React.useRef(false)
 
+  const timer = React.useRef(0)
+  React.useEffect(() => () => window.clearTimeout(timer.current), [])
+
   const next = () => {
     if (busy.current) return
     const el = ref.current
-    if (!el) return
+    // messages is a public prop; an empty list would make the modulo NaN.
+    if (!el || messages.length === 0) return
     busy.current = true
-    const dur = readMs("--text-swap-dur", 200)
+    const dur = readMs(scopeRef.current, "--text-swap-dur", 200)
 
     el.classList.add("is-exit")
-    window.setTimeout(() => {
+    timer.current = window.setTimeout(() => {
       setIndex((i) => (i + 1) % messages.length)
       el.classList.remove("is-exit")
       el.classList.add("is-enter-start")
@@ -96,9 +109,9 @@ export function TextStatesSwap({
   }
 
   return (
-    <div className={cn("t-text-swap-scope flex flex-col items-center gap-3", className)}>
+    <div ref={scopeRef} className={cn("t-text-swap-scope flex flex-col items-center gap-3", className)}>
       <span ref={ref} className="t-text-swap text-sm font-medium text-foreground">
-        {messages[index]}
+        {messages[index % messages.length]}
       </span>
       <button
         type="button"

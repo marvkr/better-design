@@ -44,23 +44,31 @@ const MODAL_CSS = `
 }
 `
 
-let injected = false
+// useInsertionEffect runs before the browser paints, so the resting state
+// these rules define lands on the first frame instead of after it. The DOM
+// query replaces a module-level flag, which stayed true if the tag was ever
+// removed and never fired for a second document.
 function useStyles() {
-  React.useEffect(() => {
-    if (injected || typeof document === "undefined") return
+  React.useInsertionEffect(() => {
+    if (typeof document === "undefined") return
+    if (document.querySelector('style[data-t-modal]')) return
     const el = document.createElement("style")
     el.setAttribute("data-t-modal", "")
     el.textContent = MODAL_CSS
     document.head.appendChild(el)
-    injected = true
   }, [])
 }
 
-function readMs(name: string, fallback: number) {
-  if (typeof window === "undefined") return fallback
-  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+// The duration variables live on the .t-*-scope wrapper, not on :root, so the
+// lookup has to start from the scope element. Custom properties inherit
+// downwards, so reading documentElement never sees them.
+function readMs(el: Element | null, name: string, fallback: number) {
+  if (typeof window === "undefined" || !el) return fallback
+  const raw = getComputedStyle(el).getPropertyValue(name).trim()
+  if (!raw) return fallback
   const n = parseFloat(raw)
-  return Number.isFinite(n) ? n : fallback
+  if (!Number.isFinite(n)) return fallback
+  return raw.endsWith("ms") ? n : raw.endsWith("s") ? n * 1000 : n
 }
 
 export function ModalTransition({
@@ -75,20 +83,40 @@ export function ModalTransition({
   className?: string
 }) {
   useStyles()
+  const scopeRef = React.useRef<HTMLDivElement>(null)
   const [state, setState] = React.useState<"closed" | "open" | "closing">("closed")
 
   React.useEffect(() => {
     if (state !== "closing") return
-    const ms = readMs("--modal-close-dur", 150)
+    const ms = readMs(scopeRef.current, "--modal-close-dur", 150)
     const id = window.setTimeout(() => setState("closed"), ms)
     return () => window.clearTimeout(id)
+  }, [state])
+
+  // The dialog mounts only once it is opening, so it would paint the open
+  // state on its first frame and skip the transition. Add .is-open a frame
+  // later, the same way number-pop-in defers its entry.
+  const [entered, setEntered] = React.useState(false)
+  React.useEffect(() => {
+    if (state !== "open") {
+      setEntered(false)
+      return
+    }
+    let inner = 0
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => setEntered(true))
+    })
+    return () => {
+      cancelAnimationFrame(outer)
+      cancelAnimationFrame(inner)
+    }
   }, [state])
 
   const open = () => setState("open")
   const close = () => setState("closing")
 
   return (
-    <div className={cn("t-modal-scope flex flex-col items-center gap-3", className)}>
+    <div ref={scopeRef} className={cn("t-modal-scope flex flex-col items-center gap-3", className)}>
       <button
         type="button"
         onClick={open}
@@ -102,7 +130,7 @@ export function ModalTransition({
           aria-modal="true"
           className={cn(
             "t-modal w-64 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-lg",
-            state === "open" && "is-open",
+            state === "open" && entered && "is-open",
             state === "closing" && "is-closing",
           )}
         >

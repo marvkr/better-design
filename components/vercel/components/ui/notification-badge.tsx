@@ -73,15 +73,18 @@ const NOTIFICATION_BADGE_CSS = `
 }
 `
 
-let injected = false
+// useInsertionEffect runs before the browser paints, so the resting state
+// these rules define lands on the first frame instead of after it. The DOM
+// query replaces a module-level flag, which stayed true if the tag was ever
+// removed and never fired for a second document.
 function useStyles() {
-  React.useEffect(() => {
-    if (injected || typeof document === "undefined") return
+  React.useInsertionEffect(() => {
+    if (typeof document === "undefined") return
+    if (document.querySelector('style[data-t-notification-badge]')) return
     const el = document.createElement("style")
     el.setAttribute("data-t-notification-badge", "")
     el.textContent = NOTIFICATION_BADGE_CSS
     document.head.appendChild(el)
-    injected = true
   }, [])
 }
 

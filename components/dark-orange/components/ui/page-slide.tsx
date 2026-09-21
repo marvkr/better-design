@@ -33,18 +33,23 @@ const PAGE_SLIDE_CSS = `
   inset: 0;
   opacity: 0;
   pointer-events: none;
+  /* hidden stops Tab from reaching the off-screen page's controls */
+  visibility: hidden;
   transform: translateX(calc(var(--t-page-from-x, 0px) * var(--page-exit-enabled)));
   filter: blur(calc(var(--page-blur) * var(--page-exit-enabled)));
   transition:
     opacity   var(--page-fade-dur)  var(--page-fade-ease),
     transform var(--page-slide-dur) var(--page-slide-ease),
-    filter    var(--page-slide-dur) var(--page-slide-ease);
+    filter    var(--page-slide-dur) var(--page-slide-ease),
+    visibility 0s linear var(--page-slide-dur);
   will-change: opacity, transform, filter;
 }
 .t-page-slide[data-page="1"] .t-page[data-page-id="1"],
 .t-page-slide[data-page="2"] .t-page[data-page-id="2"] {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
+  transition-delay: 0s;
   transform: translateX(0);
   filter: blur(0);
   transition-delay: var(--page-stagger);
@@ -54,15 +59,18 @@ const PAGE_SLIDE_CSS = `
 }
 `
 
-let injected = false
+// useInsertionEffect runs before the browser paints, so the resting state
+// these rules define lands on the first frame instead of after it. The DOM
+// query replaces a module-level flag, which stayed true if the tag was ever
+// removed and never fired for a second document.
 function useStyles() {
-  React.useEffect(() => {
-    if (injected || typeof document === "undefined") return
+  React.useInsertionEffect(() => {
+    if (typeof document === "undefined") return
+    if (document.querySelector('style[data-t-page-slide]')) return
     const el = document.createElement("style")
     el.setAttribute("data-t-page-slide", "")
     el.textContent = PAGE_SLIDE_CSS
     document.head.appendChild(el)
-    injected = true
   }, [])
 }
 

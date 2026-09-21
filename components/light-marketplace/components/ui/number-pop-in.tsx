@@ -48,15 +48,18 @@ const NUMBER_POP_IN_CSS = `
 }
 `
 
-let injected = false
+// useInsertionEffect runs before the browser paints, so the resting state
+// these rules define lands on the first frame instead of after it. The DOM
+// query replaces a module-level flag, which stayed true if the tag was ever
+// removed and never fired for a second document.
 function useStyles() {
-  React.useEffect(() => {
-    if (injected || typeof document === "undefined") return
+  React.useInsertionEffect(() => {
+    if (typeof document === "undefined") return
+    if (document.querySelector('style[data-t-number-pop-in]')) return
     const el = document.createElement("style")
     el.setAttribute("data-t-number-pop-in", "")
     el.textContent = NUMBER_POP_IN_CSS
     document.head.appendChild(el)
-    injected = true
   }, [])
 }
 
@@ -70,11 +73,20 @@ export function NumberPopIn({
   useStyles()
   const [playing, setPlaying] = React.useState(true)
 
+  const frames = React.useRef<[number, number]>([0, 0])
+  React.useEffect(
+    () => () => {
+      cancelAnimationFrame(frames.current[0])
+      cancelAnimationFrame(frames.current[1])
+    },
+    [],
+  )
+
   const replay = () => {
     setPlaying(false)
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => setPlaying(true)),
-    )
+    frames.current[0] = requestAnimationFrame(() => {
+      frames.current[1] = requestAnimationFrame(() => setPlaying(true))
+    })
   }
 
   return (
