@@ -74,23 +74,47 @@ function readMs(el: Element | null, name: string, fallback: number) {
   return raw.endsWith("ms") ? n : raw.endsWith("s") ? n * 1000 : n
 }
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+// Only elements Tab can actually reach: a selector alone also matches hidden
+// controls and buttons that opt out with tabindex="-1", such as menu items.
+function focusables(root: HTMLElement) {
+  return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+    (el) =>
+      el.tabIndex >= 0 &&
+      !el.closest("[inert]") &&
+      (el.checkVisibility?.({ visibilityProperty: true }) ??
+        getComputedStyle(el).visibility !== "hidden"),
+  )
+}
+
 export function ModalTransition({
   children,
   triggerLabel = "Open modal",
   closeLabel = "Close",
+  dialogLabel = "Modal",
   className,
 }: {
   children?: React.ReactNode
   triggerLabel?: string
   closeLabel?: string
+  /** Accessible name for the dialog. */
+  dialogLabel?: string
   className?: string
 }) {
   useStyles()
   const scopeRef = React.useRef<HTMLDivElement>(null)
+  const triggerRef = React.useRef<HTMLButtonElement>(null)
+  const dialogRef = React.useRef<HTMLDivElement>(null)
+  const dialogId = `${React.useId()}-dialog`
   const [state, setState] = React.useState<"closed" | "open" | "closing">("closed")
 
   React.useEffect(() => {
     if (state !== "closing") return
+    // Return focus to the trigger. This runs after the open-state effect
+    // below has removed its focus guard, so the guard cannot pull it back.
+    triggerRef.current?.focus()
     const ms = readMs(scopeRef.current, "--modal-close-dur", 150)
     const id = window.setTimeout(() => setState("closed"), ms)
     return () => window.clearTimeout(id)
@@ -115,22 +139,72 @@ export function ModalTransition({
     }
   }, [state])
 
-  const open = () => setState("open")
-  const close = () => setState("closing")
+  // aria-modal promises that the rest of the page is out of reach, so keep
+  // that promise: move focus in, trap Tab, close on Escape, and pull focus
+  // back if it lands outside.
+  React.useEffect(() => {
+    if (state !== "open") return
+    const dialog = dialogRef.current
+    if (!dialog) return
+    const first = () => focusables(dialog)[0] ?? dialog
+    first().focus()
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      // A nested widget such as a menu handles its own Escape first.
+      if (e.key === "Escape" && !e.defaultPrevented) {
+        e.preventDefault()
+        setState("closing")
+        return
+      }
+      if (e.key !== "Tab") return
+      const items = focusables(dialog)
+      if (items.length === 0) {
+        e.preventDefault()
+        dialog.focus()
+        return
+      }
+      const active = document.activeElement
+      const inside = dialog.contains(active)
+      if (e.shiftKey && (!inside || active === items[0])) {
+        e.preventDefault()
+        items[items.length - 1].focus()
+      } else if (!e.shiftKey && (!inside || active === items[items.length - 1])) {
+        e.preventDefault()
+        items[0].focus()
+      }
+    }
+    const onFocusIn = (e: FocusEvent) => {
+      if (!dialog.contains(e.target as Node)) first().focus()
+    }
+    document.addEventListener("keydown", onKeyDown)
+    document.addEventListener("focusin", onFocusIn)
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.removeEventListener("focusin", onFocusIn)
+    }
+  }, [state])
 
   return (
     <div ref={scopeRef} className={cn("t-modal-scope flex flex-col items-center gap-3", className)}>
       <button
+        ref={triggerRef}
         type="button"
-        onClick={open}
+        aria-haspopup="dialog"
+        aria-expanded={state === "open"}
+        aria-controls={state === "closed" ? undefined : dialogId}
+        onClick={() => setState("open")}
         className="rounded-md border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted"
       >
         {triggerLabel}
       </button>
       {state !== "closed" && (
         <div
+          ref={dialogRef}
+          id={dialogId}
           role="dialog"
-          aria-modal="true"
+          aria-modal={state === "open" ? true : undefined}
+          aria-label={dialogLabel}
+          tabIndex={-1}
           className={cn(
             "t-modal w-64 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-lg",
             state === "open" && entered && "is-open",
@@ -147,7 +221,7 @@ export function ModalTransition({
           )}
           <button
             type="button"
-            onClick={close}
+            onClick={() => setState("closing")}
             className="mt-4 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground hover:bg-muted"
           >
             {closeLabel}
