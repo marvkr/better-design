@@ -82,6 +82,11 @@ async function main() {
 
       const isStyle = src.type === "registry:style"
       const componentTitle = titleCase(component)
+      // Some components carry no per-design-system styling — they theme
+      // themselves from the CSS variables the host already defines, and every
+      // design system ships identical bytes. Saying they are "themed for X"
+      // would be false, so they describe themselves as shared.
+      const isShared = src.meta?.shared === true
 
       const item = {
         name: `${ds}/${component}`,
@@ -89,7 +94,9 @@ async function main() {
         title: `${dsLabel} — ${componentTitle}`,
         description: isStyle
           ? `${dsLabel} theme — CSS variables, tokens, and global styles.`
-          : `${componentTitle} component themed for ${dsLabel}.`,
+          : isShared
+            ? `${componentTitle} component — shared across design systems, themed by your CSS variables.`
+            : `${componentTitle} component themed for ${dsLabel}.`,
         // path + type ONLY — directory rule forbids `content` in registry.json
         files: (src.files || []).map((f) => ({ path: f.path, type: f.type })),
       }

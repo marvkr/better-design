@@ -4,7 +4,7 @@
   "description": "light-marketplace design system",
   "personality": [],
   "industry": [],
-  "componentCount": 90,
+  "componentCount": 99,
   "components": [
     {
       "name": "file-input",
@@ -540,6 +540,74 @@
       "name": "apple-hello-effect",
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "notification-badge",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "menu-dropdown",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "panel-reveal",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "card-resize",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "icon-swap",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "text-swap",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "modal-transition",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "page-slide",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "number-pop-in",
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "transitions",
+      "registryDependencies": [
+        "notification-badge",
+        "menu-dropdown",
+        "panel-reveal",
+        "card-resize",
+        "icon-swap",
+        "text-swap",
+        "modal-transition",
+        "page-slide",
+        "number-pop-in"
       ]
     }
   ]

@@ -203,6 +203,21 @@
       ]
     },
     {
+      "name": "airbnb/card-resize",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "airbnb/card",
       "type": "registry:ui",
       "title": "Airbnb Design System — Card",
@@ -618,6 +633,21 @@
       ]
     },
     {
+      "name": "airbnb/icon-swap",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "airbnb/inline-edit",
       "type": "registry:ui",
       "title": "Airbnb Design System — Inline Edit",
@@ -735,6 +765,21 @@
       ]
     },
     {
+      "name": "airbnb/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "airbnb/menubar",
       "type": "registry:ui",
       "title": "Airbnb Design System — Menubar",
@@ -742,6 +787,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "airbnb/modal-transition",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -795,6 +855,21 @@
       ]
     },
     {
+      "name": "airbnb/notification-badge",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "airbnb/notification",
       "type": "registry:ui",
       "title": "Airbnb Design System — Notification",
@@ -825,6 +900,36 @@
       ]
     },
     {
+      "name": "airbnb/number-pop-in",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "airbnb/page-slide",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "airbnb/pagination",
       "type": "registry:ui",
       "title": "Airbnb Design System — Pagination",
@@ -837,6 +942,21 @@
       ],
       "registryDependencies": [
         "airbnb/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "airbnb/panel-reveal",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -1234,6 +1354,21 @@
       ]
     },
     {
+      "name": "airbnb/text-swap",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "airbnb/textarea",
       "type": "registry:ui",
       "title": "Airbnb Design System — Textarea",
@@ -1357,6 +1492,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "airbnb/transitions",
+      "type": "registry:ui",
+      "title": "Airbnb Design System — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "airbnb/notification-badge",
+        "airbnb/menu-dropdown",
+        "airbnb/panel-reveal",
+        "airbnb/card-resize",
+        "airbnb/icon-swap",
+        "airbnb/text-swap",
+        "airbnb/modal-transition",
+        "airbnb/page-slide",
+        "airbnb/number-pop-in"
       ]
     },
     {
@@ -1585,6 +1738,21 @@
       ],
       "registryDependencies": [
         "apple/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "apple/card-resize",
+      "type": "registry:ui",
+      "title": "Apple — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -2004,6 +2172,21 @@
       ]
     },
     {
+      "name": "apple/icon-swap",
+      "type": "registry:ui",
+      "title": "Apple — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "apple/inline-edit",
       "type": "registry:ui",
       "title": "Apple — Inline Edit",
@@ -2121,6 +2304,21 @@
       ]
     },
     {
+      "name": "apple/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Apple — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "apple/menubar",
       "type": "registry:ui",
       "title": "Apple — Menubar",
@@ -2128,6 +2326,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple/modal-transition",
+      "type": "registry:ui",
+      "title": "Apple — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2181,6 +2394,21 @@
       ]
     },
     {
+      "name": "apple/notification-badge",
+      "type": "registry:ui",
+      "title": "Apple — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "apple/notification",
       "type": "registry:ui",
       "title": "Apple — Notification",
@@ -2211,6 +2439,36 @@
       ]
     },
     {
+      "name": "apple/number-pop-in",
+      "type": "registry:ui",
+      "title": "Apple — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "apple/page-slide",
+      "type": "registry:ui",
+      "title": "Apple — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "apple/pagination",
       "type": "registry:ui",
       "title": "Apple — Pagination",
@@ -2223,6 +2481,21 @@
       ],
       "registryDependencies": [
         "apple/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "apple/panel-reveal",
+      "type": "registry:ui",
+      "title": "Apple — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -2620,6 +2893,21 @@
       ]
     },
     {
+      "name": "apple/text-swap",
+      "type": "registry:ui",
+      "title": "Apple — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "apple/textarea",
       "type": "registry:ui",
       "title": "Apple — Textarea",
@@ -2743,6 +3031,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "apple/transitions",
+      "type": "registry:ui",
+      "title": "Apple — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "apple/notification-badge",
+        "apple/menu-dropdown",
+        "apple/panel-reveal",
+        "apple/card-resize",
+        "apple/icon-swap",
+        "apple/text-swap",
+        "apple/modal-transition",
+        "apple/page-slide",
+        "apple/number-pop-in"
       ]
     },
     {
@@ -2987,6 +3293,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-custom/card-resize",
+      "type": "registry:ui",
+      "title": "Beam Custom — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -3394,6 +3715,21 @@
       ]
     },
     {
+      "name": "beam-custom/icon-swap",
+      "type": "registry:ui",
+      "title": "Beam Custom — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-custom/inline-edit",
       "type": "registry:ui",
       "title": "Beam Custom — Inline Edit",
@@ -3514,6 +3850,21 @@
       ]
     },
     {
+      "name": "beam-custom/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Beam Custom — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-custom/menubar",
       "type": "registry:ui",
       "title": "Beam Custom — Menubar",
@@ -3521,6 +3872,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-custom/modal-transition",
+      "type": "registry:ui",
+      "title": "Beam Custom — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -3574,6 +3940,21 @@
       ]
     },
     {
+      "name": "beam-custom/notification-badge",
+      "type": "registry:ui",
+      "title": "Beam Custom — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-custom/notification",
       "type": "registry:ui",
       "title": "Beam Custom — Notification",
@@ -3604,6 +3985,36 @@
       ]
     },
     {
+      "name": "beam-custom/number-pop-in",
+      "type": "registry:ui",
+      "title": "Beam Custom — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-custom/page-slide",
+      "type": "registry:ui",
+      "title": "Beam Custom — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-custom/pagination",
       "type": "registry:ui",
       "title": "Beam Custom — Pagination",
@@ -3611,6 +4022,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-custom/panel-reveal",
+      "type": "registry:ui",
+      "title": "Beam Custom — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -3991,6 +4417,21 @@
       ]
     },
     {
+      "name": "beam-custom/text-swap",
+      "type": "registry:ui",
+      "title": "Beam Custom — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-custom/textarea",
       "type": "registry:ui",
       "title": "Beam Custom — Textarea",
@@ -4105,6 +4546,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "beam-custom/transitions",
+      "type": "registry:ui",
+      "title": "Beam Custom — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "beam-custom/notification-badge",
+        "beam-custom/menu-dropdown",
+        "beam-custom/panel-reveal",
+        "beam-custom/card-resize",
+        "beam-custom/icon-swap",
+        "beam-custom/text-swap",
+        "beam-custom/modal-transition",
+        "beam-custom/page-slide",
+        "beam-custom/number-pop-in"
       ]
     },
     {
@@ -4343,6 +4802,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-lib/card-resize",
+      "type": "registry:ui",
+      "title": "Beam Lib — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -4750,6 +5224,21 @@
       ]
     },
     {
+      "name": "beam-lib/icon-swap",
+      "type": "registry:ui",
+      "title": "Beam Lib — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-lib/inline-edit",
       "type": "registry:ui",
       "title": "Beam Lib — Inline Edit",
@@ -4870,6 +5359,21 @@
       ]
     },
     {
+      "name": "beam-lib/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Beam Lib — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-lib/menubar",
       "type": "registry:ui",
       "title": "Beam Lib — Menubar",
@@ -4877,6 +5381,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-lib/modal-transition",
+      "type": "registry:ui",
+      "title": "Beam Lib — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -4930,6 +5449,21 @@
       ]
     },
     {
+      "name": "beam-lib/notification-badge",
+      "type": "registry:ui",
+      "title": "Beam Lib — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-lib/notification",
       "type": "registry:ui",
       "title": "Beam Lib — Notification",
@@ -4960,6 +5494,36 @@
       ]
     },
     {
+      "name": "beam-lib/number-pop-in",
+      "type": "registry:ui",
+      "title": "Beam Lib — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-lib/page-slide",
+      "type": "registry:ui",
+      "title": "Beam Lib — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-lib/pagination",
       "type": "registry:ui",
       "title": "Beam Lib — Pagination",
@@ -4967,6 +5531,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "beam-lib/panel-reveal",
+      "type": "registry:ui",
+      "title": "Beam Lib — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -5347,6 +5926,21 @@
       ]
     },
     {
+      "name": "beam-lib/text-swap",
+      "type": "registry:ui",
+      "title": "Beam Lib — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "beam-lib/textarea",
       "type": "registry:ui",
       "title": "Beam Lib — Textarea",
@@ -5461,6 +6055,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "beam-lib/transitions",
+      "type": "registry:ui",
+      "title": "Beam Lib — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "beam-lib/notification-badge",
+        "beam-lib/menu-dropdown",
+        "beam-lib/panel-reveal",
+        "beam-lib/card-resize",
+        "beam-lib/icon-swap",
+        "beam-lib/text-swap",
+        "beam-lib/modal-transition",
+        "beam-lib/page-slide",
+        "beam-lib/number-pop-in"
       ]
     },
     {
@@ -5686,6 +6298,21 @@
       ],
       "registryDependencies": [
         "cinematic-dark/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "cinematic-dark/card-resize",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -6105,6 +6732,21 @@
       ]
     },
     {
+      "name": "cinematic-dark/icon-swap",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "cinematic-dark/inline-edit",
       "type": "registry:ui",
       "title": "Cinematic Dark — Inline Edit",
@@ -6222,6 +6864,21 @@
       ]
     },
     {
+      "name": "cinematic-dark/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "cinematic-dark/menubar",
       "type": "registry:ui",
       "title": "Cinematic Dark — Menubar",
@@ -6229,6 +6886,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "cinematic-dark/modal-transition",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -6282,6 +6954,21 @@
       ]
     },
     {
+      "name": "cinematic-dark/notification-badge",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "cinematic-dark/notification",
       "type": "registry:ui",
       "title": "Cinematic Dark — Notification",
@@ -6312,6 +6999,36 @@
       ]
     },
     {
+      "name": "cinematic-dark/number-pop-in",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "cinematic-dark/page-slide",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "cinematic-dark/pagination",
       "type": "registry:ui",
       "title": "Cinematic Dark — Pagination",
@@ -6324,6 +7041,21 @@
       ],
       "registryDependencies": [
         "cinematic-dark/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "cinematic-dark/panel-reveal",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -6721,6 +7453,21 @@
       ]
     },
     {
+      "name": "cinematic-dark/text-swap",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "cinematic-dark/textarea",
       "type": "registry:ui",
       "title": "Cinematic Dark — Textarea",
@@ -6844,6 +7591,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "cinematic-dark/transitions",
+      "type": "registry:ui",
+      "title": "Cinematic Dark — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "cinematic-dark/notification-badge",
+        "cinematic-dark/menu-dropdown",
+        "cinematic-dark/panel-reveal",
+        "cinematic-dark/card-resize",
+        "cinematic-dark/icon-swap",
+        "cinematic-dark/text-swap",
+        "cinematic-dark/modal-transition",
+        "cinematic-dark/page-slide",
+        "cinematic-dark/number-pop-in"
       ]
     },
     {
@@ -7072,6 +7837,21 @@
       ],
       "registryDependencies": [
         "corporate-fintech/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "corporate-fintech/card-resize",
+      "type": "registry:ui",
+      "title": "Column Design System — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -7489,6 +8269,21 @@
       ]
     },
     {
+      "name": "corporate-fintech/icon-swap",
+      "type": "registry:ui",
+      "title": "Column Design System — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "corporate-fintech/inline-edit",
       "type": "registry:ui",
       "title": "Column Design System — Inline Edit",
@@ -7606,6 +8401,21 @@
       ]
     },
     {
+      "name": "corporate-fintech/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Column Design System — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "corporate-fintech/menubar",
       "type": "registry:ui",
       "title": "Column Design System — Menubar",
@@ -7613,6 +8423,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "corporate-fintech/modal-transition",
+      "type": "registry:ui",
+      "title": "Column Design System — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -7666,6 +8491,21 @@
       ]
     },
     {
+      "name": "corporate-fintech/notification-badge",
+      "type": "registry:ui",
+      "title": "Column Design System — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "corporate-fintech/notification",
       "type": "registry:ui",
       "title": "Column Design System — Notification",
@@ -7696,6 +8536,36 @@
       ]
     },
     {
+      "name": "corporate-fintech/number-pop-in",
+      "type": "registry:ui",
+      "title": "Column Design System — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "corporate-fintech/page-slide",
+      "type": "registry:ui",
+      "title": "Column Design System — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "corporate-fintech/pagination",
       "type": "registry:ui",
       "title": "Column Design System — Pagination",
@@ -7708,6 +8578,21 @@
       ],
       "registryDependencies": [
         "corporate-fintech/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "corporate-fintech/panel-reveal",
+      "type": "registry:ui",
+      "title": "Column Design System — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -8105,6 +8990,21 @@
       ]
     },
     {
+      "name": "corporate-fintech/text-swap",
+      "type": "registry:ui",
+      "title": "Column Design System — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "corporate-fintech/textarea",
       "type": "registry:ui",
       "title": "Column Design System — Textarea",
@@ -8228,6 +9128,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "corporate-fintech/transitions",
+      "type": "registry:ui",
+      "title": "Column Design System — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "corporate-fintech/notification-badge",
+        "corporate-fintech/menu-dropdown",
+        "corporate-fintech/panel-reveal",
+        "corporate-fintech/card-resize",
+        "corporate-fintech/icon-swap",
+        "corporate-fintech/text-swap",
+        "corporate-fintech/modal-transition",
+        "corporate-fintech/page-slide",
+        "corporate-fintech/number-pop-in"
       ]
     },
     {
@@ -8456,6 +9374,21 @@
       ],
       "registryDependencies": [
         "dark-orange/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "dark-orange/card-resize",
+      "type": "registry:ui",
+      "title": "Dark Orange — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -8875,6 +9808,21 @@
       ]
     },
     {
+      "name": "dark-orange/icon-swap",
+      "type": "registry:ui",
+      "title": "Dark Orange — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "dark-orange/inline-edit",
       "type": "registry:ui",
       "title": "Dark Orange — Inline Edit",
@@ -8992,6 +9940,21 @@
       ]
     },
     {
+      "name": "dark-orange/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Dark Orange — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "dark-orange/menubar",
       "type": "registry:ui",
       "title": "Dark Orange — Menubar",
@@ -8999,6 +9962,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "dark-orange/modal-transition",
+      "type": "registry:ui",
+      "title": "Dark Orange — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -9052,6 +10030,21 @@
       ]
     },
     {
+      "name": "dark-orange/notification-badge",
+      "type": "registry:ui",
+      "title": "Dark Orange — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "dark-orange/notification",
       "type": "registry:ui",
       "title": "Dark Orange — Notification",
@@ -9082,6 +10075,36 @@
       ]
     },
     {
+      "name": "dark-orange/number-pop-in",
+      "type": "registry:ui",
+      "title": "Dark Orange — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "dark-orange/page-slide",
+      "type": "registry:ui",
+      "title": "Dark Orange — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "dark-orange/pagination",
       "type": "registry:ui",
       "title": "Dark Orange — Pagination",
@@ -9094,6 +10117,21 @@
       ],
       "registryDependencies": [
         "dark-orange/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "dark-orange/panel-reveal",
+      "type": "registry:ui",
+      "title": "Dark Orange — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -9491,6 +10529,21 @@
       ]
     },
     {
+      "name": "dark-orange/text-swap",
+      "type": "registry:ui",
+      "title": "Dark Orange — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "dark-orange/textarea",
       "type": "registry:ui",
       "title": "Dark Orange — Textarea",
@@ -9614,6 +10667,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "dark-orange/transitions",
+      "type": "registry:ui",
+      "title": "Dark Orange — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "dark-orange/notification-badge",
+        "dark-orange/menu-dropdown",
+        "dark-orange/panel-reveal",
+        "dark-orange/card-resize",
+        "dark-orange/icon-swap",
+        "dark-orange/text-swap",
+        "dark-orange/modal-transition",
+        "dark-orange/page-slide",
+        "dark-orange/number-pop-in"
       ]
     },
     {
@@ -9842,6 +10913,21 @@
       ],
       "registryDependencies": [
         "editorial-dark/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "editorial-dark/card-resize",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -10261,6 +11347,21 @@
       ]
     },
     {
+      "name": "editorial-dark/icon-swap",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "editorial-dark/inline-edit",
       "type": "registry:ui",
       "title": "Editorial Dark — Inline Edit",
@@ -10378,6 +11479,21 @@
       ]
     },
     {
+      "name": "editorial-dark/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "editorial-dark/menubar",
       "type": "registry:ui",
       "title": "Editorial Dark — Menubar",
@@ -10385,6 +11501,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "editorial-dark/modal-transition",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -10438,6 +11569,21 @@
       ]
     },
     {
+      "name": "editorial-dark/notification-badge",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "editorial-dark/notification",
       "type": "registry:ui",
       "title": "Editorial Dark — Notification",
@@ -10468,6 +11614,36 @@
       ]
     },
     {
+      "name": "editorial-dark/number-pop-in",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "editorial-dark/page-slide",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "editorial-dark/pagination",
       "type": "registry:ui",
       "title": "Editorial Dark — Pagination",
@@ -10480,6 +11656,21 @@
       ],
       "registryDependencies": [
         "editorial-dark/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "editorial-dark/panel-reveal",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -10877,6 +12068,21 @@
       ]
     },
     {
+      "name": "editorial-dark/text-swap",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "editorial-dark/textarea",
       "type": "registry:ui",
       "title": "Editorial Dark — Textarea",
@@ -11000,6 +12206,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "editorial-dark/transitions",
+      "type": "registry:ui",
+      "title": "Editorial Dark — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "editorial-dark/notification-badge",
+        "editorial-dark/menu-dropdown",
+        "editorial-dark/panel-reveal",
+        "editorial-dark/card-resize",
+        "editorial-dark/icon-swap",
+        "editorial-dark/text-swap",
+        "editorial-dark/modal-transition",
+        "editorial-dark/page-slide",
+        "editorial-dark/number-pop-in"
       ]
     },
     {
@@ -11228,6 +12452,21 @@
       ],
       "registryDependencies": [
         "figma/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "figma/card-resize",
+      "type": "registry:ui",
+      "title": "Figma — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -11647,6 +12886,21 @@
       ]
     },
     {
+      "name": "figma/icon-swap",
+      "type": "registry:ui",
+      "title": "Figma — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "figma/inline-edit",
       "type": "registry:ui",
       "title": "Figma — Inline Edit",
@@ -11764,6 +13018,21 @@
       ]
     },
     {
+      "name": "figma/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Figma — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "figma/menubar",
       "type": "registry:ui",
       "title": "Figma — Menubar",
@@ -11771,6 +13040,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "figma/modal-transition",
+      "type": "registry:ui",
+      "title": "Figma — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -11824,6 +13108,21 @@
       ]
     },
     {
+      "name": "figma/notification-badge",
+      "type": "registry:ui",
+      "title": "Figma — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "figma/notification",
       "type": "registry:ui",
       "title": "Figma — Notification",
@@ -11854,6 +13153,36 @@
       ]
     },
     {
+      "name": "figma/number-pop-in",
+      "type": "registry:ui",
+      "title": "Figma — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "figma/page-slide",
+      "type": "registry:ui",
+      "title": "Figma — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "figma/pagination",
       "type": "registry:ui",
       "title": "Figma — Pagination",
@@ -11866,6 +13195,21 @@
       ],
       "registryDependencies": [
         "figma/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "figma/panel-reveal",
+      "type": "registry:ui",
+      "title": "Figma — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -12263,6 +13607,21 @@
       ]
     },
     {
+      "name": "figma/text-swap",
+      "type": "registry:ui",
+      "title": "Figma — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "figma/textarea",
       "type": "registry:ui",
       "title": "Figma — Textarea",
@@ -12386,6 +13745,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "figma/transitions",
+      "type": "registry:ui",
+      "title": "Figma — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "figma/notification-badge",
+        "figma/menu-dropdown",
+        "figma/panel-reveal",
+        "figma/card-resize",
+        "figma/icon-swap",
+        "figma/text-swap",
+        "figma/modal-transition",
+        "figma/page-slide",
+        "figma/number-pop-in"
       ]
     },
     {
@@ -12603,6 +13980,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "glassmorphic-dark/card-resize",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -13022,6 +14414,21 @@
       ]
     },
     {
+      "name": "glassmorphic-dark/icon-swap",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "glassmorphic-dark/inline-edit",
       "type": "registry:ui",
       "title": "Glassmorphic Dark — Inline Edit",
@@ -13142,6 +14549,21 @@
       ]
     },
     {
+      "name": "glassmorphic-dark/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "glassmorphic-dark/menubar",
       "type": "registry:ui",
       "title": "Glassmorphic Dark — Menubar",
@@ -13149,6 +14571,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "glassmorphic-dark/modal-transition",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -13202,6 +14639,21 @@
       ]
     },
     {
+      "name": "glassmorphic-dark/notification-badge",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "glassmorphic-dark/notification",
       "type": "registry:ui",
       "title": "Glassmorphic Dark — Notification",
@@ -13232,6 +14684,36 @@
       ]
     },
     {
+      "name": "glassmorphic-dark/number-pop-in",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "glassmorphic-dark/page-slide",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "glassmorphic-dark/pagination",
       "type": "registry:ui",
       "title": "Glassmorphic Dark — Pagination",
@@ -13239,6 +14721,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "glassmorphic-dark/panel-reveal",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -13627,6 +15124,21 @@
       ]
     },
     {
+      "name": "glassmorphic-dark/text-swap",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "glassmorphic-dark/textarea",
       "type": "registry:ui",
       "title": "Glassmorphic Dark — Textarea",
@@ -13741,6 +15253,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "glassmorphic-dark/transitions",
+      "type": "registry:ui",
+      "title": "Glassmorphic Dark — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "glassmorphic-dark/notification-badge",
+        "glassmorphic-dark/menu-dropdown",
+        "glassmorphic-dark/panel-reveal",
+        "glassmorphic-dark/card-resize",
+        "glassmorphic-dark/icon-swap",
+        "glassmorphic-dark/text-swap",
+        "glassmorphic-dark/modal-transition",
+        "glassmorphic-dark/page-slide",
+        "glassmorphic-dark/number-pop-in"
       ]
     },
     {
@@ -13970,6 +15500,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "inset-dark/card-resize",
+      "type": "registry:ui",
+      "title": "Inset Dark — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -14377,6 +15922,21 @@
       ]
     },
     {
+      "name": "inset-dark/icon-swap",
+      "type": "registry:ui",
+      "title": "Inset Dark — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "inset-dark/inline-edit",
       "type": "registry:ui",
       "title": "Inset Dark — Inline Edit",
@@ -14497,6 +16057,21 @@
       ]
     },
     {
+      "name": "inset-dark/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Inset Dark — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "inset-dark/menubar",
       "type": "registry:ui",
       "title": "Inset Dark — Menubar",
@@ -14504,6 +16079,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "inset-dark/modal-transition",
+      "type": "registry:ui",
+      "title": "Inset Dark — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -14557,6 +16147,21 @@
       ]
     },
     {
+      "name": "inset-dark/notification-badge",
+      "type": "registry:ui",
+      "title": "Inset Dark — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "inset-dark/notification",
       "type": "registry:ui",
       "title": "Inset Dark — Notification",
@@ -14587,6 +16192,36 @@
       ]
     },
     {
+      "name": "inset-dark/number-pop-in",
+      "type": "registry:ui",
+      "title": "Inset Dark — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "inset-dark/page-slide",
+      "type": "registry:ui",
+      "title": "Inset Dark — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "inset-dark/pagination",
       "type": "registry:ui",
       "title": "Inset Dark — Pagination",
@@ -14594,6 +16229,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "inset-dark/panel-reveal",
+      "type": "registry:ui",
+      "title": "Inset Dark — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -14974,6 +16624,21 @@
       ]
     },
     {
+      "name": "inset-dark/text-swap",
+      "type": "registry:ui",
+      "title": "Inset Dark — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "inset-dark/textarea",
       "type": "registry:ui",
       "title": "Inset Dark — Textarea",
@@ -15088,6 +16753,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "inset-dark/transitions",
+      "type": "registry:ui",
+      "title": "Inset Dark — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "inset-dark/notification-badge",
+        "inset-dark/menu-dropdown",
+        "inset-dark/panel-reveal",
+        "inset-dark/card-resize",
+        "inset-dark/icon-swap",
+        "inset-dark/text-swap",
+        "inset-dark/modal-transition",
+        "inset-dark/page-slide",
+        "inset-dark/number-pop-in"
       ]
     },
     {
@@ -15312,6 +16995,21 @@
       ],
       "registryDependencies": [
         "light-marketplace/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "light-marketplace/card-resize",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -15726,6 +17424,21 @@
       ]
     },
     {
+      "name": "light-marketplace/icon-swap",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "light-marketplace/inline-edit",
       "type": "registry:ui",
       "title": "Light Marketplace — Inline Edit",
@@ -15843,6 +17556,21 @@
       ]
     },
     {
+      "name": "light-marketplace/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "light-marketplace/menubar",
       "type": "registry:ui",
       "title": "Light Marketplace — Menubar",
@@ -15850,6 +17578,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "light-marketplace/modal-transition",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -15903,6 +17646,21 @@
       ]
     },
     {
+      "name": "light-marketplace/notification-badge",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "light-marketplace/notification",
       "type": "registry:ui",
       "title": "Light Marketplace — Notification",
@@ -15933,6 +17691,36 @@
       ]
     },
     {
+      "name": "light-marketplace/number-pop-in",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "light-marketplace/page-slide",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "light-marketplace/pagination",
       "type": "registry:ui",
       "title": "Light Marketplace — Pagination",
@@ -15940,6 +17728,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "light-marketplace/panel-reveal",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -16343,6 +18146,21 @@
       ]
     },
     {
+      "name": "light-marketplace/text-swap",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "light-marketplace/textarea",
       "type": "registry:ui",
       "title": "Light Marketplace — Textarea",
@@ -16466,6 +18284,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "light-marketplace/transitions",
+      "type": "registry:ui",
+      "title": "Light Marketplace — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "light-marketplace/notification-badge",
+        "light-marketplace/menu-dropdown",
+        "light-marketplace/panel-reveal",
+        "light-marketplace/card-resize",
+        "light-marketplace/icon-swap",
+        "light-marketplace/text-swap",
+        "light-marketplace/modal-transition",
+        "light-marketplace/page-slide",
+        "light-marketplace/number-pop-in"
       ]
     },
     {
@@ -16694,6 +18530,21 @@
       ],
       "registryDependencies": [
         "linear/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "linear/card-resize",
+      "type": "registry:ui",
+      "title": "Linear Design System — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -17113,6 +18964,21 @@
       ]
     },
     {
+      "name": "linear/icon-swap",
+      "type": "registry:ui",
+      "title": "Linear Design System — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear/inline-edit",
       "type": "registry:ui",
       "title": "Linear Design System — Inline Edit",
@@ -17230,6 +19096,21 @@
       ]
     },
     {
+      "name": "linear/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Linear Design System — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear/menubar",
       "type": "registry:ui",
       "title": "Linear Design System — Menubar",
@@ -17237,6 +19118,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "linear/modal-transition",
+      "type": "registry:ui",
+      "title": "Linear Design System — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -17290,6 +19186,21 @@
       ]
     },
     {
+      "name": "linear/notification-badge",
+      "type": "registry:ui",
+      "title": "Linear Design System — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear/notification",
       "type": "registry:ui",
       "title": "Linear Design System — Notification",
@@ -17320,6 +19231,36 @@
       ]
     },
     {
+      "name": "linear/number-pop-in",
+      "type": "registry:ui",
+      "title": "Linear Design System — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "linear/page-slide",
+      "type": "registry:ui",
+      "title": "Linear Design System — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear/pagination",
       "type": "registry:ui",
       "title": "Linear Design System — Pagination",
@@ -17332,6 +19273,21 @@
       ],
       "registryDependencies": [
         "linear/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "linear/panel-reveal",
+      "type": "registry:ui",
+      "title": "Linear Design System — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -17729,6 +19685,21 @@
       ]
     },
     {
+      "name": "linear/text-swap",
+      "type": "registry:ui",
+      "title": "Linear Design System — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear/textarea",
       "type": "registry:ui",
       "title": "Linear Design System — Textarea",
@@ -17852,6 +19823,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "linear/transitions",
+      "type": "registry:ui",
+      "title": "Linear Design System — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "linear/notification-badge",
+        "linear/menu-dropdown",
+        "linear/panel-reveal",
+        "linear/card-resize",
+        "linear/icon-swap",
+        "linear/text-swap",
+        "linear/modal-transition",
+        "linear/page-slide",
+        "linear/number-pop-in"
       ]
     },
     {
@@ -18080,6 +20069,21 @@
       ],
       "registryDependencies": [
         "linear-quality/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "linear-quality/card-resize",
+      "type": "registry:ui",
+      "title": "Linear Quality — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -18499,6 +20503,21 @@
       ]
     },
     {
+      "name": "linear-quality/icon-swap",
+      "type": "registry:ui",
+      "title": "Linear Quality — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear-quality/inline-edit",
       "type": "registry:ui",
       "title": "Linear Quality — Inline Edit",
@@ -18616,6 +20635,21 @@
       ]
     },
     {
+      "name": "linear-quality/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Linear Quality — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear-quality/menubar",
       "type": "registry:ui",
       "title": "Linear Quality — Menubar",
@@ -18623,6 +20657,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "linear-quality/modal-transition",
+      "type": "registry:ui",
+      "title": "Linear Quality — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -18676,6 +20725,21 @@
       ]
     },
     {
+      "name": "linear-quality/notification-badge",
+      "type": "registry:ui",
+      "title": "Linear Quality — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear-quality/notification",
       "type": "registry:ui",
       "title": "Linear Quality — Notification",
@@ -18706,6 +20770,36 @@
       ]
     },
     {
+      "name": "linear-quality/number-pop-in",
+      "type": "registry:ui",
+      "title": "Linear Quality — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "linear-quality/page-slide",
+      "type": "registry:ui",
+      "title": "Linear Quality — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear-quality/pagination",
       "type": "registry:ui",
       "title": "Linear Quality — Pagination",
@@ -18718,6 +20812,21 @@
       ],
       "registryDependencies": [
         "linear-quality/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "linear-quality/panel-reveal",
+      "type": "registry:ui",
+      "title": "Linear Quality — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -19115,6 +21224,21 @@
       ]
     },
     {
+      "name": "linear-quality/text-swap",
+      "type": "registry:ui",
+      "title": "Linear Quality — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "linear-quality/textarea",
       "type": "registry:ui",
       "title": "Linear Quality — Textarea",
@@ -19238,6 +21362,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "linear-quality/transitions",
+      "type": "registry:ui",
+      "title": "Linear Quality — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "linear-quality/notification-badge",
+        "linear-quality/menu-dropdown",
+        "linear-quality/panel-reveal",
+        "linear-quality/card-resize",
+        "linear-quality/icon-swap",
+        "linear-quality/text-swap",
+        "linear-quality/modal-transition",
+        "linear-quality/page-slide",
+        "linear-quality/number-pop-in"
       ]
     },
     {
@@ -19467,6 +21609,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "lumen-dark/card-resize",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -19874,6 +22031,21 @@
       ]
     },
     {
+      "name": "lumen-dark/icon-swap",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "lumen-dark/inline-edit",
       "type": "registry:ui",
       "title": "Lumen Dark — Inline Edit",
@@ -19994,6 +22166,21 @@
       ]
     },
     {
+      "name": "lumen-dark/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "lumen-dark/menubar",
       "type": "registry:ui",
       "title": "Lumen Dark — Menubar",
@@ -20001,6 +22188,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "lumen-dark/modal-transition",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -20054,6 +22256,21 @@
       ]
     },
     {
+      "name": "lumen-dark/notification-badge",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "lumen-dark/notification",
       "type": "registry:ui",
       "title": "Lumen Dark — Notification",
@@ -20084,6 +22301,36 @@
       ]
     },
     {
+      "name": "lumen-dark/number-pop-in",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "lumen-dark/page-slide",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "lumen-dark/pagination",
       "type": "registry:ui",
       "title": "Lumen Dark — Pagination",
@@ -20091,6 +22338,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "lumen-dark/panel-reveal",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -20471,6 +22733,21 @@
       ]
     },
     {
+      "name": "lumen-dark/text-swap",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "lumen-dark/textarea",
       "type": "registry:ui",
       "title": "Lumen Dark — Textarea",
@@ -20585,6 +22862,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "lumen-dark/transitions",
+      "type": "registry:ui",
+      "title": "Lumen Dark — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "lumen-dark/notification-badge",
+        "lumen-dark/menu-dropdown",
+        "lumen-dark/panel-reveal",
+        "lumen-dark/card-resize",
+        "lumen-dark/icon-swap",
+        "lumen-dark/text-swap",
+        "lumen-dark/modal-transition",
+        "lumen-dark/page-slide",
+        "lumen-dark/number-pop-in"
       ]
     },
     {
@@ -20811,6 +23106,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-chromatic/card-resize",
+      "type": "registry:ui",
+      "title": "Metal Fx — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -21218,6 +23528,21 @@
       ]
     },
     {
+      "name": "metal-fx-chromatic/icon-swap",
+      "type": "registry:ui",
+      "title": "Metal Fx — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-chromatic/inline-edit",
       "type": "registry:ui",
       "title": "Metal Fx — Inline Edit",
@@ -21338,6 +23663,21 @@
       ]
     },
     {
+      "name": "metal-fx-chromatic/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Metal Fx — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-chromatic/menubar",
       "type": "registry:ui",
       "title": "Metal Fx — Menubar",
@@ -21360,6 +23700,21 @@
       "files": [
         {
           "path": "components/ui/metal-ring.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-chromatic/modal-transition",
+      "type": "registry:ui",
+      "title": "Metal Fx — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -21413,6 +23768,21 @@
       ]
     },
     {
+      "name": "metal-fx-chromatic/notification-badge",
+      "type": "registry:ui",
+      "title": "Metal Fx — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-chromatic/notification",
       "type": "registry:ui",
       "title": "Metal Fx — Notification",
@@ -21443,6 +23813,36 @@
       ]
     },
     {
+      "name": "metal-fx-chromatic/number-pop-in",
+      "type": "registry:ui",
+      "title": "Metal Fx — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-chromatic/page-slide",
+      "type": "registry:ui",
+      "title": "Metal Fx — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-chromatic/pagination",
       "type": "registry:ui",
       "title": "Metal Fx — Pagination",
@@ -21450,6 +23850,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-chromatic/panel-reveal",
+      "type": "registry:ui",
+      "title": "Metal Fx — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -21830,6 +24245,21 @@
       ]
     },
     {
+      "name": "metal-fx-chromatic/text-swap",
+      "type": "registry:ui",
+      "title": "Metal Fx — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-chromatic/textarea",
       "type": "registry:ui",
       "title": "Metal Fx — Textarea",
@@ -21944,6 +24374,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-chromatic/transitions",
+      "type": "registry:ui",
+      "title": "Metal Fx — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "metal-fx-chromatic/notification-badge",
+        "metal-fx-chromatic/menu-dropdown",
+        "metal-fx-chromatic/panel-reveal",
+        "metal-fx-chromatic/card-resize",
+        "metal-fx-chromatic/icon-swap",
+        "metal-fx-chromatic/text-swap",
+        "metal-fx-chromatic/modal-transition",
+        "metal-fx-chromatic/page-slide",
+        "metal-fx-chromatic/number-pop-in"
       ]
     },
     {
@@ -22170,6 +24618,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-gold/card-resize",
+      "type": "registry:ui",
+      "title": "Metal Fx — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -22577,6 +25040,21 @@
       ]
     },
     {
+      "name": "metal-fx-gold/icon-swap",
+      "type": "registry:ui",
+      "title": "Metal Fx — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-gold/inline-edit",
       "type": "registry:ui",
       "title": "Metal Fx — Inline Edit",
@@ -22697,6 +25175,21 @@
       ]
     },
     {
+      "name": "metal-fx-gold/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Metal Fx — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-gold/menubar",
       "type": "registry:ui",
       "title": "Metal Fx — Menubar",
@@ -22719,6 +25212,21 @@
       "files": [
         {
           "path": "components/ui/metal-ring.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-gold/modal-transition",
+      "type": "registry:ui",
+      "title": "Metal Fx — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -22772,6 +25280,21 @@
       ]
     },
     {
+      "name": "metal-fx-gold/notification-badge",
+      "type": "registry:ui",
+      "title": "Metal Fx — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-gold/notification",
       "type": "registry:ui",
       "title": "Metal Fx — Notification",
@@ -22802,6 +25325,36 @@
       ]
     },
     {
+      "name": "metal-fx-gold/number-pop-in",
+      "type": "registry:ui",
+      "title": "Metal Fx — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-gold/page-slide",
+      "type": "registry:ui",
+      "title": "Metal Fx — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-gold/pagination",
       "type": "registry:ui",
       "title": "Metal Fx — Pagination",
@@ -22809,6 +25362,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-gold/panel-reveal",
+      "type": "registry:ui",
+      "title": "Metal Fx — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -23189,6 +25757,21 @@
       ]
     },
     {
+      "name": "metal-fx-gold/text-swap",
+      "type": "registry:ui",
+      "title": "Metal Fx — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-gold/textarea",
       "type": "registry:ui",
       "title": "Metal Fx — Textarea",
@@ -23303,6 +25886,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-gold/transitions",
+      "type": "registry:ui",
+      "title": "Metal Fx — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "metal-fx-gold/notification-badge",
+        "metal-fx-gold/menu-dropdown",
+        "metal-fx-gold/panel-reveal",
+        "metal-fx-gold/card-resize",
+        "metal-fx-gold/icon-swap",
+        "metal-fx-gold/text-swap",
+        "metal-fx-gold/modal-transition",
+        "metal-fx-gold/page-slide",
+        "metal-fx-gold/number-pop-in"
       ]
     },
     {
@@ -23529,6 +26130,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-silver/card-resize",
+      "type": "registry:ui",
+      "title": "Metal Fx — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -23936,6 +26552,21 @@
       ]
     },
     {
+      "name": "metal-fx-silver/icon-swap",
+      "type": "registry:ui",
+      "title": "Metal Fx — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-silver/inline-edit",
       "type": "registry:ui",
       "title": "Metal Fx — Inline Edit",
@@ -24056,6 +26687,21 @@
       ]
     },
     {
+      "name": "metal-fx-silver/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Metal Fx — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-silver/menubar",
       "type": "registry:ui",
       "title": "Metal Fx — Menubar",
@@ -24078,6 +26724,21 @@
       "files": [
         {
           "path": "components/ui/metal-ring.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-silver/modal-transition",
+      "type": "registry:ui",
+      "title": "Metal Fx — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -24131,6 +26792,21 @@
       ]
     },
     {
+      "name": "metal-fx-silver/notification-badge",
+      "type": "registry:ui",
+      "title": "Metal Fx — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-silver/notification",
       "type": "registry:ui",
       "title": "Metal Fx — Notification",
@@ -24161,6 +26837,36 @@
       ]
     },
     {
+      "name": "metal-fx-silver/number-pop-in",
+      "type": "registry:ui",
+      "title": "Metal Fx — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-silver/page-slide",
+      "type": "registry:ui",
+      "title": "Metal Fx — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-silver/pagination",
       "type": "registry:ui",
       "title": "Metal Fx — Pagination",
@@ -24168,6 +26874,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-silver/panel-reveal",
+      "type": "registry:ui",
+      "title": "Metal Fx — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -24548,6 +27269,21 @@
       ]
     },
     {
+      "name": "metal-fx-silver/text-swap",
+      "type": "registry:ui",
+      "title": "Metal Fx — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "metal-fx-silver/textarea",
       "type": "registry:ui",
       "title": "Metal Fx — Textarea",
@@ -24662,6 +27398,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "metal-fx-silver/transitions",
+      "type": "registry:ui",
+      "title": "Metal Fx — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "metal-fx-silver/notification-badge",
+        "metal-fx-silver/menu-dropdown",
+        "metal-fx-silver/panel-reveal",
+        "metal-fx-silver/card-resize",
+        "metal-fx-silver/icon-swap",
+        "metal-fx-silver/text-swap",
+        "metal-fx-silver/modal-transition",
+        "metal-fx-silver/page-slide",
+        "metal-fx-silver/number-pop-in"
       ]
     },
     {
@@ -24876,6 +27630,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "midnight-glass/card-resize",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -25295,6 +28064,21 @@
       ]
     },
     {
+      "name": "midnight-glass/icon-swap",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "midnight-glass/inline-edit",
       "type": "registry:ui",
       "title": "Midnight Glass — Inline Edit",
@@ -25415,6 +28199,21 @@
       ]
     },
     {
+      "name": "midnight-glass/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "midnight-glass/menubar",
       "type": "registry:ui",
       "title": "Midnight Glass — Menubar",
@@ -25422,6 +28221,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "midnight-glass/modal-transition",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -25475,6 +28289,21 @@
       ]
     },
     {
+      "name": "midnight-glass/notification-badge",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "midnight-glass/notification",
       "type": "registry:ui",
       "title": "Midnight Glass — Notification",
@@ -25505,6 +28334,36 @@
       ]
     },
     {
+      "name": "midnight-glass/number-pop-in",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "midnight-glass/page-slide",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "midnight-glass/pagination",
       "type": "registry:ui",
       "title": "Midnight Glass — Pagination",
@@ -25512,6 +28371,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "midnight-glass/panel-reveal",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -25900,6 +28774,21 @@
       ]
     },
     {
+      "name": "midnight-glass/text-swap",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "midnight-glass/textarea",
       "type": "registry:ui",
       "title": "Midnight Glass — Textarea",
@@ -26014,6 +28903,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "midnight-glass/transitions",
+      "type": "registry:ui",
+      "title": "Midnight Glass — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "midnight-glass/notification-badge",
+        "midnight-glass/menu-dropdown",
+        "midnight-glass/panel-reveal",
+        "midnight-glass/card-resize",
+        "midnight-glass/icon-swap",
+        "midnight-glass/text-swap",
+        "midnight-glass/modal-transition",
+        "midnight-glass/page-slide",
+        "midnight-glass/number-pop-in"
       ]
     },
     {
@@ -26241,6 +29148,21 @@
       ],
       "registryDependencies": [
         "minimal-light/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "minimal-light/card-resize",
+      "type": "registry:ui",
+      "title": "Minimal Light — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -26655,6 +29577,21 @@
       ]
     },
     {
+      "name": "minimal-light/icon-swap",
+      "type": "registry:ui",
+      "title": "Minimal Light — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "minimal-light/inline-edit",
       "type": "registry:ui",
       "title": "Minimal Light — Inline Edit",
@@ -26772,6 +29709,21 @@
       ]
     },
     {
+      "name": "minimal-light/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Minimal Light — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "minimal-light/menubar",
       "type": "registry:ui",
       "title": "Minimal Light — Menubar",
@@ -26779,6 +29731,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "minimal-light/modal-transition",
+      "type": "registry:ui",
+      "title": "Minimal Light — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -26832,6 +29799,21 @@
       ]
     },
     {
+      "name": "minimal-light/notification-badge",
+      "type": "registry:ui",
+      "title": "Minimal Light — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "minimal-light/notification",
       "type": "registry:ui",
       "title": "Minimal Light — Notification",
@@ -26862,6 +29844,36 @@
       ]
     },
     {
+      "name": "minimal-light/number-pop-in",
+      "type": "registry:ui",
+      "title": "Minimal Light — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "minimal-light/page-slide",
+      "type": "registry:ui",
+      "title": "Minimal Light — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "minimal-light/pagination",
       "type": "registry:ui",
       "title": "Minimal Light — Pagination",
@@ -26869,6 +29881,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "minimal-light/panel-reveal",
+      "type": "registry:ui",
+      "title": "Minimal Light — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -27272,6 +30299,21 @@
       ]
     },
     {
+      "name": "minimal-light/text-swap",
+      "type": "registry:ui",
+      "title": "Minimal Light — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "minimal-light/textarea",
       "type": "registry:ui",
       "title": "Minimal Light — Textarea",
@@ -27395,6 +30437,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "minimal-light/transitions",
+      "type": "registry:ui",
+      "title": "Minimal Light — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "minimal-light/notification-badge",
+        "minimal-light/menu-dropdown",
+        "minimal-light/panel-reveal",
+        "minimal-light/card-resize",
+        "minimal-light/icon-swap",
+        "minimal-light/text-swap",
+        "minimal-light/modal-transition",
+        "minimal-light/page-slide",
+        "minimal-light/number-pop-in"
       ]
     },
     {
@@ -27624,6 +30684,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "monochrome-industrial/card-resize",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -28031,6 +31106,21 @@
       ]
     },
     {
+      "name": "monochrome-industrial/icon-swap",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "monochrome-industrial/inline-edit",
       "type": "registry:ui",
       "title": "Monochrome Industrial — Inline Edit",
@@ -28151,6 +31241,21 @@
       ]
     },
     {
+      "name": "monochrome-industrial/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "monochrome-industrial/menubar",
       "type": "registry:ui",
       "title": "Monochrome Industrial — Menubar",
@@ -28158,6 +31263,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "monochrome-industrial/modal-transition",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -28211,6 +31331,21 @@
       ]
     },
     {
+      "name": "monochrome-industrial/notification-badge",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "monochrome-industrial/notification",
       "type": "registry:ui",
       "title": "Monochrome Industrial — Notification",
@@ -28241,6 +31376,36 @@
       ]
     },
     {
+      "name": "monochrome-industrial/number-pop-in",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "monochrome-industrial/page-slide",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "monochrome-industrial/pagination",
       "type": "registry:ui",
       "title": "Monochrome Industrial — Pagination",
@@ -28248,6 +31413,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "monochrome-industrial/panel-reveal",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -28625,6 +31805,21 @@
       ]
     },
     {
+      "name": "monochrome-industrial/text-swap",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "monochrome-industrial/textarea",
       "type": "registry:ui",
       "title": "Monochrome Industrial — Textarea",
@@ -28739,6 +31934,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "monochrome-industrial/transitions",
+      "type": "registry:ui",
+      "title": "Monochrome Industrial — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "monochrome-industrial/notification-badge",
+        "monochrome-industrial/menu-dropdown",
+        "monochrome-industrial/panel-reveal",
+        "monochrome-industrial/card-resize",
+        "monochrome-industrial/icon-swap",
+        "monochrome-industrial/text-swap",
+        "monochrome-industrial/modal-transition",
+        "monochrome-industrial/page-slide",
+        "monochrome-industrial/number-pop-in"
       ]
     },
     {
@@ -28963,6 +32176,21 @@
       ],
       "registryDependencies": [
         "neutral-monochrome/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "neutral-monochrome/card-resize",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -29377,6 +32605,21 @@
       ]
     },
     {
+      "name": "neutral-monochrome/icon-swap",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "neutral-monochrome/inline-edit",
       "type": "registry:ui",
       "title": "Neutral Monochrome — Inline Edit",
@@ -29494,6 +32737,21 @@
       ]
     },
     {
+      "name": "neutral-monochrome/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "neutral-monochrome/menubar",
       "type": "registry:ui",
       "title": "Neutral Monochrome — Menubar",
@@ -29501,6 +32759,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "neutral-monochrome/modal-transition",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -29554,6 +32827,21 @@
       ]
     },
     {
+      "name": "neutral-monochrome/notification-badge",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "neutral-monochrome/notification",
       "type": "registry:ui",
       "title": "Neutral Monochrome — Notification",
@@ -29584,6 +32872,36 @@
       ]
     },
     {
+      "name": "neutral-monochrome/number-pop-in",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "neutral-monochrome/page-slide",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "neutral-monochrome/pagination",
       "type": "registry:ui",
       "title": "Neutral Monochrome — Pagination",
@@ -29591,6 +32909,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "neutral-monochrome/panel-reveal",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -29994,6 +33327,21 @@
       ]
     },
     {
+      "name": "neutral-monochrome/text-swap",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "neutral-monochrome/textarea",
       "type": "registry:ui",
       "title": "Neutral Monochrome — Textarea",
@@ -30117,6 +33465,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "neutral-monochrome/transitions",
+      "type": "registry:ui",
+      "title": "Neutral Monochrome — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "neutral-monochrome/notification-badge",
+        "neutral-monochrome/menu-dropdown",
+        "neutral-monochrome/panel-reveal",
+        "neutral-monochrome/card-resize",
+        "neutral-monochrome/icon-swap",
+        "neutral-monochrome/text-swap",
+        "neutral-monochrome/modal-transition",
+        "neutral-monochrome/page-slide",
+        "neutral-monochrome/number-pop-in"
       ]
     },
     {
@@ -30345,6 +33711,21 @@
       ],
       "registryDependencies": [
         "notion/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "notion/card-resize",
+      "type": "registry:ui",
+      "title": "Notion — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -30764,6 +34145,21 @@
       ]
     },
     {
+      "name": "notion/icon-swap",
+      "type": "registry:ui",
+      "title": "Notion — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "notion/inline-edit",
       "type": "registry:ui",
       "title": "Notion — Inline Edit",
@@ -30881,6 +34277,21 @@
       ]
     },
     {
+      "name": "notion/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Notion — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "notion/menubar",
       "type": "registry:ui",
       "title": "Notion — Menubar",
@@ -30888,6 +34299,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "notion/modal-transition",
+      "type": "registry:ui",
+      "title": "Notion — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -30941,6 +34367,21 @@
       ]
     },
     {
+      "name": "notion/notification-badge",
+      "type": "registry:ui",
+      "title": "Notion — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "notion/notification",
       "type": "registry:ui",
       "title": "Notion — Notification",
@@ -30971,6 +34412,36 @@
       ]
     },
     {
+      "name": "notion/number-pop-in",
+      "type": "registry:ui",
+      "title": "Notion — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "notion/page-slide",
+      "type": "registry:ui",
+      "title": "Notion — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "notion/pagination",
       "type": "registry:ui",
       "title": "Notion — Pagination",
@@ -30983,6 +34454,21 @@
       ],
       "registryDependencies": [
         "notion/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "notion/panel-reveal",
+      "type": "registry:ui",
+      "title": "Notion — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -31380,6 +34866,21 @@
       ]
     },
     {
+      "name": "notion/text-swap",
+      "type": "registry:ui",
+      "title": "Notion — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "notion/textarea",
       "type": "registry:ui",
       "title": "Notion — Textarea",
@@ -31503,6 +35004,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "notion/transitions",
+      "type": "registry:ui",
+      "title": "Notion — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "notion/notification-badge",
+        "notion/menu-dropdown",
+        "notion/panel-reveal",
+        "notion/card-resize",
+        "notion/icon-swap",
+        "notion/text-swap",
+        "notion/modal-transition",
+        "notion/page-slide",
+        "notion/number-pop-in"
       ]
     },
     {
@@ -31731,6 +35250,21 @@
       ],
       "registryDependencies": [
         "pillow-light/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "pillow-light/card-resize",
+      "type": "registry:ui",
+      "title": "Pillow Light — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -32150,6 +35684,21 @@
       ]
     },
     {
+      "name": "pillow-light/icon-swap",
+      "type": "registry:ui",
+      "title": "Pillow Light — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "pillow-light/inline-edit",
       "type": "registry:ui",
       "title": "Pillow Light — Inline Edit",
@@ -32267,6 +35816,21 @@
       ]
     },
     {
+      "name": "pillow-light/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Pillow Light — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "pillow-light/menubar",
       "type": "registry:ui",
       "title": "Pillow Light — Menubar",
@@ -32274,6 +35838,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "pillow-light/modal-transition",
+      "type": "registry:ui",
+      "title": "Pillow Light — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -32327,6 +35906,21 @@
       ]
     },
     {
+      "name": "pillow-light/notification-badge",
+      "type": "registry:ui",
+      "title": "Pillow Light — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "pillow-light/notification",
       "type": "registry:ui",
       "title": "Pillow Light — Notification",
@@ -32357,6 +35951,36 @@
       ]
     },
     {
+      "name": "pillow-light/number-pop-in",
+      "type": "registry:ui",
+      "title": "Pillow Light — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "pillow-light/page-slide",
+      "type": "registry:ui",
+      "title": "Pillow Light — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "pillow-light/pagination",
       "type": "registry:ui",
       "title": "Pillow Light — Pagination",
@@ -32369,6 +35993,21 @@
       ],
       "registryDependencies": [
         "pillow-light/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "pillow-light/panel-reveal",
+      "type": "registry:ui",
+      "title": "Pillow Light — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -32766,6 +36405,21 @@
       ]
     },
     {
+      "name": "pillow-light/text-swap",
+      "type": "registry:ui",
+      "title": "Pillow Light — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "pillow-light/textarea",
       "type": "registry:ui",
       "title": "Pillow Light — Textarea",
@@ -32889,6 +36543,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "pillow-light/transitions",
+      "type": "registry:ui",
+      "title": "Pillow Light — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "pillow-light/notification-badge",
+        "pillow-light/menu-dropdown",
+        "pillow-light/panel-reveal",
+        "pillow-light/card-resize",
+        "pillow-light/icon-swap",
+        "pillow-light/text-swap",
+        "pillow-light/modal-transition",
+        "pillow-light/page-slide",
+        "pillow-light/number-pop-in"
       ]
     },
     {
@@ -33117,6 +36789,21 @@
       ],
       "registryDependencies": [
         "precision-light/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "precision-light/card-resize",
+      "type": "registry:ui",
+      "title": "Precision Light — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -33536,6 +37223,21 @@
       ]
     },
     {
+      "name": "precision-light/icon-swap",
+      "type": "registry:ui",
+      "title": "Precision Light — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "precision-light/inline-edit",
       "type": "registry:ui",
       "title": "Precision Light — Inline Edit",
@@ -33653,6 +37355,21 @@
       ]
     },
     {
+      "name": "precision-light/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Precision Light — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "precision-light/menubar",
       "type": "registry:ui",
       "title": "Precision Light — Menubar",
@@ -33660,6 +37377,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "precision-light/modal-transition",
+      "type": "registry:ui",
+      "title": "Precision Light — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -33713,6 +37445,21 @@
       ]
     },
     {
+      "name": "precision-light/notification-badge",
+      "type": "registry:ui",
+      "title": "Precision Light — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "precision-light/notification",
       "type": "registry:ui",
       "title": "Precision Light — Notification",
@@ -33743,6 +37490,36 @@
       ]
     },
     {
+      "name": "precision-light/number-pop-in",
+      "type": "registry:ui",
+      "title": "Precision Light — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "precision-light/page-slide",
+      "type": "registry:ui",
+      "title": "Precision Light — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "precision-light/pagination",
       "type": "registry:ui",
       "title": "Precision Light — Pagination",
@@ -33755,6 +37532,21 @@
       ],
       "registryDependencies": [
         "precision-light/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "precision-light/panel-reveal",
+      "type": "registry:ui",
+      "title": "Precision Light — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -34152,6 +37944,21 @@
       ]
     },
     {
+      "name": "precision-light/text-swap",
+      "type": "registry:ui",
+      "title": "Precision Light — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "precision-light/textarea",
       "type": "registry:ui",
       "title": "Precision Light — Textarea",
@@ -34275,6 +38082,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "precision-light/transitions",
+      "type": "registry:ui",
+      "title": "Precision Light — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "precision-light/notification-badge",
+        "precision-light/menu-dropdown",
+        "precision-light/panel-reveal",
+        "precision-light/card-resize",
+        "precision-light/icon-swap",
+        "precision-light/text-swap",
+        "precision-light/modal-transition",
+        "precision-light/page-slide",
+        "precision-light/number-pop-in"
       ]
     },
     {
@@ -34503,6 +38328,21 @@
       ],
       "registryDependencies": [
         "stripe/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "stripe/card-resize",
+      "type": "registry:ui",
+      "title": "Stripe — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -34922,6 +38762,21 @@
       ]
     },
     {
+      "name": "stripe/icon-swap",
+      "type": "registry:ui",
+      "title": "Stripe — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "stripe/inline-edit",
       "type": "registry:ui",
       "title": "Stripe — Inline Edit",
@@ -35039,6 +38894,21 @@
       ]
     },
     {
+      "name": "stripe/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Stripe — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "stripe/menubar",
       "type": "registry:ui",
       "title": "Stripe — Menubar",
@@ -35046,6 +38916,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "stripe/modal-transition",
+      "type": "registry:ui",
+      "title": "Stripe — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -35099,6 +38984,21 @@
       ]
     },
     {
+      "name": "stripe/notification-badge",
+      "type": "registry:ui",
+      "title": "Stripe — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "stripe/notification",
       "type": "registry:ui",
       "title": "Stripe — Notification",
@@ -35129,6 +39029,36 @@
       ]
     },
     {
+      "name": "stripe/number-pop-in",
+      "type": "registry:ui",
+      "title": "Stripe — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "stripe/page-slide",
+      "type": "registry:ui",
+      "title": "Stripe — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "stripe/pagination",
       "type": "registry:ui",
       "title": "Stripe — Pagination",
@@ -35141,6 +39071,21 @@
       ],
       "registryDependencies": [
         "stripe/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "stripe/panel-reveal",
+      "type": "registry:ui",
+      "title": "Stripe — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -35538,6 +39483,21 @@
       ]
     },
     {
+      "name": "stripe/text-swap",
+      "type": "registry:ui",
+      "title": "Stripe — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "stripe/textarea",
       "type": "registry:ui",
       "title": "Stripe — Textarea",
@@ -35661,6 +39621,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "stripe/transitions",
+      "type": "registry:ui",
+      "title": "Stripe — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "stripe/notification-badge",
+        "stripe/menu-dropdown",
+        "stripe/panel-reveal",
+        "stripe/card-resize",
+        "stripe/icon-swap",
+        "stripe/text-swap",
+        "stripe/modal-transition",
+        "stripe/page-slide",
+        "stripe/number-pop-in"
       ]
     },
     {
@@ -35889,6 +39867,21 @@
       ],
       "registryDependencies": [
         "supabase/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "supabase/card-resize",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -36308,6 +40301,21 @@
       ]
     },
     {
+      "name": "supabase/icon-swap",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "supabase/inline-edit",
       "type": "registry:ui",
       "title": "Supabase Design System — Inline Edit",
@@ -36425,6 +40433,21 @@
       ]
     },
     {
+      "name": "supabase/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "supabase/menubar",
       "type": "registry:ui",
       "title": "Supabase Design System — Menubar",
@@ -36432,6 +40455,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "supabase/modal-transition",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -36485,6 +40523,21 @@
       ]
     },
     {
+      "name": "supabase/notification-badge",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "supabase/notification",
       "type": "registry:ui",
       "title": "Supabase Design System — Notification",
@@ -36515,6 +40568,36 @@
       ]
     },
     {
+      "name": "supabase/number-pop-in",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "supabase/page-slide",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "supabase/pagination",
       "type": "registry:ui",
       "title": "Supabase Design System — Pagination",
@@ -36527,6 +40610,21 @@
       ],
       "registryDependencies": [
         "supabase/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "supabase/panel-reveal",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -36924,6 +41022,21 @@
       ]
     },
     {
+      "name": "supabase/text-swap",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "supabase/textarea",
       "type": "registry:ui",
       "title": "Supabase Design System — Textarea",
@@ -37047,6 +41160,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "supabase/transitions",
+      "type": "registry:ui",
+      "title": "Supabase Design System — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "supabase/notification-badge",
+        "supabase/menu-dropdown",
+        "supabase/panel-reveal",
+        "supabase/card-resize",
+        "supabase/icon-swap",
+        "supabase/text-swap",
+        "supabase/modal-transition",
+        "supabase/page-slide",
+        "supabase/number-pop-in"
       ]
     },
     {
@@ -37288,6 +41419,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tactile-minimal/card-resize",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -37695,6 +41841,21 @@
       ]
     },
     {
+      "name": "tactile-minimal/icon-swap",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tactile-minimal/inline-edit",
       "type": "registry:ui",
       "title": "Tactile Minimal — Inline Edit",
@@ -37815,6 +41976,21 @@
       ]
     },
     {
+      "name": "tactile-minimal/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tactile-minimal/menubar",
       "type": "registry:ui",
       "title": "Tactile Minimal — Menubar",
@@ -37822,6 +41998,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tactile-minimal/modal-transition",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -37875,6 +42066,21 @@
       ]
     },
     {
+      "name": "tactile-minimal/notification-badge",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tactile-minimal/notification",
       "type": "registry:ui",
       "title": "Tactile Minimal — Notification",
@@ -37905,6 +42111,36 @@
       ]
     },
     {
+      "name": "tactile-minimal/number-pop-in",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tactile-minimal/page-slide",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tactile-minimal/pagination",
       "type": "registry:ui",
       "title": "Tactile Minimal — Pagination",
@@ -37912,6 +42148,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tactile-minimal/panel-reveal",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -38319,6 +42570,21 @@
       ]
     },
     {
+      "name": "tactile-minimal/text-swap",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tactile-minimal/textarea",
       "type": "registry:ui",
       "title": "Tactile Minimal — Textarea",
@@ -38433,6 +42699,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "tactile-minimal/transitions",
+      "type": "registry:ui",
+      "title": "Tactile Minimal — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "tactile-minimal/notification-badge",
+        "tactile-minimal/menu-dropdown",
+        "tactile-minimal/panel-reveal",
+        "tactile-minimal/card-resize",
+        "tactile-minimal/icon-swap",
+        "tactile-minimal/text-swap",
+        "tactile-minimal/modal-transition",
+        "tactile-minimal/page-slide",
+        "tactile-minimal/number-pop-in"
       ]
     },
     {
@@ -38662,6 +42946,21 @@
       "files": [
         {
           "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tv-style/card-resize",
+      "type": "registry:ui",
+      "title": "Tv Style — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
           "type": "registry:ui"
         }
       ],
@@ -39084,6 +43383,21 @@
       ]
     },
     {
+      "name": "tv-style/icon-swap",
+      "type": "registry:ui",
+      "title": "Tv Style — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tv-style/inline-edit",
       "type": "registry:ui",
       "title": "Tv Style — Inline Edit",
@@ -39204,6 +43518,21 @@
       ]
     },
     {
+      "name": "tv-style/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Tv Style — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tv-style/menubar",
       "type": "registry:ui",
       "title": "Tv Style — Menubar",
@@ -39211,6 +43540,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tv-style/modal-transition",
+      "type": "registry:ui",
+      "title": "Tv Style — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -39264,6 +43608,21 @@
       ]
     },
     {
+      "name": "tv-style/notification-badge",
+      "type": "registry:ui",
+      "title": "Tv Style — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tv-style/notification",
       "type": "registry:ui",
       "title": "Tv Style — Notification",
@@ -39294,6 +43653,36 @@
       ]
     },
     {
+      "name": "tv-style/number-pop-in",
+      "type": "registry:ui",
+      "title": "Tv Style — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tv-style/page-slide",
+      "type": "registry:ui",
+      "title": "Tv Style — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tv-style/pagination",
       "type": "registry:ui",
       "title": "Tv Style — Pagination",
@@ -39301,6 +43690,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "tv-style/panel-reveal",
+      "type": "registry:ui",
+      "title": "Tv Style — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -39681,6 +44085,21 @@
       ]
     },
     {
+      "name": "tv-style/text-swap",
+      "type": "registry:ui",
+      "title": "Tv Style — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "tv-style/textarea",
       "type": "registry:ui",
       "title": "Tv Style — Textarea",
@@ -39795,6 +44214,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "tv-style/transitions",
+      "type": "registry:ui",
+      "title": "Tv Style — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "tv-style/notification-badge",
+        "tv-style/menu-dropdown",
+        "tv-style/panel-reveal",
+        "tv-style/card-resize",
+        "tv-style/icon-swap",
+        "tv-style/text-swap",
+        "tv-style/modal-transition",
+        "tv-style/page-slide",
+        "tv-style/number-pop-in"
       ]
     },
     {
@@ -40020,6 +44457,21 @@
       ],
       "registryDependencies": [
         "vercel/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "vercel/card-resize",
+      "type": "registry:ui",
+      "title": "Vercel — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -40439,6 +44891,21 @@
       ]
     },
     {
+      "name": "vercel/icon-swap",
+      "type": "registry:ui",
+      "title": "Vercel — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vercel/inline-edit",
       "type": "registry:ui",
       "title": "Vercel — Inline Edit",
@@ -40556,6 +45023,21 @@
       ]
     },
     {
+      "name": "vercel/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Vercel — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vercel/menubar",
       "type": "registry:ui",
       "title": "Vercel — Menubar",
@@ -40563,6 +45045,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "vercel/modal-transition",
+      "type": "registry:ui",
+      "title": "Vercel — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -40616,6 +45113,21 @@
       ]
     },
     {
+      "name": "vercel/notification-badge",
+      "type": "registry:ui",
+      "title": "Vercel — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vercel/notification",
       "type": "registry:ui",
       "title": "Vercel — Notification",
@@ -40646,6 +45158,36 @@
       ]
     },
     {
+      "name": "vercel/number-pop-in",
+      "type": "registry:ui",
+      "title": "Vercel — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "vercel/page-slide",
+      "type": "registry:ui",
+      "title": "Vercel — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vercel/pagination",
       "type": "registry:ui",
       "title": "Vercel — Pagination",
@@ -40658,6 +45200,21 @@
       ],
       "registryDependencies": [
         "vercel/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "vercel/panel-reveal",
+      "type": "registry:ui",
+      "title": "Vercel — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -41055,6 +45612,21 @@
       ]
     },
     {
+      "name": "vercel/text-swap",
+      "type": "registry:ui",
+      "title": "Vercel — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vercel/textarea",
       "type": "registry:ui",
       "title": "Vercel — Textarea",
@@ -41178,6 +45750,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "vercel/transitions",
+      "type": "registry:ui",
+      "title": "Vercel — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "vercel/notification-badge",
+        "vercel/menu-dropdown",
+        "vercel/panel-reveal",
+        "vercel/card-resize",
+        "vercel/icon-swap",
+        "vercel/text-swap",
+        "vercel/modal-transition",
+        "vercel/page-slide",
+        "vercel/number-pop-in"
       ]
     },
     {
@@ -41405,6 +45995,21 @@
       ],
       "registryDependencies": [
         "vibrant-dark/button",
+        "utils"
+      ]
+    },
+    {
+      "name": "vibrant-dark/card-resize",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Card Resize",
+      "description": "Card Resize component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/card-resize.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
         "utils"
       ]
     },
@@ -41819,6 +46424,21 @@
       ]
     },
     {
+      "name": "vibrant-dark/icon-swap",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Icon Swap",
+      "description": "Icon Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/icon-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vibrant-dark/inline-edit",
       "type": "registry:ui",
       "title": "Vibrant Dark — Inline Edit",
@@ -41936,6 +46556,21 @@
       ]
     },
     {
+      "name": "vibrant-dark/menu-dropdown",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Menu Dropdown",
+      "description": "Menu Dropdown component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/menu-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vibrant-dark/menubar",
       "type": "registry:ui",
       "title": "Vibrant Dark — Menubar",
@@ -41943,6 +46578,21 @@
       "files": [
         {
           "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "vibrant-dark/modal-transition",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Modal Transition",
+      "description": "Modal Transition component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
           "type": "registry:ui"
         }
       ],
@@ -41996,6 +46646,21 @@
       ]
     },
     {
+      "name": "vibrant-dark/notification-badge",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Notification Badge",
+      "description": "Notification Badge component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vibrant-dark/notification",
       "type": "registry:ui",
       "title": "Vibrant Dark — Notification",
@@ -42026,6 +46691,36 @@
       ]
     },
     {
+      "name": "vibrant-dark/number-pop-in",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Number Pop In",
+      "description": "Number Pop In component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/number-pop-in.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "vibrant-dark/page-slide",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Page Slide",
+      "description": "Page Slide component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/page-slide.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vibrant-dark/pagination",
       "type": "registry:ui",
       "title": "Vibrant Dark — Pagination",
@@ -42033,6 +46728,21 @@
       "files": [
         {
           "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "vibrant-dark/panel-reveal",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Panel Reveal",
+      "description": "Panel Reveal component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -42433,6 +47143,21 @@
       ]
     },
     {
+      "name": "vibrant-dark/text-swap",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Text Swap",
+      "description": "Text Swap component — shared across design systems, themed by your CSS variables.",
+      "files": [
+        {
+          "path": "components/ui/text-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
       "name": "vibrant-dark/textarea",
       "type": "registry:ui",
       "title": "Vibrant Dark — Textarea",
@@ -42556,6 +47281,24 @@
       ],
       "registryDependencies": [
         "utils"
+      ]
+    },
+    {
+      "name": "vibrant-dark/transitions",
+      "type": "registry:ui",
+      "title": "Vibrant Dark — Transitions",
+      "description": "Transitions component — shared across design systems, themed by your CSS variables.",
+      "files": [],
+      "registryDependencies": [
+        "vibrant-dark/notification-badge",
+        "vibrant-dark/menu-dropdown",
+        "vibrant-dark/panel-reveal",
+        "vibrant-dark/card-resize",
+        "vibrant-dark/icon-swap",
+        "vibrant-dark/text-swap",
+        "vibrant-dark/modal-transition",
+        "vibrant-dark/page-slide",
+        "vibrant-dark/number-pop-in"
       ]
     },
     {

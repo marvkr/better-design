@@ -1,0 +1,25 @@
+{
+  "name": "transitions",
+  "type": "registry:ui",
+  "files": [],
+  "registryDependencies": [
+    "https://www.better-design.com/registry/metal-fx-silver/notification-badge.json",
+    "https://www.better-design.com/registry/metal-fx-silver/menu-dropdown.json",
+    "https://www.better-design.com/registry/metal-fx-silver/panel-reveal.json",
+    "https://www.better-design.com/registry/metal-fx-silver/card-resize.json",
+    "https://www.better-design.com/registry/metal-fx-silver/icon-swap.json",
+    "https://www.better-design.com/registry/metal-fx-silver/text-swap.json",
+    "https://www.better-design.com/registry/metal-fx-silver/modal-transition.json",
+    "https://www.better-design.com/registry/metal-fx-silver/page-slide.json",
+    "https://www.better-design.com/registry/metal-fx-silver/number-pop-in.json"
+  ],
+  "meta": {
+    "shared": true,
+    "source": {
+      "name": "transitions.dev",
+      "url": "https://github.com/Jakubantalik/transitions.dev",
+      "license": "MIT",
+      "author": "Jakub Antalík"
+    }
+  }
+}

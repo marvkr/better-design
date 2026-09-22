@@ -122,6 +122,18 @@ Example — install Linear's button:
 npx shadcn@latest add https://www.better-design.com/registry/linear/button.json
 ```
 
+Or grab all 9 [transitions.dev](https://github.com/Jakubantalik/transitions.dev) ports at once (`notification-badge`, `menu-dropdown`, `panel-reveal`, `card-resize`, `icon-swap`, `text-swap`, `modal-transition`, `page-slide`, `number-pop-in`):
+
+```bash
+npx shadcn@latest add https://www.better-design.com/registry/linear/transitions.json
+```
+
+The transitions come from one source, `scripts/transitions-src/`. After you edit it, run `node scripts/generate-transitions.mjs` to rewrite every design system, then run the tests:
+
+```bash
+cd tests && bun install && bun run test
+```
+
 ## Usage examples
 
 Once connected to your MCP client, ask your agent for design help directly:

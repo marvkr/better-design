@@ -1,0 +1,25 @@
+{
+  "name": "transitions",
+  "type": "registry:ui",
+  "files": [],
+  "registryDependencies": [
+    "https://www.better-design.com/registry/stripe/notification-badge.json",
+    "https://www.better-design.com/registry/stripe/menu-dropdown.json",
+    "https://www.better-design.com/registry/stripe/panel-reveal.json",
+    "https://www.better-design.com/registry/stripe/card-resize.json",
+    "https://www.better-design.com/registry/stripe/icon-swap.json",
+    "https://www.better-design.com/registry/stripe/text-swap.json",
+    "https://www.better-design.com/registry/stripe/modal-transition.json",
+    "https://www.better-design.com/registry/stripe/page-slide.json",
+    "https://www.better-design.com/registry/stripe/number-pop-in.json"
+  ],
+  "meta": {
+    "shared": true,
+    "source": {
+      "name": "transitions.dev",
+      "url": "https://github.com/Jakubantalik/transitions.dev",
+      "license": "MIT",
+      "author": "Jakub Antalík"
+    }
+  }
+}

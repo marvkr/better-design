@@ -1,0 +1,23 @@
+{
+  "name": "panel-reveal",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/panel-reveal.tsx",
+      "content": "// GENERATED FILE - do not edit.\n// Source: scripts/transitions-src/panel-reveal.tsx\n// Re-generate: node scripts/generate-transitions.mjs\n\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Panel reveal transition — ported from transitions.dev\n// https://github.com/Jakubantalik/transitions.dev (MIT)\n// Y-axis slide + fade + cross-blur on the same duration.\n\nconst PANEL_REVEAL_CSS = `\n.t-panel-scope {\n  --panel-open-dur: 400ms;\n  --panel-close-dur: 350ms;\n  --panel-translate-y: 80px;\n  --panel-blur: 2px;\n  --panel-ease: cubic-bezier(0.22, 1, 0.36, 1);\n}\n.t-panel-slide {\n  transform: translateY(var(--panel-translate-y));\n  opacity: 0;\n  filter: blur(var(--panel-blur));\n  pointer-events: none;\n  /* hidden keeps the collapsed panel's children out of the tab order */\n  visibility: hidden;\n  transition:\n    transform var(--panel-close-dur) var(--panel-ease),\n    opacity   var(--panel-close-dur) var(--panel-ease),\n    filter    var(--panel-close-dur) var(--panel-ease),\n    visibility 0s linear var(--panel-close-dur);\n  will-change: transform, opacity, filter;\n}\n.t-panel-slide[data-open=\"true\"] {\n  transform: translateY(0);\n  opacity: 1;\n  filter: blur(0);\n  pointer-events: auto;\n  visibility: visible;\n  transition-delay: 0s;\n  transition:\n    transform var(--panel-open-dur) var(--panel-ease),\n    opacity   var(--panel-open-dur) var(--panel-ease),\n    filter    var(--panel-open-dur) var(--panel-ease);\n}\n@media (prefers-reduced-motion: reduce) {\n  .t-panel-slide { transition: none !important; }\n}\n`\n\n// useInsertionEffect runs before the browser paints, so the resting state\n// these rules define lands on the first frame instead of after it. The DOM\n// query replaces a module-level flag, which stayed true if the tag was ever\n// removed and never fired for a second document.\nfunction useStyles() {\n  React.useInsertionEffect(() => {\n    if (typeof document === \"undefined\") return\n    if (document.querySelector('style[data-t-panel-reveal]')) return\n    const el = document.createElement(\"style\")\n    el.setAttribute(\"data-t-panel-reveal\", \"\")\n    el.textContent = PANEL_REVEAL_CSS\n    document.head.appendChild(el)\n  }, [])\n}\n\nexport function PanelReveal({\n  children,\n  defaultOpen = false,\n  className,\n}: {\n  children?: React.ReactNode\n  defaultOpen?: boolean\n  className?: string\n}) {\n  useStyles()\n  const [open, setOpen] = React.useState(defaultOpen)\n  return (\n    <div className={cn(\"t-panel-scope flex flex-col items-stretch gap-3\", className)}>\n      <div className=\"self-center\">\n        <button\n          type=\"button\"\n          onClick={() => setOpen((v) => !v)}\n          className=\"rounded-md border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted\"\n        >\n          {open ? \"Hide\" : \"Show\"} panel\n        </button>\n      </div>\n      <div style={{ overflow: \"hidden\" }}>\n        <div\n          className=\"t-panel-slide rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm\"\n          data-open={open}\n        >\n          {children ?? (\n            <div className=\"flex flex-col gap-3\">\n              <div className=\"h-2 w-3/5 rounded bg-muted\" />\n              <div className=\"h-2 w-2/5 rounded bg-muted\" />\n              <div className=\"grid grid-cols-3 gap-2 pt-1\">\n                <div className=\"h-12 rounded-md bg-muted\" />\n                <div className=\"h-12 rounded-md bg-muted\" />\n                <div className=\"h-12 rounded-md bg-muted\" />\n              </div>\n            </div>\n          )}\n        </div>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "meta": {
+    "shared": true,
+    "source": {
+      "name": "transitions.dev",
+      "url": "https://github.com/Jakubantalik/transitions.dev",
+      "license": "MIT",
+      "author": "Jakub Antalík"
+    }
+  }
+}
