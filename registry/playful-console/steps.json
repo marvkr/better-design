@@ -1,0 +1,32 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for Steps: the zero-based index of the step the user is on. */\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  currentStep?: number;\n}\n\ntype StepState = \"complete\" | \"current\" | \"upcoming\";\n\nconst badgeTone = {\n  complete:\n    \"border-[0.09375rem] border-(--primary-rim) bg-primary text-primary-foreground shadow-(--shadow-control)\",\n  current:\n    \"border-[0.09375rem] border-(--ink) bg-card text-foreground shadow-(--shadow-control-off)\",\n  upcoming: \"border-[0.09375rem] border-(--line-strong) bg-card text-muted-foreground\",\n} as const satisfies Record<StepState, string>;\n\n/**\n * Playful console Steps: a row of numbered square badges joined by lines.\n *\n * A finished step becomes a small orange key with a bold check. The current\n * step is a white key with an ink edge, and steps still to come are white\n * badges with an olive edge in the muted ink. The line into a reached step\n * turns orange and thickens. Each child is a step, shown as the label\n * beside its badge.\n */\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, currentStep = 0, children, ...props }, ref) => {\n    const steps = React.Children.toArray(children);\n\n    return (\n      <div\n        ref={ref}\n        role=\"list\"\n        data-slot=\"steps\"\n        className={cn(\"flex items-center gap-3\", className)}\n        {...props}\n      >\n        {steps.map((child, index) => {\n          const state: StepState =\n            index < currentStep\n              ? \"complete\"\n              : index === currentStep\n                ? \"current\"\n                : \"upcoming\";\n\n          return (\n            <React.Fragment key={index}>\n              {index > 0 && (\n                <div\n                  aria-hidden=\"true\"\n                  data-slot=\"steps-connector\"\n                  className={cn(\n                    \"min-w-6 flex-1 rounded-full transition-colors duration-fast ease-out\",\n                    index <= currentStep ? \"h-0.5 bg-primary\" : \"h-px bg-(--line-strong)\",\n                  )}\n                />\n              )}\n              <div\n                role=\"listitem\"\n                data-slot=\"steps-item\"\n                data-state={state}\n                aria-current={state === \"current\" ? \"step\" : undefined}\n                className=\"group/step flex shrink-0 items-center gap-2\"\n              >\n                <span\n                  className={cn(\n                    \"flex size-7 shrink-0 items-center justify-center rounded-md font-mono text-sm font-semibold tabular-nums\",\n                    \"transition-[background-color,border-color,color,box-shadow] duration-fast ease-out\",\n                    badgeTone[state],\n                  )}\n                >\n                  {state === \"complete\" ? (\n                    <>\n                      <Icon icon=\"ph:check-bold\" className=\"size-3.5\" aria-hidden=\"true\" />\n                      <span className=\"sr-only\">Step {index + 1}, done</span>\n                    </>\n                  ) : (\n                    index + 1\n                  )}\n                </span>\n                {child}\n              </div>\n            </React.Fragment>\n          );\n        })}\n      </div>\n    );\n  },\n);\nSteps.displayName = \"Steps\";\n\n/**\n * A single step's label: bold ink once reached, muted while still ahead.\n */\nconst Step = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"step\"\n    className={cn(\n      \"text-sm font-bold text-foreground empty:hidden group-data-[state=upcoming]/step:font-medium group-data-[state=upcoming]/step:text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nStep.displayName = \"Step\";\n\nexport { Steps, Step };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "ink": "oklch(0.26 0.015 118.8)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)",
+      "shadow-control-off": "0 0.125rem 0 0 var(--line-strong)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "ink": "oklch(0.95 0.008 114.2)"
+    }
+  }
+}

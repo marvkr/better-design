@@ -1,0 +1,27 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CodeBlock } from \"./code-block\";\n\n/*\n * Interior CodeTabs — the code well with a segmented strip along its top\n * edge. The active tab is the pressed ink thumb (the segmented-control\n * material), a 6px-radius chip with the primary Button's fill and thumb\n * shadow; focus on it is the outside line in the inverted accent.\n */\n\nexport interface CodeTabsItem {\n  label: string;\n  code: string;\n  language?: string;\n  filename?: string;\n}\n\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[];\n  defaultTab?: string;\n  className?: string;\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label);\n  const current = tabs.find((tab) => tab.label === active) ?? tabs[0];\n\n  if (!current) return null;\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-[0.6875rem] bg-secondary text-foreground\",\n        \"shadow-[var(--shadow-well)]\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-0.5 border-b border-border px-2 py-2\">\n        {tabs.map((tab) => (\n          <button\n            key={tab.label}\n            type=\"button\"\n            onClick={() => setActive(tab.label)}\n            className={cn(\n              \"rounded-[0.375rem] px-3 py-1 text-[0.75rem] font-medium\",\n              \"transition-[background-color,color,box-shadow] duration-fast\",\n              \"focus-visible:outline-none\",\n              active === tab.label\n                ? [\n                    \"bg-primary text-primary-foreground shadow-[var(--shadow-thumb)]\",\n                    \"focus-visible:shadow-[var(--shadow-thumb),0_0_0_0.0938rem_var(--ring-inverted)]\",\n                  ].join(\" \")\n                : [\n                    \"text-muted-foreground hover:text-foreground\",\n                    \"focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n                  ].join(\" \"),\n            )}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      <CodeBlock\n        code={current.code}\n        language={current.language}\n        filename={current.filename}\n        className=\"rounded-none shadow-none [&>div]:border-0 [&>div]:pt-1\"\n      />\n    </div>\n  );\n};\nCodeTabs.displayName = \"CodeTabs\";\n\nexport { CodeTabs };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/code-block.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    },
+    "dark": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    }
+  }
+}

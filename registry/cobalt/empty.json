@@ -1,0 +1,24 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Empty — larger empty surface: dashed recessed well, raised icon plinth. */\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ icon, title, description, action, className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center gap-5 rounded-lg p-12 text-center\",\n          \"border border-dashed border-border bg-input [box-shadow:var(--shadow-inset)]\",\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div\n            className={cn(\n              \"flex h-14 w-14 items-center justify-center rounded-md\",\n              \"border border-border text-muted-foreground\",\n              \"[background-image:var(--bezel)] [box-shadow:var(--shadow-raised)]\"\n            )}\n          >\n            <span className=\"flex h-6 w-6 items-center justify-center [&>svg]:h-6 [&>svg]:w-6\">\n              {icon}\n            </span>\n          </div>\n        )}\n\n        <div className=\"flex max-w-xs flex-col gap-1.5\">\n          <p className=\"text-sm font-semibold leading-snug text-foreground\">{title}</p>\n          {description && (\n            <p className=\"text-sm leading-relaxed text-muted-foreground\">{description}</p>\n          )}\n        </div>\n\n        {action && <div className=\"flex items-center gap-2\">{action}</div>}\n      </div>\n    )\n  }\n)\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

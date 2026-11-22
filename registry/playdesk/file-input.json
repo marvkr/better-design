@@ -1,0 +1,14 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Upload } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk FileInput — a dashed drop well that lights up in sky blue when a\n * file is dragged over the desk.\n */\n\nexport interface FileInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  label?: string;\n  hint?: string;\n}\n\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  (\n    { className, label = \"Drop a file here\", hint = \"or click to browse\", ...props },\n    ref,\n  ) => {\n    const [dragging, setDragging] = React.useState(false);\n    const [fileName, setFileName] = React.useState<string | null>(null);\n\n    return (\n      <label\n        onDragOver={(event) => {\n          event.preventDefault();\n          setDragging(true);\n        }}\n        onDragLeave={() => setDragging(false)}\n        onDrop={() => setDragging(false)}\n        className={cn(\n          \"flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl px-6 py-8 text-center\",\n          \"border-2 border-dashed border-border bg-card\",\n          \"transition-colors duration-fast\",\n          \"hover:border-foreground/25\",\n          dragging && \"border-ring bg-accent\",\n          className,\n        )}\n      >\n        <Upload className=\"size-5 text-muted-foreground\" />\n        <span className=\"text-sm font-medium text-foreground\">\n          {fileName ?? label}\n        </span>\n        {!fileName ? (\n          <span className=\"text-xs text-muted-foreground\">{hint}</span>\n        ) : null}\n        <input\n          ref={ref}\n          type=\"file\"\n          className=\"sr-only\"\n          onChange={(event) =>\n            setFileName(event.target.files?.[0]?.name ?? null)\n          }\n          {...props}\n        />\n      </label>\n    );\n  },\n);\nFileInput.displayName = \"FileInput\";\n\nexport { FileInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ]
+}

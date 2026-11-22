@@ -1,0 +1,15 @@
+/* Ported from https://www.aicss.dev/components/code-block */
+.cb { border-radius: 0.75rem; background: var(--card); box-shadow: 0 0 0 0.0625rem var(--border); padding: 0.75rem 1rem 1rem; overflow: hidden; }
+.cbHead { display: flex; align-items: center; gap: 0.5rem; margin: -0.75rem -1rem 0; padding: 0.625rem 0.75rem 0.625rem 1rem; background: transparent; border-bottom: 0.03125rem solid var(--border); }
+.cbFile { display: inline-flex; align-items: center; gap: 0.4375rem; }
+.cbIcon { display: block; width: 0.9375rem; height: 0.9375rem; color: var(--muted-foreground); flex: none; }
+.cbLang { font-family: ui-monospace, monospace; font-size: 0.78125rem; line-height: 1; color: var(--foreground); }
+.cbCopy { margin-left: auto; margin-top: -0.4375rem; margin-bottom: -0.4375rem; display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; color: var(--muted-foreground); border: 0; background: none; padding: 0.1875rem 0.1875rem 0.1875rem 0.4375rem; border-radius: 0.4375rem; cursor: pointer; }
+@media (hover: hover) and (pointer: fine) {
+.cbCopy:hover { color: var(--foreground); background: var(--muted); } }
+.cbBody { position: relative; margin: 0 -1rem -1rem; padding: 0.625rem 0; font-family: ui-monospace, monospace; font-size: 0.78125rem; line-height: 1.25rem; }
+.cbBody::before { content: ""; position: absolute; top: 0; bottom: 0; left: 2rem; width: 0.03125rem; background: var(--border); }
+.cbRow { display: grid; grid-template-columns: 2rem 1fr; }
+.cbLn { user-select: none; text-align: right; padding: 0 0.4375rem; color: var(--muted-foreground); font-size: 0.6875rem; }
+.cbCode { white-space: pre; padding: 0 0.75rem 0 0.5rem; color: var(--foreground); overflow-x: auto; scrollbar-width: none; mask-image: linear-gradient(to right, transparent, oklch(0 0 0) 0.5rem, oklch(0 0 0) calc(100% - 0.75rem), transparent); }
+.cbCode::-webkit-scrollbar { display: none; }

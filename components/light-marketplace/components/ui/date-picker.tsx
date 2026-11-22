@@ -39,7 +39,7 @@ const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
         </PopoverTrigger>
         <PopoverContent
           align="start"
-          className="w-auto p-0 rounded-[14px] border border-border bg-card shadow-md"
+          className="w-auto p-0 rounded-[0.875rem] bg-card shadow-md"
         >
           <Calendar
             mode="single"

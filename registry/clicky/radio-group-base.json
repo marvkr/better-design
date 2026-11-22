@@ -1,0 +1,27 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSound } from \"./sound-provider\"\n\n// Clicky Radio Group — circular flat radio with centered dot\n// Plays click sound on selection\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst RadioGroup = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<RadioGroupPrimitive.Props>\n>(({ className, onValueChange, ...props }, ref) => {\n  const { playClick } = useSound()\n  return (\n    <RadioGroupPrimitive\n      data-slot=\"radio-group\"\n      className={cn(\"grid gap-2\", className)}\n      onValueChange={(value, eventDetails) => {\n        playClick()\n        onValueChange?.(value, eventDetails)\n      }}\n      {...props}\n      ref={ref}\n    />\n  )\n})\nRadioGroup.displayName = \"RadioGroup\"\n\nconst RadioGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<RadioPrimitive.Root.Props>\n>(({ className, ...props }, ref) => {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      ref={ref}\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square h-4 w-4 rounded-full\",\n        \"border border-border bg-background text-primary\",\n        \"transition-all duration-base ease-out\",\n        \"active:translate-y-px\",\n        \"hover:border-ring/50\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:border-[var(--primary-rim)] data-checked:bg-primary\",\n        \"data-checked:shadow-[var(--shadow-tactile-control)]\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator\n        data-slot=\"radio-group-indicator\"\n        className={cn(\"flex items-center justify-center\")}\n      >\n        <div className=\"size-full h-1.5 w-1.5 rounded-full bg-primary-foreground\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  )\n})\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/clicky/sound-provider-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.46 0.21 264)",
+      "primary-base": "oklch(0.4 0.18 264)",
+      "shadow-tactile-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0 var(--primary-base), 0 0.0625rem 0.125rem oklch(0.55 0.24 264 / 0.18)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

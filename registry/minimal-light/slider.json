@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-slider"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@radix-ui/react-slider@^1.3.5"
   ]
 }

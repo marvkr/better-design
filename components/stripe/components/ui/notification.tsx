@@ -2,8 +2,6 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { X } from "lucide-react"
 
-// Stripe Notification: alert/notification item component
-
 interface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode
   title: string
@@ -16,8 +14,8 @@ interface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const variantClasses = {
   default: "border-border",
-  success: "border-emerald-200 bg-emerald-50/50",
-  warning: "border-orange-200 bg-orange-50/50",
+  success: "border-success/20 bg-success-muted/50",
+  warning: "border-warning/20 bg-warning-muted/50",
   destructive: "border-destructive/20 bg-destructive/5",
 }
 
@@ -35,8 +33,7 @@ function Notification({
   return (
     <div
       className={cn(
-        "relative flex gap-3 rounded-[12px] border bg-background p-4",
-        "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+        "relative flex gap-3 rounded-lg border bg-background p-4",
         variantClasses[variant],
         className
       )}

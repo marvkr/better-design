@@ -1,0 +1,19 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { fieldOpen, formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nconst sizes = [\n  { value: \"small\", label: \"Small, 2 cores\" },\n  { value: \"medium\", label: \"Medium, 4 cores\" },\n  { value: \"large\", label: \"Large, 8 cores\" },\n  { value: \"xlarge\", label: \"Extra large, 16 cores\" },\n  { value: \"gpu\", label: \"GPU, 1 card\" },\n];\n\n/** Mallow combobox demo: a white field that opens a searchable list as wide as the field. */\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n  const selected = sizes.find((size) => size.value === value);\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        role=\"combobox\"\n        aria-expanded={open}\n        data-slot=\"combobox-trigger\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"w-64 cursor-default items-center justify-between gap-2 text-start\",\n          fieldOpen,\n          !selected && \"text-muted-foreground\",\n        )}\n      >\n        <span className=\"truncate\">{selected ? selected.label : \"Select a size\"}</span>\n        <Icon icon=\"iconoir:nav-arrow-down\" className=\"size-4 shrink-0 text-muted-foreground\" aria-hidden=\"true\" />\n      </PopoverTrigger>\n      <PopoverContent align=\"start\" className=\"w-(--anchor-width) gap-0 p-0\">\n        <Command className=\"bg-transparent shadow-none\">\n          <CommandInput placeholder=\"Search sizes\" />\n          <CommandList>\n            <CommandEmpty>No size found.</CommandEmpty>\n            <CommandGroup>\n              {sizes.map((size) => (\n                <CommandItem\n                  key={size.value}\n                  value={size.value}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                >\n                  {size.label}\n                  <Icon\n                    icon=\"iconoir:check\"\n                    className={cn(\"ms-auto size-4 text-foreground\", value === size.value ? \"opacity-100\" : \"opacity-0\")}\n                    aria-hidden=\"true\"\n                  />\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json",
+    "https://better-design.com/registry/mallow/command-base.json",
+    "https://better-design.com/registry/mallow/popover-base.json"
+  ]
+}

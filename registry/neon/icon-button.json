@@ -1,0 +1,32 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// neon Icon Button: square/circle button for icon-only actions\n// Default/primary filled variant uses the neon gradient + neon glow.\n// Ghost/outline are transparent and lift to bg-accent on hover.\n\nconst iconButtonVariants = cva(\n  \"relative inline-flex items-center justify-center shrink-0 outline-none transition duration-base ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"text-primary-foreground [background:var(--neon-gradient)] [box-shadow:var(--shadow-neon)] hover:[background:var(--neon-gradient-hover)] hover:[box-shadow:var(--shadow-neon-hover)]\",\n        secondary:\n          \"bg-secondary text-foreground border border-border hover:bg-accent\",\n        ghost: \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/85\",\n        outline:\n          \"border border-border bg-transparent text-foreground hover:bg-accent\",\n      },\n      size: {\n        xs: \"h-7 w-7 rounded-[0.5rem] text-xs\",\n        sm: \"h-8 w-8 rounded-[0.5rem] text-sm\",\n        default: \"h-9 w-9 rounded-[0.625rem] text-sm\",\n        lg: \"h-10 w-10 rounded-[0.625rem] text-base\",\n        xl: \"h-11 w-11 rounded-[0.75rem] text-base\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"ghost\",\n      size: \"default\",\n      corners: \"square\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(iconButtonVariants({ variant, size, corners, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "neon-gradient-hover": "linear-gradient( 180deg, oklch(0.93 0.21 145) 0%, oklch(0.86 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "shadow-neon-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.1875rem oklch(0.86 0.22 145 / 0.3), 0 0.875rem 2.375rem -0.5rem oklch(0.86 0.22 145 / 0.22)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "neon-gradient-hover": "linear-gradient( 180deg, oklch(0.93 0.21 145) 0%, oklch(0.86 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "shadow-neon-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.1875rem oklch(0.86 0.22 145 / 0.3), 0 0.875rem 2.375rem -0.5rem oklch(0.86 0.22 145 / 0.22)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

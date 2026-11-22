@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Chrome Azure Skeleton — a recessed brushed well that pulses while content\n * loads. Sits inset in the surface like an empty steel slot.\n */\n\nconst Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"animate-pulse rounded-md bg-muted [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nSkeleton.displayName = \"Skeleton\"\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

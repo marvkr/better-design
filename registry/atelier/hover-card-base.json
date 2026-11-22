@@ -1,0 +1,23 @@
+{
+  "name": "hover-card-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { PreviewCard as PreviewCardPrimitive } from \"@base-ui/react/preview-card\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst HoverCard = PreviewCardPrimitive.Root\n\nconst HoverCardTrigger = PreviewCardPrimitive.Trigger\n\nconst HoverCardContent = React.forwardRef<\n  HTMLDivElement,\n  PreviewCardPrimitive.Popup.Props &\n    Pick<\n      PreviewCardPrimitive.Positioner.Props,\n      \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n    >\n>(\n  (\n    { className, align = \"center\", alignOffset, side, sideOffset = 6, ...props },\n    ref\n  ) => (\n    <PreviewCardPrimitive.Portal>\n      <PreviewCardPrimitive.Positioner\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n        className=\"isolate z-50\"\n      >\n        <PreviewCardPrimitive.Popup\n          ref={ref}\n          className={cn(\n            \"origin-(--transform-origin) z-50 w-64 p-4\",\n            \"rounded-lg border border-border\",\n            \"bg-popover text-popover-foreground\",\n            \"[box-shadow:var(--shadow-l)]\",\n            \"outline-none transition-[transform,translate,scale,opacity] duration-fast data-starting-style:opacity-0 data-starting-style:scale-95 data-ending-style:opacity-0 data-ending-style:scale-95 data-[side=bottom]:data-starting-style:-translate-y-2 data-[side=left]:data-starting-style:translate-x-2 data-[side=right]:data-starting-style:-translate-x-2 data-[side=top]:data-starting-style:translate-y-2\",\n            className\n          )}\n          {...props}\n        />\n      </PreviewCardPrimitive.Positioner>\n    </PreviewCardPrimitive.Portal>\n  )\n)\nHoverCardContent.displayName = \"HoverCardContent\"\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05), 0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12)"
+    },
+    "dark": {
+      "shadow-l": "0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05), 0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12)"
+    }
+  }
+}

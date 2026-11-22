@@ -1,0 +1,24 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Retro LCD Button — a calculator / digital-watch key.\n// Primary: solid olive \"ink\" key, LCD-green legend, subtle raised rim + press travel.\n// Secondary: graphite casing key. Outline/ghost: thin olive trace on the screen.\n// Monospace legends, slight uppercase tracking for the digital readout feel.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"font-mono text-sm font-semibold uppercase tracking-wider\",\n    \"rounded-md transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Olive ink key — solid fill, raised rim (inset top highlight + drop)\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.12),0_0.125rem_0.25rem_oklch(0_0_0/0.22)] \" +\n          \"hover:brightness-110 active:shadow-[inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.3)]\",\n        // Graphite casing key\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.10),0_0.125rem_0.25rem_oklch(0_0_0/0.22)] \" +\n          \"hover:brightness-110 active:shadow-[inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.3)]\",\n        // Olive trace on the screen\n        outline:\n          \"border border-foreground/60 bg-transparent text-foreground \" +\n          \"hover:bg-foreground/5 active:bg-foreground/10\",\n        // No trace until hover\n        ghost:\n          \"bg-transparent text-foreground \" +\n          \"hover:bg-foreground/5 active:bg-foreground/10\",\n        // Low-battery brick\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.12),0_0.125rem_0.25rem_oklch(0_0_0/0.22)] \" +\n          \"hover:brightness-110 active:shadow-[inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.3)]\",\n        // Underlined segment\n        link: \"text-foreground underline-offset-4 underline hover:text-foreground/80 normal-case tracking-normal\",\n      },\n      size: {\n        default: \"h-11 px-5 py-2.5\",\n        sm: \"h-9 px-3.5 text-xs rounded-md\",\n        lg: \"h-14 px-7 text-base rounded-lg\",\n        icon: \"h-10 w-10 rounded-md\",\n        \"icon-sm\": \"h-9 w-9 rounded-md\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

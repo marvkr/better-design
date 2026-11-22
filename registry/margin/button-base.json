@@ -1,0 +1,29 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  oxFace,\n  oxFaceHover,\n  destructiveFace,\n  focusRing,\n  pillFace,\n  pressScale,\n  quietFace,\n  markFace,\n} from \"./_shared\";\n\n/**\n * Margin Button on a Base UI button: a plain ruled label, near square.\n *\n * The default is the signature: flat oxblood ink inside a darker rule, with\n * no light and no drop. It is the one coloured object on a page,\n * so a page carries one or two. `secondary` is the ruled toolbar tab;\n * `outline` keeps only the hairline; `ghost` shows its face on hover alone;\n * `lit` is the pale oxblood mark. Every press settles it toward the page.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap\",\n    \"rounded-lg font-medium\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: cn(oxFace, oxFaceHover),\n        primary: cn(oxFace, oxFaceHover),\n        lit: markFace,\n        solid: cn(oxFace, oxFaceHover),\n        secondary: cn(pillFace, \"font-normal\"),\n        outline:\n          \"bg-transparent text-foreground shadow-(--pill-edge) font-normal hover:bg-accent\",\n        ghost:\n          \"bg-transparent font-normal text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive: destructiveFace,\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline decoration-current/30 underline-offset-4 hover:decoration-current\",\n        quiet: quietFace,\n      },\n      size: {\n        sm: \"h-8 px-3 text-sm\",\n        default: \"h-9 px-4 text-sm\",\n        lg: \"h-10 px-5 text-base\",\n        icon: \"size-9 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-10 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Props for the Base UI Button; `asChild` turns a single child element into the button. */\nexport interface ButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  /**\n   * Renders the single child element as the button, for callers written\n   * against the Radix API. Base UI composes through `render`.\n   */\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const classes = cn(buttonVariants({ variant, size, className }));\n\n    if (asChild && React.isValidElement(children)) {\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          data-slot=\"button\"\n          className={classes}\n          nativeButton={false}\n          {...props}\n          render={children}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive ref={ref} data-slot=\"button\" className={classes} {...props}>\n        {children}\n      </ButtonPrimitive>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.82 0.016 85)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.36 0.014 260)"
+    }
+  }
+}

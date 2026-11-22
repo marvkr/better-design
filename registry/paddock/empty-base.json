@@ -1,0 +1,14 @@
+{
+  "name": "empty-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { raisedSurface } from \"./_shared\";\n\n/**\n * Paddock Empty: the parts of an empty state with no frame of their own. The\n * icon sits in a small white tile with a 1px border, and the title and\n * description are centred under it.\n */\nconst Empty = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty\"\n      className={cn(\"flex flex-col items-center justify-center gap-2 p-8 text-center\", className)}\n      {...props}\n    />\n  ),\n);\nEmpty.displayName = \"Empty\";\n\n/** The white tile that holds the empty state's icon. */\nconst EmptyIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-icon\"\n      className={cn(\n        \"mb-2 flex size-11 items-center justify-center rounded-lg text-muted-foreground [&_svg]:size-5\",\n        raisedSurface,\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nEmptyIcon.displayName = \"EmptyIcon\";\n\n/** The empty state's title, in the card-title size. */\nconst EmptyTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-title\"\n      className={cn(\"text-[0.9375rem] font-semibold tracking-tight text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nEmptyTitle.displayName = \"EmptyTitle\";\n\n/** The muted line that says what will appear and how to start. */\nconst EmptyDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"empty-description\"\n    className={cn(\"max-w-sm text-[0.8125rem] text-muted-foreground\", className)}\n    {...props}\n  />\n));\nEmptyDescription.displayName = \"EmptyDescription\";\n\n/** The row of buttons under an empty state. */\nconst EmptyActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-actions\"\n      className={cn(\"flex items-center gap-2 pt-3\", className)}\n      {...props}\n    />\n  ),\n);\nEmptyActions.displayName = \"EmptyActions\";\n\nexport { Empty, EmptyIcon, EmptyTitle, EmptyDescription, EmptyActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ]
+}

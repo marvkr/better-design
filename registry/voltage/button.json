@@ -1,0 +1,30 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Electric Fintech Button — acid-yellow \"electric chip\" on deep near-black navy.\n// Hero (default) is the bright electric-yellow primary: solid fill, a tight yellow\n// rim, a soft yellow-tinted lift, and a top inset sheen so it reads as a lit chip.\n// Label is near-black (--primary-foreground) so it stays AA-legible on yellow.\n// The chip material (--shadow-chip / --shadow-chip-hover) is reused by the filled\n// controls (checkbox / switch / radio / slider) so the DS reads as one material.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold tracking-tight\",\n    \"rounded-md transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98] active:brightness-95\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Hero — electric-yellow chip.\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-chip)] \" +\n          \"hover:bg-primary/95 hover:[box-shadow:var(--shadow-chip-hover)]\",\n        // Explicit primary mirrors the hero exactly.\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-chip)] \" +\n          \"hover:bg-primary/95 hover:[box-shadow:var(--shadow-chip-hover)]\",\n        // Secondary: quiet raised cool panel with border.\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"border border-border \" +\n          \"[box-shadow:var(--shadow-xs)] \" +\n          \"hover:bg-accent hover:border-border/70\",\n        // Outline: transparent with full border.\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary hover:border-border/80\",\n        // Ghost: no background, understated.\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-secondary hover:text-foreground\",\n        // Destructive.\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:0_0_0_0.0625rem_color-mix(in_oklch,var(--destructive)_55%,transparent),0_0.0625rem_0.1875rem_0_oklch(0_0_0/0.4)] \" +\n          \"hover:bg-destructive/90\",\n        // Link.\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-4\",\n        lg:      \"h-11 px-6 text-sm\",\n        icon:    \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8 rounded-md\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow": "0 0.125rem 0.3125rem 0 oklch(0 0 0 / 0.5), 0 0.0625rem 0.125rem -0.0625rem oklch(0 0 0 / 0.4), 0 0 0 0.0625rem oklch(1 0 0 / 0.04)",
+      "shadow-chip": "0 0 0 0.0625rem color-mix(in oklch, var(--primary) 60%, transparent), 0 0.0625rem 0.1875rem 0 oklch(0 0 0 / 0.5), inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.28)",
+      "shadow-chip-hover": "0 0 0 0.0625rem color-mix(in oklch, var(--primary) 78%, transparent), 0 0.1875rem 0.625rem -0.125rem color-mix(in oklch, var(--primary) 40%, transparent), inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.34)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow": "0 0.125rem 0.3125rem 0 oklch(0 0 0 / 0.5), 0 0.0625rem 0.125rem -0.0625rem oklch(0 0 0 / 0.4), 0 0 0 0.0625rem oklch(1 0 0 / 0.04)",
+      "shadow-chip": "0 0 0 0.0625rem color-mix(in oklch, var(--primary) 60%, transparent), 0 0.0625rem 0.1875rem 0 oklch(0 0 0 / 0.5), inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.28)",
+      "shadow-chip-hover": "0 0 0 0.0625rem color-mix(in oklch, var(--primary) 78%, transparent), 0 0.1875rem 0.625rem -0.125rem color-mix(in oklch, var(--primary) 40%, transparent), inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.34)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

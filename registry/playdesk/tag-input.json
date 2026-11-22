@@ -1,0 +1,25 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk TagInput — committed values become small pills inside the recessed\n * field, matching the Badge shape.\n */\n\nexport interface TagInputProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: string[];\n  onChange?: (tags: string[]) => void;\n  placeholder?: string;\n}\n\nconst TagInput = React.forwardRef<HTMLDivElement, TagInputProps>(\n  ({ className, value, onChange, placeholder = \"Add a tag\", ...props }, ref) => {\n    const [internal, setInternal] = React.useState<string[]>(value ?? []);\n    const [draft, setDraft] = React.useState(\"\");\n    const tags = value ?? internal;\n\n    const commit = (next: string[]) => {\n      setInternal(next);\n      onChange?.(next);\n    };\n\n    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {\n      if (event.key === \"Enter\" && draft.trim()) {\n        event.preventDefault();\n        commit([...tags, draft.trim()]);\n        setDraft(\"\");\n      }\n      if (event.key === \"Backspace\" && !draft && tags.length) {\n        commit(tags.slice(0, -1));\n      }\n    };\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex min-h-10 w-full flex-wrap items-center gap-1.5 rounded-lg px-2 py-1.5\",\n          \"border border-border bg-input\",\n          \"[box-shadow:var(--shadow-inset)]\",\n          \"transition-[box-shadow,border-color] duration-fast ease-out\",\n          \"focus-within:border-ring focus-within:ring-[0.1875rem] focus-within:ring-ring/25\",\n          className,\n        )}\n        {...props}\n      >\n        {tags.map((tag) => (\n          <span\n            key={tag}\n            className=\"inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground\"\n          >\n            {tag}\n            <button\n              type=\"button\"\n              aria-label={`Remove ${tag}`}\n              onClick={() => commit(tags.filter((item) => item !== tag))}\n              className=\"text-muted-foreground transition-colors hover:text-foreground\"\n            >\n              <X className=\"size-3\" />\n            </button>\n          </span>\n        ))}\n        <input\n          value={draft}\n          onChange={(event) => setDraft(event.target.value)}\n          onKeyDown={handleKeyDown}\n          placeholder={tags.length ? undefined : placeholder}\n          className=\"min-w-24 flex-1 bg-transparent px-1.5 text-sm outline-none placeholder:text-muted-foreground\"\n        />\n      </div>\n    );\n  },\n);\nTagInput.displayName = \"TagInput\";\n\nexport { TagInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Paddock Tabs root: owns which panel shows. */\nconst Tabs = TabsPrimitive.Root;\n\n/**\n * Paddock TabsList: a view switch on a recessed light-grey track with small\n * rounded corners.\n */\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    data-slot=\"tabs-list\"\n    className={cn(\n      \"inline-flex h-10 items-center justify-center gap-0.5 rounded-md p-1 text-muted-foreground\",\n      wellInset,\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = \"TabsList\";\n\n/**\n * Paddock TabsTrigger: a muted label in a small rounded segment. The active\n * tab is a raised white segment with a 1px cool border and a faint drop.\n */\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    data-slot=\"tabs-trigger\"\n    className={cn(\n      \"inline-flex h-full items-center justify-center gap-1.5 whitespace-nowrap rounded-sm px-3.5 text-sm\",\n      \"text-muted-foreground transition-[color,box-shadow,background-color] duration-base ease-out\",\n      \"hover:text-foreground\",\n      focusRing,\n      \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n      \"data-[active]:bg-card data-[active]:font-medium data-[active]:text-foreground data-[active]:shadow-(--segment-lift)\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = \"TabsTrigger\";\n\n/** Paddock TabsContent: the active panel, set below the tab row. */\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    data-slot=\"tabs-content\"\n    className={cn(\"mt-4 rounded-lg\", focusRing, className)}\n    {...props}\n  />\n));\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "segment-lift": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 0.0625rem 0.0625rem oklch(0.3 0.03 240 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "segment-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

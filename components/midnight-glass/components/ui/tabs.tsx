@@ -67,7 +67,7 @@ function TabsTrigger({
       {isActive && (
         <motion.div
           layoutId={`tabs-indicator-${uid}`}
-          className="absolute inset-0 rounded-full bg-white/[0.1] shadow-[inset_0_0_8px_rgba(255,255,255,0.1)] border border-white/[0.1]"
+          className="absolute inset-0 rounded-full bg-white/[0.1] shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.1)] border border-white/[0.1]"
           transition={springInteraction}
         />
       )}

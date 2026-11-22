@@ -1,0 +1,48 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Pill controls with the compact orange action and ivory secondary surface. */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-full cursor-pointer select-none\",\n    \"transition-[box-shadow,transform,color] duration-base ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.97]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground [background-image:linear-gradient(to_bottom,var(--primary-from),var(--primary-to))] [box-shadow:var(--shadow-primary)] \" +\n          \"hover:[box-shadow:var(--shadow-primary-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground [background-image:linear-gradient(to_bottom,var(--primary-from),var(--primary-to))] [box-shadow:var(--shadow-primary)] \" +\n          \"hover:[box-shadow:var(--shadow-primary-hover)]\",\n        secondary:\n          \"bg-secondary text-secondary-foreground [box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:[box-shadow:var(--shadow-button-hover)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-foreground/20 hover:text-accent-foreground\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [background-image:linear-gradient(to_bottom,var(--destructive-from),var(--destructive-to))] [box-shadow:var(--shadow-destructive)] \" +\n          \"hover:[box-shadow:var(--shadow-destructive-hover)]\",\n        link: \"text-foreground underline-offset-4 hover:underline hover:text-ring\",\n      },\n      size: {\n        sm: \"h-8 px-3.5 text-xs\",\n        default: \"h-10 px-5\",\n        lg: \"h-12 px-6 text-base\",\n        icon: \"h-10 w-10\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.76 0.22 54)",
+      "primary-to": "oklch(0.7 0.245 43)",
+      "primary-hover-to": "oklch(0.75 0.23 50)",
+      "destructive-from": "oklch(0.577 0.245 27.325)",
+      "destructive-to": "oklch(0.505 0.213 27.518)",
+      "destructive-hover-to": "oklch(0.59 0.245 27)",
+      "shadow-button": "var(--shadow-sm)",
+      "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)",
+      "shadow-primary": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--primary-to)",
+      "shadow-primary-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--primary-hover-to)",
+      "shadow-destructive": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--destructive-to)",
+      "shadow-destructive-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--destructive-hover-to)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.76 0.22 54)",
+      "primary-to": "oklch(0.7 0.245 43)",
+      "primary-hover-to": "oklch(0.75 0.23 50)",
+      "destructive-from": "oklch(0.577 0.245 27.325)",
+      "destructive-to": "oklch(0.505 0.213 27.518)",
+      "destructive-hover-to": "oklch(0.59 0.245 27)",
+      "shadow-button": "var(--shadow-sm)",
+      "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)",
+      "shadow-primary": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--primary-to)",
+      "shadow-primary-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--primary-hover-to)",
+      "shadow-destructive": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--destructive-to)",
+      "shadow-destructive-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--destructive-hover-to)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

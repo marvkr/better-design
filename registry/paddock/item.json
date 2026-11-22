@@ -1,0 +1,27 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, focusRing, pressScale } from \"./_shared\";\n\n/** Props for a list row that can be interactive or selected. */\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  asChild?: boolean;\n  interactive?: boolean;\n  selected?: boolean;\n}\n\n/**\n * Paddock Item: a list row. A white slab with one 1px cool\n * border; an interactive row firms its border on hover, and a\n * selected row wears a teal ring.\n */\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"div\";\n    return (\n      <Comp\n        ref={ref}\n        data-slot=\"item\"\n        data-selected={selected ? \"\" : undefined}\n        className={cn(\n          \"flex items-center gap-3 rounded-lg px-3 py-2.5\",\n          cardSlab,\n          \"transition-shadow duration-fast ease-out\",\n          interactive && [\"cursor-pointer\", pressScale, focusRing, \"hover:shadow-(--card-lift)\"],\n          selected && \"ring-2 ring-primary\",\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\nItem.displayName = \"Item\";\n\n/** The grey tile that holds a row's icon. */\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-icon\"\n      className={cn(\n        \"flex size-9 shrink-0 items-center justify-center rounded-md bg-secondary text-secondary-foreground [&_svg]:size-4\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemIcon.displayName = \"ItemIcon\";\n\n/** The text column that takes the row's free width. */\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} data-slot=\"item-content\" className={cn(\"min-w-0 flex-1\", className)} {...props} />\n  ),\n);\nItemContent.displayName = \"ItemContent\";\n\n/** The row's title, cut to one line. */\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-title\"\n      className={cn(\"truncate text-sm font-semibold text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nItemTitle.displayName = \"ItemTitle\";\n\n/** The row's muted second line, cut to one line. */\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-description\"\n      className={cn(\"truncate text-[0.8125rem] text-muted-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nItemDescription.displayName = \"ItemDescription\";\n\n/** The controls at the row's right edge. */\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} data-slot=\"item-actions\" className={cn(\"flex shrink-0 items-center gap-1\", className)} {...props} />\n  ),\n);\nItemActions.displayName = \"ItemActions\";\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "card-lift": "0 0 0 0.0625rem oklch(0.85 0.012 230)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "card-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.16)"
+    }
+  }
+}

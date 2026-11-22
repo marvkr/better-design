@@ -1,0 +1,20 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Label: medium Inter at 0.875rem in full ink, so a field is named\n * clearly above a quiet grey box. A disabled control greys its label too.\n *\n * Base UI has no label primitive, so this is a native label. Base UI marks\n * a disabled control with data-disabled, so the label watches that as well\n * as the native disabled state.\n */\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.ComponentPropsWithoutRef<\"label\">\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    data-slot=\"label\"\n    className={cn(\n      \"flex select-none items-center gap-2 text-sm font-medium leading-none text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:text-(--foreground-disabled)\",\n      \"peer-data-[disabled]:cursor-not-allowed peer-data-[disabled]:text-(--foreground-disabled)\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.72 0.004 160)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

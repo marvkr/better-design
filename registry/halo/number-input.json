@@ -1,0 +1,23 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Halo Number Input: translucent pill input with increment/decrement buttons\n\ninterface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  ({ className, value = 0, onChange, min, max, step = 1, disabled, ...props }, ref) => {\n    // Local draft lets the field be cleared mid-edit without the controlled\n    // numeric value snapping back. It re-syncs whenever `value` changes externally.\n    const [draft, setDraft] = React.useState(String(value))\n\n    React.useEffect(() => {\n      setDraft(String(value))\n    }, [value])\n\n    const clamp = (n: number) => {\n      const lower = min !== undefined ? Math.max(min, n) : n\n      return max !== undefined ? Math.min(max, lower) : lower\n    }\n\n    const handleDecrement = () => {\n      onChange?.(clamp(value - step))\n    }\n\n    const handleIncrement = () => {\n      onChange?.(clamp(value + step))\n    }\n\n    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n      setDraft(e.target.value)\n      const parsed = parseFloat(e.target.value)\n      if (!isNaN(parsed)) {\n        onChange?.(parsed)\n      }\n    }\n\n    return (\n      <div\n        className={cn(\n          \"flex h-10 w-full overflow-hidden\",\n          \"rounded-full border border-border backdrop-blur-xl bg-foreground/[0.06]\",\n          \"shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n          \"transition duration-base\",\n          \"focus-within:shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent),0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_20%,transparent)] focus-within:border-primary/50\",\n          disabled && \"opacity-70 cursor-not-allowed\",\n          className\n        )}\n      >\n        <button\n          type=\"button\"\n          onClick={handleDecrement}\n          disabled={disabled || (min !== undefined && value <= min)}\n          className=\"flex h-full w-10 shrink-0 items-center justify-center border-r border-border text-foreground/40 transition-colors hover:bg-foreground/[0.08] hover:text-foreground/80 disabled:opacity-40\"\n        >\n          <Icon icon=\"tabler:minus\" className=\"h-3.5 w-3.5\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          value={draft}\n          onChange={handleChange}\n          disabled={disabled}\n          min={min}\n          max={max}\n          step={step}\n          className=\"flex-1 bg-transparent px-2 text-center text-sm text-foreground/90 focus:outline-none disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\"\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleIncrement}\n          disabled={disabled || (max !== undefined && value >= max)}\n          className=\"flex h-full w-10 shrink-0 items-center justify-center border-l border-border text-foreground/40 transition-colors hover:bg-foreground/[0.08] hover:text-foreground/80 disabled:opacity-40\"\n        >\n          <Icon icon=\"tabler:plus\" className=\"h-3.5 w-3.5\" />\n        </button>\n      </div>\n    )\n  }\n)\nNumberInput.displayName = \"NumberInput\"\n\nexport { NumberInput }\nexport type { NumberInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)"
+    }
+  }
+}

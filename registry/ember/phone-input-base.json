@@ -1,0 +1,26 @@
+{
+  "name": "phone-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass PhoneInput: recessed well with a country dial-code selector.\n\ninterface Country {\n  code: string\n  dial: string\n  name: string\n}\n\nconst COUNTRIES: Country[] = [\n  { code: \"US\", dial: \"+1\", name: \"United States\" },\n  { code: \"GB\", dial: \"+44\", name: \"United Kingdom\" },\n  { code: \"DE\", dial: \"+49\", name: \"Germany\" },\n  { code: \"FR\", dial: \"+33\", name: \"France\" },\n  { code: \"ES\", dial: \"+34\", name: \"Spain\" },\n  { code: \"IT\", dial: \"+39\", name: \"Italy\" },\n  { code: \"NL\", dial: \"+31\", name: \"Netherlands\" },\n  { code: \"AU\", dial: \"+61\", name: \"Australia\" },\n  { code: \"JP\", dial: \"+81\", name: \"Japan\" },\n  { code: \"ZM\", dial: \"+260\", name: \"Zambia\" },\n]\n\ninterface PhoneInputProps {\n  value?: string\n  onChange?: (value: string) => void\n  defaultCountry?: string\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction PhoneInput({\n  value,\n  onChange,\n  defaultCountry = \"US\",\n  placeholder = \"Phone number\",\n  disabled,\n  className,\n}: PhoneInputProps) {\n  const [country, setCountry] = React.useState<Country>(\n    COUNTRIES.find((c) => c.code === defaultCountry) ?? COUNTRIES[0]\n  )\n  const [number, setNumber] = React.useState(value ?? \"\")\n\n  const handleNumber = (next: string) => {\n    setNumber(next)\n    onChange?.(`${country.dial} ${next}`)\n  }\n\n  return (\n    <div\n      className={cn(\n        \"flex h-9 w-full items-stretch overflow-hidden rounded-lg\",\n        formFieldBase,\n        \"p-0\",\n        className\n      )}\n    >\n      <div className=\"relative flex items-center border-r border-[color:var(--ag-border)]\">\n        <select\n          aria-label=\"Country code\"\n          className=\"h-full cursor-pointer appearance-none bg-transparent pl-3 pr-7 text-sm text-foreground outline-none disabled:cursor-not-allowed [&>option]:bg-[oklch(0.22_0.006_70)] [&>option]:text-foreground\"\n          value={country.code}\n          disabled={disabled}\n          onChange={(e) => {\n            const next = COUNTRIES.find((c) => c.code === e.target.value)\n            if (next) {\n              setCountry(next)\n              onChange?.(`${next.dial} ${number}`)\n            }\n          }}\n        >\n          {COUNTRIES.map((c) => (\n            <option key={c.code} value={c.code}>\n              {c.code} {c.dial}\n            </option>\n          ))}\n        </select>\n        <Icon\n          icon=\"tabler:chevron-down\"\n          className=\"pointer-events-none absolute right-2 h-3.5 w-3.5 text-muted-foreground\"\n        />\n      </div>\n      <input\n        type=\"tel\"\n        inputMode=\"tel\"\n        className=\"w-full flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground\"\n        placeholder={placeholder}\n        value={number}\n        disabled={disabled}\n        onChange={(e) => handleNumber(e.target.value)}\n      />\n    </div>\n  )\n}\n\nexport { PhoneInput }\nexport type { PhoneInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

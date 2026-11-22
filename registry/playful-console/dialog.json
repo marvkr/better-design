@@ -1,0 +1,32 @@
+{
+  "name": "dialog",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\n/**\n * Playful console Dialog: a white card that pops over the cream page.\n *\n * The panel keeps the olive hairline of every card, takes the larger dialog\n * corner and the one deep drop shadow in the system, and snaps in from 95%\n * scale. The close control is a flat ghost square in the top end corner.\n */\nconst Dialog = DialogPrimitive.Root;\n/** Opens the dialog. */\nconst DialogTrigger = DialogPrimitive.Trigger;\n/** Renders the dialog into the document body. */\nconst DialogPortal = DialogPrimitive.Portal;\n/** Closes the dialog from any element inside it. */\nconst DialogClose = DialogPrimitive.Close;\n\n/** The scrim: dims the page behind the dialog and fades in and out. */\nconst DialogOverlay = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Overlay\n    ref={ref}\n    data-slot=\"dialog-overlay\"\n    className={cn(\n      \"fixed inset-0 z-50 bg-(--scrim)\",\n      \"data-[state=open]:animate-in data-[state=open]:fade-in-0 duration-base\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogOverlay.displayName = DialogPrimitive.Overlay.displayName;\n\ninterface DialogContentProps\n  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {\n  /** Renders the close square in the top end corner. Defaults to true. */\n  showCloseButton?: boolean;\n}\n\n/** The dialog panel, centred over the scrim. */\nconst DialogContent = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Content>,\n  DialogContentProps\n>(({ className, children, showCloseButton = true, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Content\n      ref={ref}\n      data-slot=\"dialog-content\"\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 sm:max-w-lg\",\n        \"rounded-xl border border-border bg-card p-6 text-card-foreground shadow-(--shadow-overlay) outline-none\",\n        \"ease-out data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 duration-base\",\n        \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      {showCloseButton ? (\n        <DialogPrimitive.Close\n          data-slot=\"dialog-close\"\n          className={cn(\n            buttonVariants({ variant: \"ghost\", size: \"icon-sm\" }),\n            \"absolute end-3 top-3 text-muted-foreground hover:text-foreground\",\n          )}\n        >\n          <Icon icon=\"ph:x-bold\" className=\"size-4\" aria-hidden=\"true\" />\n          <span className=\"sr-only\">Close</span>\n        </DialogPrimitive.Close>\n      ) : null}\n    </DialogPrimitive.Content>\n  </DialogPortal>\n));\nDialogContent.displayName = DialogPrimitive.Content.displayName;\n\n/** Holds the title and description, clear of the close square. */\nconst DialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-header\"\n    className={cn(\"flex flex-col gap-1.5 pe-8 text-start\", className)}\n    {...props}\n  />\n);\nDialogHeader.displayName = \"DialogHeader\";\n\n/** Actions stack on a phone with the main one on top, and sit in a row at the end from sm up. */\nconst DialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-footer\"\n    className={cn(\n      \"flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end\",\n      className,\n    )}\n    {...props}\n  />\n);\nDialogFooter.displayName = \"DialogFooter\";\n\n/** The dialog title: heavy and tight. */\nconst DialogTitle = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    data-slot=\"dialog-title\"\n    className={cn(\"text-xl font-extrabold leading-tight tracking-tight text-foreground\", className)}\n    {...props}\n  />\n));\nDialogTitle.displayName = DialogPrimitive.Title.displayName;\n\n/** The supporting line under the title. */\nconst DialogDescription = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    data-slot=\"dialog-description\"\n    className={cn(\"text-sm leading-relaxed text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nDialogDescription.displayName = DialogPrimitive.Description.displayName;\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dialog@^1.1.14",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "scrim": "oklch(0.26 0.015 118.8 / 0.45)",
+      "shadow-overlay": "0 1.25rem 2.5rem -0.75rem oklch(0.26 0.015 118.8 / 0.3), 0 0.25rem 0.75rem oklch(0.26 0.015 118.8 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "scrim": "oklch(0 0 0 / 0.6)",
+      "shadow-overlay": "0 1.25rem 2.5rem -0.75rem oklch(0 0 0 / 0.7), 0 0 0 0.0625rem oklch(0.36 0.012 114)"
+    }
+  }
+}

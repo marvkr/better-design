@@ -1,0 +1,26 @@
+{
+  "name": "slider",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SliderPrimitive from \"@radix-ui/react-slider\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Slider: a thin grey track whose filled range is the primary\n * button's flat green. The thumb is a solid knob in the same green.\n */\nconst Slider = React.forwardRef<\n  React.ElementRef<typeof SliderPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>\n>(({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n  const values = React.useMemo(\n    () =>\n      Array.isArray(value)\n        ? value\n        : Array.isArray(defaultValue)\n          ? defaultValue\n          : [min],\n    [value, defaultValue, min],\n  );\n\n  return (\n    <SliderPrimitive.Root\n      ref={ref}\n      data-slot=\"slider\"\n      defaultValue={defaultValue}\n      value={value}\n      min={min}\n      max={max}\n      className={cn(\n        \"relative flex h-5 w-full touch-none select-none items-center data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <SliderPrimitive.Track\n        data-slot=\"slider-track\"\n        className=\"relative h-1.5 w-full grow overflow-hidden rounded-full bg-muted\"\n      >\n        <SliderPrimitive.Range\n          data-slot=\"slider-range\"\n          className=\"absolute h-full rounded-full bg-primary\"\n        />\n      </SliderPrimitive.Track>\n      {values.map((_, index) => (\n        <SliderPrimitive.Thumb\n          data-slot=\"slider-thumb\"\n          key={index}\n          className={cn(\n            \"block size-4 shrink-0 cursor-grab rounded-full bg-primary shadow-(--shadow-thumb)\",\n            \"transition-[box-shadow] duration-fast ease-out active:cursor-grabbing\",\n            \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n            \"disabled:pointer-events-none\",\n          )}\n        />\n      ))}\n    </SliderPrimitive.Root>\n  );\n});\nSlider.displayName = SliderPrimitive.Root.displayName;\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slider@^1.3.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.0625rem 0.1875rem oklch(0.155 0.005 173.5 / 0.16), 0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.0625rem 0.1875rem oklch(0 0 0 / 0.4), 0 0 0 0.0625rem oklch(1 0 0 / 0.1)"
+    }
+  }
+}

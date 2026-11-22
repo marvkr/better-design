@@ -1,0 +1,24 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst Tabs = TabsPrimitive.Root;\n\n/**\n * Airy docs TabsList: a row of labels standing on the page hairline, the\n * way docs pages switch between examples.\n */\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    data-slot=\"tabs-list\"\n    className={cn(\n      \"inline-flex items-center gap-4 border-b border-border text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = \"TabsList\";\n\n/**\n * Airy docs TabsTrigger: grey text that darkens on hover. The active tab\n * turns to full ink and a 0.125rem green bar sits under it on the hairline.\n */\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    data-slot=\"tabs-trigger\"\n    className={cn(\n      \"relative -mb-px inline-flex h-10 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap border-b-2 border-transparent px-0.5\",\n      \"text-sm font-medium text-muted-foreground\",\n      \"transition-colors duration-fast ease-out hover:text-foreground\",\n      \"data-[active]:border-primary data-[active]:text-foreground\",\n      \"rounded-t-sm outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n      \"data-[disabled]:cursor-not-allowed data-[disabled]:text-(--foreground-disabled)\",\n      \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = \"TabsTrigger\";\n\n/** Airy docs TabsContent: the active panel, set below the tab row. */\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    data-slot=\"tabs-content\"\n    className={cn(\n      \"mt-4 rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

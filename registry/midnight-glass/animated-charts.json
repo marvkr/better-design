@@ -1,0 +1,9 @@
+{
+  "name": "animated-charts",
+  "type": "registry:ui",
+  "description": "Animated charts: Seventeen animated chart types, from area and bar to sankey and sunburst, coloured by the design system's tokens. From bklit-ui, MIT.",
+  "files": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/animated-charts/animated-charts.json"
+  ]
+}

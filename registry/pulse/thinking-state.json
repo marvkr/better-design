@@ -1,0 +1,17 @@
+{
+  "name": "thinking-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-state.tsx",
+      "content": "// Ported from the public AIcss React source.\n// Source: https://www.aicss.dev/components/thinking-state\n\"use client\"\n\nimport styles from \"./thinking-state.module.css\";\n\nexport function ThinkingState() {\n  return <span className={styles.shimmer}>Thinking</span>;\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "components/ui/thinking-state.module.css",
+      "content": "/* Ported from https://www.aicss.dev/components/thinking-state */\n.shimmer {\n  font-size: 0.8125rem;\n  line-height: 1.125rem;\n  font-weight: 500;\n  color: transparent;\n  -webkit-text-fill-color: transparent;\n  background: linear-gradient(\n    90deg,\n    var(--muted-foreground) 0%, var(--muted-foreground) 30%,\n    color-mix(in oklch, var(--muted-foreground) 45%, transparent) 45%, color-mix(in oklch, var(--muted-foreground) 45%, transparent) 55%,\n    var(--muted-foreground) 70%, var(--muted-foreground) 100%\n  );\n  background-size: 300% 100%;\n  -webkit-background-clip: text;\n  background-clip: text;\n  animation: label-shine 2.25s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;\n}\n@keyframes label-shine {\n  0%, 18% { background-position: 100% 0; }\n  82%, 100% { background-position: 0% 0; }\n}\n@media (prefers-reduced-motion: reduce) {\n  .shimmer {\n    animation: none !important;\n    transition-duration: 0.01ms !important;\n  }\n}\n",
+      "type": "registry:file",
+      "target": "components/ui/thinking-state.module.css"
+    }
+  ]
+}

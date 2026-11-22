@@ -1,0 +1,25 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Alert: a raised card slip with a hairline sheen; the\n// destructive variant warms toward saddle red.\n\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-lg border p-4\",\n    \"[box-shadow:var(--shadow-card)]\",\n    \"[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-0.1875rem]\",\n    \"[&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:h-4 [&>svg]:w-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-highlight bg-card text-card-foreground [&>svg]:text-muted-foreground\",\n        destructive:\n          \"border-[oklch(0.62_0.16_30/0.4)] bg-[oklch(0.52_0.16_28/0.12)] text-[oklch(0.78_0.12_30)] [&>svg]:text-[oklch(0.78_0.12_30)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n))\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 font-medium leading-none tracking-tight\", className)}\n    {...props}\n  />\n))\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"text-sm opacity-85 [&_p]:leading-relaxed\", className)}\n    {...props}\n  />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "shadow-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0 0 0 / 0.25)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "shadow-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0 0 0 / 0.25)"
+    }
+  }
+}

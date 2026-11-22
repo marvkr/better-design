@@ -1,0 +1,11 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  /**\n   * Optional custom icon node. Kept for API compatibility; when omitted a\n   * brushed-steel \"empty box\" glyph is rendered inline (no runtime icon font).\n   */\n  icon?: React.ReactNode\n  title: React.ReactNode\n  description?: React.ReactNode\n  action?: React.ReactNode\n}\n\nconst DefaultEmptyIcon = (props: React.SVGProps<SVGSVGElement>) => (\n  <svg\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth={1.75}\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n    aria-hidden=\"true\"\n    {...props}\n  >\n    <path d=\"M21 8l-9 4-9-4 9-4 9 4z\" />\n    <path d=\"M3 8v8l9 4 9-4V8\" />\n    <path d=\"M12 12v8\" />\n  </svg>\n)\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon, title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center\",\n        \"bg-card text-card-foreground border border-dashed border-white/10\",\n        className\n      )}\n      {...props}\n    >\n      <div\n        className={cn(\n          \"flex h-12 w-12 items-center justify-center rounded-full\",\n          \"bg-muted text-muted-foreground\",\n          \"[box-shadow:var(--shadow-sm)]\"\n        )}\n      >\n        {icon ?? <DefaultEmptyIcon className=\"h-5 w-5\" />}\n      </div>\n      <div className=\"space-y-1 max-w-md\">\n        <div className=\"text-base font-semibold text-foreground\">{title}</div>\n        {description && (\n          <div className=\"text-sm text-muted-foreground leading-relaxed\">{description}</div>\n        )}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  )\n)\nEmptyState.displayName = \"EmptyState\"\n\nexport { EmptyState }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Empty: the parts of an empty state with no frame of their own.\n * The icon sits on a round graphite bevel; the title and description are\n * centred under it.\n */\nconst Empty = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty\"\n      className={cn(\"flex flex-col items-center justify-center gap-3 p-8 text-center\", className)}\n      {...props}\n    />\n  ),\n);\nEmpty.displayName = \"Empty\";\n\nconst EmptyIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-icon\"\n      className={cn(\n        \"mb-1 flex size-12 items-center justify-center rounded-full text-muted-foreground [&_svg]:size-5\",\n        \"bg-(image:--fill-raised) shadow-(--bevel-raised)\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nEmptyIcon.displayName = \"EmptyIcon\";\n\nconst EmptyTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-title\"\n      className={cn(\"text-base font-semibold text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nEmptyTitle.displayName = \"EmptyTitle\";\n\nconst EmptyDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"empty-description\"\n    className={cn(\"max-w-md text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nEmptyDescription.displayName = \"EmptyDescription\";\n\nconst EmptyActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-actions\"\n      className={cn(\"flex items-center gap-2 pt-2\", className)}\n      {...props}\n    />\n  ),\n);\nEmptyActions.displayName = \"EmptyActions\";\n\nexport { Empty, EmptyIcon, EmptyTitle, EmptyDescription, EmptyActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

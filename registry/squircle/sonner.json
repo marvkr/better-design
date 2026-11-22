@@ -1,0 +1,14 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\n// Apple Sonner: clean minimal toast notifications\n// Uses bg-background, rounded-[0.75rem], ring-1 border\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-[oklch(1_0_0/0.82)] group-[.toaster]:backdrop-blur-xl group-[.toaster]:text-foreground group-[.toaster]:rounded-[calc(0.875rem*var(--corner-factor,1))] group-[.toaster]:border group-[.toaster]:border-[oklch(1_0_0/0.6)] group-[.toaster]:shadow-[0_0.25rem_1rem_0_oklch(0_0_0/0.08),inset_0_0.0625rem_0_oklch(1_0_0/0.5)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-lg\",\n          error: \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success: \"group-[.toaster]:text-emerald-700 group-[.toaster]:border-emerald-200\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ]
+}

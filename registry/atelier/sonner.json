@@ -1,0 +1,25 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\"\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:rounded-lg group-[.toaster]:[box-shadow:var(--shadow-l)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-md group-[.toast]:[box-shadow:var(--shadow-button)]\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground group-[.toast]:rounded-md\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05), 0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.0625rem 0.125rem oklch(0.25 0.05 156 / 0.12), 0 0.1875rem 0.625rem -0.125rem oklch(0.25 0.05 156 / 0.1)"
+    },
+    "dark": {
+      "shadow-l": "0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05), 0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.0625rem 0.125rem oklch(0.25 0.05 156 / 0.12), 0 0.1875rem 0.625rem -0.125rem oklch(0.25 0.05 156 / 0.1)"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+/* Ported from https://www.aicss.dev/components/text-response */
+.prose { font-size: 0.875rem; line-height: 1.1875rem; color: var(--foreground); }
+.prose p { margin-bottom: 0.625rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose code { font-family: ui-monospace, monospace; font-size: 0.78125rem; color: inherit; background: var(--muted); padding: 0.1875rem 0.3125rem 0.0625rem; border-radius: 0.3125rem; }
+/* Answer states, the AI label and the rating bar. [BD-1055] */
+.response { display: flex; flex-direction: column; gap: 0.5rem; }
+.aiLabel { align-self: flex-start; margin: 0; padding: 0.125rem 0.5rem; border-radius: 999rem; font-size: 0.75rem; line-height: 1rem; font-weight: 500; color: var(--ai-label-foreground); background: var(--ai-label); }
+.notice { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0; padding: 0.5rem 0.75rem; border: 0.0625rem solid var(--border); border-radius: 0.5rem; font-size: 0.875rem; line-height: 1.25rem; color: var(--foreground); }
+.notice p { margin: 0; }
+.response[data-status="failed"] .notice { border-color: var(--destructive); }
+.noticeHint { margin: 0; font-size: 0.875rem; line-height: 1.25rem; color: var(--muted-foreground); }
+.feedback { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.action { min-height: 2rem; padding: 0 0.75rem; border: 0.0625rem solid var(--border); border-radius: 0.5rem; background: transparent; font: inherit; font-size: 0.8125rem; color: var(--foreground); cursor: pointer; }
+@media (hover: hover) and (pointer: fine) { .action:hover { background: var(--muted); } }
+.action:focus-visible { outline: 0.125rem solid var(--ring); outline-offset: 0.125rem; }

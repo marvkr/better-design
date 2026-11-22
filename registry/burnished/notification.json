@@ -1,0 +1,33 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, focusRing } from \"./_shared\";\n\n/**\n * Burnished Notification: a banner cut as an umber slab, with the long soft\n * drop of a card so it sits above the page. Status variants tint a hairline\n * inside the rim and colour the icon; the dismiss control is a round ghost.\n */\nconst notificationVariants = cva(\n  [\"relative flex gap-3 rounded-2xl p-4\", cardSlab].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"\",\n        info: \"inset-ring-1 inset-ring-info/25\",\n        success: \"inset-ring-1 inset-ring-success/25\",\n        warning: \"inset-ring-1 inset-ring-warning/25\",\n        destructive: \"inset-ring-1 inset-ring-destructive/30\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nconst iconMap = {\n  default: { icon: \"ph:bell\", color: \"text-muted-foreground\" },\n  info: { icon: \"ph:info\", color: \"text-info\" },\n  success: { icon: \"ph:check-circle\", color: \"text-success\" },\n  warning: { icon: \"ph:warning\", color: \"text-warning\" },\n  destructive: { icon: \"ph:warning-circle\", color: \"text-destructive\" },\n} as const;\n\nexport interface NotificationProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">,\n    VariantProps<typeof notificationVariants> {\n  title?: React.ReactNode;\n  description?: React.ReactNode;\n  icon?: React.ReactNode;\n  onDismiss?: () => void;\n  actions?: React.ReactNode;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    { className, variant = \"default\", title, description, icon, onDismiss, actions, children, ...props },\n    ref,\n  ) => {\n    const meta = iconMap[variant ?? \"default\"];\n    return (\n      <div\n        ref={ref}\n        data-slot=\"notification\"\n        className={cn(notificationVariants({ variant }), className)}\n        {...props}\n      >\n        <div className={cn(\"mt-0.5 flex size-5 shrink-0 items-center justify-center\", meta.color)}>\n          {icon ?? <Icon icon={meta.icon} className=\"size-5\" />}\n        </div>\n        <div className=\"min-w-0 flex-1\">\n          {title && <div className=\"text-sm font-semibold leading-snug text-foreground\">{title}</div>}\n          {description && (\n            <div className={cn(\"text-sm leading-relaxed text-muted-foreground\", title && \"mt-1\")}>\n              {description}\n            </div>\n          )}\n          {children}\n          {actions && <div className=\"mt-3 flex items-center gap-2\">{actions}</div>}\n        </div>\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            aria-label=\"Dismiss\"\n            className={cn(\n              \"-m-1 flex size-8 shrink-0 items-center justify-center rounded-full text-muted-foreground\",\n              \"transition-colors duration-fast ease-(--ease-out)\",\n              \"[@media(hover:hover)_and_(pointer:fine)]:hover:bg-accent [@media(hover:hover)_and_(pointer:fine)]:hover:text-foreground\",\n              focusRing,\n            )}\n          >\n            <Icon icon=\"ph:x\" className=\"size-4\" />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nNotification.displayName = \"Notification\";\n\nexport { Notification };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.79 0.12 150)",
+      "warning": "oklch(0.827 0.122 62.1)",
+      "info": "oklch(0.78 0.08 240)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.79 0.12 150)",
+      "warning": "oklch(0.827 0.122 62.1)",
+      "info": "oklch(0.78 0.08 240)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

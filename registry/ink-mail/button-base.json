@@ -1,0 +1,28 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, glassFill, primaryFill } from \"./_shared\";\n\n/**\n * Ink mail Button on a Base UI button: a 1rem-corner block in Inter semibold.\n *\n * The primary is flat off-white with black ink, the one solid bright surface\n * on the black page. The glass variant is the translucent call to action that\n * pairs with it. Secondary and outline step down through surface luminance\n * and hairlines. Nothing casts a shadow. A disabled button goes quiet whether\n * the element is a native button or a link rendered through `render`.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-xl font-semibold\",\n    \"transition-[background-color,background-image,color,border-color] duration-fast ease-out\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:border-transparent disabled:bg-muted disabled:bg-none disabled:text-(--foreground-disabled)\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:border-transparent data-[disabled]:bg-muted data-[disabled]:bg-none data-[disabled]:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: primaryFill,\n        primary: primaryFill,\n        glass: glassFill,\n        secondary:\n          \"border border-(--line-strong) bg-secondary text-secondary-foreground hover:bg-muted\",\n        outline:\n          \"border border-(--line-strong) bg-background text-foreground hover:bg-secondary\",\n        ghost: \"bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        link: \"h-auto rounded-sm px-0 font-medium text-(--link) underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-sm\",\n        default: \"h-10 px-4 text-sm\",\n        lg: \"h-12 px-5 text-base\",\n        icon: \"size-10 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-12 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Props for the Base UI Button. `asChild` turns a single child element into the button. */\nexport interface ButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  /**\n   * Renders the single child element as the button, for callers written\n   * against the Radix API (`<Button asChild><a href=\"…\" /></Button>`).\n   * Base UI composes through `render`, so the child becomes that element.\n   */\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const classes = cn(buttonVariants({ variant, size, className }));\n\n    if (asChild && React.isValidElement(children)) {\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          data-slot=\"button\"\n          className={classes}\n          nativeButton={false}\n          {...props}\n          render={children}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive\n        ref={ref}\n        data-slot=\"button\"\n        className={classes}\n        {...props}\n      >\n        {children}\n      </ButtonPrimitive>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "link": "oklch(0.688 0.169 251.4)",
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

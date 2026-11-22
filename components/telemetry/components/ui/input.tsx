@@ -1,0 +1,32 @@
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+import { formFieldBase, formFieldSingleLine } from "./_shared"
+
+// Control Room Input: recessed instrument well.
+// Near-black fill below the panel surface, hairline border, inner shadow.
+// Focus energizes the field with the signal-green ring glow.
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          formFieldBase,
+          formFieldSingleLine,
+          "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }

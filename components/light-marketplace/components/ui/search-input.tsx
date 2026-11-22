@@ -16,6 +16,8 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     const handleClear = () => {
       onClear?.()
       if (onChange) {
+        // SAFETY: a cleared input only needs target.value; consumers of this
+        // registry component read nothing else off the synthetic event.
         const event = {
           target: { value: "" },
         } as React.ChangeEvent<HTMLInputElement>
@@ -32,7 +34,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           value={value}
           onChange={onChange}
           className={cn(
-            "flex h-11 w-full rounded-[14px] border border-border bg-background",
+            "flex h-11 w-full rounded-[0.875rem] border border-border bg-background",
             "pl-10 pr-10 py-2 text-sm",
             "placeholder:text-muted-foreground",
             "focus-visible:outline-none focus-visible:border-ring focus-visible:ring-0 transition-colors",

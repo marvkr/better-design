@@ -9,9 +9,15 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-avatar"
+    "@radix-ui/react-avatar@^1.1.10"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    }
+  }
 }

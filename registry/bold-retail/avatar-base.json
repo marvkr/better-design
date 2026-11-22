@@ -1,0 +1,14 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Bold retail Avatar: a 2.5rem round photo, or initials in ink on the soft\n * grey when there is no photo. Resize it with a size class (size-6, size-8,\n * size-14); the initials follow the circle down to xs and up to lg.\n */\nconst Avatar = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    data-slot=\"avatar\"\n    className={cn(\n      \"@container relative flex size-10 shrink-0 select-none overflow-hidden rounded-full bg-secondary\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatar.displayName = \"Avatar\";\n\n/** The photo, cropped to fill the circle. */\nconst AvatarImage = React.forwardRef<\n  HTMLImageElement,\n  WithClassName<AvatarPrimitive.Image.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    data-slot=\"avatar-image\"\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n));\nAvatarImage.displayName = \"AvatarImage\";\n\n/** Initials on the soft grey, shown while the photo loads or when it fails. */\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    data-slot=\"avatar-fallback\"\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full bg-secondary\",\n      \"text-sm font-medium text-foreground\",\n      \"@max-[2.25rem]:text-xs @min-[3rem]:text-lg\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = \"AvatarFallback\";\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

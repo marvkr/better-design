@@ -1,0 +1,489 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Bevel: a compact design system for phone apps.
+ *
+ * Every surface is borderless. Separation comes from three layers stacked in
+ * one shadow: an inset highlight along the top edge, a 0.0625rem ring, and a soft
+ * drop shadow. Dividers are one pixel of the track token, never a border
+ * color, so a list of rows reads as one card instead of a stack of boxes.
+ *
+ * Inter Tight carries the whole interface. Headings pull -0.0438rem to -0.0563rem of
+ * tracking so a 1.375rem title sits tight; small labels push +0.0188rem back out so
+ * 0.75rem copy stays readable. The blue is the only accent, and charts step from
+ * the track color up to a deep blue in five stops.
+ *
+ * Light and dark ship the same component structure. Only the variables below
+ * change, so no component carries a `dark:` variant.
+ */
+
+:root {
+  /* ─── Ground and surfaces ─── */
+  --background: oklch(0.97 0.0029 264.54);
+  --foreground: oklch(0.1593 0.0111 267.98);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1593 0.0111 267.98);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1593 0.0111 267.98);
+
+  /* Inner surfaces: rows, wells and chips that sit inside a card. */
+  --inner: oklch(0.9745 0.0028 264.5);
+  --inner-foreground: oklch(0.1593 0.0111 267.98);
+
+  /* ─── The one accent ─── */
+  --primary: oklch(0.5418 0.1798 264.36);
+  --primary-from: oklch(0.59 0.175 264.6);
+  --primary-to: oklch(0.505 0.183 263.4);
+  --primary-hover-from: oklch(0.625 0.168 264.8);
+  --primary-hover-to: oklch(0.54 0.18 263.6);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(1 0 0);
+  --secondary-foreground: oklch(0.1593 0.0111 267.98);
+  --muted: oklch(0.9584 0.0033 264.5);
+  --muted-foreground: oklch(0.54 0.0234 264.36);
+  --accent: oklch(0.9505 0.0119 264.5);
+  --accent-foreground: oklch(0.4 0.14 264);
+
+  --destructive: oklch(0.5762 0.2149 25.5);
+  --destructive-from: oklch(0.624 0.208 25.9);
+  --destructive-to: oklch(0.539 0.216 25.2);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.5695 0.1372 158);
+  --warning: oklch(0.6802 0.1568 62);
+
+  /* ─── The spec's own names ─── */
+  /* Text, icons and rules address these four directly, so a screen reads the
+     same way the spec is written. */
+  --text: var(--foreground);
+  --muted-text: var(--muted-foreground);
+  --strong: oklch(0.3382 0.0208 265.5);
+  --track: oklch(0.9306 0.0058 264.53);
+
+  /* A divider is one pixel of the track, so --border resolves to it. */
+  --border: var(--track);
+  --input: oklch(1 0 0);
+  --ring: oklch(0.5418 0.1798 264.36);
+
+  /* ─── Radius hierarchy ─── */
+  /* 3.375rem device frame, 1.125-1.375rem cards, 0.5-0.875rem chips and rows. */
+  --radius: 1.25rem;
+  --radius-device: 3.375rem;
+
+  /* ─── Type ─── */
+  --font-sans: "Inter Tight", ui-sans-serif, -apple-system,
+    BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  --font-serif: "Inter Tight", ui-sans-serif, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
+    monospace;
+
+  /* Headings pull tracking in; small labels push it back out. */
+  --tracking-display: -0.0563rem;
+  --tracking-title: -0.0438rem;
+  --tracking-heading: -0.0375rem;
+  --tracking-body: 0.0188rem;
+
+  /* ─── Depth: inset highlight, 0.0625rem ring, soft drop ─── */
+  --shadow-ring: 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06);
+  --shadow-xs: 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.05),
+    0 0.0625rem 0.0625rem -0.0313rem oklch(0.1593 0.0111 267.98 / 0.06);
+  --shadow-sm: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9),
+    0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.055),
+    0 0.0625rem 0.125rem -0.0625rem oklch(0.1593 0.0111 267.98 / 0.08);
+  --shadow-md: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9),
+    0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.055),
+    0 0.0625rem 0.125rem -0.0625rem oklch(0.1593 0.0111 267.98 / 0.08),
+    0 0.5rem 1.25rem -0.75rem oklch(0.1593 0.0111 267.98 / 0.18);
+  --shadow-lg: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9),
+    0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06),
+    0 0.125rem 0.25rem -0.125rem oklch(0.1593 0.0111 267.98 / 0.08),
+    0 1rem 2rem -1rem oklch(0.1593 0.0111 267.98 / 0.22);
+  --shadow-xl: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9),
+    0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.07),
+    0 0.25rem 0.5rem -0.25rem oklch(0.1593 0.0111 267.98 / 0.1),
+    0 1.75rem 3.5rem -1.5rem oklch(0.1593 0.0111 267.98 / 0.26);
+
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+
+  /* The card recipe the whole system leans on. */
+  --shadow-card: var(--shadow-md);
+  --shadow-card-hover: var(--shadow-lg);
+  /* A well pressed into a card: inner surfaces and empty tracks. */
+  --shadow-inset: inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06),
+    inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045);
+
+  /* Buttons are never a flat fill: 0.375rem of inset highlight, then a soft drop. */
+  --shadow-button: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.85),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.28),
+    0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.07),
+    0 0.0625rem 0.125rem oklch(0.1593 0.0111 267.98 / 0.07),
+    0 0.375rem 0.875rem -0.625rem oklch(0.1593 0.0111 267.98 / 0.2);
+  --shadow-button-hover: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.22),
+    0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.08),
+    0 0.125rem 0.25rem oklch(0.1593 0.0111 267.98 / 0.08),
+    0 0.625rem 1.25rem -0.75rem oklch(0.1593 0.0111 267.98 / 0.26);
+  --shadow-primary: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55),
+    0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9),
+    0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24),
+    0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4);
+  --shadow-primary-hover: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.36),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.45),
+    0 0 0 0.0625rem oklch(0.47 0.172 263.6 / 0.9),
+    0 0.125rem 0.25rem oklch(0.3 0.14 263 / 0.26),
+    0 0.75rem 1.5rem -0.75rem oklch(0.3 0.14 263 / 0.46);
+  --shadow-destructive: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.16 26 / 0.5),
+    0 0 0 0.0625rem oklch(0.49 0.212 25.4 / 0.9),
+    0 0.0625rem 0.125rem oklch(0.36 0.16 26 / 0.24),
+    0 0.5rem 1.125rem -0.625rem oklch(0.36 0.16 26 / 0.4);
+  --shadow-destructive-hover: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.36),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.16 26 / 0.42),
+    0 0 0 0.0625rem oklch(0.52 0.21 25.6 / 0.9),
+    0 0.125rem 0.25rem oklch(0.36 0.16 26 / 0.26),
+    0 0.75rem 1.5rem -0.75rem oklch(0.36 0.16 26 / 0.46);
+
+  /* ─── Charts: five steps from the track color up to deep blue ─── */
+  --chart-1: oklch(0.42 0.165 263);
+  --chart-2: oklch(0.5418 0.1798 264.36);
+  --chart-3: oklch(0.66 0.133 265);
+  --chart-4: oklch(0.8 0.076 265.5);
+  --chart-5: oklch(0.9306 0.0058 264.53);
+
+  --pop-blue: oklch(0.9426 0.0308 264.5);
+  --pop-blue-foreground: oklch(0.4416 0.1683 264);
+  --pop-green: oklch(0.9426 0.0455 158);
+  --pop-green-foreground: oklch(0.4319 0.1055 158);
+  --pop-orange: oklch(0.9506 0.045 62);
+  --pop-orange-foreground: oklch(0.5111 0.135 52);
+  --pop-yellow: oklch(0.9613 0.0641 95);
+  --pop-yellow-foreground: oklch(0.4913 0.1074 84);
+  --pop-purple: oklch(0.9427 0.0432 293.5);
+  --pop-purple-foreground: oklch(0.4813 0.1454 293.5);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+.dark {
+  --background: oklch(0.1593 0.0111 267.98);
+  --foreground: oklch(0.9666 0.0027 264.5);
+
+  --card: oklch(0.2202 0.0134 269);
+  --card-foreground: oklch(0.9666 0.0027 264.5);
+  --popover: oklch(0.2202 0.0134 269);
+  --popover-foreground: oklch(0.9666 0.0027 264.5);
+
+  --inner: oklch(0.2519 0.0152 268);
+  --inner-foreground: oklch(0.9666 0.0027 264.5);
+
+  --primary: oklch(0.6206 0.1712 264.5);
+  --primary-from: oklch(0.664 0.163 265);
+  --primary-to: oklch(0.582 0.176 263.8);
+  --primary-hover-from: oklch(0.7 0.152 265.4);
+  --primary-hover-to: oklch(0.618 0.172 264);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.2519 0.0152 268);
+  --secondary-foreground: oklch(0.9666 0.0027 264.5);
+  --muted: oklch(0.2519 0.0152 268);
+  --muted-foreground: oklch(0.6537 0.0248 269.31);
+  --accent: oklch(0.2925 0.0284 266);
+  --accent-foreground: oklch(0.8206 0.0912 265);
+
+  --destructive: oklch(0.6402 0.201 25.8);
+  --destructive-from: oklch(0.681 0.19 26.2);
+  --destructive-to: oklch(0.606 0.206 25.4);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.6903 0.1305 158);
+  --warning: oklch(0.7807 0.1424 66);
+
+  --text: var(--foreground);
+  --muted-text: var(--muted-foreground);
+  --strong: oklch(0.8409 0.0148 267);
+  --track: oklch(0.2849 0.0175 266.34);
+
+  --border: var(--track);
+  --input: oklch(0.2519 0.0152 268);
+  --ring: oklch(0.6206 0.1712 264.5);
+
+  /* The inset highlight goes to a faint white rim on dark ground, and the
+     drop shadow deepens so a card still lifts off a near-black page. */
+  --shadow-ring: 0 0 0 0.0625rem oklch(1 0 0 / 0.07);
+  --shadow-xs: 0 0 0 0.0625rem oklch(1 0 0 / 0.06),
+    0 0.0625rem 0.0625rem -0.0313rem oklch(0 0 0 / 0.4);
+  --shadow-sm: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06),
+    0 0 0 0.0625rem oklch(1 0 0 / 0.07),
+    0 0.0625rem 0.125rem -0.0625rem oklch(0 0 0 / 0.5);
+  --shadow-md: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06),
+    0 0 0 0.0625rem oklch(1 0 0 / 0.07),
+    0 0.0625rem 0.125rem -0.0625rem oklch(0 0 0 / 0.5),
+    0 0.5rem 1.25rem -0.75rem oklch(0 0 0 / 0.7);
+  --shadow-lg: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.07),
+    0 0 0 0.0625rem oklch(1 0 0 / 0.08),
+    0 0.125rem 0.25rem -0.125rem oklch(0 0 0 / 0.5),
+    0 1rem 2rem -1rem oklch(0 0 0 / 0.75);
+  --shadow-xl: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08),
+    0 0 0 0.0625rem oklch(1 0 0 / 0.09),
+    0 0.25rem 0.5rem -0.25rem oklch(0 0 0 / 0.55),
+    0 1.75rem 3.5rem -1.5rem oklch(0 0 0 / 0.8);
+
+  --shadow-inset: inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45),
+    inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05);
+
+  --shadow-button: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.5),
+    0 0 0 0.0625rem oklch(1 0 0 / 0.08),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.375rem 0.875rem -0.625rem oklch(0 0 0 / 0.6);
+  --shadow-button-hover: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.1),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.42),
+    0 0 0 0.0625rem oklch(1 0 0 / 0.1),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.42),
+    0 0.625rem 1.25rem -0.75rem oklch(0 0 0 / 0.66);
+  --shadow-primary: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5),
+    0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55);
+  --shadow-primary-hover: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.4),
+    0 0 0 0.0625rem oklch(0.56 0.168 264.4 / 0.9),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.42),
+    0 0.75rem 1.5rem -0.75rem oklch(0.35 0.15 263 / 0.62);
+  --shadow-destructive: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.15 26 / 0.5),
+    0 0 0 0.0625rem oklch(0.56 0.2 25.6 / 0.9),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.5rem 1.125rem -0.625rem oklch(0.4 0.17 26 / 0.55);
+  --shadow-destructive-hover: inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3),
+    inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.15 26 / 0.4),
+    0 0 0 0.0625rem oklch(0.6 0.196 25.8 / 0.9),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.42),
+    0 0.75rem 1.5rem -0.75rem oklch(0.4 0.17 26 / 0.62);
+
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+  --shadow-card: var(--shadow-md);
+  --shadow-card-hover: var(--shadow-lg);
+
+  --chart-1: oklch(0.72 0.135 265.5);
+  --chart-2: oklch(0.6206 0.1712 264.5);
+  --chart-3: oklch(0.51 0.168 263.6);
+  --chart-4: oklch(0.4 0.128 263);
+  --chart-5: oklch(0.2849 0.0175 266.34);
+
+  --pop-blue: oklch(0.3113 0.0709 264.5);
+  --pop-blue-foreground: oklch(0.8306 0.0902 265);
+  --pop-green: oklch(0.3113 0.0629 158);
+  --pop-green-foreground: oklch(0.8306 0.1024 160);
+  --pop-orange: oklch(0.3213 0.0688 62);
+  --pop-orange-foreground: oklch(0.8506 0.1024 70);
+  --pop-yellow: oklch(0.3313 0.0654 95);
+  --pop-yellow-foreground: oklch(0.8706 0.1154 95);
+  --pop-purple: oklch(0.3213 0.0705 293.5);
+  --pop-purple-foreground: oklch(0.8306 0.0912 293.5);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-inner: var(--inner);
+  --color-inner-foreground: var(--inner-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-track: var(--track);
+  --color-strong: var(--strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-pop-blue: var(--pop-blue);
+  --color-pop-blue-foreground: var(--pop-blue-foreground);
+  --color-pop-green: var(--pop-green);
+  --color-pop-green-foreground: var(--pop-green-foreground);
+  --color-pop-orange: var(--pop-orange);
+  --color-pop-orange-foreground: var(--pop-orange-foreground);
+  --color-pop-yellow: var(--pop-yellow);
+  --color-pop-yellow-foreground: var(--pop-yellow-foreground);
+  --color-pop-purple: var(--pop-purple);
+  --color-pop-purple-foreground: var(--pop-purple-foreground);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  /* The shadcn radius steps, kept on their standard formulas so a stamped
+     component lands the same here as in the app that installs this system.
+     The spec's own steps are literal: 0.5-0.875rem on chips, rows, fields and
+     buttons, 1.125-1.375rem on cards, and --radius-device on the frame. */
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-chip: 0.5rem;
+  --radius-row: 0.75rem;
+  --radius-menu: 0.875rem;
+  --radius-card: 1.25rem;
+  --radius-device: var(--radius-device);
+
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-ring: var(--shadow-ring);
+  --shadow-card: var(--shadow-card);
+  --shadow-card-hover: var(--shadow-card-hover);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+  --shadow-primary-hover: var(--shadow-primary-hover);
+  --shadow-destructive: var(--shadow-destructive);
+  --shadow-destructive-hover: var(--shadow-destructive-hover);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    letter-spacing: var(--tracking-body);
+  }
+
+  /* Headings pull tracking in so a dense screen still feels calm. */
+  :is(h1, h2, h3, h4, h5, h6) {
+    letter-spacing: var(--tracking-title);
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
+}

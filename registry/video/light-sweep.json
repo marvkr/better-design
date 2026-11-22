@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "light-sweep",
+  "type": "registry:component",
+  "title": "Light Sweep",
+  "description": "Light sweep background animation: a soft diagonal band of light crosses the surface every few seconds, like a reflection on glass. Children draw underneath.",
+  "dependencies": [
+    "remotion@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/light-sweep.tsx",
+      "target": "components/bd-video/light-sweep.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Light sweep: a soft diagonal band of light crosses the surface once every\n * few seconds, like a reflection sliding over glass. Use it under a logo or a\n * hero title to give a still frame a pulse.\n *\n * Written by Better Design. The sweep repeats every `every` frames, so a\n * composition that length loops without a seam.\n */\nimport type { ReactNode } from \"react\";\nimport { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from \"remotion\";\nimport { easings, type VideoTheme, useVideoTheme, withAlpha } from \"@/lib/bd-video\";\n\nexport interface LightSweepProps {\n  /** Drawn under the light, so the sweep passes over it too. */\n  children?: ReactNode;\n  /** Frames between the start of one sweep and the next. */\n  every?: number;\n  /** Frames one sweep takes to cross the frame. */\n  sweepFrames?: number;\n  /** Angle of the band, in degrees from vertical. */\n  angle?: number;\n  /** Width of the band, as a share of the frame width. */\n  bandWidth?: number;\n  /** Brightness of the band, 0 to 1. */\n  intensity?: number;\n  /** Frame the first sweep starts on. */\n  delay?: number;\n  theme?: Partial<VideoTheme>;\n}\n\n/** A soft diagonal band of light that sweeps the surface every `every` frames, children underneath. */\nexport function LightSweep({ children, every = 120, sweepFrames = 56, angle = 20, bandWidth = 0.32, intensity = 0.6, delay = 20, theme: themeOverride }: LightSweepProps) {\n  const t = useVideoTheme(themeOverride);\n  const frame = useCurrentFrame();\n  const { width, height } = useVideoConfig();\n  const local = (((frame - delay) % every) + every) % every;\n  const p = easings.inOut(interpolate(local, [0, sweepFrames], [0, 1], { extrapolateLeft: \"clamp\", extrapolateRight: \"clamp\" }));\n  const active = local < sweepFrames;\n\n  // The band is wider than the frame's diagonal so its angled edges never show.\n  const bandPx = width * bandWidth;\n  const x = interpolate(p, [0, 1], [-bandPx * 1.5, width + bandPx * 0.5]);\n  // A primary-tinted halo carries the band on a light page; a white core lights it on a dark one.\n  const glow = t.primary;\n  const core = \"oklch(1 0 0)\";\n  const surface = `linear-gradient(160deg, ${withAlpha(t.primary, 0)} 30%, ${withAlpha(t.primary, 0.06)} 100%), ${t.background}`;\n\n  return (\n    <AbsoluteFill style={{ background: surface, overflow: \"hidden\" }}>\n      {children ? <AbsoluteFill>{children}</AbsoluteFill> : null}\n      {active ? (\n        <div\n          style={{\n            position: \"absolute\",\n            top: -height * 0.4,\n            bottom: -height * 0.4,\n            left: x,\n            width: bandPx,\n            transform: `rotate(${angle}deg)`,\n            background: `linear-gradient(90deg, ${withAlpha(glow, 0)} 0%, ${withAlpha(glow, intensity * 0.16)} 32%, ${withAlpha(core, intensity * 0.55)} 50%, ${withAlpha(glow, intensity * 0.16)} 68%, ${withAlpha(glow, 0)} 100%)`,\n            filter: \"blur(24px)\",\n          }}\n        />\n      ) : null}\n    </AbsoluteFill>\n  );\n}\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

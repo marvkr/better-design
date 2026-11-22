@@ -56,7 +56,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     return (
       <div
         className={cn(
-          "inline-flex items-center gap-2 rounded-[14px] border border-border bg-background px-2 py-1.5",
+          "inline-flex items-center gap-2 rounded-[0.875rem] border border-border bg-background px-2 py-1.5",
           className
         )}
       >

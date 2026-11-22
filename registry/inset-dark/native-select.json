@@ -9,9 +9,9 @@
     }
   ],
   "dependencies": [
-    "@iconify/react"
+    "@iconify/react@^6.0.2"
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/inset-dark/_shared.json"
   ]
 }

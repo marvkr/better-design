@@ -1,0 +1,14 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { selectedOption } from \"./_shared\";\n\n/**\n * Mallow Kbd: a small key in the light violet tint inside a violet ring, so\n * a shortcut reads as something you press.\n */\nconst Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(\n  ({ className, ...props }, ref) => (\n    <kbd\n      ref={ref}\n      data-slot=\"kbd\"\n      className={cn(\n        selectedOption,\n        \"inline-flex h-6 min-w-6 select-none items-center justify-center gap-1 rounded-sm px-1.5\",\n        \"font-mono text-xs font-medium text-muted-foreground\",\n        \"[&_svg]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nKbd.displayName = \"Kbd\";\n\nexport { Kbd };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ]
+}

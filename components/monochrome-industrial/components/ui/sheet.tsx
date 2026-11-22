@@ -20,7 +20,7 @@ const SheetOverlay = React.forwardRef<
  ref={ref}
  className={cn(
  "fixed inset-0 z-50 bg-black/70 backdrop-blur-sm",
- "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+ "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-base",
  className
  )}
  {...props}
@@ -29,7 +29,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
- "fixed z-50 gap-4 bg-popover text-popover-foreground p-6 transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+ "fixed z-50 gap-4 bg-popover text-popover-foreground p-6 transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out duration-base",
  {
  variants: {
  side: {
@@ -63,7 +63,7 @@ const SheetContent = React.forwardRef<
  <SheetPrimitive.Close
  className={cn(
  "absolute right-4 top-4 rounded-none p-1 text-muted-foreground",
- "transition-[background-color,color] duration-150",
+ "transition-[background-color,color] duration-fast",
  "hover:bg-accent hover:text-foreground",
  "focus:outline-none focus:ring-2 focus:ring-ring/50",
  "disabled:pointer-events-none"

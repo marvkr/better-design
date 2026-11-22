@@ -1,0 +1,21 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Table: quiet rows on the page.\n *\n * No outer frame and no zebra stripes. Rows are split by warm hairlines,\n * headers are small muted labels, and numbers line up on tabular figures.\n * A row warms under the pointer, and a selected row takes the pale\n * yellow-green wash used by pressed chips.\n */\nconst Table = React.forwardRef<\n  HTMLTableElement,\n  React.HTMLAttributes<HTMLTableElement>\n>(({ className, ...props }, ref) => (\n  <div data-slot=\"table-container\" className=\"relative w-full overflow-x-auto\">\n    <table\n      ref={ref}\n      data-slot=\"table\"\n      className={cn(\"w-full caption-bottom text-sm\", className)}\n      {...props}\n    />\n  </div>\n));\nTable.displayName = \"Table\";\n\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead\n    ref={ref}\n    data-slot=\"table-header\"\n    className={cn(\"[&_tr]:border-b [&_tr]:border-border [&_tr]:hover:bg-transparent\", className)}\n    {...props}\n  />\n));\nTableHeader.displayName = \"TableHeader\";\n\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    data-slot=\"table-body\"\n    className={cn(\"[&_tr:last-child]:border-0\", className)}\n    {...props}\n  />\n));\nTableBody.displayName = \"TableBody\";\n\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    data-slot=\"table-footer\"\n    className={cn(\n      \"border-t border-border bg-card font-medium [&>tr:last-child]:border-b-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableFooter.displayName = \"TableFooter\";\n\nconst TableRow = React.forwardRef<\n  HTMLTableRowElement,\n  React.HTMLAttributes<HTMLTableRowElement>\n>(({ className, ...props }, ref) => (\n  <tr\n    ref={ref}\n    data-slot=\"table-row\"\n    className={cn(\n      \"border-b border-border transition-colors duration-fast ease-out\",\n      \"hover:bg-muted data-[state=selected]:bg-(--accent-wash)\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableRow.displayName = \"TableRow\";\n\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    data-slot=\"table-head\"\n    className={cn(\n      \"h-10 whitespace-nowrap px-3 text-start align-middle text-xs font-medium text-muted-foreground\",\n      \"[&:has([role=checkbox])]:pe-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHead.displayName = \"TableHead\";\n\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    data-slot=\"table-cell\"\n    className={cn(\n      \"px-3 py-3 align-middle text-sm tabular-nums [&:has([role=checkbox])]:pe-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableCell.displayName = \"TableCell\";\n\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    data-slot=\"table-caption\"\n    className={cn(\"mt-4 text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nTableCaption.displayName = \"TableCaption\";\n\nexport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "accent-wash": "oklch(0.966 0.068 111.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "accent-wash": "oklch(0.29 0.052 113.9)"
+    }
+  }
+}

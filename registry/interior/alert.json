@@ -1,0 +1,25 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Alert — a note set into the page as a bordered card, edged on all\n * four sides; a single accent stripe is banned. The verdict is carried by the\n * border tint and the title ink, not by a flooded background: the body stays\n * muted so the message reads calmly.\n */\n\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-[0.6875rem] border bg-card px-4 py-3.5\",\n    \"[&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:size-4\",\n    \"[&>svg~*]:pl-7\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"border-border text-foreground\",\n        info: \"border-accent-foreground/30 text-accent-foreground\",\n        success: \"border-success/40 text-success\",\n        warning: \"border-warning/40 text-warning\",\n        destructive: \"border-destructive/40 text-destructive\",\n      },\n    },\n    defaultVariants: { variant: \"default\" },\n  },\n);\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\n      \"mb-1 text-[0.8125rem] font-medium leading-snug tracking-[-0.01em]\",\n      className,\n    )}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"text-[0.7813rem] leading-relaxed text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5262 0.0942 151.04)",
+      "warning": "oklch(0.6658 0.1574 58.32)"
+    },
+    "dark": {
+      "success": "oklch(0.5262 0.0942 151.04)",
+      "warning": "oklch(0.6658 0.1574 58.32)"
+    }
+  }
+}

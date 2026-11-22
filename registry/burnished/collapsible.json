@@ -1,0 +1,14 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Collapsible: a bare open and close region. The content eases\n * open on the system's soft curve; the trigger and panel take whatever\n * finish the caller gives them.\n */\nconst Collapsible = CollapsiblePrimitive.Root;\n\nconst CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;\n\nconst CollapsibleContent = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleContent>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleContent>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleContent\n    ref={ref}\n    data-slot=\"collapsible-content\"\n    className={cn(\n      \"overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down\",\n      className,\n    )}\n    {...props}\n  />\n));\nCollapsibleContent.displayName = CollapsiblePrimitive.CollapsibleContent.displayName;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible@^1.1.11"
+  ]
+}

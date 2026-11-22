@@ -1,0 +1,34 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Card, CardContent } from \"./card\";\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string | number;\n  change?: {\n    value: string | number;\n    trend: \"up\" | \"down\" | \"neutral\";\n  };\n  icon?: React.ReactNode;\n  description?: string;\n}\n\nconst trendTone = {\n  up: \"bg-(--success-tint) text-(--success-text)\",\n  down: \"bg-(--destructive-tint) text-(--destructive-text)\",\n  neutral: \"bg-secondary text-(--foreground-secondary)\",\n} as const;\n\nconst trendIcon = {\n  up: \"feather:arrow-up-right\",\n  down: \"feather:arrow-down-right\",\n  neutral: null,\n} as const;\n\n/** Read before the value, so a screen reader hears the direction too. */\nconst trendSpoken = {\n  up: \"Up \",\n  down: \"Down \",\n  neutral: \"No change \",\n} as const;\n\n/**\n * Airy docs StatCard: one number on a hairline card, the way a docs\n * analytics page reports views or API calls. A muted label sits over a\n * large medium-weight figure on tabular digits; an icon rests in a small\n * tray tile at the top right. The change is a tinted pill with an arrow.\n */\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  const arrow = change ? trendIcon[change.trend] : null;\n\n  return (\n    <Card className={className} {...props}>\n      <CardContent className=\"flex flex-col gap-3 p-5\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"flex min-w-0 flex-col gap-1\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"text-3xl font-medium tracking-tight tabular-nums text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <span\n              aria-hidden=\"true\"\n              className=\"flex size-8 shrink-0 items-center justify-center rounded-md border border-border bg-secondary text-(--foreground-secondary) [&_svg]:size-4\"\n            >\n              {icon}\n            </span>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"flex flex-wrap items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex h-5.5 items-center gap-0.5 rounded-full px-2 text-xs font-medium tabular-nums\",\n                  trendTone[change.trend],\n                )}\n              >\n                {arrow && (\n                  <Icon icon={arrow} className=\"size-3\" aria-hidden=\"true\" />\n                )}\n                <span className=\"sr-only\">{trendSpoken[change.trend]}</span>\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-sm text-muted-foreground\">\n                {description}\n              </span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { StatCard };\nexport type { StatCardProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "success-tint": "oklch(0.476 0.11 154.3 / 0.08)",
+      "success-text": "oklch(0.42 0.1 154.3)",
+      "destructive-tint": "oklch(0.577 0.17 25 / 0.08)",
+      "destructive-text": "oklch(0.5 0.16 25)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "success-tint": "oklch(0.705 0.169 153.6 / 0.12)",
+      "success-text": "oklch(0.78 0.15 153.6)",
+      "destructive-tint": "oklch(0.66 0.17 23 / 0.14)",
+      "destructive-text": "oklch(0.78 0.13 22)"
+    }
+  }
+}

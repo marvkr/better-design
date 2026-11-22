@@ -1,0 +1,14 @@
+{
+  "name": "checkbox-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\nimport { Checkbox } from \"./checkbox\"\n\n// Amber Glass CheckboxGroup: stacked amber checkboxes with labels.\n\ninterface CheckboxGroupOption {\n  value: string\n  label: React.ReactNode\n  description?: React.ReactNode\n  disabled?: boolean\n}\n\ninterface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: CheckboxGroupOption[]\n  value: string[]\n  onValueChange: (value: string[]) => void\n  orientation?: \"vertical\" | \"horizontal\"\n  name?: string\n}\n\nconst CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(\n  (\n    { className, options, value, onValueChange, orientation = \"vertical\", name, ...props },\n    ref\n  ) => {\n    const toggle = (optionValue: string, checked: boolean) => {\n      onValueChange(\n        checked\n          ? [...value, optionValue]\n          : value.filter((v) => v !== optionValue)\n      )\n    }\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\n          \"flex gap-3\",\n          orientation === \"vertical\" ? \"flex-col\" : \"flex-row flex-wrap\",\n          className\n        )}\n        {...props}\n      >\n        {options.map((option) => {\n          const id = `${name ?? \"checkbox-group\"}-${option.value}`\n          return (\n            <label\n              key={option.value}\n              htmlFor={id}\n              className={cn(\n                \"flex cursor-pointer items-start gap-2.5\",\n                option.disabled && \"cursor-not-allowed opacity-50\"\n              )}\n            >\n              <Checkbox\n                id={id}\n                checked={value.includes(option.value)}\n                disabled={option.disabled}\n                onCheckedChange={(checked) => toggle(option.value, checked === true)}\n                className=\"mt-0.5\"\n              />\n              <span className=\"flex flex-col gap-0.5\">\n                <span className=\"text-sm font-semibold leading-none tracking-[-0.01em]\">\n                  {option.label}\n                </span>\n                {option.description && (\n                  <span className=\"text-xs text-muted-foreground\">{option.description}</span>\n                )}\n              </span>\n            </label>\n          )\n        })}\n      </div>\n    )\n  }\n)\nCheckboxGroup.displayName = \"CheckboxGroup\"\n\nexport { CheckboxGroup }\nexport type { CheckboxGroupProps, CheckboxGroupOption }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/checkbox-base.json"
+  ]
+}

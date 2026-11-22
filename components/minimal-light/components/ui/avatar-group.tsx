@@ -43,7 +43,7 @@ function AvatarGroup({
           key={i}
           className={cn(
             sizeMap[size],
-            "ring-2 ring-background transition-transform duration-200 hover:z-10 hover:scale-110"
+            "ring-2 ring-background transition-transform duration-base hover:z-10 hover:scale-110"
           )}
         >
           {av.src && <AvatarImage src={av.src} alt={av.alt ?? av.fallback} />}

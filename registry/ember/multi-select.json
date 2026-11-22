@@ -1,0 +1,28 @@
+{
+  "name": "multi-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, popoverSurface } from \"./_shared\"\n\n// Amber Glass MultiSelect: recessed well collecting glass chips,\n// floating glass option list.\n\ninterface MultiSelectOption {\n  label: string\n  value: string\n}\n\ninterface MultiSelectProps {\n  options: MultiSelectOption[]\n  value?: string[]\n  onChange?: (value: string[]) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction MultiSelect({\n  options,\n  value,\n  onChange,\n  placeholder = \"Select options...\",\n  disabled,\n  className,\n}: MultiSelectProps) {\n  const [open, setOpen] = React.useState(false)\n  const [internal, setInternal] = React.useState<string[]>(value ?? [])\n  const selected = value ?? internal\n  const containerRef = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const handler = (e: MouseEvent) => {\n      if (containerRef.current && !(e.target instanceof Node && containerRef.current.contains(e.target))) {\n        setOpen(false)\n      }\n    }\n    document.addEventListener(\"mousedown\", handler)\n    return () => document.removeEventListener(\"mousedown\", handler)\n  }, [])\n\n  const commit = (next: string[]) => {\n    setInternal(next)\n    onChange?.(next)\n  }\n\n  const toggle = (optionValue: string) => {\n    commit(\n      selected.includes(optionValue)\n        ? selected.filter((v) => v !== optionValue)\n        : [...selected, optionValue]\n    )\n  }\n\n  return (\n    <div ref={containerRef} className={cn(\"relative w-full\", className)}>\n      <button\n        type=\"button\"\n        disabled={disabled}\n        aria-haspopup=\"listbox\"\n        aria-expanded={open}\n        onClick={() => setOpen((o) => !o)}\n        className={cn(\n          \"flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-sm\",\n          formFieldBase\n        )}\n      >\n        {selected.length === 0 && (\n          <span className=\"px-1 text-muted-foreground\">{placeholder}</span>\n        )}\n        {selected.map((v) => {\n          const option = options.find((o) => o.value === v)\n          return (\n            <span\n              key={v}\n              className=\"inline-flex items-center gap-1 rounded-full bg-[var(--ag-fill-hover)] border border-[color:var(--ag-border)] px-2 py-0.5 text-xs font-semibold\"\n            >\n              {option?.label ?? v}\n              <span\n                role=\"button\"\n                tabIndex={0}\n                aria-label={`Remove ${option?.label ?? v}`}\n                onClick={(e) => {\n                  e.stopPropagation()\n                  toggle(v)\n                }}\n                onKeyDown={(e) => {\n                  if (e.key === \"Enter\" || e.key === \" \") {\n                    e.preventDefault()\n                    e.stopPropagation()\n                    toggle(v)\n                  }\n                }}\n                className=\"rounded-full text-muted-foreground transition-colors hover:text-foreground\"\n              >\n                <Icon icon=\"tabler:x\" className=\"h-3 w-3\" />\n              </span>\n            </span>\n          )\n        })}\n        <Icon\n          icon=\"tabler:chevron-down\"\n          className=\"ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground\"\n        />\n      </button>\n      {open && (\n        <ul\n          role=\"listbox\"\n          aria-multiselectable\n          className={cn(\n            \"absolute z-50 mt-1.5 max-h-56 w-full overflow-y-auto rounded-lg p-1\",\n            popoverSurface\n          )}\n        >\n          {options.map((option) => {\n            const isSelected = selected.includes(option.value)\n            return (\n              <li key={option.value}>\n                <button\n                  type=\"button\"\n                  role=\"option\"\n                  aria-selected={isSelected}\n                  onClick={() => toggle(option.value)}\n                  className={cn(\n                    \"flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors\",\n                    isSelected\n                      ? \"bg-primary/10 font-semibold text-primary\"\n                      : \"hover:bg-accent hover:text-accent-foreground\"\n                  )}\n                >\n                  <Icon\n                    icon=\"tabler:check\"\n                    className={cn(\"h-4 w-4\", isSelected ? \"opacity-100\" : \"opacity-0\")}\n                  />\n                  {option.label}\n                </button>\n              </li>\n            )\n          })}\n        </ul>\n      )}\n    </div>\n  )\n}\n\nexport { MultiSelect }\nexport type { MultiSelectProps, MultiSelectOption }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

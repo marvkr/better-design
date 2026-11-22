@@ -72,7 +72,7 @@ function InlineEdit({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className={cn(
-            "flex-1 min-w-0 rounded-[10px] border border-primary/60 bg-card px-3 py-1.5 text-sm text-foreground",
+            "flex-1 min-w-0 rounded-[0.625rem] border border-primary/60 bg-card px-3 py-1.5 text-sm text-foreground",
             "placeholder:text-muted-foreground/50",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
             "transition-colors",
@@ -118,8 +118,8 @@ function InlineEdit({
       onClick={startEdit}
       onKeyDown={(e) => e.key === "Enter" && startEdit()}
       className={cn(
-        "group inline-flex min-w-[120px] items-center gap-1.5 rounded-[10px] px-3 py-1.5",
-        "border border-transparent transition-all duration-150",
+        "group inline-flex min-w-[7.5rem] items-center gap-1.5 rounded-[0.625rem] px-3 py-1.5",
+        "border border-transparent transition-all duration-fast",
         !disabled && !readOnly && [
           "cursor-pointer",
           "hover:border-border hover:bg-secondary",

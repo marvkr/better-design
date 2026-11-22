@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { formFieldBase } from "./_shared"
 import { Check, X, Pencil } from "lucide-react"
 
 // Stripe Inline Edit: click-to-edit text field with confirm/cancel actions
@@ -67,10 +68,8 @@ function InlineEdit({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className={cn(
-            "h-8 min-w-0 flex-1 rounded-lg border border-border bg-background px-2.5 text-sm",
-            "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-            "focus-visible:border-foreground focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-            "transition-shadow duration-200",
+            formFieldBase,
+            "h-8 min-w-0 flex-1 px-2.5",
             inputClassName
           )}
         />

@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Airbnb Badge — extracted from airbnb.com (2026-04)\n// \"Guest favorite\" badge: white text, semi-transparent dark bg, rounded-full, px-2\n// Default badges: pill shape, light bg, medium weight text\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        // Guest favorite — white on dark overlay\n        default: \"bg-foreground text-background\",\n        // Light subtle — Airbnb's category pills\n        secondary: \"bg-muted text-foreground border border-border\",\n        // Rausch accent\n        primary: \"text-primary-foreground bg-[color:oklch(0.579_0.17_35.1)]\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive/14 text-[color:oklch(0.519_0.182_33.7)]\",\n        success: \"text-white bg-[color:oklch(0.546_0.118_163.2)]\",\n        \"success-light\": \"bg-[color:oklch(0.596_0.145_163.2/0.17)] text-[color:oklch(0.483_0.101_165.6)]\",\n        warning: \"text-white bg-[color:oklch(0.569_0.123_70.1)]\",\n        \"warning-light\": \"bg-[color:oklch(0.769_0.188_70.1/0.28)] text-[color:oklch(0.51_0.137_49)]\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-5 gap-1 px-2 text-[0.6875rem] font-semibold\",\n        default: \"h-6 gap-1.5 px-2.5 text-xs\",\n        lg: \"h-7 gap-1.5 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

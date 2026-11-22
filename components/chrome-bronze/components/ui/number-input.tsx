@@ -1,0 +1,117 @@
+"use client"
+
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+import { formFieldBase, formFieldSingleLine } from "./_shared"
+
+/*
+ * NumberInput — a recessed steel field with two stacked chrome stepper chips
+ * milled into the right edge. Spin buttons read as tiny raised metal taps.
+ */
+
+const ChevronUpIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2.5}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="m6 15 6-6 6 6" />
+  </svg>
+)
+
+const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2.5}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+)
+
+export interface NumberInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange"> {
+  value?: number
+  onValueChange?: (value: number) => void
+  step?: number
+  min?: number
+  max?: number
+}
+
+const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
+  ({ className, value = 0, onValueChange, step = 1, min, max, ...props }, ref) => {
+    const clamp = (n: number) => {
+      let next = n
+      if (min !== undefined) next = Math.max(next, min)
+      if (max !== undefined) next = Math.min(next, max)
+      return next
+    }
+
+    const increment = () => onValueChange?.(clamp(value + step))
+    const decrement = () => onValueChange?.(clamp(value - step))
+
+    const stepperButton =
+      "flex h-[0.875rem] w-6 items-center justify-center rounded-sm " +
+      "text-muted-foreground transition-[background,box-shadow,color] duration-fast " +
+      "hover:[background:var(--surface-silver)] hover:text-foreground hover:[box-shadow:var(--shadow-sm)] " +
+      "focus:outline-none focus:ring-1 focus:ring-ring/40"
+
+    return (
+      <div className="relative">
+        <input
+          ref={ref}
+          type="number"
+          value={value}
+          step={step}
+          min={min}
+          max={max}
+          onChange={(e) => {
+            const parsed = parseFloat(e.target.value)
+            if (!Number.isNaN(parsed)) onValueChange?.(clamp(parsed))
+          }}
+          className={cn(
+            formFieldBase,
+            formFieldSingleLine,
+            "pr-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]",
+            className
+          )}
+          {...props}
+        />
+        <div className="absolute right-1 top-1/2 flex -translate-y-1/2 flex-col">
+          <button
+            type="button"
+            onClick={increment}
+            className={cn(stepperButton)}
+            aria-label="Increment"
+            tabIndex={-1}
+          >
+            <ChevronUpIcon className="h-3 w-3" />
+          </button>
+          <button
+            type="button"
+            onClick={decrement}
+            className={cn(stepperButton)}
+            aria-label="Decrement"
+            tabIndex={-1}
+          >
+            <ChevronDownIcon className="h-3 w-3" />
+          </button>
+        </div>
+      </div>
+    )
+  }
+)
+NumberInput.displayName = "NumberInput"
+
+export { NumberInput }

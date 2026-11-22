@@ -1,0 +1,25 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Item — a list row stamped from the steel plate. Quietly raised at rest; hover\n * lifts it; active flattens it (pressed). Selected rows take the azure alloy\n * fill so they read as the same metal as the primary control.\n */\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  asChild?: boolean\n  interactive?: boolean\n  selected?: boolean\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"div\"\n    return (\n      <Comp\n        ref={ref}\n        className={cn(\n          \"flex items-center gap-3 rounded-lg px-3 py-2\",\n          \"bg-card text-card-foreground border border-white/10\",\n          \"[box-shadow:var(--shadow-sm)]\",\n          \"transition-[background,box-shadow,border-color,transform] duration-fast\",\n          interactive &&\n            \"cursor-pointer hover:bg-accent hover:[box-shadow:var(--shadow-md)] active:translate-y-px active:[box-shadow:var(--shadow-sm)]\",\n          selected &&\n            \"border-transparent [background:var(--surface-on)] text-primary-foreground [box-shadow:var(--shadow-primary)]\",\n          className\n        )}\n        {...props}\n      />\n    )\n  }\n)\nItem.displayName = \"Item\"\n\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground\",\n        \"[box-shadow:var(--shadow-sm)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nItemIcon.displayName = \"ItemIcon\"\n\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex-1 min-w-0\", className)} {...props} />\n  )\n)\nItemContent.displayName = \"ItemContent\"\n\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-sm font-medium truncate\", className)} {...props} />\n  )\n)\nItemTitle.displayName = \"ItemTitle\"\n\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-xs text-muted-foreground truncate\", className)} {...props} />\n  )\n)\nItemDescription.displayName = \"ItemDescription\"\n\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex items-center gap-1 shrink-0\", className)} {...props} />\n  )\n)\nItemActions.displayName = \"ItemActions\"\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    },
+    "dark": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    }
+  }
+}

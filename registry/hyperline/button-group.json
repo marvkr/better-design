@@ -1,0 +1,20 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline ButtonGroup: fused control strip; one rim around the whole group.\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n  attached?: boolean;\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", attached = true, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\n          \"inline-flex\",\n          orientation === \"vertical\" && \"flex-col\",\n          attached\n            ? cn(\n                \"overflow-hidden rounded-lg shadow-[var(--hl-shadow-raise)]\",\n                orientation === \"horizontal\"\n                  ? \"[&>*>*]:rounded-none [&>*>*]:shadow-none [&>*>*:not(:first-child)]:border-l [&>*>*:not(:first-child)]:border-border/70\"\n                  : \"[&>*>*]:rounded-none [&>*>*]:shadow-none [&>*>*:not(:first-child)]:border-t [&>*>*:not(:first-child)]:border-border/70\"\n              )\n            : \"gap-2\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    );\n  }\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\ninterface ButtonGroupItemProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ButtonGroupItem = React.forwardRef<HTMLDivElement, ButtonGroupItemProps>(\n  ({ className, children, ...props }, ref) => {\n    return (\n      <div ref={ref} className={cn(\"contents\", className)} {...props}>\n        {children}\n      </div>\n    );\n  }\n);\nButtonGroupItem.displayName = \"ButtonGroupItem\";\n\nexport { ButtonGroup, ButtonGroupItem };\nexport type { ButtonGroupProps, ButtonGroupItemProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)"
+    }
+  }
+}

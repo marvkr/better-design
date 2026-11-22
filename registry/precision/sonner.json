@@ -1,0 +1,23 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\n// Precision Sonner: clean light toast surface on the shared popover material\n// (white popover, hairline border, small radius, whisper-soft drop).\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:rounded-md group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:shadow-[var(--shadow-popover)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-md\",\n          cancelButton:\n            \"group-[.toast]:bg-accent group-[.toast]:text-muted-foreground group-[.toast]:rounded-md\",\n          error: \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success:\n            \"group-[.toaster]:text-[oklch(0.55_0.13_152)] group-[.toaster]:border-[oklch(0.85_0.09_152)]\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.21 0.006 271 / 0.06), 0 0.0625rem 0.0625rem oklch(0.21 0.006 271 / 0.04), 0 0.25rem 0.5rem -0.125rem oklch(0.21 0.006 271 / 0.08), 0 0.625rem 1.25rem -0.375rem oklch(0.21 0.006 271 / 0.06)"
+    },
+    "dark": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.21 0.006 271 / 0.06), 0 0.0625rem 0.0625rem oklch(0.21 0.006 271 / 0.04), 0 0.25rem 0.5rem -0.125rem oklch(0.21 0.006 271 / 0.08), 0 0.625rem 1.25rem -0.375rem oklch(0.21 0.006 271 / 0.06)"
+    }
+  }
+}

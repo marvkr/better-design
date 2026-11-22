@@ -1,0 +1,26 @@
+{
+  "name": "inline-edit",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass InlineEdit: click-to-edit text that swaps into a recessed well.\n\ninterface InlineEditProps {\n  value: string\n  onConfirm: (value: string) => void\n  onCancel?: () => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n  inputClassName?: string\n  renderValue?: (value: string) => React.ReactNode\n}\n\nfunction InlineEdit({\n  value,\n  onConfirm,\n  onCancel,\n  placeholder = \"Enter a value\",\n  disabled,\n  className,\n  inputClassName,\n  renderValue,\n}: InlineEditProps) {\n  const [editing, setEditing] = React.useState(false)\n  const [draft, setDraft] = React.useState(value)\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  React.useEffect(() => {\n    if (editing) {\n      inputRef.current?.focus()\n      inputRef.current?.select()\n    }\n  }, [editing])\n\n  const confirm = () => {\n    setEditing(false)\n    if (draft !== value) onConfirm(draft)\n  }\n\n  const cancel = () => {\n    setEditing(false)\n    setDraft(value)\n    onCancel?.()\n  }\n\n  if (editing) {\n    return (\n      <div className={cn(\"inline-flex items-center gap-1.5\", className)}>\n        <input\n          ref={inputRef}\n          value={draft}\n          placeholder={placeholder}\n          onChange={(e) => setDraft(e.target.value)}\n          onKeyDown={(e) => {\n            if (e.key === \"Enter\") confirm()\n            if (e.key === \"Escape\") cancel()\n          }}\n          className={cn(\n            \"h-8 rounded-lg px-2.5 text-sm\",\n            formFieldBase,\n            \"w-auto min-w-[10rem]\",\n            inputClassName\n          )}\n        />\n        <button\n          type=\"button\"\n          onClick={confirm}\n          aria-label=\"Confirm\"\n          className=\"rounded-md p-1 text-primary transition-colors hover:bg-[var(--ag-fill)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n        >\n          <Icon icon=\"tabler:check\" className=\"h-4 w-4\" />\n        </button>\n        <button\n          type=\"button\"\n          onClick={cancel}\n          aria-label=\"Cancel\"\n          className=\"rounded-md p-1 text-muted-foreground transition-colors hover:bg-[var(--ag-fill)] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n        >\n          <Icon icon=\"tabler:x\" className=\"h-4 w-4\" />\n        </button>\n      </div>\n    )\n  }\n\n  return (\n    <button\n      type=\"button\"\n      disabled={disabled}\n      onClick={() => setEditing(true)}\n      className={cn(\n        \"group inline-flex items-center gap-1.5 rounded-md px-1.5 py-0.5 text-sm font-medium\",\n        \"transition-colors hover:bg-[var(--ag-fill)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        className\n      )}\n    >\n      {renderValue ? renderValue(value) : value || (\n        <span className=\"text-muted-foreground\">{placeholder}</span>\n      )}\n      <Icon\n        icon=\"tabler:pencil\"\n        className=\"h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100\"\n      />\n    </button>\n  )\n}\n\nexport { InlineEdit }\nexport type { InlineEditProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)"
+    }
+  }
+}

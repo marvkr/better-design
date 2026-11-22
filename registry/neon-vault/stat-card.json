@@ -1,0 +1,23 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Card, CardContent } from \"./card\"\n\n// Neon Vault Stat Card: a raised asset panel showing one metric, like the\n// wallet's Funding and Unified Trading rows. Big tabular numerals, a pill\n// trend chip in mint or the destructive hue, and a raised graphite icon tile.\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: string | number\n  change?: {\n    value: string | number\n    trend: \"up\" | \"down\" | \"neutral\"\n  }\n  icon?: React.ReactNode\n  description?: string\n}\n\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  return (\n    <Card className={cn(\"\", className)} {...props}>\n      <CardContent className=\"p-5\">\n        <div className=\"flex items-start justify-between\">\n          <div className=\"flex flex-col gap-1\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"text-2xl font-semibold tracking-tight text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <div className=\"flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary text-muted-foreground [box-shadow:var(--shadow-raised)]\">\n              {icon}\n            </div>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"mt-3 flex items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium\",\n                  change.trend === \"up\" && \"bg-chart-5/15 text-chart-5\",\n                  change.trend === \"down\" &&\n                    \"bg-destructive/15 text-destructive\",\n                  change.trend === \"neutral\" &&\n                    \"bg-secondary text-muted-foreground\"\n                )}\n              >\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-xs text-muted-foreground\">\n                {description}\n              </span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  )\n}\n\nexport { StatCard }\nexport type { StatCardProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/neon-vault/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

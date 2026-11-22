@@ -1,0 +1,31 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\"\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:rounded-lg group-[.toaster]:[box-shadow:var(--shadow-lg)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:text-primary-foreground group-[.toast]:bg-[image:var(--pill-gradient)] group-[.toast]:hover:bg-[image:var(--pill-gradient-hover)] group-[.toast]:rounded-md group-[.toast]:[box-shadow:var(--shadow-pill)] group-[.toast]:hover:[box-shadow:var(--shadow-pill-hover)] group-[.toast]:active:translate-y-px\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground group-[.toast]:rounded-md group-[.toast]:[box-shadow:var(--shadow-tile)] group-[.toast]:hover:bg-accent\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-pill-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.28), 0 0.25rem 0.625rem oklch(0 0 0 / 0.3)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "pill-gradient-hover": "linear-gradient(180deg, oklch(0.45 0 0) 0%, oklch(0.4 0 0) 100%)"
+    },
+    "dark": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-pill-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.28), 0 0.25rem 0.625rem oklch(0 0 0 / 0.3)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "pill-gradient-hover": "linear-gradient(180deg, oklch(0.45 0 0) 0%, oklch(0.4 0 0) 100%)"
+    }
+  }
+}

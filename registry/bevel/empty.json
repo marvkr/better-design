@@ -1,0 +1,22 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Empty.\n *\n * The compositional empty state: structural slots only, so a screen can place\n * its own glyph, copy and actions. It draws no surface of its own, which lets\n * it sit directly inside a card. The glyph slot is the one piece with a\n * treatment: a round well on the inner token, pressed in with the inset\n * shadow, because an empty area in this system is always a well.\n */\n\nconst Empty = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"flex flex-col items-center justify-center gap-3 p-8 text-center\",\n      className,\n    )}\n    {...props}\n  />\n))\nEmpty.displayName = \"Empty\"\n\nconst EmptyIcon = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"flex size-12 items-center justify-center rounded-full\",\n      \"bg-[var(--inner)] text-muted-foreground\",\n      \"[box-shadow:var(--shadow-inset)]\",\n      \"[&_svg]:size-[1.375rem]\",\n      className,\n    )}\n    {...props}\n  />\n))\nEmptyIcon.displayName = \"EmptyIcon\"\n\nconst EmptyTitle = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"text-[1rem] leading-[1.375rem] font-semibold tracking-[-0.025rem] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nEmptyTitle.displayName = \"EmptyTitle\"\n\nconst EmptyDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\n      \"max-w-md text-[0.9063rem] leading-[1.3125rem] tracking-[0.0188rem] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nEmptyDescription.displayName = \"EmptyDescription\"\n\nconst EmptyActions = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex items-center gap-2.5 pt-1\", className)}\n    {...props}\n  />\n))\nEmptyActions.displayName = \"EmptyActions\"\n\nexport { Empty, EmptyIcon, EmptyTitle, EmptyDescription, EmptyActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

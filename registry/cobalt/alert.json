@@ -1,0 +1,23 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Alert — a carved panel slice with the standard inset + outer treatment. */\n\nconst alertVariants = cva(\n  \"relative w-full rounded-lg border border-border p-4 [box-shadow:var(--shadow-panel)] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg~*]:pl-7\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-card text-card-foreground [&>svg]:text-muted-foreground\",\n        destructive:\n          \"bg-card text-destructive border-destructive/40 [&>svg]:text-destructive\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n))\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 text-sm font-medium leading-none tracking-tight\", className)}\n    {...props}\n  />\n))\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground [&_p]:leading-relaxed\", className)}\n    {...props}\n  />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-panel": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.625rem 1.75rem oklch(0 0 0 / 0.36)"
+    },
+    "dark": {
+      "shadow-panel": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.625rem 1.75rem oklch(0 0 0 / 0.36)"
+    }
+  }
+}

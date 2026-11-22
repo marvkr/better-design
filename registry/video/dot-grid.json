@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dot-grid",
+  "type": "registry:component",
+  "title": "Dot Grid",
+  "description": "Dot grid background animation: an even field of dots drifts diagonally while a wave of primary light travels across it, looping without a seam. Children draw on top.",
+  "dependencies": [
+    "remotion@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/dot-grid.tsx",
+      "target": "components/bd-video/dot-grid.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Dot grid: an even field of small dots drifts diagonally while a soft wave of\n * light travels across it, lifting the dots it passes toward the primary\n * colour. A quiet technical backdrop for product and data shots.\n *\n * Written by Better Design. Drift and wave both repeat over `loopFrames`, so\n * the background loops without a seam.\n */\nimport { useId } from \"react\";\nimport type { ReactNode } from \"react\";\nimport { AbsoluteFill, useCurrentFrame, useVideoConfig } from \"remotion\";\nimport { type VideoTheme, useVideoTheme, withAlpha } from \"@/lib/bd-video\";\n\nexport interface DotGridProps {\n  /** Drawn on top of the grid. */\n  children?: ReactNode;\n  /** Distance between dots, in pixels. */\n  spacing?: number;\n  /** Radius of a resting dot, in pixels. */\n  dotSize?: number;\n  /** Frames for one full cycle. The grid loops at this length. */\n  loopFrames?: number;\n  /** How many wave crests cross the frame per loop. */\n  waves?: number;\n  theme?: Partial<VideoTheme>;\n}\n\nconst TAU = Math.PI * 2;\n\n/** A drifting dot grid with a travelling wave of light, looping seamlessly, with children on top. */\nexport function DotGrid({ children, spacing = 44, dotSize = 2.8, loopFrames = 150, waves = 1, theme: themeOverride }: DotGridProps) {\n  const t = useVideoTheme(themeOverride);\n  // Two grids in one frame each need their own gradient and mask.\n  const uid = useId().replace(/[^a-zA-Z0-9-]/g, \"\");\n  const fadeId = `dot-grid-fade-${uid}`;\n  const maskId = `dot-grid-mask-${uid}`;\n  const { width, height } = useVideoConfig();\n  const frame = useCurrentFrame();\n  const loopT = (frame % loopFrames) / loopFrames;\n  // The grid moves one cell per loop, so the end lines up with the start.\n  const drift = loopT * spacing;\n\n  const cols = Math.ceil(width / spacing) + 2;\n  const rows = Math.ceil(height / spacing) + 2;\n  const diag = width + height;\n  const base: string[] = [];\n  const lit: { cx: number; cy: number; w: number }[] = [];\n  for (let r = 0; r < rows; r++) {\n    for (let c = 0; c < cols; c++) {\n      const cx = (c - 1) * spacing + drift;\n      const cy = (r - 1) * spacing + drift;\n      base.push(`M${cx - dotSize} ${cy}a${dotSize} ${dotSize} 0 1 0 ${dotSize * 2} 0a${dotSize} ${dotSize} 0 1 0 ${-dotSize * 2} 0`);\n      // A wide crest running from top-left to bottom-right.\n      const along = (cx + cy) / diag;\n      const w = Math.max(0, Math.cos(TAU * (along * 1.2 - loopT * waves))) ** 6;\n      if (w > 0.02) lit.push({ cx, cy, w });\n    }\n  }\n\n  return (\n    <AbsoluteFill style={{ background: t.background }}>\n      <svg width={width} height={height} style={{ position: \"absolute\", inset: 0 }}>\n        <defs>\n          <radialGradient id={fadeId} cx=\"50%\" cy=\"50%\" r=\"75%\">\n            <stop offset=\"0%\" stopColor=\"white\" stopOpacity={1} />\n            <stop offset=\"100%\" stopColor=\"white\" stopOpacity={0.3} />\n          </radialGradient>\n          <mask id={maskId}>\n            <rect width={width} height={height} fill={`url(#${fadeId})`} />\n          </mask>\n        </defs>\n        <g mask={`url(#${maskId})`}>\n          <path d={base.join(\"\")} fill={withAlpha(t.foreground, 0.22)} />\n          {lit.map((d, i) => (\n            <circle key={i} cx={d.cx} cy={d.cy} r={dotSize * (1 + d.w * 0.8)} fill={t.primary} opacity={Math.min(1, d.w * 1.1)} />\n          ))}\n        </g>\n      </svg>\n      {children ? <AbsoluteFill>{children}</AbsoluteFill> : null}\n    </AbsoluteFill>\n  );\n}\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

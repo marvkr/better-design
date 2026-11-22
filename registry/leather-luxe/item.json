@@ -1,0 +1,24 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Item: a settings row straight from the wallet screen; the\n// leading slot is a raised charcoal coin, the row lifts gently on hover.\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  leading?: React.ReactNode\n  trailing?: React.ReactNode\n  title: string\n  subtitle?: string\n  disabled?: boolean\n  interactive?: boolean\n  as?: React.ElementType\n  href?: string\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  (\n    {\n      leading,\n      trailing,\n      title,\n      subtitle,\n      disabled,\n      interactive = true,\n      as: Comp = \"div\",\n      className,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <Comp\n        ref={ref}\n        className={cn(\n          \"group flex w-full items-center gap-3 px-4 py-3\",\n          \"text-left\",\n          interactive && [\n            \"cursor-pointer rounded-lg\",\n            \"transition-[background,box-shadow] duration-base\",\n            \"hover:bg-accent hover:[box-shadow:var(--shadow-raised-sm)]\",\n            \"focus-visible:outline-none focus-visible:bg-accent focus-visible:ring-2 focus-visible:ring-ring/60\",\n            \"active:bg-accent/70\",\n          ],\n          disabled && \"pointer-events-none opacity-40\",\n          className\n        )}\n        {...props}\n      >\n        {/* Leading slot: icon or avatar coin */}\n        {leading && (\n          <div\n            className={cn(\n              \"flex h-9 w-9 shrink-0 items-center justify-center rounded-full\",\n              \"[background-image:var(--gradient-raised)] border border-highlight\",\n              \"[box-shadow:var(--shadow-raised-sm)]\",\n              \"text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              \"transition-[filter,color] duration-base group-hover:brightness-125 group-hover:text-foreground\"\n            )}\n          >\n            {leading}\n          </div>\n        )}\n\n        {/* Text content */}\n        <div className=\"flex min-w-0 flex-1 flex-col gap-0.5\">\n          <span className=\"truncate text-sm font-medium leading-snug text-foreground\">\n            {title}\n          </span>\n          {subtitle && (\n            <span className=\"truncate text-xs leading-snug text-muted-foreground\">\n              {subtitle}\n            </span>\n          )}\n          {children}\n        </div>\n\n        {/* Trailing slot: action, badge, arrow, toggle */}\n        {trailing && (\n          <div className=\"flex shrink-0 items-center gap-2 text-muted-foreground [&>svg]:h-4 [&>svg]:w-4\">\n            {trailing}\n          </div>\n        )}\n      </Comp>\n    )\n  }\n)\nItem.displayName = \"Item\"\n\n// Item list container for grouped items\ninterface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {\n  divided?: boolean\n}\n\nconst ItemList = React.forwardRef<HTMLDivElement, ItemListProps>(\n  ({ divided = false, className, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col\",\n          divided && [\n            \"[&>*:not(:last-child)]:border-b\",\n            \"[&>*:not(:last-child)]:border-border\",\n          ],\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    )\n  }\n)\nItemList.displayName = \"ItemList\"\n\nexport { Item, ItemList }\nexport type { ItemProps, ItemListProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

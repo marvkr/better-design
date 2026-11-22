@@ -1,0 +1,14 @@
+{
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\";\n\n/**\n * Airy docs Textarea: the Input box grown to several lines, with the relaxed\n * line height of docs prose so a long answer stays easy to read back.\n */\nconst Textarea = React.forwardRef<\n  HTMLTextAreaElement,\n  React.TextareaHTMLAttributes<HTMLTextAreaElement>\n>(({ className, ...props }, ref) => (\n  <textarea\n    ref={ref}\n    data-slot=\"textarea\"\n    className={cn(formFieldBase, formFieldMultiLine, \"leading-relaxed\", className)}\n    {...props}\n  />\n));\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared.json"
+  ]
+}

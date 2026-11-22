@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass Input: recessed dark well sunk into the glass,\n// amber glow on focus.\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-9 rounded-lg px-3 py-2 text-sm\",\n          formFieldBase,\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared.json"
+  ]
+}

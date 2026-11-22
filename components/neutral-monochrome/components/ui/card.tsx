@@ -11,7 +11,7 @@ const Card = React.forwardRef<
     className={cn(
       // Earthy card: real shadow — inset border + subtle outer shadow
       // Browser-extracted: inset 0 0 0 1px <border> + 0 4px 6px -1px rgba(0,0,0,0.05)
-      "rounded-lg border border-border bg-card text-card-foreground shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-2px_rgba(0,0,0,0.05)]",
+      "rounded-lg border border-border bg-card text-card-foreground shadow-[0_0.25rem_0.375rem_-0.0625rem_oklch(0_0_0/0.05),0_0.125rem_0.25rem_-0.125rem_oklch(0_0_0/0.05)]",
       className
     )}
     {...props}

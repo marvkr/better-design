@@ -1,0 +1,30 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Toggle: pressed state lifts into the raised cyan material.\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium\",\n    \"text-muted-foreground transition-all duration-fast ease-out\",\n    \"hover:bg-accent hover:text-foreground\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-pressed:bg-[image:var(--hl-primary-gradient)] data-pressed:text-primary-foreground\",\n    \"data-pressed:shadow-[var(--hl-shadow-primary-sm)]\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-border bg-transparent shadow-[var(--hl-shadow-sm)]\",\n      },\n      size: {\n        default: \"h-9 px-2.5 min-w-9\",\n        sm: \"h-8 px-2 min-w-8\",\n        lg: \"h-10 px-3 min-w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  TogglePrimitive.Props & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = \"Toggle\";\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-sm": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.22), 0 0.125rem 0.375rem -0.0625rem oklch(0.05 0.02 300 / 0.35)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "hl-shadow-sm": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.22), 0 0.125rem 0.375rem -0.0625rem oklch(0.05 0.02 300 / 0.35)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

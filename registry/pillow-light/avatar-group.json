@@ -9,7 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "https://www.better-design.com/registry/pillow-light/avatar.json",
-    "utils"
+    "https://better-design.com/registry/pillow-light/avatar.json"
   ]
 }

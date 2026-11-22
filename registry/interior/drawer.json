@@ -1,0 +1,25 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Drawer — a panel pulled up from the bottom edge on the modal float\n * shadow. The grab handle is a short 2px-radius rail cut in as a well, not a\n * pill: rounded-full is banned everywhere, including here.\n */\n\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root\n    shouldScaleBackground={shouldScaleBackground}\n    {...props}\n  />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    className={cn(\"fixed inset-0 z-50 bg-foreground/20\", className)}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[0.875rem]\",\n        \"bg-card text-card-foreground shadow-[var(--shadow-float-modal)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-[0.125rem] bg-secondary shadow-[var(--shadow-well)]\" />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\nconst DrawerHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"flex flex-col gap-1.5 p-5\", className)} {...props} />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\nconst DrawerFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"mt-auto flex flex-col gap-2 p-5\", className)} {...props} />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-[0.9375rem] font-medium leading-snug tracking-[-0.02em] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDrawerTitle.displayName = DrawerPrimitive.Title.displayName;\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    className={cn(\n      \"text-[0.8125rem] leading-relaxed text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDrawerDescription.displayName = DrawerPrimitive.Description.displayName;\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-float-modal": "0 1.75rem 3.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.45)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-float-modal": "0 1.75rem 3.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.45)"
+    }
+  }
+}

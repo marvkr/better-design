@@ -1,0 +1,14 @@
+{
+  "name": "textarea-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\";\n\n/**\n * Firefly Textarea: the same warm well as Input, grown to several lines.\n */\nconst Textarea = React.forwardRef<\n  HTMLTextAreaElement,\n  React.TextareaHTMLAttributes<HTMLTextAreaElement>\n>(({ className, ...props }, ref) => (\n  <textarea\n    ref={ref}\n    data-slot=\"textarea\"\n    className={cn(formFieldBase, formFieldMultiLine, \"leading-normal\", className)}\n    {...props}\n  />\n));\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json"
+  ]
+}

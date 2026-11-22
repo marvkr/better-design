@@ -83,7 +83,7 @@ function InlineEdit({
             "flex h-8 min-w-0 flex-1 rounded-lg border border-border bg-secondary px-3 py-1 text-sm",
             "text-foreground placeholder:text-muted-foreground",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary/30",
-            "transition-colors duration-200",
+            "transition-colors duration-base",
             inputClassName
           )}
         />
@@ -95,7 +95,7 @@ function InlineEdit({
           className={cn(
             "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg",
             "bg-primary text-primary-foreground",
-            "transition-all duration-200 hover:bg-primary/90",
+            "transition-all duration-base hover:bg-primary/90",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
             "active:scale-[0.96]"
           )}
@@ -122,7 +122,7 @@ function InlineEdit({
           className={cn(
             "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg",
             "border border-border bg-secondary text-muted-foreground",
-            "transition-all duration-200 hover:bg-accent hover:text-foreground",
+            "transition-all duration-base hover:bg-accent hover:text-foreground",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
             "active:scale-[0.96]"
           )}
@@ -154,7 +154,7 @@ function InlineEdit({
       aria-label="Click to edit"
       className={cn(
         "group inline-flex items-center gap-2 rounded-lg text-sm",
-        "text-foreground tracking-wide transition-colors duration-200",
+        "text-foreground tracking-wide transition-colors duration-base",
         "hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:rounded-lg",
         "disabled:cursor-not-allowed disabled:opacity-40",
         className
@@ -174,7 +174,7 @@ function InlineEdit({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-muted-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          className="text-muted-foreground opacity-0 transition-opacity duration-base group-hover:opacity-100"
         >
           <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
         </svg>

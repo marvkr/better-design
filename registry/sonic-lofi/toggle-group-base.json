@@ -1,0 +1,27 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants } from \"./toggle\"\n\nconst ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({\n  size: \"default\",\n  variant: \"default\",\n})\n\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  children,\n  ...props\n}: ToggleGroupPrimitive.Props & VariantProps<typeof toggleVariants>) {\n  return (\n    <ToggleGroupPrimitive\n      className={cn(\n        \"inline-flex items-center gap-0.5 rounded-lg p-1\",\n        \"bg-card border border-border [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive>\n  )\n}\nToggleGroup.displayName = \"ToggleGroup\"\n\nfunction ToggleGroupItem({\n  className,\n  children,\n  variant,\n  size,\n  ...props\n}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {\n  const context = React.useContext(ToggleGroupContext)\n  return (\n    <TogglePrimitive\n      className={cn(\n        toggleVariants({\n          variant: context.variant || variant,\n          size: context.size || size,\n        }),\n        \"data-pressed:bg-popover data-pressed:text-foreground data-pressed:[box-shadow:var(--shadow-s)]\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </TogglePrimitive>\n  )\n}\nToggleGroupItem.displayName = \"ToggleGroupItem\"\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/sonic-lofi/toggle-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25)"
+    }
+  }
+}

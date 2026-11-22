@@ -1,0 +1,30 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, copperRimChecked, focusRing, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Burnished Checkbox: a 1.25rem box with a 0.375rem corner, pressed into a\n * recessed well while off. Checked or mixed, it rises as the primary's cream\n * bevel inside a thin copper rim and shows a dark tick or dash. Base UI owns\n * the checked state, so a controlled parent passes `checked` straight through.\n */\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer inline-flex size-5 shrink-0 items-center justify-center rounded-sm border-2 border-transparent text-primary-foreground\",\n        wellInset,\n        \"transition-[box-shadow,background-image] duration-fast ease-(--ease-out)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        controlChecked,\n        copperRimChecked,\n        \"data-[indeterminate]:bg-(image:--fill-primary) data-[indeterminate]:shadow-(--bevel-primary)\",\n        className,\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        keepMounted\n        data-slot=\"checkbox-indicator\"\n        className=\"size-full grid place-items-center text-current data-[unchecked]:opacity-0 transition-opacity duration-fast\"\n      >\n        {indeterminate ? (\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" className=\"size-3\">\n            <path d=\"M3.5 8h9\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\" />\n          </svg>\n        ) : (\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" className=\"size-3\">\n            <path\n              d=\"M3 8.5 6.25 11.5 13 4.5\"\n              stroke=\"currentColor\"\n              strokeWidth=\"2.5\"\n              strokeLinecap=\"round\"\n              strokeLinejoin=\"round\"\n            />\n          </svg>\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

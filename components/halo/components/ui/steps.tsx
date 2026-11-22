@@ -1,0 +1,56 @@
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+export interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {
+  currentStep?: number
+}
+
+const Steps = React.forwardRef<HTMLDivElement, StepsProps>(
+  ({ className, currentStep = 0, children, ...props }, ref) => {
+    const steps = React.Children.toArray(children)
+    return (
+      <div
+        ref={ref}
+        className={cn("flex items-center gap-2", className)}
+        {...props}
+      >
+        {steps.map((_child, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && (
+              <div
+                className={cn(
+                  "h-px flex-1",
+                  index <= currentStep ? "bg-primary/50" : "bg-foreground/10"
+                )}
+              />
+            )}
+            <div
+              className={cn(
+                "flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-all duration-base",
+                index < currentStep &&
+                  "bg-primary/80 text-primary-foreground shadow-[0_0_0.75rem_color-mix(in_oklch,var(--primary)_30%,transparent)]",
+                index === currentStep &&
+                  "backdrop-blur-xl bg-foreground/[0.1] text-foreground shadow-[inset_0_0_0.5rem_color-mix(in_oklch,var(--halo)_15%,transparent),0_0_0.75rem_color-mix(in_oklch,var(--primary)_20%,transparent)]",
+                index > currentStep &&
+                  "bg-foreground/[0.04] text-muted-foreground"
+              )}
+            >
+              {index + 1}
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+    )
+  }
+)
+Steps.displayName = "Steps"
+
+const Step = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("", className)} {...props} />
+))
+Step.displayName = "Step"
+
+export { Steps, Step }

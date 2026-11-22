@@ -35,8 +35,8 @@ function Notification({
   return (
     <div
       className={cn(
-        "relative flex gap-3 rounded-[12px] border bg-background p-4",
-        "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+        "relative flex gap-3 rounded-[0.75rem] border bg-background p-4",
+        "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
         variantClasses[variant],
         className
       )}

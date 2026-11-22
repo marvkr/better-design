@@ -1,0 +1,23 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Tabs: panel selector strip.\n// Recessed dark rail; the active tab raises to the panel surface with an\n// energized green underline, like the active sector tab on the console.\n\nconst Tabs = TabsPrimitive.Root\n\nfunction TabsList({ className, ...props }: TabsPrimitive.List.Props) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-9 items-center justify-center gap-1 rounded-sm p-1\",\n        \"border border-border bg-input\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        \"text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = \"TabsList\"\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      className={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-xs px-3 py-1\",\n        \"text-xs font-semibold uppercase tracking-wider\",\n        \"transition-all duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"hover:text-foreground\",\n        \"data-active:bg-card data-active:text-primary\",\n        \"data-active:[box-shadow:inset_0_0_0_0.0625rem_oklch(0.78_0.21_148/0.3),0_0_0.5rem_oklch(0.78_0.21_148/0.15)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsTrigger.displayName = \"TabsTrigger\"\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      className={cn(\n        \"mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

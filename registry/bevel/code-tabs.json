@@ -1,0 +1,36 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { CodeBlock } from \"./code-block\"\n\n/*\n * Bevel CodeTabs.\n *\n * The whole panel is one well, and the tab strip sits inside it above a single\n * pixel of the track token. The selected tab is a filled segment, so it takes\n * the primary button's gradient and rim rather than a flat tint, and the code\n * below it drops its own well to avoid a box inside a box.\n */\n\n/** One tab: a label and the code it shows. */\nexport interface CodeTabsItem {\n  label: string\n  code: string\n  language?: string\n  filename?: string\n}\n\n/** Props for `CodeTabs`; `defaultTab` matches an item's `label`. */\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[]\n  defaultTab?: string\n  className?: string\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label)\n  const current = tabs.find((t) => t.label === active) ?? tabs[0]\n\n  if (!current) return null\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-[0.875rem]\",\n        \"bg-[var(--inner)] text-[var(--inner-foreground)]\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className,\n      )}\n    >\n      <div role=\"tablist\" className=\"flex items-center gap-1 p-1.5\">\n        {tabs.map((tab) => {\n          const selected = tab.label === current.label\n          return (\n            <button\n              key={tab.label}\n              type=\"button\"\n              role=\"tab\"\n              aria-selected={selected}\n              onClick={() => setActive(tab.label)}\n              className={cn(\n                \"rounded-[0.5rem] px-2.5 py-1.5\",\n                \"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem]\",\n                \"transition-[box-shadow,background-color,color] duration-fast ease-out\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                selected\n                  ? \"text-primary-foreground bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)] [box-shadow:var(--shadow-primary)]\"\n                  : \"text-muted-foreground hover:bg-card hover:text-foreground\",\n              )}\n            >\n              {tab.label}\n            </button>\n          )\n        })}\n      </div>\n      <div className=\"h-px w-full bg-[var(--track)]\" aria-hidden />\n      <CodeBlock\n        code={current.code}\n        language={current.language}\n        filename={current.filename}\n        className=\"rounded-none bg-transparent [box-shadow:none]\"\n      />\n    </div>\n  )\n}\nCodeTabs.displayName = \"CodeTabs\"\n\nexport { CodeTabs }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/code-block.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "inner-foreground": "oklch(0.1593 0.0111 267.98)",
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55), 0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "inner-foreground": "oklch(0.9666 0.0027 264.5)",
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)",
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5), 0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55)"
+    }
+  }
+}

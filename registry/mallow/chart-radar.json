@@ -1,0 +1,18 @@
+{
+  "name": "chart-radar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-radar.tsx",
+      "content": "\"use client\"\n\nimport { PolarAngleAxis, PolarGrid, Radar, RadarChart } from \"recharts\"\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\"\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\"\n\nconst chartData = [\n  { month: \"January\", uptime: 186 },\n  { month: \"February\", uptime: 305 },\n  { month: \"March\", uptime: 237 },\n  { month: \"April\", uptime: 273 },\n  { month: \"May\", uptime: 209 },\n  { month: \"June\", uptime: 214 },\n]\n\nconst chartConfig = {\n  uptime: { label: \"Hours online\", color: \"var(--chart-1)\" },\n}\n\n/** Mallow radar chart: a faint violet shape over a hairline polar grid. */\nexport function ChartRadarDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Hours online</CardTitle>\n        <CardDescription>January to June</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"mx-auto aspect-square max-h-64\">\n          <RadarChart data={chartData}>\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <PolarAngleAxis dataKey=\"month\" tickFormatter={(value) => value.slice(0, 3)} />\n            <PolarGrid />\n            <Radar\n              dataKey=\"uptime\"\n              fill=\"var(--chart-1)\"\n              fillOpacity={0.2}\n              stroke=\"var(--chart-1)\"\n              strokeWidth={1.5}\n            />\n          </RadarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1\">\n        <span className=\"text-sm text-muted-foreground\">Monthly average</span>\n        <span className=\"text-2xl font-medium tabular-nums\">237 h</span>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/card.json",
+    "https://better-design.com/registry/mallow/chart.json"
+  ]
+}

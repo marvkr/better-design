@@ -1,0 +1,17 @@
+{
+  "name": "search-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\"\nimport { Search, X } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Leather Luxe Search Input: recessed well with a leading glass icon and\n// an optional clear control.\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, value, onClear, ...props }, ref) => {\n    return (\n      <div className=\"relative\">\n        <Search className=\"absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground\" />\n        <input\n          ref={ref}\n          value={value}\n          className={cn(\n            formFieldBase,\n            \"flex h-10 py-2 pl-9\",\n            onClear && value ? \"pr-9\" : \"pr-3\",\n            className\n          )}\n          {...props}\n        />\n        {onClear && value ? (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            className={cn(\n              \"absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\",\n              \"transition-colors hover:text-foreground\",\n              \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:rounded-sm\"\n            )}\n          >\n            <X className=\"h-4 w-4\" />\n            <span className=\"sr-only\">Clear search</span>\n          </button>\n        ) : null}\n      </div>\n    )\n  }\n)\nSearchInput.displayName = \"SearchInput\"\n\nexport { SearchInput }\nexport type { SearchInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/leather-luxe/_shared-base.json"
+  ]
+}

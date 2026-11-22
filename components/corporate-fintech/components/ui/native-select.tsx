@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 // Column NativeSelect: native <select> styled to match the design system
-// h-10, rounded-[10px], border-border, shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]
+// h-10, rounded-[0.625rem], border-border, shadow-[0_0.0625rem_0.125rem_0_rgb(0_0_0/0.04)]
 // Custom chevron via bg-image SVG (light theme: dark chevron)
 // Appearance: none to hide native arrow, pr-8 to make room for custom arrow
 
@@ -18,18 +18,18 @@ const NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(
           ref={ref}
           className={cn(
             "flex h-10 w-full appearance-none items-center",
-            "rounded-[10px] border border-border bg-background",
+            "rounded-[0.625rem] border border-border bg-background",
             "pl-3 pr-9 py-2 text-sm text-foreground",
-            "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+            "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
             "cursor-pointer",
-            "transition duration-200 ease-out",
+            "transition duration-base ease-out",
             "hover:border-foreground/30",
-            "focus:outline-none focus:border-foreground focus:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+            "focus:outline-none focus:border-foreground focus:shadow-[0_0_0_0.1875rem_oklch(0_0_0/0.06)]",
             "disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70",
             "[&>option]:bg-background [&>option]:text-foreground",
             error && [
               "border-destructive",
-              "focus:border-destructive focus:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]",
+              "focus:border-destructive focus:shadow-[0_0_0_0.1875rem_hsl(var(--destructive)/0.12)]",
             ],
             className
           )}

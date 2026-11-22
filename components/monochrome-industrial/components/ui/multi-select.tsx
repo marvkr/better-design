@@ -55,9 +55,10 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
  else onValueChange([...value, v])
  }
 
- const selectedLabels = value
- .map((v) => options.find((o) => o.value === v)?.label)
- .filter(Boolean) as string[]
+ const selectedLabels = value.flatMap((v) => {
+ const label = options.find((o) => o.value === v)?.label
+ return label === undefined ? [] : [label]
+ })
 
  return (
  <Popover open={open} onOpenChange={setOpen}>

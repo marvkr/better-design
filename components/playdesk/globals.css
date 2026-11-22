@@ -1,0 +1,378 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Playdesk — a soft desktop-operating-system kit.
+ *
+ * The canvas is a warm off-white desk with a faint dot-grid wallpaper. Content
+ * sits in floating windows: a brushed horizontal titlebar, a hairline rim, a
+ * white body, and one wide low-opacity shadow that reads as height above the
+ * desk rather than a tight drop. Controls are full pills with a vertical
+ * gradient and a gloss sheen across the top half, in system sky blue for the
+ * primary action and light grey for everything else. Inter carries the whole
+ * kit; headings run at weight 500 with tight negative tracking instead of bold.
+ */
+
+:root {
+  --background: oklch(0.9702 0 0);
+  --foreground: oklch(0.1776 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1776 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1776 0 0);
+
+  --primary: oklch(0.6243 0.2056 255.49);
+  --primary-from: oklch(0.684 0.1713 252.21);
+  --primary-to: oklch(0.5914 0.224 258.99);
+  --primary-hover-from: oklch(0.724 0.1521 250.8);
+  --primary-hover-to: oklch(0.6314 0.2129 257.6);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.9521 0 0);
+  --secondary-from: oklch(0.9521 0 0);
+  --secondary-to: oklch(0.8945 0 0);
+  --secondary-hover-from: oklch(0.9731 0 0);
+  --secondary-hover-to: oklch(0.9189 0 0);
+  --secondary-foreground: oklch(0.1776 0 0);
+
+  --muted: oklch(0.9551 0 0);
+  --muted-foreground: oklch(0.5278 0 0);
+  --accent: oklch(0.9452 0.0243 253.5);
+  --accent-foreground: oklch(0.5914 0.224 258.99);
+
+  --destructive: oklch(0.5771 0.245 27.33);
+  --destructive-from: oklch(0.6321 0.2211 26.6);
+  --destructive-to: oklch(0.5423 0.2298 27.9);
+  --destructive-hover-from: oklch(0.6721 0.1996 26.2);
+  --destructive-hover-to: oklch(0.5823 0.2287 27.5);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.6231 0.1652 149.2);
+  --warning: oklch(0.7686 0.1647 70.08);
+
+  --border: oklch(0.912 0 0);
+  --input: oklch(1 0 0);
+  --ring: oklch(0.6243 0.2056 255.49);
+
+  --radius: 0.625rem;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, ui-sans-serif,
+    system-ui, "Segoe UI", sans-serif;
+  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  /*
+   * Desk wallpaper. A 0.0625rem dot on an 1.125rem lattice, faint enough to read as
+   * paper texture rather than a grid. Painted on the app surface, never on a
+   * window, so windows keep a clean white body.
+   */
+  --desk-dot: oklch(0 0 0 / 0.08);
+  --desk-dot-gap: 1.125rem;
+  --desk-wallpaper: radial-gradient(var(--desk-dot) 0.0625rem, transparent 0.0625rem);
+
+  /*
+   * The signature float. One wide, very soft shadow with a long vertical
+   * offset, so a window looks lifted off the desk instead of stamped onto it.
+   * The whole elevation scale is that same recipe at different heights.
+   */
+  --shadow-float: 0 1.125rem 3.125rem oklch(0 0 0 / 0.12);
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05);
+  --shadow-sm: 0 0.125rem 0.375rem oklch(0 0 0 / 0.06);
+  --shadow-md: 0 0.5rem 1.5rem oklch(0 0 0 / 0.08);
+  --shadow-lg: var(--shadow-float);
+  --shadow-xl: 0 1.625rem 4.375rem oklch(0 0 0 / 0.16);
+
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+
+  /* Window rim: a hairline that survives on white and on the desk alike. */
+  --shadow-rim: inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06);
+  --shadow-window: var(--shadow-rim), var(--shadow-float);
+  --shadow-inset: inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07);
+  --shadow-track-inset: inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14);
+
+  /* Pill controls. Grey pills carry a hairline; the blue pill carries light. */
+  --shadow-button: inset 0 0 0 0.0625rem oklch(0 0 0 / 0.1),
+    0 0.5rem 1.5rem oklch(0 0 0 / 0.08);
+  --shadow-button-hover: inset 0 0 0 0.0625rem oklch(0 0 0 / 0.12),
+    0 0.75rem 1.875rem oklch(0 0 0 / 0.12);
+  --shadow-primary: inset 0 0.0625rem 0 oklch(1 0 0 / 0.34),
+    0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32);
+  --shadow-primary-hover: inset 0 0.0625rem 0 oklch(1 0 0 / 0.4),
+    0 0.75rem 1.875rem oklch(0.6243 0.2056 255.49 / 0.4);
+  --shadow-destructive: inset 0 0.0625rem 0 oklch(1 0 0 / 0.3),
+    0 0.5rem 1.5rem oklch(0.5771 0.245 27.33 / 0.3);
+  --shadow-destructive-hover: inset 0 0.0625rem 0 oklch(1 0 0 / 0.36),
+    0 0.75rem 1.875rem oklch(0.5771 0.245 27.33 / 0.38);
+
+  /*
+   * Gloss. A single highlight over the gradient, which is what makes a pill
+   * read as a moulded object.
+   *
+   * The falloff runs the full height and never stops hard. An earlier version
+   * faded out between 44% and 52%; on a 2.5rem pill that reads as a sheen, but on
+   * an 1.125rem checkbox the same 8% band is barely a pixel, so the highlight lands
+   * as a rectangular block cut across a rounded shape. Easing it all the way to
+   * the bottom edge keeps one recipe working at both sizes.
+   */
+  --gloss: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.34) 0%,
+    oklch(1 0 0 / 0.14) 34%,
+    oklch(1 0 0 / 0.04) 62%,
+    oklch(1 0 0 / 0) 100%
+  );
+
+  /*
+   * Raised fills. The gloss is the FIRST layer so it paints over the gradient
+   * and under the label. Layering it in the background stack, rather than as a
+   * pseudo-element, is what keeps the sheen visible without a z-index fight.
+   */
+  --fill-primary: var(--gloss),
+    linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%);
+  --fill-primary-hover: var(--gloss),
+    linear-gradient(
+      180deg,
+      var(--primary-hover-from) 0%,
+      var(--primary-hover-to) 100%
+    );
+  --fill-secondary: var(--gloss),
+    linear-gradient(180deg, var(--secondary-from) 0%, var(--secondary-to) 100%);
+  --fill-secondary-hover: var(--gloss),
+    linear-gradient(
+      180deg,
+      var(--secondary-hover-from) 0%,
+      var(--secondary-hover-to) 100%
+    );
+  --fill-destructive: var(--gloss),
+    linear-gradient(
+      180deg,
+      var(--destructive-from) 0%,
+      var(--destructive-to) 100%
+    );
+  --fill-destructive-hover: var(--gloss),
+    linear-gradient(
+      180deg,
+      var(--destructive-hover-from) 0%,
+      var(--destructive-hover-to) 100%
+    );
+
+  /* Brushed titlebar: light in the middle, shaded at both ends. */
+  --chrome-brushed: linear-gradient(
+    90deg,
+    oklch(0.8744 0.0029 308.42) 0%,
+    oklch(0.9551 0 0) 50%,
+    oklch(0.8744 0.0029 308.42) 100%
+  );
+
+  /* Frosted panel used by overlays that sit over the desk. */
+  --glass-surface: oklch(1 0 0 / 0.78);
+  --glass-blur: blur(1.375rem) saturate(1.35);
+  --shadow-glass: inset 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.8),
+    inset 0 0 0 0.0625rem oklch(1 0 0 / 0.25), 0 0.625rem 1.5rem oklch(0 0 0 / 0.12);
+
+  --chart-1: oklch(0.6243 0.2056 255.49);
+  --chart-2: oklch(0.8279 0.0991 179.2);
+  --chart-3: oklch(0.8284 0.1161 58.91);
+  --chart-4: oklch(0.7595 0.1254 254.62);
+  --chart-5: oklch(0.5278 0 0);
+
+  --pop-blue: oklch(0.9452 0.0243 253.5);
+  --pop-blue-foreground: oklch(0.5024 0.1834 258);
+  --pop-green: oklch(0.945 0.0451 163.2);
+  --pop-green-foreground: oklch(0.4623 0.1114 158);
+  --pop-orange: oklch(0.9506 0.0441 63.4);
+  --pop-orange-foreground: oklch(0.5623 0.1522 45.2);
+  --pop-yellow: oklch(0.9612 0.0602 95.1);
+  --pop-yellow-foreground: oklch(0.5223 0.1053 78.4);
+  --pop-purple: oklch(0.9446 0.0342 293.5);
+  --pop-purple-foreground: oklch(0.5023 0.1613 293.5);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-pop-blue: var(--pop-blue);
+  --color-pop-blue-foreground: var(--pop-blue-foreground);
+  --color-pop-green: var(--pop-green);
+  --color-pop-green-foreground: var(--pop-green-foreground);
+  --color-pop-orange: var(--pop-orange);
+  --color-pop-orange-foreground: var(--pop-orange-foreground);
+  --color-pop-yellow: var(--pop-yellow);
+  --color-pop-yellow-foreground: var(--pop-yellow-foreground);
+  --color-pop-purple: var(--pop-purple);
+  --color-pop-purple-foreground: var(--pop-purple-foreground);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  /* 6 / 8 / 10 / 12 / 14 / 1.125rem — the radii the desk chrome actually uses. */
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.125rem);
+  --radius-2xl: calc(var(--radius) + 0.25rem);
+  --radius-3xl: calc(var(--radius) + 0.5rem);
+
+  /*
+   * Only Tailwind's own namespaces belong here. Playdesk's material tokens
+   * (--fill-*, --shadow-*, --gloss, --chrome-brushed) are read directly as
+   * [box-shadow:var(--x)] and [background-image:var(--x)], so they need no
+   * theme entry. Re-declaring one as `--x: var(--x)` emits a self-referential
+   * property that overrides the real :root value and resolves to nothing, which
+   * is what left every filled button transparent in the compiled HTML kit.
+   */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    background-image: var(--desk-wallpaper);
+    background-size: var(--desk-dot-gap) var(--desk-dot-gap);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

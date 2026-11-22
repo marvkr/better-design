@@ -17,12 +17,12 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           ref={ref}
           value={value}
           className={cn(
-            "flex h-10 w-full rounded-[10px] border border-border bg-background pl-9 pr-3 py-2 text-sm",
-            "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+            "flex h-10 w-full rounded-lg border border-input bg-background pl-9 pr-3 py-2 text-sm",
+            "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
             "placeholder:text-muted-foreground",
-            "transition duration-200 ease-out",
+            "transition duration-base ease-out",
             "hover:border-foreground/30",
-            "focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+            "focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]",
             "disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70",
             onClear && value ? "pr-9" : "",
             className

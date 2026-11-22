@@ -1,0 +1,20 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault EmptyState: a dashed vault outline on the canvas; the icon sits\n// in a raised graphite well.\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nfunction EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  className,\n  ...props\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-card/40 p-10 text-center\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <div className=\"flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-secondary text-muted-foreground [box-shadow:var(--shadow-raised)]\">\n          {icon}\n        </div>\n      )}\n      <div className=\"flex flex-col gap-1\">\n        <p className=\"text-sm font-medium text-foreground\">{title}</p>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {action && <div>{action}</div>}\n    </div>\n  )\n}\n\nexport { EmptyState }\nexport type { EmptyStateProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

@@ -39,8 +39,8 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           "text-left",
           interactive && [
             "cursor-pointer rounded-xl",
-            "transition-all duration-200",
-            "hover:bg-white/[0.06] hover:shadow-[inset_0_0_8px_rgba(255,255,255,0.04)]",
+            "transition-all duration-base",
+            "hover:bg-white/[0.06] hover:shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.04)]",
             "focus-visible:outline-none focus-visible:bg-white/[0.08] focus-visible:ring-2 focus-visible:ring-[oklch(0.65_0.19_250)]/30",
             "active:bg-white/[0.10]",
           ],
@@ -57,7 +57,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
               "rounded-xl backdrop-blur-md bg-white/[0.08] border border-white/[0.06]",
               "text-white/60",
               "[&>svg]:h-4 [&>svg]:w-4",
-              "group-hover:bg-white/[0.12] group-hover:text-white/80 transition-all duration-200"
+              "group-hover:bg-white/[0.12] group-hover:text-white/80 transition-all duration-base"
             )}
           >
             {leading}

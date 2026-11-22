@@ -33,7 +33,7 @@ function MultiSelect({
 
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {
         setOpen(false)
       }
     }
@@ -62,10 +62,10 @@ function MultiSelect({
         className={cn(
           "flex min-h-10 w-full flex-wrap items-center gap-1.5 px-3 py-2 text-sm",
           "rounded-full border border-white/10 backdrop-blur-xl bg-white/[0.06]",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.06)]",
-          "transition duration-200",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06)]",
+          "transition duration-base",
           "hover:bg-white/[0.08] hover:border-white/[0.15]",
-          open && "shadow-[inset_0_0_6px_rgba(255,255,255,0.06),0_0_0_3px_oklch(0.65_0.19_250/0.2)] border-primary/50",
+          open && "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06),0_0_0_0.1875rem_oklch(0.65_0.19_250/0.2)] border-primary/50",
           "disabled:cursor-not-allowed disabled:opacity-70",
           "text-left"
         )}
@@ -103,7 +103,7 @@ function MultiSelect({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-white/10 backdrop-blur-2xl bg-white/[0.08] p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_0_6px_rgba(255,255,255,0.06)]">
+        <div className="absolute z-50 mt-1 w-full rounded-xl border border-white/10 backdrop-blur-3xl backdrop-saturate-200 bg-zinc-900/80 supports-[backdrop-filter]:bg-zinc-900/45 p-1.5 shadow-[0_0.5rem_2rem_oklch(0_0_0/0.4),inset_0_0_0.375rem_oklch(1_0_0/0.06)]">
           {options.map((option) => (
             <button
               key={option.value}
@@ -113,7 +113,7 @@ function MultiSelect({
             >
               <div
                 className={cn(
-                  "flex h-4 w-4 items-center justify-center rounded-[4px] border transition-colors",
+                  "flex h-4 w-4 items-center justify-center rounded-[0.25rem] border transition-colors",
                   value.includes(option.value)
                     ? "bg-primary border-primary"
                     : "border-white/20 bg-white/[0.04]"

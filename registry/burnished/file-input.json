@@ -1,0 +1,28 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { raisedBevel, wellInset } from \"./_shared\";\n\n/**\n * Burnished FileInput: a drop zone pressed into the page as a well, with a\n * dashed hairline edge and a graphite bevel badge holding the upload icon.\n */\nexport interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string;\n  helperText?: string;\n}\n\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  ({ className, label = \"Choose file or drop here\", helperText, onChange, ...props }, ref) => {\n    const [fileName, setFileName] = React.useState<string | null>(null);\n    const inputRef = React.useRef<HTMLInputElement>(null);\n\n    // SAFETY: the handle is read only after mount, when the element this\n    // component renders is attached, so the ref is non-null.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);\n\n    return (\n      <div data-slot=\"file-input\" className=\"w-full\">\n        <label\n          className={cn(\n            \"group flex w-full cursor-pointer flex-col items-center justify-center gap-2.5 px-4 py-8\",\n            \"rounded-2xl border border-dashed border-input\",\n            wellInset,\n            \"transition-[border-color] duration-base ease-(--ease-out)\",\n            \"[@media(hover:hover)_and_(pointer:fine)]:hover:border-primary-text\",\n            \"has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring\",\n            \"has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50\",\n            className,\n          )}\n        >\n          <span className={cn(\"flex size-11 items-center justify-center rounded-full\", raisedBevel)}>\n            <Icon icon=\"ph:upload-simple\" className=\"size-5\" />\n          </span>\n          <span className=\"text-sm font-semibold text-foreground\">{fileName ?? label}</span>\n          {helperText && <span className=\"text-xs text-muted-foreground\">{helperText}</span>}\n          <input\n            ref={inputRef}\n            type=\"file\"\n            className=\"sr-only\"\n            onChange={(e) => {\n              const file = e.target.files?.[0];\n              setFileName(file?.name ?? null);\n              onChange?.(e);\n            }}\n            {...props}\n          />\n        </label>\n      </div>\n    );\n  },\n);\nFileInput.displayName = \"FileInput\";\n\nexport { FileInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

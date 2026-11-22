@@ -5,7 +5,7 @@ import { Toaster as Sonner } from "sonner"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 // Linear Sonner: clean minimal toast notifications
-// Uses bg-background, rounded-[12px], ring-1 border
+// Uses bg-background, rounded-[0.75rem], ring-1 border
 
 const Toaster = ({ ...props }: ToasterProps) => {
   return (
@@ -14,7 +14,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:rounded-[12px] group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:shadow-[0_4px_16px_0_rgb(0_0_0/0.08)]",
+            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:rounded-[0.75rem] group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:shadow-[0_0.25rem_1rem_0_oklch(0_0_0/0.08)]",
           description: "group-[.toast]:text-muted-foreground",
           actionButton:
             "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg",

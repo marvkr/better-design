@@ -53,8 +53,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
  type="button"
  onClick={increment}
  className={cn(
- "flex h-[14px] w-6 items-center justify-center rounded-none",
- "text-muted-foreground transition-colors duration-150",
+ "flex h-[0.875rem] w-6 items-center justify-center rounded-none",
+ "text-muted-foreground transition-colors duration-fast",
  "hover:bg-accent hover:text-foreground",
  "focus:outline-none focus:ring-1 focus:ring-ring/40"
  )}
@@ -67,8 +67,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
  type="button"
  onClick={decrement}
  className={cn(
- "flex h-[14px] w-6 items-center justify-center rounded-none",
- "text-muted-foreground transition-colors duration-150",
+ "flex h-[0.875rem] w-6 items-center justify-center rounded-none",
+ "text-muted-foreground transition-colors duration-fast",
  "hover:bg-accent hover:text-foreground",
  "focus:outline-none focus:ring-1 focus:ring-ring/40"
  )}

@@ -13,9 +13,9 @@ const Checkbox = React.forwardRef<
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
-      "peer h-[18px] w-[18px] shrink-0 rounded-[5px]",
+      "peer h-[1.125rem] w-[1.125rem] shrink-0 rounded-[0.3125rem]",
       "bg-card [box-shadow:var(--shadow-inset)]",
-      "transition-[background,box-shadow] duration-150",
+      "transition-[background,box-shadow] duration-fast",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
       "disabled:cursor-not-allowed disabled:opacity-50",
       "data-[state=checked]:[background:var(--pill-gradient)] data-[state=checked]:text-foreground data-[state=checked]:[box-shadow:var(--shadow-pill)]",

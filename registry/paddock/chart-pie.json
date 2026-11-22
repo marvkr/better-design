@@ -1,0 +1,18 @@
+{
+  "name": "chart-pie",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-pie.tsx",
+      "content": "\"use client\";\n\nimport { Pie, PieChart } from \"recharts\";\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { stage: \"todo\", projects: 4, fill: \"var(--chart-5)\" },\n  { stage: \"progress\", projects: 3, fill: \"var(--chart-1)\" },\n  { stage: \"review\", projects: 2, fill: \"var(--chart-4)\" },\n  { stage: \"done\", projects: 3, fill: \"var(--chart-3)\" },\n];\n\nconst chartConfig = {\n  projects: { label: \"Projects\" },\n  todo: { label: \"To do\", color: \"var(--chart-5)\" },\n  progress: { label: \"In progress\", color: \"var(--chart-1)\" },\n  review: { label: \"In review\", color: \"var(--chart-4)\" },\n  done: { label: \"Done\", color: \"var(--chart-3)\" },\n};\n\n/** A donut chart of projects by stage. */\nexport function ChartPieDonut() {\n  return (\n    <Card className=\"flex flex-col\">\n      <CardHeader className=\"items-center pb-0\">\n        <CardTitle>Projects by stage</CardTitle>\n        <CardDescription>12 projects this quarter</CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex-1 pb-0\">\n        <ChartContainer config={chartConfig} className=\"mx-auto aspect-square max-h-64\">\n          <PieChart>\n            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />\n            <Pie\n              data={chartData}\n              dataKey=\"projects\"\n              nameKey=\"stage\"\n              innerRadius={64}\n              strokeWidth={3}\n              paddingAngle={2}\n              cornerRadius={4}\n            />\n          </PieChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col gap-1 text-[0.8125rem]\">\n        <div className=\"font-medium text-foreground\">3 projects done this quarter</div>\n        <div className=\"text-muted-foreground\">Counted across every stage</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/card.json",
+    "https://better-design.com/registry/paddock/chart.json"
+  ]
+}

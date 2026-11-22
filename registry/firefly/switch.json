@@ -1,0 +1,33 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { glowControlChecked } from \"./_shared\";\n\n/**\n * Firefly Switch: a 2.5rem by 1.5rem warm track with a white knob on a\n * soft three-layer shadow. On, the track lights up in the primary button's\n * material and the knob slides a full knob-width.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer group/switch inline-flex h-6 w-10 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-(--surface-3) p-0.5\",\n      \"transition-[background-color,box-shadow] duration-fast ease-out\",\n      \"hover:data-[state=unchecked]:bg-(--line-strong)\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      \"disabled:cursor-not-allowed disabled:bg-secondary\",\n      glowControlChecked,\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-4 rounded-full bg-(--thumb) shadow-(--shadow-thumb)\",\n        \"transition-transform duration-fast ease-out\",\n        \"data-[state=checked]:translate-x-4.5 data-[state=unchecked]:translate-x-0\",\n        \"group-disabled/switch:bg-muted group-disabled/switch:shadow-none\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.125rem 0.3125rem oklch(0.26 0.028 95.8 / 0.1), 0 0.0625rem 0.0625rem oklch(0.26 0.028 95.8 / 0.07), 0 0 0 0.03125rem oklch(0.26 0.028 95.8 / 0.1)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.125rem 0.3125rem oklch(0 0 0 / 0.22), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.16), 0 0 0 0.03125rem oklch(0 0 0 / 0.2)"
+    }
+  }
+}

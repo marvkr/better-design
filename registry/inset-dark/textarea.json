@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/inset-dark/_shared.json"
   ]
 }

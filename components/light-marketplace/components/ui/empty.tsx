@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Energetic Empty: light marketplace, rounded-[14px], NO shadows, NO borders on icon
+// Energetic Empty: light marketplace, rounded-[0.875rem], NO shadows, NO borders on icon
 // bg-[#f0f0f0] (bg-secondary) container; charcoal text; dashed border for empty area
 // Clean and airy — marketplace style like an empty shop shelf
 
@@ -19,7 +19,7 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(
         ref={ref}
         className={cn(
           "flex flex-col items-center justify-center gap-5",
-          "rounded-[14px] bg-secondary",
+          "rounded-[0.875rem] bg-secondary",
           "p-12 text-center",
           className
         )}
@@ -29,7 +29,7 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(
           <div
             className={cn(
               "flex h-14 w-14 items-center justify-center",
-              "rounded-[10px] bg-background",
+              "rounded-[0.625rem] bg-background",
               "text-foreground/40",
               "[&>svg]:h-6 [&>svg]:w-6"
             )}

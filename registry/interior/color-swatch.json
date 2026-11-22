@@ -1,0 +1,20 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior ColorSwatch — a 10px-radius tile (the avatar-tile radius) cut into\n * the panel as a shallow well, with a hairline border so a pale colour keeps\n * an edge. The value line is metadata, so it runs mono.\n */\n\nexport interface ColorSwatchProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  color: string;\n  name?: string;\n  value?: string;\n}\n\nconst ColorSwatch = React.forwardRef<HTMLDivElement, ColorSwatchProps>(\n  ({ className, color, name, value, ...props }, ref) => (\n    <div ref={ref} className={cn(\"space-y-1.5\", className)} {...props}>\n      <div\n        className=\"h-14 w-full rounded-[0.625rem] border border-border shadow-[var(--shadow-well)]\"\n        style={{ backgroundColor: color }}\n      />\n      {name ? (\n        <p className=\"text-[0.7813rem] font-medium text-foreground\">{name}</p>\n      ) : null}\n      {value ? (\n        <p className=\"font-mono text-[0.6563rem] tabular-nums text-muted-foreground\">\n          {value}\n        </p>\n      ) : null}\n    </div>\n  ),\n);\nColorSwatch.displayName = \"ColorSwatch\";\n\nexport interface ColorPaletteProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  colors: ColorSwatchProps[];\n}\n\nconst ColorPalette = React.forwardRef<HTMLDivElement, ColorPaletteProps>(\n  ({ className, colors, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"grid grid-cols-2 gap-3 sm:grid-cols-4\", className)}\n      {...props}\n    >\n      {colors.map((swatch) => (\n        <ColorSwatch key={swatch.color} {...swatch} />\n      ))}\n    </div>\n  ),\n);\nColorPalette.displayName = \"ColorPalette\";\n\nexport { ColorSwatch, ColorPalette };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

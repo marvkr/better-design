@@ -1,0 +1,18 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\";\nimport { type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { toggleVariants } from \"./toggle\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({});\n\n/**\n * Bold retail ToggleGroup: a wrapping row of filter chips 0.5rem apart, such\n * as a size grid or a colour filter. Each chip stays its own pill, and the\n * group passes its variant and size down to every item.\n */\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  children,\n  ...props\n}: WithClassName<ToggleGroupPrimitive.Props<string>> &\n  VariantProps<typeof toggleVariants>) {\n  return (\n    <ToggleGroupPrimitive\n      data-slot=\"toggle-group\"\n      className={cn(\n        \"inline-flex flex-wrap items-center gap-2\",\n        \"data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch\",\n        className,\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size }}>\n        {children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive>\n  );\n}\nToggleGroup.displayName = \"ToggleGroup\";\n\n/** One chip inside a ToggleGroup. It takes the group's variant and size unless the group leaves them unset. */\nfunction ToggleGroupItem({\n  className,\n  variant,\n  size,\n  ...props\n}: WithClassName<TogglePrimitive.Props<string>> &\n  VariantProps<typeof toggleVariants>) {\n  const context = React.useContext(ToggleGroupContext);\n\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle-group-item\"\n      className={cn(\n        toggleVariants({\n          variant: context.variant ?? variant,\n          size: context.size ?? size,\n        }),\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nToggleGroupItem.displayName = \"ToggleGroupItem\";\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/toggle-base.json"
+  ]
+}

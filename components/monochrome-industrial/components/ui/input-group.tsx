@@ -17,7 +17,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
  className={cn(
  "flex items-stretch w-full rounded-none overflow-hidden",
  "bg-input border border-border ",
- "transition-[border-color,box-shadow] duration-150",
+ "transition-[border-color,box-shadow] duration-fast",
  "focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/40",
  className
  )}

@@ -1,0 +1,33 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { frostedGlassSurface, frostedGlassHover } from \"./_shared\";\n\n// Frosted Glass Button — a frosted glass pill.\n// default / primary ARE the DS's signature glass material (frostedGlassSurface):\n// specular top rim + chromatic cyan/magenta edge + soft outer glow. The filled\n// controls (checkbox / switch / radio / slider) mirror this exact surface.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-[0.9375rem] font-medium leading-none tracking-[0.01em] text-foreground\",\n    \"rounded-full transition-all duration-slow ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98]\",\n    \"select-none\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: cn(frostedGlassSurface, frostedGlassHover),\n        primary: cn(frostedGlassSurface, frostedGlassHover),\n        secondary: cn(\n          \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[oklch(1_0_0/0.05)]\",\n          \"border border-[color:oklch(1_0_0/0.1)] text-secondary-foreground\",\n          \"shadow-[inset_0_0.0625rem_0_-0.0313rem_oklch(1_0_0/0.3)]\",\n          \"hover:bg-[var(--fg-fill)] hover:text-foreground\",\n        ),\n        outline: cn(\n          \"bg-transparent border border-[color:var(--fg-border)]\",\n          \"hover:bg-[oklch(1_0_0/0.06)] hover:border-[color:oklch(1_0_0/0.24)]\",\n        ),\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-[oklch(1_0_0/0.06)] hover:text-foreground\",\n        destructive: cn(\n          \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[oklch(0.62_0.21_18/0.8)] text-destructive-foreground\",\n          \"border border-[color:oklch(1_0_0/0.16)]\",\n          \"shadow-[inset_0_0.0938rem_0.0313rem_-0.0313rem_oklch(1_0_0/0.5),0_0.5rem_1.375rem_-0.5rem_oklch(0.62_0.21_18/0.6)]\",\n          \"hover:brightness-110\",\n        ),\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-9 px-4 text-xs\",\n        default: \"h-12 px-8\",\n        lg: \"h-14 px-10 text-base\",\n        icon: \"h-12 w-12\",\n        \"icon-sm\": \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/frosted-glass/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

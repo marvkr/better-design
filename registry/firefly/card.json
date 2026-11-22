@@ -1,0 +1,29 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Card: warm paper on a white page.\n *\n * The default card is a borderless warm surface with a 1rem corner, so cards\n * read as paper laid on the page rather than boxes drawn on it. An outline\n * card sits on the page colour behind a hairline, a raised card lifts on two\n * warm hairline shadows, and the lit card carries the one number a screen is\n * about in the same glowing material as the primary button.\n */\nconst cardVariants = cva(\"flex flex-col rounded-xl text-card-foreground\", {\n  variants: {\n    variant: {\n      default: \"bg-card\",\n      outline: \"border border-border bg-background\",\n      raised: \"bg-popover shadow-(--shadow-card)\",\n      // Static lit material: the card glows but does not react to the pointer.\n      glow:\n        \"bg-primary bg-(image:--gradient-primary) text-primary-foreground shadow-(--shadow-primary) \" +\n        \"[&_[data-slot=card-description]]:text-primary-foreground\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nexport interface CardProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-1 p-5\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\nconst CardTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\"text-lg font-semibold leading-tight\", className)}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"p-5 pt-0\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-2 p-5 pt-0\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "shadow-card": "var(--shadow-sm)",
+      "gradient-primary": "linear-gradient(180deg, oklch(1 0 0 / 0.3) 0%, oklch(1 0 0 / 0) 45%), radial-gradient(110% 90% at 22% 0%, oklch(1 0 0 / 0.24) 0%, oklch(1 0 0 / 0) 60%), radial-gradient(70% 60% at 50% 115%, oklch(1 0 0 / 0.32) 0%, oklch(1 0 0 / 0) 70%), linear-gradient(0deg, oklch(0 0 0 / 0.05) 0%, oklch(0 0 0 / 0) 18%), linear-gradient(180deg, oklch(0.9 0.199 115) 0%, oklch(0.968 0.155 112.5) 100%)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.75), inset 0 -0.09375rem 0.125rem 0 oklch(1 0 0 / 0.7), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.2), inset 0 0 0.75rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.548 0.116 114.4 / 0.22)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "shadow-card": "var(--shadow-sm)",
+      "gradient-primary": "linear-gradient(180deg, oklch(1 0 0 / 0.075) 0%, oklch(1 0 0 / 0) 45%), radial-gradient(110% 90% at 22% 0%, oklch(1 0 0 / 0.06) 0%, oklch(1 0 0 / 0) 60%), radial-gradient(70% 60% at 50% 115%, oklch(1 0 0 / 0.08) 0%, oklch(1 0 0 / 0) 70%), linear-gradient(0deg, oklch(0 0 0 / 0.05) 0%, oklch(0 0 0 / 0) 18%), linear-gradient(180deg, oklch(0.814 0.16 113.8) 0%, oklch(0.879 0.136 117) 100%)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.188), inset 0 -0.09375rem 0.125rem 0 oklch(1 0 0 / 0.3), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05), inset 0 0 0.75rem 0 oklch(1 0 0 / 0.12), 0 0 0 0.0625rem oklch(0 0 0 / 0.22)"
+    }
+  }
+}

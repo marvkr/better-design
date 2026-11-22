@@ -1,0 +1,43 @@
+/* Ported from https://www.aicss.dev/components/file-diff */
+.diff { border-radius: 0.75rem; background: var(--card); box-shadow: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05), 0 0.125rem 0.25rem oklch(0 0 0 / 0.02), 0 0 0 0.03125rem oklch(0 0 0 / 0.08); padding: 0.75rem 1rem 1rem; overflow: hidden; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.diffHead {
+  display: flex; align-items: center; gap: 0.5rem;
+  margin: -0.75rem -1rem 0; padding: 0.625rem 0.75rem 0.625rem 1rem;
+  background: transparent; border-bottom: 0.03125rem solid var(--border); font-size: 0.78125rem;
+}
+.diffFileWrap { display: inline-flex; align-items: center; gap: 0.4375rem; }
+.diffIcon { display: block; width: 0.9375rem; height: 0.9375rem; color: var(--muted-foreground); flex: none; }
+.diffFile { color: var(--foreground); line-height: 1; }
+.diffStat { margin-left: auto; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; line-height: 1; }
+.diffStat .add { color: oklch(0.6247 0.137 159.8934); }
+.diffStat .del { color: oklch(0.5771 0.2152 27.325); }
+.diffBody {
+  position: relative;
+  margin: 0 -1rem -1rem; overflow: hidden;
+  padding: 0.25rem 0; font-size: 0.78125rem; line-height: 1.25rem;
+}
+/* full-height gutter divider at the line-number edge (32px + 32px), unaffected
+   by the body padding; z-index keeps it above the tinted add/del rows */
+.diffBody::before { content: ""; position: absolute; top: 0; bottom: 0; left: 4rem; width: 0.03125rem; background: var(--border); z-index: 1; }
+.diffRow {
+  position: relative;
+  display: grid; grid-template-columns: 2rem 2rem 1.125rem 1fr; align-items: stretch;
+}
+.diffRow .ln, .diffRow .sign { user-select: none; color: var(--muted-foreground); font-size: 0.6875rem; }
+.diffRow .ln { text-align: right; padding: 0 0.4375rem; }
+.diffRow .sign { text-align: center; }
+.diffRow code { white-space: pre; padding: 0 0.75rem 0 0.5rem; color: var(--muted-foreground); }
+/* left accent bar: solid green for additions, red hatch for deletions */
+.diffRow.add::before, .diffRow.del::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 0.1875rem;
+}
+.diffRow.add::before { background: oklch(0.6247 0.137 159.8934); }
+.diffRow.del::before {
+  background: repeating-linear-gradient(45deg, oklch(0.5771 0.2152 27.325) 0, oklch(0.5771 0.2152 27.325) 0.09375rem, transparent 0.09375rem, transparent 0.1875rem);
+}
+.diffRow.add { background: oklch(0.5244 0.1401 148.0394 / 0.09); }
+.diffRow.add .sign, .diffRow.add .new { color: oklch(0.6247 0.137 159.8934); }
+.diffRow.add code { color: var(--foreground); }
+.diffRow.del { background: oklch(0.5517 0.2051 24.5252 / 0.09); }
+.diffRow.del .sign, .diffRow.del .old { color: oklch(0.5771 0.2152 27.325); }
+.diffRow.del code { color: var(--foreground); }

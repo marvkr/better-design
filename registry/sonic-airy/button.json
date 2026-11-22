@@ -1,0 +1,29 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { useSound } from \"./sound-provider\";\n\n// Airbnb Button — extracted from airbnb.com (2026-04)\n// Primary: solid #FF385C, radial gradient on hover\n// Secondary: #222 solid\n// Outline: white bg, 1px #222 border\n// Rounded: 8px default, pill for search CTA\n// No drop-shadow on buttons — flat with border or solid fill\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold\",\n    \"rounded-lg transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Rausch solid — radial gradient on hover\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"hover:bg-primary/90\",\n        // Dark — #222 solid\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"hover:bg-[oklch(0_0_0)]\",\n        // Outline — white bg, thin dark border\n        outline:\n          \"border border-foreground bg-background text-foreground \" +\n          \"hover:bg-muted\",\n        // Ghost: no border and no fill until hover\n        ghost:\n          \"bg-transparent text-foreground \" +\n          \"hover:bg-muted\",\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"hover:bg-destructive/90\",\n        // Link\n        link: \"text-foreground underline-offset-4 underline hover:text-foreground/80\",\n      },\n      size: {\n        default: \"h-12 px-6 py-3\",\n        sm: \"h-9 px-4 text-xs rounded-lg\",\n        lg: \"h-14 px-8 text-base rounded-xl\",\n        icon: \"h-10 w-10 rounded-full\",\n        \"icon-sm\": \"h-9 w-9 rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, onClick, onPointerDown, ...props }, ref) => {\n    const { playClick, playTick } = useSound();\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => {\n          playTick();\n          onPointerDown?.(e);\n        }}\n        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {\n          playClick();\n          onClick?.(e);\n        }}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/sonic-airy/sound-provider.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow": "0 0.125rem 0.25rem oklch(0 0 0 / 0.05)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "shadow": "0 0.125rem 0.25rem oklch(0 0 0 / 0.05)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

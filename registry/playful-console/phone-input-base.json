@@ -1,0 +1,30 @@
+{
+  "name": "phone-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/** Props for PhoneInput: a tel input plus a separately editable country code. */\nexport interface PhoneInputProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\"\n> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\n/**\n * Playful console PhoneInput: one white well split by the olive edge. The\n * country code sits at the start on a cream tray in mono figures, the number\n * fills the rest, and the whole shell takes the blue edge and ring while\n * either part has focus.\n */\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode = \"+1\", onCountryCodeChange, disabled, ...props }, ref) => (\n    <div\n      data-slot=\"phone-input\"\n      className={cn(\n        formFieldBase,\n        \"flex h-9 items-stretch overflow-hidden px-0\",\n        \"focus-within:border-ring focus-within:ring-3 focus-within:ring-(--highlight-blue)\",\n        \"has-[[aria-invalid=true]]:border-destructive\",\n        \"has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-secondary has-[:disabled]:text-(--foreground-disabled) has-[:disabled]:hover:border-(--line-strong)\",\n        className,\n      )}\n    >\n      <div className=\"flex shrink-0 items-center gap-1.5 border-e border-(--line-strong) bg-secondary ps-2.5 pe-2 text-muted-foreground\">\n        <Icon icon=\"ph:phone-duotone\" className=\"size-4\" aria-hidden=\"true\" />\n        <input\n          type=\"tel\"\n          value={countryCode}\n          onChange={(event) => onCountryCodeChange?.(event.target.value)}\n          disabled={disabled}\n          aria-label=\"Country code\"\n          className=\"w-10 bg-transparent font-mono text-[0.8125rem] font-semibold tabular-nums text-foreground outline-none disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\"\n        />\n      </div>\n      <input\n        ref={ref}\n        type=\"tel\"\n        autoComplete=\"tel-national\"\n        disabled={disabled}\n        className=\"min-w-0 flex-1 bg-transparent px-3 text-sm tabular-nums text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\"\n        {...props}\n      />\n    </div>\n  ),\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "highlight-blue": "oklch(0.623 0.188 259.8 / 0.2)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "highlight-blue": "oklch(0.7 0.15 258 / 0.3)"
+    }
+  }
+}

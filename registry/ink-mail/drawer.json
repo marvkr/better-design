@@ -1,0 +1,23 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Drawer: a bottom sheet you can pull down to close.\n *\n * The panel is the elevated popover step, attached to the bottom edge with a\n * 1rem corner on its top edge only. A translucent hairline handle shows it can\n * be dragged, and the page behind it dims under a blurred black scrim.\n */\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root\n    shouldScaleBackground={shouldScaleBackground}\n    {...props}\n  />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\n/** The scrim. The drawer fades it with the drag, so it carries no animation classes. */\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    data-slot=\"drawer-overlay\"\n    className={cn(\"fixed inset-0 z-50 bg-(--scrim) backdrop-blur-sm\", className)}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = \"DrawerOverlay\";\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      data-slot=\"drawer-content\"\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[85dvh] flex-col\",\n        \"rounded-t-xl bg-popover text-popover-foreground shadow-(--shadow-overlay) outline-none\",\n        className,\n      )}\n      {...props}\n    >\n      <div\n        aria-hidden=\"true\"\n        data-slot=\"drawer-handle\"\n        className=\"mx-auto mt-3 h-1 w-10 shrink-0 rounded-full bg-(--line-strong)\"\n      />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\nconst DrawerHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-header\"\n    className={cn(\n      \"flex flex-col gap-1.5 px-6 pt-5 pb-3 text-center sm:text-start\",\n      className,\n    )}\n    {...props}\n  />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\nconst DrawerFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-footer\"\n    className={cn(\"mt-auto flex flex-col gap-2 px-6 pt-3 pb-6\", className)}\n    {...props}\n  />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\n/** The title renders as h2, so it opts out of the display serif and stays in Inter. */\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    data-slot=\"drawer-title\"\n    className={cn(\n      \"font-sans text-lg font-medium leading-tight tracking-tight text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDrawerTitle.displayName = \"DrawerTitle\";\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    data-slot=\"drawer-description\"\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDrawerDescription.displayName = \"DrawerDescription\";\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "scrim": "oklch(0 0 0 / 0.72)",
+      "shadow-overlay": "0 0 0 0.0625rem oklch(1 0 0 / 0.12), 0 2rem 4rem -1rem oklch(0 0 0 / 0.9)"
+    },
+    "dark": {}
+  }
+}

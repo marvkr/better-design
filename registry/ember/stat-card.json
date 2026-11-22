@@ -1,0 +1,29 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass StatCard: glass ticket with a bold number and a trend chip.\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: string | number\n  change?: {\n    value: string | number\n    trend: \"up\" | \"down\" | \"neutral\"\n  }\n  icon?: React.ReactNode\n  description?: string\n}\n\nconst trendStyles = {\n  up: \"text-[oklch(0.78_0.14_155)] bg-[oklch(0.72_0.15_155/0.12)]\",\n  down: \"text-[oklch(0.74_0.16_27)] bg-[oklch(0.6_0.21_27/0.12)]\",\n  neutral: \"text-muted-foreground bg-[var(--ag-fill)]\",\n}\n\nconst trendIcons = {\n  up: \"tabler:trending-up\",\n  down: \"tabler:trending-down\",\n  neutral: \"tabler:minus\",\n}\n\nconst StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(\n  ({ className, label, value, change, icon, description, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col gap-3 rounded-xl p-5\",\n        \"backdrop-blur-[var(--ag-blur)] bg-card\",\n        \"border border-[color:var(--ag-border)]\",\n        \"shadow-[var(--shadow-glass)]\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center justify-between gap-2\">\n        <span className=\"text-xs font-semibold uppercase tracking-wide text-muted-foreground\">\n          {label}\n        </span>\n        {icon && <span className=\"text-primary [&>svg]:h-4 [&>svg]:w-4\">{icon}</span>}\n      </div>\n      <div className=\"flex items-baseline gap-2\">\n        <span className=\"text-3xl font-bold tracking-[-0.02em] tabular-nums\">\n          {value}\n        </span>\n        {change && (\n          <span\n            className={cn(\n              \"inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold\",\n              trendStyles[change.trend]\n            )}\n          >\n            <Icon icon={trendIcons[change.trend]} className=\"h-3 w-3\" />\n            {change.value}\n          </span>\n        )}\n      </div>\n      {description && (\n        <p className=\"text-xs text-muted-foreground\">{description}</p>\n      )}\n    </div>\n  )\n)\nStatCard.displayName = \"StatCard\"\n\nexport { StatCard }\nexport type { StatCardProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)"
+    }
+  }
+}

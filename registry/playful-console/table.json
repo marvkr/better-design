@@ -1,0 +1,25 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Table: a white card of rows.\n *\n * The table sits in a white frame with the olive hairline and the card\n * corner. The header row is a cream band of small bold uppercase labels;\n * body rows are split by the soft line and take a cream wash under the\n * pointer. A selected row takes the orange wash used by pressed chips.\n */\nconst Table = React.forwardRef<\n  HTMLTableElement,\n  React.HTMLAttributes<HTMLTableElement>\n>(({ className, ...props }, ref) => (\n  <div\n    data-slot=\"table-container\"\n    className=\"relative w-full overflow-x-auto rounded-lg border border-border bg-card\"\n  >\n    <table\n      ref={ref}\n      data-slot=\"table\"\n      className={cn(\"w-full caption-bottom text-sm\", className)}\n      {...props}\n    />\n  </div>\n));\nTable.displayName = \"Table\";\n\n/** The header group: a cream band under the top edge. */\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead\n    ref={ref}\n    data-slot=\"table-header\"\n    className={cn(\n      \"bg-secondary [&_tr]:border-b [&_tr]:border-border [&_tr]:hover:bg-transparent\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHeader.displayName = \"TableHeader\";\n\n/** The body group; its last row drops the divider. */\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    data-slot=\"table-body\"\n    className={cn(\"[&_tr:last-child]:border-0\", className)}\n    {...props}\n  />\n));\nTableBody.displayName = \"TableBody\";\n\n/** The footer group: totals on a cream band with bold figures. */\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    data-slot=\"table-footer\"\n    className={cn(\n      \"border-t border-border bg-secondary font-bold [&>tr:last-child]:border-b-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableFooter.displayName = \"TableFooter\";\n\n/** One row: a soft divider, a cream wash on hover, orange wash when selected. */\nconst TableRow = React.forwardRef<\n  HTMLTableRowElement,\n  React.HTMLAttributes<HTMLTableRowElement>\n>(({ className, ...props }, ref) => (\n  <tr\n    ref={ref}\n    data-slot=\"table-row\"\n    className={cn(\n      \"border-b border-(--line-soft) transition-colors duration-fast ease-out\",\n      \"hover:bg-secondary/60 data-[state=selected]:bg-(--primary-wash)\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableRow.displayName = \"TableRow\";\n\n/** A column label: small, bold and uppercase in the muted ink. */\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    data-slot=\"table-head\"\n    className={cn(\n      \"h-9 whitespace-nowrap px-3 text-start align-middle text-xs font-bold uppercase text-muted-foreground\",\n      \"[&:has([role=checkbox])]:pe-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHead.displayName = \"TableHead\";\n\n/** A data cell: secondary ink with even figures. */\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    data-slot=\"table-cell\"\n    className={cn(\n      \"px-3 py-2.5 align-middle text-sm tabular-nums text-(--foreground-secondary) [&:has([role=checkbox])]:pe-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableCell.displayName = \"TableCell\";\n\n/** A caption under the frame. */\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    data-slot=\"table-caption\"\n    className={cn(\"mt-3 text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nTableCaption.displayName = \"TableCaption\";\n\nexport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "line-soft": "oklch(0.898 0.018 117.3)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "line-soft": "oklch(0.31 0.012 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "phone-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Burnished PhoneInput: one graphite bevel field split by a hairline into a\n * country code and the number. The whole field takes the focus glow.\n */\nexport interface PhoneInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode = \"+1\", onCountryCodeChange, ...props }, ref) => (\n    <div\n      data-slot=\"phone-input\"\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"items-stretch gap-0 px-0 py-0\",\n        \"focus-within:shadow-(--bevel-raised-focus) focus-within:ring-3 focus-within:ring-ring\",\n        \"has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-1.5 border-r border-border pl-4 pr-2 text-muted-foreground\">\n        <Icon icon=\"ph:phone\" aria-hidden className=\"size-4\" />\n        <input\n          type=\"tel\"\n          value={countryCode}\n          onChange={(e) => onCountryCodeChange?.(e.target.value)}\n          className=\"w-12 bg-transparent tabular-nums text-foreground outline-none\"\n          aria-label=\"Country code\"\n        />\n      </div>\n      <input\n        ref={ref}\n        type=\"tel\"\n        className=\"min-w-0 flex-1 bg-transparent px-3 text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        {...props}\n      />\n    </div>\n  ),\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bevel-raised-focus": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26), inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "bevel-raised-focus": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26), inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Atelier: a quiet-luxury investment dashboard on light ground.
+ *
+ * Authored from a watch-portfolio dashboard reference: an airy cream canvas,
+ * pure-white cards with hairline borders, charcoal type, generous whitespace,
+ * and one refined green accent used sparingly (a deep forest fill for actions,
+ * a pale mint wash for highlights). Depth comes from a single soft overhead
+ * key light: low-alpha, large-blur drop shadows, never hard edges.
+ * Pill-shaped controls, roomy card radii, elegant grotesk typography.
+ */
+
+:root {
+  /* ─── Surfaces: cream canvas, white cards floating above it ─── */
+  --background: oklch(0.9731 0.0036 91);   /* warm off-white canvas */
+  --foreground: oklch(0.245 0.0055 106);   /* soft charcoal, never pure black */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.245 0.0055 106);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.245 0.0055 106);
+
+  /* ─── Primary: deep forest green, the single refined accent ─── */
+  --primary: oklch(0.44 0.08 158);
+  --primary-foreground: oklch(0.9821 0.0061 155);
+  /* Hover deepens slightly, like ink soaking in. */
+  --primary-hover: oklch(0.4 0.078 158);
+
+  --secondary: oklch(0.9572 0.0042 95);    /* warm gray chip / pill surface */
+  --secondary-foreground: oklch(0.3253 0.0064 106);
+
+  --muted: oklch(0.9594 0.0035 95);
+  --muted-foreground: oklch(0.5174 0.0058 106);
+
+  /* ─── Accent: warm gray hover and highlight surface; green stays on primary and charts ─── */
+  --accent: oklch(0.9352 0.0052 95);
+  --accent-foreground: oklch(0.3253 0.0064 106);
+
+  --destructive: oklch(0.5478 0.1843 28);
+  --destructive-foreground: oklch(0.985 0.008 28);
+
+  --border: oklch(0.9183 0.004 95);        /* hairline warm gray */
+  --input: oklch(0.9883 0.0022 95);        /* near-white field surface */
+  --ring: oklch(0.5642 0.0855 157);
+  --radius: 1rem;
+
+  /*
+   * ─── Shadow scale: one soft overhead key light ───
+   * Light ground demands restraint: low alpha (0.05-0.12), large negative
+   * spread blurs so shadows pool under surfaces instead of outlining them.
+   */
+  --shadow-s: 0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.06);
+
+  --shadow-m:
+    0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.05),
+    0 0.5rem 1.5rem -0.375rem oklch(0.2 0.01 110 / 0.08);
+
+  --shadow-l:
+    0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05),
+    0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12);
+
+  /* Fields rest a hair below the card plane. */
+  --shadow-inset: inset 0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.05);
+
+  /*
+   * The primary button material: deep green fill, faint top light caught on
+   * the upper rim, one soft green-tinted drop. Filled controls (checkbox,
+   * switch, radio, slider) reuse this exact stack scaled down.
+   */
+  --shadow-button:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.16),
+    0 0.0625rem 0.125rem oklch(0.25 0.05 156 / 0.12),
+    0 0.1875rem 0.625rem -0.125rem oklch(0.25 0.05 156 / 0.1);
+
+  --shadow-button-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.2),
+    0 0.0625rem 0.125rem oklch(0.25 0.05 156 / 0.12),
+    0 0.3125rem 0.875rem -0.125rem oklch(0.25 0.05 156 / 0.12);
+
+  --shadow-primary:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.16),
+    0 0.0625rem 0.125rem oklch(0.25 0.05 156 / 0.12),
+    0 0.1875rem 0.625rem -0.125rem oklch(0.25 0.05 156 / 0.1);
+
+  /*
+   * ─── Chart palette: gray field, green voice ───
+   * The reference chart keeps bars warm gray and lets a single mint bar
+   * speak; the ramp goes deep green -> mint -> sage -> warm gray -> charcoal.
+   */
+  --chart-1: var(--primary);
+  --chart-2: oklch(0.87 0.0993 156);
+  --chart-3: oklch(0.6864 0.0455 152);
+  --chart-4: oklch(0.8585 0.0035 95);
+  --chart-5: oklch(0.4 0.006 106);
+
+  /* --- Motion (soft profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 180ms;
+  --transition-duration-base: 240ms;
+  --transition-duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.5rem);
+  --radius-md: calc(var(--radius) - 0.25rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: "Instrument Sans", ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      sans-serif;
+    letter-spacing: -0.01em;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling. */
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: spacious;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 62);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 10);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 12);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 6);
+}

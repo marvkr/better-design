@@ -1,0 +1,38 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\nimport { Icon } from \"@iconify/react\";\n\nconst focusRing = \"outline-none focus-visible:ring-3 focus-visible:ring-ring\";\n\n/**\n * Airy docs Toaster for sonner: white notes with Feather status icons.\n *\n * Sonner's own look is switched off and each part is styled here, so a toast\n * is the same floating panel as a menu: white, a 0.75rem corner and a\n * hairline ring and no shadow. Only the status icon takes a colour:\n * green for success, blue for info, amber for warning, red for error. The\n * action is the green pill and cancel a hairline outline pill.\n */\nconst Toaster = ({ ...props }: ToasterProps) => (\n  <SonnerPrimitive\n    icons={{\n      success: <Icon icon=\"feather:check-circle\" aria-hidden=\"true\" />,\n      info: <Icon icon=\"feather:info\" aria-hidden=\"true\" />,\n      warning: <Icon icon=\"feather:alert-triangle\" aria-hidden=\"true\" />,\n      error: <Icon icon=\"feather:alert-circle\" aria-hidden=\"true\" />,\n      loading: (\n        <Icon icon=\"feather:loader\" className=\"animate-spin\" aria-hidden=\"true\" />\n      ),\n      close: <Icon icon=\"feather:x\" aria-hidden=\"true\" />,\n    }}\n    toastOptions={{\n      unstyled: true,\n      classNames: {\n        toast:\n          \"flex w-(--width) items-start gap-3 rounded-lg bg-popover p-4 text-sm text-popover-foreground shadow-(--shadow-menu)\",\n        content: \"flex min-w-0 flex-1 flex-col gap-1\",\n        title: \"font-semibold text-foreground\",\n        description: \"text-(--foreground-secondary)\",\n        icon: \"mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-4\",\n        actionButton: `inline-flex h-8 shrink-0 items-center rounded-full bg-primary px-3 text-sm font-medium text-primary-foreground transition-colors duration-fast hover:bg-(--primary-hover) ${focusRing}`,\n        cancelButton: `inline-flex h-8 shrink-0 items-center rounded-full border border-(--line-strong) bg-background px-3 text-sm font-medium text-foreground transition-colors duration-fast hover:bg-secondary ${focusRing}`,\n        closeButton: `absolute -end-2 -top-2 inline-flex size-6 items-center justify-center rounded-full border border-border bg-popover text-muted-foreground transition-colors duration-fast hover:text-foreground [&_svg]:size-3 ${focusRing}`,\n        success: \"[&_[data-icon]]:text-(--success-text)\",\n        error: \"[&_[data-icon]]:text-(--destructive-text)\",\n        warning: \"[&_[data-icon]]:text-(--warning-text)\",\n        info: \"[&_[data-icon]]:text-(--info-text)\",\n      },\n    }}\n    {...props}\n  />\n);\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.43 0.1 154.3)",
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "success-text": "oklch(0.42 0.1 154.3)",
+      "warning-text": "oklch(0.5 0.11 66)",
+      "info-text": "oklch(0.48 0.15 259.2)",
+      "destructive-text": "oklch(0.5 0.16 25)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.12)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.76 0.16 153.6)",
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "success-text": "oklch(0.78 0.15 153.6)",
+      "warning-text": "oklch(0.84 0.13 80)",
+      "info-text": "oklch(0.8 0.1 259)",
+      "destructive-text": "oklch(0.78 0.13 22)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(1 0 0 / 0.14)"
+    }
+  }
+}

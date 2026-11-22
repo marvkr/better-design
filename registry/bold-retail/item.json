@@ -1,0 +1,25 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Item: one row of an account or order list. The leading icon\n * sits in a soft grey circle, the title reads at body size in medium weight,\n * and a muted line can sit under it. Trailing values line up their figures.\n * A row you can press fills with soft grey under the pointer and a step\n * darker while held.\n */\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** An icon or avatar, shown in a soft grey circle at the start. */\n  leading?: React.ReactNode;\n  /** A value, badge or chevron at the end of the row. */\n  trailing?: React.ReactNode;\n  title: string;\n  subtitle?: string;\n  disabled?: boolean;\n  /** Adds the hover and press fills for a row that does something. */\n  interactive?: boolean;\n  as?: React.ElementType;\n  href?: string;\n}\n\nfunction Item({\n  leading,\n  trailing,\n  title,\n  subtitle,\n  disabled,\n  interactive,\n  as,\n  href,\n  className,\n  ...props\n}: ItemProps) {\n  const Comp: React.ElementType = as ?? (href ? \"a\" : \"div\");\n\n  return (\n    <Comp\n      href={disabled ? undefined : href}\n      tabIndex={disabled ? -1 : undefined}\n      aria-disabled={disabled || undefined}\n      data-slot=\"item\"\n      className={cn(\n        \"relative flex min-h-16 w-full items-center gap-4 rounded-none px-4 py-3 text-start\",\n        interactive &&\n          \"cursor-pointer outline-none transition-colors duration-fast ease-out hover:bg-accent active:bg-(--secondary-hover) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring\",\n        disabled && \"pointer-events-none\",\n        className,\n      )}\n      {...props}\n    >\n      {leading && (\n        <span\n          data-slot=\"item-leading\"\n          className={cn(\n            \"flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-secondary [&_svg]:size-5\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {leading}\n        </span>\n      )}\n      <span className=\"flex min-w-0 flex-1 flex-col gap-0.5\">\n        <span\n          className={cn(\n            \"truncate text-base font-medium leading-snug\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {title}\n        </span>\n        {subtitle && (\n          <span\n            className={cn(\n              \"truncate text-sm\",\n              disabled\n                ? \"text-(--foreground-disabled)\"\n                : \"text-muted-foreground\",\n            )}\n          >\n            {subtitle}\n          </span>\n        )}\n      </span>\n      {trailing && (\n        <span\n          data-slot=\"item-trailing\"\n          className={cn(\n            \"flex shrink-0 items-center gap-2 text-base tabular-nums [&_svg]:size-4 [&_svg]:text-muted-foreground\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {trailing}\n        </span>\n      )}\n    </Comp>\n  );\n}\n\n/**\n * Bold retail ItemList: rows stacked in a square white box behind the soft\n * edge. With `divided`, a full-width hairline runs between rows, and the\n * last row has none.\n */\ninterface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {\n  divided?: boolean;\n}\n\nfunction ItemList({ divided, className, ...props }: ItemListProps) {\n  return (\n    <div\n      data-slot=\"item-list\"\n      className={cn(\n        \"flex flex-col overflow-hidden rounded-none border border-(--border-soft) bg-card\",\n        divided && \"divide-y divide-border\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Item, ItemList };\nexport type { ItemProps, ItemListProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "secondary-hover": "oklch(0.922 0 0)",
+      "border-soft": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "secondary-hover": "oklch(0.31 0 0)",
+      "border-soft": "oklch(1 0 0 / 0.1)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

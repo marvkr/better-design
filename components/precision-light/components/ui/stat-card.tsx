@@ -35,7 +35,7 @@ function StatCard({
             </span>
           </div>
           {icon && (
-            <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-secondary text-muted-foreground">
+            <div className="flex h-9 w-9 items-center justify-center rounded-[0.625rem] bg-secondary text-muted-foreground">
               {icon}
             </div>
           )}

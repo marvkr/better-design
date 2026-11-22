@@ -1,0 +1,32 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { creamBevel, wellInset } from \"./_shared\";\n\n/**\n * Burnished Steps: numbered studs joined by a recessed groove. A finished\n * step is a cream bevel with a check, the current step is a graphite bevel\n * with a glow halo, and the steps ahead sit pressed into the page. The\n * groove fills with cream as the reader moves forward.\n */\nexport interface Step {\n  title: string;\n  description?: string;\n  icon?: string;\n}\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  currentStep: number;\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, steps, currentStep, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"steps\"\n      data-orientation={orientation}\n      className={cn(\n        \"flex\",\n        orientation === \"horizontal\" ? \"flex-row items-start\" : \"flex-col\",\n        className,\n      )}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep;\n        const isCurrent = index === currentStep;\n        const isLast = index === steps.length - 1;\n\n        return (\n          <div\n            key={index}\n            data-state={isCompleted ? \"complete\" : isCurrent ? \"current\" : \"upcoming\"}\n            aria-current={isCurrent ? \"step\" : undefined}\n            className={cn(\n              \"flex gap-3\",\n              orientation === \"horizontal\" ? \"flex-1 flex-col items-start\" : \"flex-row\",\n            )}\n          >\n            <div\n              className={cn(\n                \"flex w-full items-start gap-3\",\n                orientation === \"horizontal\" ? \"flex-row\" : \"flex-col\",\n              )}\n            >\n              <div className=\"flex flex-col items-center self-stretch\">\n                <div\n                  className={cn(\n                    \"flex size-8 shrink-0 items-center justify-center rounded-full\",\n                    \"transition-[background-image,box-shadow,color] duration-base ease-(--ease-out)\",\n                    isCompleted && creamBevel,\n                    isCurrent &&\n                      \"bg-(image:--fill-raised) text-primary-text shadow-(--bevel-raised-focus) ring-3 ring-ring\",\n                    !isCompleted && !isCurrent && cn(wellInset, \"text-muted-foreground\"),\n                  )}\n                >\n                  {isCompleted ? (\n                    <Icon icon=\"ph:check-bold\" className=\"size-4\" />\n                  ) : step.icon ? (\n                    <Icon icon={step.icon} className=\"size-4\" />\n                  ) : (\n                    <span className=\"text-xs font-semibold tabular-nums\">{index + 1}</span>\n                  )}\n                </div>\n                {orientation === \"vertical\" && !isLast && (\n                  <div\n                    className={cn(\n                      \"my-1.5 min-h-6 w-1 flex-1 rounded-full\",\n                      isCompleted ? creamBevel : wellInset,\n                    )}\n                  />\n                )}\n              </div>\n              <div className={cn(\"min-w-0 flex-1\", orientation === \"vertical\" && \"pb-6\")}>\n                <div\n                  className={cn(\n                    \"text-sm font-semibold leading-snug\",\n                    isCurrent || isCompleted ? \"text-foreground\" : \"text-muted-foreground\",\n                  )}\n                >\n                  {step.title}\n                </div>\n                {step.description && (\n                  <div className=\"mt-1 text-xs leading-relaxed text-muted-foreground\">\n                    {step.description}\n                  </div>\n                )}\n              </div>\n            </div>\n            {orientation === \"horizontal\" && !isLast && (\n              <div className=\"hidden w-full pr-3 sm:block\">\n                <div\n                  className={cn(\"h-1 w-full rounded-full\", isCompleted ? creamBevel : wellInset)}\n                />\n              </div>\n            )}\n          </div>\n        );\n      })}\n    </div>\n  ),\n);\nSteps.displayName = \"Steps\";\n\nexport { Steps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised-focus": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26), inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised-focus": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26), inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

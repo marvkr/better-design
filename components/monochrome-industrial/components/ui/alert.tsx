@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 const alertVariants = cva(
  "relative w-full rounded-none p-4 " +
  "border " +
- "[&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7",
+ "[&>svg+div]:translate-y-[-0.1875rem] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7",
  {
  variants: {
  variant: {

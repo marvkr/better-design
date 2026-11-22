@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 // Notion ButtonGroup: groups buttons horizontally, removes inner rounded edges
-// Outer buttons keep rounded-[10px], inner buttons get flat edges where they meet
+// Outer buttons keep rounded-[0.625rem], inner buttons get flat edges where they meet
 // Divider between buttons via ring-inset on adjacent elements
 
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,12 +23,12 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           isHorizontal ? "flex-row" : "flex-col",
           attached && [
             // For attached groups, clip children and merge borders
-            "rounded-[10px]",
+            "rounded-[0.625rem]",
             "*:rounded-none",
             // First child
             isHorizontal
-              ? "[&>*:first-child]:rounded-l-[10px] [&>*:last-child]:rounded-r-[10px]"
-              : "[&>*:first-child]:rounded-t-[10px] [&>*:last-child]:rounded-b-[10px]",
+              ? "[&>*:first-child]:rounded-l-[0.625rem] [&>*:last-child]:rounded-r-[0.625rem]"
+              : "[&>*:first-child]:rounded-t-[0.625rem] [&>*:last-child]:rounded-b-[0.625rem]",
             // Collapse adjacent borders
             isHorizontal
               ? "[&>*:not(:first-child)]:-ml-px"

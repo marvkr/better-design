@@ -1,0 +1,17 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\";\nimport { ChevronDown } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n// Ops Sharp NativeSelect - a native <select> wearing the shared field surface\n// (formFieldBase) with the native arrow suppressed and a precise lucide chevron\n// dropped in. Error state swaps the border + focus ring to destructive.\n\ninterface NativeSelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean;\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"appearance-none cursor-pointer pr-9\",\n            \"[&>option]:bg-popover [&>option]:text-popover-foreground\",\n            error &&\n              \"border-destructive focus-visible:border-destructive focus-visible:ring-destructive/25\",\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <ChevronDown className=\"h-4 w-4\" />\n        </div>\n      </div>\n    );\n  }\n);\nNativeSelect.displayName = \"NativeSelect\";\n\nexport { NativeSelect };\nexport type { NativeSelectProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/slate/_shared.json"
+  ]
+}

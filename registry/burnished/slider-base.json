@@ -1,0 +1,36 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\";\n\nimport { cn } from \"@/lib/utils\";\nimport { creamBevel, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Burnished Slider: a recessed well track with a cream bevel range, the\n * primary's own face. Each thumb is a cream bevel knob in a copper rim.\n * Pass an array value for a range; the slider renders one thumb per value.\n */\nconst Slider = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SliderPrimitive.Root.Props>\n>(({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n  const _values = Array.isArray(value)\n    ? value\n    : Array.isArray(defaultValue)\n      ? defaultValue\n      : [min];\n\n  return (\n    <SliderPrimitive.Root\n      data-slot=\"slider\"\n      ref={ref}\n      thumbAlignment=\"edge\"\n      defaultValue={defaultValue}\n      value={value}\n      min={min}\n      max={max}\n      className={cn(\n        \"relative w-full data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <SliderPrimitive.Control className=\"relative flex h-6 w-full touch-none select-none items-center\">\n        <SliderPrimitive.Track\n          data-slot=\"slider-track\"\n          className={cn(\"relative h-2 w-full grow overflow-hidden rounded-full\", wellInset)}\n        >\n          <SliderPrimitive.Indicator\n            data-slot=\"slider-range\"\n            className={cn(\"rounded-full\", creamBevel)}\n          />\n        </SliderPrimitive.Track>\n        {Array.from({ length: _values.length }, (_, index) => (\n          <SliderPrimitive.Thumb\n            data-slot=\"slider-thumb\"\n            key={index}\n            className={cn(\n              \"block size-5 shrink-0 cursor-grab rounded-full border-2 border-transparent\",\n              \"[background:var(--fill-primary)_padding-box,var(--ring-sheen)_border-box,conic-gradient(var(--ring-flow))_border-box] shadow-(--bevel-primary)\",\n              \"transition-[box-shadow] duration-fast ease-(--ease-out) active:cursor-grabbing\",\n              \"[@media(hover:hover)_and_(pointer:fine)]:hover:shadow-(--bevel-glow)\",\n              \"has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring\",\n              \"data-[disabled]:pointer-events-none\",\n            )}\n          />\n        ))}\n      </SliderPrimitive.Control>\n    </SliderPrimitive.Root>\n  );\n});\nSlider.displayName = \"Slider\";\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
+      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
+      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

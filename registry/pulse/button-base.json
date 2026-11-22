@@ -1,0 +1,28 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Pulseboard Button — dark analytics board, glowing electric-violet primary.\n// default/primary: saturated violet fill, violet rim, soft outer glow + inset\n// highlight (the --shadow-glow material reused by checkbox/switch/radio/slider).\n// secondary/outline/ghost: dark panels over the canvas.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-md transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98] active:brightness-95\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Hero — glowing violet material.\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-glow)] \" +\n          \"hover:bg-primary/95 hover:[box-shadow:var(--shadow-glow-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-glow)] \" +\n          \"hover:bg-primary/95 hover:[box-shadow:var(--shadow-glow-hover)]\",\n        // Secondary: dark panel, border, subtle shadow.\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"border border-border \" +\n          \"[box-shadow:0_0.0625rem_0.125rem_oklch(0_0_0/0.25)] \" +\n          \"hover:bg-accent hover:border-border/60\",\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary hover:border-border/80\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:0_0_0_0.0625rem_oklch(from_var(--destructive)_l_c_h/0.5),0_0.0625rem_0.1875rem_oklch(0_0_0/0.35)] \" +\n          \"hover:bg-destructive/90\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm:      \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-4\",\n        lg:      \"h-10 px-6 text-sm\",\n        icon:    \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8 rounded-md\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-glow": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), 0 0.25rem 0.75rem -0.1875rem oklch(from var(--primary) l c h / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(from var(--primary) l c h / 0.16)",
+      "shadow-glow-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.125rem 0.375rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem -0.1875rem oklch(from var(--primary) l c h / 0.3), 0 0.875rem 2.375rem -0.625rem oklch(from var(--primary) l c h / 0.24)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-glow": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), 0 0.25rem 0.75rem -0.1875rem oklch(from var(--primary) l c h / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(from var(--primary) l c h / 0.16)",
+      "shadow-glow-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.125rem 0.375rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem -0.1875rem oklch(from var(--primary) l c h / 0.3), 0 0.875rem 2.375rem -0.625rem oklch(from var(--primary) l c h / 0.24)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

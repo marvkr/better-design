@@ -17,7 +17,7 @@ const buttonVariants = cva(
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-medium leading-none",
     "rounded-full cursor-pointer select-none",
-    "transition-[background-color,box-shadow,transform] duration-150",
+    "transition-[background-color,box-shadow,transform] duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px",
@@ -54,6 +54,7 @@ const buttonVariants = cva(
         default: "h-9 px-5",
         lg: "h-11 px-7",
         icon: "h-9 w-9",
+        "icon-sm": "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -79,6 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const button = (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
@@ -89,7 +91,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (!showRing) return button
 
-    return <MetalRing shape="pill">{button}</MetalRing>
+    return <MetalRing corners="pill">{button}</MetalRing>
   }
 )
 Button.displayName = "Button"

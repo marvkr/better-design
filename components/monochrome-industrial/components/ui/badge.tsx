@@ -20,9 +20,9 @@ const badgeVariants = cva(
         destructive:
           "bg-[var(--mono-accent)] text-white border-[var(--mono-accent)]",
         "destructive-light":
-          "bg-transparent text-[var(--mono-accent)] border-[var(--mono-accent)]",
+          "bg-transparent border-[var(--mono-accent)] text-[color:oklch(0.621_0.218_26.8)]",
         success:
-          "bg-[var(--mono-success)] text-white border-[var(--mono-success)]",
+          "text-white border-[var(--mono-success)] bg-[color:oklch(0.545_0.128_148.6)]",
         "success-light":
           "bg-transparent text-[var(--mono-success)] border-[var(--mono-success)]",
         warning:
@@ -33,9 +33,9 @@ const badgeVariants = cva(
           "bg-transparent text-foreground border-[var(--mono-border-visible)]",
       },
       size: {
-        sm:      "h-4 gap-1   px-1.5 text-[9px]",
-        default: "h-5 gap-1.5 px-2   text-[10px]",
-        lg:      "h-6 gap-1.5 px-2.5 text-[11px]",
+        sm:      "h-4 gap-1   px-1.5 text-[0.5625rem]",
+        default: "h-5 gap-1.5 px-2   text-[0.625rem]",
+        lg:      "h-6 gap-1.5 px-2.5 text-[0.6875rem]",
       },
     },
     defaultVariants: {

@@ -1,0 +1,24 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe EmptyState: a raised coin icon above quiet copy.\n\nconst EmptyState = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"flex flex-col items-center justify-center py-12 text-center\",\n      className\n    )}\n    {...props}\n  />\n))\nEmptyState.displayName = \"EmptyState\"\n\nconst EmptyStateIcon = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"mb-4 flex h-14 w-14 items-center justify-center rounded-full\",\n      \"[background-image:var(--gradient-raised)] border border-highlight\",\n      \"[box-shadow:var(--shadow-raised)]\",\n      \"[&>svg]:h-6 [&>svg]:w-6 [&>svg]:text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nEmptyStateIcon.displayName = \"EmptyStateIcon\"\n\nconst EmptyStateTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    className={cn(\"mb-1 text-lg font-semibold tracking-tight\", className)}\n    {...props}\n  />\n))\nEmptyStateTitle.displayName = \"EmptyStateTitle\"\n\nconst EmptyStateDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"mb-4 max-w-sm text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nEmptyStateDescription.displayName = \"EmptyStateDescription\"\n\nexport { EmptyState, EmptyStateIcon, EmptyStateTitle, EmptyStateDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

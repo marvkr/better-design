@@ -1,0 +1,11 @@
+{
+  "name": "aspect-ratio-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n/** Props for the AspectRatio box, where `ratio` is width over height. */\nexport interface AspectRatioProps extends React.ComponentPropsWithoutRef<\"div\"> {\n  ratio?: number;\n}\n\n/** Mallow AspectRatio: a plain full-width box that holds its shape, since Base UI has no such primitive. */\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  ({ ratio = 1, style, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"aspect-ratio\"\n      style={{ position: \"relative\", width: \"100%\", aspectRatio: String(ratio), ...style }}\n      {...props}\n    />\n  ),\n);\nAspectRatio.displayName = \"AspectRatio\";\n\nexport { AspectRatio };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

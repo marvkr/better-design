@@ -15,9 +15,9 @@ const Card = React.forwardRef<
     ref={ref}
     className={cn(
       "rounded-2xl border border-border bg-card text-card-foreground",
-      "shadow-[0_2px_8px_color-mix(in_oklch,var(--primary)_8%,transparent),0_0_0_1px_color-mix(in_oklch,var(--primary)_5%,transparent)]",
-      "transition-[border-color,box-shadow] duration-200",
-      "hover:border-primary/30 hover:shadow-[0_4px_16px_color-mix(in_oklch,var(--primary)_12%,transparent),0_0_0_1px_color-mix(in_oklch,var(--primary)_10%,transparent)]",
+      "shadow-[0_0.125rem_0.5rem_color-mix(in_oklch,var(--primary)_8%,transparent),0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_5%,transparent)]",
+      "transition-[border-color,box-shadow] duration-base",
+      "hover:border-primary/30 hover:shadow-[0_0.25rem_1rem_color-mix(in_oklch,var(--primary)_12%,transparent),0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_10%,transparent)]",
       className
     )}
     {...props}

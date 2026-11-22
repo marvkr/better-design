@@ -9,12 +9,11 @@
     }
   ],
   "dependencies": [
-    "lucide-react"
+    "lucide-react@>=0.518.0 <1"
   ],
   "registryDependencies": [
-    "https://www.better-design.com/registry/pillow-light/button.json",
-    "https://www.better-design.com/registry/pillow-light/calendar.json",
-    "https://www.better-design.com/registry/pillow-light/popover.json",
-    "utils"
+    "https://better-design.com/registry/pillow-light/button.json",
+    "https://better-design.com/registry/pillow-light/calendar.json",
+    "https://better-design.com/registry/pillow-light/popover.json"
   ]
 }

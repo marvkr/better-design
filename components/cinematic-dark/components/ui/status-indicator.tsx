@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils"
 
 type StatusType = "online" | "offline" | "busy" | "away" | "idle"
 
-const statusConfig: Record<StatusType, { label: string; className: string }> = {
+const statusConfig = {
   online: { label: "Online", className: "bg-emerald-500" },
   offline: { label: "Offline", className: "bg-muted-foreground/40" },
   busy: { label: "Busy", className: "bg-destructive" },
   away: { label: "Away", className: "bg-orange-400" },
   idle: { label: "Idle", className: "bg-yellow-400" },
-}
+} satisfies Record<StatusType, { label: string; className: string }>
 
 interface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   status: StatusType

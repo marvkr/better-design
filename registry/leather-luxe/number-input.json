@@ -1,0 +1,30 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Minus, Plus } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Leather Luxe Number Input: a recessed well flanked by raised stepper coins.\n\ninterface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  ({ className, value = 0, onChange, min, max, step = 1, disabled, ...props }, ref) => {\n    // Local draft lets the field be cleared mid-edit without the controlled\n    // numeric value snapping back; re-syncs when `value` changes externally.\n    const [draft, setDraft] = React.useState(String(value))\n\n    React.useEffect(() => {\n      setDraft(String(value))\n    }, [value])\n\n    const clamp = (n: number) => {\n      const lower = min !== undefined ? Math.max(min, n) : n\n      return max !== undefined ? Math.min(max, lower) : lower\n    }\n\n    const handleDecrement = () => {\n      onChange?.(clamp(value - step))\n    }\n\n    const handleIncrement = () => {\n      onChange?.(clamp(value + step))\n    }\n\n    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n      setDraft(e.target.value)\n      const parsed = parseFloat(e.target.value)\n      if (!isNaN(parsed)) {\n        onChange?.(clamp(parsed))\n      }\n    }\n\n    const stepperButton = cn(\n      \"flex h-7 w-7 shrink-0 items-center justify-center rounded-full\",\n      \"[background-image:var(--gradient-raised)] border border-highlight\",\n      \"[box-shadow:var(--shadow-raised-sm)]\",\n      \"text-muted-foreground transition-[filter,color] duration-base\",\n      \"hover:brightness-125 hover:text-foreground\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n      \"disabled:pointer-events-none disabled:opacity-40\"\n    )\n\n    return (\n      <div\n        className={cn(\n          formFieldBase,\n          \"flex h-10 items-center gap-1 px-1.5\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n      >\n        <button\n          type=\"button\"\n          aria-label=\"Decrease value\"\n          onClick={handleDecrement}\n          disabled={disabled || (min !== undefined && value <= min)}\n          className={stepperButton}\n        >\n          <Minus className=\"h-3.5 w-3.5\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          value={draft}\n          onChange={handleChange}\n          disabled={disabled}\n          min={min}\n          max={max}\n          step={step}\n          className={cn(\n            \"flex-1 bg-transparent px-1 text-center text-sm text-foreground\",\n            \"focus:outline-none disabled:cursor-not-allowed\",\n            \"[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\"\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          aria-label=\"Increase value\"\n          onClick={handleIncrement}\n          disabled={disabled || (max !== undefined && value >= max)}\n          className={stepperButton}\n        >\n          <Plus className=\"h-3.5 w-3.5\" />\n        </button>\n      </div>\n    )\n  }\n)\nNumberInput.displayName = \"NumberInput\"\n\nexport { NumberInput }\nexport type { NumberInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/leather-luxe/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

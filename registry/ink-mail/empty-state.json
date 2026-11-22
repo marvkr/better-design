@@ -1,0 +1,22 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail EmptyState: a centred note for a screen with nothing on it yet,\n * such as an inbox before the first send. A hairline-edged square holds the\n * icon, a medium title says what is missing, and a muted line says what to\n * do. Pass the primary Button as `action`, so the one off-white surface on\n * the screen is the way forward.\n */\nexport interface EmptyStateProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"title\"\n> {\n  /** An Iconify name, such as `ph:envelope-simple`. */\n  icon?: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  (\n    {\n      className,\n      icon = \"ph:envelope-simple\",\n      title,\n      description,\n      action,\n      ...props\n    },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-state\"\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-lg border border-border bg-card px-6 py-12 text-center text-card-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <span\n        data-slot=\"empty-state-icon\"\n        className=\"flex size-10 items-center justify-center rounded-lg border border-(--line-strong) bg-secondary text-(--foreground-secondary)\"\n      >\n        <Icon icon={icon} aria-hidden=\"true\" className=\"size-5\" />\n      </span>\n      <div className=\"flex max-w-sm flex-col gap-1\">\n        <div className=\"text-base font-medium leading-snug text-foreground\">\n          {title}\n        </div>\n        {description && (\n          <div className=\"text-sm leading-relaxed text-muted-foreground\">\n            {description}\n          </div>\n        )}\n      </div>\n      {action && <div className=\"mt-1 flex flex-wrap justify-center gap-2\">{action}</div>}\n    </div>\n  ),\n);\nEmptyState.displayName = \"EmptyState\";\n\nexport { EmptyState };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-secondary": "oklch(0.88 0.002 264)"
+    },
+    "dark": {}
+  }
+}

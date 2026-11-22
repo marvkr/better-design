@@ -55,12 +55,12 @@ export function DataRangePicker({
           variant="outline"
           disabled={disabled}
           className={cn(
-            "w-[280px] justify-start text-left font-normal",
+            "w-[17.5rem] justify-start text-left font-normal",
             "rounded-full border border-white/10 backdrop-blur-xl bg-white/[0.06]",
-            "shadow-[inset_0_0_6px_rgba(255,255,255,0.06)]",
-            "text-white/90 transition duration-200",
+            "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06)]",
+            "text-white/90 transition duration-base",
             "hover:bg-white/[0.08] hover:border-white/[0.15]",
-            "focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.06),0_0_0_3px_oklch(0.65_0.19_250/0.2)] focus-visible:border-primary/50",
+            "focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06),0_0_0_0.1875rem_oklch(0.65_0.19_250/0.2)] focus-visible:border-primary/50",
             !date && "text-white/40",
             className
           )}
@@ -72,8 +72,8 @@ export function DataRangePicker({
       <PopoverContent
         className={cn(
           "w-auto p-0 rounded-xl",
-          "border border-white/10 backdrop-blur-2xl bg-white/[0.08]",
-          "shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_0_6px_rgba(255,255,255,0.06)]"
+          "border border-white/10 backdrop-blur-3xl backdrop-saturate-200 bg-zinc-900/80 supports-[backdrop-filter]:bg-zinc-900/45",
+          "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.4),inset_0_0_0.375rem_oklch(1_0_0/0.06)]"
         )}
       >
         <Calendar

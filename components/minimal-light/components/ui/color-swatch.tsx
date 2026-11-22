@@ -37,7 +37,7 @@ function ColorSwatch({
       {label && (
         <div className="text-center">
           <p className="text-xs font-medium text-foreground tracking-wide">{label}</p>
-          <p className="text-[10px] font-mono text-muted-foreground">{color}</p>
+          <p className="text-[0.625rem] font-mono text-muted-foreground">{color}</p>
         </div>
       )}
     </div>

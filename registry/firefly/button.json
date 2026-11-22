@@ -1,0 +1,38 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { glowDestructive, glowPrimary } from \"./_shared\";\n\n/**\n * Firefly Button: the one glowing action.\n *\n * Every button is a full pill. The default is lit from within: a yellow-green\n * gradient under white highlights, an inner top line and a soft bloom, with a\n * brighter layer that fades in under the pointer. The rest stay quiet so the\n * lit pill is the only thing on the screen that glows: near-black ink, warm\n * paper, a strong outline, and a ghost.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-full font-medium\",\n    \"transition-[background-color,color,border-color,scale] duration-fast ease-out\",\n    \"active:scale-98\",\n    \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n    \"disabled:pointer-events-none disabled:bg-secondary disabled:bg-none disabled:text-(--foreground-disabled) disabled:shadow-none disabled:before:hidden\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // The lit pill: the one action a screen exists to offer.\n        default: glowPrimary,\n        primary: glowPrimary,\n        // Near-black ink for a strong action that should not glow.\n        solid:\n          \"bg-(--ink) text-(--ink-foreground) hover:bg-(--ink-hover)\",\n        secondary:\n          \"bg-secondary text-secondary-foreground hover:bg-(--surface-3)\",\n        outline:\n          \"border border-(--line-strong) bg-transparent text-foreground hover:bg-muted\",\n        ghost: \"bg-transparent text-foreground hover:bg-secondary\",\n        destructive: glowDestructive,\n        link: \"h-auto rounded-sm px-0 text-foreground underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-sm\",\n        default: \"h-10 px-4 text-sm\",\n        lg: \"h-12 px-6 text-base\",\n        icon: \"size-10 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-12 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        data-slot=\"button\"\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "ink": "oklch(0.168 0.004 106.8)",
+      "ink-hover": "oklch(0.284 0.007 106.8)",
+      "ink-foreground": "oklch(1 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "ink": "oklch(0.964 0.007 97.4)",
+      "ink-hover": "oklch(0.903 0.011 95.2)",
+      "ink-foreground": "oklch(0.168 0.004 106.8)"
+    }
+  }
+}

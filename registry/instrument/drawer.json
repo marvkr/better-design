@@ -1,0 +1,25 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark Drawer: bottom tray panel. Card surface with the floating-layer\n// shadow and a raised grab handle, like a pull-out equipment tray.\n\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    className={cn(\n      \"fixed inset-0 z-50 bg-[oklch(0.1_0.01_285/0.7)] backdrop-blur-sm\",\n      className\n    )}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col\",\n        \"rounded-t-xl border-t border-border bg-card text-card-foreground\",\n        \"shadow-[var(--shadow-pop)]\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"mx-auto mt-3 h-1.5 w-12 rounded-full bg-secondary shadow-[var(--shadow-raised)]\" />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\nconst DrawerHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"grid gap-1.5 p-6 text-center sm:text-left\", className)}\n    {...props}\n  />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\nconst DrawerFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"mt-auto flex flex-col gap-2 p-6\", className)}\n    {...props}\n  />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    className={cn(\"text-lg font-semibold leading-none tracking-tight\", className)}\n    {...props}\n  />\n));\nDrawerTitle.displayName = DrawerPrimitive.Title.displayName;\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDrawerDescription.displayName = DrawerPrimitive.Description.displayName;\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

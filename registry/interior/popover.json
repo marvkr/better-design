@@ -1,0 +1,23 @@
+{
+  "name": "popover",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Popover — an 11px-radius panel on the popover float shadow, no\n * border: the shadow alone says it floats. It arrives with a 2px slide and a\n * 0.97 zoom, and leaves faster than it came.\n */\n\nconst Popover = PopoverPrimitive.Root;\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\nconst PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 8, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(\n        \"origin-(--radix-popover-content-transform-origin) z-50 w-72 rounded-[0.6875rem] bg-popover p-4 text-popover-foreground outline-none\",\n        \"shadow-[var(--shadow-float-popover)]\",\n        \"data-[state=open]:animate-in data-[state=closed]:animate-out\",\n        \"duration-base\",\n        \"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n        \"data-[state=closed]:zoom-out-[0.97] data-[state=open]:zoom-in-[0.97]\",\n        \"data-[side=bottom]:slide-in-from-top-[0.125rem] data-[side=top]:slide-in-from-bottom-[0.125rem]\",\n        \"data-[side=left]:slide-in-from-right-[0.125rem] data-[side=right]:slide-in-from-left-[0.125rem]\",\n        className,\n      )}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = PopoverPrimitive.Content.displayName;\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-popover@^1.1.14"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
+    },
+    "dark": {
+      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
+    }
+  }
+}

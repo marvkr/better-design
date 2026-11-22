@@ -1,0 +1,22 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Kbd: the search field's shortcut chip.\n\nconst Kbd = React.forwardRef<\n  HTMLElement,\n  React.HTMLAttributes<HTMLElement>\n>(({ className, ...props }, ref) => (\n  <kbd\n    ref={ref}\n    className={cn(\n      \"inline-flex h-5 min-w-5 items-center justify-center rounded-md px-1.5\",\n      \"bg-[var(--ag-fill)] border border-[color:var(--ag-border)]\",\n      \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.06)]\",\n      \"font-sans text-[0.6875rem] font-semibold text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nKbd.displayName = \"Kbd\"\n\nexport { Kbd }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

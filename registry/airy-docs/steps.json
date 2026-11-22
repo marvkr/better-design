@@ -1,0 +1,26 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  currentStep?: number;\n}\n\ntype StepState = \"complete\" | \"current\" | \"upcoming\";\n\nconst discTone = {\n  complete: \"border border-primary bg-primary text-primary-foreground\",\n  current: \"border border-primary bg-(--primary-wash) text-(--primary-text)\",\n  upcoming: \"border border-border bg-background text-muted-foreground\",\n} satisfies Record<StepState, string>;\n\n/**\n * Airy docs Steps: the numbered markers of a quickstart, in a row joined by\n * hairlines. A finished step fills flat green with a tick. The current step\n * is a green-edged circle on the wash, and steps ahead are hairline circles\n * in muted ink. The line into a reached step turns green. Each child is a\n * step, and its content is the label beside its marker.\n */\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, currentStep = 0, children, ...props }, ref) => {\n    const steps = React.Children.toArray(children);\n\n    return (\n      <div\n        ref={ref}\n        role=\"list\"\n        data-slot=\"steps\"\n        className={cn(\"flex items-center gap-3\", className)}\n        {...props}\n      >\n        {steps.map((child, index) => {\n          const state: StepState =\n            index < currentStep\n              ? \"complete\"\n              : index === currentStep\n                ? \"current\"\n                : \"upcoming\";\n\n          return (\n            <React.Fragment key={index}>\n              {index > 0 && (\n                <div\n                  aria-hidden=\"true\"\n                  data-slot=\"steps-connector\"\n                  className={cn(\n                    \"h-px min-w-6 flex-1 transition-colors duration-fast ease-out\",\n                    index <= currentStep ? \"bg-primary\" : \"bg-border\",\n                  )}\n                />\n              )}\n              <div\n                role=\"listitem\"\n                data-slot=\"steps-item\"\n                data-state={state}\n                aria-current={state === \"current\" ? \"step\" : undefined}\n                className=\"group/step flex shrink-0 items-center gap-2\"\n              >\n                <span\n                  className={cn(\n                    \"flex size-7 shrink-0 items-center justify-center rounded-full font-mono text-xs font-medium tabular-nums\",\n                    \"transition-[background-color,border-color,color] duration-fast ease-out\",\n                    discTone[state],\n                  )}\n                >\n                  {state === \"complete\" ? (\n                    <>\n                      <Icon icon=\"feather:check\" className=\"size-3.5\" aria-hidden=\"true\" />\n                      <span className=\"sr-only\">Step {index + 1}, done</span>\n                    </>\n                  ) : (\n                    index + 1\n                  )}\n                </span>\n                {child}\n              </div>\n            </React.Fragment>\n          );\n        })}\n      </div>\n    );\n  },\n);\nSteps.displayName = \"Steps\";\n\n/**\n * One step's label: ink once reached, muted while it is still ahead.\n */\nconst Step = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"step\"\n    className={cn(\n      \"text-sm font-medium text-foreground empty:hidden group-data-[state=upcoming]/step:text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nStep.displayName = \"Step\";\n\nexport { Steps, Step };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "primary-wash": "oklch(0.476 0.11 154.3 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "primary-wash": "oklch(0.705 0.169 153.6 / 0.12)"
+    }
+  }
+}

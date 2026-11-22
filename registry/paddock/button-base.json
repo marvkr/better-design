@@ -1,0 +1,33 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { primaryFace, primaryFaceHover, focusRing, pressScale, quietChip, raisedSurface } from \"./_shared\";\n\n/**\n * Paddock Button on a Base UI button: a small rounded rectangle.\n *\n * The default is the signature: a solid deep teal fill with white text and a\n * crisp 1px highlight along the top edge, the front desk's one action colour.\n * `secondary` is the white control with a 1px cool border; `accent` is the\n * sky blue check-in action a page may feature once. Status colours never sit\n * on a button, so a teal fill always reads as \"do this\". A press scales the\n * control a little toward the page.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap\",\n    \"rounded-md font-medium\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: cn(primaryFace, primaryFaceHover),\n        primary: cn(primaryFace, primaryFaceHover),\n        solid: cn(primaryFace, primaryFaceHover),\n        accent: \"bg-(--arrived-fill) text-primary-foreground shadow-(--arrived-face) hover:brightness-105\",\n        secondary: raisedSurface,\n        outline:\n          \"border border-input bg-transparent text-foreground hover:bg-accent\",\n        quiet: quietChip,\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground shadow-(--card-ring) hover:bg-destructive/90\",\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline decoration-current/30 underline-offset-4 hover:decoration-current\",\n      },\n      size: {\n        sm: \"h-7 px-2.5 text-[0.8125rem]\",\n        default: \"h-8 px-3 text-sm\",\n        lg: \"h-9 px-4 text-sm\",\n        icon: \"size-8 px-0\",\n        \"icon-sm\": \"size-7 px-0\",\n        \"icon-lg\": \"size-9 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Props for the Base UI Button. `asChild` turns a single child element into the button. */\nexport interface ButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  /**\n   * Renders the single child element as the button, for callers written\n   * against the Radix API. Base UI composes through `render`, so the child\n   * becomes that element and keeps its own children.\n   */\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const classes = cn(buttonVariants({ variant, size, className }));\n\n    if (asChild && React.isValidElement<{ children?: React.ReactNode }>(children)) {\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          data-slot=\"button\"\n          className={classes}\n          nativeButton={false}\n          {...props}\n          render={children}\n        >\n          {children.props.children}\n        </ButtonPrimitive>\n      );\n    }\n\n    return (\n      <ButtonPrimitive ref={ref} data-slot=\"button\" className={classes} {...props}>\n        {children}\n      </ButtonPrimitive>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.45 0.09 198)",
+      "arrived-fill": "oklch(0.5 0.12 240)",
+      "arrived-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.44 0.12 242), 0 0.0625rem 0.125rem oklch(0.3 0.06 240 / 0.14)",
+      "card-ring": "0 0 0 0.0625rem oklch(0.915 0.008 230)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.8 0.09 190)",
+      "arrived-fill": "oklch(0.74 0.11 235)",
+      "arrived-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.66 0.11 235), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "card-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.09)"
+    }
+  }
+}

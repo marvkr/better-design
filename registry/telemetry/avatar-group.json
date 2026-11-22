@@ -1,0 +1,11 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room AvatarGroup: overlapping crew badges with an overflow\n// counter chip in the same square ID-tile material.\n\nexport interface AvatarGroupProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  max?: number\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ className, max, children, ...props }, ref) => {\n    const childArray = React.Children.toArray(children)\n    const visible = max ? childArray.slice(0, max) : childArray\n    const overflow = max ? childArray.length - max : 0\n\n    return (\n      <div ref={ref} className={cn(\"flex -space-x-2\", className)} {...props}>\n        {visible}\n        {overflow > 0 && (\n          <div className=\"relative flex h-10 w-10 items-center justify-center rounded-sm ring-1 ring-border bg-secondary text-xs font-semibold text-muted-foreground\">\n            +{overflow}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

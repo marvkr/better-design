@@ -1,0 +1,34 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\nimport { Icon } from \"@iconify/react\";\n\nimport { focusRing } from \"./_shared\";\n\n/**\n * Ink mail Toaster for sonner: a floating panel on the elevated surface step.\n *\n * Sonner's own look is switched off and every part is styled here. The toast\n * is the same surface as a menu: the popover step, a 0.75rem corner and the\n * menu shadow token. Only the status icon takes a colour: green for\n * delivered, red for failed, yellow for queued, blue for information. The\n * action is the off-white primary fill; cancel is a quiet secondary block.\n */\nconst Toaster = ({ ...props }: ToasterProps) => (\n  <SonnerPrimitive\n    icons={{\n      success: <Icon icon=\"ph:check-circle\" aria-hidden=\"true\" />,\n      info: <Icon icon=\"ph:info\" aria-hidden=\"true\" />,\n      warning: <Icon icon=\"ph:warning\" aria-hidden=\"true\" />,\n      error: <Icon icon=\"ph:x-circle\" aria-hidden=\"true\" />,\n      loading: (\n        <Icon icon=\"ph:spinner-gap\" className=\"animate-spin\" aria-hidden=\"true\" />\n      ),\n      close: <Icon icon=\"ph:x\" aria-hidden=\"true\" />,\n    }}\n    toastOptions={{\n      unstyled: true,\n      classNames: {\n        toast:\n          \"flex w-(--width) items-start gap-3 rounded-lg bg-popover p-4 text-sm text-popover-foreground shadow-(--shadow-menu)\",\n        content: \"flex min-w-0 flex-1 flex-col gap-0.5\",\n        title: \"font-medium leading-snug text-foreground\",\n        description: \"text-muted-foreground\",\n        icon: \"mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-4\",\n        actionButton: `inline-flex h-8 shrink-0 items-center rounded-xl bg-primary px-3 text-sm font-semibold text-primary-foreground transition-colors duration-fast ease-out hover:bg-(--primary-hover) ${focusRing}`,\n        cancelButton: `inline-flex h-8 shrink-0 items-center rounded-xl border border-(--line-strong) bg-secondary px-3 text-sm font-semibold text-secondary-foreground transition-colors duration-fast ease-out hover:bg-muted ${focusRing}`,\n        closeButton: `absolute -end-2 -top-2 inline-flex size-6 items-center justify-center rounded-full border border-(--line-strong) bg-popover text-muted-foreground transition-colors duration-fast ease-out hover:text-foreground [&_svg]:size-3.5 ${focusRing}`,\n        success: \"[&_[data-icon]]:text-(--success-text)\",\n        error: \"[&_[data-icon]]:text-(--destructive-text)\",\n        warning: \"[&_[data-icon]]:text-(--warning-text)\",\n        info: \"[&_[data-icon]]:text-(--info-text)\",\n      },\n    }}\n    {...props}\n  />\n);\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.88 0.004 264)",
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "success-text": "oklch(0.88 0.19 155.8)",
+      "warning-text": "oklch(0.87 0.14 84.1)",
+      "info-text": "oklch(0.78 0.13 251.4)",
+      "destructive-text": "oklch(0.74 0.18 20.6)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 1rem 2rem -0.75rem oklch(0 0 0 / 0.8)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.88 0.004 264)"
+    }
+  }
+}

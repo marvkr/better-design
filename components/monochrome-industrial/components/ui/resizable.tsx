@@ -32,7 +32,7 @@ const ResizableHandle = ({
  className={cn(
  "relative flex w-px items-center justify-center bg-border",
  "after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2",
- "transition-colors duration-150",
+ "transition-colors duration-fast",
  "hover:bg-ring/40 focus-visible:bg-ring",
  "data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full",
  "data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0",

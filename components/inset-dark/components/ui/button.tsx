@@ -17,8 +17,8 @@ const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-medium leading-none tracking-[-0.01em]",
-    "rounded-[9px] cursor-pointer select-none",
-    "transition-[background,box-shadow,transform,color] duration-150",
+    "rounded-[0.5625rem] cursor-pointer select-none",
+    "transition-[background,box-shadow,transform,color] duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px",
@@ -39,15 +39,15 @@ const buttonVariants = cva(
           "hover:[background:var(--pill-gradient-hover)] hover:[box-shadow:var(--shadow-pill-hover)] " +
           "active:[box-shadow:var(--shadow-sm)]",
         secondary:
-          "bg-card text-[rgba(255,255,255,0.78)] " +
+          "bg-card text-[oklch(1_0_0/0.78)] " +
           "[box-shadow:var(--shadow-sm)] " +
           "hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-md)] " +
           "active:[box-shadow:var(--shadow-xs)]",
         outline:
           "bg-transparent text-foreground border border-border " +
-          "hover:bg-accent hover:border-[rgba(255,255,255,0.16)]",
+          "hover:bg-accent hover:border-[oklch(1_0_0/0.16)]",
         ghost:
-          "bg-transparent text-[rgba(255,255,255,0.55)] " +
+          "bg-transparent text-[oklch(1_0_0/0.55)] " +
           "hover:bg-accent hover:text-foreground",
         destructive:
           "bg-destructive text-destructive-foreground " +
@@ -56,10 +56,11 @@ const buttonVariants = cva(
         link: "text-foreground underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-8 px-3 text-xs rounded-[7px]",
+        sm: "h-8 px-3 text-xs rounded-[0.4375rem]",
         default: "h-9 px-4",
-        lg: "h-11 px-6 rounded-[11px]",
+        lg: "h-11 px-6 rounded-[0.6875rem]",
         icon: "h-9 w-9",
+        "icon-sm": "h-8 w-8 rounded-[0.4375rem]",
       },
     },
     defaultVariants: {
@@ -80,6 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

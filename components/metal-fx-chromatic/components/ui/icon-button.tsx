@@ -12,7 +12,7 @@ const iconButtonVariants = cva(
   [
     "inline-flex items-center justify-center shrink-0",
     "rounded-md cursor-pointer select-none",
-    "transition-[background-color,box-shadow,transform,color] duration-150",
+    "transition-[background-color,box-shadow,transform,color] duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px active:[box-shadow:var(--shadow-s)]",

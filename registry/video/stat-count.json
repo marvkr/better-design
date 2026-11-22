@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stat-count",
+  "type": "registry:component",
+  "title": "Stat Count",
+  "description": "Stat count animation: one sourced number climbs to its value while a hairline under it fills, then the label settles in. The proof beat of a launch film.",
+  "dependencies": [
+    "remotion@4.0.513",
+    "@remotion/google-fonts@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/stat-count.tsx",
+      "target": "components/bd-video/stat-count.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Stat count: one number climbs to its value while a hairline under it fills,\n * then the label settles in. The proof beat of a launch film.\n *\n * Written by Better Design. Painted from the theme prop, so the number takes\n * the product's ink and the line takes its primary colour.\n */\nimport { loadFont } from \"@remotion/google-fonts/Inter\";\nimport { AbsoluteFill, interpolate, useCurrentFrame } from \"remotion\";\nimport { easings, pickFont, type VideoTheme, useVideoTheme, withAlpha } from \"@/lib/bd-video\";\n\nconst { fontFamily: INTER } = loadFont(\"normal\", { weights: [\"500\", \"700\"], subsets: [\"latin\"] });\n\n/** Frames the count takes. The label lands after it. */\nconst COUNT_FRAMES = 54;\nconst LABEL_AT = 46;\nconst LABEL_FRAMES = 18;\n\nexport interface StatCountProps {\n  /** The figure the count lands on. Use a sourced number. */\n  value?: number;\n  /** Digits after the decimal point. */\n  decimals?: number;\n  prefix?: string;\n  suffix?: string;\n  /** One line that says what the number counts. */\n  label?: string;\n  theme?: Partial<VideoTheme>;\n  /** A CSS font family the project has loaded. Defaults to the theme's face, then Inter. */\n  font?: string;\n}\n\nconst format = (n: number, decimals: number): string =>\n  n.toLocaleString(\"en-US\", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });\n\n/** Count up to one sourced figure, with a filling rule under it and a label. */\nexport function StatCount({\n  value = 12480,\n  decimals = 0,\n  prefix = \"\",\n  suffix = \"\",\n  label = \"teams shipped a film this month\",\n  theme: themeOverride,\n  font,\n}: StatCountProps) {\n  const theme = useVideoTheme(themeOverride);\n  const frame = useCurrentFrame();\n  const family = pickFont(font, theme, INTER);\n\n  const progress = easings.out(interpolate(frame, [0, COUNT_FRAMES], [0, 1], { extrapolateLeft: \"clamp\", extrapolateRight: \"clamp\" }));\n  const shown = format(value * progress, decimals);\n  // The final string sets the width, so the digits never shove the layout.\n  const finalText = `${prefix}${format(value, decimals)}${suffix}`;\n\n  const labelT = easings.out(interpolate(frame, [LABEL_AT, LABEL_AT + LABEL_FRAMES], [0, 1], { extrapolateLeft: \"clamp\", extrapolateRight: \"clamp\" }));\n  const rise = interpolate(frame, [0, 14], [24, 0], { extrapolateRight: \"clamp\" });\n  const enter = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: \"clamp\" });\n\n  return (\n    <AbsoluteFill style={{ background: theme.background, alignItems: \"center\", justifyContent: \"center\", fontFamily: family }}>\n      <div style={{ display: \"flex\", flexDirection: \"column\", alignItems: \"flex-start\", gap: 28, opacity: enter, transform: `translateY(${rise}px)` }}>\n        <div style={{ position: \"relative\", fontSize: 168, fontWeight: 700, letterSpacing: \"-0.04em\", lineHeight: 1, color: theme.foreground, fontVariantNumeric: \"tabular-nums\" }}>\n          <span style={{ visibility: \"hidden\" }}>{finalText}</span>\n          <span style={{ position: \"absolute\", left: 0, top: 0 }}>{`${prefix}${shown}${suffix}`}</span>\n        </div>\n        <div style={{ width: \"100%\", height: 4, borderRadius: 2, background: withAlpha(theme.foreground, 0.08) }}>\n          <div style={{ width: `${progress * 100}%`, height: \"100%\", borderRadius: 2, background: theme.primary }} />\n        </div>\n        <div style={{ fontSize: 40, fontWeight: 500, color: theme.mutedForeground, opacity: labelT, transform: `translateY(${(1 - labelT) * 12}px)` }}>\n          {label}\n        </div>\n      </div>\n    </AbsoluteFill>\n  );\n}\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

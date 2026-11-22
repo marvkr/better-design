@@ -1,0 +1,26 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst Tabs = TabsPrimitive.Root;\n\n/**\n * Firefly TabsList: a row of labels standing on a warm hairline. Nothing\n * fills behind the active tab; a short ink underline marks it instead.\n */\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    data-slot=\"tabs-list\"\n    className={cn(\n      \"inline-flex items-center gap-1 border-b border-border text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = \"TabsList\";\n\n/**\n * Firefly TabsTrigger: muted ink that darkens on hover. The active tab\n * turns near-black and an ink underline fades in under its label.\n */\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    data-slot=\"tabs-trigger\"\n    className={cn(\n      \"relative inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-t-md px-3\",\n      \"text-sm font-medium text-muted-foreground\",\n      \"transition-colors duration-fast ease-out hover:text-foreground\",\n      \"after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full after:bg-(--ink)\",\n      \"after:opacity-0 after:transition-opacity after:duration-fast after:ease-out\",\n      \"data-[active]:text-foreground data-[active]:after:opacity-100\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      \"data-[disabled]:cursor-not-allowed data-[disabled]:text-(--foreground-disabled)\",\n      \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = \"TabsTrigger\";\n\n/** Firefly TabsContent: the active panel, set a little below the tab row. */\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    data-slot=\"tabs-content\"\n    className={cn(\n      \"mt-4 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "ink": "oklch(0.168 0.004 106.8)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "ink": "oklch(0.964 0.007 97.4)"
+    }
+  }
+}

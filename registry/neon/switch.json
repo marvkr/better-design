@@ -1,0 +1,25 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Checked track reuses the primary Button's neon material, scaled down. */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer inline-flex h-[1.375rem] w-[2.5rem] shrink-0 cursor-pointer items-center rounded-full border border-border\",\n      \"bg-input [box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0_/_0.4)]\",\n      \"transition-[background,box-shadow,border-color] duration-base\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:[background:var(--neon-gradient)] data-[state=checked]:border-transparent\",\n      \"data-[state=checked]:[box-shadow:var(--shadow-neon)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-[1rem] w-[1rem] rounded-full bg-background\",\n        \"[box-shadow:0_0.0625rem_0.125rem_oklch(0_0_0_/_0.5)]\",\n        \"transition-transform duration-base\",\n        \"data-[state=checked]:translate-x-[1.25rem]\",\n        \"data-[state=unchecked]:translate-x-0.5\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)"
+    },
+    "dark": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "tag-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\nexport interface TagInputProps {\n  value: string[];\n  onValueChange: (tags: string[]) => void;\n  placeholder?: string;\n  className?: string;\n  disabled?: boolean;\n  maxTags?: number;\n}\n\n/**\n * Bold retail TagInput: a checkout field that grows as tags are added. Each\n * tag is a soft grey pill with a small round remove button. Enter or a comma\n * adds the typed text, and Backspace in an empty field removes the last tag.\n */\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  (\n    {\n      value,\n      onValueChange,\n      placeholder = \"Add a tag\",\n      className,\n      disabled,\n      maxTags,\n    },\n    ref,\n  ) => {\n    const [input, setInput] = React.useState(\"\");\n    const inputRef = React.useRef<HTMLInputElement>(null);\n    const full = maxTags !== undefined && value.length >= maxTags;\n\n    // SAFETY: inputRef is attached to the input this component always renders,\n    // so it is set by the time a parent can reach the handle.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim();\n      if (!trimmed || value.includes(trimmed) || full) return;\n      onValueChange([...value, trimmed]);\n      setInput(\"\");\n    };\n\n    const removeTag = (tag: string) => {\n      onValueChange(value.filter((t) => t !== tag));\n    };\n\n    const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {\n      if (event.key === \"Enter\" || event.key === \",\") {\n        event.preventDefault();\n        addTag(input);\n      } else if (event.key === \"Backspace\" && !input && value.length > 0) {\n        removeTag(value[value.length - 1]);\n      }\n    };\n\n    return (\n      <div\n        data-slot=\"tag-input\"\n        data-disabled={disabled || undefined}\n        onClick={() => inputRef.current?.focus()}\n        className={cn(\n          formFieldBase,\n          \"flex min-h-12 cursor-text flex-wrap items-center gap-1.5 px-2.5 py-2\",\n          \"focus-within:border-foreground focus-within:ring-4 focus-within:ring-(--halo)\",\n          \"data-[disabled]:cursor-not-allowed data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled) data-[disabled]:hover:border-(--line-strong)\",\n          className,\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            data-slot=\"tag-input-chip\"\n            className={cn(\n              \"inline-flex h-7 max-w-48 items-center gap-1 rounded-full bg-secondary ps-3 pe-1 text-sm font-medium text-foreground\",\n              disabled && \"pe-3 text-(--foreground-disabled)\",\n            )}\n          >\n            <span className=\"truncate\">{tag}</span>\n            {!disabled && (\n              <button\n                type=\"button\"\n                onClick={(event) => {\n                  event.stopPropagation();\n                  removeTag(tag);\n                }}\n                aria-label={`Remove ${tag}`}\n                className={cn(\n                  \"inline-flex size-5 shrink-0 items-center justify-center rounded-full text-muted-foreground\",\n                  \"transition-colors duration-fast ease-out\",\n                  \"hover:bg-(--secondary-hover) hover:text-foreground\",\n                  \"outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n                )}\n              >\n                <Icon icon=\"mingcute:close-line\" className=\"size-3.5\" aria-hidden=\"true\" />\n              </button>\n            )}\n          </span>\n        ))}\n        <input\n          ref={inputRef}\n          type=\"text\"\n          value={input}\n          onChange={(event) => setInput(event.target.value)}\n          onKeyDown={onKeyDown}\n          onBlur={() => addTag(input)}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          disabled={disabled}\n          aria-label={placeholder}\n          className=\"h-7 min-w-20 flex-1 bg-transparent px-1.5 text-base text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        />\n      </div>\n    );\n  },\n);\nTagInput.displayName = \"TagInput\";\n\nexport { TagInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "secondary-hover": "oklch(0.922 0 0)",
+      "line-strong": "oklch(0.62 0.003 286.3)",
+      "halo": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "secondary-hover": "oklch(0.31 0 0)",
+      "line-strong": "oklch(1 0 0 / 0.32)",
+      "halo": "oklch(1 0 0 / 0.16)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

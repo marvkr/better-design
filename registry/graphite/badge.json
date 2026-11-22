@@ -1,0 +1,31 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Graphite Badge — a small chip on the graphite surface ramp.\n * \"default\" sits as a calm raised tile; \"primary\" mirrors the raised-pill\n * recipe at chip scale (gradient fill + pressed label). Status variants stay\n * tonal and quiet so nothing glares against the warm-grey field.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 \" +\n    \"text-[0.6875rem] font-medium tracking-[0.02em] \" +\n    \"border transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-popover text-foreground border-border [box-shadow:var(--shadow-tile)]\",\n        primary:\n          \"bg-[image:var(--pill-gradient)] text-primary-foreground \" +\n          \"[text-shadow:var(--text-shadow-pressed)] border-[oklch(1_0_0_/_0.08)] \" +\n          \"[box-shadow:var(--shadow-pill)]\",\n        secondary:\n          \"text-secondary-foreground border-border [box-shadow:var(--shadow-inset)] bg-[color:oklch(0.349_0_180)]\",\n        outline: \"bg-transparent text-foreground border-border\",\n        success:\n          \"bg-[oklch(0.4_0.1_145)]/30 border-[oklch(0.5_0.15_145)]/30 text-[color:oklch(0.875_0.15_145)]\",\n        warning:\n          \"bg-[oklch(0.45_0.12_70)]/30 border-[oklch(0.55_0.18_55)]/30 text-[color:oklch(0.875_0.119_80)]\",\n        destructive:\n          \"bg-destructive/20 border-destructive/30 text-[color:oklch(0.875_0.066_25)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

@@ -17,7 +17,7 @@ const HoverCardContent = React.forwardRef<
     align={align}
     sideOffset={sideOffset}
     className={cn(
-      "z-50 w-64 p-4",
+      "origin-(--radix-hover-card-content-transform-origin) z-50 w-64 p-4",
       "rounded-lg border border-border",
       "bg-popover text-popover-foreground",
       "[box-shadow:var(--shadow-l)]",

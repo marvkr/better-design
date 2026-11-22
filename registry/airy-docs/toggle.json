@@ -1,0 +1,32 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { activeWash } from \"./_shared\";\n\n/**\n * Airy docs Toggle: a pill that stays pressed. Pressed, it takes the faint\n * green wash with green ink, the same mark as the active sidebar link. The\n * default pill is bare and greys under the pointer; the outline pill sits on\n * white behind a hairline.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full border font-medium text-(--foreground-secondary)\",\n    \"transition-[background-color,border-color,color] duration-fast ease-out\",\n    \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n    \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n    activeWash,\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"border-transparent bg-transparent hover:bg-secondary hover:text-foreground\",\n        outline:\n          \"border-(--line-strong) bg-background hover:bg-secondary hover:text-foreground disabled:border-border disabled:bg-secondary\",\n      },\n      size: {\n        sm: \"h-7 px-2.5 text-xs\",\n        default: \"h-8 px-3 text-sm\",\n        lg: \"h-10 px-4 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = TogglePrimitive.Root.displayName;\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

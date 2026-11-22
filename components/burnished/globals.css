@@ -1,0 +1,490 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Burnished: a warm dark system where every control is an object you could
+  pick up. Each raised surface carries one bevel recipe: a vertical gradient
+  fill, a lit line along the top edge, a shaded line along the bottom edge, a
+  dark rim and a soft drop below. The primary is a cream pill set inside a
+  slowly turning copper ring that glows ember on hover. Fields and chips are
+  graphite bevels; cards are deep umber slabs. Inter Tight at weight 420 with
+  a little open tracking.
+
+  The texture lives in tokens, so the `.light` block flips every recipe at
+  once: --fill-* are the gradients, --bevel-* the shadow stacks, --ring-flow
+  the copper ring's colour stops.
+*/
+
+:root {
+  /* ─── Surfaces: umber graphite, lighter as they rise ─── */
+  --background: oklch(0.192 0.003 67.7);
+  --foreground: oklch(0.936 0.016 82.8);
+  --card: oklch(0.218 0.004 67.6);
+  --card-foreground: oklch(0.936 0.016 82.8);
+  --popover: oklch(0.236 0.005 67.6);
+  --popover-foreground: oklch(0.936 0.016 82.8);
+
+  /* ─── The action: cream ─── */
+  --primary: oklch(0.92 0.021 84);
+  --primary-foreground: oklch(0.192 0.003 67.7);
+  --primary-text: oklch(0.798 0.084 66.7);        /* the glow, as a link on umber */
+
+  --secondary: oklch(0.266 0.006 72);              /* graphite bevel face */
+  --secondary-foreground: oklch(0.936 0.016 82.8);
+  --muted: oklch(0.246 0.005 70);
+  --muted-foreground: oklch(0.72 0.012 80);        /* 6.5:1 on the page */
+  --accent: oklch(0.29 0.007 70);                  /* hover rows */
+  --accent-foreground: oklch(0.936 0.016 82.8);
+
+  --destructive: oklch(0.758 0.145 29);
+  --destructive-foreground: oklch(0.192 0.003 67.7);
+  --success: oklch(0.79 0.12 150);
+  --success-foreground: oklch(0.192 0.003 67.7);
+  --warning: oklch(0.827 0.122 62.1);
+  --warning-foreground: oklch(0.192 0.003 67.7);
+  --info: oklch(0.78 0.08 240);
+  --info-foreground: oklch(0.192 0.003 67.7);
+
+  --border: oklch(0.921 0.023 84.6 / 0.08);        /* hairline: text at a twelfth */
+  --input: oklch(0.936 0.016 82.8 / 0.14);
+  --ring: oklch(0.798 0.084 66.7 / 0.55);          /* the glow */
+
+  /* ─── Warm light: used for the hover halo and the lit variant ─── */
+  --glow: oklch(0.798 0.084 66.7);
+  --ember: oklch(0.73 0.177 45.6);
+  --flame: oklch(0.827 0.122 62.1);
+  --scrim: oklch(0.12 0.003 67.7 / 0.6);
+  /* ─── Status text on a tinted badge: light in its own hue, short of white ─── */
+  --success-text: oklch(0.875 0.09 150);
+  --warning-text: oklch(0.875 0.09 70);
+  --destructive-text: oklch(0.875 0.07 29);
+  --info-text: oklch(0.875 0.06 240);
+  --ember-text: oklch(0.875 0.08 50);
+  --flame-text: oklch(0.875 0.08 75);
+  --glow-text: oklch(0.875 0.06 66.7);
+  --field: oklch(0.258 0.005 67.6);
+
+  /* ─── Texture: gradient fills ─── */
+  --fill-primary: linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5));
+  --fill-primary-hover: linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5));
+  --fill-lit: linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2));
+  --fill-raised: linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6));
+  --fill-raised-hover: linear-gradient(180deg, oklch(0.325 0.007 72), oklch(0.27 0.005 67.6));
+  --fill-quiet: linear-gradient(180deg, oklch(0.29 0.006 78.2), oklch(0.241 0.005 67.6));
+  --fill-quiet-hover: linear-gradient(180deg, oklch(0.311 0.007 67.6), oklch(0.258 0.005 67.6));
+  --fill-card: linear-gradient(180deg, oklch(0.241 0.005 67.6), oklch(0.196 0.003 67.7));
+  --fill-surface: linear-gradient(180deg, oklch(0.227 0.004 84.6), oklch(0.201 0.004 84.6));
+  --fill-well: linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6));
+  --fill-destructive: linear-gradient(180deg, oklch(0.78 0.14 29), oklch(0.7 0.15 29));
+
+  /* ─── Texture: bevel shadow stacks (top light, bottom shade, rim, drop) ─── */
+  --bevel-primary:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.7),
+    inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.35),
+    0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6);
+  --bevel-lit:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.85),
+    inset 0 -0.0625rem 0 oklch(0.446 0.087 56.4 / 0.25),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.3),
+    0 0.5rem 1.375rem -0.625rem oklch(0.73 0.177 45.6 / 0.4);
+  --bevel-raised:
+    inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.09),
+    0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6);
+  --bevel-raised-hover:
+    inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.17),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.12),
+    0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6);
+  --bevel-raised-focus:
+    inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.16),
+    0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6);
+  --bevel-quiet:
+    inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.1),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.1),
+    inset 0 -0.0625rem 0 oklch(0 0 0 / 0.35),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.5),
+    0 0.25rem 0.75rem -0.25rem oklch(0 0 0 / 0.6);
+  --bevel-card:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.09),
+    inset 0 -0.0625rem 0 oklch(0 0 0 / 0.35),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.5),
+    0 1.5rem 3.125rem -1.5rem oklch(0 0 0 / 0.85);
+  --bevel-surface:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.05),
+    inset 0 -0.0625rem 0 oklch(0 0 0 / 0.35),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.45),
+    0 0.0625rem 0 0.0625rem oklch(1 0 0 / 0.03);
+  --bevel-well:
+    inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45),
+    inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.4);
+  --bevel-menu:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.08),
+    inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.06),
+    0 0 0 0.0625rem oklch(0 0 0 / 0.55),
+    0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.7);
+  --bevel-glow:
+    0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45),
+    0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5);
+
+  /* ─── Texture: the copper ring's stops, top light and bottom shade ─── */
+  --ring-flow: oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%,
+    oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%,
+    oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9);
+  --ring-rim: 0 0 0 0.0625rem oklch(0 0 0 / 0.35);
+  --lit-foreground: oklch(0.192 0.003 67.7);
+  --ring-sheen: linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42));
+
+  /* ─── Type ─── */
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ─── Radius: pills for controls, soft slabs for surfaces ─── */
+  --radius: 1rem;
+  --radius-sm: 0.5rem;     /* inline code, small tags */
+  --radius-md: 0.75rem;    /* menu rows, inner wells */
+  --radius-lg: 0.875rem;   /* fields, popovers */
+  --radius-xl: 1.25rem;    /* inner tiles */
+  --radius-2xl: 1.5rem;    /* cards */
+  --radius-3xl: 1.75rem;   /* dialogs, sheets */
+
+  /* ─── Motion: the soft profile, a long ease-out ─── */
+  --transition-duration-fast: 180ms;
+  --transition-duration-base: 240ms;
+  --transition-duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4);
+  --shadow-sm: var(--bevel-raised);
+  --shadow-md: var(--bevel-menu);
+  --shadow-lg: var(--bevel-card);
+  --shadow-card: var(--bevel-card);
+  --shadow-menu: var(--bevel-menu);
+  --shadow-overlay: var(--bevel-card);
+  --shadow-thumb: var(--bevel-primary);
+
+  --chart-1: oklch(0.798 0.084 66.7);
+  --chart-2: oklch(0.73 0.177 45.6);
+  --chart-3: oklch(0.908 0.056 74.9);
+  --chart-4: oklch(0.666 0.107 48.1);
+  --chart-5: oklch(0.55 0.02 75);
+
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/*
+  Light: the same objects in daylight. Parchment page, ivory slabs, and the
+  primary turns to a dark umber bevel inside the same copper ring, so the
+  action keeps its contrast on a pale ground.
+*/
+.light {
+  --background: oklch(0.955 0.01 80);
+  --foreground: oklch(0.22 0.008 67);
+  --card: oklch(0.985 0.006 84);
+  --card-foreground: oklch(0.22 0.008 67);
+  --popover: oklch(0.99 0.005 84);
+  --popover-foreground: oklch(0.22 0.008 67);
+
+  --primary: oklch(0.27 0.008 67);
+  --primary-foreground: oklch(0.959 0.014 84.6);
+  --primary-text: oklch(0.52 0.12 50);
+
+  --secondary: oklch(0.935 0.012 80);
+  --secondary-foreground: oklch(0.22 0.008 67);
+  --muted: oklch(0.92 0.012 80);
+  --muted-foreground: oklch(0.47 0.015 70);
+  --accent: oklch(0.915 0.014 78);
+  --accent-foreground: oklch(0.22 0.008 67);
+
+  --destructive: oklch(0.55 0.19 29);
+  --destructive-foreground: oklch(0.985 0.006 84);
+  --success: oklch(0.52 0.12 150);
+  --success-foreground: oklch(0.985 0.006 84);
+  --warning: oklch(0.62 0.14 62);
+  --warning-foreground: oklch(0.22 0.008 67);
+  --info: oklch(0.52 0.12 240);
+  --info-foreground: oklch(0.985 0.006 84);
+
+  --border: oklch(0.22 0.008 67 / 0.1);
+  --input: oklch(0.22 0.008 67 / 0.16);
+  --ring: oklch(0.6 0.13 55 / 0.5);
+
+  --glow: oklch(0.7 0.12 60);
+  --ember: oklch(0.68 0.17 45.6);
+  --flame: oklch(0.78 0.12 62);
+  --scrim: oklch(0.22 0.008 67 / 0.35);
+  --success-text: oklch(0.42 0.11 150);
+  --warning-text: oklch(0.45 0.11 62);
+  --destructive-text: oklch(0.47 0.17 29);
+  --info-text: oklch(0.44 0.12 240);
+  --ember-text: oklch(0.48 0.15 45.6);
+  --flame-text: oklch(0.46 0.1 70);
+  --glow-text: oklch(0.45 0.09 60);
+  --field: oklch(0.975 0.007 82);
+
+  --fill-primary: linear-gradient(180deg, oklch(0.36 0.01 67), oklch(0.22 0.008 67));
+  --fill-primary-hover: linear-gradient(180deg, oklch(0.4 0.012 67), oklch(0.25 0.008 67));
+  --fill-lit: linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2));
+  --fill-raised: linear-gradient(180deg, oklch(0.995 0.004 84), oklch(0.945 0.011 80));
+  --fill-raised-hover: linear-gradient(180deg, oklch(1 0 0), oklch(0.955 0.01 80));
+  --fill-quiet: linear-gradient(180deg, oklch(0.985 0.006 84), oklch(0.93 0.012 80));
+  --fill-quiet-hover: linear-gradient(180deg, oklch(0.995 0.004 84), oklch(0.945 0.011 80));
+  --fill-card: linear-gradient(180deg, oklch(0.995 0.004 84), oklch(0.97 0.008 82));
+  --fill-surface: linear-gradient(180deg, oklch(0.98 0.006 84), oklch(0.96 0.009 80));
+  --fill-well: linear-gradient(180deg, oklch(0.93 0.012 80), oklch(0.955 0.01 80));
+  --fill-destructive: linear-gradient(180deg, oklch(0.6 0.19 29), oklch(0.52 0.19 29));
+
+  --bevel-primary:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.22),
+    inset 0 -0.0625rem 0 oklch(0 0 0 / 0.4),
+    0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.6),
+    0 0.375rem 1rem -0.375rem oklch(0.22 0.008 67 / 0.45);
+  --bevel-lit:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.85),
+    inset 0 -0.0625rem 0 oklch(0.446 0.087 56.4 / 0.3),
+    0 0 0 0.0625rem oklch(0.446 0.087 56.4 / 0.35),
+    0 0.5rem 1.375rem -0.625rem oklch(0.68 0.17 45.6 / 0.45);
+  --bevel-raised:
+    inset 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.1),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.9),
+    0 0.125rem 0.5rem -0.125rem oklch(0.22 0.008 67 / 0.16);
+  --bevel-raised-hover:
+    inset 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.18),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 1),
+    0 0.125rem 0.5rem -0.125rem oklch(0.22 0.008 67 / 0.2);
+  --bevel-raised-focus:
+    inset 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.28),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 1),
+    0 0.125rem 0.5rem -0.125rem oklch(0.22 0.008 67 / 0.2);
+  --bevel-quiet:
+    inset 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.12),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.95),
+    inset 0 -0.0625rem 0 oklch(0.22 0.008 67 / 0.08),
+    0 0.125rem 0.5rem -0.125rem oklch(0.22 0.008 67 / 0.18);
+  --bevel-card:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 1),
+    inset 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.07),
+    0 0.0625rem 0.125rem oklch(0.22 0.008 67 / 0.06),
+    0 1rem 2.5rem -1.25rem oklch(0.3 0.03 60 / 0.3);
+  --bevel-surface:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.9),
+    inset 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.07),
+    0 0.0625rem 0.125rem oklch(0.22 0.008 67 / 0.05);
+  --bevel-well:
+    inset 0 0.125rem 0.1875rem oklch(0.22 0.008 67 / 0.1),
+    inset 0 -0.0625rem 0 oklch(1 0 0 / 1),
+    0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.12);
+  --bevel-menu:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 1),
+    0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.1),
+    0 0.75rem 1.75rem -0.5rem oklch(0.3 0.03 60 / 0.28);
+  --bevel-glow:
+    0 0 1.25rem -0.125rem oklch(0.68 0.17 45.6 / 0.4),
+    0 0 0.5rem -0.125rem oklch(0.78 0.12 62 / 0.45);
+
+  --ring-rim: 0 0 0 0.0625rem oklch(0.22 0.008 67 / 0.3);
+  --ring-sheen: linear-gradient(180deg, oklch(1 0 0 / 0.45), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.3));
+
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0.22 0.008 67 / 0.1);
+
+  --chart-1: oklch(0.62 0.12 60);
+  --chart-2: oklch(0.6 0.17 45.6);
+  --chart-3: oklch(0.36 0.04 57);
+  --chart-4: oklch(0.75 0.1 70);
+  --chart-5: oklch(0.6 0.02 75);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-glow: var(--glow);
+  --color-ember: var(--ember);
+  --color-flame: var(--flame);
+  --color-scrim: var(--scrim);
+  --color-field: var(--field);
+  --color-success-text: var(--success-text);
+  --color-warning-text: var(--warning-text);
+  --color-destructive-text: var(--destructive-text);
+  --color-info-text: var(--info-text);
+  --color-ember-text: var(--ember-text);
+  --color-flame-text: var(--flame-text);
+  --color-glow-text: var(--glow-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 420;
+    letter-spacing: 0.016em;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  /* Headings: semibold, tracking pulled back in from the body's open setting. */
+  :is(h1, h2) {
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  :is(h3, h4) {
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+    letter-spacing: 0;
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

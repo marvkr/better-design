@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Skeleton: shimmering glass placeholder.\n\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\n        \"animate-pulse rounded-lg bg-[var(--ag-fill-hover)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)"
+    },
+    "dark": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)"
+    }
+  }
+}

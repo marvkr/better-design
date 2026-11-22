@@ -1,0 +1,22 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Item: one row of a docs index, such as a guide, an endpoint or\n * a setting. The leading icon sits in a small square tile, the title in\n * medium ink, a muted line under it. A row you can press takes the pale\n * tray under the pointer.\n */\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** An icon or avatar, shown in a small tile at the start. */\n  leading?: React.ReactNode;\n  /** A value, badge or chevron at the end of the row. */\n  trailing?: React.ReactNode;\n  title: string;\n  subtitle?: string;\n  disabled?: boolean;\n  /** Adds the hover surface and focus ring for a row that does something. */\n  interactive?: boolean;\n  as?: React.ElementType;\n  href?: string;\n}\n\nfunction Item({\n  leading,\n  trailing,\n  title,\n  subtitle,\n  disabled,\n  interactive,\n  as,\n  href,\n  className,\n  ...props\n}: ItemProps) {\n  const Comp: React.ElementType = as ?? (href ? \"a\" : \"div\");\n\n  return (\n    <Comp\n      href={disabled ? undefined : href}\n      tabIndex={disabled ? -1 : undefined}\n      aria-disabled={disabled || undefined}\n      data-slot=\"item\"\n      className={cn(\n        \"relative flex min-h-12 w-full items-center gap-3 rounded-lg px-3 py-2.5 text-start\",\n        interactive &&\n          \"cursor-pointer outline-none transition-colors duration-fast hover:bg-secondary focus-visible:ring-3 focus-visible:ring-ring\",\n        disabled && \"pointer-events-none\",\n        className,\n      )}\n      {...props}\n    >\n      {leading && (\n        <span\n          data-slot=\"item-leading\"\n          className={cn(\n            \"flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-background [&_svg]:size-4\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-(--foreground-secondary)\",\n          )}\n        >\n          {leading}\n        </span>\n      )}\n      <span className=\"flex min-w-0 flex-1 flex-col gap-0.5\">\n        <span\n          className={cn(\n            \"truncate text-sm font-medium leading-5\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {title}\n        </span>\n        {subtitle && (\n          <span\n            className={cn(\n              \"truncate text-[0.8125rem] leading-5\",\n              disabled ? \"text-(--foreground-disabled)\" : \"text-muted-foreground\",\n            )}\n          >\n            {subtitle}\n          </span>\n        )}\n      </span>\n      {trailing && (\n        <span\n          data-slot=\"item-trailing\"\n          className={cn(\n            \"flex shrink-0 items-center gap-2 text-sm tabular-nums [&_svg]:size-4 [&_svg]:text-muted-foreground\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-(--foreground-secondary)\",\n          )}\n        >\n          {trailing}\n        </span>\n      )}\n    </Comp>\n  );\n}\n\n/**\n * Airy docs ItemList: rows grouped in one hairline-edged box with a 1rem\n * corner. With `divided`, a hairline runs between rows and the last row has\n * none.\n */\ninterface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {\n  divided?: boolean;\n}\n\nfunction ItemList({ divided, className, ...props }: ItemListProps) {\n  return (\n    <div\n      data-slot=\"item-list\"\n      className={cn(\n        \"flex flex-col gap-0.5 overflow-hidden rounded-xl border border-border bg-card p-1.5\",\n        divided &&\n          \"gap-0 p-0 *:rounded-none *:border-b *:border-border *:last:border-b-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Item, ItemList };\nexport type { ItemProps, ItemListProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * ButtonGroup — container that attaches adjacent buttons seamlessly.\n * Inner buttons lose their radii on the shared sides; outer ones keep theirs.\n *\n * Graphite: members read as one continuous raised tile. The outer corners take\n * the calm tile radius (rounded-lg); shared seams collapse to square and overlap\n * the hairline border by 1px so no double-line shows between members.\n */\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      className={cn(\n        \"inline-flex\",\n        orientation === \"horizontal\"\n          ? \"flex-row [&>*]:rounded-none [&>*:first-child]:rounded-l-lg [&>*:last-child]:rounded-r-lg [&>*:not(:first-child)]:-ml-px\"\n          : \"flex-col [&>*]:rounded-none [&>*:first-child]:rounded-t-lg [&>*:last-child]:rounded-b-lg [&>*:not(:first-child)]:-mt-px\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\nexport { ButtonGroup }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

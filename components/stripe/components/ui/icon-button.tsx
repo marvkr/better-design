@@ -3,28 +3,25 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-// Stripe Icon Button: square/circle button for icon-only actions
-// Based on Stripe's button pattern with icon sizes
-
 const iconButtonVariants = cva(
-  "relative inline-flex items-center justify-center shrink-0 outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  "relative inline-flex shrink-0 items-center justify-center outline-none transition-[background-color,color,box-shadow] duration-fast focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)] disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/85 focus-visible:ring-2 focus-visible:ring-primary/30",
-        secondary: "bg-secondary text-foreground hover:bg-secondary/80 ring-1 ring-border focus-visible:ring-2 focus-visible:ring-foreground/20",
+        default: "bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] hover:bg-primary/90",
+        secondary: "bg-background text-foreground [box-shadow:var(--shadow-control)] hover:bg-secondary hover:[box-shadow:var(--shadow-control-hover)]",
         ghost: "text-muted-foreground hover:bg-secondary hover:text-foreground",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/85",
-        outline: "border border-border bg-background text-foreground hover:bg-secondary",
+        destructive: "bg-destructive text-destructive-foreground [box-shadow:var(--shadow-control)] hover:bg-destructive/90",
+        outline: "bg-background text-foreground [box-shadow:var(--shadow-control)] hover:bg-secondary hover:[box-shadow:var(--shadow-control-hover)]",
       },
       size: {
-        xs: "h-7 w-7 rounded-lg text-xs",
-        sm: "h-8 w-8 rounded-lg text-sm",
-        default: "h-9 w-9 rounded-[10px] text-sm",
-        lg: "h-10 w-10 rounded-[10px] text-base",
-        xl: "h-11 w-11 rounded-[12px] text-base",
+        xs: "h-7 w-7 rounded text-xs",
+        sm: "h-8 w-8 rounded-md text-sm",
+        default: "h-9 w-9 rounded-md text-sm",
+        lg: "h-10 w-10 rounded-lg text-base",
+        xl: "h-11 w-11 rounded-lg text-base",
       },
-      shape: {
+      corners: {
         square: "",
         circle: "rounded-full",
       },
@@ -32,7 +29,7 @@ const iconButtonVariants = cva(
     defaultVariants: {
       variant: "ghost",
       size: "default",
-      shape: "square",
+      corners: "square",
     },
   }
 )
@@ -44,11 +41,11 @@ export interface IconButtonProps
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, corners, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(iconButtonVariants({ variant, size, shape, className }))}
+        className={cn(iconButtonVariants({ variant, size, corners, className }))}
         ref={ref}
         {...props}
       />

@@ -1,0 +1,14 @@
+{
+  "name": "input-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Paddock InputGroup: one white bordered field that holds an input and its\n * addons (text, icons, buttons). Addons sit behind a thin divider, and the\n * whole field takes the focus outline while its input has focus.\n */\ninterface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"input-group\"\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"items-stretch overflow-hidden px-0 py-0\",\n        \"focus-within:ring-2 focus-within:ring-ring\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nInputGroup.displayName = \"InputGroup\";\n\n/** A leading or trailing addon, split from the input by a thin divider. */\nconst InputGroupAddon = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { side?: \"left\" | \"right\" }\n>(({ className, side = \"left\", ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"input-group-addon\"\n    data-side={side}\n    className={cn(\n      \"flex shrink-0 items-center gap-1.5 px-3.5 text-sm text-muted-foreground [&_svg]:size-4\",\n      side === \"left\" ? \"order-first border-r border-border\" : \"order-last border-l border-border\",\n      className,\n    )}\n    {...props}\n  />\n));\nInputGroupAddon.displayName = \"InputGroupAddon\";\n\n/** The bare input inside the group; the group draws the field. */\nconst InputGroupInput = React.forwardRef<\n  HTMLInputElement,\n  React.InputHTMLAttributes<HTMLInputElement>\n>(({ className, ...props }, ref) => (\n  <input\n    ref={ref}\n    data-slot=\"input-group-input\"\n    className={cn(\n      \"min-w-0 flex-1 bg-transparent px-3.5 text-foreground outline-none placeholder:text-muted-foreground\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n));\nInputGroupInput.displayName = \"InputGroupInput\";\n\nexport { InputGroup, InputGroupAddon, InputGroupInput };\nexport type { InputGroupProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ]
+}

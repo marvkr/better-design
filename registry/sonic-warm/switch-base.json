@@ -1,0 +1,23 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\nimport { useSound } from \"./sound-provider\"\n\nfunction Switch({\n  className,\n  onCheckedChange,\n  ...props\n}: SwitchPrimitive.Root.Props) {\n  const { playClick } = useSound()\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-[1.5rem] w-[2.75rem] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-50 data-checked:bg-primary data-unchecked:bg-input\",\n        className\n      )}\n      onCheckedChange={(checked, eventDetails) => {\n        playClick()\n        onCheckedChange?.(checked, eventDetails)\n      }}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        render={\n          <motion.span\n            layout\n            transition={springInteraction}\n            className=\"pointer-events-none block h-5 w-5 rounded-full bg-background shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.1)] ring-0 data-checked:translate-x-5 data-unchecked:translate-x-0\"\n          />\n        }\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/motion.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "motion@^12.25.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/sonic-warm/sound-provider-base.json"
+  ]
+}

@@ -33,7 +33,7 @@ function MultiSelect({
 
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {
         setOpen(false)
       }
     }
@@ -60,10 +60,10 @@ function MultiSelect({
         onClick={() => !disabled && setOpen(!open)}
         disabled={disabled}
         className={cn(
-          "flex min-h-10 w-full flex-wrap items-center gap-1.5 rounded-[10px] border border-border bg-background px-3 py-2 text-sm",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-          "transition duration-200 hover:border-foreground/30",
-          open && "border-foreground shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+          "flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-md bg-input px-3 py-2 text-sm",
+          "[box-shadow:var(--shadow-control)]",
+          "transition-[box-shadow] duration-fast hover:[box-shadow:var(--shadow-control-hover)]",
+          open && "[box-shadow:var(--shadow-focus)]",
           "disabled:cursor-not-allowed disabled:opacity-70",
           "text-left"
         )}
@@ -73,7 +73,7 @@ function MultiSelect({
             selectedLabels.map((label) => (
               <span
                 key={label}
-                className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                className="inline-flex items-center gap-1 rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
               >
                 {label}
                 <X
@@ -99,7 +99,7 @@ function MultiSelect({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-[12px] bg-popover p-1.5 shadow-[0_4px_16px_0_rgb(0_0_0/0.08),0_0_0_1px_rgb(0_0_0/0.06)]">
+        <div className="absolute z-50 mt-1 w-full rounded-lg bg-popover p-1.5 [box-shadow:var(--shadow-popover)]">
           {options.map((option) => (
             <button
               key={option.value}
@@ -109,7 +109,7 @@ function MultiSelect({
             >
               <div
                 className={cn(
-                  "flex h-4 w-4 items-center justify-center rounded-[4px] border border-border transition-colors",
+                  "flex h-4 w-4 items-center justify-center rounded-sm border border-border transition-colors",
                   value.includes(option.value) && "bg-primary border-primary"
                 )}
               >

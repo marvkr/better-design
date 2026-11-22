@@ -1,0 +1,14 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Star } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Rating: filled stars glow warm cognac, like brass studs.\n\nexport interface RatingProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number\n  max?: number\n  onChange?: (value: number) => void\n  readonly?: boolean\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  ({ className, value = 0, max = 5, onChange, readonly = false, ...props }, ref) => {\n    const [hovered, setHovered] = React.useState(-1)\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        {...props}\n      >\n        {Array.from({ length: max }, (_, i) => {\n          const filled = i < (hovered >= 0 ? hovered + 1 : value)\n          return (\n            <button\n              key={i}\n              type=\"button\"\n              disabled={readonly}\n              aria-label={`Rate ${i + 1} ${i === 0 ? \"star\" : \"stars\"}`}\n              aria-pressed={value >= i + 1}\n              className={cn(\n                \"transition-transform duration-base\",\n                !readonly && \"cursor-pointer hover:scale-110\",\n                \"disabled:cursor-default\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:rounded-sm\"\n              )}\n              onMouseEnter={() => !readonly && setHovered(i)}\n              onMouseLeave={() => !readonly && setHovered(-1)}\n              onClick={() => onChange?.(i + 1)}\n            >\n              <Star\n                className={cn(\n                  \"h-5 w-5\",\n                  filled\n                    ? \"fill-[oklch(0.68_0.12_60)] text-[oklch(0.68_0.12_60)] drop-shadow-[0_0.0625rem_0.1875rem_oklch(0.55_0.115_52/0.5)]\"\n                    : \"fill-transparent text-muted-foreground/40\"\n                )}\n              />\n            </button>\n          )\n        })}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ]
+}

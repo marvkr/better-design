@@ -1,0 +1,25 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Tabs — the desk's segmented control. A recessed pill track holds\n * the segments; the active one lifts out as a white cap with its own shadow.\n */\n\nconst Tabs = TabsPrimitive.Root;\n\nconst TabsList = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-full bg-secondary p-1\",\n      \"[box-shadow:var(--shadow-rim)]\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = TabsPrimitive.List.displayName;\n\nconst TabsTrigger = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Trigger\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 py-1.5\",\n      \"text-sm font-medium text-muted-foreground\",\n      \"transition-[background-color,color,box-shadow] duration-fast ease-out\",\n      \"hover:text-foreground\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      \"data-[state=active]:bg-card data-[state=active]:text-foreground\",\n      \"data-[state=active]:[box-shadow:var(--shadow-md)]\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName;\n\nconst TabsContent = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Content\n    ref={ref}\n    className={cn(\n      \"mt-4 focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsContent.displayName = TabsPrimitive.Content.displayName;\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

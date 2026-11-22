@@ -1,0 +1,27 @@
+{
+  "name": "accordion",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Accordion: the disclosure rows under a product, such as\n * Reviews, Shipping and Returns. There is no box around them: each row is\n * divided by the grey hairline and gives its medium label plenty of room.\n * The black chevron sits at the right end and turns over as the panel\n * opens; the answer reads in the muted grey.\n */\nconst Accordion = AccordionPrimitive.Root;\n\n/** One row and its panel, closed off by a hairline under it. */\nfunction AccordionItem({\n  className,\n  ...props\n}: React.ComponentProps<typeof AccordionPrimitive.Item>) {\n  return (\n    <AccordionPrimitive.Item\n      data-slot=\"accordion-item\"\n      className={cn(\"rounded-none border-b border-border\", className)}\n      {...props}\n    />\n  );\n}\nAccordionItem.displayName = \"AccordionItem\";\n\n/** The full-width label row, with the chevron at the right end. */\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        data-slot=\"accordion-trigger\"\n        className={cn(\n          \"flex flex-1 items-center justify-between gap-4 rounded-none py-6 text-start text-base font-medium text-foreground\",\n          \"transition-colors duration-fast ease-out hover:text-(--foreground-secondary)\",\n          \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\",\n          \"[&[data-state=open]>svg]:rotate-180\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        <Icon\n          icon=\"mingcute:down-line\"\n          aria-hidden=\"true\"\n          className=\"size-5 shrink-0 text-foreground transition-transform duration-fast ease-out motion-reduce:transition-none\"\n        />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  );\n}\nAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;\n\n/** The panel: opens and closes on its own height. */\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: React.ComponentProps<typeof AccordionPrimitive.Content>) {\n  return (\n    <AccordionPrimitive.Content\n      data-slot=\"accordion-content\"\n      className=\"overflow-hidden text-base text-muted-foreground data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down motion-reduce:animate-none\"\n      {...props}\n    >\n      <div className={cn(\"pb-6 leading-relaxed\", className)}>{children}</div>\n    </AccordionPrimitive.Content>\n  );\n}\nAccordionContent.displayName = AccordionPrimitive.Content.displayName;\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-accordion@^1.2.11",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.345 0.003 286.2)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.839 0.001 286.4)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

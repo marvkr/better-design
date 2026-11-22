@@ -1,0 +1,23 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Upload } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior FileInput — a drop target is a well: a recessed slot at the field\n * radius with a dashed edge saying \"something goes here\". Accent marks the\n * drag, per the color rules; a chosen file is news the label carries, not a\n * color change.\n */\n\nexport interface FileInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  label?: string;\n  hint?: string;\n}\n\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  (\n    { className, label = \"Drop a file here\", hint = \"or click to browse\", ...props },\n    ref,\n  ) => {\n    const [dragging, setDragging] = React.useState(false);\n    const [fileName, setFileName] = React.useState<string | null>(null);\n\n    return (\n      <label\n        onDragOver={(event) => {\n          event.preventDefault();\n          setDragging(true);\n        }}\n        onDragLeave={() => setDragging(false)}\n        onDrop={() => setDragging(false)}\n        className={cn(\n          \"flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-[0.625rem] px-6 py-8 text-center\",\n          \"border-2 border-dashed border-border bg-input\",\n          \"shadow-[var(--shadow-well)]\",\n          \"transition-[background-color,border-color,box-shadow] duration-fast\",\n          \"hover:border-foreground/30\",\n          \"focus-within:border-ring focus-within:bg-card focus-within:shadow-none\",\n          dragging && \"border-ring bg-accent shadow-none\",\n          className,\n        )}\n      >\n        <Upload className=\"size-5 text-muted-foreground\" strokeWidth={1.5} />\n        <span className=\"text-[0.8125rem] font-medium text-foreground\">\n          {fileName ?? label}\n        </span>\n        {!fileName ? (\n          <span className=\"text-[0.7188rem] text-muted-foreground\">{hint}</span>\n        ) : null}\n        <input\n          ref={ref}\n          type=\"file\"\n          className=\"sr-only\"\n          onChange={(event) =>\n            setFileName(event.target.files?.[0]?.name ?? null)\n          }\n          {...props}\n        />\n      </label>\n    );\n  },\n);\nFileInput.displayName = \"FileInput\";\n\nexport { FileInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

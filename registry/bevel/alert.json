@@ -1,0 +1,27 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Alert.\n *\n * An alert is a card, not a striped banner. The surface never carries a border\n * or a left rule: it takes the same inset highlight, 1px ring and soft drop as\n * every other card, at the 20px card radius. The variant lives in the icon\n * color alone, so a run of alerts reads as one stack of cards instead of five\n * colored boxes. Padding is 18px, and the icon sits in the top left corner\n * with the text indented past it.\n */\n\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-[1.25rem] bg-card text-card-foreground p-[1.125rem]\",\n    \"[box-shadow:var(--shadow-card)]\",\n    \"[&>svg]:absolute [&>svg]:left-[1.125rem] [&>svg]:top-[1.125rem] [&>svg]:size-5\",\n    \"[&>svg~*]:pl-8 [&>svg+div]:translate-y-[-0.0625rem]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"[&>svg]:text-muted-foreground\",\n        info: \"[&>svg]:text-primary\",\n        success: \"[&>svg]:text-[var(--success)]\",\n        warning: \"[&>svg]:text-[var(--warning)]\",\n        destructive: \"[&>svg]:text-destructive\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n)\n\n/** Props for `Alert`; the variant tints the icon and nothing else. */\nexport interface AlertProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof alertVariants> {}\n\nconst Alert = React.forwardRef<HTMLDivElement, AlertProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"alert\"\n      className={cn(alertVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n)\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\n      \"mb-1 text-[1rem] leading-[1.375rem] font-semibold tracking-[-0.025rem] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"text-[0.9063rem] leading-[1.3125rem] tracking-[0.0188rem] text-muted-foreground [&_p]:leading-[1.3125rem]\",\n      className,\n    )}\n    {...props}\n  />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5695 0.1372 158)",
+      "warning": "oklch(0.6802 0.1568 62)",
+      "shadow-card": "var(--shadow-md)"
+    },
+    "dark": {
+      "success": "oklch(0.6903 0.1305 158)",
+      "warning": "oklch(0.7807 0.1424 66)",
+      "shadow-card": "var(--shadow-md)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "sidebar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sidebar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, selectedOption } from \"./_shared\";\n\ninterface SidebarProps extends React.HTMLAttributes<HTMLElement> {\n  collapsible?: boolean;\n}\n\n/**\n * Mallow Sidebar: the left rail on the white card, split from the page by a\n * hairline, whose current link takes the violet tint and ring.\n */\nconst Sidebar = React.forwardRef<HTMLElement, SidebarProps>(\n  ({ className, collapsible, ...props }, ref) => (\n    <aside\n      ref={ref}\n      data-slot=\"sidebar\"\n      data-collapsible={collapsible ? \"\" : undefined}\n      className={cn(\n        \"flex h-full w-64 flex-col border-e border-border bg-card text-card-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nSidebar.displayName = \"Sidebar\";\n\nconst SidebarHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-header\"\n    className={cn(\"flex min-h-16 items-center gap-3 px-4 pt-4 pb-2\", className)}\n    {...props}\n  />\n));\nSidebarHeader.displayName = \"SidebarHeader\";\n\nconst SidebarContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-content\"\n    className={cn(\"flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-3 py-3\", className)}\n    {...props}\n  />\n));\nSidebarContent.displayName = \"SidebarContent\";\n\nconst SidebarFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-footer\"\n    className={cn(\"mt-auto border-t border-border px-3 py-3\", className)}\n    {...props}\n  />\n));\nSidebarFooter.displayName = \"SidebarFooter\";\n\nconst SidebarGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-group\"\n    className={cn(\"flex flex-col gap-1\", className)}\n    {...props}\n  />\n));\nSidebarGroup.displayName = \"SidebarGroup\";\n\nconst SidebarGroupLabel = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-group-label\"\n    className={cn(\"px-3 pb-1 text-xs font-medium text-muted-foreground\", className)}\n    {...props}\n  />\n));\nSidebarGroupLabel.displayName = \"SidebarGroupLabel\";\n\ninterface SidebarItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  active?: boolean;\n  icon?: React.ReactNode;\n}\n\nconst SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>(\n  ({ className, active, icon, children, ...props }, ref) => (\n    <button\n      ref={ref}\n      type=\"button\"\n      data-slot=\"sidebar-item\"\n      data-active={active ? \"\" : undefined}\n      aria-current={active ? \"page\" : undefined}\n      className={cn(\n        \"group/sidebar-item flex min-h-10 w-full items-center gap-2.5 rounded-xl px-3 py-2 text-start text-sm\",\n        focusRing,\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        active\n          ? cn(selectedOption, \"font-medium\")\n          : \"text-muted-foreground transition-colors duration-fast ease-(--ease-out) enabled:hover:bg-accent enabled:hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      {icon && (\n        <span\n          aria-hidden=\"true\"\n          className={cn(\n            \"flex size-4.5 shrink-0 items-center justify-center [&_svg]:size-4.5\",\n            active ? \"text-foreground\" : \"text-muted-foreground group-hover/sidebar-item:text-foreground\",\n          )}\n        >\n          {icon}\n        </span>\n      )}\n      <span className=\"min-w-0 flex-1 truncate\">{children}</span>\n    </button>\n  ),\n);\nSidebarItem.displayName = \"SidebarItem\";\n\nexport {\n  Sidebar,\n  SidebarHeader,\n  SidebarContent,\n  SidebarFooter,\n  SidebarGroup,\n  SidebarGroupLabel,\n  SidebarItem,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

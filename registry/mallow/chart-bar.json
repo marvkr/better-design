@@ -1,0 +1,18 @@
+{
+  "name": "chart-bar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-bar.tsx",
+      "content": "\"use client\"\n\nimport { Bar, BarChart, CartesianGrid, XAxis } from \"recharts\"\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\"\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\"\n\nconst chartData = [\n  { month: \"January\", orders: 186 },\n  { month: \"February\", orders: 305 },\n  { month: \"March\", orders: 237 },\n  { month: \"April\", orders: 73 },\n  { month: \"May\", orders: 209 },\n  { month: \"June\", orders: 214 },\n]\n\nconst chartConfig = {\n  orders: { label: \"Orders\", color: \"var(--chart-1)\" },\n}\n\n/** Mallow bar chart: rounded violet bars with a soft hover column. */\nexport function ChartBarDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Orders</CardTitle>\n        <CardDescription>January to June</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <BarChart accessibilityLayer data={chartData}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              tickMargin={10}\n              axisLine={false}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip content={<ChartTooltipContent hideLabel />} />\n            <Bar dataKey=\"orders\" fill=\"var(--chart-1)\" radius={6} />\n          </BarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1\">\n        <span className=\"text-sm text-muted-foreground\">Busiest month</span>\n        <span className=\"text-2xl font-medium tabular-nums\">February, 305</span>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/card.json",
+    "https://better-design.com/registry/mallow/chart.json"
+  ]
+}

@@ -38,7 +38,7 @@ const NavigationMenuItem = NavigationMenuPrimitive.Item
 
 const navigationMenuTriggerStyle = cva(
   "inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium " +
-    "transition-[background-color,color] duration-150 " +
+    "transition-[background-color,color] duration-fast " +
     "hover:bg-accent hover:text-accent-foreground " +
     "focus:bg-accent focus:text-accent-foreground focus:outline-none " +
     "disabled:pointer-events-none disabled:opacity-50 " +
@@ -57,7 +57,7 @@ const NavigationMenuTrigger = React.forwardRef<
     {children}
     <Icon
       icon="tabler:chevron-down"
-      className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
+      className="relative top-[0.0625rem] ml-1 h-3 w-3 transition duration-base group-data-[state=open]:rotate-180"
       aria-hidden="true"
     />
   </NavigationMenuPrimitive.Trigger>
@@ -89,7 +89,7 @@ const NavigationMenuViewport = React.forwardRef<
     <NavigationMenuPrimitive.Viewport
       ref={ref}
       className={cn(
-        "origin-top-center relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden",
+        "origin-top relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden",
         "rounded-lg border border-border bg-popover text-popover-foreground",
         "[box-shadow:var(--shadow-l)]",
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",

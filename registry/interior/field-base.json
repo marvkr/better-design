@@ -1,0 +1,14 @@
+{
+  "name": "field-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Label } from \"./label\";\n\n/*\n * Interior Field — label, control, hint and error in one stack, so a form\n * row is one component instead of four hand-aligned pieces. Hints and errors\n * run at 11.5px; the error carries the destructive ink.\n */\n\nexport interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {\n  label?: string;\n  htmlFor?: string;\n  description?: string;\n  error?: string;\n  required?: boolean;\n}\n\nconst Field = React.forwardRef<HTMLDivElement, FieldProps>(\n  (\n    { className, label, htmlFor, description, error, required, children, ...props },\n    ref,\n  ) => (\n    <div ref={ref} className={cn(\"space-y-1.5\", className)} {...props}>\n      {label ? (\n        <Label htmlFor={htmlFor}>\n          {label}\n          {required ? (\n            <span aria-hidden className=\"ml-0.5 text-destructive\">\n              *\n            </span>\n          ) : null}\n        </Label>\n      ) : null}\n      {children}\n      {description && !error ? (\n        <p className=\"text-[0.7188rem] text-muted-foreground\">{description}</p>\n      ) : null}\n      {error ? (\n        <p role=\"alert\" className=\"text-[0.7188rem] font-medium text-destructive\">\n          {error}\n        </p>\n      ) : null}\n    </div>\n  ),\n);\nField.displayName = \"Field\";\n\nexport { Field };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/label-base.json"
+  ]
+}

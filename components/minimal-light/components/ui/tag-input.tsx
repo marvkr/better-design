@@ -60,7 +60,7 @@ function TagInput({
       onClick={() => inputRef.current?.focus()}
       className={cn(
         "flex min-h-10 w-full flex-wrap gap-1.5 rounded-xl border border-border bg-secondary px-3 py-2",
-        "transition-colors duration-200 hover:bg-accent cursor-text",
+        "transition-colors duration-base hover:bg-accent cursor-text",
         "focus-within:ring-1 focus-within:ring-ring focus-within:border-primary/30",
         disabled && "cursor-not-allowed opacity-40 pointer-events-none",
         className
@@ -105,7 +105,7 @@ function TagInput({
         placeholder={current.length === 0 ? placeholder : undefined}
         disabled={disabled}
         className={cn(
-          "flex-1 min-w-[80px] bg-transparent text-sm text-foreground placeholder:text-muted-foreground",
+          "flex-1 min-w-[5rem] bg-transparent text-sm text-foreground placeholder:text-muted-foreground",
           "outline-none focus:outline-none"
         )}
       />

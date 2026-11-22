@@ -1,0 +1,25 @@
+{
+  "name": "search-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Halo Search Input: translucent pill input with search icon and optional clear button\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, value, onClear, ...props }, ref) => {\n    return (\n      <div className=\"relative\">\n        <Icon\n          icon=\"tabler:search\"\n          className=\"absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40\"\n        />\n        <input\n          ref={ref}\n          value={value}\n          className={cn(\n            \"flex h-10 w-full pl-9 pr-3 py-2 text-sm\",\n            \"rounded-full border border-border backdrop-blur-xl bg-foreground/[0.06]\",\n            \"shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n            \"text-foreground/90 placeholder:text-foreground/40\",\n            \"transition duration-base ease-out\",\n            \"hover:bg-foreground/[0.08] hover:border-foreground/[0.15]\",\n            \"focus-visible:outline-none focus-visible:shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent),0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_20%,transparent)] focus-visible:border-primary/50\",\n            \"disabled:cursor-not-allowed disabled:opacity-70\",\n            onClear && value ? \"pr-9\" : \"\",\n            className\n          )}\n          {...props}\n        />\n        {onClear && value && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            className=\"absolute right-3 top-1/2 -translate-y-1/2 text-foreground/40 transition-colors hover:text-foreground/80\"\n          >\n            <Icon icon=\"tabler:x\" className=\"h-4 w-4\" />\n            <span className=\"sr-only\">Clear search</span>\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nSearchInput.displayName = \"SearchInput\"\n\nexport { SearchInput }\nexport type { SearchInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

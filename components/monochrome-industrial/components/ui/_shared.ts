@@ -12,10 +12,10 @@ export const formFieldBase =
   "border border-[var(--mono-border-visible)] " +
   "font-[family-name:var(--font-mono)] " +
   "placeholder:text-muted-foreground placeholder:uppercase placeholder:tracking-[0.08em] " +
-  "transition-colors duration-150 ease-out " +
+  "transition-colors duration-fast ease-out " +
   "hover:border-foreground/60 " +
   "focus-visible:outline-none focus-visible:border-[var(--mono-accent)] " +
   "disabled:cursor-not-allowed disabled:opacity-50"
 
 export const formFieldSingleLine = "flex h-9 py-1.5"
-export const formFieldMultiLine = "flex min-h-[80px] py-2 resize-y"
+export const formFieldMultiLine = "flex min-h-[5rem] py-2 resize-y"

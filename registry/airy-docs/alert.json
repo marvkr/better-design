@@ -1,0 +1,39 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Alert: the docs callout, as in Note, Tip, Warning and Danger.\n * A rounded box edged on all four sides, never a stripe down one. Each tone\n * pairs a tint with a faint line and its own darker text, so the message\n * passes contrast on its colour. The default is a plain hairline box.\n */\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-xl border px-4 py-3 text-sm\",\n    \"[&>svg]:absolute [&>svg]:start-4 [&>svg]:top-3.5 [&>svg]:size-4\",\n    \"[&>svg~*]:ps-7\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-border bg-background text-foreground [&>svg]:text-muted-foreground [&_[data-slot=alert-description]]:text-(--foreground-secondary)\",\n        info: \"border-(--info-text)/20 bg-(--info-tint) text-(--info-text)\",\n        success: \"border-(--success-text)/20 bg-(--success-tint) text-(--success-text)\",\n        warning: \"border-(--warning-text)/20 bg-(--warning-tint) text-(--warning-text)\",\n        destructive:\n          \"border-(--destructive-text)/20 bg-(--destructive-tint) text-(--destructive-text)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    data-slot=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\n/** The callout's headline, level with the icon. */\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    data-slot=\"alert-title\"\n    className={cn(\"mb-0.5 text-sm font-semibold leading-6\", className)}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\n/** The callout body, on the docs body line height. */\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"alert-description\"\n    className={cn(\"text-sm leading-6\", className)}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "success-tint": "oklch(0.476 0.11 154.3 / 0.08)",
+      "success-text": "oklch(0.42 0.1 154.3)",
+      "warning-tint": "oklch(0.648 0.138 69.8 / 0.1)",
+      "warning-text": "oklch(0.5 0.11 66)",
+      "info-tint": "oklch(0.562 0.156 259.2 / 0.1)",
+      "info-text": "oklch(0.48 0.15 259.2)",
+      "destructive-tint": "oklch(0.577 0.17 25 / 0.08)",
+      "destructive-text": "oklch(0.5 0.16 25)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "success-tint": "oklch(0.705 0.169 153.6 / 0.12)",
+      "success-text": "oklch(0.78 0.15 153.6)",
+      "warning-tint": "oklch(0.78 0.14 75 / 0.12)",
+      "warning-text": "oklch(0.84 0.13 80)",
+      "info-tint": "oklch(0.7 0.13 259 / 0.14)",
+      "info-text": "oklch(0.8 0.1 259)",
+      "destructive-tint": "oklch(0.66 0.17 23 / 0.14)",
+      "destructive-text": "oklch(0.78 0.13 22)"
+    }
+  }
+}

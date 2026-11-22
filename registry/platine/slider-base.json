@@ -1,0 +1,27 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Slider = React.forwardRef<HTMLDivElement, SliderPrimitive.Root.Props>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max]\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track\n            data-slot=\"slider-track\"\n            className={cn(\n              \"relative h-1.5 w-full grow overflow-hidden rounded-full border border-border\",\n              \"bg-input [box-shadow:var(--shadow-inset)]\"\n            )}\n          >\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full bg-primary [background-image:var(--metal)] [box-shadow:var(--shadow-primary)]\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\" key={index}\n              className={cn(\n                \"block h-4 w-4 rounded-full bg-primary [background-image:var(--metal)]\",\n                \"[box-shadow:var(--shadow-primary)]\",\n                \"transition-[box-shadow,filter] duration-fast\",\n                \"hover:brightness-105\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n                \"data-disabled:pointer-events-none data-disabled:opacity-50\"\n              )}\n            />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    )\n  }\n)\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.8), inset 0 -0.0625rem 0.125rem oklch(1 0 0 / 0.05)",
+      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)"
+    },
+    "dark": {
+      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.8), inset 0 -0.0625rem 0.125rem oklch(1 0 0 / 0.05)",
+      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)"
+    }
+  }
+}

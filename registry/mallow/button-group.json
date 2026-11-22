@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Mallow ButtonGroup: buttons joined into one. The inner ends go square, the\n * outer ends stay round, and a hairline gap keeps each button's own edge.\n */\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"isolate inline-flex gap-0.25 *:rounded-none *:focus-visible:z-10\",\n        orientation === \"horizontal\"\n          ? \"flex-row *:first:rounded-s-lg *:last:rounded-e-lg\"\n          : \"flex-col *:first:rounded-t-lg *:last:rounded-b-lg\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

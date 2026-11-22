@@ -36,7 +36,7 @@ const ColorSwatch = React.forwardRef<HTMLButtonElement, ColorSwatchProps>(
  "group flex flex-col items-start gap-2 rounded-none p-3 text-left",
  "bg-card text-card-foreground border border-border",
  "",
- "transition-[background-color,box-shadow] duration-200",
+ "transition-[background-color,box-shadow] duration-base",
  "hover:bg-accent hover:",
  "active:translate-y-px",
  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
@@ -56,13 +56,13 @@ const ColorSwatch = React.forwardRef<HTMLButtonElement, ColorSwatchProps>(
  <div className="min-w-0 flex-1">
  {name && <div className="text-xs font-medium truncate">{name}</div>}
  {showValue && (
- <div className="text-[10px] font-mono text-muted-foreground truncate">{color}</div>
+ <div className="text-[0.625rem] font-mono text-muted-foreground truncate">{color}</div>
  )}
  </div>
  <Icon
  icon={copied ? "tabler:check" : "tabler:copy"}
  className={cn(
- "h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity duration-150",
+ "h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity duration-fast",
  "group-hover:opacity-100",
  copied && "opacity-100 text-primary"
  )}

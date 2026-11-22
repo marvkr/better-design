@@ -1,0 +1,65 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-design-charts",
+  "homepage": "https://better-design.com/design-systems",
+  "items": [
+    {
+      "name": "chart-funnel",
+      "type": "registry:ui",
+      "title": "Funnel chart",
+      "description": "Show where people drop out of a sequence of steps, with each step's rate.",
+      "dependencies": [
+        "recharts@^2.15.3"
+      ],
+      "files": [
+        {
+          "path": "components/ui/chart-funnel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chart-heatmap-calendar",
+      "type": "registry:ui",
+      "title": "Calendar heatmap",
+      "description": "Show a daily count over half a year, so patterns by weekday and season stand out.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "components/ui/chart-heatmap-calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chart-bump",
+      "type": "registry:ui",
+      "title": "Bump chart",
+      "description": "Show how the rank of a few items changes month by month.",
+      "dependencies": [
+        "recharts@^2.15.3"
+      ],
+      "files": [
+        {
+          "path": "components/ui/chart-bump.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chart-composition",
+      "type": "registry:ui",
+      "title": "Composition chart",
+      "description": "Show each part's share of the whole, month by month, stacked to 100%.",
+      "dependencies": [
+        "recharts@^2.15.3"
+      ],
+      "files": [
+        {
+          "path": "components/ui/chart-composition.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

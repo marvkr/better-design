@@ -15,6 +15,7 @@ function CopyButton({
   value,
   timeout = 2000,
   className,
+  onClick,
   ...props
 }: CopyButtonProps) {
   const [copied, setCopied] = React.useState(false)
@@ -27,7 +28,7 @@ function CopyButton({
 
   return (
     <button
-      onClick={handleCopy}
+      onClick={(e) => { onClick?.(e); handleCopy(); }}
       className={cn(
         "inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground",
         "transition-colors hover:bg-secondary hover:text-foreground",

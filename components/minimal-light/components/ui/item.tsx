@@ -39,7 +39,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           "text-left",
           interactive && [
             "cursor-pointer rounded-xl",
-            "transition-all duration-200",
+            "transition-all duration-base",
             "hover:bg-accent",
             "focus-visible:outline-none focus-visible:bg-accent focus-visible:ring-1 focus-visible:ring-ring",
             "active:scale-[0.99]",
@@ -55,7 +55,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
             className={cn(
               "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl",
               "border border-border bg-secondary",
-              "shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]",
+              "shadow-[inset_0_0.125rem_0.25rem_0_color-mix(in_oklch,var(--foreground)_8%,transparent)]",
               "text-muted-foreground",
               "[&>svg]:h-4 [&>svg]:w-4"
             )}

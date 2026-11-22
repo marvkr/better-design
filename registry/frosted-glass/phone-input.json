@@ -1,0 +1,36 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Icon } from \"@iconify/react\"\nimport { formFieldBase } from \"./_shared\"\n\n// Frosted Glass Phone Input: glass pill input with country code selector\n\ninterface Country {\n  code: string\n  dial: string\n  name: string\n}\n\nconst COUNTRIES: Country[] = [\n  { code: \"US\", dial: \"+1\", name: \"United States\" },\n  { code: \"GB\", dial: \"+44\", name: \"United Kingdom\" },\n  { code: \"AU\", dial: \"+61\", name: \"Australia\" },\n  { code: \"CA\", dial: \"+1\", name: \"Canada\" },\n  { code: \"DE\", dial: \"+49\", name: \"Germany\" },\n  { code: \"FR\", dial: \"+33\", name: \"France\" },\n  { code: \"IN\", dial: \"+91\", name: \"India\" },\n  { code: \"JP\", dial: \"+81\", name: \"Japan\" },\n  { code: \"BR\", dial: \"+55\", name: \"Brazil\" },\n  { code: \"MX\", dial: \"+52\", name: \"Mexico\" },\n]\n\ninterface PhoneInputProps {\n  value?: string\n  onChange?: (value: string) => void\n  defaultCountry?: string\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction PhoneInput({\n  value = \"\",\n  onChange,\n  defaultCountry = \"US\",\n  placeholder = \"Phone number\",\n  disabled,\n  className,\n}: PhoneInputProps) {\n  const [open, setOpen] = React.useState(false)\n  const [country, setCountry] = React.useState(\n    () => COUNTRIES.find((c) => c.code === defaultCountry) ?? COUNTRIES[0]!\n  )\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const handler = (e: MouseEvent) => {\n      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) setOpen(false)\n    }\n    document.addEventListener(\"mousedown\", handler)\n    return () => document.removeEventListener(\"mousedown\", handler)\n  }, [])\n\n  const handleSelect = (c: Country) => {\n    setCountry(c)\n    setOpen(false)\n  }\n\n  return (\n    <div ref={ref} className={cn(\"relative flex\", className)}>\n      {/* Country selector */}\n      <button\n        type=\"button\"\n        disabled={disabled}\n        onClick={() => setOpen((o) => !o)}\n        className={cn(\n          \"flex h-12 items-center gap-1.5 rounded-l-full border border-r-0 px-5\",\n          \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[var(--fg-fill)] border-[color:var(--fg-border)] shadow-[var(--fg-shadow)]\",\n          \"text-[0.9375rem] font-medium text-foreground transition-colors\",\n          \"hover:bg-[var(--fg-fill-hover)]\",\n          \"focus-visible:outline-none focus-visible:border-[color:var(--ring)] focus-visible:ring-2 focus-visible:ring-ring/50\",\n          disabled && \"cursor-not-allowed opacity-60\"\n        )}\n      >\n        <span>{country?.dial}</span>\n        <Icon icon=\"tabler:chevron-down\" className=\"h-3.5 w-3.5 text-muted-foreground\" />\n      </button>\n\n      {/* Phone input */}\n      <input\n        type=\"tel\"\n        value={value}\n        onChange={(e) => onChange?.(e.target.value)}\n        placeholder={placeholder}\n        disabled={disabled}\n        className={cn(\n          formFieldBase,\n          // flex-1 + w-auto override formFieldBase's w-full so the input shares the\n          // row with the country pill instead of forcing 100% width.\n          \"h-12 w-auto flex-1 rounded-r-full px-5 text-[0.9375rem]\",\n          disabled && \"cursor-not-allowed opacity-60\"\n        )}\n      />\n\n      {/* Dropdown */}\n      {open && (\n        <div className=\"absolute left-0 top-14 z-50 w-56 rounded-xl border border-border backdrop-blur-2xl bg-[var(--fg-fill-hover)] p-1.5 shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.375rem_oklch(1_0_0/0.05)]\">\n          {COUNTRIES.map((c) => (\n            <button\n              key={c.code}\n              type=\"button\"\n              onClick={() => handleSelect(c)}\n              className={cn(\n                \"flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[0.9375rem]\",\n                \"transition-colors hover:bg-[oklch(1_0_0/0.07)]\",\n                country?.code === c.code\n                  ? \"text-primary font-medium\"\n                  : \"text-foreground\"\n              )}\n            >\n              <span className=\"w-8 font-mono text-xs text-muted-foreground\">{c.dial}</span>\n              <span className=\"truncate\">{c.name}</span>\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { PhoneInput }\nexport type { PhoneInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/frosted-glass/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    },
+    "dark": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    }
+  }
+}

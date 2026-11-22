@@ -1,0 +1,28 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  copperRim,\n  creamBevelHover,\n  focusRing,\n  pressScale,\n  quietBevel,\n  raisedBevel,\n} from \"./_shared\";\n\n/**\n * Burnished IconButton: a round bevel sized for one icon. It wears the same\n * finishes as Button: graphite by default, cream inside a copper rim for\n * primary, the quiet face for outline, and the red bevel for destructive.\n * Every press scales it a little toward the page. Give it an `aria-label`.\n */\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex shrink-0 cursor-pointer select-none items-center justify-center rounded-full\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: raisedBevel,\n        primary: cn(copperRim, \"text-primary-foreground shadow-(--bevel-primary)\", creamBevelHover),\n        ghost:\n          \"bg-transparent text-muted-foreground [@media(hover:hover)_and_(pointer:fine)]:hover:bg-accent [@media(hover:hover)_and_(pointer:fine)]:hover:text-foreground\",\n        outline: quietBevel,\n        destructive:\n          \"bg-(image:--fill-destructive) text-destructive-foreground shadow-(--bevel-primary)\",\n      },\n      size: {\n        sm: \"size-8 [&_svg]:size-3.5\",\n        default: \"size-10 [&_svg]:size-4\",\n        lg: \"size-12 [&_svg]:size-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, type = \"button\", ...props }, ref) => (\n    <button\n      ref={ref}\n      type={type}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-destructive": "linear-gradient(180deg, oklch(0.78 0.14 29), oklch(0.7 0.15 29))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "fill-destructive": "linear-gradient(180deg, oklch(0.78 0.14 29), oklch(0.7 0.15 29))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

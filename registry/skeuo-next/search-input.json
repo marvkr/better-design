@@ -1,0 +1,23 @@
+{
+  "name": "search-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\"\nimport { Search, X } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Airbnb Search Input: input with search icon and optional clear button\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, value, onClear, ...props }, ref) => {\n    return (\n      <div className=\"relative\">\n        <Search className=\"absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground\" />\n        <input\n          ref={ref}\n          value={value}\n          className={cn(\n            \"flex h-10 w-full rounded-[0.625rem] border border-border bg-background pl-9 pr-3 py-2 text-sm\",\n            \"shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0_/_0.04)]\",\n            \"placeholder:text-muted-foreground\",\n            \"transition duration-base ease-out\",\n            \"hover:border-foreground/30\",\n            \"focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[0_0_0_0.1875rem_oklch(0_0_0_/_0.06)]\",\n            \"disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70\",\n            onClear && value ? \"pr-9\" : \"\",\n            className\n          )}\n          {...props}\n        />\n        {onClear && value && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            className=\"absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground\"\n          >\n            <X className=\"h-4 w-4\" />\n            <span className=\"sr-only\">Clear search</span>\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nSearchInput.displayName = \"SearchInput\"\n\nexport { SearchInput }\nexport type { SearchInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

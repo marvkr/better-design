@@ -1,0 +1,39 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Alert: a note edged on all four sides, never a stripe down one.\n * The default is a white card behind a hairline. Info takes the pale\n * yellow-green wash under a soft olive line, and success, warning and\n * destructive each pair a tint with its own darker text, so the message\n * passes contrast on its own colour. Alerts never glow.\n */\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-xl border p-4 text-sm\",\n    \"[&>svg]:absolute [&>svg]:start-4 [&>svg]:top-4 [&>svg]:size-5\",\n    \"[&>svg~*]:ps-8\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-border bg-background text-foreground [&>svg]:text-foreground [&_[data-slot=alert-description]]:text-(--foreground-secondary)\",\n        info:\n          \"border-(--accent-line)/40 bg-(--accent-wash) text-foreground [&>svg]:text-(--accent-line) [&_[data-slot=alert-description]]:text-(--foreground-secondary)\",\n        success: \"border-transparent bg-(--success-tint) text-(--success-text)\",\n        warning: \"border-transparent bg-(--warning-tint) text-(--warning-text)\",\n        destructive:\n          \"border-transparent bg-(--destructive-tint) text-(--destructive-text)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    data-slot=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\n/** The alert's one-line headline, set on the icon's first line. */\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    data-slot=\"alert-title\"\n    className={cn(\"mb-1 text-sm font-semibold leading-5\", className)}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\n/** The body text: secondary ink on neutral alerts, the tone's text on tints. */\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"alert-description\"\n    className={cn(\"text-sm leading-relaxed\", className)}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "accent-wash": "oklch(0.966 0.068 111.2)",
+      "accent-line": "oklch(0.594 0.135 115.4)",
+      "success-tint": "oklch(0.955 0.022 155.9)",
+      "success-text": "oklch(0.481 0.118 151.5)",
+      "warning-tint": "oklch(0.966 0.04 88.2)",
+      "warning-text": "oklch(0.492 0.11 66)",
+      "destructive-tint": "oklch(0.954 0.02 17.5)",
+      "destructive-text": "oklch(0.501 0.181 26.8)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "accent-wash": "oklch(0.29 0.052 113.9)",
+      "accent-line": "oklch(0.841 0.161 114)",
+      "success-tint": "oklch(0.254 0.039 154.6)",
+      "success-text": "oklch(0.839 0.154 153.8)",
+      "warning-tint": "oklch(0.26 0.043 83.1)",
+      "warning-text": "oklch(0.862 0.139 81.9)",
+      "destructive-tint": "oklch(0.228 0.041 18.3)",
+      "destructive-text": "oklch(0.761 0.142 20.9)"
+    }
+  }
+}

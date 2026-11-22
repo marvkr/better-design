@@ -18,7 +18,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       />
     )
     if (!ring) return textarea
-    return <MetalRing shape="rect" block>{textarea}</MetalRing>
+    return <MetalRing corners="rect" block>{textarea}</MetalRing>
   }
 )
 Textarea.displayName = "Textarea"

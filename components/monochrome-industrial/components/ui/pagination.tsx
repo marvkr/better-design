@@ -1,4 +1,5 @@
 import * as React from "react"
+import type { VariantProps } from "class-variance-authority"
 import { Icon } from "@iconify/react"
 
 import { cn } from "@/lib/utils"
@@ -30,7 +31,7 @@ PaginationItem.displayName = "PaginationItem"
 
 type PaginationLinkProps = {
  isActive?: boolean
-} & Pick<React.ComponentProps<typeof buttonVariants>, "size"> &
+} & Pick<VariantProps<typeof buttonVariants>, "size"> &
  React.ComponentProps<"a">
 
 const PaginationLink = ({ className, isActive, size = "icon", ...props }: PaginationLinkProps) => (

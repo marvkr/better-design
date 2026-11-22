@@ -9,10 +9,12 @@
     }
   ],
   "dependencies": [
-    "date-fns",
-    "@iconify/react"
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/monochrome-industrial/button.json",
+    "https://better-design.com/registry/monochrome-industrial/calendar.json",
+    "https://better-design.com/registry/monochrome-industrial/popover.json"
   ]
 }

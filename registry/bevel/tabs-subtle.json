@@ -1,0 +1,26 @@
+{
+  "name": "tabs-subtle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs-subtle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, AnimatePresence, type HTMLMotionProps } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel TabsSubtle.\n *\n * The quiet counterpart to the segmented control. There is no well and no\n * lifted segment here, only a two pixel rule in the accent that slides between\n * items, so a screen can carry a second row of tabs without gaining a second\n * raised surface. The rule takes the primary gradient rather than a flat fill.\n *\n * Usage:\n *   <TabsSubtle value={tab} onValueChange={setTab}>\n *     <TabsSubtleItem value=\"a\">First</TabsSubtleItem>\n *     <TabsSubtleItem value=\"b\">Second</TabsSubtleItem>\n *   </TabsSubtle>\n */\n\ninterface TabsSubtleContextValue {\n  value: string\n  onValueChange: (value: string) => void\n  layoutId: string\n}\n\nconst TabsSubtleContext = React.createContext<TabsSubtleContextValue | null>(\n  null,\n)\n\nfunction useTabsSubtle(): TabsSubtleContextValue {\n  const ctx = React.useContext(TabsSubtleContext)\n  if (!ctx) {\n    throw new Error(\"TabsSubtleItem must be used inside <TabsSubtle>\")\n  }\n  return ctx\n}\n\n/** Props for `TabsSubtle`; the selected value is controlled by the caller. */\ninterface TabsSubtleProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string\n  onValueChange: (value: string) => void\n  children: React.ReactNode\n}\n\nfunction TabsSubtle({\n  value,\n  onValueChange,\n  children,\n  className,\n  ...props\n}: TabsSubtleProps) {\n  const layoutId = React.useId()\n\n  return (\n    <TabsSubtleContext.Provider value={{ value, onValueChange, layoutId }}>\n      <div\n        role=\"tablist\"\n        className={cn(\n          \"relative inline-flex select-none items-center gap-1\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    </TabsSubtleContext.Provider>\n  )\n}\n\n/** Props for one `TabsSubtleItem`; `icon` sits ahead of the label. */\ninterface TabsSubtleItemProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string\n  icon?: React.ReactNode\n}\n\nfunction TabsSubtleItem({\n  value,\n  icon,\n  className,\n  children,\n  ...props\n}: TabsSubtleItemProps) {\n  const { value: selected, onValueChange, layoutId } = useTabsSubtle()\n  const isSelected = selected === value\n\n  return (\n    <button\n      type=\"button\"\n      role=\"tab\"\n      aria-selected={isSelected}\n      tabIndex={isSelected ? 0 : -1}\n      onClick={() => onValueChange(value)}\n      className={cn(\n        \"relative z-10 inline-flex items-center gap-2 rounded-[0.625rem] px-3 py-2\",\n        \"text-[0.9063rem] leading-[1.125rem] font-semibold tracking-[-0.0125rem]\",\n        \"text-muted-foreground transition-colors duration-fast ease-out\",\n        \"hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        isSelected && \"text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      {isSelected && (\n        <motion.span\n          layoutId={layoutId}\n          className=\"absolute inset-x-1 -bottom-px h-0.5 rounded-full bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)]\"\n          transition={{ type: \"spring\", duration: 0.4, bounce: 0.15 }}\n        />\n      )}\n      {icon && <span className=\"shrink-0\">{icon}</span>}\n      <span>{children}</span>\n    </button>\n  )\n}\n\n/** Props for `TabsSubtlePanel`; it renders only while `value` is active. */\ninterface TabsSubtlePanelProps extends HTMLMotionProps<\"div\"> {\n  value: string\n  activeValue: string\n  children: React.ReactNode\n}\n\nfunction TabsSubtlePanel({\n  value,\n  activeValue,\n  children,\n  className,\n  ...props\n}: TabsSubtlePanelProps) {\n  const isSelected = value === activeValue\n  return (\n    <AnimatePresence mode=\"wait\" initial={false}>\n      {isSelected && (\n        <motion.div\n          key={value}\n          role=\"tabpanel\"\n          initial={{ opacity: 0, y: 4 }}\n          animate={{ opacity: 1, y: 0 }}\n          exit={{ opacity: 0, y: -4 }}\n          transition={{ duration: 0.16, ease: [0.4, 0, 0.2, 1] }}\n          className={cn(\"outline-none\", className)}\n          {...props}\n        >\n          {children}\n        </motion.div>\n      )}\n    </AnimatePresence>\n  )\n}\n\nexport { TabsSubtle, TabsSubtleItem, TabsSubtlePanel }\nexport type { TabsSubtleProps, TabsSubtleItemProps, TabsSubtlePanelProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)"
+    }
+  }
+}

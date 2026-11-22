@@ -1,0 +1,34 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked } from \"./_shared\";\n\n/**\n * Cream editorial Checkbox: a 1rem box with a small corner and a warm grey\n * edge on pale paper. Checked, it fills with the same flat terracotta as the\n * primary button and a white tick sits on it. Indeterminate shows a dash on\n * the same fill.\n */\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    data-slot=\"checkbox\"\n    className={cn(\n      \"peer inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-(--control) bg-(--field) text-primary-foreground\",\n      \"transition-[background-color,border-color] duration-fast ease-out\",\n      \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:border-(--line-strong) disabled:bg-secondary disabled:text-(--foreground-disabled)\",\n      controlChecked,\n      \"data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground\",\n      \"disabled:data-[state=indeterminate]:border-(--line-strong) disabled:data-[state=indeterminate]:bg-muted disabled:data-[state=indeterminate]:text-(--foreground-disabled)\",\n      className,\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      data-slot=\"checkbox-indicator\"\n      className=\"flex items-center justify-center text-current\"\n    >\n      <Icon\n        icon={props.checked === \"indeterminate\" ? \"ph:minus\" : \"ph:check\"}\n        aria-hidden=\"true\"\n        className=\"size-3\"\n      />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n));\nCheckbox.displayName = CheckboxPrimitive.Root.displayName;\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox@^1.3.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "foreground-disabled": "oklch(0.75 0.013 96.5)",
+      "control": "oklch(0.75 0.013 96.5)",
+      "field": "oklch(0.993 0.003 95)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "foreground-disabled": "oklch(0.478 0.006 95.2)",
+      "control": "oklch(0.551 0.009 99)",
+      "field": "oklch(0.214 0.002 67.7)"
+    }
+  }
+}

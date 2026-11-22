@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Minus, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { formFieldBase } from "./_shared"
 
 // Stripe Number Input: input with increment/decrement buttons
 
@@ -40,9 +41,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     return (
       <div
         className={cn(
-          "flex h-10 w-full overflow-hidden rounded-[10px] border border-border bg-background",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-          "transition duration-200 focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+          formFieldBase,
+          "flex h-9 overflow-hidden focus-within:[box-shadow:var(--shadow-focus)]",
           disabled && "opacity-70 cursor-not-allowed",
           className
         )}

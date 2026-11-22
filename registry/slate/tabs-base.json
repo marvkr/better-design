@@ -1,0 +1,31 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\n/*\n * Ops Sharp Tabs — a segmented selector pressed into a recessed grey track. The\n * active trigger lifts into a crisp white tile (bg-card + --shadow-s) with the\n * graphite ink emphasis, sliding between segments via a shared layoutId.\n */\n\nconst TabsContext = React.createContext<{ uid: string }>({ uid: \"\" })\n\nfunction Tabs({ className, ...props }: TabsPrimitive.Root.Props) {\n  const uid = React.useId()\n  return (\n    <TabsContext.Provider value={{ uid }}>\n      <TabsPrimitive.Root className={cn(\"\", className)} {...props} />\n    </TabsContext.Provider>\n  )\n}\nTabs.displayName = \"Tabs\"\n\nfunction TabsList({ className, ...props }: TabsPrimitive.List.Props) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-9 items-center justify-center rounded-md border border-border bg-muted p-1 text-muted-foreground\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = \"TabsList\"\n\nfunction TabsTrigger({\n  className,\n  children,\n  ...props\n}: TabsPrimitive.Tab.Props) {\n  const { uid } = React.useContext(TabsContext)\n\n  return (\n    <TabsPrimitive.Tab\n      className={cn(\n        \"relative inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-sm font-medium\",\n        \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n        \"text-muted-foreground data-active:text-foreground\",\n        className\n      )}\n      {...props}\n      render={(tabProps, state) => (\n        <button {...tabProps}>\n          {state.active && (\n            <motion.div\n              layoutId={`tabs-indicator-${uid}`}\n              className=\"absolute inset-0 rounded-sm border border-border bg-card [box-shadow:var(--shadow-s)]\"\n              transition={springInteraction}\n            />\n          )}\n          <span className=\"relative z-10\">{children}</span>\n        </button>\n      )}\n    />\n  )\n}\nTabsTrigger.displayName = \"TabsTrigger\"\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      className={cn(\n        \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/motion.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

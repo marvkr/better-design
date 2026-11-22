@@ -1,0 +1,36 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "// Hyperline shared material recipes.\n// Premium depth comes from layered soft shadows (rim + top highlight + near\n// shadow + far ambient) over the deep purple gradient backdrop. All optical\n// values live in globals.css :root as --hl-* tokens; retune them there.\n\n// The raised cyan primary material. The primary Button and every filled\n// control (checkbox checked, switch track, radio dot, slider range + thumb)\n// share this exact treatment so they read as one material.\nexport const hlPrimaryRaised =\n  \"bg-[image:var(--hl-primary-gradient)] text-primary-foreground shadow-[var(--hl-shadow-primary)]\";\n\nexport const hlPrimaryRaisedHover =\n  \"hover:shadow-[var(--hl-shadow-primary-hover)] hover:brightness-[1.04]\";\n\n// Scaled-down primary material for small filled controls.\nexport const hlControlFill =\n  \"bg-[image:var(--hl-primary-gradient)] shadow-[var(--hl-shadow-primary-sm)]\";\n\n// Raised neutral panel: secondary buttons, toolbar chips, kbd.\nexport const hlRaisedPanel =\n  \"bg-secondary text-secondary-foreground border border-border/70 shadow-[var(--hl-shadow-raise)]\";\n\n// Card surface: layered soft shadow, hairline rim, sharp-ish radius.\nexport const hlCardSurface =\n  \"bg-card text-card-foreground border border-border/60 shadow-[var(--hl-shadow-card)]\";\n\n// Floating surface: dropdowns, selects, popovers, tooltips, command,\n// context menus, menubar, navigation menu, hover cards. One shadow token.\nexport const hlPopSurface =\n  \"bg-popover text-popover-foreground border border-border/60 shadow-[var(--hl-shadow-pop)]\";\n\n// Every form field (Input, Textarea, PasswordInput, SearchInput, NumberInput,\n// PhoneInput, InputOTP) imports this single base: recessed fill, soft inset\n// shadow, cyan focus ring.\nexport const formFieldBase =\n  \"w-full bg-input/80 text-foreground placeholder:text-muted-foreground \" +\n  \"border border-border/70 shadow-[var(--hl-shadow-inset)] \" +\n  \"transition-[border-color,box-shadow,background-color] duration-fast ease-out \" +\n  \"hover:border-border \" +\n  \"focus-visible:outline-none focus-visible:border-ring/60 focus-visible:ring-2 focus-visible:ring-ring/35 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-shadow-card": "0 0 0 0.0625rem oklch(1 0 0 / 0.05), inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem -0.0625rem oklch(0.05 0.02 300 / 0.3), 0 0.75rem 2rem -0.5rem oklch(0.05 0.02 300 / 0.5)",
+      "hl-shadow-pop": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.25rem 0.75rem -0.125rem oklch(0.05 0.02 300 / 0.45), 0 1.25rem 3rem -0.75rem oklch(0.04 0.02 300 / 0.6)",
+      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.875rem -0.25rem oklch(0.74 0.13 205 / 0.5)",
+      "hl-shadow-primary-hover": "0 0 0 0.0625rem oklch(0.64 0.12 205 / 0.95), inset 0 0.0625rem 0 oklch(1 0 0 / 0.5), 0 0.125rem 0.25rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.25rem oklch(0.74 0.13 205 / 0.6)",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-shadow-card": "0 0 0 0.0625rem oklch(1 0 0 / 0.05), inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem -0.0625rem oklch(0.05 0.02 300 / 0.3), 0 0.75rem 2rem -0.5rem oklch(0.05 0.02 300 / 0.5)",
+      "hl-shadow-pop": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.25rem 0.75rem -0.125rem oklch(0.05 0.02 300 / 0.45), 0 1.25rem 3rem -0.75rem oklch(0.04 0.02 300 / 0.6)",
+      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.875rem -0.25rem oklch(0.74 0.13 205 / 0.5)",
+      "hl-shadow-primary-hover": "0 0 0 0.0625rem oklch(0.64 0.12 205 / 0.95), inset 0 0.0625rem 0 oklch(1 0 0 / 0.5), 0 0.125rem 0.25rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.25rem oklch(0.74 0.13 205 / 0.6)",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

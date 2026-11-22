@@ -1,0 +1,26 @@
+{
+  "name": "code-block-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { sheetSurface, codeToneClass, tokenizeCodeLines } from \"./_shared\";\nimport { CopyButton } from \"./copy-button\";\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showCopy?: boolean;\n}\n\n/**\n * Margin CodeBlock: code laid on a white sheet the way a notes editor shows\n * it. A slim bar above the sheet names the file or language in a paper tab\n * and holds the copy button at its end. The sheet has a hairline edge, a\n * right-aligned gutter of faint line numbers and the editor's own syntax\n * palette: violet keywords, magenta calls, green strings, orange numbers.\n */\nconst CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(\n  ({ className, code, language, filename, showCopy = true, ...props }, ref) => {\n    const caption = filename ?? language;\n    const hasHeader = Boolean(caption) || showCopy;\n    const lines = React.useMemo(() => tokenizeCodeLines(code), [code]);\n\n    return (\n      <div data-slot=\"code-block\" className=\"flex flex-col gap-2\">\n        {hasHeader && (\n          <div\n            data-slot=\"code-block-header\"\n            className=\"flex items-center justify-between gap-2\"\n          >\n            {caption ? (\n              <span className=\"inline-flex h-7 min-w-0 items-center truncate rounded-lg bg-card px-2.5 text-sm text-foreground shadow-(--pill-edge)\">\n                {caption}\n              </span>\n            ) : (\n              <span />\n            )}\n            {showCopy && <CopyButton value={code} size=\"icon-sm\" label=\"Copy code\" />}\n          </div>\n        )}\n        <pre\n          ref={ref}\n          data-slot=\"code-block-code\"\n          className={cn(\n            sheetSurface,\n            \"m-0 overflow-x-auto rounded-xl pt-4 pb-5 pe-5 font-mono text-[0.8125rem] leading-6\",\n            className,\n          )}\n          {...props}\n        >\n          <code className=\"block\">\n            {lines.map((line, i) => (\n              <span key={i} className=\"block whitespace-pre text-foreground\">\n                <span\n                  aria-hidden\n                  className=\"me-4 inline-block w-9.5 select-none text-right tabular-nums text-(--clause-gutter)\"\n                >\n                  {i + 1}\n                </span>\n                {line.map((token, j) => (\n                  <span key={j} className={codeToneClass[token.tone]}>\n                    {token.text}\n                  </span>\n                ))}\n              </span>\n            ))}\n          </code>\n        </pre>\n      </div>\n    );\n  },\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json",
+    "https://better-design.com/registry/margin/copy-button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.82 0.016 85)",
+      "clause-gutter": "oklch(0.58 0.015 85)"
+    },
+    "dark": {
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.36 0.014 260)",
+      "clause-gutter": "oklch(0.56 0.015 85)"
+    }
+  }
+}

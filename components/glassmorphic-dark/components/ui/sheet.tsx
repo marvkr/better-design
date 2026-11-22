@@ -18,7 +18,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-base",
       className
     )}
     {...props}
@@ -29,20 +29,20 @@ SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
   [
-    "fixed z-50 gap-4 p-6",
-    "backdrop-blur-2xl bg-white/[0.06] border-white/10",
-    "shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_8px_rgba(255,255,255,0.06)]",
-    "transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+    "fixed z-50 gap-4 px-8 py-6",
+    "backdrop-blur-3xl backdrop-saturate-200 bg-zinc-900/80 supports-[backdrop-filter]:bg-zinc-900/45 border-white/10",
+    "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.5),inset_0_0_0.5rem_oklch(1_0_0/0.06)]",
+    "transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out duration-base",
   ].join(" "),
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b rounded-b-2xl data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        top: "inset-x-2 top-2 sm:inset-x-3 sm:top-3 border rounded-2xl data-[state=closed]:slide-out-to-top-[calc(100%+1rem)] data-[state=open]:slide-in-from-top-[calc(100%+1rem)]",
         bottom:
-          "inset-x-0 bottom-0 border-t rounded-t-2xl data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r rounded-r-2xl sm:max-w-sm data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+          "inset-x-2 bottom-2 sm:inset-x-3 sm:bottom-3 border rounded-2xl data-[state=closed]:slide-out-to-bottom-[calc(100%+1rem)] data-[state=open]:slide-in-from-bottom-[calc(100%+1rem)]",
+        left: "inset-y-2 left-2 sm:inset-y-3 sm:left-3 h-auto w-3/4 border rounded-2xl sm:max-w-sm data-[state=closed]:slide-out-to-left-[calc(100%+1rem)] data-[state=open]:slide-in-from-left-[calc(100%+1rem)]",
         right:
-          "inset-y-0 right-0 h-full w-3/4 border-l rounded-l-2xl sm:max-w-sm data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+          "inset-y-2 right-2 sm:inset-y-3 sm:right-3 h-auto w-3/4 border rounded-2xl sm:max-w-sm data-[state=closed]:slide-out-to-right-[calc(100%+1rem)] data-[state=open]:slide-in-from-right-[calc(100%+1rem)]",
       },
     },
     defaultVariants: {

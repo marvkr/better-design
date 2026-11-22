@@ -1,0 +1,33 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Playful console Slider: a chunky cream track with an olive edge and a\n * solid orange range. Each thumb is a round white key on the orange slab,\n * edged in the orange rim, that lifts a little while dragged. Pass an array\n * value for a range; the slider renders one thumb per value.\n */\nconst Slider = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SliderPrimitive.Root.Props>\n>(({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n  const _values = Array.isArray(value)\n    ? value\n    : Array.isArray(defaultValue)\n      ? defaultValue\n      : [min];\n\n  return (\n    <SliderPrimitive.Root\n      data-slot=\"slider\"\n      ref={ref}\n      thumbAlignment=\"edge\"\n      defaultValue={defaultValue}\n      value={value}\n      min={min}\n      max={max}\n      className={cn(\n        \"relative w-full data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <SliderPrimitive.Control className=\"relative flex h-6 w-full touch-none select-none items-center\">\n        <SliderPrimitive.Track\n          data-slot=\"slider-track\"\n          className=\"relative h-2 w-full grow overflow-hidden rounded-full border border-(--line-strong) bg-(--surface-3)\"\n        >\n          <SliderPrimitive.Indicator\n            data-slot=\"slider-range\"\n            className=\"rounded-full bg-primary\"\n          />\n        </SliderPrimitive.Track>\n        {Array.from({ length: _values.length }, (_, index) => (\n          <SliderPrimitive.Thumb\n            data-slot=\"slider-thumb\"\n            key={index}\n            className={cn(\n              \"block size-5 shrink-0 cursor-grab rounded-full border-[0.09375rem] border-(--primary-rim) bg-card shadow-(--shadow-control)\",\n              \"transition-[translate,box-shadow] duration-fast ease-out active:cursor-grabbing data-[dragging]:-translate-y-0.5\",\n              \"has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring\",\n              \"data-[disabled]:pointer-events-none\",\n            )}\n          />\n        ))}\n      </SliderPrimitive.Control>\n    </SliderPrimitive.Root>\n  );\n});\nSlider.displayName = \"Slider\";\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "surface-3": "oklch(0.898 0.018 117.3)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "surface-3": "oklch(0.34 0.012 114)",
+      "thumb": "oklch(0.95 0.008 114.2)"
+    }
+  }
+}

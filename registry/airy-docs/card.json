@@ -1,0 +1,30 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Card: a white panel edged by a hairline, with a 1rem corner.\n *\n * Docs cards are flat. The default sits on the page behind a one-tenth ink\n * hairline; the tray card fills with the pale green-grey used for code\n * frames; a link card turns its edge green under the pointer, the way a\n * \"next page\" or guide card invites a click. None of them cast a shadow.\n */\nconst cardVariants = cva(\n  \"flex flex-col rounded-xl text-card-foreground transition-colors duration-fast ease-out\",\n  {\n    variants: {\n      variant: {\n        default: \"border border-border bg-card\",\n        outline: \"border border-(--line-strong) bg-background\",\n        tray: \"border border-border bg-secondary\",\n        link: \"border border-border bg-card hover:border-(--primary-line) hover:bg-(--primary-wash)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface CardProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-1.5 p-6\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\nconst CardTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\"text-base font-semibold leading-snug text-foreground\", className)}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"p-6 pt-0 text-sm text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-2 p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-wash": "oklch(0.476 0.11 154.3 / 0.08)",
+      "primary-line": "oklch(0.476 0.11 154.3 / 0.32)",
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-wash": "oklch(0.705 0.169 153.6 / 0.12)",
+      "primary-line": "oklch(0.705 0.169 153.6 / 0.4)",
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)"
+    }
+  }
+}

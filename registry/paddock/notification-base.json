@@ -1,0 +1,40 @@
+{
+  "name": "notification-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, focusRing } from \"./_shared\";\n\n/**\n * The banner shell: a flat white card. Status variants change only the\n * icon tile, a pale tint of the status hue, so the card itself stays calm.\n */\nconst notificationVariants = cva([\"relative flex gap-3 rounded-xl p-3.5\", cardSlab].join(\" \"), {\n  variants: {\n    variant: {\n      default: \"\",\n      info: \"\",\n      success: \"\",\n      warning: \"\",\n      destructive: \"\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nconst iconMap = {\n  default: { icon: \"mingcute:notification-line\", tile: \"bg-secondary text-secondary-foreground\" },\n  info: { icon: \"mingcute:information-line\", tile: \"bg-info/10 text-info-text\" },\n  success: { icon: \"mingcute:check-circle-line\", tile: \"bg-success/12 text-success-text\" },\n  warning: { icon: \"mingcute:warning-line\", tile: \"bg-warning/18 text-warning-text\" },\n  destructive: { icon: \"mingcute:close-circle-line\", tile: \"bg-destructive/10 text-destructive-text\" },\n} as const;\n\n/** Props for a banner with a title, a description, actions and a dismiss control. */\nexport interface NotificationProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">,\n    VariantProps<typeof notificationVariants> {\n  title?: React.ReactNode;\n  description?: React.ReactNode;\n  icon?: React.ReactNode;\n  onDismiss?: () => void;\n  actions?: React.ReactNode;\n}\n\n/** Paddock Notification: a white card banner with a tinted icon tile and a round dismiss control. */\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    { className, variant = \"default\", title, description, icon, onDismiss, actions, children, ...props },\n    ref,\n  ) => {\n    const meta = iconMap[variant ?? \"default\"];\n    return (\n      <div\n        ref={ref}\n        data-slot=\"notification\"\n        data-variant={variant ?? \"default\"}\n        className={cn(notificationVariants({ variant }), className)}\n        {...props}\n      >\n        <div\n          aria-hidden=\"true\"\n          className={cn(\"flex size-8 shrink-0 items-center justify-center rounded-md [&_svg]:size-4\", meta.tile)}\n        >\n          {icon ?? <Icon icon={meta.icon} className=\"size-4\" />}\n        </div>\n        <div className=\"min-w-0 flex-1 pt-1\">\n          {title && <div className=\"text-sm font-semibold text-foreground\">{title}</div>}\n          {description && (\n            <div className={cn(\"text-[0.8125rem] text-muted-foreground\", title && \"mt-0.5\")}>{description}</div>\n          )}\n          {children}\n          {actions && <div className=\"mt-3 flex items-center gap-2\">{actions}</div>}\n        </div>\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            aria-label=\"Dismiss\"\n            className={cn(\n              \"flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground\",\n              \"transition-colors duration-fast ease-out hover:bg-accent hover:text-foreground\",\n              focusRing,\n            )}\n          >\n            <Icon icon=\"mingcute:close-line\" aria-hidden=\"true\" className=\"size-4\" />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nNotification.displayName = \"Notification\";\n\nexport { Notification };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.56 0.12 160)",
+      "warning": "oklch(0.79 0.14 85)",
+      "info": "oklch(0.6 0.12 235)",
+      "success-text": "oklch(0.44 0.1 160)",
+      "warning-text": "oklch(0.48 0.1 75)",
+      "destructive-text": "oklch(0.49 0.18 25)",
+      "info-text": "oklch(0.45 0.12 240)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.72 0.13 160)",
+      "warning": "oklch(0.82 0.13 85)",
+      "info": "oklch(0.74 0.11 235)",
+      "success-text": "oklch(0.87 0.1 160)",
+      "warning-text": "oklch(0.87 0.1 85)",
+      "destructive-text": "oklch(0.87 0.09 25)",
+      "info-text": "oklch(0.87 0.07 235)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface PhoneInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\nconst codes = [\"+1\", \"+44\", \"+33\", \"+49\", \"+61\", \"+81\"];\n\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode, onCountryCodeChange, ...props }, ref) => {\n    // Controlled when a countryCode is passed, uncontrolled otherwise, so the\n    // select still changes when a caller supplies neither prop.\n    const [internal, setInternal] = React.useState(countryCode ?? \"+44\");\n    const current = countryCode ?? internal;\n\n    return (\n      <div\n        className={cn(\n          \"flex h-10 w-full items-stretch overflow-hidden rounded-lg\",\n          \"border border-border bg-input\",\n          \"[box-shadow:var(--shadow-inset)]\",\n          \"transition-[box-shadow,border-color] duration-fast ease-out\",\n          \"focus-within:border-ring focus-within:ring-[0.1875rem] focus-within:ring-ring/25\",\n          className,\n        )}\n      >\n        <select\n          aria-label=\"Country code\"\n          value={current}\n          onChange={(event) => {\n            if (countryCode === undefined) setInternal(event.target.value);\n            onCountryCodeChange?.(event.target.value);\n          }}\n          className=\"shrink-0 appearance-none border-r border-border bg-muted px-3 text-sm text-muted-foreground outline-none\"\n        >\n          {codes.map((code) => (\n            <option key={code} value={code}>\n              {code}\n            </option>\n          ))}\n        </select>\n        <input\n          ref={ref}\n          type=\"tel\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"rounded-none border-0 [box-shadow:none] focus-visible:ring-0\",\n          )}\n          {...props}\n        />\n      </div>\n    );\n  },\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

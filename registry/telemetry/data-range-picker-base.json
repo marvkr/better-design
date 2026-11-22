@@ -1,0 +1,30 @@
+{
+  "name": "data-range-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { Icon } from \"@iconify/react\"\nimport { type DateRange } from \"react-day-picker\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n// Control Room DataRangePicker: log-window selector. Recessed trigger\n// well; the two-month calendar drops in the console popover surface.\n\ninterface DataRangePickerProps {\n  value?: DateRange\n  onChange?: (range: DateRange | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nexport function DataRangePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date range\",\n  disabled,\n  className,\n}: DataRangePickerProps) {\n  const [date, setDate] = React.useState<DateRange | undefined>(value)\n\n  React.useEffect(() => {\n    setDate(value)\n  }, [value])\n\n  const handleSelect = (range: DateRange | undefined) => {\n    setDate(range)\n    onChange?.(range)\n  }\n\n  const displayText = React.useMemo(() => {\n    if (date?.from) {\n      if (date.to) {\n        return `${format(date.from, \"LLL dd, y\")} - ${format(date.to, \"LLL dd, y\")}`\n      }\n      return format(date.from, \"LLL dd, y\")\n    }\n    return null\n  }, [date])\n\n  return (\n    <Popover>\n      <PopoverTrigger\n        render={\n          <Button\n            variant=\"outline\"\n            disabled={disabled}\n            className={cn(\n              \"w-[17.5rem] justify-start text-left font-normal normal-case tracking-normal\",\n              \"bg-input [box-shadow:var(--shadow-inset)]\",\n              !date && \"text-muted-foreground\",\n              className\n            )}\n          />\n        }\n      >\n        <Icon icon=\"tabler:calendar\" className=\"mr-2 size-4\" />\n        {displayText ?? <span>{placeholder}</span>}\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\">\n        <Calendar\n          mode=\"range\"\n          defaultMonth={date?.from}\n          selected={date}\n          onSelect={handleSelect}\n          numberOfMonths={2}\n          autoFocus\n          className=\"border-0 bg-transparent\"\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2",
+    "react-day-picker@^9.7.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/telemetry/button-base.json",
+    "https://better-design.com/registry/telemetry/calendar-base.json",
+    "https://better-design.com/registry/telemetry/popover-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

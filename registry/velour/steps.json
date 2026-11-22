@@ -1,0 +1,28 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Completed steps wear the champagne primary material; the current step\n * is a raised velour disc; upcoming steps stay recessed.\n */\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  currentStep?: number\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, currentStep = 0, children, ...props }, ref) => {\n    const steps = React.Children.toArray(children)\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex items-center gap-2\", className)}\n        {...props}\n      >\n        {steps.map((_child, index) => (\n          <React.Fragment key={index}>\n            {index > 0 && (\n              <div\n                className={cn(\n                  \"h-px flex-1\",\n                  index <= currentStep ? \"bg-primary/60\" : \"bg-border\"\n                )}\n              />\n            )}\n            <div\n              className={cn(\n                \"flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-all duration-base\",\n                index < currentStep &&\n                  \"[background-image:var(--champagne)] text-primary-foreground [box-shadow:var(--shadow-primary)]\",\n                index === currentStep &&\n                  \"[background-image:var(--velour-raised)] text-foreground [box-shadow:var(--shadow-button)]\",\n                index > currentStep &&\n                  \"bg-input text-muted-foreground [box-shadow:var(--shadow-inset)]\"\n              )}\n            >\n              {index + 1}\n            </div>\n          </React.Fragment>\n        ))}\n      </div>\n    )\n  }\n)\nSteps.displayName = \"Steps\"\n\nconst Step = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"\", className)} {...props} />\n))\nStep.displayName = \"Step\"\n\nexport { Steps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "champagne": "linear-gradient( to bottom, oklch(0.95 0.03 95), oklch(0.875 0.045 88) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.125rem 0.25rem oklch(0.75 0.06 85 / 0.55), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.125rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "champagne": "linear-gradient( to bottom, oklch(0.95 0.03 95), oklch(0.875 0.045 88) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.125rem 0.25rem oklch(0.75 0.06 85 / 0.55), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

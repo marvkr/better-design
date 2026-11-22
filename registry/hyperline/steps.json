@@ -1,0 +1,29 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Check } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Steps: completed markers wear the raised cyan material.\n\ninterface Step {\n  title: string;\n  description?: string;\n}\n\ninterface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  currentStep: number;\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nfunction Steps({ steps, currentStep, orientation = \"horizontal\", className, ...props }: StepsProps) {\n  return (\n    <div\n      className={cn(\n        \"flex\",\n        orientation === \"horizontal\" ? \"flex-row items-start\" : \"flex-col\",\n        className\n      )}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isComplete = index < currentStep;\n        const isCurrent = index === currentStep;\n        const isLast = index === steps.length - 1;\n\n        return (\n          <div\n            key={index}\n            className={cn(\n              \"flex\",\n              orientation === \"horizontal\" ? \"flex-1 flex-col\" : \"flex-row gap-3\"\n            )}\n          >\n            <div\n              className={cn(\n                \"flex items-center\",\n                orientation === \"vertical\" && \"flex-col\"\n              )}\n            >\n              <span\n                className={cn(\n                  \"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold\",\n                  \"transition-all duration-fast\",\n                  isComplete &&\n                    \"bg-[image:var(--hl-primary-gradient)] text-primary-foreground shadow-[var(--hl-shadow-primary-sm)]\",\n                  isCurrent &&\n                    \"border border-ring/60 bg-secondary text-foreground shadow-[var(--hl-shadow-raise)]\",\n                  !isComplete && !isCurrent &&\n                    \"border border-border/70 bg-input/60 text-muted-foreground shadow-[var(--hl-shadow-inset)]\"\n                )}\n              >\n                {isComplete ? <Check className=\"h-3.5 w-3.5\" strokeWidth={3} /> : index + 1}\n              </span>\n              {!isLast && (\n                <span\n                  className={cn(\n                    \"bg-border/70\",\n                    orientation === \"horizontal\" ? \"mx-2 h-px flex-1\" : \"my-2 h-8 w-px\",\n                    isComplete && \"bg-primary/50\"\n                  )}\n                />\n              )}\n            </div>\n            <div\n              className={cn(\n                orientation === \"horizontal\" ? \"mt-2 pr-4\" : \"pb-6\",\n                isLast && orientation === \"vertical\" && \"pb-0\"\n              )}\n            >\n              <div\n                className={cn(\n                  \"text-sm font-medium\",\n                  isCurrent || isComplete ? \"text-foreground\" : \"text-muted-foreground\"\n                )}\n              >\n                {step.title}\n              </div>\n              {step.description && (\n                <div className=\"mt-0.5 text-xs text-muted-foreground\">{step.description}</div>\n              )}\n            </div>\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n\nexport { Steps };\nexport type { StepsProps, Step };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)"
+    }
+  }
+}

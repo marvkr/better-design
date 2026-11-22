@@ -1,0 +1,31 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, primaryFill } from \"./_shared\";\n\n/**\n * Airy docs IconButton: a round button for one icon, on the same heights as\n * Button. The default is a quiet hairline circle on white, the kind a docs\n * header uses for theme and search. Primary takes the flat green. Always\n * pass `aria-label`.\n */\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center rounded-full\",\n    \"transition-[background-color,color,border-color] duration-fast ease-out\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:bg-muted disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border border-border bg-background text-(--foreground-secondary) hover:bg-secondary hover:text-foreground disabled:border-transparent\",\n        primary: `${primaryFill}`,\n        ghost: \"bg-transparent text-(--foreground-secondary) hover:bg-secondary hover:text-foreground\",\n        outline:\n          \"border border-(--line-strong) bg-transparent text-foreground hover:bg-secondary disabled:border-border\",\n        destructive: \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n      },\n      size: {\n        sm: \"size-8 [&_svg]:size-3.5\",\n        default: \"size-9 [&_svg]:size-4\",\n        lg: \"size-11 [&_svg]:size-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface IconButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, type = \"button\", ...props }, ref) => (\n    <button\n      ref={ref}\n      type={type}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

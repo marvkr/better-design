@@ -40,7 +40,7 @@ const ResizableHandle = React.forwardRef<
       "data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2",
       "data-[panel-group-direction=vertical]:after:translate-x-0",
       "[&[data-panel-group-direction=vertical]>div]:rotate-90",
-      "transition-colors duration-200 hover:bg-border/80",
+      "transition-colors duration-base hover:bg-border/80",
       className
     )}
     {...props}

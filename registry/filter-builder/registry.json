@@ -1,0 +1,185 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-design-filter-builder",
+  "homepage": "https://better-design.com/design-systems",
+  "items": [
+    {
+      "name": "filter-builder",
+      "type": "registry:ui",
+      "title": "Filter builder",
+      "description": "A filter bar with chips, nested fields, an advanced rule builder and a cascading field picker.",
+      "dependencies": [
+        "@base-ui/react@^1.6.0",
+        "@radix-ui/react-slot@^1.2.3",
+        "@tanstack/react-virtual@^3.14.13",
+        "date-fns@^4.1.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/button-group-text.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-async.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-columns.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-context.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-footer.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-i18n.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-item-classes.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-item-group.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-item.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-lib.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-nav.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-parts.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-root-actions.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-root-props.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-root-view.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-types.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader-virtual.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/cascader.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filter-glyphs.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-advanced-cells.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-advanced-tree.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-advanced.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-builder.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-chip-display.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-chip.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-context.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-date.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-dnd.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-draft.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-editors-fields.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-editors-menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-editors.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-guards.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-i18n.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-lib.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-operators.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-query.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-root-props.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-root-row.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters-types.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/filters.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

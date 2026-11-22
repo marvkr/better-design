@@ -1,0 +1,40 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Notification: a docs callout, the Note, Tip, Warning and Danger\n * boxes a docs page drops between paragraphs.\n *\n * Each one is a rounded box edged on all four sides. The default is white\n * behind a hairline. Info, success, warning and danger each pair a pale tint\n * with a faint border in the same hue and their own darker text, so the\n * words pass contrast on the tint. The tone lives in the fill and the edge,\n * never in a stripe down one side.\n */\nconst notificationVariants = cva(\n  \"relative flex w-full items-start gap-3 rounded-xl border px-4 py-3.5 text-sm leading-relaxed\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-background text-foreground\",\n        info:\n          \"border-(--info-text)/20 bg-(--info-tint) text-(--info-text) [&_[data-slot=notification-description]]:text-current\",\n        success:\n          \"border-(--success-text)/20 bg-(--success-tint) text-(--success-text) [&_[data-slot=notification-description]]:text-current\",\n        warning:\n          \"border-(--warning-text)/20 bg-(--warning-tint) text-(--warning-text) [&_[data-slot=notification-description]]:text-current\",\n        destructive:\n          \"border-(--destructive-text)/20 bg-(--destructive-tint) text-(--destructive-text) [&_[data-slot=notification-description]]:text-current\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface NotificationProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  onClose?: () => void;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant, onClose, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      role={variant === \"destructive\" ? \"alert\" : \"status\"}\n      data-slot=\"notification\"\n      data-variant={variant ?? \"default\"}\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className=\"min-w-0 flex-1\">{children}</div>\n      {onClose && (\n        <button\n          type=\"button\"\n          onClick={onClose}\n          aria-label=\"Dismiss\"\n          className={cn(\n            \"-me-1.5 -mt-1 inline-flex size-7 shrink-0 items-center justify-center rounded-full text-current opacity-70\",\n            \"outline-none transition-[opacity,background-color] duration-fast hover:bg-current/10 hover:opacity-100\",\n            \"focus-visible:ring-3 focus-visible:ring-ring\",\n          )}\n        >\n          <Icon icon=\"feather:x\" className=\"size-3.5\" aria-hidden=\"true\" />\n        </button>\n      )}\n    </div>\n  ),\n);\nNotification.displayName = \"Notification\";\n\nconst NotificationTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h4\n    ref={ref}\n    data-slot=\"notification-title\"\n    className={cn(\"text-sm font-semibold\", className)}\n    {...props}\n  />\n));\nNotificationTitle.displayName = \"NotificationTitle\";\n\nconst NotificationDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"notification-description\"\n    className={cn(\n      \"mt-1 text-sm text-(--foreground-secondary) first:mt-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nNotificationDescription.displayName = \"NotificationDescription\";\n\nexport { Notification, NotificationTitle, NotificationDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "success-tint": "oklch(0.476 0.11 154.3 / 0.08)",
+      "success-text": "oklch(0.42 0.1 154.3)",
+      "warning-tint": "oklch(0.648 0.138 69.8 / 0.1)",
+      "warning-text": "oklch(0.5 0.11 66)",
+      "info-tint": "oklch(0.562 0.156 259.2 / 0.1)",
+      "info-text": "oklch(0.48 0.15 259.2)",
+      "destructive-tint": "oklch(0.577 0.17 25 / 0.08)",
+      "destructive-text": "oklch(0.5 0.16 25)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "success-tint": "oklch(0.705 0.169 153.6 / 0.12)",
+      "success-text": "oklch(0.78 0.15 153.6)",
+      "warning-tint": "oklch(0.78 0.14 75 / 0.12)",
+      "warning-text": "oklch(0.84 0.13 80)",
+      "info-tint": "oklch(0.7 0.13 259 / 0.14)",
+      "info-text": "oklch(0.8 0.1 259)",
+      "destructive-tint": "oklch(0.66 0.17 23 / 0.14)",
+      "destructive-text": "oklch(0.78 0.13 22)"
+    }
+  }
+}

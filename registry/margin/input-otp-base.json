@@ -1,0 +1,17 @@
+{
+  "name": "input-otp-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { OTPInput, OTPInputContext } from \"input-otp\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/**\n * Margin InputOTP: a row of small square grey cells. The active cell turns\n * white with an oxblood edge, the oxblood halo and a blinking caret.\n */\nconst InputOTP = React.forwardRef<\n  React.ElementRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    data-slot=\"input-otp\"\n    containerClassName={cn(\"flex items-center gap-2 has-[:disabled]:opacity-50\", containerClassName)}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n));\nInputOTP.displayName = \"InputOTP\";\n\nconst InputOTPGroup = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ className, ...props }, ref) => (\n  <div ref={ref} data-slot=\"input-otp-group\" className={cn(\"flex items-center gap-1.5\", className)} {...props} />\n));\nInputOTPGroup.displayName = \"InputOTPGroup\";\n\nconst InputOTPSlot = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\"> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext);\n  const slot = inputOTPContext.slots[index];\n  const char = slot?.char;\n  const hasFakeCaret = slot?.hasFakeCaret;\n  const isActive = slot?.isActive;\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"input-otp-slot\"\n      data-active={isActive || undefined}\n      className={cn(\n        formFieldBase,\n        \"relative flex size-9 items-center justify-center px-0 text-base font-medium tabular-nums\",\n        isActive && \"z-10 border-primary/45 bg-card ring-3 ring-ring\",\n        className,\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-4 w-[0.0625rem] animate-pulse bg-primary\" />\n        </div>\n      )}\n    </div>\n  );\n});\nInputOTPSlot.displayName = \"InputOTPSlot\";\n\nconst InputOTPSeparator = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ ...props }, ref) => (\n  <div ref={ref} role=\"separator\" data-slot=\"input-otp-separator\" className=\"flex size-4 items-center justify-center\" {...props}>\n    <span className=\"block h-0.5 w-2.5 rounded-full bg-muted-foreground\" aria-hidden />\n  </div>\n));\nInputOTPSeparator.displayName = \"InputOTPSeparator\";\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ]
+}

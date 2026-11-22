@@ -1,0 +1,482 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400..700;1,400..500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Margin: paper and ink for people who read closely and write things down.
+  The page is a warm paper, cards a lighter sheet, and hairline rules divide
+  them the way ruled lines divide a legal pad. Ink is a deep blue-black.
+  Colour is spent sparingly: an oxblood for the main action and the
+  selection, and three muted marks for status, olive for settled, slate for
+  pending and amber for a deadline. Headings and entry titles set in a book
+  serif, the interface in a plain grotesque, line numbers in a typewriter
+  mono. Corners stay near square, and only a floating menu casts a shadow.
+
+  The `.dark` block flips every token at once, so components never branch on
+  the theme: --*-face hold the fills, --*-edge the rules around them.
+*/
+
+:root {
+  /* ─── Paper: a warm page, a lighter sheet, one hairline between ─── */
+  --background: oklch(0.975 0.012 85);
+  --foreground: oklch(0.24 0.02 260);
+  --card: oklch(0.99 0.008 85);
+  --card-foreground: oklch(0.24 0.02 260);
+  --popover: oklch(0.99 0.008 85);
+  --popover-foreground: oklch(0.24 0.02 260);
+
+  /* ─── The action: oxblood ink ─── */
+  --primary: oklch(0.42 0.13 25);
+  --primary-foreground: oklch(0.985 0.01 85);
+  --primary-text: oklch(0.42 0.13 25);             /* oxblood as text on paper */
+
+  --secondary: oklch(0.955 0.014 85);               /* the matter rail */
+  --secondary-foreground: oklch(0.24 0.02 260);
+  --muted: oklch(0.955 0.014 85);                   /* the desk under the sheet */
+  --muted-foreground: oklch(0.46 0.02 260);
+  --accent: oklch(0.935 0.016 85);                  /* hover and highlighted rows */
+  --accent-foreground: oklch(0.24 0.02 260);
+
+  --destructive: oklch(0.52 0.18 29);
+  --destructive-foreground: oklch(0.985 0.01 85);
+  --success: oklch(0.5 0.09 115);                   /* olive: settled */
+  --success-foreground: oklch(0.985 0.01 85);
+  --warning: oklch(0.74 0.13 75);                   /* amber: a deadline */
+  --warning-foreground: oklch(0.24 0.02 260);
+  --info: oklch(0.5 0.05 245);                      /* slate: pending */
+  --info-foreground: oklch(0.985 0.01 85);
+
+  --border: oklch(0.89 0.014 85);                   /* the ruled hairline */
+  --input: oklch(0.82 0.016 85);                    /* the firmer rule on controls */
+  --ring: oklch(0.42 0.13 25 / 0.32);
+
+  /* ─── Status marks: muted inks for settled, pending, deadline, overdue ─── */
+  --olive: oklch(0.55 0.09 115);
+  --slate: oklch(0.52 0.05 245);
+  --amber: oklch(0.74 0.13 75);
+  --rust: oklch(0.58 0.12 45);
+  --scrim: oklch(0.24 0.02 260 / 0.32);
+
+  /* ─── The mark: a pale oxblood wash for issue tags and small labels ─── */
+  --mark: oklch(0.895 0.04 28);
+  --mark-foreground: oklch(0.38 0.12 25);
+
+  /* ─── Status text on a marked label: deep in its own hue ─── */
+  --success-text: oklch(0.4 0.08 115);
+  --warning-text: oklch(0.4 0.09 70);
+  --destructive-text: oklch(0.45 0.16 28);
+  --info-text: oklch(0.4 0.05 245);
+  --olive-text: oklch(0.4 0.08 115);
+  --slate-text: oklch(0.4 0.05 245);
+  --amber-text: oklch(0.4 0.09 70);
+  --rust-text: oklch(0.39 0.1 40);
+  --field: oklch(0.99 0.008 85);                    /* a field is a clean sheet */
+
+  /* ─── Faces and rules: flat inks, no light, no drop ─── */
+  /* The primary button: flat oxblood inside a darker rule. */
+  --ox-face: linear-gradient(oklch(0.42 0.13 25), oklch(0.42 0.13 25));
+  --ox-face-hover: linear-gradient(oklch(0.37 0.12 25), oklch(0.37 0.12 25));
+  --ox-edge: 0 0 0 0.0625rem oklch(0.35 0.11 25);
+  /* The darker rule on its own, around a paper thumb. */
+  --ox-hairline: 0 0 0 0.0625rem oklch(0.35 0.11 25);
+  /* The marked call to action: the pale wash inside a faint oxblood rule. */
+  --mark-face: linear-gradient(oklch(0.895 0.04 28), oklch(0.895 0.04 28));
+  --mark-edge: inset 0 0 0 0.0625rem oklch(0.42 0.13 25 / 0.2);
+  /* The toolbar tab: a ruled sheet with no shadow at all. */
+  --pill-face-hover: oklch(0.955 0.014 85);
+  --pill-edge: inset 0 0 0 0.0625rem oklch(0.82 0.016 85);
+  --pill-edge-hover: inset 0 0 0 0.0625rem oklch(0.72 0.02 85);
+  /* The quiet face: a step of paper, no shade. */
+  --field-hover: oklch(0.965 0.012 85);
+  --field-shade: inset 0 0 0 0 oklch(0 0 0 / 0);
+  /* The slot a switch or slider track sits in: a rule dark enough to hold
+     3:1 against the page and the sheet (WCAG 1.4.11). */
+  --slot-edge: inset 0 0 0 0.0625rem oklch(0.57 0.02 80);
+  /* An empty checkbox or radio: the same firm rule. */
+  --control-edge: inset 0 0 0 0.0625rem oklch(0.56 0.02 80);
+  --control-edge-hover: inset 0 0 0 0.0625rem oklch(0.42 0.02 260);
+  /* A text field: a clean sheet inside a firm rule. */
+  --field-edge: inset 0 0 0 0.0625rem oklch(0.6 0.02 80);
+  /* The selected sheet: one oxblood rule inside the edge. */
+  --selected-edge: inset 0 0 0 0.09375rem oklch(0.42 0.13 25);
+  --destructive-face: linear-gradient(oklch(0.52 0.18 29), oklch(0.52 0.18 29));
+
+  /* ─── Clause: the inks a quoted passage or a listing is set in ─── */
+  --clause-comment: oklch(0.55 0.015 85);
+  --clause-keyword: oklch(0.42 0.13 25);
+  --clause-control: oklch(0.45 0.1 40);
+  --clause-ident: oklch(0.4 0.05 245);
+  --clause-fn: oklch(0.4 0.05 245);
+  --clause-string: oklch(0.42 0.08 115);
+  --clause-doc: oklch(0.45 0.07 115);
+  --clause-number: oklch(0.47 0.1 65);
+  --clause-escape: oklch(0.45 0.05 245);
+  --clause-op: oklch(0.42 0.02 260);
+  --clause-key: oklch(0.42 0.13 25);
+  --clause-gutter: oklch(0.58 0.015 85);
+
+  /* ─── Type: a book serif for headings, a plain grotesque for the interface ─── */
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", Georgia, ui-serif, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* ─── Radius: near square, a touch softer on sheets ─── */
+  --radius: 0.25rem;
+  --radius-sm: 0.125rem;   /* checkboxes, the tag remove button */
+  --radius-md: 0.1875rem;  /* labels, menu rows */
+  --radius-lg: 0.25rem;    /* buttons, fields, tabs */
+  --radius-xl: 0.375rem;   /* cards, menus, clause blocks */
+  --radius-2xl: 0.375rem;  /* larger popovers */
+  --radius-3xl: 0.5rem;    /* dialogs and the app shell */
+
+  /* ─── Motion: the soft profile, calm enough to read through ─── */
+  --transition-duration-fast: 180ms;
+  --transition-duration-base: 240ms;
+  --transition-duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  --shadow-xs: 0 0.0625rem 0 oklch(0.24 0.02 260 / 0.04);
+  --shadow-sm: var(--pill-edge);
+  --shadow-md: var(--shadow-menu);
+  --shadow-lg:
+    0 0 0 0.0625rem oklch(0.24 0.02 260 / 0.1),
+    0 1rem 2.5rem -1.25rem oklch(0.24 0.02 260 / 0.22);
+  --shadow-card: 0 0 0 0.0625rem oklch(0.89 0.014 85);
+  --shadow-menu:
+    0 0 0 0.0625rem oklch(0.24 0.02 260 / 0.1),
+    0 0.5rem 1.5rem -0.5rem oklch(0.24 0.02 260 / 0.18);
+  --shadow-overlay: var(--shadow-lg);
+  --shadow-thumb:
+    0 0 0 0.0625rem oklch(0.56 0.02 80),
+    0 0.0625rem 0.125rem oklch(0.24 0.02 260 / 0.12);
+
+  --chart-1: oklch(0.42 0.13 25);
+  --chart-2: oklch(0.52 0.05 245);
+  --chart-3: oklch(0.55 0.09 115);
+  --chart-4: oklch(0.7 0.13 75);
+  --chart-5: oklch(0.58 0.12 45);
+
+  --ai-label: oklch(0.94 0.04 80);
+  --ai-label-foreground: oklch(0.45 0.09 70);
+}
+
+/*
+  Dark: the same notebook under a desk lamp. The paper turns to a deep ink
+  blue, the ink to a warm cream, and the oxblood lifts a step so it still
+  reads as the one action.
+*/
+.dark {
+  --background: oklch(0.2 0.012 260);
+  --foreground: oklch(0.92 0.015 85);
+  --card: oklch(0.23 0.014 260);
+  --card-foreground: oklch(0.92 0.015 85);
+  --popover: oklch(0.24 0.014 260);
+  --popover-foreground: oklch(0.92 0.015 85);
+
+  --primary: oklch(0.52 0.14 25);
+  --primary-foreground: oklch(0.98 0.01 85);
+  --primary-text: oklch(0.76 0.1 25);
+
+  --secondary: oklch(0.18 0.012 260);
+  --secondary-foreground: oklch(0.92 0.015 85);
+  --muted: oklch(0.18 0.012 260);
+  --muted-foreground: oklch(0.72 0.015 85);
+  --accent: oklch(0.28 0.014 260);
+  --accent-foreground: oklch(0.92 0.015 85);
+
+  --destructive: oklch(0.62 0.17 29);
+  --destructive-foreground: oklch(0.16 0.01 260);
+  --success: oklch(0.7 0.14 115);
+  --success-foreground: oklch(0.16 0.01 260);
+  --warning: oklch(0.8 0.12 78);
+  --warning-foreground: oklch(0.16 0.01 260);
+  --info: oklch(0.7 0.05 245);
+  --info-foreground: oklch(0.16 0.01 260);
+
+  --border: oklch(0.3 0.014 260);
+  --input: oklch(0.36 0.014 260);
+  --ring: oklch(0.7 0.11 25 / 0.45);
+
+  --olive: oklch(0.7 0.09 115);
+  --slate: oklch(0.7 0.05 245);
+  --amber: oklch(0.8 0.12 78);
+  --rust: oklch(0.72 0.11 45);
+  --scrim: oklch(0 0 0 / 0.55);
+
+  --mark: oklch(0.32 0.05 25);
+  --mark-foreground: oklch(0.88 0.06 30);
+
+  --success-text: oklch(0.86 0.09 115);
+  --warning-text: oklch(0.87 0.1 80);
+  --destructive-text: oklch(0.86 0.09 28);
+  --info-text: oklch(0.86 0.04 245);
+  --olive-text: oklch(0.86 0.08 115);
+  --slate-text: oklch(0.86 0.04 245);
+  --amber-text: oklch(0.87 0.1 80);
+  --rust-text: oklch(0.86 0.08 45);
+  --field: oklch(0.22 0.014 260);
+
+  --ox-face: linear-gradient(oklch(0.52 0.14 25), oklch(0.52 0.14 25));
+  --ox-face-hover: linear-gradient(oklch(0.56 0.14 25), oklch(0.56 0.14 25));
+  --ox-edge: 0 0 0 0.0625rem oklch(0.6 0.13 25);
+  --ox-hairline: 0 0 0 0.0625rem oklch(0.6 0.13 25);
+  --mark-face: linear-gradient(oklch(0.32 0.05 25), oklch(0.32 0.05 25));
+  --mark-edge: inset 0 0 0 0.0625rem oklch(0.76 0.1 25 / 0.25);
+  --pill-face-hover: oklch(0.28 0.014 260);
+  --pill-edge: inset 0 0 0 0.0625rem oklch(0.36 0.014 260);
+  --pill-edge-hover: inset 0 0 0 0.0625rem oklch(0.46 0.014 260);
+  --field-hover: oklch(0.26 0.014 260);
+  --field-shade: inset 0 0 0 0 oklch(0 0 0 / 0);
+  --slot-edge: inset 0 0 0 0.0625rem oklch(0.58 0.015 85);
+  --control-edge: inset 0 0 0 0.0625rem oklch(0.58 0.015 85);
+  --control-edge-hover: inset 0 0 0 0.0625rem oklch(0.7 0.015 85);
+  --field-edge: inset 0 0 0 0.0625rem oklch(0.56 0.015 85);
+  --selected-edge: inset 0 0 0 0.09375rem oklch(0.7 0.11 25);
+  --destructive-face: linear-gradient(oklch(0.62 0.17 29), oklch(0.62 0.17 29));
+  --shadow-sm: var(--pill-edge);
+  --shadow-md: var(--shadow-menu);
+  --shadow-card: 0 0 0 0.0625rem oklch(0.3 0.014 260);
+  --shadow-menu:
+    0 0 0 0.0625rem oklch(1 0 0 / 0.08),
+    0 0.75rem 1.5rem -0.5rem oklch(0 0 0 / 0.5);
+
+  --clause-comment: oklch(0.62 0.015 85);
+  --clause-keyword: oklch(0.78 0.09 25);
+  --clause-control: oklch(0.78 0.09 45);
+  --clause-ident: oklch(0.8 0.05 245);
+  --clause-fn: oklch(0.8 0.05 245);
+  --clause-string: oklch(0.8 0.08 115);
+  --clause-doc: oklch(0.78 0.07 115);
+  --clause-number: oklch(0.82 0.1 78);
+  --clause-escape: oklch(0.78 0.05 245);
+  --clause-op: oklch(0.8 0.015 85);
+  --clause-key: oklch(0.78 0.09 25);
+  --clause-gutter: oklch(0.56 0.015 85);
+
+  --shadow-xs: 0 0.0625rem 0 oklch(0 0 0 / 0.3);
+  --shadow-lg:
+    0 0 0 0.0625rem oklch(1 0 0 / 0.06),
+    0 1.5rem 3rem -1.5rem oklch(0 0 0 / 0.6);
+  --shadow-thumb:
+    0 0 0 0.0625rem oklch(0 0 0 / 0.3),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4);
+
+  --chart-1: oklch(0.7 0.12 25);
+  --chart-2: oklch(0.72 0.05 245);
+  --chart-3: oklch(0.72 0.09 115);
+  --chart-4: oklch(0.8 0.12 78);
+  --chart-5: oklch(0.74 0.11 45);
+
+  --ai-label: oklch(0.32 0.05 80);
+  --ai-label-foreground: oklch(0.85 0.09 85);
+}
+
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-olive: var(--olive);
+  --color-slate: var(--slate);
+  --color-amber: var(--amber);
+  --color-rust: var(--rust);
+  --color-scrim: var(--scrim);
+  --color-field: var(--field);
+  --color-mark: var(--mark);
+  --color-mark-foreground: var(--mark-foreground);
+  --color-success-text: var(--success-text);
+  --color-warning-text: var(--warning-text);
+  --color-destructive-text: var(--destructive-text);
+  --color-info-text: var(--info-text);
+  --color-olive-text: var(--olive-text);
+  --color-slate-text: var(--slate-text);
+  --color-amber-text: var(--amber-text);
+  --color-rust-text: var(--rust-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-clause-comment: var(--clause-comment);
+  --color-clause-keyword: var(--clause-keyword);
+  --color-clause-control: var(--clause-control);
+  --color-clause-ident: var(--clause-ident);
+  --color-clause-fn: var(--clause-fn);
+  --color-clause-string: var(--clause-string);
+  --color-clause-doc: var(--clause-doc);
+  --color-clause-number: var(--clause-number);
+  --color-clause-escape: var(--clause-escape);
+  --color-clause-op: var(--clause-op);
+  --color-clause-key: var(--clause-key);
+  --color-clause-gutter: var(--clause-gutter);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  /* Headings: the book serif at a medium weight, set close but not tight. */
+  :is(h1, h2, h3) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  h4 {
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+
+  /* Thin scrollbars in the ruled hairline. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--input) transparent;
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: spacious;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 62);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 10);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 12);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 6);
+}

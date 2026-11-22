@@ -1,0 +1,28 @@
+{
+  "name": "chart-line-dots-custom",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-line-dots-custom.tsx",
+      "content": "\"use client\"\n\nimport { Icon } from \"@iconify/react\"\nimport { CartesianGrid, Line, LineChart, XAxis } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\"\nimport {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  type ChartConfig,\n} from \"./chart\"\n\nexport const description = \"A line chart with custom dots\"\n\nconst chartData = [\n  { month: \"January\", desktop: 186, mobile: 80 },\n  { month: \"February\", desktop: 305, mobile: 200 },\n  { month: \"March\", desktop: 237, mobile: 120 },\n  { month: \"April\", desktop: 73, mobile: 190 },\n  { month: \"May\", desktop: 209, mobile: 130 },\n  { month: \"June\", desktop: 214, mobile: 140 },\n]\n\nconst chartConfig = {\n  desktop: {\n    label: \"Desktop\",\n    color: \"var(--chart-1)\",\n  },\n  mobile: {\n    label: \"Mobile\",\n    color: \"var(--chart-2)\",\n  },\n} satisfies ChartConfig\n\n/**\n * Burnished line chart with custom dots: each point is a small rivet, a\n * glow disc ringed in the card colour with a darker core, set on the line.\n */\nexport function ChartLineDotsCustom() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Line Chart - Custom Dots</CardTitle>\n        <CardDescription>January - June 2024</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig}>\n          <LineChart\n            accessibilityLayer\n            data={chartData}\n            margin={{\n              left: 12,\n              right: 12,\n            }}\n          >\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip\n              cursor={false}\n              content={<ChartTooltipContent hideLabel />}\n            />\n            <Line\n              dataKey=\"desktop\"\n              type=\"natural\"\n              stroke=\"var(--color-desktop)\"\n              strokeWidth={2}\n              dot={({\n                cx,\n                cy,\n                payload,\n              }: {\n                cx?: number\n                cy?: number\n                payload?: { month?: string }\n              }) => {\n                if (cx == null || cy == null) {\n                  return <g key={payload?.month} />\n                }\n\n                return (\n                  <g key={payload?.month}>\n                    <circle\n                      cx={cx}\n                      cy={cy}\n                      r={6.5}\n                      fill=\"var(--color-desktop)\"\n                      stroke=\"var(--card)\"\n                      strokeWidth={2.5}\n                    />\n                    <circle cx={cx} cy={cy} r={2} fill=\"var(--background)\" />\n                  </g>\n                )\n              }}\n            />\n          </LineChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-2 text-sm\">\n        <div className=\"flex items-center gap-2 leading-none font-semibold\">\n          Trending up by 5.2% this month{\" \"}\n          <Icon icon=\"ph:trend-up\" aria-hidden=\"true\" className=\"size-4 text-primary-text\" />\n        </div>\n        <div className=\"leading-none text-muted-foreground\">\n          Showing total visitors for the last 6 months\n        </div>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2",
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/card.json",
+    "https://better-design.com/registry/burnished/chart.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    }
+  }
+}

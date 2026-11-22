@@ -1,0 +1,56 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { oxFace, quietFace } from \"./_shared\";\n\n/**\n * Margin Badge: a rectangular label, as square as a clerk's stamp.\n *\n * The default is the issue tag: oxblood ink on a pale oxblood mark. Pass\n * `onRemove` and it grows a small remove button at its end, whose hit area\n * fills the chip's height. `neutral` is the paper field chip, `outline` a\n * hairline on white, and `primary` and `solid` wear the oxblood face of the\n * primary Button. Status and colour variants are a light tint of their own\n * hue with the text deep in that hue. Size `sm` is the small mark that sits\n * at the end of a navigation row.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center gap-1 whitespace-nowrap font-medium [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-(--mark) text-(--mark-foreground)\",\n        neutral: \"bg-foreground/10 text-foreground\",\n        primary: oxFace,\n        solid: oxFace,\n        secondary: quietFace,\n        outline: \"bg-card text-muted-foreground ring-1 ring-input\",\n        info: \"bg-info/15 text-info-text\",\n        success: \"bg-success/18 text-success-text\",\n        warning: \"bg-warning/26 text-warning-text\",\n        destructive: \"bg-destructive/16 text-destructive-text\",\n        blue: \"bg-(--mark) text-(--mark-foreground)\",\n        green: \"bg-success/18 text-success-text\",\n        orange: \"bg-(--rust)/22 text-(--rust-text)\",\n        yellow: \"bg-(--amber)/34 text-(--amber-text)\",\n        purple: \"bg-(--slate)/15 text-(--slate-text)\",\n      },\n      size: {\n        sm: \"h-4.5 rounded-sm px-1.5 text-xs [&_svg]:size-3\",\n        default: \"h-6 rounded-md px-2 text-xs [&_svg]:size-3.5\",\n        lg: \"h-7 rounded-lg px-2.5 text-sm font-normal [&_svg]:size-3.5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {\n  /** Shows a remove button at the chip's end and calls this when pressed. */\n  onRemove?: () => void;\n  /** The remove button's accessible name. Defaults to \"Remove\" plus the text. */\n  removeLabel?: string;\n}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, size, onRemove, removeLabel, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), onRemove && \"gap-0.5 pe-1\", className)}\n      {...props}\n    >\n      {children}\n      {onRemove && (\n        <button\n          type=\"button\"\n          data-slot=\"badge-remove\"\n          onClick={onRemove}\n          aria-label={removeLabel ?? \"Remove\"}\n          className={cn(\n            \"relative grid size-5 place-items-center rounded-sm text-current opacity-55 outline-none\",\n            \"transition duration-fast ease-(--ease-out) hover:bg-primary/12 hover:opacity-100\",\n            \"focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring\",\n            \"after:absolute after:-inset-1\",\n          )}\n        >\n          <Icon icon=\"solar:close-circle-linear\" className=\"size-3.5\" aria-hidden />\n        </button>\n      )}\n    </div>\n  ),\n);\nBadge.displayName = \"Badge\";\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5 0.09 115)",
+      "warning": "oklch(0.74 0.13 75)",
+      "info": "oklch(0.5 0.05 245)",
+      "slate": "oklch(0.52 0.05 245)",
+      "amber": "oklch(0.74 0.13 75)",
+      "rust": "oklch(0.58 0.12 45)",
+      "mark": "oklch(0.895 0.04 28)",
+      "mark-foreground": "oklch(0.38 0.12 25)",
+      "success-text": "oklch(0.4 0.08 115)",
+      "warning-text": "oklch(0.4 0.09 70)",
+      "destructive-text": "oklch(0.45 0.16 28)",
+      "info-text": "oklch(0.4 0.05 245)",
+      "slate-text": "oklch(0.4 0.05 245)",
+      "amber-text": "oklch(0.4 0.09 70)",
+      "rust-text": "oklch(0.39 0.1 40)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.7 0.14 115)",
+      "warning": "oklch(0.8 0.12 78)",
+      "info": "oklch(0.7 0.05 245)",
+      "slate": "oklch(0.7 0.05 245)",
+      "amber": "oklch(0.8 0.12 78)",
+      "rust": "oklch(0.72 0.11 45)",
+      "mark": "oklch(0.32 0.05 25)",
+      "mark-foreground": "oklch(0.88 0.06 30)",
+      "success-text": "oklch(0.86 0.09 115)",
+      "warning-text": "oklch(0.87 0.1 80)",
+      "destructive-text": "oklch(0.86 0.09 28)",
+      "info-text": "oklch(0.86 0.04 245)",
+      "slate-text": "oklch(0.86 0.04 245)",
+      "amber-text": "oklch(0.87 0.1 80)",
+      "rust-text": "oklch(0.86 0.08 45)"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * IconButton — square button meant for a single icon. Mirrors Button's shadow\n * language but sized for icons. Provide `aria-label` for accessibility.\n *\n * Graphite: the default sits as a raised tile that lifts to the hover surface;\n * primary reuses the pill gradient + pill shadow; outline is a hairline tile;\n * ghost is flat until hovered into the accent tile. Active sinks a hair (the\n * tile settles back toward the card).\n */\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center shrink-0\",\n    \"rounded-md cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform,color] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-s)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground [box-shadow:var(--shadow-tile)] hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-[image:var(--pill-gradient)] text-primary-foreground [box-shadow:var(--shadow-pill)] hover:bg-[image:var(--pill-gradient-hover)] hover:[box-shadow:var(--shadow-pill-hover)]\",\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground\",\n        outline:\n          \"bg-transparent text-foreground border border-border hover:bg-accent hover:border-ring/30\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-button)] hover:brightness-105\",\n      },\n      size: {\n        sm: \"h-7 w-7 [&>svg]:h-3.5 [&>svg]:w-3.5\",\n        default: \"h-9 w-9 [&>svg]:h-4 [&>svg]:w-4\",\n        lg: \"h-10 w-10 [&>svg]:h-5 [&>svg]:w-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <button\n      ref={ref}\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n      type={props.type ?? \"button\"}\n    />\n  )\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-pill-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.28), 0 0.25rem 0.625rem oklch(0 0 0 / 0.3)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "pill-gradient-hover": "linear-gradient(180deg, oklch(0.45 0 0) 0%, oklch(0.4 0 0) 100%)",
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-button": "var(--shadow-pill)",
+      "shadow-button-hover": "var(--shadow-pill-hover)"
+    },
+    "dark": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-pill-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.28), 0 0.25rem 0.625rem oklch(0 0 0 / 0.3)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "pill-gradient-hover": "linear-gradient(180deg, oklch(0.45 0 0) 0%, oklch(0.4 0 0) 100%)",
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-button": "var(--shadow-pill)",
+      "shadow-button-hover": "var(--shadow-pill-hover)"
+    }
+  }
+}

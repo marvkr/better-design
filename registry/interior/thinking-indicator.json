@@ -1,0 +1,24 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, AnimatePresence } from \"motion/react\";\nimport { Loader2 } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior ThinkingIndicator — a spinner arc beside a rotating word. The arc\n * is the one allowed loop (unknown duration, honestly reported) and it wears\n * the accent because the system is responding right now. The word swap is an\n * event, so it moves; nothing idles, morphs, or pulses. The widest word\n * reserves the width so the chip never changes size mid-thought.\n */\n\nconst DEFAULT_WORDS = [\"Thinking\", \"Planning\", \"Refining\", \"Generating\"];\n\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[];\n  intervalMs?: number;\n}\n\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 4000,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0);\n\n  React.useEffect(() => {\n    const id = setInterval(\n      () => setIndex((current) => (current + 1) % words.length),\n      intervalMs,\n    );\n    return () => clearInterval(id);\n  }, [words.length, intervalMs]);\n\n  const widest = React.useMemo(\n    () => words.reduce((a, b) => (a.length >= b.length ? a : b), \"\"),\n    [words],\n  );\n\n  return (\n    <div\n      role=\"status\"\n      className={cn(\n        \"inline-flex items-center gap-2 rounded-[0.5rem] bg-card px-3 py-1.5\",\n        \"shadow-[var(--shadow-lift)]\",\n        className,\n      )}\n      {...props}\n    >\n      <Loader2\n        aria-hidden\n        strokeWidth={1.5}\n        className=\"size-3.5 shrink-0 animate-spin text-ring\"\n      />\n      <span className=\"inline-grid overflow-hidden text-[0.7813rem] font-medium text-muted-foreground\">\n        <span aria-hidden className=\"invisible col-start-1 row-start-1\">\n          {widest}\n        </span>\n        <AnimatePresence mode=\"popLayout\" initial={false}>\n          <motion.span\n            key={words[index]}\n            className=\"col-start-1 row-start-1\"\n            initial={{ y: \"80%\", opacity: 0 }}\n            animate={{\n              y: 0,\n              opacity: 1,\n              transition: { duration: 0.24, ease: [0.4, 0, 0.2, 1] },\n            }}\n            exit={{\n              y: \"-80%\",\n              opacity: 0,\n              transition: { duration: 0.16, ease: [0.4, 0, 0.2, 1] },\n            }}\n          >\n            {words[index]}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  );\n}\n\nexport { ThinkingIndicator };\nexport type { ThinkingIndicatorProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.06), 0 0.25rem 0.625rem -0.5rem oklch(0.2161 0.0061 56.04 / 0.45)"
+    },
+    "dark": {
+      "shadow-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.06), 0 0.25rem 0.625rem -0.5rem oklch(0.2161 0.0061 56.04 / 0.45)"
+    }
+  }
+}

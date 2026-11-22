@@ -1,0 +1,28 @@
+{
+  "name": "tag-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { X } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n/* TagInput — tags are tiny raised bezel chips floating inside the well. */\n\ninterface TagInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\"> {\n  value?: string[]\n  onChange?: (tags: string[]) => void\n  placeholder?: string\n  maxTags?: number\n}\n\nfunction TagInput({\n  value = [],\n  onChange,\n  placeholder = \"Add tag...\",\n  maxTags,\n  className,\n  disabled,\n  ...props\n}: TagInputProps) {\n  const [input, setInput] = React.useState(\"\")\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  const addTag = (tag: string) => {\n    const trimmed = tag.trim()\n    if (trimmed && !value.includes(trimmed) && (!maxTags || value.length < maxTags)) {\n      onChange?.([...value, trimmed])\n      setInput(\"\")\n    }\n  }\n\n  const removeTag = (tagToRemove: string) => {\n    onChange?.(value.filter((t) => t !== tagToRemove))\n  }\n\n  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === \"Enter\" || e.key === \",\") {\n      e.preventDefault()\n      addTag(input)\n    } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n      removeTag(value[value.length - 1])\n    }\n  }\n\n  return (\n    <div\n      className={cn(\n        formFieldBase,\n        \"flex min-h-9 cursor-text flex-wrap items-center gap-1.5 rounded-md py-1.5\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        className\n      )}\n      onClick={() => inputRef.current?.focus()}\n    >\n      {value.map((tag) => (\n        <span\n          key={tag}\n          className={cn(\n            \"inline-flex items-center gap-1 rounded-sm px-2 py-0.5 text-xs font-medium text-foreground\",\n            \"border border-border [background-image:var(--bezel)] [box-shadow:var(--shadow-raised)]\"\n          )}\n        >\n          {tag}\n          {!disabled && (\n            <button\n              type=\"button\"\n              onClick={(e) => { e.stopPropagation(); removeTag(tag) }}\n              aria-label={`Remove ${tag}`}\n              className=\"text-muted-foreground transition-colors hover:text-foreground\"\n            >\n              <X className=\"h-3 w-3\" />\n            </button>\n          )}\n        </span>\n      ))}\n      <input\n        ref={inputRef}\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        onKeyDown={handleKeyDown}\n        onBlur={() => addTag(input)}\n        placeholder={value.length === 0 ? placeholder : undefined}\n        disabled={disabled || (maxTags !== undefined && value.length >= maxTags)}\n        className=\"min-w-28 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        {...props}\n      />\n    </div>\n  )\n}\n\nexport { TagInput }\nexport type { TagInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cobalt/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

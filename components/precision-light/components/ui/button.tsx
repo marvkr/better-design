@@ -15,21 +15,21 @@ import { cn } from "@/lib/utils"
 // Ring/focus: blue #335cff = hsl(228,100%,60%)
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground font-medium",
+  "relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-base ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground font-medium",
   {
     variants: {
       variant: {
         // Primary: charcoal (#2e2e2e) — precision multi-layer upward shadow + 1px outer ring
         default:
           "bg-primary text-primary-foreground hover:bg-primary/85 active:bg-primary/90 " +
-          "shadow-[0_16px_8px_rgba(31,31,31,0.01),0_12px_6px_rgba(31,31,31,0.04),0_4px_4px_rgba(31,31,31,0.07),0_1.5px_3px_rgba(31,31,31,0.08),0_0_0_1px_rgb(15,15,15),inset_0_1px_2px_rgba(255,255,255,0.12)] " +
-          "hover:shadow-[0_16px_8px_rgba(31,31,31,0.02),0_12px_6px_rgba(31,31,31,0.06),0_4px_4px_rgba(31,31,31,0.10),0_1.5px_3px_rgba(31,31,31,0.12),0_0_0_1px_rgb(15,15,15),inset_0_1px_2px_rgba(255,255,255,0.14)] " +
+          "shadow-[0_1rem_0.5rem_oklch(0.2393_0_0/0.01),0_0.75rem_0.375rem_oklch(0.2393_0_0/0.04),0_0.25rem_0.25rem_oklch(0.2393_0_0/0.07),0_0.0938rem_0.1875rem_oklch(0.2393_0_0/0.08),0_0_0_0.0625rem_oklch(0.1684_0_0),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.12)] " +
+          "hover:shadow-[0_1rem_0.5rem_oklch(0.2393_0_0/0.02),0_0.75rem_0.375rem_oklch(0.2393_0_0/0.06),0_0.25rem_0.25rem_oklch(0.2393_0_0/0.1),0_0.0938rem_0.1875rem_oklch(0.2393_0_0/0.12),0_0_0_0.0625rem_oklch(0.1684_0_0),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.14)] " +
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
 
         // Neutral/white surface button with layered card shadow + 1px outer ring
         neutral:
           "bg-secondary text-secondary-foreground hover:bg-secondary/70 active:bg-secondary/80 " +
-          "shadow-[0_1px_1px_0.5px_rgba(51,51,51,0.04),0_3px_3px_-1.5px_rgba(51,51,51,0.02),0_6px_6px_-3px_rgba(51,51,51,0.04),0_12px_12px_-6px_rgba(51,51,51,0.04),0_24px_24px_-12px_rgba(51,51,51,0.04),0_0_0_1px_rgba(51,51,51,0.1),inset_0_-1px_1px_-0.5px_rgba(51,51,51,0.06)] " +
+          "shadow-[0_0.0625rem_0.0625rem_0.0313rem_oklch(0.3211_0_0/0.04),0_0.1875rem_0.1875rem_-0.0938rem_oklch(0.3211_0_0/0.02),0_0.375rem_0.375rem_-0.1875rem_oklch(0.3211_0_0/0.04),0_0.75rem_0.75rem_-0.375rem_oklch(0.3211_0_0/0.04),0_1.5rem_1.5rem_-0.75rem_oklch(0.3211_0_0/0.04),0_0_0_0.0625rem_oklch(0.3211_0_0/0.1),inset_0_-0.0625rem_0.0625rem_-0.0313rem_oklch(0.3211_0_0/0.06)] " +
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
 
         // Destructive
@@ -52,13 +52,13 @@ const buttonVariants = cva(
         link: "bg-transparent text-ring underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 gap-3 rounded-[10px] px-3.5 text-sm",
+        default: "h-10 gap-3 rounded-[0.625rem] px-3.5 text-sm",
         sm:      "h-9 gap-3 rounded-lg px-3 text-sm",
         xs:      "h-8 gap-2.5 rounded-lg px-2.5 text-sm",
         xxs:     "h-7 gap-2.5 rounded-lg px-2 text-xs",
-        lg:      "h-11 gap-3 rounded-[10px] px-4 text-sm",
-        xl:      "h-[44px] gap-3 rounded-[13px] px-[18px] text-sm",
-        icon:    "h-10 w-10 rounded-[10px]",
+        lg:      "h-11 gap-3 rounded-[0.625rem] px-4 text-sm",
+        xl:      "h-[2.75rem] gap-3 rounded-[0.8125rem] px-[1.125rem] text-sm",
+        icon:    "h-10 w-10 rounded-[0.625rem]",
         "icon-sm": "h-9 w-9 rounded-lg",
       },
     },
@@ -80,6 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

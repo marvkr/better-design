@@ -9,9 +9,12 @@
     }
   ],
   "dependencies": [
-    "date-fns"
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/metal-fx-chromatic/button.json",
+    "https://better-design.com/registry/metal-fx-chromatic/calendar.json",
+    "https://better-design.com/registry/metal-fx-chromatic/popover.json"
   ]
 }

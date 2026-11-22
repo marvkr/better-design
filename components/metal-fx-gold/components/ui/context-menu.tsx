@@ -14,7 +14,7 @@ const ContextMenuSub = ContextMenuPrimitive.Sub
 const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup
 
 const contentStyles =
-  "z-50 min-w-[10rem] overflow-hidden p-1 " +
+  "origin-(--radix-context-menu-content-transform-origin) z-50 min-w-[10rem] overflow-hidden p-1 " +
   "rounded-lg border border-border " +
   "bg-popover text-popover-foreground " +
   "[box-shadow:var(--shadow-l)] " +
@@ -22,7 +22,7 @@ const contentStyles =
 
 const itemStyles =
   "relative flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none " +
-  "transition-[background-color,color] duration-150 " +
+  "transition-[background-color,color] duration-fast " +
   "focus:bg-accent focus:text-accent-foreground " +
   "data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
 

@@ -10,8 +10,8 @@ const MegaMenu = React.forwardRef<
     className={cn(
       "absolute left-0 top-full z-50 w-full p-4",
       "rounded-xl border border-white/10",
-      "backdrop-blur-2xl bg-white/[0.06]",
-      "shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_0_8px_rgba(255,255,255,0.06)]",
+      "backdrop-blur-3xl backdrop-saturate-200 bg-zinc-900/80 supports-[backdrop-filter]:bg-zinc-900/45",
+      "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.5),inset_0_0_0.5rem_oklch(1_0_0/0.06)]",
       className
     )}
     {...props}
@@ -51,7 +51,7 @@ const MegaMenuItem = React.forwardRef<
     ref={ref}
     className={cn(
       "block rounded-lg px-3 py-2 text-sm",
-      "transition-all duration-200",
+      "transition-all duration-base",
       "hover:bg-white/[0.06] hover:text-foreground",
       "text-muted-foreground",
       className

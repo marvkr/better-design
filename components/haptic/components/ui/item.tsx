@@ -1,0 +1,84 @@
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+
+import { cn } from "@/lib/utils"
+
+/*
+ * Item — a list row with elevation. Use for navigation lists, file rows, results, etc.
+ * Hover raises it; active state flattens it (pressed).
+ */
+
+interface ItemProps extends React.HTMLAttributes<HTMLElement> {
+  asChild?: boolean
+  interactive?: boolean
+  selected?: boolean
+}
+
+const Item = React.forwardRef<HTMLElement, ItemProps>(
+  ({ className, asChild, interactive = true, selected, ...props }, ref) => {
+    const Comp = asChild ? Slot : interactive ? "button" : "div"
+    return (
+      <Comp
+        ref={/* SAFETY: the ref matches whichever element Comp resolves to. */ ref as React.Ref<never>}
+        {...(Comp === "button" ? { type: "button" } : {})}
+        className={cn(
+          "flex items-center gap-3 rounded-md px-3 py-2 w-full text-left",
+          "bg-card text-card-foreground border border-border",
+          "[box-shadow:var(--shadow-s)]",
+          "transition-[background-color,box-shadow,border-color,transform] duration-fast",
+          interactive &&
+            "cursor-pointer hover:bg-accent hover:[box-shadow:var(--shadow-m)] active:translate-y-px active:[box-shadow:var(--shadow-s)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+          selected && "border-primary/40 bg-accent [box-shadow:var(--shadow-m)]",
+          className
+        )}
+        {...props}
+      />
+    )
+  }
+)
+Item.displayName = "Item"
+
+const ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground",
+        "[box-shadow:var(--shadow-s)]",
+        className
+      )}
+      {...props}
+    />
+  )
+)
+ItemIcon.displayName = "ItemIcon"
+
+const ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex-1 min-w-0", className)} {...props} />
+  )
+)
+ItemContent.displayName = "ItemContent"
+
+const ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("text-sm font-medium text-foreground truncate", className)} {...props} />
+  )
+)
+ItemTitle.displayName = "ItemTitle"
+
+const ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("text-xs text-muted-foreground truncate", className)} {...props} />
+  )
+)
+ItemDescription.displayName = "ItemDescription"
+
+const ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex items-center gap-1 shrink-0", className)} {...props} />
+  )
+)
+ItemActions.displayName = "ItemActions"
+
+export { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions }

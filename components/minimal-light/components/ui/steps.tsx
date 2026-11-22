@@ -50,7 +50,7 @@ function Steps({
             <div className={cn(isVertical ? "flex flex-col items-center" : "flex items-center w-full")}>
               <div
                 className={cn(
-                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium tracking-wide transition-colors duration-200",
+                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium tracking-wide transition-colors duration-base",
                   isCompleted && "bg-primary text-primary-foreground",
                   isActive && "bg-primary text-primary-foreground ring-4 ring-primary/20",
                   isUpcoming && "bg-secondary text-muted-foreground border border-border"
@@ -77,7 +77,7 @@ function Steps({
               {!isLast && (
                 <div
                   className={cn(
-                    "transition-colors duration-200",
+                    "transition-colors duration-base",
                     isVertical
                       ? "mt-1 ml-0 w-px flex-1 min-h-[2rem] bg-border"
                       : "h-px flex-1 mx-2 bg-border"

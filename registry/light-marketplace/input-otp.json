@@ -9,10 +9,7 @@
     }
   ],
   "dependencies": [
-    "input-otp",
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "utils"
+    "input-otp@^1.4.2",
+    "lucide-react@>=0.518.0 <1"
   ]
 }

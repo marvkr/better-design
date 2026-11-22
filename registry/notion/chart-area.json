@@ -1,0 +1,18 @@
+{
+  "name": "chart-area",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-area.tsx",
+      "content": "\"use client\"\n\nimport { Area, AreaChart, CartesianGrid, XAxis } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\"\nimport {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n} from \"./chart\"\n\nconst chartData = [\n  { month: \"January\", desktop: 186 },\n  { month: \"February\", desktop: 305 },\n  { month: \"March\", desktop: 237 },\n  { month: \"April\", desktop: 73 },\n  { month: \"May\", desktop: 209 },\n  { month: \"June\", desktop: 214 },\n]\n\nconst chartConfig = {\n  desktop: {\n    label: \"Desktop\",\n    color: \"var(--chart-1)\",\n  },\n}\n\nexport function ChartAreaDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Area Chart</CardTitle>\n        <CardDescription>Showing total visitors for the last 6 months</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <AreaChart accessibilityLayer data={chartData} margin={{ left: 12, right: 12 }}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <Area\n              dataKey=\"desktop\"\n              type=\"natural\"\n              fill=\"var(--chart-1)\"\n              fillOpacity={0.4}\n              stroke=\"var(--chart-1)\"\n            />\n          </AreaChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-2 text-sm\">\n        <div className=\"flex gap-2 leading-none font-medium\">Trending up by 5.2% this month</div>\n        <div className=\"leading-none text-muted-foreground\">January - June 2024</div>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/notion/card.json",
+    "https://better-design.com/registry/notion/chart.json"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Check } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Checkbox — unchecked: a recessed well sunk into the panel (the inverse of\n * a raised control). Checked: the exact cobalt button material, scaled down:\n * blue vertical gradient, white top highlight, cyan rim, blue outer bloom.\n */\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Checkbox = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<CheckboxPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    data-slot=\"checkbox\"\n    ref={ref}\n    className={cn(\n      \"peer inline-flex items-center justify-center h-4.5 w-4.5 shrink-0 rounded-sm border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-color,box-shadow,border-color] duration-fast\",\n      \"hover:border-ring/30\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:border-transparent data-checked:bg-transparent\",\n      \"data-checked:[background-image:var(--cobalt)]\",\n      \"data-checked:[box-shadow:var(--shadow-primary)]\",\n      \"data-checked:text-primary-foreground\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n      <Check className=\"h-3 w-3\" strokeWidth={3} />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)"
+    },
+    "dark": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)"
+    }
+  }
+}

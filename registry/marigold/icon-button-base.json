@@ -1,0 +1,29 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { tbPrimaryRaised, tbPrimaryRaisedHover, tbRaisedPanel } from \"./_shared\";\n\n// Talentboard IconButton: square control sharing the Button materials.\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center rounded-lg\",\n    \"transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-45\",\n    \"active:translate-y-px active:brightness-95\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: cn(tbPrimaryRaised, tbPrimaryRaisedHover),\n        secondary: cn(tbRaisedPanel, \"hover:bg-accent hover:border-border\"),\n        outline:\n          \"border border-border bg-transparent text-foreground hover:bg-secondary hover:shadow-[var(--tb-shadow-sm)]\",\n        ghost: \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.22),0_0.0625rem_0.125rem_oklch(0.5_0.16_27/0.3),0_0.25rem_0.75rem_-0.1875rem_oklch(0.6_0.2_27/0.4)] \" +\n          \"hover:brightness-[1.04]\",\n      },\n      size: {\n        sm: \"h-8 w-8 rounded-md\",\n        default: \"h-9 w-9\",\n        lg: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface IconButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, ...props }, ref) => {\n    return (\n      <ButtonPrimitive\n        className={cn(iconButtonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/marigold/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-shadow-sm": "0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.06), 0 0.0625rem 0.0625rem oklch(0.27 0.03 60 / 0.04)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "tb-shadow-sm": "0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.06), 0 0.0625rem 0.0625rem oklch(0.27 0.03 60 / 0.04)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

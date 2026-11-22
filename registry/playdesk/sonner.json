@@ -1,0 +1,27 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as Sonner } from \"sonner\";\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>;\n\n/* Playdesk toasts are small floating windows, so they reuse the window rim. */\nconst Toaster = ({ ...props }: ToasterProps) => (\n  <Sonner\n    className=\"toaster group\"\n    toastOptions={{\n      classNames: {\n        toast:\n          \"group toast group-[.toaster]:bg-card group-[.toaster]:text-card-foreground group-[.toaster]:rounded-xl group-[.toaster]:[box-shadow:var(--shadow-window)]\",\n        description: \"group-[.toast]:text-muted-foreground\",\n        actionButton:\n          \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-full\",\n        cancelButton:\n          \"group-[.toast]:bg-muted group-[.toast]:text-muted-foreground group-[.toast]:rounded-full\",\n      },\n    }}\n    {...props}\n  />\n);\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    }
+  }
+}

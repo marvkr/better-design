@@ -12,7 +12,7 @@ const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-medium",
-    "rounded-md transition-all duration-150 ease-out",
+    "rounded-lg transition-all duration-fast ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
     "active:scale-[0.98]",
@@ -20,16 +20,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary green — semi-transparent fill + solid border (from supabase-shadcn reference)
+        // Primary green — solid fill + solid border, as the source's live buttons draw it
         default:
-          "bg-primary/70 text-primary-foreground " +
+          "bg-primary text-primary-foreground " +
           "border border-primary " +
           "hover:bg-primary/90",
         // Secondary: dark panel with border + subtle shadow
         secondary:
           "bg-secondary text-secondary-foreground " +
           "border border-border " +
-          "shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.04)] " +
+          "shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.2),inset_0_0.0625rem_0_oklch(1_0_0/0.04)] " +
           "hover:bg-accent hover:border-border/70",
         // Outline
         outline:
@@ -43,7 +43,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground " +
           "border border-destructive/50 " +
-          "shadow-[0_1px_3px_rgba(0,0,0,0.3)] " +
+          "shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.3)] " +
           "hover:bg-destructive/90",
         // Link
         link: "text-primary underline-offset-4 hover:underline",
@@ -53,6 +53,7 @@ const buttonVariants = cva(
         default: "h-9 px-4",
         lg:      "h-10 px-6",
         icon:    "h-9 w-9",
+        "icon-sm": "h-8 w-8 rounded-md",
       },
     },
     defaultVariants: {
@@ -73,6 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

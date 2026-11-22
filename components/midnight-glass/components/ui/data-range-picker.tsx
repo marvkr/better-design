@@ -55,12 +55,12 @@ export function DataRangePicker({
           variant="outline"
           disabled={disabled}
           className={cn(
-            "w-[280px] justify-start text-left font-normal",
+            "w-[17.5rem] justify-start text-left font-normal",
             "rounded-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05]",
-            "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
-            "text-white/90 transition duration-300",
+            "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
+            "text-white/90 transition duration-slow",
             "hover:bg-white/[0.07] hover:border-white/[0.13]",
-            "focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)] focus-visible:border-primary/50",
+            "focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)] focus-visible:border-primary/50",
             !date && "text-white/40",
             className
           )}
@@ -73,7 +73,7 @@ export function DataRangePicker({
         className={cn(
           "w-auto p-0 rounded-xl",
           "border border-white/[0.08] backdrop-blur-2xl bg-white/[0.07]",
-          "shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_6px_rgba(255,255,255,0.05)]"
+          "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.375rem_oklch(1_0_0/0.05)]"
         )}
       >
         <Calendar

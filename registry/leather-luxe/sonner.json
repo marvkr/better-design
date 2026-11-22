@@ -1,0 +1,29 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\n// Leather Luxe Sonner: toasts as floating glass card slips with the DS\n// popover depth; actions wear the cognac leather pill.\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-card group-[.toaster]:text-foreground group-[.toaster]:border-highlight group-[.toaster]:[box-shadow:var(--shadow-popover)] group-[.toaster]:rounded-lg\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:[background-image:var(--gradient-leather)] group-[.toast]:text-primary-foreground group-[.toast]:rounded-full\",\n          cancelButton:\n            \"group-[.toast]:[background-image:var(--gradient-raised)] group-[.toast]:text-muted-foreground group-[.toast]:rounded-full\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

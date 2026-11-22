@@ -15,7 +15,7 @@ const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-semibold tracking-[-0.005em]",
-    "rounded-[14px] transition-all duration-150 ease-out",
+    "rounded-[0.875rem] transition-all duration-fast ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px",
@@ -27,18 +27,18 @@ const buttonVariants = cva(
         // tinted lift glow (color-mix retints if user overrides --primary).
         default: [
           "text-primary-foreground",
-          "bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_85%,white)_0%,var(--primary)_55%,color-mix(in_oklch,var(--primary)_85%,black)_100%)]",
-          "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.30),inset_0_-2px_0_0_rgba(0,0,0,0.18),0_1px_1px_0_rgba(15,23,42,0.08),0_4px_10px_-2px_color-mix(in_oklch,var(--primary)_35%,transparent)]",
+          "bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_85%,oklch(1_0_none))_0%,var(--primary)_55%,color-mix(in_oklch,var(--primary)_85%,oklch(0_0_none))_100%)]",
+          "shadow-[var(--shadow-pillow-primary)]",
           "hover:-translate-y-px",
-          "hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.32),inset_0_-2px_0_0_rgba(0,0,0,0.20),0_2px_2px_0_rgba(15,23,42,0.10),0_8px_18px_-3px_color-mix(in_oklch,var(--primary)_45%,transparent)]",
+          "hover:shadow-[var(--shadow-pillow-primary-hover)]",
         ].join(" "),
         // Secondary — white pillow with hairline ring + ground shadow
         secondary: [
           "text-foreground",
-          "bg-[linear-gradient(180deg,#FFFFFF_0%,#FAFAFB_100%)]",
-          "shadow-[inset_0_1px_0_0_rgba(255,255,255,1),inset_0_-1.5px_0_0_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.05),0_1px_1px_0_rgba(15,23,42,0.04),0_3px_8px_-2px_rgba(15,23,42,0.10)]",
+          "bg-[linear-gradient(180deg,oklch(1_0_0)_0%,oklch(0.9854_0.0013_286.3758)_100%)]",
+          "shadow-[var(--shadow-pillow-secondary)]",
           "hover:-translate-y-px",
-          "hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,1),inset_0_-1.5px_0_0_rgba(15,23,42,0.08),0_0_0_1px_rgba(15,23,42,0.07),0_2px_2px_0_rgba(15,23,42,0.06),0_6px_14px_-3px_rgba(15,23,42,0.14)]",
+          "hover:shadow-[var(--shadow-pillow-secondary-hover)]",
         ].join(" "),
         // Outline — minimal hairline, no pillow
         outline:
@@ -48,18 +48,19 @@ const buttonVariants = cva(
         // Destructive — same pillow recipe, mixed off --destructive
         destructive: [
           "text-destructive-foreground",
-          "bg-[linear-gradient(180deg,color-mix(in_oklch,var(--destructive)_85%,white)_0%,var(--destructive)_55%,color-mix(in_oklch,var(--destructive)_85%,black)_100%)]",
-          "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.28),inset_0_-2px_0_0_rgba(0,0,0,0.20),0_1px_1px_0_rgba(15,23,42,0.08),0_4px_10px_-2px_color-mix(in_oklch,var(--destructive)_35%,transparent)]",
+          "bg-[linear-gradient(180deg,color-mix(in_oklch,var(--destructive)_85%,oklch(1_0_none))_0%,var(--destructive)_55%,color-mix(in_oklch,var(--destructive)_85%,oklch(0_0_none))_100%)]",
+          "shadow-[var(--shadow-pillow-destructive)]",
           "hover:-translate-y-px",
-          "hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.30),inset_0_-2px_0_0_rgba(0,0,0,0.22),0_2px_2px_0_rgba(15,23,42,0.10),0_8px_18px_-3px_color-mix(in_oklch,var(--destructive)_45%,transparent)]",
+          "hover:shadow-[var(--shadow-pillow-destructive-hover)]",
         ].join(" "),
         link: "text-primary underline-offset-4 hover:underline shadow-none",
       },
       size: {
         default: "h-11 px-5 py-2.5",
-        sm: "h-9 px-4 text-xs rounded-[10px]",
-        lg: "h-14 px-8 text-base rounded-[16px]",
+        sm: "h-9 px-4 text-xs rounded-[0.625rem]",
+        lg: "h-14 px-8 text-base rounded-[1rem]",
         icon: "h-11 w-11",
+        "icon-sm": "h-9 w-9 rounded-[0.625rem]",
       },
     },
     defaultVariants: {
@@ -81,6 +82,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

@@ -20,13 +20,13 @@ const Slider = React.forwardRef<
         "bg-input [box-shadow:var(--shadow-inset)]"
       )}
     >
-      <SliderPrimitive.Range className="absolute h-full bg-primary" />
+      <SliderPrimitive.Range className="absolute h-full [background:var(--pill-gradient)] [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.08)]" />
     </SliderPrimitive.Track>
     <SliderPrimitive.Thumb
       className={cn(
         "block h-4 w-4 rounded-full border border-border bg-popover",
         "[box-shadow:var(--shadow-m)]",
-        "transition-[background-color,box-shadow] duration-150",
+        "transition-[background-color,box-shadow] duration-fast",
         "hover:[box-shadow:var(--shadow-l)] hover:bg-accent",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
         "disabled:pointer-events-none disabled:opacity-50"

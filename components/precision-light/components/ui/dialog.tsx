@@ -21,7 +21,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-base",
       className
     )}
     {...props}
@@ -39,8 +39,8 @@ const DialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         // Sharp Light Modal: rounded-20 (20px radius), bg-bg-white-0, shadow-regular-md
-        // Extracted: rounded-[20px] bg-background shadow-[0_8px_24px_0_rgb(0_0_0/0.08),0_0_0_1px_rgb(0_0_0/0.06)]
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 bg-background p-6 shadow-[0_8px_24px_0_rgb(0_0_0/0.08),0_0_0_1px_rgb(0_0_0/0.06)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] rounded-[20px] md:w-full",
+        // Extracted: rounded-[1.25rem] bg-background shadow-[0_0.5rem_1.5rem_0_rgb(0_0_0/0.08),0_0_0_0.0625rem_rgb(0_0_0/0.06)]
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 bg-background p-6 shadow-[0_0.5rem_1.5rem_0_oklch(0_0_0/0.08),0_0_0_0.0625rem_oklch(0_0_0/0.06)] duration-base data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] rounded-[1.25rem] md:w-full",
         className
       )}
       {...props}

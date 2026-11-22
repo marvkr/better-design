@@ -1,0 +1,45 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Badge — a 10px chip for counts, states and day labels. Filled\n * badges reuse the button gradient so a badge and a button read as one\n * material; tinted badges stay flat, because a status is not a control.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-[0.625rem] px-2.5 py-1 \" +\n    \"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem] \" +\n    \"transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"text-[var(--strong)] [box-shadow:var(--shadow-ring)] bg-[color:oklch(0.9_0.003_264.5)] dark:text-[color:oklch(0.491_0.015_267)]\",\n        primary:\n          \"text-primary-foreground bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)] [box-shadow:var(--shadow-primary)]\",\n        secondary: \"bg-[color:oklch(0.898_0.003_264.5)] text-[color:oklch(0.49_0.023_264.4)]\",\n        outline: \"bg-transparent text-foreground [box-shadow:var(--shadow-ring)] border border-[color:oklch(0.159_0.011_268)] dark:border-[color:oklch(0.279_0.011_268)]\",\n        destructive:\n          \"text-destructive-foreground bg-[linear-gradient(180deg,var(--destructive-from)_0%,var(--destructive-to)_100%)] [box-shadow:var(--shadow-destructive)]\",\n        success: \"text-[var(--pop-green-foreground)] bg-[color:oklch(0.893_0.046_158)] dark:text-[color:oklch(0.476_0.102_160)]\",\n        warning: \"text-[var(--pop-yellow-foreground)] bg-[color:oklch(0.896_0.064_95)] dark:text-[color:oklch(0.486_0.1_95)]\",\n        blue: \"text-[var(--pop-blue-foreground)] bg-[color:oklch(0.898_0.031_264.5)] dark:text-[color:oklch(0.491_0.086_265)]\",\n        green: \"text-[var(--pop-green-foreground)] bg-[color:oklch(0.893_0.046_158)] dark:text-[color:oklch(0.476_0.102_160)]\",\n        orange: \"bg-[color:oklch(0.901_0.045_62)] text-[color:oklch(0.501_0.129_52)]\",\n        yellow: \"text-[var(--pop-yellow-foreground)] bg-[color:oklch(0.896_0.064_95)] dark:text-[color:oklch(0.486_0.1_95)]\",\n        purple: \"text-[var(--pop-purple-foreground)] bg-[color:oklch(0.903_0.043_293.5)] dark:text-[color:oklch(0.496_0.091_293.5)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n)\n\n/** Props for `Badge`. */\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(badgeVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "destructive-from": "oklch(0.624 0.208 25.9)",
+      "destructive-to": "oklch(0.539 0.216 25.2)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55), 0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4)",
+      "shadow-destructive": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.16 26 / 0.5), 0 0 0 0.0625rem oklch(0.49 0.212 25.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.36 0.16 26 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.36 0.16 26 / 0.4)",
+      "pop-blue-foreground": "oklch(0.4416 0.1683 264)",
+      "pop-green-foreground": "oklch(0.4319 0.1055 158)",
+      "pop-yellow-foreground": "oklch(0.4913 0.1074 84)",
+      "pop-purple-foreground": "oklch(0.4813 0.1454 293.5)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)",
+      "destructive-from": "oklch(0.681 0.19 26.2)",
+      "destructive-to": "oklch(0.606 0.206 25.4)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.07)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5), 0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55)",
+      "shadow-destructive": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.15 26 / 0.5), 0 0 0 0.0625rem oklch(0.56 0.2 25.6 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.4 0.17 26 / 0.55)",
+      "pop-blue-foreground": "oklch(0.8306 0.0902 265)",
+      "pop-green-foreground": "oklch(0.8306 0.1024 160)",
+      "pop-yellow-foreground": "oklch(0.8706 0.1154 95)",
+      "pop-purple-foreground": "oklch(0.8306 0.0912 293.5)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface RatingProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"onChange\"\n> {\n  value?: number;\n  max?: number;\n  onRatingChange?: (value: number) => void;\n  readOnly?: boolean;\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst starSizes = {\n  sm: \"size-4\",\n  default: \"size-5\",\n  lg: \"size-6\",\n} as const;\n\n/**\n * Firefly Rating: a row of Carbon stars. Empty stars are warm grey outlines\n * and filled stars take the olive accent line, which holds its contrast on\n * a white page where the lit yellow-green would wash out. Hovering previews\n * the score; a read-only rating renders as one labelled image.\n */\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  (\n    {\n      className,\n      value = 0,\n      max = 5,\n      onRatingChange,\n      readOnly,\n      size = \"default\",\n      onMouseLeave,\n      ...props\n    },\n    ref,\n  ) => {\n    const [hover, setHover] = React.useState<number | null>(null);\n    const shown = hover ?? value;\n\n    const star = (starValue: number) => (\n      <Icon\n        icon={shown >= starValue ? \"carbon:star-filled\" : \"carbon:star\"}\n        aria-hidden=\"true\"\n        className={cn(\n          starSizes[size],\n          \"transition-colors duration-fast ease-out\",\n          shown >= starValue ? \"text-(--accent-line)\" : \"text-(--control)\",\n        )}\n      />\n    );\n\n    if (readOnly) {\n      return (\n        <div\n          ref={ref}\n          role=\"img\"\n          aria-label={`Rated ${value} out of ${max}`}\n          data-slot=\"rating\"\n          onMouseLeave={onMouseLeave}\n          className={cn(\"inline-flex items-center gap-0.5\", className)}\n          {...props}\n        >\n          {Array.from({ length: max }, (_, i) => (\n            <span key={i} className=\"p-0.5\">\n              {star(i + 1)}\n            </span>\n          ))}\n        </div>\n      );\n    }\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        aria-label={`Rating: ${value} out of ${max}`}\n        data-slot=\"rating\"\n        onMouseLeave={(event) => {\n          setHover(null);\n          onMouseLeave?.(event);\n        }}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        {...props}\n      >\n        {Array.from({ length: max }, (_, i) => {\n          const starValue = i + 1;\n          return (\n            <button\n              key={i}\n              type=\"button\"\n              onMouseEnter={() => setHover(starValue)}\n              onClick={() => onRatingChange?.(starValue)}\n              aria-label={`${starValue} star${starValue > 1 ? \"s\" : \"\"}`}\n              aria-pressed={value === starValue}\n              className={cn(\n                \"rounded-full p-0.5 transition-transform duration-fast ease-out\",\n                \"hover:scale-110 active:scale-95\",\n                \"focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring\",\n              )}\n            >\n              {star(starValue)}\n            </button>\n          );\n        })}\n      </div>\n    );\n  },\n);\nRating.displayName = \"Rating\";\n\nexport { Rating };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "control": "oklch(0.607 0.012 89.8)",
+      "accent-line": "oklch(0.594 0.135 115.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "control": "oklch(0.626 0.012 95.3)",
+      "accent-line": "oklch(0.841 0.161 114)"
+    }
+  }
+}

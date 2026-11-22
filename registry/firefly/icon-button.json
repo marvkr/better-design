@@ -1,0 +1,31 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { glowDestructive, glowPrimary } from \"./_shared\";\n\n/** A disabled lit button drops its light and rests on warm paper. */\nconst litDisabled =\n  \"disabled:bg-secondary disabled:bg-none disabled:shadow-none disabled:before:hidden\";\n\n/**\n * Firefly IconButton: a round button for a single icon, on the same 2, 2.5\n * and 3rem heights as Button. The default is quiet warm paper. Primary\n * wears the lit yellow-green material, so keep it for the one action a\n * screen exists to offer. Always pass `aria-label`.\n */\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center rounded-full\",\n    \"transition-[background-color,color,border-color,scale] duration-fast ease-out\",\n    \"active:scale-95\",\n    \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n    \"disabled:pointer-events-none disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground hover:bg-(--surface-3) disabled:bg-secondary\",\n        primary: `${glowPrimary} ${litDisabled}`,\n        ghost: \"bg-transparent text-foreground hover:bg-secondary\",\n        outline:\n          \"border border-(--line-strong) bg-transparent text-foreground hover:bg-muted disabled:border-border\",\n        destructive: `${glowDestructive} ${litDisabled}`,\n      },\n      size: {\n        sm: \"size-8 [&_svg]:size-4\",\n        default: \"size-10 [&_svg]:size-5\",\n        lg: \"size-12 [&_svg]:size-6\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface IconButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, type = \"button\", ...props }, ref) => (\n    <button\n      ref={ref}\n      type={type}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)"
+    }
+  }
+}

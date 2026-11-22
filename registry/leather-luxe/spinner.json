@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Spinner: a thin ring whose moving arc is cognac.\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      className={cn(\n        \"animate-spin rounded-full border-2 border-border border-t-primary\",\n        size === \"sm\" && \"h-4 w-4\",\n        size === \"default\" && \"h-6 w-6\",\n        size === \"lg\" && \"h-8 w-8\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nSpinner.displayName = \"Spinner\"\n\nexport { Spinner }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

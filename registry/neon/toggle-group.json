@@ -1,0 +1,31 @@
+{
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants } from \"@/components/ui/toggle\"\n\n/*\n * Dark Neon AI ToggleGroup.\n *\n * The group is a recessed bar; the pressed item carries the neon-green\n * material (the same signature as the primary Button), rendered directly via\n * radix data-[state=on] classes (no animation lib in this DS).\n */\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({\n  size: \"default\",\n  variant: \"default\",\n})\n\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  children,\n  ...props\n}: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &\n  VariantProps<typeof toggleVariants>) {\n  return (\n    <ToggleGroupPrimitive.Root\n      className={cn(\n        \"flex items-center gap-1 rounded-[0.75rem] border border-border bg-input p-1 [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size }}>\n        {children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive.Root>\n  )\n}\nToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName\n\nfunction ToggleGroupItem({\n  className,\n  children,\n  variant,\n  size,\n  ...props\n}: React.ComponentProps<typeof ToggleGroupPrimitive.Item> &\n  VariantProps<typeof toggleVariants>) {\n  // The group sets variant/size via context (callers configure the group, not\n  // each item), matching the linear toggle-group API. The neon pressed classes\n  // are appended last so they win the active-state coloring over the base.\n  const context = React.useContext(ToggleGroupContext)\n\n  return (\n    <ToggleGroupPrimitive.Item\n      className={cn(\n        toggleVariants({\n          variant: context.variant ?? variant,\n          size: context.size ?? size,\n        }),\n        \"relative rounded-[0.5625rem]\",\n        \"data-[state=on]:[background:var(--neon-gradient)] data-[state=on]:text-primary-foreground data-[state=on]:[box-shadow:var(--shadow-neon)] data-[state=on]:hover:bg-transparent\",\n        className\n      )}\n      {...props}\n    >\n      <span className=\"relative z-10\">{children}</span>\n    </ToggleGroupPrimitive.Item>\n  )\n}\nToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle-group@^1.1.10",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/neon/toggle.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

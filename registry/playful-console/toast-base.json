@@ -1,0 +1,34 @@
+{
+  "name": "toast-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toast.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toast as ToastPrimitive } from \"@base-ui/react/toast\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"@/components/ui/button\";\nimport { popoverSurface } from \"./_shared\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Holds the toast queue. The Toaster passes it the shared toast manager. */\nconst ToastProvider = ToastPrimitive.Provider;\n\n/**\n * Where toasts appear: the bottom of the screen on a phone, and the bottom\n * end corner from the small breakpoint, 24rem wide at most.\n */\nconst ToastViewport = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ToastPrimitive.Viewport.Props>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Portal>\n    <ToastPrimitive.Viewport\n      ref={ref}\n      data-slot=\"toast-viewport\"\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-100 flex flex-col gap-2 p-4 outline-none\",\n        \"sm:start-auto sm:w-full sm:max-w-sm\",\n        className,\n      )}\n      {...props}\n    />\n  </ToastPrimitive.Portal>\n));\nToastViewport.displayName = \"ToastViewport\";\n\n/**\n * A toast is a white card with the olive hairline and the soft menu drop.\n * It pops up 0.5rem as it fades in and follows the finger when swiped away.\n * The destructive toast takes the pale red tint, a red edge and red text.\n */\nconst toastVariants = cva(\n  [\n    popoverSurface,\n    \"group pointer-events-auto relative flex w-full items-center justify-between gap-3 p-4 pe-11\",\n    \"transition-[opacity,translate] duration-fast ease-out\",\n    \"data-[starting-style]:translate-y-2 data-[starting-style]:opacity-0\",\n    \"data-[ending-style]:opacity-0 data-[ending-style]:duration-fast\",\n    \"data-[ending-style]:data-[swipe-direction=right]:translate-x-full\",\n    \"data-[swiping]:translate-x-(--toast-swipe-movement-x) data-[swiping]:transition-none\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"\",\n        destructive: \"border-(--destructive) bg-(--destructive-tint) text-(--destructive-text)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\n/** Playful console toast: a short notice that floats over the page and leaves on its own. */\nconst Toast = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ToastPrimitive.Root.Props> & VariantProps<typeof toastVariants>\n>(({ className, variant, swipeDirection = \"right\", ...props }, ref) => (\n  <ToastPrimitive.Root\n    ref={ref}\n    data-slot=\"toast\"\n    data-variant={variant ?? \"default\"}\n    swipeDirection={swipeDirection}\n    className={cn(toastVariants({ variant }), className)}\n    {...props}\n  />\n));\nToast.displayName = \"Toast\";\n\n/** The toast's one follow-up action: a small white key at the end. */\nconst ToastAction = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<ToastPrimitive.Action.Props>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Action\n    ref={ref}\n    data-slot=\"toast-action\"\n    className={cn(buttonVariants({ variant: \"outline\", size: \"sm\" }), className)}\n    {...props}\n  />\n));\nToastAction.displayName = \"ToastAction\";\n\n/** A small close key in the top corner of the toast. */\nconst ToastClose = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<ToastPrimitive.Close.Props>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Close\n    ref={ref}\n    data-slot=\"toast-close\"\n    aria-label=\"Close\"\n    className={cn(\n      \"absolute end-2 top-2 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground\",\n      \"transition-colors duration-fast ease-out hover:bg-secondary hover:text-foreground\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      \"group-data-[variant=destructive]:text-(--destructive-text) group-data-[variant=destructive]:hover:bg-card\",\n      className,\n    )}\n    {...props}\n  >\n    <Icon icon=\"ph:x-bold\" className=\"size-4\" aria-hidden=\"true\" />\n  </ToastPrimitive.Close>\n));\nToastClose.displayName = \"ToastClose\";\n\n/** The toast headline: small, bold type in the toast's own ink. */\nconst ToastTitle = React.forwardRef<\n  HTMLHeadingElement,\n  WithClassName<ToastPrimitive.Title.Props>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Title\n    ref={ref}\n    data-slot=\"toast-title\"\n    className={cn(\"text-sm font-bold leading-snug\", className)}\n    {...props}\n  />\n));\nToastTitle.displayName = \"ToastTitle\";\n\n/** The detail line under the headline, in the secondary ink. */\nconst ToastDescription = React.forwardRef<\n  HTMLParagraphElement,\n  WithClassName<ToastPrimitive.Description.Props>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Description\n    ref={ref}\n    data-slot=\"toast-description\"\n    className={cn(\n      \"text-sm text-(--foreground-secondary) group-data-[variant=destructive]:text-(--destructive-text)\",\n      className,\n    )}\n    {...props}\n  />\n));\nToastDescription.displayName = \"ToastDescription\";\n\n/** Props for one toast, as the toast hook stores them. */\ntype ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;\n\n/** The element type the toast hook accepts as a toast's action. */\ntype ToastActionElement = React.ReactElement<typeof ToastAction>;\n\nexport {\n  type ToastProps,\n  type ToastActionElement,\n  ToastProvider,\n  ToastViewport,\n  Toast,\n  ToastTitle,\n  ToastDescription,\n  ToastClose,\n  ToastAction,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/button-base.json",
+    "https://better-design.com/registry/playful-console/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "destructive-tint": "oklch(0.903 0.037 24)",
+      "destructive-text": "oklch(0.5 0.17 27.5)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "destructive-tint": "oklch(0.28 0.06 25)",
+      "destructive-text": "oklch(0.8 0.11 25)"
+    }
+  }
+}

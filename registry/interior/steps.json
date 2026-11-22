@@ -1,0 +1,27 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Check } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Steps — the three materials in a column. A completed tile takes the\n * primary Button's flat ink fill and thumb shadow; the current tile is a\n * pressable cap lifted to the surface; upcoming tiles stay recessed wells.\n * Step numbers are counts, so they run mono. Connectors are 2px-radius rails\n * at border weight; done is said with ink, never blue.\n */\n\nexport interface Step {\n  title: string;\n  description?: string;\n}\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLOListElement> {\n  steps: Step[];\n  current?: number;\n}\n\nconst Steps = React.forwardRef<HTMLOListElement, StepsProps>(\n  ({ className, steps, current = 0, ...props }, ref) => (\n    <ol ref={ref} className={cn(\"flex flex-col\", className)} {...props}>\n      {steps.map((step, index) => {\n        const done = index < current;\n        const active = index === current;\n        const last = index === steps.length - 1;\n\n        return (\n          <li key={step.title} className=\"flex gap-3\">\n            <div className=\"flex flex-col items-center\">\n              <span\n                className={cn(\n                  \"mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-[0.5rem]\",\n                  \"font-mono text-[0.6563rem] tabular-nums\",\n                  \"transition-[background-color,box-shadow] duration-fast\",\n                  done &&\n                    \"bg-primary text-primary-foreground shadow-[var(--shadow-thumb)]\",\n                  active && \"bg-card text-foreground shadow-[var(--shadow-cap)]\",\n                  !done &&\n                    !active &&\n                    \"bg-secondary text-muted-foreground shadow-[var(--shadow-well)]\",\n                )}\n              >\n                {done ? (\n                  <Check className=\"size-3\" strokeWidth={2.5} />\n                ) : (\n                  index + 1\n                )}\n              </span>\n              {!last ? (\n                <span\n                  aria-hidden\n                  className=\"mt-1 mb-1 w-0.5 flex-1 rounded-[0.125rem] bg-border\"\n                />\n              ) : null}\n            </div>\n            <div className={cn(\"space-y-0.5\", !last && \"pb-4\")}>\n              <p\n                className={cn(\n                  \"text-[0.8125rem] font-medium\",\n                  active ? \"text-foreground\" : \"text-muted-foreground\",\n                )}\n              >\n                {step.title}\n              </p>\n              {step.description ? (\n                <p className=\"text-[0.7813rem] leading-relaxed text-muted-foreground\">\n                  {step.description}\n                </p>\n              ) : null}\n            </div>\n          </li>\n        );\n      })}\n    </ol>\n  ),\n);\nSteps.displayName = \"Steps\";\n\nexport { Steps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface NumberInputProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\" | \"onChange\"\n> {\n  value?: number;\n  onValueChange?: (value: number) => void;\n  step?: number;\n  min?: number;\n  max?: number;\n}\n\nconst stepButton = cn(\n  \"absolute top-1/2 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-secondary text-foreground\",\n  \"transition-colors duration-fast ease-out\",\n  \"hover:bg-(--secondary-hover)\",\n  \"disabled:pointer-events-none disabled:bg-transparent disabled:text-(--foreground-disabled)\",\n);\n\n/**\n * Bold retail NumberInput: the quantity picker from the bag. The number sits\n * centred in tabular figures between two round grey buttons, minus at the\n * start and plus at the end. A button goes quiet once the value reaches its\n * limit; the arrow keys still step the value from the keyboard.\n */\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  (\n    { className, value = 0, onValueChange, step = 1, min, max, disabled, ...props },\n    ref,\n  ) => {\n    const clamp = (n: number) => {\n      let next = n;\n      if (min !== undefined) next = Math.max(next, min);\n      if (max !== undefined) next = Math.min(next, max);\n      return next;\n    };\n\n    const atMin = min !== undefined && value <= min;\n    const atMax = max !== undefined && value >= max;\n\n    return (\n      <div data-slot=\"number-input\" className=\"relative\">\n        <button\n          type=\"button\"\n          onClick={() => onValueChange?.(clamp(value - step))}\n          disabled={disabled || atMin}\n          aria-label=\"Decrease\"\n          tabIndex={-1}\n          className={cn(stepButton, \"start-1.5\")}\n        >\n          <Icon icon=\"mingcute:minimize-line\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          inputMode=\"decimal\"\n          value={value}\n          step={step}\n          min={min}\n          max={max}\n          disabled={disabled}\n          onChange={(event) => {\n            const parsed = parseFloat(event.target.value);\n            if (!Number.isNaN(parsed)) onValueChange?.(clamp(parsed));\n          }}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"px-12 text-center font-medium tabular-nums\",\n            \"[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\",\n            className,\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={() => onValueChange?.(clamp(value + step))}\n          disabled={disabled || atMax}\n          aria-label=\"Increase\"\n          tabIndex={-1}\n          className={cn(stepButton, \"end-1.5\")}\n        >\n          <Icon icon=\"mingcute:add-line\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n      </div>\n    );\n  },\n);\nNumberInput.displayName = \"NumberInput\";\n\nexport { NumberInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "secondary-hover": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "secondary-hover": "oklch(0.31 0 0)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

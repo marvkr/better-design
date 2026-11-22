@@ -1,0 +1,29 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark Alert: a level-2 panel (panel inside a panel) carrying a status\n// hue. The nested shadow keeps it physically above the card it sits on.\n\nconst alertVariants = cva(\n  \"relative w-full rounded-lg border p-4 shadow-[var(--shadow-nested)] [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-0.1875rem] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-border bg-[var(--gauge-nested)] text-foreground [&>svg]:text-primary\",\n        destructive:\n          \"border-destructive/40 bg-[var(--gauge-nested)] text-[oklch(0.78_0.14_25)] [&>svg]:text-[oklch(0.72_0.16_25)]\",\n        success:\n          \"border-[oklch(0.74_0.12_152/0.35)] bg-[var(--gauge-nested)] text-[var(--gauge-ok)] [&>svg]:text-[var(--gauge-ok)]\",\n        warning:\n          \"border-[oklch(0.76_0.14_70/0.35)] bg-[var(--gauge-nested)] text-[var(--gauge-warn)] [&>svg]:text-[var(--gauge-warn)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n);\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 font-medium leading-none tracking-tight\", className)}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground [&_p]:leading-relaxed\", className)}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-nested": "oklch(0.235 0.015 283)",
+      "gauge-ok": "oklch(0.74 0.12 152)",
+      "gauge-warn": "oklch(0.76 0.14 70)",
+      "shadow-nested": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem -0.125rem oklch(0 0 0 / 0.35)"
+    },
+    "dark": {
+      "gauge-nested": "oklch(0.235 0.015 283)",
+      "gauge-ok": "oklch(0.74 0.12 152)",
+      "gauge-warn": "oklch(0.76 0.14 70)",
+      "shadow-nested": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem -0.125rem oklch(0 0 0 / 0.35)"
+    }
+  }
+}

@@ -39,8 +39,8 @@ const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-bold uppercase tracking-[0.06em] leading-none",
-    "rounded-[3px] cursor-pointer select-none",
-    "transition-[background-color,box-shadow,transform,color] duration-150",
+    "rounded-[0.1875rem] cursor-pointer select-none",
+    "transition-[background-color,box-shadow,transform,color] duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px",
@@ -82,6 +82,7 @@ const buttonVariants = cva(
         default: "h-9 px-4",
         lg: "h-10 px-6",
         icon: "h-9 w-9",
+        "icon-sm": "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -100,13 +101,20 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, onClick, style, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    const label = typeof children === "string" ? children : null
+    /** Narrows children to plain text, the only form the marquee can measure. */
+    function isTextChild(node: React.ReactNode): node is string {
+      return typeof node === "string"
+    }
+
+    const label = isTextChild(children) ? children : null
 
     const [scrambled, setScrambled] = React.useState<string | null>(null)
     const [lockedWidth, setLockedWidth] = React.useState<number | undefined>()
     const timerRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
     const innerRef = React.useRef<HTMLButtonElement | null>(null)
 
+    // SAFETY: the handle is read only after mount, when the element this
+    // component renders is attached, so the ref is non-null.
     React.useImperativeHandle(ref, () => innerRef.current as HTMLButtonElement)
 
     // Measure the natural label width so the scramble (variable-width random
@@ -160,6 +168,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={innerRef}
         onClick={handleClick}

@@ -1,0 +1,29 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Chrome Azure RadioGroup — recessed steel wells; the checked indicator is a\n * raised azure chrome knob (inset highlight + drop shadow), the same alloy as\n * the switch thumb.\n */\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst RadioGroup = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<RadioGroupPrimitive.Props>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive data-slot=\"radio-group\" ref={ref} className={cn(\"grid gap-2\", className)} {...props} />\n))\nRadioGroup.displayName = \"RadioGroup\"\n\nconst RadioGroupItem = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<RadioPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <RadioPrimitive.Root\n    data-slot=\"radio-group-item\"\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center aspect-square h-4 w-4 shrink-0 rounded-full border-[0.0938rem] border-white/10 bg-origin-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background,box-shadow,border-color] duration-fast\",\n      \"hover:border-ring/40\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      // Checked = the primary button material: metal-rim border + azure alloy fill.\n      \"data-checked:border-transparent data-checked:[background:var(--surface-on)_padding-box,var(--metal-rim)_border-box] data-checked:[box-shadow:var(--shadow-primary)]\",\n      className\n    )}\n    {...props}\n  >\n    <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"size-full flex items-center justify-center\">\n      <span className=\"block h-1.5 w-1.5 rounded-full bg-primary-foreground\" />\n    </RadioPrimitive.Indicator>\n  </RadioPrimitive.Root>\n))\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "metal-rim": "linear-gradient(to bottom, oklch(0.469 0.105 55.5), oklch(0.808 0.087 62.1))",
+      "surface-on": "linear-gradient(to bottom, oklch(0.752 0.091 83.8), oklch(0.701 0.091 83.5), oklch(0.65 0.091 83.2))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.701 0.091 83.5 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.752 0.091 83.8 / 0.35)"
+    },
+    "dark": {
+      "metal-rim": "linear-gradient(to bottom, oklch(0.469 0.105 55.5), oklch(0.808 0.087 62.1))",
+      "surface-on": "linear-gradient(to bottom, oklch(0.752 0.091 83.8), oklch(0.701 0.091 83.5), oklch(0.65 0.091 83.2))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.701 0.091 83.5 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.752 0.091 83.8 / 0.35)"
+    }
+  }
+}

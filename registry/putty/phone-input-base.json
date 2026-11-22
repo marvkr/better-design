@@ -1,0 +1,30 @@
+{
+  "name": "phone-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { ChevronDown } from \"lucide-react\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n// Clay Product Phone Input: raised clay country chip + recessed clay number well\n// (shared formFieldBase), with a soft clay popover for the country list.\n\ninterface Country {\n  code: string\n  dial: string\n  name: string\n}\n\nconst COUNTRIES: Country[] = [\n  { code: \"US\", dial: \"+1\", name: \"United States\" },\n  { code: \"GB\", dial: \"+44\", name: \"United Kingdom\" },\n  { code: \"AU\", dial: \"+61\", name: \"Australia\" },\n  { code: \"CA\", dial: \"+1\", name: \"Canada\" },\n  { code: \"DE\", dial: \"+49\", name: \"Germany\" },\n  { code: \"FR\", dial: \"+33\", name: \"France\" },\n  { code: \"IN\", dial: \"+91\", name: \"India\" },\n  { code: \"JP\", dial: \"+81\", name: \"Japan\" },\n  { code: \"BR\", dial: \"+55\", name: \"Brazil\" },\n  { code: \"MX\", dial: \"+52\", name: \"Mexico\" },\n]\n\ninterface PhoneInputProps {\n  value?: string\n  onChange?: (value: string) => void\n  defaultCountry?: string\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction PhoneInput({\n  value = \"\",\n  onChange,\n  defaultCountry = \"US\",\n  placeholder = \"Phone number\",\n  disabled,\n  className,\n}: PhoneInputProps) {\n  const [open, setOpen] = React.useState(false)\n  const [country, setCountry] = React.useState(\n    () => COUNTRIES.find((c) => c.code === defaultCountry) ?? COUNTRIES[0]!\n  )\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const handler = (e: MouseEvent) => {\n      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) setOpen(false)\n    }\n    document.addEventListener(\"mousedown\", handler)\n    return () => document.removeEventListener(\"mousedown\", handler)\n  }, [])\n\n  const handleSelect = (c: Country) => {\n    setCountry(c)\n    setOpen(false)\n  }\n\n  return (\n    <div ref={ref} className={cn(\"relative flex\", className)}>\n      {/* Country selector, raised clay chip */}\n      <button\n        type=\"button\"\n        disabled={disabled}\n        onClick={() => setOpen((o) => !o)}\n        className={cn(\n          \"flex h-10 items-center gap-1.5 rounded-l-[var(--radius-lg)] border border-r-0 border-border bg-secondary px-3.5\",\n          \"text-sm font-medium text-secondary-foreground transition-[filter] hover:brightness-[1.02]\",\n          \"[box-shadow:var(--shadow-clay-sm)]\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50\",\n          disabled && \"cursor-not-allowed opacity-60\"\n        )}\n      >\n        <span>{country?.dial}</span>\n        <ChevronDown className=\"h-3.5 w-3.5 text-muted-foreground\" />\n      </button>\n\n      {/* Phone input, recessed clay well */}\n      <input\n        type=\"tel\"\n        value={value}\n        onChange={(e) => onChange?.(e.target.value)}\n        placeholder={placeholder}\n        disabled={disabled}\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"flex-1 rounded-l-none\",\n          disabled && \"cursor-not-allowed opacity-60\"\n        )}\n      />\n\n      {/* Dropdown, soft clay popover */}\n      {open && (\n        <div className=\"absolute left-0 top-11 z-50 w-56 rounded-[var(--radius-xl)] border border-border bg-popover p-1.5 [box-shadow:var(--shadow-overlay)]\">\n          {COUNTRIES.map((c) => (\n            <button\n              key={c.code}\n              type=\"button\"\n              onClick={() => handleSelect(c)}\n              className={cn(\n                \"flex w-full items-center gap-2.5 rounded-[var(--radius-md)] px-2.5 py-1.5 text-sm\",\n                \"transition-colors hover:bg-accent\",\n                country?.code === c.code\n                  ? \"text-primary font-semibold\"\n                  : \"text-foreground\"\n              )}\n            >\n              <span className=\"w-8 font-mono text-xs text-muted-foreground\">{c.dial}</span>\n              <span className=\"truncate\">{c.name}</span>\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { PhoneInput }\nexport type { PhoneInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/putty/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-clay-sm": "inset 0 0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.85), inset 0 -0.0625rem 0.0625rem 0 oklch(0.62 0.04 70 / 0.14), 0 0.0625rem 0.125rem -0.0313rem oklch(0.5 0.04 70 / 0.16), 0 0.1875rem 0.375rem -0.125rem oklch(0.5 0.04 70 / 0.14)",
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    },
+    "dark": {
+      "shadow-clay-sm": "inset 0 0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.85), inset 0 -0.0625rem 0.0625rem 0 oklch(0.62 0.04 70 / 0.14), 0 0.0625rem 0.125rem -0.0313rem oklch(0.5 0.04 70 / 0.16), 0 0.1875rem 0.375rem -0.125rem oklch(0.5 0.04 70 / 0.14)",
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    }
+  }
+}

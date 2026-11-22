@@ -1,0 +1,52 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { creamBevel, quietBevel } from \"./_shared\";\n\n/**\n * Burnished Badge: a small bevelled pill.\n *\n * The default is a graphite bevel, the same finish as a chip. `primary` and\n * `solid` wear the cream bevel of the primary button. Status and colour\n * variants are a quiet tint with a hairline inside, so the label stays\n * readable on umber without a second raised object competing with the\n * buttons.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center gap-1 whitespace-nowrap rounded-full font-semibold tracking-[0.016em] [&_svg]:size-3 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-foreground ring-1 ring-input shadow-(--bevel-raised)\",\n        primary: creamBevel,\n        solid: creamBevel,\n        secondary: quietBevel,\n        outline: \"border border-input bg-transparent text-muted-foreground\",\n        info: \"bg-info/15 text-info-text inset-ring-1 inset-ring-info/25\",\n        success: \"bg-success/15 text-success-text inset-ring-1 inset-ring-success/25\",\n        warning: \"bg-warning/15 text-warning-text inset-ring-1 inset-ring-warning/25\",\n        destructive: \"bg-destructive/15 text-destructive-text inset-ring-1 inset-ring-destructive/30\",\n        blue: \"bg-info/15 text-info-text inset-ring-1 inset-ring-info/25\",\n        green: \"bg-success/15 text-success-text inset-ring-1 inset-ring-success/25\",\n        orange: \"bg-ember/15 text-ember-text inset-ring-1 inset-ring-ember/30\",\n        yellow: \"bg-flame/15 text-flame-text inset-ring-1 inset-ring-flame/25\",\n        purple: \"bg-glow/15 text-glow-text inset-ring-1 inset-ring-glow/25\",\n      },\n      size: {\n        sm: \"h-5 px-2 text-[0.6875rem]\",\n        default: \"h-6 px-2.5 text-xs\",\n        lg: \"h-7 px-3 text-[0.8125rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  ),\n);\nBadge.displayName = \"Badge\";\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.79 0.12 150)",
+      "warning": "oklch(0.827 0.122 62.1)",
+      "info": "oklch(0.78 0.08 240)",
+      "glow": "oklch(0.798 0.084 66.7)",
+      "ember": "oklch(0.73 0.177 45.6)",
+      "flame": "oklch(0.827 0.122 62.1)",
+      "success-text": "oklch(0.875 0.09 150)",
+      "warning-text": "oklch(0.875 0.09 70)",
+      "destructive-text": "oklch(0.875 0.07 29)",
+      "info-text": "oklch(0.875 0.06 240)",
+      "ember-text": "oklch(0.875 0.08 50)",
+      "flame-text": "oklch(0.875 0.08 75)",
+      "glow-text": "oklch(0.875 0.06 66.7)",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "success": "oklch(0.79 0.12 150)",
+      "warning": "oklch(0.827 0.122 62.1)",
+      "info": "oklch(0.78 0.08 240)",
+      "glow": "oklch(0.798 0.084 66.7)",
+      "ember": "oklch(0.73 0.177 45.6)",
+      "flame": "oklch(0.827 0.122 62.1)",
+      "success-text": "oklch(0.875 0.09 150)",
+      "warning-text": "oklch(0.875 0.09 70)",
+      "destructive-text": "oklch(0.875 0.07 29)",
+      "info-text": "oklch(0.875 0.06 240)",
+      "ember-text": "oklch(0.875 0.08 50)",
+      "flame-text": "oklch(0.875 0.08 75)",
+      "glow-text": "oklch(0.875 0.06 66.7)",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Margin Item: a row from the notes list. Rows sit flat on the page and part\n * on a hairline inset from both edges. An interactive row turns hover grey,\n * and a selected row becomes a paper card with an oxblood line drawn inside its\n * edge; the hairlines either side of it fade out.\n */\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  asChild?: boolean;\n  interactive?: boolean;\n  selected?: boolean;\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"div\";\n    return (\n      <Comp\n        ref={ref}\n        data-slot=\"item\"\n        data-selected={selected ? \"\" : undefined}\n        aria-current={selected ? \"true\" : undefined}\n        className={cn(\n          \"relative flex items-start gap-3 rounded-xl p-3\",\n          \"transition-colors duration-fast ease-(--ease-out)\",\n          // The hairline between two rows, hidden next to the selected one.\n          \"[[data-slot=item]+&]:before:absolute [[data-slot=item]+&]:before:inset-x-3 [[data-slot=item]+&]:before:top-0 [[data-slot=item]+&]:before:h-px [[data-slot=item]+&]:before:bg-border\",\n          \"[[data-selected]+&]:before:opacity-0 data-selected:before:opacity-0\",\n          interactive && [\"cursor-pointer\", focusRing, \"pointer-fine:hover:bg-accent/60\"],\n          selected && \"bg-card ring-2 ring-inset ring-primary shadow-sm pointer-fine:hover:bg-card\",\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\nItem.displayName = \"Item\";\n\n/** A small tinted square that holds the row's icon. */\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-icon\"\n      className={cn(\n        \"flex size-8 shrink-0 items-center justify-center rounded-lg bg-(--mark) text-(--mark-foreground) [&_svg]:size-4\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemIcon.displayName = \"ItemIcon\";\n\n/** The text column: title, excerpt and meta stacked with a small gap. */\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} data-slot=\"item-content\" className={cn(\"flex min-w-0 flex-1 flex-col gap-1.5\", className)} {...props} />\n  ),\n);\nItemContent.displayName = \"ItemContent\";\n\n/** The row title on one line, medium weight, cut with an ellipsis. */\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-title\"\n      className={cn(\"flex min-w-0 items-center gap-2 truncate text-sm font-medium text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nItemTitle.displayName = \"ItemTitle\";\n\n/** The excerpt in muted text, held to two lines. */\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-description\"\n      className={cn(\"line-clamp-2 text-sm leading-snug text-muted-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nItemDescription.displayName = \"ItemDescription\";\n\n/** The faint meta line under the excerpt, such as an edit time with its icon. */\nconst ItemMeta = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-meta\"\n      className={cn(\n        \"mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground/80 [&_svg]:size-3.5 [&_svg]:shrink-0\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemMeta.displayName = \"ItemMeta\";\n\n/** The trailing slot for icons or buttons at the row's end. */\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-actions\"\n      className={cn(\"flex shrink-0 items-center gap-1 text-muted-foreground [&_svg]:size-4\", className)}\n      {...props}\n    />\n  ),\n);\nItemActions.displayName = \"ItemActions\";\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemMeta, ItemActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mark": "oklch(0.895 0.04 28)",
+      "mark-foreground": "oklch(0.38 0.12 25)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "mark": "oklch(0.32 0.05 25)",
+      "mark-foreground": "oklch(0.88 0.06 30)"
+    }
+  }
+}

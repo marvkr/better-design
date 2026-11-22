@@ -26,7 +26,7 @@ const Slider = React.forwardRef<
  className={cn(
  "block h-4 w-4 rounded-full border border-border bg-popover",
  "",
- "transition-[background-color,box-shadow] duration-150",
+ "transition-[background-color,box-shadow] duration-fast",
  "hover: hover:bg-accent",
  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
  "disabled:pointer-events-none disabled:opacity-50"

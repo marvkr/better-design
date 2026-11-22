@@ -1,0 +1,27 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * The list is a recessed velvet well; the active tab is a raised velour\n * pill lifting out of it, the same material as secondary buttons.\n */\n\nconst Tabs = TabsPrimitive.Root\n\nfunction TabsList({ className, ...props }: TabsPrimitive.List.Props) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-10 items-center justify-center gap-1 rounded-lg p-1\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\",\n        \"text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = \"TabsList\"\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      className={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3.5 py-1.5 text-sm font-medium\",\n        \"transition-[background-image,box-shadow,color] duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30\",\n        \"disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n        \"data-active:text-foreground\",\n        \"data-active:[background-image:var(--velour-raised)]\",\n        \"data-active:[box-shadow:var(--shadow-button)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsTrigger.displayName = \"TabsTrigger\"\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      className={cn(\n        \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

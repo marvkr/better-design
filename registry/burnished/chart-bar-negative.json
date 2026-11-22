@@ -1,0 +1,28 @@
+{
+  "name": "chart-bar-negative",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-bar-negative.tsx",
+      "content": "\"use client\"\n\nimport { Icon } from \"@iconify/react\"\nimport { Bar, BarChart, CartesianGrid, Cell, LabelList } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\"\nimport {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  type ChartConfig,\n} from \"./chart\"\n\nexport const description = \"A bar chart with negative values\"\n\nconst chartData = [\n  { month: \"January\", visitors: 186 },\n  { month: \"February\", visitors: 205 },\n  { month: \"March\", visitors: -207 },\n  { month: \"April\", visitors: 173 },\n  { month: \"May\", visitors: -209 },\n  { month: \"June\", visitors: 214 },\n]\n\nconst chartConfig = {\n  visitors: {\n    label: \"Visitors\",\n  },\n} satisfies ChartConfig\n\n/**\n * Burnished bar chart with negative values: gains rise in glow, losses drop\n * in ember, and each bar keeps a soft rounded cap like a worn copper bar.\n */\nexport function ChartBarNegative() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Bar Chart - Negative</CardTitle>\n        <CardDescription>January - June 2024</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig}>\n          <BarChart accessibilityLayer data={chartData}>\n            <CartesianGrid vertical={false} />\n            <ChartTooltip\n              cursor={false}\n              content={<ChartTooltipContent hideLabel hideIndicator />}\n            />\n            <Bar dataKey=\"visitors\" radius={6}>\n              <LabelList\n                position=\"top\"\n                dataKey=\"month\"\n                fillOpacity={1}\n                className=\"fill-muted-foreground\"\n              />\n              {chartData.map((item) => (\n                <Cell\n                  key={item.month}\n                  fill={item.visitors > 0 ? \"var(--chart-1)\" : \"var(--chart-2)\"}\n                />\n              ))}\n            </Bar>\n          </BarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-2 text-sm\">\n        <div className=\"flex items-center gap-2 leading-none font-semibold\">\n          Trending up by 5.2% this month{\" \"}\n          <Icon icon=\"ph:trend-up\" aria-hidden=\"true\" className=\"size-4 text-primary-text\" />\n        </div>\n        <div className=\"leading-none text-muted-foreground\">\n          Showing total visitors for the last 6 months\n        </div>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2",
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/card.json",
+    "https://better-design.com/registry/burnished/chart.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    }
+  }
+}

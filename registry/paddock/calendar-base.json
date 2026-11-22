@@ -1,0 +1,29 @@
+{
+  "name": "calendar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { DayButton, DayPicker } from \"react-day-picker\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\nimport { primaryFace, focusRing } from \"./_shared\";\n\n/** Props for the Calendar: every react-day-picker prop passes through. */\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>;\n\nconst navButton = cn(\n  buttonVariants({ variant: \"ghost\", size: \"icon-sm\" }),\n  \"aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n);\n\nconst chevronIcons = {\n  left: \"mingcute:left-line\",\n  right: \"mingcute:right-line\",\n  up: \"mingcute:up-line\",\n  down: \"mingcute:down-line\",\n} as const;\n\n/** The month arrows and dropdown chevron, drawn in MingCute. */\nfunction CalendarChevron({\n  orientation = \"left\",\n  className,\n}: {\n  orientation?: keyof typeof chevronIcons;\n  className?: string;\n}) {\n  return <Icon icon={chevronIcons[orientation]} aria-hidden=\"true\" className={cn(\"size-4\", className)} />;\n}\n\n/**\n * One day of the grid. A chosen day, and each end of a chosen range, wears\n * the solid teal fill of the primary Button; the days between sit in a light\n * grey band. Today reads in semibold teal text until it is chosen.\n */\nfunction CalendarDayButton({\n  className,\n  modifiers,\n  ...props\n}: React.ComponentProps<typeof DayButton>) {\n  const filled = modifiers.selected && !modifiers.range_middle;\n\n  return (\n    <DayButton\n      modifiers={modifiers}\n      data-slot=\"calendar-day\"\n      className={cn(\n        className,\n        modifiers.outside && \"text-muted-foreground\",\n        modifiers.today && !modifiers.selected && \"font-semibold text-(--primary-text)\",\n        modifiers.range_middle && \"rounded-none bg-transparent hover:bg-transparent\",\n        filled && cn(primaryFace, \"font-medium hover:bg-primary/88\"),\n        modifiers.disabled && \"opacity-40\",\n      )}\n      {...props}\n    />\n  );\n}\n\n/**\n * Paddock Calendar: a month of 2.25rem days with small rounded corners. The\n * month name sits in semibold between two ghost arrows; a chosen day fills\n * with solid teal, and a range runs as a grey band between two teal ends.\n */\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  components,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      data-slot=\"calendar\"\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"relative flex flex-col gap-4 sm:flex-row\",\n        month: \"flex flex-col gap-3\",\n        month_caption: \"flex h-8 items-center justify-center\",\n        caption_label:\n          \"inline-flex items-center gap-1 text-sm font-semibold text-foreground [&_svg]:size-3.5 [&_svg]:text-muted-foreground\",\n        dropdowns: \"flex items-center gap-2\",\n        dropdown_root:\n          \"relative inline-flex items-center rounded-sm px-1.5 hover:bg-accent has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring\",\n        dropdown: \"absolute inset-0 cursor-pointer opacity-0\",\n        nav: \"absolute inset-x-0 top-0 flex h-8 items-center justify-between\",\n        button_previous: navButton,\n        button_next: navButton,\n        month_grid: \"w-full border-collapse\",\n        weekdays: \"flex\",\n        weekday: \"w-9 text-center text-xs font-medium text-muted-foreground\",\n        week: \"mt-1 flex w-full\",\n        day: \"relative size-9 p-0 text-center\",\n        day_button: cn(\n          \"inline-flex size-9 items-center justify-center rounded-md text-sm tabular-nums text-foreground\",\n          \"transition-colors duration-fast ease-out hover:bg-accent\",\n          focusRing,\n          \"disabled:pointer-events-none\",\n        ),\n        range_start: \"rounded-s-full bg-muted\",\n        range_middle: \"bg-muted\",\n        range_end: \"rounded-e-full bg-muted\",\n        outside: \"text-muted-foreground\",\n        disabled: \"opacity-40\",\n        hidden: \"invisible\",\n        week_number: \"w-9 text-xs text-muted-foreground\",\n        footer: \"pt-3 text-[0.8125rem] text-muted-foreground\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: CalendarChevron,\n        DayButton: CalendarDayButton,\n        ...components,\n      }}\n      {...props}\n    />\n  );\n}\nCalendar.displayName = \"Calendar\";\n\nexport { Calendar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/button-base.json",
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.45 0.09 198)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.8 0.09 190)"
+    }
+  }
+}

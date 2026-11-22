@@ -1,0 +1,20 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Card — the spec's carved panel: a face one step lighter than the canvas,\n * a 1px top inset highlight and a soft outer drop (--shadow-panel), so the\n * panel reads as carved into the blue-black background while still floating\n * a hair above it.\n */\n\nconst Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"rounded-lg border border-border bg-card text-card-foreground\",\n        \"[box-shadow:var(--shadow-panel)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nCard.displayName = \"Card\"\n\nconst CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"flex flex-col gap-1.5 p-5\", className)}\n      {...props}\n    />\n  )\n)\nCardHeader.displayName = \"CardHeader\"\n\nconst CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"text-base font-semibold leading-none tracking-tight text-foreground\", className)}\n      {...props}\n    />\n  )\n)\nCardTitle.displayName = \"CardTitle\"\n\nconst CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"text-sm text-muted-foreground\", className)}\n      {...props}\n    />\n  )\n)\nCardDescription.displayName = \"CardDescription\"\n\nconst CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"p-5 pt-0\", className)} {...props} />\n  )\n)\nCardContent.displayName = \"CardContent\"\n\nconst CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"flex items-center p-5 pt-0\", className)}\n      {...props}\n    />\n  )\n)\nCardFooter.displayName = \"CardFooter\"\n\nexport { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-panel": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.625rem 1.75rem oklch(0 0 0 / 0.36)"
+    },
+    "dark": {
+      "shadow-panel": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.625rem 1.75rem oklch(0 0 0 / 0.36)"
+    }
+  }
+}

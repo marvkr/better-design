@@ -1,0 +1,20 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Cream editorial Label: warm ink in the sans at the body size, medium\n * weight, so it names a field without competing with it. When its control\n * is disabled the label fades to the disabled ink.\n *\n * Base UI has no label primitive, so this is a native label. Base UI\n * controls mark a disabled state with data-disabled rather than the\n * disabled attribute, so the label watches both.\n */\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.ComponentPropsWithoutRef<\"label\">\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    data-slot=\"label\"\n    className={cn(\n      \"flex select-none items-center gap-2 text-sm font-medium leading-snug text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:text-(--foreground-disabled)\",\n      \"peer-data-[disabled]:cursor-not-allowed peer-data-[disabled]:text-(--foreground-disabled)\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.75 0.013 96.5)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.478 0.006 95.2)"
+    }
+  }
+}

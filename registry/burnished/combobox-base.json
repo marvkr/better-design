@@ -1,0 +1,28 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { fieldOpen, formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nconst finishes = [\n  { value: \"copper\", label: \"Copper\" },\n  { value: \"bronze\", label: \"Bronze\" },\n  { value: \"brass\", label: \"Brass\" },\n  { value: \"pewter\", label: \"Pewter\" },\n  { value: \"graphite\", label: \"Graphite\" },\n];\n\n/**\n * Burnished combobox: a graphite bevel field that opens a searchable list on\n * the raised umber panel, as wide as the field. The chosen row carries a\n * copper tick.\n */\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n  const selected = finishes.find((finish) => finish.value === value);\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        role=\"combobox\"\n        aria-expanded={open}\n        data-slot=\"combobox-trigger\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"w-60 cursor-default items-center justify-between gap-2 text-start\",\n          fieldOpen,\n          !selected && \"text-muted-foreground\",\n        )}\n      >\n        <span className=\"truncate\">{selected ? selected.label : \"Select a finish\"}</span>\n        <Icon\n          icon=\"ph:caret-up-down\"\n          className=\"size-4 shrink-0 text-muted-foreground\"\n          aria-hidden=\"true\"\n        />\n      </PopoverTrigger>\n      <PopoverContent align=\"start\" className=\"w-(--anchor-width) gap-0 p-0\">\n        <Command className=\"bg-transparent shadow-none\">\n          <CommandInput placeholder=\"Search finishes\" />\n          <CommandList>\n            <CommandEmpty>No finish found.</CommandEmpty>\n            <CommandGroup>\n              {finishes.map((finish) => (\n                <CommandItem\n                  key={finish.value}\n                  value={finish.value}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                >\n                  {finish.label}\n                  <Icon\n                    icon=\"ph:check-bold\"\n                    className={cn(\n                      \"ms-auto size-4 text-primary-text\",\n                      value === finish.value ? \"opacity-100\" : \"opacity-0\",\n                    )}\n                    aria-hidden=\"true\"\n                  />\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json",
+    "https://better-design.com/registry/burnished/command-base.json",
+    "https://better-design.com/registry/burnished/popover-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    }
+  }
+}

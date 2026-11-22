@@ -1,0 +1,22 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk StatusIndicator — a dot plus a label. AvatarStatus pins the same\n * dot to the corner of an avatar, ringed in the surface colour.\n */\n\nexport type StatusType = \"online\" | \"away\" | \"busy\" | \"offline\";\n\nconst dotStyles = {\n  online: \"bg-[var(--success)]\",\n  away: \"bg-[var(--warning)]\",\n  busy: \"bg-destructive\",\n  offline: \"bg-muted-foreground\",\n} satisfies Record<StatusType, string>;\n\nconst labels = {\n  online: \"Online\",\n  away: \"Away\",\n  busy: \"Busy\",\n  offline: \"Offline\",\n} satisfies Record<StatusType, string>;\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement> {\n  status: StatusType;\n  showLabel?: boolean;\n}\n\nconst StatusIndicator = React.forwardRef<\n  HTMLSpanElement,\n  StatusIndicatorProps\n>(({ className, status, showLabel = true, ...props }, ref) => (\n  <span\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-1.5 text-sm text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  >\n    <span className={cn(\"size-2 rounded-full\", dotStyles[status])} />\n    {showLabel ? labels[status] : <span className=\"sr-only\">{labels[status]}</span>}\n  </span>\n));\nStatusIndicator.displayName = \"StatusIndicator\";\n\nexport interface AvatarStatusProps extends React.HTMLAttributes<HTMLDivElement> {\n  status: StatusType;\n}\n\nconst AvatarStatus = React.forwardRef<HTMLDivElement, AvatarStatusProps>(\n  ({ className, status, children, ...props }, ref) => (\n    <div ref={ref} className={cn(\"relative inline-flex\", className)} {...props}>\n      {children}\n      <span\n        aria-label={labels[status]}\n        className={cn(\n          \"absolute bottom-0 right-0 size-2.5 rounded-full ring-2 ring-card\",\n          dotStyles[status],\n        )}\n      />\n    </div>\n  ),\n);\nAvatarStatus.displayName = \"AvatarStatus\";\n\nexport { StatusIndicator, AvatarStatus };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.6231 0.1652 149.2)",
+      "warning": "oklch(0.7686 0.1647 70.08)"
+    },
+    "dark": {
+      "success": "oklch(0.6231 0.1652 149.2)",
+      "warning": "oklch(0.7686 0.1647 70.08)"
+    }
+  }
+}

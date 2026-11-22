@@ -1,0 +1,317 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Heyclicky — a desktop you can pick up.
+  Dotted grey paper ground, macOS window chrome, glossy pill buttons in system
+  blue, liquid-glass panels with a white inside rim. Depth is one soft far-throw
+  shadow; edges are hairlines, never hard rules.
+*/
+
+:root {
+  /* ─── Ground: dotted grey desktop paper, near-black ink ─── */
+  --background: oklch(0.97 0 0);              /* #f5f5f5 desktop paper */
+  --foreground: oklch(0.178 0 0);             /* #111 ink */
+
+  --card: oklch(1 0 0);                        /* white window body */
+  --card-foreground: oklch(0.178 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.178 0 0);
+
+  /* ─── Primary: the system blue of the download pill ─── */
+  --primary: oklch(0.624 0.206 255.5);        /* #0a84ff */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.952 0 0);               /* #efefef silver control */
+  --secondary-foreground: oklch(0.178 0 0);
+
+  --muted: oklch(0.964 0 0);                   /* #f3f3f3 */
+  --muted-foreground: oklch(0.528 0 0);        /* #6b6b6b */
+
+  --accent: oklch(0.955 0.024 255.5);          /* faint blue wash for hovers */
+  --accent-foreground: oklch(0.591 0.224 259);
+
+  --destructive: oklch(0.637 0.212 25.7);      /* system red */
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.68 0.17 149);             /* system green */
+  --warning: oklch(0.77 0.16 76);              /* system orange */
+
+  --border: oklch(0.902 0 0);                  /* hairline, reads as 8% black on paper */
+  --input: oklch(1 0 0);
+  --ring: oklch(0.624 0.206 255.5);
+  --radius: 0.625rem;                          /* 0.625rem: the window corner */
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, "SF Mono", monospace;
+
+  /* ─── Signature: the desktop dot grid the whole system sits on ─── */
+  --dot-color: oklch(0 0 0 / 0.08);
+  --dot-size: 1.125rem;
+
+  /* ─── Signature: glossy pill fills ─── */
+  --gradient-primary: linear-gradient(
+    180deg,
+    oklch(0.684 0.171 252.2) 0%,
+    oklch(0.591 0.224 259) 100%
+  );
+  --gradient-primary-hover: linear-gradient(
+    180deg,
+    oklch(0.71 0.163 252.2) 0%,
+    oklch(0.62 0.216 259) 100%
+  );
+  --gradient-silver: linear-gradient(
+    180deg,
+    oklch(0.952 0 0) 0%,
+    oklch(0.894 0 0) 100%
+  );
+  --gradient-silver-hover: linear-gradient(
+    180deg,
+    oklch(0.973 0 0) 0%,
+    oklch(0.919 0 0) 100%
+  );
+  /* The lit segment of a segmented control, and the plan button. */
+  --gradient-chip: linear-gradient(
+    180deg,
+    oklch(1 0 0) 0%,
+    oklch(0.928 0 0) 42%,
+    oklch(0.988 0 0) 100%
+  );
+  /* A desktop window title bar: lit in the middle, dark at both edges. */
+  --gradient-chrome: linear-gradient(
+    90deg,
+    oklch(0.874 0.003 308.4) 0%,
+    oklch(0.955 0 0) 50%,
+    oklch(0.874 0.003 308.4) 100%
+  );
+  --gradient-destructive: linear-gradient(
+    180deg,
+    oklch(0.69 0.19 25.7) 0%,
+    oklch(0.6 0.224 27) 100%
+  );
+
+  /* ─── Depth: one soft far-throw shadow, never a hard edge ─── */
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05);
+  --shadow-sm: 0 0.125rem 0.375rem oklch(0 0 0 / 0.06);
+  --shadow-md: 0 0.5rem 1.5rem oklch(0 0 0 / 0.08);
+  --shadow-lg: 0 0.75rem 2.125rem oklch(0 0 0 / 0.1);
+  --shadow-xl: 0 1.125rem 3.125rem oklch(0 0 0 / 0.12);   /* the window drop */
+
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+  --shadow-window: var(--shadow-xl);
+
+  /* Fields sit flush on white behind a hairline, not sunken. */
+  --shadow-inset: inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06);
+
+  /* Raised silver control. */
+  --shadow-button:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05);
+  --shadow-button-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), 0 0.25rem 0.875rem oklch(0 0 0 / 0.1);
+
+  /* The blue pill: gloss on top, wide soft throw below. */
+  --shadow-primary:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12);
+  --shadow-primary-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.625rem 1.875rem oklch(0.591 0.224 259 / 0.3);
+
+  /* Small filled controls wear the pill's material, scaled down. */
+  --shadow-control:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28);
+
+  /* Liquid-glass panel: white rim inside, soft throw outside. */
+  --shadow-glass:
+    inset 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.8), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.25),
+    0 0.625rem 1.5rem oklch(0 0 0 / 0.12);
+
+  /* ─── Charts: the system accent set ─── */
+  --chart-1: oklch(0.624 0.206 255.5);   /* blue */
+  --chart-2: oklch(0.72 0.13 200);       /* teal */
+  --chart-3: oklch(0.77 0.16 76);        /* orange */
+  --chart-4: oklch(0.58 0.19 300);       /* purple */
+  --chart-5: oklch(0.7 0.18 5);          /* pink */
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) - 0.25rem);   /* 0.375rem  chips, media insets */
+  --radius-md: calc(var(--radius) - 0.125rem);   /* 0.5rem  fields, small cards */
+  --radius-lg: var(--radius);                /* 0.625rem window corner */
+  --radius-xl: calc(var(--radius) + 0.25rem);    /* 0.875rem card */
+  --radius-2xl: calc(var(--radius) + 0.5rem);   /* 1.125rem panel, modal */
+  --radius-3xl: calc(var(--radius) + 0.875rem);  /* 1.5rem hero surface */
+
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-window: var(--shadow-window);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+  --shadow-primary-hover: var(--shadow-primary-hover);
+  --shadow-control: var(--shadow-control);
+  --shadow-glass: var(--shadow-glass);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  /* The dot grid is the ground the whole system sits on. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(var(--dot-color) 0.0625rem, transparent 0.0625rem);
+    background-size: var(--dot-size) var(--dot-size);
+    opacity: 0.45;
+  }
+
+  :is(h1, h2, h3) {
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

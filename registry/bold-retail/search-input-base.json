@@ -1,0 +1,27 @@
+{
+  "name": "search-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldSingleLine, searchPill } from \"./_shared\";\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void;\n}\n\n/**\n * Bold retail SearchInput: the soft grey pill from the store header, with a\n * magnifier at its start. It turns white with a black edge on focus. Once it\n * holds a query and a clear handler is given, a round close button appears\n * at its end; the browser's own clear cross is hidden.\n */\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, type = \"search\", value, onClear, ...props }, ref) => {\n    const showClear = Boolean(onClear && value);\n\n    return (\n      <div data-slot=\"search-input\" className=\"relative\">\n        <Icon\n          icon=\"mingcute:search-line\"\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute start-3.5 top-1/2 size-5 -translate-y-1/2 text-foreground\"\n        />\n        <input\n          ref={ref}\n          type={type}\n          value={value}\n          className={cn(\n            searchPill,\n            formFieldSingleLine,\n            \"h-10 py-2 ps-11 [&::-webkit-search-cancel-button]:appearance-none\",\n            showClear && \"pe-11\",\n            className,\n          )}\n          {...props}\n        />\n        {showClear && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            aria-label=\"Clear search\"\n            className={cn(\n              \"absolute end-1.5 top-1/2 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground\",\n              \"transition-colors duration-fast ease-out\",\n              \"hover:bg-(--secondary-hover) hover:text-foreground\",\n              \"outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n            )}\n          >\n            <Icon icon=\"mingcute:close-line\" className=\"size-4\" aria-hidden=\"true\" />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nSearchInput.displayName = \"SearchInput\";\n\nexport { SearchInput };\nexport type { SearchInputProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "secondary-hover": "oklch(0.922 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "secondary-hover": "oklch(0.31 0 0)"
+    }
+  }
+}

@@ -56,14 +56,14 @@ function FileInput({
           }
         }}
         className={cn(
-          "flex flex-col items-center justify-center gap-3 rounded-[12px] border border-dashed border-border p-8",
-          "transition duration-200 cursor-pointer",
+          "flex flex-col items-center justify-center gap-3 rounded-[0.75rem] border border-dashed border-border p-8",
+          "transition duration-base cursor-pointer",
           isDragging && "border-primary bg-primary/5",
           !isDragging && "hover:border-foreground/30 hover:bg-secondary/30",
           disabled && "opacity-50 cursor-not-allowed"
         )}
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-secondary">
+        <div className="flex h-10 w-10 items-center justify-center rounded-[0.625rem] bg-secondary">
           <Upload className="h-5 w-5 text-muted-foreground" />
         </div>
         <div className="text-center">
@@ -95,7 +95,7 @@ function FileInput({
           {files.map((file, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 rounded-[10px] border border-border bg-background px-3 py-2"
+              className="flex items-center gap-3 rounded-[0.625rem] border border-border bg-background px-3 py-2"
             >
               <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
               <div className="flex-1 min-w-0">

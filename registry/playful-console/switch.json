@@ -1,0 +1,36 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked } from \"./_shared\";\n\n/**\n * Playful console Switch: a 2.5rem cream track with a firm olive edge and a\n * white knob that sits on its own thin slab. On, the track becomes the\n * orange key, with the primary button's rim and slab, and the knob slides\n * across.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer group/switch inline-flex h-6 w-10 shrink-0 cursor-pointer items-center rounded-full border-[0.09375rem] border-(--line-strong) bg-(--surface-3) p-0.5\",\n      \"transition-[background-color,border-color,box-shadow] duration-fast ease-out\",\n      \"hover:data-[state=unchecked]:border-(--control)\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      \"disabled:cursor-not-allowed disabled:bg-secondary\",\n      controlChecked,\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-4 rounded-full border-[0.09375rem] border-(--line-strong) bg-(--thumb) shadow-(--shadow-thumb)\",\n        \"transition-[translate,border-color] duration-fast ease-out\",\n        \"data-[state=checked]:translate-x-4 data-[state=checked]:border-(--primary-rim) data-[state=unchecked]:translate-x-0\",\n        \"group-disabled/switch:bg-muted group-disabled/switch:shadow-none\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "surface-3": "oklch(0.898 0.018 117.3)",
+      "control": "oklch(0.533 0.017 115.3)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.125rem 0 0 var(--line-strong)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "surface-3": "oklch(0.34 0.012 114)",
+      "control": "oklch(0.62 0.014 114)",
+      "thumb": "oklch(0.95 0.008 114.2)"
+    }
+  }
+}

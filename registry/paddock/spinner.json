@@ -1,0 +1,20 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Paddock Spinner: a thin cool grey ring with one darker segment turning\n * around it, flat like the rest of the system.\n */\ninterface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst sizes = {\n  sm: \"size-3.5 border-2\",\n  default: \"size-4 border-2\",\n  lg: \"size-6 border-2\",\n};\n\nconst Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <span\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\"inline-flex items-center justify-center\", className)}\n      {...props}\n    >\n      <span\n        aria-hidden\n        className={cn(\n          \"block animate-spin rounded-full border-(--track) border-t-foreground motion-reduce:animate-none\",\n          sizes[size],\n        )}\n      />\n    </span>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.945 0.008 230)"
+    },
+    "dark": {
+      "track": "oklch(0.155 0.012 240)"
+    }
+  }
+}

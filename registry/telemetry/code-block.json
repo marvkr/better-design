@@ -1,0 +1,23 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room CodeBlock: terminal viewport. Recessed near-black well\n// with a panel-header filename bar; line numbers read like log offsets\n// and copy confirms in signal green.\n\ninterface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  showLineNumbers?: boolean\n  filename?: string\n}\n\nfunction CodeBlock({\n  code,\n  language,\n  showLineNumbers = false,\n  filename,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  const lines = code.split(\"\\n\")\n\n  return (\n    <div\n      className={cn(\n        \"relative overflow-hidden rounded-md\",\n        \"border border-border bg-input\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      {filename && (\n        <div className=\"flex items-center justify-between border-b border-border bg-card px-4 py-2.5\">\n          <span className=\"text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground\">\n            {filename}\n          </span>\n          {language && (\n            <span className=\"rounded-xs border border-primary/30 bg-primary/15 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-primary\">\n              {language}\n            </span>\n          )}\n        </div>\n      )}\n      <div className=\"relative\">\n        <pre className=\"overflow-x-auto p-4 text-xs leading-relaxed text-foreground/90\">\n          <code>\n            {showLineNumbers\n              ? lines.map((line, i) => (\n                  <span key={i} className=\"flex\">\n                    <span className=\"mr-4 w-6 shrink-0 select-none text-right text-muted-foreground/40\">\n                      {i + 1}\n                    </span>\n                    <span>{line}</span>\n                  </span>\n                ))\n              : code}\n          </code>\n        </pre>\n        <button\n          onClick={handleCopy}\n          className={cn(\n            \"absolute right-2 top-2\",\n            \"inline-flex items-center gap-1.5 rounded-xs px-2.5 py-1\",\n            \"border border-border bg-secondary\",\n            \"text-[0.625rem] font-semibold uppercase tracking-wider text-muted-foreground\",\n            \"transition-colors duration-fast\",\n            \"hover:border-ring/50 hover:text-primary\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n          )}\n        >\n          <Icon\n            icon={copied ? \"tabler:check\" : \"tabler:copy\"}\n            className={cn(\"size-3\", copied && \"text-primary\")}\n          />\n          {copied ? \"Copied\" : \"Copy\"}\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeBlock }\nexport type { CodeBlockProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

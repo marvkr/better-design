@@ -1,0 +1,24 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n// Carbon (Concept 002) Input : smoked dark glass field with hairline ring, focus = white glow.\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-12 w-full rounded-2xl bg-input px-4 py-3 text-sm text-foreground\",\n          \"backdrop-blur-md\",\n          \"shadow-[var(--shadow-input)]\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-all duration-fast\",\n          \"hover:shadow-[var(--shadow-input-hover)]\",\n          \"focus-visible:outline-none focus-visible:shadow-[var(--shadow-input-focus)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-input": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "shadow-input-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.14), 0 0.125rem 0.25rem oklch(0 0 0 / 0.35)",
+      "shadow-input-focus": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.1), 0 0 0 0.125rem var(--ring), 0 0.25rem 0.75rem -0.125rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "shadow-input": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "shadow-input-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.14), 0 0.125rem 0.25rem oklch(0 0 0 / 0.35)",
+      "shadow-input-focus": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.1), 0 0 0 0.125rem var(--ring), 0 0.25rem 0.75rem -0.125rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

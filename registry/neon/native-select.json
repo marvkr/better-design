@@ -1,0 +1,14 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\ninterface NativeSelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"appearance-none cursor-pointer pr-9\",\n            \"[&>option]:bg-popover [&>option]:text-popover-foreground\",\n            error &&\n              \"border-destructive focus-visible:border-destructive focus-visible:[box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0_/_0.4),0_0_0_0.1875rem_oklch(0.62_0.23_25_/_0.2)]\",\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"m6 9 6 6 6-6\" />\n          </svg>\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/neon/_shared.json"
+  ]
+}

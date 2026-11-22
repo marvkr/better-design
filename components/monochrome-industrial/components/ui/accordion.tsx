@@ -29,7 +29,7 @@ const AccordionTrigger = React.forwardRef<
  ref={ref}
  className={cn(
  "flex flex-1 items-center justify-between py-4 text-sm font-medium text-foreground",
- "transition-colors duration-150",
+ "transition-colors duration-fast",
  "hover:text-primary",
  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-none",
  "[&[data-state=open]>svg]:rotate-180",
@@ -40,7 +40,7 @@ const AccordionTrigger = React.forwardRef<
  {children}
  <Icon
  icon="tabler:chevron-down"
- className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+ className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base"
  />
  </AccordionPrimitive.Trigger>
  </AccordionPrimitive.Header>

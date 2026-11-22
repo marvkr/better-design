@@ -61,7 +61,7 @@ const CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(
  className={cn(
  "absolute top-2 right-2 inline-flex h-7 w-7 items-center justify-center rounded-none",
  "bg-popover text-muted-foreground border border-border",
- "transition-[opacity,background-color,color,box-shadow] duration-150",
+ "transition-[opacity,background-color,color,box-shadow] duration-fast",
  "opacity-0 group-hover:opacity-100",
  "",
  "hover:text-foreground hover:bg-accent hover:",

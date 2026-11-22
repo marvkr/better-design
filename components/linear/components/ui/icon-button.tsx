@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 // Based on Linear's button pattern with icon sizes
 
 const iconButtonVariants = cva(
-  "relative inline-flex items-center justify-center shrink-0 outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  "relative inline-flex items-center justify-center shrink-0 outline-none transition duration-base ease-out focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -20,11 +20,11 @@ const iconButtonVariants = cva(
       size: {
         xs: "h-7 w-7 rounded-lg text-xs",
         sm: "h-8 w-8 rounded-lg text-sm",
-        default: "h-9 w-9 rounded-[10px] text-sm",
-        lg: "h-10 w-10 rounded-[10px] text-base",
-        xl: "h-11 w-11 rounded-[12px] text-base",
+        default: "h-9 w-9 rounded-[0.625rem] text-sm",
+        lg: "h-10 w-10 rounded-[0.625rem] text-base",
+        xl: "h-11 w-11 rounded-[0.75rem] text-base",
       },
-      shape: {
+      corners: {
         square: "",
         circle: "rounded-full",
       },
@@ -32,7 +32,7 @@ const iconButtonVariants = cva(
     defaultVariants: {
       variant: "ghost",
       size: "default",
-      shape: "square",
+      corners: "square",
     },
   }
 )
@@ -44,11 +44,11 @@ export interface IconButtonProps
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, corners, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(iconButtonVariants({ variant, size, shape, className }))}
+        className={cn(iconButtonVariants({ variant, size, corners, className }))}
         ref={ref}
         {...props}
       />

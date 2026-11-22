@@ -1,0 +1,23 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/*\n * Interior PhoneInput — one well with two compartments. The wrapper owns the\n * field recipe (2px border, tinted fill, inset shadow; accent border on a\n * white fill when entered), so the seam between the code select and the\n * number never breaks the slot.\n */\n\nexport interface PhoneInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\nconst codes = [\"+1\", \"+44\", \"+33\", \"+49\", \"+61\", \"+81\"];\n\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode, onCountryCodeChange, ...props }, ref) => {\n    // Controlled when a countryCode is passed, uncontrolled otherwise, so the\n    // select still changes when a caller supplies neither prop.\n    const [internal, setInternal] = React.useState(countryCode ?? \"+44\");\n    const current = countryCode ?? internal;\n\n    return (\n      <div\n        className={cn(\n          \"flex h-10 w-full items-stretch overflow-hidden rounded-[0.625rem]\",\n          \"border-2 border-border bg-input\",\n          \"shadow-[var(--shadow-well)]\",\n          \"transition-[background-color,border-color,box-shadow] duration-fast\",\n          \"focus-within:border-ring focus-within:bg-card focus-within:shadow-none\",\n          className,\n        )}\n      >\n        <select\n          aria-label=\"Country code\"\n          value={current}\n          onChange={(event) => {\n            if (countryCode === undefined) setInternal(event.target.value);\n            onCountryCodeChange?.(event.target.value);\n          }}\n          className=\"shrink-0 appearance-none border-r border-border bg-secondary px-3 text-[0.8125rem] text-muted-foreground outline-none\"\n        >\n          {codes.map((code) => (\n            <option key={code} value={code}>\n              {code}\n            </option>\n          ))}\n        </select>\n        <input\n          ref={ref}\n          type=\"tel\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"rounded-none border-0 bg-transparent shadow-none\",\n            \"focus-visible:bg-transparent focus-visible:shadow-none\",\n          )}\n          {...props}\n        />\n      </div>\n    );\n  },\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

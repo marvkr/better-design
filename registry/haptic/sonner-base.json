@@ -1,0 +1,28 @@
+{
+  "name": "sonner-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as SonnerPrimitive, toast as sonnerToast, type ToasterProps } from \"sonner\"\n\nimport { fireHaptic } from \"./haptics-provider\"\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:rounded-lg group-[.toaster]:[box-shadow:var(--shadow-l)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-md group-[.toast]:[box-shadow:var(--shadow-button)]\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground group-[.toast]:rounded-md\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\n/*\n * Haptic-aware `toast`: fires the preset that matches each toast's intent\n * before delegating to sonner. success → success, error → error,\n * warning → warning, plain/info messages → light tick. All other sonner\n * methods (promise, loading, dismiss, custom) pass through unchanged.\n */\n// SAFETY: Object.assign copies every sonnerToast member onto the wrapper,\n// and each override keeps the signature it wraps.\nconst toast = Object.assign(\n  (...args: Parameters<typeof sonnerToast>) => {\n    fireHaptic(\"light\")\n    return sonnerToast(...args)\n  },\n  sonnerToast,\n  {\n    success: (...args: Parameters<typeof sonnerToast.success>) => {\n      fireHaptic(\"success\")\n      return sonnerToast.success(...args)\n    },\n    error: (...args: Parameters<typeof sonnerToast.error>) => {\n      fireHaptic(\"error\")\n      return sonnerToast.error(...args)\n    },\n    warning: (...args: Parameters<typeof sonnerToast.warning>) => {\n      fireHaptic(\"warning\")\n      return sonnerToast.warning(...args)\n    },\n    info: (...args: Parameters<typeof sonnerToast.info>) => {\n      fireHaptic(\"light\")\n      return sonnerToast.info(...args)\n    },\n  }\n) as typeof sonnerToast\n\nexport { Toaster, toast }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/haptic/haptics-provider-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.22), 0 0.25rem 0.5rem oklch(0 0 0 / 0.65), 0 0.5rem 1rem oklch(0 0 0 / 0.32)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.2), 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.22), 0 0.25rem 0.5rem oklch(0 0 0 / 0.65), 0 0.5rem 1rem oklch(0 0 0 / 0.32)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.2), 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

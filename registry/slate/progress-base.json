@@ -1,0 +1,27 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Ops Sharp Progress : a recessed white meter with a graphite fill. The track\n * is a pressed-in well (inset shadow); the filled portion is the solid graphite\n * tile (bg-primary + --shadow-primary) so it reads as the same material as the\n * primary Button. Base UI computes the indicator fill width itself.\n */\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"]\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator className=\"h-full w-full flex-1 bg-primary transition-transform duration-slow ease-out [box-shadow:var(--shadow-primary)]\" />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

@@ -2,8 +2,6 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
-// Stripe Stat Card: displays a metric with label, value, and optional change indicator
-
 interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string
   value: string | number
@@ -35,7 +33,7 @@ function StatCard({
             </span>
           </div>
           {icon && (
-            <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-secondary text-muted-foreground">
+            <div className="flex h-9 w-9 items-center justify-center rounded-[0.625rem] bg-secondary text-muted-foreground">
               {icon}
             </div>
           )}
@@ -46,7 +44,7 @@ function StatCard({
               <span
                 className={cn(
                   "inline-flex items-center rounded-full px-1.5 py-0.5 text-xs font-medium",
-                  change.trend === "up" && "bg-emerald-500/10 text-emerald-700",
+                  change.trend === "up" && "bg-success-muted text-success-foreground",
                   change.trend === "down" && "bg-destructive/10 text-destructive",
                   change.trend === "neutral" && "bg-secondary text-muted-foreground"
                 )}

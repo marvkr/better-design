@@ -56,10 +56,10 @@ function TimePicker({ value = "12:00", onChange, disabled, className }: TimePick
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1 rounded-[10px] border border-border bg-background px-3",
-        "h-10 shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-        "focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-        "transition-shadow duration-200",
+        "inline-flex items-center gap-1 rounded-[0.625rem] border border-border bg-background px-3",
+        "h-10 shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
+        "focus-within:border-foreground focus-within:shadow-[0_0_0_0.1875rem_oklch(0_0_0/0.06)]",
+        "transition-shadow duration-base",
         disabled && "cursor-not-allowed opacity-60",
         className
       )}

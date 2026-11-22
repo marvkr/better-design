@@ -1,0 +1,18 @@
+{
+  "name": "chart-radar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-radar.tsx",
+      "content": "\"use client\";\n\nimport { PolarAngleAxis, PolarGrid, Radar, RadarChart } from \"recharts\";\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { month: \"May\", closed: 42 },\n  { month: \"June\", closed: 58 },\n  { month: \"July\", closed: 51 },\n  { month: \"August\", closed: 37 },\n  { month: \"September\", closed: 64 },\n  { month: \"October\", closed: 71 },\n];\n\nconst chartConfig = {\n  closed: { label: \"Tasks closed\", color: \"var(--chart-1)\" },\n};\n\n/** A radar chart of tasks closed each month, filled in a pale wash of the first chart colour. */\nexport function ChartRadarDefault() {\n  return (\n    <Card>\n      <CardHeader className=\"items-center pb-4\">\n        <CardTitle>Tasks closed</CardTitle>\n        <CardDescription>The last six months</CardDescription>\n      </CardHeader>\n      <CardContent className=\"pb-0\">\n        <ChartContainer config={chartConfig} className=\"mx-auto aspect-square max-h-64\">\n          <RadarChart data={chartData}>\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <PolarAngleAxis dataKey=\"month\" tickFormatter={(value: string) => value.slice(0, 3)} />\n            <PolarGrid />\n            <Radar\n              dataKey=\"closed\"\n              fill=\"var(--chart-1)\"\n              fillOpacity={0.18}\n              stroke=\"var(--chart-1)\"\n              strokeWidth={2}\n            />\n          </RadarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col gap-1 text-[0.8125rem]\">\n        <div className=\"font-medium text-foreground\">Up 11% on September</div>\n        <div className=\"text-muted-foreground\">May to October</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/card.json",
+    "https://better-design.com/registry/paddock/chart.json"
+  ]
+}

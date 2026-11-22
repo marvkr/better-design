@@ -1,0 +1,20 @@
+{
+  "name": "date-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { format } from \"date-fns\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { Calendar } from \"./calendar\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\n/** Props for the DatePicker. It is controlled: pass `value` and `onValueChange`. */\nexport interface DatePickerProps {\n  value?: Date;\n  onValueChange?: (date: Date | undefined) => void;\n  placeholder?: string;\n  className?: string;\n  disabled?: boolean;\n}\n\n/**\n * Playful console DatePicker: a white field with a calendar glyph that opens\n * the calendar in the white panel. Picking a day fills the field and closes\n * the panel.\n */\nconst DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(\n  ({ value, onValueChange, placeholder = \"Pick a date\", className, disabled }, ref) => {\n    const [open, setOpen] = React.useState(false);\n\n    return (\n      <Popover open={open} onOpenChange={setOpen}>\n        <PopoverTrigger\n          ref={ref}\n          disabled={disabled}\n          data-slot=\"date-picker\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"items-center gap-2 text-start data-[popup-open]:border-ring\",\n            !value && \"text-muted-foreground\",\n            className,\n          )}\n        >\n          <Icon\n            icon=\"ph:calendar-blank-duotone\"\n            aria-hidden=\"true\"\n            className=\"size-4 shrink-0 text-muted-foreground\"\n          />\n          <span className=\"truncate\">{value ? format(value, \"d MMMM yyyy\") : placeholder}</span>\n        </PopoverTrigger>\n        <PopoverContent className=\"w-auto p-0\" align=\"start\">\n          <Calendar\n            mode=\"single\"\n            selected={value}\n            defaultMonth={value}\n            onSelect={(date: Date | undefined) => {\n              onValueChange?.(date);\n              setOpen(false);\n            }}\n            autoFocus\n          />\n        </PopoverContent>\n      </Popover>\n    );\n  },\n);\nDatePicker.displayName = \"DatePicker\";\n\nexport { DatePicker };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json",
+    "https://better-design.com/registry/playful-console/calendar-base.json",
+    "https://better-design.com/registry/playful-console/popover-base.json"
+  ]
+}

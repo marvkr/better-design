@@ -1,0 +1,28 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass EmptyState: dashed glass panel inviting the first item.\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon, title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 rounded-xl px-6 py-12 text-center\",\n        \"border border-dashed border-[color:var(--ag-border-strong)]\",\n        \"bg-[var(--ag-fill)] backdrop-blur-[var(--ag-blur)]\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <span className=\"flex h-12 w-12 items-center justify-center rounded-full bg-[var(--ag-fill-hover)] border border-[color:var(--ag-border)] text-primary [&>svg]:h-5 [&>svg]:w-5\">\n          {icon}\n        </span>\n      )}\n      <div className=\"flex flex-col gap-1\">\n        <span className=\"text-sm font-bold tracking-[-0.01em]\">{title}</span>\n        {description && (\n          <span className=\"max-w-xs text-xs text-muted-foreground\">{description}</span>\n        )}\n      </div>\n      {action}\n    </div>\n  )\n)\nEmptyState.displayName = \"EmptyState\"\n\nexport { EmptyState }\nexport type { EmptyStateProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)"
+    }
+  }
+}

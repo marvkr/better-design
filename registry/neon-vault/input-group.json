@@ -1,0 +1,20 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault InputGroup: prefix/suffix addons merged into one recessed pill.\n// Addons sit as graphite caps on the sunken track; focus lights the magenta\n// ring around the whole group.\n\ninterface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"prefix\"> {\n  prefix?: React.ReactNode\n  suffix?: React.ReactNode\n  size?: \"default\" | \"sm\"\n  disabled?: boolean\n  error?: boolean\n}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  (\n    {\n      prefix,\n      suffix,\n      size = \"default\",\n      disabled,\n      error,\n      className,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          // Outer container owns the border, inset shadow and pill radius\n          \"flex w-full items-stretch overflow-hidden\",\n          \"rounded-full border border-border bg-input\",\n          \"[box-shadow:var(--shadow-inset)]\",\n          \"transition-[border-color,box-shadow] duration-fast\",\n          \"focus-within:border-ring/60 focus-within:ring-2 focus-within:ring-ring/40\",\n          \"hover:border-ring/35\",\n          error && [\n            \"border-destructive\",\n            \"focus-within:border-destructive focus-within:ring-destructive/30\",\n          ],\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        {/* Prefix addon */}\n        {prefix && (\n          <div\n            className={cn(\n              \"flex shrink-0 select-none items-center justify-center border-r border-border bg-secondary px-3\",\n              \"text-sm text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              size === \"default\" ? \"h-9\" : \"h-8\"\n            )}\n          >\n            {prefix}\n          </div>\n        )}\n\n        {/* Input child: strip its own chrome since the parent owns it */}\n        <div\n          className={cn(\n            \"flex-1 [&_input]:rounded-none [&_input]:border-0 [&_input]:shadow-none\",\n            \"[&_input]:focus-visible:border-0 [&_input]:focus-visible:ring-0 [&_input]:focus-visible:shadow-none\",\n            \"[&_input]:h-full [&_input]:w-full [&_input]:bg-transparent\",\n            disabled && \"[&_input]:cursor-not-allowed\"\n          )}\n        >\n          {children}\n        </div>\n\n        {/* Suffix addon */}\n        {suffix && (\n          <div\n            className={cn(\n              \"flex shrink-0 select-none items-center justify-center border-l border-border bg-secondary px-3\",\n              \"text-sm text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              size === \"default\" ? \"h-9\" : \"h-8\"\n            )}\n          >\n            {suffix}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nInputGroup.displayName = \"InputGroup\"\n\nexport { InputGroup }\nexport type { InputGroupProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

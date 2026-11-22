@@ -1,0 +1,24 @@
+{
+  "name": "accordion-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\"\n\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Accordion: stitched-seam row dividers, like the rows of\n// the wallet's settings list.\n\nconst Accordion = AccordionPrimitive.Root\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nfunction AccordionItem({\n  className,\n  ...props\n}: WithClassName<AccordionPrimitive.Item.Props>) {\n  return (\n    <AccordionPrimitive.Item\n      className={cn(\"border-b border-border\", className)}\n      {...props}\n    />\n  )\n}\nAccordionItem.displayName = \"AccordionItem\"\n\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: WithClassName<AccordionPrimitive.Trigger.Props>) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        className={cn(\n          \"flex flex-1 items-center justify-between py-4 text-left text-sm font-medium\",\n          \"text-foreground transition-colors hover:text-primary-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:rounded-sm\",\n          \"[&[data-panel-open]>svg]:rotate-180\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <ChevronDown className=\"h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base\" />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n}\nAccordionTrigger.displayName = \"AccordionTrigger\"\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: WithClassName<AccordionPrimitive.Panel.Props>) {\n  return (\n    <AccordionPrimitive.Panel\n      className={cn(\n        \"overflow-hidden text-sm text-muted-foreground\",\n        \"h-[var(--accordion-panel-height)] transition-[height] duration-base ease-out\",\n        \"data-starting-style:h-0 data-ending-style:h-0\"\n      )}\n      {...props}\n    >\n      <div className={cn(\"pb-4 pt-0\", className)}>{children}</div>\n    </AccordionPrimitive.Panel>\n  )\n}\nAccordionContent.displayName = \"AccordionContent\"\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

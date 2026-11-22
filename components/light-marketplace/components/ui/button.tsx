@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold",
-    "rounded-[14px] transition-all duration-150",
+    "rounded-[0.875rem] transition-all duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:scale-[0.98]",
@@ -22,12 +22,12 @@ const buttonVariants = cva(
         // Charcoal primary — marketplace "buy/sign-up" CTA with subtle depth
         default:
           "bg-primary text-primary-foreground " +
-          "shadow-[0_1px_3px_rgba(0,0,0,0.2),0_2px_8px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.08)] " +
-          "hover:bg-primary/90 hover:shadow-[0_2px_6px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12)]",
+          "shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.2),0_0.125rem_0.5rem_oklch(0_0_0/0.1),inset_0_0.0625rem_0_oklch(1_0_0/0.08)] " +
+          "hover:bg-primary/90 hover:shadow-[0_0.125rem_0.375rem_oklch(0_0_0/0.25),0_0.25rem_0.75rem_oklch(0_0_0/0.12)]",
         // Light gray secondary — #f0f0f0 NO border (browser-confirmed)
         secondary:
           "bg-secondary text-secondary-foreground " +
-          "shadow-[0_1px_2px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)] " +
+          "shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.06),inset_0_0.0625rem_0_oklch(1_0_0/0.7)] " +
           "hover:bg-secondary/80",
         // Outline
         outline:
@@ -39,7 +39,7 @@ const buttonVariants = cva(
         // Destructive
         destructive:
           "bg-destructive text-destructive-foreground " +
-          "shadow-[0_1px_3px_rgba(0,0,0,0.2)] " +
+          "shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.2)] " +
           "hover:bg-destructive/90",
         link:
           "text-primary underline-offset-4 hover:underline",
@@ -50,8 +50,9 @@ const buttonVariants = cva(
       size: {
         sm:      "h-9 px-4 text-xs rounded-xl",
         default: "h-11 px-5",
-        lg:      "h-12 px-8 text-base rounded-[14px]",
+        lg:      "h-12 px-8 text-base rounded-[0.875rem]",
         icon:    "h-11 w-11",
+        "icon-sm": "h-9 w-9 rounded-xl",
       },
     },
     defaultVariants: {
@@ -72,6 +73,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

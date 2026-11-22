@@ -1,0 +1,39 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for Airy docs components.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes. This keeps the background,\n * border, focus ring, hover, disabled and transition behaviour identical\n * across every form field in the design system.\n *\n * Airy docs fields are white boxes behind a quiet grey hairline, with a\n * 0.5rem corner. Focus turns the edge green and adds a soft green halo, the\n * same green that marks every active thing in the system.\n *\n * Do NOT copy-paste these classes into individual components - always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-md border border-(--line-strong) bg-(--field) px-3 text-sm text-foreground \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-(--control) \" +\n  \"focus-visible:border-primary focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring \" +\n  \"disabled:cursor-not-allowed disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\";\n\n/** Height + vertical padding for single-line form fields (2.5rem) */\nexport const formFieldSingleLine = \"flex h-10 py-2\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-24 py-2.5\";\n\n/**\n * The floating panel shared by every menu, popover and dropdown: a white\n * panel with a 0.75rem corner, edged by a hairline ring held in the menu shadow\n * token, with no soft shadow, so it reads in both themes without a separate border.\n */\nexport const popoverSurface =\n  \"rounded-lg bg-popover text-popover-foreground shadow-(--shadow-menu)\";\n\n/** A highlighted row inside a floating panel: pale tray, 0.5rem corner. */\nexport const menuItemBase =\n  \"relative flex min-h-8 cursor-default select-none items-center gap-2 rounded-md px-2.5 py-1.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:text-(--foreground-disabled)\";\n\n/**\n * The primary fill: a flat deep green with no gradient. Hover\n * darkens the green one step and the press one more. The pill shape comes\n * from the caller.\n */\nexport const primaryFill =\n  \"bg-primary text-primary-foreground hover:bg-(--primary-hover) active:bg-(--primary-active)\";\n\n/**\n * The same flat green on a small checked control (checkbox, radio, switch\n * track). Radix marks the checked state with data-state=\"checked\"; Base UI\n * with data-checked. A disabled control goes quiet even when checked.\n */\nexport const controlChecked =\n  \"data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground \" +\n  \"data-[checked]:border-primary data-[checked]:bg-primary data-[checked]:text-primary-foreground \" +\n  \"disabled:data-[state=checked]:border-(--line-strong) disabled:data-[state=checked]:bg-muted disabled:data-[state=checked]:text-(--foreground-disabled) \" +\n  \"data-[disabled]:data-[checked]:border-(--line-strong) data-[disabled]:data-[checked]:bg-muted data-[disabled]:data-[checked]:text-(--foreground-disabled)\";\n\n/** A selected chip, toggle or nav row: the faint green wash with green ink. */\nexport const activeWash =\n  \"data-[state=on]:bg-(--primary-wash) data-[state=on]:text-(--primary-text) data-[state=on]:border-(--primary-line)\";\n\n/** The focus ring every interactive element uses: a soft green halo. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-3 focus-visible:ring-ring\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.43 0.1 154.3)",
+      "primary-active": "oklch(0.39 0.092 154.3)",
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "primary-wash": "oklch(0.476 0.11 154.3 / 0.08)",
+      "primary-line": "oklch(0.476 0.11 154.3 / 0.32)",
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "control": "oklch(0.6 0.004 160)",
+      "field": "oklch(1 0 0)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.12)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.76 0.16 153.6)",
+      "primary-active": "oklch(0.66 0.16 153.6)",
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "primary-wash": "oklch(0.705 0.169 153.6 / 0.12)",
+      "primary-line": "oklch(0.705 0.169 153.6 / 0.4)",
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-disabled": "oklch(0.48 0.005 170)",
+      "control": "oklch(0.52 0.005 170)",
+      "field": "oklch(0.18 0.006 190)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(1 0 0 / 0.14)"
+    }
+  }
+}

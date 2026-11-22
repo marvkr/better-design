@@ -1,0 +1,24 @@
+{
+  "name": "sidebar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sidebar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Sidebar: the board's left rail. Bare canvas with a hairline\n// border; the active item is a raised glass pill.\n\ninterface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {\n  collapsed?: boolean\n}\n\nconst Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(\n  ({ className, collapsed, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-collapsed={collapsed}\n      className={cn(\n        \"flex h-full flex-col border-r border-[color:var(--ag-border)] bg-background\",\n        \"transition-[width] duration-base\",\n        collapsed ? \"w-16\" : \"w-60\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  )\n)\nSidebar.displayName = \"Sidebar\"\n\nconst SidebarHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex h-14 items-center border-b border-[color:var(--ag-border)] px-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nSidebarHeader.displayName = \"SidebarHeader\"\n\nconst SidebarContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"flex flex-1 flex-col gap-1 overflow-y-auto p-2\", className)}\n      {...props}\n    />\n  )\n)\nSidebarContent.displayName = \"SidebarContent\"\n\nconst SidebarFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"border-t border-[color:var(--ag-border)] p-2\", className)}\n      {...props}\n    />\n  )\n)\nSidebarFooter.displayName = \"SidebarFooter\"\n\ninterface SidebarItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  active?: boolean\n  icon?: React.ReactNode\n}\n\nconst SidebarItem = React.forwardRef<HTMLDivElement, SidebarItemProps>(\n  ({ className, active, icon, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-active={active}\n      className={cn(\n        \"flex cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold\",\n        \"transition-colors duration-fast\",\n        active\n          ? \"bg-[var(--ag-fill-hover)] text-foreground border border-[color:var(--ag-border)] shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.06)]\"\n          : \"border border-transparent text-muted-foreground hover:bg-[var(--ag-fill)] hover:text-foreground\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <span className={cn(\"[&>svg]:h-4 [&>svg]:w-4\", active && \"text-primary\")}>\n          {icon}\n        </span>\n      )}\n      {children}\n    </div>\n  )\n)\nSidebarItem.displayName = \"SidebarItem\"\n\nconst SidebarGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex flex-col gap-1 py-2\", className)} {...props} />\n  )\n)\nSidebarGroup.displayName = \"SidebarGroup\"\n\nconst SidebarGroupLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nSidebarGroupLabel.displayName = \"SidebarGroupLabel\"\n\nexport {\n  Sidebar,\n  SidebarHeader,\n  SidebarContent,\n  SidebarFooter,\n  SidebarItem,\n  SidebarGroup,\n  SidebarGroupLabel,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

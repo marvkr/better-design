@@ -1,0 +1,20 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Item: list row with leading / trailing slots; interactive rows\n// brighten like the board's hover states.\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  leading?: React.ReactNode\n  trailing?: React.ReactNode\n  title: string\n  subtitle?: string\n  disabled?: boolean\n  interactive?: boolean\n  as?: React.ElementType\n  href?: string\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  (\n    {\n      className,\n      leading,\n      trailing,\n      title,\n      subtitle,\n      disabled,\n      interactive,\n      as,\n      href,\n      ...props\n    },\n    ref\n  ) => {\n    const Comp = as ?? (href ? \"a\" : \"div\")\n\n    return (\n      <Comp\n        ref={ref}\n        href={href}\n        aria-disabled={disabled || undefined}\n        className={cn(\n          \"flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left\",\n          interactive &&\n            \"cursor-pointer transition-colors duration-fast hover:bg-[var(--ag-fill)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n          disabled && \"pointer-events-none opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        {leading && <span className=\"shrink-0 text-muted-foreground\">{leading}</span>}\n        <span className=\"flex min-w-0 flex-1 flex-col gap-0.5\">\n          <span className=\"truncate text-sm font-semibold tracking-[-0.01em] text-foreground\">\n            {title}\n          </span>\n          {subtitle && (\n            <span className=\"truncate text-xs text-muted-foreground\">{subtitle}</span>\n          )}\n        </span>\n        {trailing && <span className=\"shrink-0 text-muted-foreground\">{trailing}</span>}\n      </Comp>\n    )\n  }\n)\nItem.displayName = \"Item\"\n\ninterface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {\n  divided?: boolean\n}\n\nconst ItemList = React.forwardRef<HTMLDivElement, ItemListProps>(\n  ({ className, divided, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col\",\n        divided && \"divide-y divide-[oklch(1_0_0/0.09)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nItemList.displayName = \"ItemList\"\n\nexport { Item, ItemList }\nexport type { ItemProps, ItemListProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)"
+    }
+  }
+}

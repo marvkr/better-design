@@ -45,7 +45,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             key={tab.label}
             onClick={() => handleTabChange(i)}
             className={cn(
-              "relative px-4 py-2.5 font-[family-name:var(--font-mono)] uppercase tracking-[0.08em] text-[10px] transition-colors",
+              "relative px-4 py-2.5 font-[family-name:var(--font-mono)] uppercase tracking-[0.08em] text-[0.625rem] transition-colors",
               i === activeIndex
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground"
@@ -54,7 +54,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             {i === activeIndex && (
               <motion.div
                 layoutId={`code-tab-indicator-${uid}`}
-                className="absolute bottom-0 left-0 right-0 h-[1px] bg-[var(--mono-accent)]"
+                className="absolute bottom-0 left-0 right-0 h-[0.0625rem] bg-[var(--mono-accent)]"
                 transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               />
             )}
@@ -74,7 +74,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <pre className="p-4 m-0 bg-transparent font-[family-name:var(--font-mono)] text-[12px] leading-relaxed overflow-x-auto text-foreground">
+            <pre className="p-4 m-0 bg-transparent font-[family-name:var(--font-mono)] text-[0.75rem] leading-relaxed overflow-x-auto text-foreground">
               <code>{active.code}</code>
             </pre>
           </motion.div>

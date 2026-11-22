@@ -17,8 +17,8 @@ interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const variantDotClass = {
   default: "bg-border",
-  success: "bg-emerald-500",
-  warning: "bg-orange-500",
+  success: "bg-success",
+  warning: "bg-warning",
   destructive: "bg-destructive",
 }
 

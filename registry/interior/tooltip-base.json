@@ -1,0 +1,26 @@
+{
+  "name": "tooltip-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tooltip as TooltipPrimitive } from \"@base-ui/react/tooltip\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Interior Tooltip — a small lifted panel, not an inverted black bubble: the\n * same white surface as every other float, at the 6px cap radius and the\n * hint size, carried by the popover float shadow.\n */\n\nconst TooltipProvider = TooltipPrimitive.Provider\nconst Tooltip = TooltipPrimitive.Root\nconst TooltipTrigger = TooltipPrimitive.Trigger\n\nconst TooltipContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TooltipPrimitive.Popup.Props> &\n    Pick<TooltipPrimitive.Positioner.Props, \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\">\n>(({ className, align, alignOffset, side, sideOffset = 6, ...props }, ref) => (\n  <TooltipPrimitive.Portal>\n    <TooltipPrimitive.Positioner\n      align={align}\n      alignOffset={alignOffset}\n      side={side}\n      sideOffset={sideOffset}\n      className=\"isolate z-50\"\n    >\n      <TooltipPrimitive.Popup\n        ref={ref}\n        className={cn(\n          \"origin-(--transform-origin) z-50 overflow-hidden rounded-[0.375rem] px-2.5 py-1.5\",\n          \"bg-card text-[0.7188rem] font-medium text-foreground\",\n          \"shadow-[var(--shadow-float-popover)]\",\n          \"transition-[opacity,transform,scale] duration-fast\",\n          \"data-starting-style:opacity-0 data-starting-style:scale-[0.97]\",\n          \"data-ending-style:opacity-0 data-ending-style:scale-[0.97]\",\n          className\n        )}\n        {...props}\n      />\n    </TooltipPrimitive.Positioner>\n  </TooltipPrimitive.Portal>\n))\nTooltipContent.displayName = \"TooltipContent\"\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
+    },
+    "dark": {
+      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
+    }
+  }
+}

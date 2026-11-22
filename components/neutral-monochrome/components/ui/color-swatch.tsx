@@ -25,7 +25,7 @@ function ColorSwatch({
     >
       <div
         className={cn(
-          "rounded-[10px] border border-border/50",
+          "rounded-[0.625rem] border border-border/50",
           size === "sm"      && "h-8 w-8",
           size === "default" && "h-10 w-10",
           size === "lg"      && "h-14 w-14"
@@ -35,7 +35,7 @@ function ColorSwatch({
         title={label ?? color}
       />
       {label && (
-        <span className="text-[10px] font-medium text-muted-foreground">
+        <span className="text-[0.625rem] font-medium text-muted-foreground">
           {label}
         </span>
       )}

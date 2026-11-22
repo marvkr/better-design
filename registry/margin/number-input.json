@@ -1,0 +1,17 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, formFieldBase, formFieldSingleLine, pressScale } from \"./_shared\";\n\n/**\n * Margin NumberInput: the grey filled field with two tiny white stepper\n * pills stacked inside its right edge.\n */\nexport interface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number;\n  onValueChange?: (value: number) => void;\n  step?: number;\n  min?: number;\n  max?: number;\n}\n\nconst stepper = cn(\n  \"flex h-3 w-5 items-center justify-center rounded-sm bg-card text-muted-foreground shadow-sm\",\n  \"hover:bg-muted hover:text-foreground\",\n  pressScale,\n  focusRing,\n  \"disabled:pointer-events-none disabled:opacity-40\",\n);\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  ({ className, value = 0, onValueChange, step = 1, min, max, disabled, ...props }, ref) => {\n    const clamp = (n: number) => {\n      let next = n;\n      if (min !== undefined) next = Math.max(next, min);\n      if (max !== undefined) next = Math.min(next, max);\n      return next;\n    };\n\n    const increment = () => onValueChange?.(clamp(value + step));\n    const decrement = () => onValueChange?.(clamp(value - step));\n\n    return (\n      <div data-slot=\"number-input\" className=\"relative\">\n        <input\n          ref={ref}\n          type=\"number\"\n          inputMode=\"decimal\"\n          value={value}\n          step={step}\n          min={min}\n          max={max}\n          disabled={disabled}\n          onChange={(e) => {\n            const parsed = parseFloat(e.target.value);\n            if (!Number.isNaN(parsed)) onValueChange?.(clamp(parsed));\n          }}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"pr-8 tabular-nums [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\",\n            className,\n          )}\n          {...props}\n        />\n        <div className=\"absolute right-1.5 top-1/2 flex -translate-y-1/2 flex-col gap-0.5\">\n          <button\n            type=\"button\"\n            onClick={increment}\n            disabled={disabled || (max !== undefined && value >= max)}\n            className={stepper}\n            aria-label=\"Increment\"\n            tabIndex={-1}\n          >\n            <Icon icon=\"solar:alt-arrow-up-linear\" className=\"size-2.5\" aria-hidden />\n          </button>\n          <button\n            type=\"button\"\n            onClick={decrement}\n            disabled={disabled || (min !== undefined && value <= min)}\n            className={stepper}\n            aria-label=\"Decrement\"\n            tabIndex={-1}\n          >\n            <Icon icon=\"solar:alt-arrow-down-linear\" className=\"size-2.5\" aria-hidden />\n          </button>\n        </div>\n      </div>\n    );\n  },\n);\nNumberInput.displayName = \"NumberInput\";\n\nexport { NumberInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ]
+}

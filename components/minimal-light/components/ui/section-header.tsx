@@ -33,7 +33,7 @@ function SectionHeader({
     >
       <div className={cn("flex flex-col gap-1.5", align === "center" && "items-center")}>
         {eyebrow && (
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/70">
+          <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground/70">
             {eyebrow}
           </p>
         )}

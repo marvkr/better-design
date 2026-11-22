@@ -1,0 +1,27 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Cream editorial Card: an oat page laid on cream paper.\n *\n * The default card sits one tone under the page behind a warm hairline,\n * with a 1.5rem corner and no shadow. Its title is set in the serif. An\n * outline card keeps the page colour behind the hairline, a raised card is\n * the lightest paper with a soft menu shadow, and the accent card carries a\n * pale terracotta wash for the one note a screen is about.\n */\nconst cardVariants = cva(\n  \"flex flex-col rounded-xl border text-card-foreground\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-card\",\n        outline: \"border-border bg-background\",\n        raised: \"border-transparent bg-popover shadow-(--shadow-menu)\",\n        // The terracotta wash: a quiet tint behind a terracotta hairline.\n        accent: \"border-(--primary-line) bg-(--primary-wash)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface CardProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-1.5 p-6\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\n/** The card's title, set in the serif at medium weight. */\nconst CardTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\n      \"font-serif text-xl font-medium leading-snug tracking-tight\",\n      className,\n    )}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-2 p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-wash": "oklch(0.57 0.135 39 / 0.1)",
+      "primary-line": "oklch(0.57 0.135 39 / 0.35)",
+      "shadow-menu": "0 0.5rem 1.5rem -0.375rem oklch(0.191 0.002 106.6 / 0.12), 0 0 0 0.0625rem oklch(0.191 0.002 106.6 / 0.08)"
+    },
+    "dark": {
+      "primary-wash": "oklch(0.672 0.131 38.8 / 0.14)",
+      "primary-line": "oklch(0.672 0.131 38.8 / 0.45)",
+      "shadow-menu": "0 0.5rem 1.5rem -0.375rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.1)"
+    }
+  }
+}

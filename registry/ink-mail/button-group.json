@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail ButtonGroup: buttons joined into one block. Only the outer ends\n * keep the 1rem button corner; the inner edges go square and overlap by one\n * hairline, so outlined buttons share a single line between them. A focused\n * button lifts above its neighbours so its halo is never cut off.\n */\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"inline-flex w-fit items-stretch *:rounded-none *:focus-visible:z-10\",\n        orientation === \"horizontal\"\n          ? \"*:first:rounded-s-xl *:last:rounded-e-xl [&>*+*]:-ms-[0.0625rem]\"\n          : \"flex-col *:first:rounded-t-xl *:last:rounded-b-xl [&>*+*]:-mt-[0.0625rem]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

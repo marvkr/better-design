@@ -1,0 +1,27 @@
+{
+  "name": "scroll-area-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Burnished ScrollArea: content that scrolls inside its own box. The thumb\n * is a slim graphite bevel that shows only while the pointer is over the box\n * or the content moves.\n */\nconst ScrollArea = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Root.Props>\n>(({ className, children, ...props }, ref) => (\n  <ScrollAreaPrimitive.Root\n    data-slot=\"scroll-area\"\n    ref={ref}\n    className={cn(\"relative overflow-hidden\", className)}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Viewport\n      data-slot=\"scroll-area-viewport\"\n      className=\"size-full rounded-[inherit] outline-none focus-visible:ring-3 focus-visible:ring-ring\"\n    >\n      <ScrollAreaPrimitive.Content>{children}</ScrollAreaPrimitive.Content>\n    </ScrollAreaPrimitive.Viewport>\n    <ScrollBar />\n    <ScrollAreaPrimitive.Corner data-slot=\"scroll-area-corner\" />\n  </ScrollAreaPrimitive.Root>\n));\nScrollArea.displayName = \"ScrollArea\";\n\n/** One scrollbar for a ScrollArea. Add `orientation=\"horizontal\"` for a sideways one. */\nconst ScrollBar = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Scrollbar.Props>\n>(({ className, orientation = \"vertical\", ...props }, ref) => (\n  <ScrollAreaPrimitive.Scrollbar\n    data-slot=\"scroll-area-scrollbar\"\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"flex touch-none select-none p-0.5 opacity-0 transition-opacity duration-base ease-(--ease-out)\",\n      \"data-[hovering]:opacity-100 data-[scrolling]:opacity-100\",\n      \"data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2.5\",\n      \"data-[orientation=horizontal]:h-2.5 data-[orientation=horizontal]:flex-col\",\n      className,\n    )}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Thumb\n      data-slot=\"scroll-area-thumb\"\n      className=\"relative flex-1 rounded-full bg-(image:--fill-raised) shadow-(--bevel-raised)\"\n    />\n  </ScrollAreaPrimitive.Scrollbar>\n));\nScrollBar.displayName = \"ScrollBar\";\n\nexport { ScrollArea, ScrollBar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

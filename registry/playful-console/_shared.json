@@ -1,0 +1,53 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for Playful console components.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes, so every field in the\n * system shares one surface, edge, focus ring and disabled state.\n *\n * Playful console fields are plain white wells on the cream page: a firm\n * olive edge, a 0.25rem corner, and a bold blue edge plus ring on focus.\n * The chunky offset press belongs to buttons and checked controls only.\n *\n * Do NOT copy-paste these classes into individual components - always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-md border border-(--line-strong) bg-(--field) px-3 text-sm text-foreground \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-(--control) \" +\n  \"focus-visible:border-ring focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-(--highlight-blue) \" +\n  \"disabled:cursor-not-allowed disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\";\n\n/** Height + vertical padding for single-line form fields (2.25rem) */\nexport const formFieldSingleLine = \"flex h-9 py-1.5\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-24 py-2\";\n\n/**\n * The floating panel surface, shared by every menu that drops over the page:\n * a white card with the olive hairline, the card corner and a soft drop.\n */\nexport const popoverSurface =\n  \"rounded-lg border border-border bg-popover text-popover-foreground shadow-(--shadow-menu)\";\n\n/** A highlighted row inside a floating panel: a cream wash, 0.25rem corner. */\nexport const menuItemBase =\n  \"relative flex min-h-8 cursor-default select-none items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:text-(--foreground-disabled)\";\n\n/**\n * The press: a bordered face that sits on an offset slab. It lifts a little\n * under the pointer and drops into the slab when pressed. The bottom edge of\n * the slab never moves, so the button reads as a physical key.\n */\nexport const pressBase =\n  \"border-[0.09375rem] transition-[translate,box-shadow,background-color] duration-fast ease-out \" +\n  \"hover:-translate-y-0.5 active:translate-y-0.5\";\n\n/** The orange key: the primary action on a darker orange slab. */\nexport const pressPrimary =\n  \"border-[0.09375rem] transition-[translate,box-shadow,background-color] duration-fast ease-out hover:-translate-y-0.5 active:translate-y-0.5 border-(--primary-rim) bg-primary text-primary-foreground shadow-(--shadow-press-primary) \" +\n  \"hover:shadow-(--shadow-press-primary-hover) active:shadow-(--shadow-press-primary-active)\";\n\n/** The white key on the orange slab: the friendly second action. */\nexport const pressSecondary =\n  \"border-[0.09375rem] transition-[translate,box-shadow,background-color] duration-fast ease-out hover:-translate-y-0.5 active:translate-y-0.5 border-(--primary-rim) bg-card text-foreground shadow-(--shadow-press-secondary) \" +\n  \"hover:shadow-(--shadow-press-secondary-hover) active:shadow-(--shadow-press-secondary-active)\";\n\n/** The quiet key: a white face on a cream slab with an olive edge. */\nexport const pressOutline =\n  \"border-[0.09375rem] transition-[translate,box-shadow,background-color] duration-fast ease-out hover:-translate-y-0.5 active:translate-y-0.5 border-(--line-strong) bg-card text-foreground shadow-(--shadow-press-outline) \" +\n  \"hover:shadow-(--shadow-press-outline-hover) active:shadow-(--shadow-press-outline-active)\";\n\n/** The red key, for an action that removes something. */\nexport const pressDestructive =\n  \"border-[0.09375rem] transition-[translate,box-shadow,background-color] duration-fast ease-out hover:-translate-y-0.5 active:translate-y-0.5 border-(--destructive-base) bg-destructive text-destructive-foreground shadow-(--shadow-press-destructive) \" +\n  \"hover:shadow-(--shadow-press-destructive-hover) active:shadow-(--shadow-press-destructive-active)\";\n\n/**\n * A small checked control (checkbox, radio, switch track) wears the orange\n * key at a shorter slab. Radix marks the checked state with data-state=\"checked\".\n */\nexport const controlChecked =\n  \"data-[state=checked]:border-(--primary-rim) data-[state=checked]:bg-primary \" +\n  \"data-[state=checked]:text-primary-foreground data-[state=checked]:shadow-(--shadow-control) \" +\n  // A disabled control goes quiet even when checked: cream fill, no slab.\n  \"disabled:data-[state=checked]:border-(--line-strong) disabled:data-[state=checked]:bg-secondary \" +\n  \"disabled:data-[state=checked]:shadow-none disabled:data-[state=checked]:text-(--foreground-disabled)\";\n\n/** An unchecked small control: a white face with an olive edge and a thin slab. */\nexport const controlUnchecked =\n  \"border-[0.09375rem] border-(--line-strong) bg-(--field) shadow-(--shadow-control-off)\";\n\n/** A pressed toggle or chip: the orange wash behind the orange rim. */\nexport const pressedWash =\n  \"data-[state=on]:border-(--primary-rim) data-[state=on]:bg-(--primary-wash) data-[state=on]:text-foreground\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "destructive-base": "oklch(0.48 0.16 27.5)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "field": "oklch(1 0 0)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "control": "oklch(0.533 0.017 115.3)",
+      "highlight-blue": "oklch(0.623 0.188 259.8 / 0.2)",
+      "shadow-menu": "var(--shadow-md)",
+      "shadow-press-primary": "0 0.25rem 0 -0.09375rem var(--primary-base), 0 0.25rem 0 0 var(--primary-rim)",
+      "shadow-press-primary-hover": "0 0.375rem 0 -0.09375rem var(--primary-base), 0 0.375rem 0 0 var(--primary-rim)",
+      "shadow-press-primary-active": "0 0.125rem 0 -0.09375rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)",
+      "shadow-press-secondary": "0 0.25rem 0 -0.09375rem var(--primary), 0 0.25rem 0 0 var(--primary-rim)",
+      "shadow-press-secondary-hover": "0 0.375rem 0 -0.09375rem var(--primary), 0 0.375rem 0 0 var(--primary-rim)",
+      "shadow-press-secondary-active": "0 0.125rem 0 -0.09375rem var(--primary), 0 0.125rem 0 0 var(--primary-rim)",
+      "shadow-press-outline": "0 0.25rem 0 -0.09375rem var(--secondary), 0 0.25rem 0 0 var(--line-strong)",
+      "shadow-press-outline-hover": "0 0.375rem 0 -0.09375rem var(--secondary), 0 0.375rem 0 0 var(--line-strong)",
+      "shadow-press-outline-active": "0 0.125rem 0 -0.09375rem var(--secondary), 0 0.125rem 0 0 var(--line-strong)",
+      "shadow-press-destructive": "0 0.25rem 0 -0.09375rem var(--destructive-base), 0 0.25rem 0 0 var(--destructive-base)",
+      "shadow-press-destructive-hover": "0 0.375rem 0 -0.09375rem var(--destructive-base), 0 0.375rem 0 0 var(--destructive-base)",
+      "shadow-press-destructive-active": "0 0.125rem 0 -0.09375rem var(--destructive-base), 0 0.125rem 0 0 var(--destructive-base)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)",
+      "shadow-control-off": "0 0.125rem 0 0 var(--line-strong)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "destructive-base": "oklch(0.5 0.15 27)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "field": "oklch(0.225 0.009 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "control": "oklch(0.62 0.014 114)",
+      "highlight-blue": "oklch(0.7 0.15 258 / 0.3)",
+      "shadow-menu": "var(--shadow-md)"
+    }
+  }
+}

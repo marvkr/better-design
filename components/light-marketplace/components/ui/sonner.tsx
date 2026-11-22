@@ -19,7 +19,7 @@ const Toaster = ({ className, ...props }: ToasterProps) => {
             "group-[.toaster]:text-foreground",
             "group-[.toaster]:border group-[.toaster]:border-border",
             "group-[.toaster]:shadow-sm",
-            "group-[.toaster]:rounded-[14px]",
+            "group-[.toaster]:rounded-[0.875rem]",
           ].join(" "),
           description: "group-[.toast]:text-muted-foreground",
           actionButton:

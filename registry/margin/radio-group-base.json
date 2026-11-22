@@ -1,0 +1,29 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\";\n\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\";\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Margin RadioGroup: a column of choices with 0.625rem between them. */\nfunction RadioGroup({ className, ...props }: WithClassName<RadioGroupPrimitive.Props>) {\n  return (\n    <RadioGroupPrimitive\n      data-slot=\"radio-group\"\n      className={cn(\"grid gap-2.5\", className)}\n      {...props}\n    />\n  );\n}\nRadioGroup.displayName = \"RadioGroup\";\n\n/**\n * Margin RadioGroupItem: a small round paper tab with a hairline ring. The\n * chosen one fills with the primary Button's oxblood face and keeps a white dot\n * at its centre.\n */\nfunction RadioGroupItem({ className, ...props }: WithClassName<RadioPrimitive.Root.Props>) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"relative inline-flex items-center justify-center aspect-square size-4.5 shrink-0 rounded-full border border-transparent\",\n        \"bg-card shadow-(--control-edge)\",\n        \"transition duration-fast ease-(--ease-out) hover:shadow-(--control-edge-hover)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        controlChecked,\n        className,\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator\n        data-slot=\"radio-group-indicator\"\n        className=\"flex size-full items-center justify-center\"\n      >\n        <span className=\"block size-1.5 rounded-full bg-primary-foreground\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  );\n}\nRadioGroupItem.displayName = \"RadioGroupItem\";\n\nexport { RadioGroup, RadioGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "control-edge": "inset 0 0 0 0.0625rem oklch(0.56 0.02 80)",
+      "control-edge-hover": "inset 0 0 0 0.0625rem oklch(0.42 0.02 260)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "control-edge": "inset 0 0 0 0.0625rem oklch(0.58 0.015 85)",
+      "control-edge-hover": "inset 0 0 0 0.0625rem oklch(0.7 0.015 85)"
+    }
+  }
+}

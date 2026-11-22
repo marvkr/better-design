@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils"
 const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "font-[family-name:var(--font-mono)] uppercase tracking-[0.08em] text-[12px] font-medium",
-    "rounded-none border transition-[background-color,color,border-color] duration-150 ease-out",
+    "font-[family-name:var(--font-mono)] uppercase tracking-[0.08em] text-[0.75rem] font-medium",
+    "rounded-none border transition-[background-color,color,border-color] duration-fast ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mono-accent)] focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
-    "active:translate-y-[1px]",
+    "active:translate-y-[0.0625rem]",
   ].join(" "),
   {
     variants: {
@@ -43,14 +43,15 @@ const buttonVariants = cva(
           "hover:bg-[var(--mono-accent)]/90",
         // Link — Space Mono underlined.
         link:
-          "border-transparent text-foreground underline underline-offset-[6px] decoration-[1px] " +
+          "border-transparent text-foreground underline underline-offset-[0.375rem] decoration-[0.0625rem] " +
           "hover:text-[var(--mono-accent)]",
       },
       size: {
-        sm:      "h-8  px-3 text-[11px]",
+        sm:      "h-8  px-3 text-[0.6875rem]",
         default: "h-10 px-5",
-        lg:      "h-12 px-7 text-[13px]",
+        lg:      "h-12 px-7 text-[0.8125rem]",
         icon:    "h-10 w-10",
+        "icon-sm": "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -71,6 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

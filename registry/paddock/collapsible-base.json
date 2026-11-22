@@ -1,0 +1,14 @@
+{
+  "name": "collapsible-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\";\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\";\n\n/** Paddock Collapsible: an unstyled show-and-hide region on Base UI. */\nconst Collapsible = CollapsiblePrimitive.Root;\n\n/** The control that shows or hides the panel. */\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\n/** The region that shows and hides. */\nconst CollapsibleContent = CollapsiblePrimitive.Panel;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

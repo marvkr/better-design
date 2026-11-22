@@ -1,0 +1,17 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Paddock NativeSelect: the browser's own select, dressed as the white rounded\n * field with a small chevron at its right edge.\n */\nexport interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, children, ...props }, ref) => (\n    <div data-slot=\"native-select\" className=\"relative\">\n      <select\n        ref={ref}\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"cursor-pointer appearance-none pr-10 *:bg-popover *:text-popover-foreground\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </select>\n      <Icon\n        icon=\"mingcute:down-line\"\n        aria-hidden\n        className=\"pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground\"\n      />\n    </div>\n  ),\n);\nNativeSelect.displayName = \"NativeSelect\";\n\nexport { NativeSelect };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared.json"
+  ]
+}

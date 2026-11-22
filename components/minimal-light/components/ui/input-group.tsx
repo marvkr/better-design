@@ -33,7 +33,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
         className={cn(
           "flex w-full items-stretch overflow-hidden",
           "rounded-xl border border-border bg-secondary",
-          "transition-colors duration-200",
+          "transition-colors duration-base",
           "hover:border-border/80 hover:bg-accent",
           "focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-0",
           "focus-within:border-primary/30",
@@ -51,7 +51,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
             className={cn(
               "flex items-center justify-center px-3 shrink-0",
               "bg-accent border-r border-border",
-              "shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]",
+              "shadow-[inset_0_0.125rem_0.25rem_0_color-mix(in_oklch,var(--foreground)_8%,transparent)]",
               "text-muted-foreground select-none",
               "text-sm tracking-wide",
               "[&>svg]:h-4 [&>svg]:w-4",
@@ -85,7 +85,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
             className={cn(
               "flex items-center justify-center px-3 shrink-0",
               "bg-accent border-l border-border",
-              "shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]",
+              "shadow-[inset_0_0.125rem_0.25rem_0_color-mix(in_oklch,var(--foreground)_8%,transparent)]",
               "text-muted-foreground select-none",
               "text-sm tracking-wide",
               "[&>svg]:h-4 [&>svg]:w-4",

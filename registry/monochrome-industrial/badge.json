@@ -4,14 +4,28 @@
   "files": [
     {
       "path": "components/ui/badge.tsx",
-      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Monochrome Industrial Badge — sharp rectangle, Space Mono ALL CAPS, hairline border.\n// Status colors apply to the FILL, not the surrounding row.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-none font-[family-name:var(--font-mono)] uppercase tracking-[0.1em] border transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--mono-accent)] focus:ring-offset-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent text-foreground border-[var(--mono-border-visible)]\",\n        primary:\n          \"bg-primary text-primary-foreground border-primary\",\n        secondary:\n          \"bg-[var(--mono-surface-raised)] text-foreground border-[var(--mono-border-visible)]\",\n        destructive:\n          \"bg-[var(--mono-accent)] text-white border-[var(--mono-accent)]\",\n        \"destructive-light\":\n          \"bg-transparent text-[var(--mono-accent)] border-[var(--mono-accent)]\",\n        success:\n          \"bg-[var(--mono-success)] text-white border-[var(--mono-success)]\",\n        \"success-light\":\n          \"bg-transparent text-[var(--mono-success)] border-[var(--mono-success)]\",\n        warning:\n          \"bg-[var(--mono-warning)] text-black border-[var(--mono-warning)]\",\n        \"warning-light\":\n          \"bg-transparent text-[var(--mono-warning)] border-[var(--mono-warning)]\",\n        outline:\n          \"bg-transparent text-foreground border-[var(--mono-border-visible)]\",\n      },\n      size: {\n        sm:      \"h-4 gap-1   px-1.5 text-[9px]\",\n        default: \"h-5 gap-1.5 px-2   text-[10px]\",\n        lg:      \"h-6 gap-1.5 px-2.5 text-[11px]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Monochrome Industrial Badge — sharp rectangle, Space Mono ALL CAPS, hairline border.\n// Status colors apply to the FILL, not the surrounding row.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-none font-[family-name:var(--font-mono)] uppercase tracking-[0.1em] border transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--mono-accent)] focus:ring-offset-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent text-foreground border-[var(--mono-border-visible)]\",\n        primary:\n          \"bg-primary text-primary-foreground border-primary\",\n        secondary:\n          \"bg-[var(--mono-surface-raised)] text-foreground border-[var(--mono-border-visible)]\",\n        destructive:\n          \"bg-[var(--mono-accent)] text-white border-[var(--mono-accent)]\",\n        \"destructive-light\":\n          \"bg-transparent border-[var(--mono-accent)] text-[color:oklch(0.621_0.218_26.8)]\",\n        success:\n          \"text-white border-[var(--mono-success)] bg-[color:oklch(0.545_0.128_148.6)]\",\n        \"success-light\":\n          \"bg-transparent text-[var(--mono-success)] border-[var(--mono-success)]\",\n        warning:\n          \"bg-[var(--mono-warning)] text-black border-[var(--mono-warning)]\",\n        \"warning-light\":\n          \"bg-transparent text-[var(--mono-warning)] border-[var(--mono-warning)]\",\n        outline:\n          \"bg-transparent text-foreground border-[var(--mono-border-visible)]\",\n      },\n      size: {\n        sm:      \"h-4 gap-1   px-1.5 text-[0.5625rem]\",\n        default: \"h-5 gap-1.5 px-2   text-[0.625rem]\",\n        lg:      \"h-6 gap-1.5 px-2.5 text-[0.6875rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority@>=0.7.1 <1"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mono-surface-raised": "oklch(0.2178 0 0)",
+      "mono-border-visible": "oklch(0.3211 0 0)",
+      "mono-accent": "oklch(0.5607 0.2177 26.79)",
+      "mono-success": "oklch(0.6299 0.1279 148.63)",
+      "mono-warning": "oklch(0.7534 0.1274 84.93)"
+    },
+    "dark": {
+      "mono-surface-raised": "oklch(0.2178 0 0)",
+      "mono-border-visible": "oklch(0.3211 0 0)",
+      "mono-accent": "oklch(0.5607 0.2177 26.79)",
+      "mono-success": "oklch(0.6299 0.1279 148.63)",
+      "mono-warning": "oklch(0.7534 0.1274 84.93)"
+    }
+  }
 }

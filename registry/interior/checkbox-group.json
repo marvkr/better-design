@@ -1,0 +1,14 @@
+{
+  "name": "checkbox-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Checkbox } from \"./checkbox\";\n\nexport interface CheckboxGroupOption {\n  value: string;\n  label: string;\n  description?: string;\n  disabled?: boolean;\n}\n\nexport interface CheckboxGroupProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: CheckboxGroupOption[];\n  value?: string[];\n  onChange?: (value: string[]) => void;\n}\n\nconst CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(\n  ({ className, options, value, onChange, ...props }, ref) => {\n    // Scope the ids to this group so two groups sharing option values do not\n    // produce duplicate ids, which would break every label association.\n    const groupId = React.useId();\n    const [internal, setInternal] = React.useState<string[]>(value ?? []);\n    const selected = value ?? internal;\n\n    const toggle = (next: string) => {\n      const updated = selected.includes(next)\n        ? selected.filter((item) => item !== next)\n        : [...selected, next];\n      setInternal(updated);\n      onChange?.(updated);\n    };\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\"flex flex-col gap-3\", className)}\n        {...props}\n      >\n        {options.map((option) => {\n          const id = `${groupId}-${option.value}`;\n          return (\n            <div key={option.value} className=\"flex items-start gap-2.5\">\n              <Checkbox\n                id={id}\n                checked={selected.includes(option.value)}\n                disabled={option.disabled}\n                onCheckedChange={() => toggle(option.value)}\n                className=\"mt-0.5\"\n              />\n              <div className=\"space-y-0.5\">\n                <label\n                  htmlFor={id}\n                  className={cn(\n                    \"text-[0.8125rem] font-medium leading-[1.25rem] text-foreground\",\n                    option.disabled && \"cursor-not-allowed opacity-50\",\n                  )}\n                >\n                  {option.label}\n                </label>\n                {option.description ? (\n                  <p className=\"text-[0.7188rem] leading-relaxed text-muted-foreground\">\n                    {option.description}\n                  </p>\n                ) : null}\n              </div>\n            </div>\n          );\n        })}\n      </div>\n    );\n  },\n);\nCheckboxGroup.displayName = \"CheckboxGroup\";\n\nexport { CheckboxGroup };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/checkbox.json"
+  ]
+}

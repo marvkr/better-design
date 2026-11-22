@@ -1,0 +1,20 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Empty: a dashed hairline box with a 1rem corner that holds its\n * content centred. It keeps the shape of a list or a result while there is\n * nothing in it yet.\n */\nconst Empty = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"empty\"\n    className={cn(\n      \"flex min-h-48 flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-(--line-strong) p-8 text-center text-sm text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nEmpty.displayName = \"Empty\";\n\nexport { Empty };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.65 0.004 160)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.36)"
+    }
+  }
+}

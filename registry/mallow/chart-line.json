@@ -1,0 +1,18 @@
+{
+  "name": "chart-line",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-line.tsx",
+      "content": "\"use client\"\n\nimport { CartesianGrid, Line, LineChart, XAxis } from \"recharts\"\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\"\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\"\n\nconst chartData = [\n  { month: \"January\", balance: 186 },\n  { month: \"February\", balance: 305 },\n  { month: \"March\", balance: 237 },\n  { month: \"April\", balance: 73 },\n  { month: \"May\", balance: 209 },\n  { month: \"June\", balance: 214 },\n]\n\nconst chartConfig = {\n  balance: { label: \"Balance\", color: \"var(--chart-1)\" },\n}\n\n/** Mallow line chart: one thin violet line with no dots until hover. */\nexport function ChartLineDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Account balance</CardTitle>\n        <CardDescription>January to June</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <LineChart accessibilityLayer data={chartData} margin={{ left: 12, right: 12 }}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />\n            <Line\n              dataKey=\"balance\"\n              type=\"monotone\"\n              stroke=\"var(--chart-1)\"\n              strokeWidth={1.5}\n              dot={false}\n              activeDot={{ r: 4 }}\n            />\n          </LineChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1\">\n        <span className=\"text-sm text-muted-foreground\">End of June</span>\n        <span className=\"text-2xl font-medium tabular-nums\">214.00</span>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/card.json",
+    "https://better-design.com/registry/mallow/chart.json"
+  ]
+}

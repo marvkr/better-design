@@ -68,7 +68,7 @@ function Cursor({
             className={cn(
               "rounded-xl px-3 py-2 text-sm text-white/90",
               "backdrop-blur-xl bg-white/[0.06] border border-white/10",
-              "shadow-[inset_0_0_8px_rgba(255,255,255,0.08),0_4px_24px_rgba(0,0,0,0.3)]"
+              "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.08),0_0.25rem_1.5rem_oklch(0_0_0/0.3)]"
             )}
             style={{ minHeight: "36px" }}
           >
@@ -76,7 +76,7 @@ function Cursor({
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-              className="inline-block w-[2px] h-[14px] ml-[1px] align-middle"
+              className="inline-block w-[0.125rem] h-[0.875rem] ml-[0.0625rem] align-middle"
               style={{ backgroundColor: color }}
             />
           </motion.div>
@@ -91,7 +91,7 @@ function Cursor({
           className="flex items-center gap-1.5"
         >
           <div
-            className="h-2.5 w-2.5 rounded-full shadow-[0_0_8px_color-mix(in_oklch,var(--primary)_40%,transparent)]"
+            className="h-2.5 w-2.5 rounded-full shadow-[0_0_0.5rem_color-mix(in_oklch,var(--primary)_40%,transparent)]"
             style={{ backgroundColor: color }}
           />
           <span className="text-xs font-medium text-white/50">{label}</span>

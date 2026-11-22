@@ -8,7 +8,12 @@
       "type": "registry:ui"
     }
   ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/metal-fx-silver/button.json",
+    "https://better-design.com/registry/metal-fx-silver/command.json",
+    "https://better-design.com/registry/metal-fx-silver/popover.json"
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for pulse.\n *\n * Fields read as dark recessed wells on the analytics board: a faint inset\n * shadow for depth, a hairline border, and a violet focus glow that echoes\n * the primary accent. All seven form fields (input, textarea, password,\n * search, number, phone, otp) compose from this single base.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-md px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"[box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.3)] \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-border/70 \" +\n  \"focus-visible:outline-none focus-visible:border-primary/60 \" +\n  \"focus-visible:[box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.2),0_0_0_0.1875rem_oklch(from_var(--primary)_l_c_h/0.3)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

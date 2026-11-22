@@ -8,13 +8,13 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-secondary text-secondary-foreground border border-border",
+          "text-secondary-foreground border border-border bg-[color:oklch(0.882_0_166)]",
         primary:
           "bg-primary text-primary-foreground",
         outline:
-          "border border-border bg-transparent text-foreground",
+          "border bg-transparent text-foreground border-[color:oklch(0.883_0_180)]",
         muted:
-          "bg-muted text-muted-foreground",
+          "bg-[color:oklch(0.885_0_191.3)] text-[color:oklch(0.48_0_184.6)]",
       },
       size: {
         sm:      "rounded-full px-2 py-0.5 text-xs",

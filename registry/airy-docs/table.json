@@ -1,0 +1,23 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Table: the reference table of a docs page.\n *\n * The table sits in a white frame with a 0.75rem corner and a hairline\n * edge. The header row fills with the pale tray and labels read in small\n * medium Inter. Body rows are split by hairlines, figures line up on\n * tabular numerals, and a selected row takes the faint green wash.\n */\nconst Table = React.forwardRef<\n  HTMLTableElement,\n  React.HTMLAttributes<HTMLTableElement>\n>(({ className, ...props }, ref) => (\n  <div\n    data-slot=\"table-container\"\n    className=\"relative w-full overflow-x-auto rounded-lg border border-border\"\n  >\n    <table\n      ref={ref}\n      data-slot=\"table\"\n      className={cn(\"w-full caption-bottom text-sm\", className)}\n      {...props}\n    />\n  </div>\n));\nTable.displayName = \"Table\";\n\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead\n    ref={ref}\n    data-slot=\"table-header\"\n    className={cn(\n      \"bg-secondary [&_tr]:border-b [&_tr]:border-border [&_tr]:hover:bg-transparent\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHeader.displayName = \"TableHeader\";\n\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    data-slot=\"table-body\"\n    className={cn(\"[&_tr:last-child]:border-0\", className)}\n    {...props}\n  />\n));\nTableBody.displayName = \"TableBody\";\n\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    data-slot=\"table-footer\"\n    className={cn(\n      \"border-t border-border bg-secondary font-medium [&>tr:last-child]:border-b-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableFooter.displayName = \"TableFooter\";\n\nconst TableRow = React.forwardRef<\n  HTMLTableRowElement,\n  React.HTMLAttributes<HTMLTableRowElement>\n>(({ className, ...props }, ref) => (\n  <tr\n    ref={ref}\n    data-slot=\"table-row\"\n    className={cn(\n      \"border-b border-border transition-colors duration-fast ease-out\",\n      \"hover:bg-secondary data-[state=selected]:bg-(--primary-wash)\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableRow.displayName = \"TableRow\";\n\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    data-slot=\"table-head\"\n    className={cn(\n      \"h-9 whitespace-nowrap px-4 text-start align-middle text-xs font-medium text-muted-foreground\",\n      \"[&:has([role=checkbox])]:pe-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHead.displayName = \"TableHead\";\n\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    data-slot=\"table-cell\"\n    className={cn(\n      \"px-4 py-2.5 align-middle text-sm text-(--foreground-secondary) tabular-nums [&:has([role=checkbox])]:pe-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableCell.displayName = \"TableCell\";\n\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    data-slot=\"table-caption\"\n    className={cn(\"my-3 text-xs text-muted-foreground\", className)}\n    {...props}\n  />\n));\nTableCaption.displayName = \"TableCaption\";\n\nexport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-wash": "oklch(0.476 0.11 154.3 / 0.08)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-wash": "oklch(0.705 0.169 153.6 / 0.12)",
+      "foreground-secondary": "oklch(0.82 0.004 160)"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "navigation-menu-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/navigation-menu.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { NavigationMenu as NavigationMenuPrimitive } from \"@base-ui/react/navigation-menu\"\nimport { cva } from \"class-variance-authority\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Playdesk NavigationMenu: pill triggers along the desk's top bar, opening into\n * a floating window viewport.\n */\n\nconst NavigationMenu = React.forwardRef<\n  HTMLElement,\n  WithClassName<NavigationMenuPrimitive.Root.Props>\n>(({ className, children, ...props }, ref) => (\n  <NavigationMenuPrimitive.Root\n    ref={ref}\n    className={cn(\"relative z-10 flex max-w-max flex-1 items-center justify-center\", className)}\n    {...props}\n  >\n    {children}\n    <NavigationMenuPrimitive.Portal>\n      <NavigationMenuPrimitive.Positioner className=\"isolate z-50\" sideOffset={8}>\n        <NavigationMenuPrimitive.Popup\n          className={cn(\n            \"relative origin-(--transform-origin) overflow-hidden rounded-xl\",\n            \"bg-popover text-popover-foreground\",\n            \"[box-shadow:var(--shadow-rim),var(--shadow-float)]\",\n            \"transition-[opacity,transform,scale] duration-fast\",\n            \"data-starting-style:opacity-0 data-starting-style:scale-95\",\n            \"data-ending-style:opacity-0 data-ending-style:scale-95\"\n          )}\n        >\n          <NavigationMenuPrimitive.Viewport />\n        </NavigationMenuPrimitive.Popup>\n      </NavigationMenuPrimitive.Positioner>\n    </NavigationMenuPrimitive.Portal>\n  </NavigationMenuPrimitive.Root>\n))\nNavigationMenu.displayName = \"NavigationMenu\"\n\nconst NavigationMenuList = React.forwardRef<\n  HTMLUListElement,\n  WithClassName<NavigationMenuPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <NavigationMenuPrimitive.List\n    ref={ref}\n    className={cn(\"group flex flex-1 list-none items-center justify-center gap-1\", className)}\n    {...props}\n  />\n))\nNavigationMenuList.displayName = \"NavigationMenuList\"\n\nconst NavigationMenuItem = NavigationMenuPrimitive.Item\n\nconst navigationMenuTriggerStyle = cva(\n  [\n    \"inline-flex h-9 w-max cursor-pointer items-center justify-center rounded-full px-4\",\n    \"text-sm font-medium text-foreground\",\n    \"transition-colors duration-fast\",\n    \"hover:bg-foreground/[0.05] focus:bg-foreground/[0.05] focus:outline-none\",\n    \"data-popup-open:bg-foreground/[0.05]\",\n  ].join(\" \")\n)\n\nconst NavigationMenuTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<NavigationMenuPrimitive.Trigger.Props>\n>(({ className, children, ...props }, ref) => (\n  <NavigationMenuPrimitive.Trigger\n    ref={ref}\n    className={cn(navigationMenuTriggerStyle(), \"group\", className)}\n    {...props}\n  >\n    {children}\n    <ChevronDown\n      aria-hidden\n      className=\"relative top-px ml-1 size-3 text-muted-foreground transition-transform duration-base group-data-popup-open:rotate-180\"\n    />\n  </NavigationMenuPrimitive.Trigger>\n))\nNavigationMenuTrigger.displayName = \"NavigationMenuTrigger\"\n\nconst NavigationMenuContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<NavigationMenuPrimitive.Content.Props>\n>(({ className, ...props }, ref) => (\n  <NavigationMenuPrimitive.Content ref={ref} className={cn(\"p-4\", className)} {...props} />\n))\nNavigationMenuContent.displayName = \"NavigationMenuContent\"\n\nconst NavigationMenuLink = NavigationMenuPrimitive.Link\n\n// Base UI renders the viewport inside Root's popup, so these two exports are\n// passthroughs that keep the Radix-shaped API drop-in compatible.\nconst NavigationMenuViewport = ({ children }: { children?: React.ReactNode }) => <>{children}</>\nconst NavigationMenuIndicator = ({ children }: { children?: React.ReactNode }) => <>{children}</>\n\nexport {\n  navigationMenuTriggerStyle,\n  NavigationMenu,\n  NavigationMenuList,\n  NavigationMenuItem,\n  NavigationMenuContent,\n  NavigationMenuTrigger,\n  NavigationMenuLink,\n  NavigationMenuIndicator,\n  NavigationMenuViewport,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

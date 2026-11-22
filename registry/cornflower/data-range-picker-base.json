@@ -1,0 +1,27 @@
+{
+  "name": "data-range-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { format } from \"date-fns\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Button } from \"@/components/ui/button\";\nimport { Calendar } from \"@/components/ui/calendar\";\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\";\n\nexport function DataRangePicker() {\n  const [date, setDate] = React.useState<Date>();\n\n  return (\n    <Popover>\n      <PopoverTrigger\n        render={\n          <Button\n            variant={\"outline\"}\n            className={cn(\n              \"w-[17.5rem] justify-start text-left font-normal\",\n              !date && \"text-muted-foreground\"\n            )}\n          />\n        }>\n        <Icon icon=\"tabler:calendar\" className=\"mr-2 h-4 w-4\" />\n        {date ? format(date, \"PPP\") : <span>Pick a date</span>}\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0 border border-border bg-popover text-popover-foreground shadow-[var(--shadow-popover)] rounded-lg\">\n        <Calendar\n          mode=\"single\"\n          selected={date}\n          onSelect={setDate}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cornflower/button-base.json",
+    "https://better-design.com/registry/cornflower/calendar-base.json",
+    "https://better-design.com/registry/cornflower/popover-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0.25rem 0.75rem oklch(0.45 0.05 264 / 0.1), 0 0.0625rem 0.1875rem oklch(0.45 0.05 264 / 0.06)"
+    },
+    "dark": {}
+  }
+}

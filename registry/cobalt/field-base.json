@@ -1,0 +1,17 @@
+{
+  "name": "field-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\"\nimport { CircleAlert } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Label } from \"./label\"\n\n/* Field — Label + control + description/error wiring for the well fields. */\n\ninterface FieldProps extends React.HTMLAttributes<HTMLDivElement> {\n  label?: string\n  htmlFor?: string\n  description?: string\n  error?: string\n  required?: boolean\n  optional?: boolean\n}\n\nconst Field = React.forwardRef<HTMLDivElement, FieldProps>(\n  (\n    {\n      label,\n      htmlFor,\n      description,\n      error,\n      required,\n      optional,\n      className,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    const hasError = Boolean(error)\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex flex-col gap-1.5\", className)}\n        {...props}\n      >\n        {label && (\n          <div className=\"flex items-center gap-1.5\">\n            <Label\n              htmlFor={htmlFor}\n              className={cn(hasError && \"text-destructive\")}\n            >\n              {label}\n            </Label>\n            {required && (\n              <span className=\"text-sm leading-none text-destructive\" aria-hidden=\"true\">\n                *\n              </span>\n            )}\n            {optional && !required && (\n              <span className=\"text-xs text-muted-foreground\">(optional)</span>\n            )}\n          </div>\n        )}\n\n        <div\n          className={cn(\n            hasError && [\n              \"[&_input]:border-destructive/60\",\n              \"[&_input]:focus-visible:border-destructive\",\n              \"[&_input]:focus-visible:ring-destructive/30\",\n              \"[&_textarea]:border-destructive/60\",\n              \"[&_select]:border-destructive/60\",\n            ]\n          )}\n        >\n          {children}\n        </div>\n\n        {description && !hasError && (\n          <p className=\"text-xs leading-relaxed text-muted-foreground\">\n            {description}\n          </p>\n        )}\n\n        {hasError && (\n          <p className=\"flex items-center gap-1 text-xs leading-relaxed text-destructive\">\n            <CircleAlert className=\"h-3 w-3 shrink-0\" aria-hidden=\"true\" />\n            {error}\n          </p>\n        )}\n      </div>\n    )\n  }\n)\nField.displayName = \"Field\"\n\nexport { Field }\nexport type { FieldProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cobalt/label-base.json"
+  ]
+}

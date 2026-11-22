@@ -1,0 +1,22 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for form-field components in Heyclicky.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes. This guarantees identical\n * background, border, focus ring, hover, disabled, and transition behavior\n * across every form field in the design system.\n *\n * Heyclicky fields read like a crisp white panel cut into the dotted desktop:\n * a hairline edge, an 8px corner, and a system-blue focus ring. No inner\n * shadow, no glow, no heavy border.\n *\n * Do NOT copy-paste these classes into individual components - always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full rounded-md px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-base ease-out \" +\n  \"hover:border-ring/40 \" +\n  \"focus-visible:outline-none focus-visible:border-ring \" +\n  \"focus-visible:ring-2 focus-visible:ring-ring/25 focus-visible:ring-offset-0 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted\";\n\n/** Height + vertical padding for single-line form fields (h-10, the pill height) */\nexport const formFieldSingleLine = \"flex h-10 py-2\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-[5.25rem] py-2.5 resize-y\";\n\n/**\n * The floating panel surface, shared by every menu that drops over the page.\n *\n * A white window body behind a hairline, a 10px window corner, and the one\n * soft far-throw shadow. This is the same recipe Select, Menubar and\n * NavigationMenu declare inline, so a panel built from it matches them.\n */\nexport const popoverSurface =\n  \"rounded-lg border border-border bg-popover text-popover-foreground \" +\n  \"shadow-[var(--shadow-m)]\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-m": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-m": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

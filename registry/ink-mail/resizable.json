@@ -1,0 +1,24 @@
+{
+  "name": "resizable",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ResizablePrimitive from \"react-resizable-panels\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Resizable: panels split by a translucent hairline. The line\n * brightens under the pointer and turns off-white while you drag it, and its\n * grab area is wider than it looks. With `withHandle`, a small dark grip on\n * the elevated surface sits in the middle of the line.\n */\nconst ResizablePanelGroup = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (\n  <ResizablePrimitive.PanelGroup\n    data-slot=\"resizable-panel-group\"\n    className={cn(\n      \"flex size-full data-[panel-group-direction=vertical]:flex-col\",\n      className,\n    )}\n    {...props}\n  />\n);\n\nconst ResizablePanel = ResizablePrimitive.Panel;\n\n/** The dividing line between two panels; drag it or move it with arrow keys. */\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {\n  withHandle?: boolean;\n}) => (\n  <ResizablePrimitive.PanelResizeHandle\n    data-slot=\"resizable-handle\"\n    className={cn(\n      \"group/handle relative flex w-px shrink-0 items-center justify-center bg-border\",\n      \"transition-colors duration-fast ease-out\",\n      \"after:absolute after:inset-y-0 after:-inset-x-1\",\n      \"data-[resize-handle-state=hover]:bg-(--control) data-[resize-handle-state=drag]:bg-foreground\",\n      \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n      \"data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:inset-x-0 data-[panel-group-direction=vertical]:after:-inset-y-1\",\n      className,\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div className=\"z-10 flex h-6 w-4 items-center justify-center rounded-sm border border-(--line-strong) bg-secondary group-data-[panel-group-direction=vertical]/handle:rotate-90\">\n        <Icon\n          icon=\"ph:dots-six-vertical\"\n          aria-hidden=\"true\"\n          className=\"size-3 text-muted-foreground\"\n        />\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n);\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels@^3.0.3",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "control": "oklch(0.52 0.006 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nconst regions = [\n  { value: \"us-east-1\", label: \"US East (N. Virginia)\" },\n  { value: \"eu-west-1\", label: \"EU West (Ireland)\" },\n  { value: \"sa-east-1\", label: \"South America (São Paulo)\" },\n  { value: \"ap-northeast-1\", label: \"Asia Pacific (Tokyo)\" },\n  { value: \"ap-southeast-2\", label: \"Asia Pacific (Sydney)\" },\n];\n\n/**\n * Ink mail combobox: a field that opens a searchable list of sending\n * regions. The trigger is the dark well every text field uses, with an\n * up-down caret at the end; open, its edge brightens to the off-white ink.\n * The list drops onto the elevated panel, as wide as the trigger, and the\n * chosen row carries a tick.\n */\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n  const selected = regions.find((region) => region.value === value);\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        role=\"combobox\"\n        aria-expanded={open}\n        data-slot=\"combobox-trigger\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"w-64 cursor-default items-center justify-between gap-2 text-start\",\n          \"data-[popup-open]:border-foreground\",\n          !selected && \"text-muted-foreground\",\n        )}\n      >\n        <span className=\"truncate\">{selected ? selected.label : \"Select a region\"}</span>\n        <Icon\n          icon=\"ph:caret-up-down\"\n          className=\"size-4 shrink-0 text-muted-foreground\"\n          aria-hidden=\"true\"\n        />\n      </PopoverTrigger>\n      <PopoverContent align=\"start\" className=\"w-(--anchor-width) gap-0 p-0\">\n        <Command className=\"bg-transparent shadow-none\">\n          <CommandInput placeholder=\"Search regions\" />\n          <CommandList>\n            <CommandEmpty>No region found.</CommandEmpty>\n            <CommandGroup>\n              {regions.map((region) => (\n                <CommandItem\n                  key={region.value}\n                  value={region.value}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                >\n                  <span className=\"truncate\">{region.label}</span>\n                  <Icon\n                    icon=\"ph:check\"\n                    className={cn(\n                      \"ms-auto size-4\",\n                      value === region.value ? \"opacity-100\" : \"opacity-0\",\n                    )}\n                    aria-hidden=\"true\"\n                  />\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared-base.json",
+    "https://better-design.com/registry/ink-mail/command-base.json",
+    "https://better-design.com/registry/ink-mail/popover-base.json"
+  ]
+}

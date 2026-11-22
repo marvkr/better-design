@@ -6,7 +6,7 @@ import { Drawer as DrawerPrimitive } from "vaul"
 import { cn } from "@/lib/utils"
 
 // Stripe Drawer: uses vaul for bottom-sheet/side drawer
-// Rounded-[20px_20px_0_0] for bottom drawers
+// Rounded-[1.25rem_1.25rem_0_0] for bottom drawers
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -26,7 +26,7 @@ const DrawerOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
-    className={cn("fixed inset-0 z-50 bg-foreground/20 backdrop-blur-sm", className)}
+    className={cn("fixed inset-0 z-50 bg-[var(--overlay)]", className)}
     {...props}
   />
 ))
@@ -42,8 +42,8 @@ const DrawerContent = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
-        "rounded-t-[20px] border-t border-border bg-background",
-        "shadow-[0_-4px_24px_0_rgb(0_0_0/0.06)]",
+        "rounded-t-[1.25rem] bg-background",
+        "[box-shadow:var(--shadow-dialog)]",
         className
       )}
       {...props}

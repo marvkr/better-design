@@ -30,7 +30,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     ref
   ) => {
     const [internalValue, setInternalValue] = React.useState<number>(
-      (value as number) ?? 0
+      value ?? 0
     )
 
     const current = value !== undefined ? value : internalValue
@@ -47,7 +47,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const buttonBase = cn(
       "flex h-10 w-10 shrink-0 items-center justify-center",
       "bg-secondary border border-border text-muted-foreground",
-      "transition-all duration-200 hover:bg-accent hover:text-foreground",
+      "transition-all duration-base hover:bg-accent hover:text-foreground",
       "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
       "disabled:pointer-events-none disabled:opacity-40",
       "active:scale-[0.96]"
@@ -88,7 +88,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           className={cn(
             "h-10 w-16 border border-border bg-secondary px-2 py-2",
             "text-center text-sm font-medium text-foreground",
-            "transition-colors duration-200 hover:bg-accent",
+            "transition-colors duration-base hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:z-10",
             "disabled:cursor-not-allowed disabled:opacity-40",
             // Hide native spinners

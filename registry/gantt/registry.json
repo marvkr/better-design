@@ -1,0 +1,120 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-design-gantt",
+  "homepage": "https://better-design.com/design-systems",
+  "items": [
+    {
+      "name": "gantt",
+      "type": "registry:ui",
+      "title": "Gantt chart",
+      "description": "A Gantt chart with a task tree, drag to move and resize bars, row reordering, progress and dependencies.",
+      "dependencies": [
+        "@date-fns/tz@^1.5.0",
+        "@radix-ui/react-slot@^1.2.3",
+        "date-fns@^4.1.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/gantt-bar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-dnd-surface.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-dnd.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-glyphs.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-guards.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-i18n.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-lib.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-nav.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-recurrence.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-root-hooks.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-root-settings.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-root-store.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-root-view-config.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-types.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-chips.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-layers.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-layout.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-lib.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-row-overlays.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-scale.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-scroll.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view-timeline-row.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt-view.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/gantt.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

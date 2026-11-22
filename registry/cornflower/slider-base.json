@@ -1,0 +1,25 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ledger Light Slider — recessed muted track, primary-blue range fill, and a\n// thumb that reuses the primary Button's material (rim + soft blue glow).\n\nconst Slider = React.forwardRef<HTMLDivElement, SliderPrimitive.Root.Props>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max]\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track data-slot=\"slider-track\" className=\"relative h-2 w-full grow rounded-full bg-muted shadow-[var(--shadow-inset)]\">\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full rounded-full bg-primary\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb data-slot=\"slider-thumb\" key={index} className=\"block h-5 w-5 rounded-full bg-primary border border-[var(--primary-rim)] shadow-[var(--shadow-primary-control)] transition-all duration-fast ease-out focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/30 data-disabled:pointer-events-none data-disabled:opacity-50 hover:shadow-[var(--shadow-primary-hover)]\" />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    )\n  }\n)\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.45 0.05 264 / 0.06)",
+      "primary-rim": "oklch(0.5 0.19 264)",
+      "shadow-primary-hover": "0 0.125rem 0.25rem oklch(0.5 0.19 264 / 0.28), 0 0.25rem 0.75rem oklch(0.5 0.19 264 / 0.26)",
+      "shadow-primary-control": "0 0.0625rem 0.125rem oklch(0.5 0.19 264 / 0.25)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

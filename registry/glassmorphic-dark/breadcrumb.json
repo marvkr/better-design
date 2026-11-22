@@ -9,10 +9,7 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-slot",
-    "@iconify/react"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@radix-ui/react-slot@^1.2.3",
+    "@iconify/react@^6.0.2"
   ]
 }

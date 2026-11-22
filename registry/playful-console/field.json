@@ -1,0 +1,20 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Field: one form row on a tight 0.375rem rhythm. The bold\n * label sits on top, the white well under it, then a muted hint or a red\n * error line.\n */\nconst Field = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"field\"\n    className={cn(\"flex flex-col gap-1.5\", className)}\n    {...props}\n  />\n));\nField.displayName = \"Field\";\n\n/** A hint under the field, in muted ink at a compact size. */\nconst FieldDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"field-description\"\n    className={cn(\"text-[0.8125rem] leading-normal text-muted-foreground\", className)}\n    {...props}\n  />\n));\nFieldDescription.displayName = \"FieldDescription\";\n\n/**\n * The error line under the field, in the deeper red that reads on the cream\n * page. It announces itself to screen readers as soon as it appears.\n */\nconst FieldError = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    role=\"alert\"\n    data-slot=\"field-error\"\n    className={cn(\n      \"text-[0.8125rem] font-semibold leading-normal text-(--destructive-text)\",\n      className,\n    )}\n    {...props}\n  />\n));\nFieldError.displayName = \"FieldError\";\n\nexport { Field, FieldDescription, FieldError };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "destructive-text": "oklch(0.5 0.17 27.5)"
+    },
+    "dark": {
+      "destructive-text": "oklch(0.8 0.11 25)"
+    }
+  }
+}

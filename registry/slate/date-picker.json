@@ -1,0 +1,28 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\";\n\nimport { CalendarIcon } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { Calendar } from \"./calendar\";\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"./popover\";\n\n/*\n * Ops Sharp DatePicker — a field-well trigger (shared formFieldBase, in lockstep\n * with Input and Select) opening the white calendar popover (--shadow-popover\n * via PopoverContent).\n */\n\ninterface DatePickerProps {\n  value?: Date;\n  onChange?: (date: Date | undefined) => void;\n  placeholder?: string;\n  disabled?: boolean;\n  className?: string;\n}\n\nfunction DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: DatePickerProps) {\n  const formatted = value\n    ? value.toLocaleDateString(\"en-US\", {\n        year: \"numeric\",\n        month: \"long\",\n        day: \"numeric\",\n      })\n    : null;\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          disabled={disabled}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"items-center justify-start text-left font-normal\",\n            !value && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <CalendarIcon className=\"mr-2 h-4 w-4\" />\n          {formatted ?? placeholder}\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar mode=\"single\" selected={value} onSelect={onChange} initialFocus />\n      </PopoverContent>\n    </Popover>\n  );\n}\n\nexport { DatePicker };\nexport type { DatePickerProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/slate/_shared.json",
+    "https://better-design.com/registry/slate/calendar.json",
+    "https://better-design.com/registry/slate/popover.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

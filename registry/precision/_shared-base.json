@@ -1,0 +1,20 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for form-field components in precision.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes. This guarantees identical\n * background, border, focus ring, hover, disabled, and transition behavior\n * across every form field in the design system.\n *\n * Precision: crisp white field on a hairline neutral border, a precise small\n * radius, and a quiet 2px indigo-blue focus ring. No glow, no heavy shadow.\n *\n * Do NOT copy-paste these classes into individual components - always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full rounded-md px-3 text-sm \" +\n  \"bg-background text-foreground \" +\n  \"border border-input \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-ring/45 \" +\n  \"focus-visible:outline-none focus-visible:border-ring \" +\n  \"focus-visible:ring-2 focus-visible:ring-ring/25 focus-visible:ring-offset-0 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted\";\n\n/** Height + vertical padding for single-line form fields (h-9) */\nexport const formFieldSingleLine = \"flex h-9 py-1.5\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

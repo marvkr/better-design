@@ -1,0 +1,15 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-5 w-5 shrink-0 rounded-md\",\n        \"backdrop-blur-xl bg-white/[0.05]\",\n        \"border border-white/[0.15]\",\n        \"shadow-[inset_0_0_0.25rem_oklch(1_0_0/0.05)]\",\n        \"transition-all duration-base\",\n        \"hover:border-white/[0.25] hover:bg-white/[0.08]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:backdrop-blur-xl data-checked:bg-white/[0.15] data-checked:border-white/[0.25] data-checked:text-white\",\n        \"data-checked:shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.2),0_0_1rem_oklch(1_0_0/0.08)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className={cn(\"flex items-center justify-center text-current\")}\n      >\n        <Icon icon=\"tabler:check\" className=\"size-full h-3.5 w-3.5\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console AvatarGroup: circles that overlap by a quarter, each cut\n * out of the next by a ring in the page colour. Past `max`, the rest fold\n * into a cream circle that counts them in bold mono figures.\n */\nexport interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** The number of avatars to show before the rest fold into a count. */\n  max?: number;\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ className, max, children, ...props }, ref) => {\n    const avatars = React.Children.toArray(children);\n    const shown = max ? avatars.slice(0, max) : avatars;\n    const hidden = avatars.length - shown.length;\n\n    return (\n      <div\n        ref={ref}\n        data-slot=\"avatar-group\"\n        className={cn(\n          \"flex items-center -space-x-2.5 *:ring-2 *:ring-background\",\n          className,\n        )}\n        {...props}\n      >\n        {shown}\n        {hidden > 0 && (\n          <span className=\"relative flex size-10 shrink-0 items-center justify-center rounded-full border-[0.09375rem] border-(--line-strong) bg-secondary font-mono text-xs font-bold tabular-nums text-foreground\">\n            <span aria-hidden=\"true\">+{hidden}</span>\n            <span className=\"sr-only\">{hidden} more</span>\n          </span>\n        )}\n      </div>\n    );\n  },\n);\nAvatarGroup.displayName = \"AvatarGroup\";\n\nexport { AvatarGroup };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)"
+    }
+  }
+}

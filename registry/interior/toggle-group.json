@@ -1,0 +1,27 @@
+{
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\nimport type { VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { toggleVariants } from \"./toggle\";\n\n/*\n * Interior ToggleGroup — the segmented control: a well cut into the panel\n * (9px shell = 6px items + 3px padding) holding flat segments. The pressed\n * segment is the ink thumb the Toggle already defines — the same material as\n * the primary Button, so every \"on\" in the system reads as one thing.\n */\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({ size: \"default\", variant: \"default\" });\n\nconst ToggleGroup = React.forwardRef<\n  React.ElementRef<typeof ToggleGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, children, ...props }, ref) => (\n  <ToggleGroupPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-[0.5625rem] p-[0.1875rem]\",\n      \"border border-border bg-secondary shadow-[var(--shadow-well)]\",\n      className,\n    )}\n    {...props}\n  >\n    <ToggleGroupContext.Provider value={{ variant, size }}>\n      {children}\n    </ToggleGroupContext.Provider>\n  </ToggleGroupPrimitive.Root>\n));\nToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;\n\nconst ToggleGroupItem = React.forwardRef<\n  React.ElementRef<typeof ToggleGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &\n    VariantProps<typeof toggleVariants>\n>(({ className, children, variant, size, ...props }, ref) => {\n  const context = React.useContext(ToggleGroupContext);\n  return (\n    <ToggleGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        toggleVariants({\n          variant: context.variant ?? variant,\n          size: context.size ?? size,\n        }),\n        // Inside the well the item drops to the 6px inner radius and loses\n        // the panel hover wash; the well is already the resting surface.\n        \"rounded-[0.375rem] hover:bg-transparent hover:text-foreground\",\n        \"data-[state=on]:hover:bg-primary/90\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </ToggleGroupPrimitive.Item>\n  );\n});\nToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle-group@^1.1.10",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/toggle.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

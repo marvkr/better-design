@@ -1,0 +1,28 @@
+{
+  "name": "scroll-area-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Cream editorial ScrollArea: content that scrolls inside its own box. The\n * scrollbar stays out of the way until the pointer is over it or the content\n * moves, then shows a slim warm thumb that darkens under the pointer.\n */\nconst ScrollArea = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Root.Props>\n>(({ className, children, ...props }, ref) => (\n  <ScrollAreaPrimitive.Root\n    data-slot=\"scroll-area\"\n    ref={ref}\n    className={cn(\"relative overflow-hidden\", className)}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Viewport\n      data-slot=\"scroll-area-viewport\"\n      className=\"size-full rounded-[inherit] outline-none focus-visible:ring-3 focus-visible:ring-ring\"\n    >\n      <ScrollAreaPrimitive.Content>{children}</ScrollAreaPrimitive.Content>\n    </ScrollAreaPrimitive.Viewport>\n    <ScrollBar />\n    <ScrollAreaPrimitive.Corner data-slot=\"scroll-area-corner\" />\n  </ScrollAreaPrimitive.Root>\n));\nScrollArea.displayName = \"ScrollArea\";\n\n/** One scrollbar for a ScrollArea. Add `orientation=\"horizontal\"` for a sideways one. */\nconst ScrollBar = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Scrollbar.Props>\n>(({ className, orientation = \"vertical\", ...props }, ref) => (\n  <ScrollAreaPrimitive.Scrollbar\n    data-slot=\"scroll-area-scrollbar\"\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"flex touch-none select-none p-0.5 opacity-0 transition-opacity duration-fast ease-out\",\n      \"data-[hovering]:opacity-100 data-[scrolling]:opacity-100\",\n      \"data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2\",\n      \"data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:flex-col\",\n      className,\n    )}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Thumb\n      data-slot=\"scroll-area-thumb\"\n      className=\"relative flex-1 rounded-full bg-(--line-strong) transition-colors duration-fast ease-out hover:bg-(--control)\"\n    />\n  </ScrollAreaPrimitive.Scrollbar>\n));\nScrollBar.displayName = \"ScrollBar\";\n\nexport { ScrollArea, ScrollBar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "control": "oklch(0.75 0.013 96.5)",
+      "thumb": "oklch(1 0 0)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "control": "oklch(0.551 0.009 99)",
+      "thumb": "oklch(0.966 0.009 100)"
+    }
+  }
+}

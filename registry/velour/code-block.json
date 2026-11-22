@@ -1,0 +1,31 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n/*\n * A recessed velvet well for code, like the reference's command strip:\n * darker-than-canvas fill, inset shadow, hairline header.\n */\n\ninterface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  showLineNumbers?: boolean\n  filename?: string\n}\n\nfunction CodeBlock({\n  code,\n  language,\n  showLineNumbers = false,\n  filename,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  const lines = code.split(\"\\n\")\n\n  return (\n    <div\n      className={cn(\n        \"relative overflow-hidden rounded-lg border border-border\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      {filename && (\n        <div className=\"flex items-center justify-between border-b border-border px-4 py-2.5 [background-image:var(--velour)]\">\n          <span className=\"text-xs font-medium text-muted-foreground\">{filename}</span>\n          {language && (\n            <span className=\"rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground\">\n              {language}\n            </span>\n          )}\n        </div>\n      )}\n      <div className=\"relative\">\n        <pre className=\"overflow-x-auto p-4 text-sm text-foreground/85\">\n          <code>\n            {showLineNumbers\n              ? lines.map((line, i) => (\n                  <span key={i} className=\"flex\">\n                    <span className=\"mr-4 w-6 shrink-0 select-none text-right text-muted-foreground/50\">\n                      {i + 1}\n                    </span>\n                    <span>{line}</span>\n                  </span>\n                ))\n              : code}\n          </code>\n        </pre>\n        <button\n          onClick={handleCopy}\n          className={cn(\n            \"absolute right-2 top-2\",\n            \"inline-flex items-center gap-1.5 rounded-md px-2.5 py-1\",\n            \"[background-image:var(--velour-raised)] [box-shadow:var(--shadow-button)]\",\n            \"text-xs text-muted-foreground transition-[background-image,box-shadow,color] duration-fast\",\n            \"hover:[background-image:var(--velour-hover)] hover:text-foreground\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30\"\n          )}\n        >\n          <Icon\n            icon={copied ? \"tabler:check\" : \"tabler:copy\"}\n            className={cn(\"h-3 w-3\", copied && \"text-primary\")}\n          />\n          {copied ? \"Copied!\" : \"Copy\"}\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeBlock }\nexport type { CodeBlockProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "velour-hover": "linear-gradient( to bottom, oklch(0.335 0.015 286), oklch(0.27 0.013 286) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "velour-hover": "linear-gradient( to bottom, oklch(0.335 0.015 286), oklch(0.27 0.013 286) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

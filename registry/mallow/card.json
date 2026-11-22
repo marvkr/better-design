@@ -1,0 +1,17 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, selectedOption, surfacePanel, optionTrack } from \"./_shared\";\n\n/**\n * Mallow Card: the white card everything else steps from.\n *\n * The default is a 1rem white surface with a hairline and a soft plum\n * shadow. `plate` is a white panel with a hairline and no drop, for a surface\n * nested in another. `well` sits on the lilac option track, and `featured`\n * takes the light violet tint inside a violet ring, for the one card a page\n * wants to point at.\n */\nconst cardVariants = cva(\"flex flex-col gap-6 py-7\", {\n  variants: {\n    variant: {\n      default: `${cardSlab} rounded-3xl`,\n      plate: `${surfacePanel} rounded-2xl`,\n      well: `${optionTrack} rounded-2xl text-card-foreground`,\n      featured: `${selectedOption} rounded-3xl`,\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nexport interface CardProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-0.5 px-6\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\nconst CardTitle = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\"text-base font-medium leading-snug tracking-tight text-card-foreground\", className)}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm leading-snug text-muted-foreground\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"px-6\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-3 px-6\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  CardFooter,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ]
+}

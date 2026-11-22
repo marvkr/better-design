@@ -24,7 +24,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           "flex items-center gap-3 rounded-md px-3 py-2",
           "bg-card text-card-foreground border border-border",
           "[box-shadow:var(--shadow-s)]",
-          "transition-[background-color,box-shadow,border-color,transform] duration-150",
+          "transition-[background-color,box-shadow,border-color,transform] duration-fast",
           interactive &&
             "cursor-pointer hover:bg-accent hover:[box-shadow:var(--shadow-m)] active:translate-y-px active:[box-shadow:var(--shadow-s)]",
           selected && "border-primary/40 bg-accent [box-shadow:var(--shadow-m)]",

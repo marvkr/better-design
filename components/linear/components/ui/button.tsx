@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import { LoaderCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-medium",
-    "rounded-md transition-all duration-150 ease-out",
+    "rounded-md transition-all duration-fast ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
     "active:scale-[0.98] active:brightness-95",
@@ -25,14 +26,14 @@ const buttonVariants = cva(
         // (orange, green, etc.) automatically retint the ring.
         default:
           "bg-primary text-primary-foreground " +
-          "shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_55%,transparent),0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] " +
-          "hover:bg-primary/90 hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_70%,transparent),0_2px_6px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.12)]",
+          "shadow-[0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_55%,transparent),0_0.0625rem_0.1875rem_oklch(0_0_0/0.4),inset_0_0.0625rem_0_oklch(1_0_0/0.1)] " +
+          "hover:bg-primary/90 hover:shadow-[0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_70%,transparent),0_0.125rem_0.375rem_oklch(0_0_0/0.4),inset_0_0.0625rem_0_oklch(1_0_0/0.12)]",
         // Secondary: dark panel, border, subtle shadow
         secondary:
           "bg-secondary text-secondary-foreground " +
           "border border-border " +
-          "shadow-[0_1px_2px_rgba(0,0,0,0.2)] " +
-          "hover:bg-accent hover:border-border/60 hover:shadow-[0_1px_4px_rgba(0,0,0,0.3)]",
+          "shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.2)] " +
+          "hover:bg-accent hover:border-border/60 hover:shadow-[0_0.0625rem_0.25rem_oklch(0_0_0/0.3)]",
         // Outline: transparent with full border
         outline:
           "border border-border bg-transparent text-foreground " +
@@ -44,7 +45,7 @@ const buttonVariants = cva(
         // Destructive
         destructive:
           "bg-destructive text-destructive-foreground " +
-          "shadow-[0_0_0_1px_rgba(239,68,68,0.4),0_1px_3px_rgba(0,0,0,0.3)] " +
+          "shadow-[0_0_0_0.0625rem_oklch(0.6368_0.2078_25.3313/0.4),0_0.0625rem_0.1875rem_oklch(0_0_0/0.3)] " +
           "hover:bg-destructive/90",
         // Link
         link: "text-primary underline-offset-4 hover:underline",
@@ -54,6 +55,7 @@ const buttonVariants = cva(
         default: "h-9 px-4",
         lg:      "h-10 px-6 text-sm",
         icon:    "h-9 w-9",
+        "icon-sm": "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -67,17 +69,32 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, loading = false, children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+    const content = asChild ? (
+      children
+    ) : (
+      <>
+        {loading ? <LoaderCircle className="size-4 animate-spin" /> : null}
+        {children}
+      </>
+    );
+
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        aria-busy={loading || undefined}
+        disabled={disabled || loading}
         {...props}
-      />
+      >
+        {content}
+      </Comp>
     );
   }
 );

@@ -1,0 +1,17 @@
+{
+  "name": "separator-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Interior Separator — a hairline in the border ink. A rule divides; it never\n * carries elevation, so it stays 1px and flat.\n */\n\nconst Separator = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SeparatorPrimitive.Props>\n>(({ className, orientation = \"horizontal\", ...props }, ref) => (\n  <SeparatorPrimitive\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"shrink-0 bg-border\",\n      orientation === \"horizontal\" ? \"h-px w-full\" : \"h-full w-px\",\n      className\n    )}\n    {...props}\n  />\n))\nSeparator.displayName = \"Separator\"\n\nexport { Separator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared-base.json"
+  ]
+}

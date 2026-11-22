@@ -1,0 +1,11 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Ops Sharp Kbd: a small key cap. Muted surface, hairline border, sharp\n// rounded-md corner, a tight contact shadow, monospace label.\n\ninterface KbdProps extends React.HTMLAttributes<HTMLElement> {}\n\nfunction Kbd({ className, ...props }: KbdProps) {\n  return (\n    <kbd\n      className={cn(\n        \"inline-flex items-center justify-center rounded-md border border-border bg-secondary px-1.5 py-0.5 font-mono text-xs font-medium text-muted-foreground [box-shadow:var(--shadow-xs)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Kbd }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

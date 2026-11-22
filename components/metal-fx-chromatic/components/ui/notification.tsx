@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 const notificationVariants = cva(
   "relative flex gap-3 rounded-lg p-4 border " +
     "[box-shadow:var(--shadow-m)] " +
-    "transition-[background-color,box-shadow] duration-150",
+    "transition-[background-color,box-shadow] duration-fast",
   {
     variants: {
       variant: {
@@ -74,7 +74,7 @@ const Notification = React.forwardRef<HTMLDivElement, NotificationProps>(
             onClick={onDismiss}
             className={cn(
               "shrink-0 rounded-md p-1 text-muted-foreground",
-              "transition-[background-color,color] duration-150",
+              "transition-[background-color,color] duration-fast",
               "hover:bg-accent hover:text-foreground",
               "focus:outline-none focus:ring-2 focus:ring-ring/40"
             )}

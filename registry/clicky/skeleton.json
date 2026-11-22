@@ -1,0 +1,11 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n// Clicky Skeleton — muted pulsing placeholder, rounded-[0.375rem]\n\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\"bg-muted animate-pulse rounded-[0.375rem]\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

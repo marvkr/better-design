@@ -1,0 +1,40 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Margin Notification: a white sheet bounded by one hairline with a soft\n * floating shadow. Status variants tint the hairline and colour the icon,\n * and the dismiss control is a small ghost square.\n */\nconst notificationVariants = cva(\n  \"relative flex gap-2.5 rounded-xl border bg-card p-3.5 text-card-foreground shadow-md\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border\",\n        info: \"border-info/30\",\n        success: \"border-success/30\",\n        warning: \"border-warning/40\",\n        destructive: \"border-destructive/30\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nconst iconMap = {\n  default: { icon: \"solar:bell-bold\", color: \"text-muted-foreground\" },\n  info: { icon: \"solar:info-circle-bold\", color: \"text-info-text\" },\n  success: { icon: \"solar:check-circle-bold\", color: \"text-success-text\" },\n  warning: { icon: \"solar:danger-triangle-bold\", color: \"text-warning-text\" },\n  destructive: { icon: \"solar:danger-circle-bold\", color: \"text-destructive-text\" },\n} as const;\n\n/** Props for a banner: a title, a description, an optional icon, actions and a dismiss handler. */\nexport interface NotificationProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">,\n    VariantProps<typeof notificationVariants> {\n  title?: React.ReactNode;\n  description?: React.ReactNode;\n  icon?: React.ReactNode;\n  onDismiss?: () => void;\n  actions?: React.ReactNode;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant = \"default\", title, description, icon, onDismiss, actions, children, ...props }, ref) => {\n    const meta = iconMap[variant ?? \"default\"];\n    return (\n      <div\n        ref={ref}\n        data-slot=\"notification\"\n        role={variant === \"destructive\" || variant === \"warning\" ? \"alert\" : \"status\"}\n        className={cn(notificationVariants({ variant }), className)}\n        {...props}\n      >\n        <div className={cn(\"mt-px flex size-4.5 shrink-0 items-center justify-center\", meta.color)}>\n          {icon ?? <Icon icon={meta.icon} className=\"size-4.5\" aria-hidden />}\n        </div>\n        <div className=\"min-w-0 flex-1\">\n          {title && <div className=\"text-sm font-semibold leading-snug text-foreground\">{title}</div>}\n          {description && (\n            <div className={cn(\"text-sm leading-snug text-muted-foreground\", title && \"mt-0.5\")}>{description}</div>\n          )}\n          {children}\n          {actions && <div className=\"mt-2.5 flex items-center gap-1.5\">{actions}</div>}\n        </div>\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            aria-label=\"Dismiss\"\n            className={cn(\n              \"-m-1 flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground\",\n              \"transition-colors duration-fast ease-(--ease-out) pointer-fine:hover:bg-accent pointer-fine:hover:text-foreground\",\n              focusRing,\n            )}\n          >\n            <Icon icon=\"solar:close-circle-linear\" className=\"size-4\" aria-hidden />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nNotification.displayName = \"Notification\";\n\nexport { Notification };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5 0.09 115)",
+      "warning": "oklch(0.74 0.13 75)",
+      "info": "oklch(0.5 0.05 245)",
+      "success-text": "oklch(0.4 0.08 115)",
+      "warning-text": "oklch(0.4 0.09 70)",
+      "destructive-text": "oklch(0.45 0.16 28)",
+      "info-text": "oklch(0.4 0.05 245)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.7 0.14 115)",
+      "warning": "oklch(0.8 0.12 78)",
+      "info": "oklch(0.7 0.05 245)",
+      "success-text": "oklch(0.86 0.09 115)",
+      "warning-text": "oklch(0.87 0.1 80)",
+      "destructive-text": "oklch(0.86 0.09 28)",
+      "info-text": "oklch(0.86 0.04 245)"
+    }
+  }
+}

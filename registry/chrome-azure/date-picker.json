@@ -1,0 +1,19 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n/*\n * Chrome Azure Date Picker — an outline metal trigger that drops a brushed\n * popover calendar. Selected days adopt the azure alloy inside the calendar.\n */\n\nexport interface DatePickerProps {\n  value?: Date\n  onValueChange?: (date: Date | undefined) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n}\n\nconst DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(\n  ({ value, onValueChange, placeholder = \"Pick a date\", className, disabled }, ref) => (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button\n          ref={ref}\n          variant=\"outline\"\n          disabled={disabled}\n          className={cn(\n            \"w-full justify-start text-left font-normal\",\n            !value && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <svg\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth={2}\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n            className=\"mr-2 h-4 w-4\"\n          >\n            <path d=\"M8 2v4\" />\n            <path d=\"M16 2v4\" />\n            <rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" />\n            <path d=\"M3 10h18\" />\n          </svg>\n          {value ? format(value, \"PPP\") : <span>{placeholder}</span>}\n        </Button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar mode=\"single\" selected={value} onSelect={onValueChange} initialFocus />\n      </PopoverContent>\n    </Popover>\n  )\n)\nDatePicker.displayName = \"DatePicker\"\n\nexport { DatePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/chrome-azure/button.json",
+    "https://better-design.com/registry/chrome-azure/calendar.json",
+    "https://better-design.com/registry/chrome-azure/popover.json"
+  ]
+}

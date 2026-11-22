@@ -1,0 +1,17 @@
+{
+  "name": "empty-state-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { raisedSurface } from \"./_shared\";\n\n/** Props for a framed empty state with an icon, a title and an optional action. */\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\n/**\n * Paddock EmptyState: an open slot on the schedule grown into a\n * panel. A grey well with a dashed outline holds a white icon tile, a title,\n * a muted line and an optional action.\n */\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon = \"mingcute:folder-open-line\", title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-state\"\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-input bg-muted px-6 py-10 text-center\",\n        className,\n      )}\n      {...props}\n    >\n      <div className={cn(\"flex size-11 items-center justify-center rounded-lg text-muted-foreground\", raisedSurface)}>\n        <Icon icon={icon} aria-hidden=\"true\" className=\"size-5\" />\n      </div>\n      <div className=\"max-w-sm space-y-1\">\n        <div className=\"text-[0.9375rem] font-semibold tracking-tight text-foreground\">{title}</div>\n        {description && <div className=\"text-[0.8125rem] text-muted-foreground\">{description}</div>}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  ),\n);\nEmptyState.displayName = \"EmptyState\";\n\nexport { EmptyState };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ]
+}

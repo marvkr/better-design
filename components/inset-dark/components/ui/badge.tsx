@@ -10,24 +10,24 @@ import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
   "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 " +
-    "text-[11px] font-medium tracking-[0.02em] " +
-    "ring-1 ring-inset transition-colors duration-150",
+    "text-[0.6875rem] font-medium tracking-[0.02em] " +
+    "ring-1 ring-inset transition-colors duration-fast",
   {
     variants: {
       variant: {
         default: "bg-card text-foreground ring-border",
         primary:
           "[background:var(--pill-gradient)] text-foreground " +
-          "[text-shadow:var(--text-shadow-pressed)] ring-[rgba(255,255,255,0.08)]",
+          "[text-shadow:var(--text-shadow-pressed)] ring-[oklch(1_0_0/0.08)]",
         secondary:
-          "bg-card text-[rgba(255,255,255,0.6)] ring-border",
+          "bg-card text-[oklch(1_0_0/0.6)] ring-border",
         outline: "bg-transparent text-foreground ring-border",
         success:
-          "bg-[oklch(0.4_0.1_145)]/30 text-[oklch(0.82_0.15_145)] ring-[oklch(0.5_0.15_145)]/30",
+          "bg-[oklch(0.4_0.1_145)]/30 ring-[oklch(0.5_0.15_145)]/30 text-[color:oklch(0.875_0.15_145)]",
         warning:
-          "bg-[oklch(0.45_0.12_70)]/30 text-[oklch(0.82_0.14_80)] ring-[oklch(0.55_0.18_55)]/30",
+          "bg-[oklch(0.45_0.12_70)]/30 ring-[oklch(0.55_0.18_55)]/30 text-[color:oklch(0.875_0.119_80)]",
         destructive:
-          "bg-destructive/20 text-[oklch(0.78_0.18_25)] ring-destructive/30",
+          "bg-destructive/20 ring-destructive/30 text-[color:oklch(0.875_0.066_25)]",
       },
     },
     defaultVariants: {

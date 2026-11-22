@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ledger Light Badge — the dashboard's pill chips: soft-tinted success/loss\n// deltas and outline status pills. Semantic tokens only.\n\nconst badgeVariants = cva(\n  [\n    \"inline-flex items-center justify-center rounded-full font-medium\",\n    \"transition-colors duration-fast\",\n    \"focus:outline-none focus:ring-[0.1875rem] focus:ring-ring/30\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground dark:bg-[color:oklch(0.57_0.19_264)]\",\n        secondary: \"text-secondary-foreground bg-[color:oklch(0.905_0.004_256)] dark:text-[color:oklch(0.495_0.004_256)]\",\n        outline: \"border bg-transparent text-foreground border-[color:oklch(0.905_0.004_256)]\",\n        destructive: \"bg-destructive text-destructive-foreground dark:bg-[color:oklch(0.585_0.2_25)]\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem]\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

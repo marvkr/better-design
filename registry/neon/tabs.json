@@ -1,0 +1,27 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Dark Neon AI Tabs.\n *\n * The list is a recessed well sunk into the surface. The ACTIVE trigger is the\n * DS signature: it adopts the neon-green material (the same gradient + glow as\n * the primary Button), scaled to a tab. Inactive triggers are quiet muted text\n * that warms to the foreground on hover.\n */\n\nfunction Tabs({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Root>) {\n  return <TabsPrimitive.Root className={cn(\"\", className)} {...props} />\n}\nTabs.displayName = TabsPrimitive.Root.displayName\n\nfunction TabsList({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.List>) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-10 items-center justify-center rounded-[0.75rem] bg-input p-1 text-muted-foreground [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = TabsPrimitive.List.displayName\n\nfunction TabsTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {\n  return (\n    <TabsPrimitive.Trigger\n      className={cn(\n        \"relative inline-flex items-center justify-center whitespace-nowrap rounded-[0.5625rem] px-3 py-1.5 text-sm font-medium\",\n        \"text-muted-foreground transition-[color,background,box-shadow] duration-fast\",\n        \"hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"data-[state=active]:[background:var(--neon-gradient)] data-[state=active]:text-primary-foreground data-[state=active]:[box-shadow:var(--shadow-neon)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName\n\nfunction TabsContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Content>) {\n  return (\n    <TabsPrimitive.Content\n      className={cn(\n        \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = TabsPrimitive.Content.displayName\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

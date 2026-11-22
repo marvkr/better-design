@@ -1,0 +1,74 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Playdesk Button, the desk's download pill.\n *\n * A vertical gradient for body, a gloss sheen over it for light, and a wide\n * soft shadow for height. Fully rounded at every size; the label sits at medium\n * weight so the shape carries the emphasis.\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-full text-sm font-medium cursor-pointer select-none\",\n    \"transition-[box-shadow,background-image,transform] duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: [\n          \"text-primary-foreground\",\n          \"[background-image:var(--fill-primary)] [box-shadow:var(--shadow-primary)]\",\n          \"hover:[background-image:var(--fill-primary-hover)] hover:[box-shadow:var(--shadow-primary-hover)]\",\n        ].join(\" \"),\n        primary: [\n          \"text-primary-foreground\",\n          \"[background-image:var(--fill-primary)] [box-shadow:var(--shadow-primary)]\",\n          \"hover:[background-image:var(--fill-primary-hover)] hover:[box-shadow:var(--shadow-primary-hover)]\",\n        ].join(\" \"),\n        secondary: [\n          \"text-secondary-foreground\",\n          \"[background-image:var(--fill-secondary)] [box-shadow:var(--shadow-button)]\",\n          \"hover:[background-image:var(--fill-secondary-hover)] hover:[box-shadow:var(--shadow-button-hover)]\",\n        ].join(\" \"),\n        outline:\n          \"bg-card text-foreground border border-border [box-shadow:var(--shadow-xs)] hover:bg-muted hover:border-foreground/20\",\n        ghost: \"text-foreground hover:bg-foreground/[0.05]\",\n        destructive: [\n          \"text-destructive-foreground\",\n          \"[background-image:var(--fill-destructive)] [box-shadow:var(--shadow-destructive)]\",\n          \"hover:[background-image:var(--fill-destructive-hover)] hover:[box-shadow:var(--shadow-destructive-hover)]\",\n        ].join(\" \"),\n        link: \"text-primary font-semibold underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-10 px-5\",\n        sm: \"h-8 px-3.5 text-xs\",\n        lg: \"h-12 px-7 text-base\",\n        icon: \"h-10 w-10 px-0\",\n        \"icon-sm\": \"h-8 w-8 px-0\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"default\" },\n  }\n)\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const classes = cn(buttonVariants({ variant, size, className }))\n\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(children)) {\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={classes}\n          {...props}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      )\n    }\n\n    return (\n      <ButtonPrimitive ref={ref} className={classes} {...props}>\n        {children}\n      </ButtonPrimitive>\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "primary-hover-from": "oklch(0.724 0.1521 250.8)",
+      "primary-hover-to": "oklch(0.6314 0.2129 257.6)",
+      "secondary-from": "oklch(0.9521 0 0)",
+      "secondary-to": "oklch(0.8945 0 0)",
+      "secondary-hover-from": "oklch(0.9731 0 0)",
+      "secondary-hover-to": "oklch(0.9189 0 0)",
+      "destructive-from": "oklch(0.6321 0.2211 26.6)",
+      "destructive-to": "oklch(0.5423 0.2298 27.9)",
+      "destructive-hover-from": "oklch(0.6721 0.1996 26.2)",
+      "destructive-hover-to": "oklch(0.5823 0.2287 27.5)",
+      "shadow-button": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.1), 0 0.5rem 1.5rem oklch(0 0 0 / 0.08)",
+      "shadow-button-hover": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.12), 0 0.75rem 1.875rem oklch(0 0 0 / 0.12)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.75rem 1.875rem oklch(0.6243 0.2056 255.49 / 0.4)",
+      "shadow-destructive": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0.5771 0.245 27.33 / 0.3)",
+      "shadow-destructive-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.36), 0 0.75rem 1.875rem oklch(0.5771 0.245 27.33 / 0.38)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "fill-primary-hover": "var(--gloss), linear-gradient( 180deg, var(--primary-hover-from) 0%, var(--primary-hover-to) 100% )",
+      "fill-secondary": "var(--gloss), linear-gradient(180deg, var(--secondary-from) 0%, var(--secondary-to) 100%)",
+      "fill-secondary-hover": "var(--gloss), linear-gradient( 180deg, var(--secondary-hover-from) 0%, var(--secondary-hover-to) 100% )",
+      "fill-destructive": "var(--gloss), linear-gradient( 180deg, var(--destructive-from) 0%, var(--destructive-to) 100% )",
+      "fill-destructive-hover": "var(--gloss), linear-gradient( 180deg, var(--destructive-hover-from) 0%, var(--destructive-hover-to) 100% )",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "primary-hover-from": "oklch(0.724 0.1521 250.8)",
+      "primary-hover-to": "oklch(0.6314 0.2129 257.6)",
+      "secondary-from": "oklch(0.9521 0 0)",
+      "secondary-to": "oklch(0.8945 0 0)",
+      "secondary-hover-from": "oklch(0.9731 0 0)",
+      "secondary-hover-to": "oklch(0.9189 0 0)",
+      "destructive-from": "oklch(0.6321 0.2211 26.6)",
+      "destructive-to": "oklch(0.5423 0.2298 27.9)",
+      "destructive-hover-from": "oklch(0.6721 0.1996 26.2)",
+      "destructive-hover-to": "oklch(0.5823 0.2287 27.5)",
+      "shadow-button": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.1), 0 0.5rem 1.5rem oklch(0 0 0 / 0.08)",
+      "shadow-button-hover": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.12), 0 0.75rem 1.875rem oklch(0 0 0 / 0.12)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.75rem 1.875rem oklch(0.6243 0.2056 255.49 / 0.4)",
+      "shadow-destructive": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0.5771 0.245 27.33 / 0.3)",
+      "shadow-destructive-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.36), 0 0.75rem 1.875rem oklch(0.5771 0.245 27.33 / 0.38)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "fill-primary-hover": "var(--gloss), linear-gradient( 180deg, var(--primary-hover-from) 0%, var(--primary-hover-to) 100% )",
+      "fill-secondary": "var(--gloss), linear-gradient(180deg, var(--secondary-from) 0%, var(--secondary-to) 100%)",
+      "fill-secondary-hover": "var(--gloss), linear-gradient( 180deg, var(--secondary-hover-from) 0%, var(--secondary-hover-to) 100% )",
+      "fill-destructive": "var(--gloss), linear-gradient( 180deg, var(--destructive-from) 0%, var(--destructive-to) 100% )",
+      "fill-destructive-hover": "var(--gloss), linear-gradient( 180deg, var(--destructive-hover-from) 0%, var(--destructive-hover-to) 100% )",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

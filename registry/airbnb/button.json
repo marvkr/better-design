@@ -4,47 +4,29 @@
   "files": [
     {
       "path": "components/ui/button.tsx",
-      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Airbnb Button — extracted from airbnb.com (2026-04)\n// Primary: solid #FF385C, radial gradient on hover\n// Secondary: #222 solid\n// Outline: white bg, 1px #222 border\n// Rounded: 8px default, pill for search CTA\n// No drop-shadow on buttons — flat with border or solid fill\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold\",\n    \"rounded-lg transition-all duration-150 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Rausch solid — radial gradient on hover\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"hover:bg-primary/90\",\n        // Dark — #222 solid\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"hover:bg-[#000000]\",\n        // Outline — white bg, thin dark border\n        outline:\n          \"border border-foreground bg-background text-foreground \" +\n          \"hover:bg-muted\",\n        // Subtle outline — light border\n        ghost:\n          \"border border-border bg-background text-foreground \" +\n          \"hover:bg-muted\",\n        // Destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"hover:bg-destructive/90\",\n        // Link\n        link: \"text-foreground underline-offset-4 underline hover:text-foreground/80\",\n      },\n      size: {\n        default: \"h-12 px-6 py-3\",\n        sm: \"h-9 px-4 text-xs rounded-lg\",\n        lg: \"h-14 px-8 text-base rounded-xl\",\n        icon: \"h-10 w-10 rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Airbnb Button, measured on airbnb.com (13 November 2026)\n// Default: brand gradient, linear at rest and radial on hover, weight 500\n// Secondary: grey fill with a dark label\n// Outline: white with a 1px dark line\n// Inverse: dark fill, the site's banner and confirm button\n// Ghost: clear until hover, a pill like the header links\n// Radius: 12px at 48px height and above, 8px below, and a pill size for the booking button\n// No shadow on any button\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-base font-medium\",\n    \"rounded-lg transition-[background-color,border-color,color,scale] duration-fast ease-in-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.96]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary bg-(image:--primary-gradient) text-primary-foreground \" +\n          \"hover:bg-(image:--primary-gradient-hover)\",\n        secondary:\n          \"bg-secondary text-secondary-foreground \" +\n          \"hover:bg-secondary-hover\",\n        outline:\n          \"border border-foreground bg-background text-foreground \" +\n          \"hover:bg-muted\",\n        inverse:\n          \"bg-foreground text-background \" +\n          \"hover:bg-inverse-hover\",\n        ghost:\n          \"rounded-full bg-transparent text-foreground \" +\n          \"hover:bg-muted\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"hover:bg-destructive/90\",\n        link: \"text-foreground underline underline-offset-2 hover:text-foreground/80\",\n      },\n      size: {\n        default: \"h-12 px-6\",\n        sm: \"h-8 px-3 text-xs rounded-sm\",\n        md: \"h-10 px-4 text-sm rounded-sm\",\n        pill: \"h-12 px-6 rounded-full\",\n        lg: \"h-14 px-8\",\n        icon: \"h-10 w-10 rounded-full text-sm\",\n        \"icon-sm\": \"h-8 w-8 rounded-full text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@radix-ui/react-slot",
-    "class-variance-authority"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
   ],
   "cssVars": {
+    "theme": {},
     "light": {
-      "--background": "#FFFFFF",
-      "--foreground": "#222222",
-      "--card": "#FFFFFF",
-      "--card-foreground": "#222222",
-      "--popover": "#FFFFFF",
-      "--popover-foreground": "#222222",
-      "--primary": "#FF385C",
-      "--primary-foreground": "#FFFFFF",
-      "--secondary": "#222222",
-      "--secondary-foreground": "#FFFFFF",
-      "--muted": "#F7F7F7",
-      "--muted-foreground": "#6A6A6A",
-      "--accent": "#F7F7F7",
-      "--accent-foreground": "#222222",
-      "--destructive": "#C13515",
-      "--destructive-foreground": "#FFFFFF",
-      "--border": "#DDDDDD",
-      "--input": "#F7F7F7",
-      "--ring": "#222222",
-      "--radius": "0.75rem",
-      "--rausch-gradient": "radial-gradient(\n    circle at center,\n    #FF385C 0%,\n    #E61E4D 27.5%,\n    #E31C5F 40%,\n    #D70466 57.5%,\n    #BD1E59 75%,\n    #BD1E59 100%\n  )",
-      "--shadow-2xs": "0 1px 2px rgba(0,0,0,0.04)",
-      "--shadow-xs": "0 1px 2px rgba(0,0,0,0.06)",
-      "--shadow-sm": "0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05)",
-      "--shadow": "0 2px 4px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.08)",
-      "--shadow-md": "0 2px 8px rgba(0,0,0,0.08), 0 6px 20px rgba(0,0,0,0.06)",
-      "--shadow-lg": "0 6px 20px rgba(0,0,0,0.2)",
-      "--shadow-xl": "0 6px 20px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.04)"
+      "primary-gradient": "linear-gradient( to right, oklch(0.5962 0.2257 16.6) 0%, oklch(0.5937 0.2256 10) 50%, oklch(0.5668 0.2266 4.4) 100% )",
+      "primary-gradient-hover": "radial-gradient( circle at center, oklch(0.5962 0.2257 16.6) 0%, oklch(0.5962 0.2257 16.6) 27.5%, oklch(0.5937 0.2256 10) 40%, oklch(0.5668 0.2266 4.4) 57.5%, oklch(0.5248 0.1934 6) 75%, oklch(0.5248 0.1934 6) 100% )",
+      "secondary-hover": "oklch(0.9401 0 0)",
+      "inverse-hover": "oklch(0.3677 0 0)",
+      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
+    },
+    "dark": {
+      "primary-gradient": "linear-gradient( to right, oklch(0.5962 0.2257 16.6) 0%, oklch(0.5937 0.2256 10) 50%, oklch(0.5668 0.2266 4.4) 100% )",
+      "primary-gradient-hover": "radial-gradient( circle at center, oklch(0.5962 0.2257 16.6) 0%, oklch(0.5962 0.2257 16.6) 27.5%, oklch(0.5937 0.2256 10) 40%, oklch(0.5668 0.2266 4.4) 57.5%, oklch(0.5248 0.1934 6) 75%, oklch(0.5248 0.1934 6) 100% )",
+      "secondary-hover": "oklch(0.9401 0 0)",
+      "inverse-hover": "oklch(0.3677 0 0)",
+      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     }
   }
 }

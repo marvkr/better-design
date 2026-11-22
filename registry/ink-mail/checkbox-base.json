@@ -1,0 +1,28 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Ink mail Checkbox: a 1rem box with a 0.375rem corner and a grey edge on the\n * black page. Checked or mixed, it fills with the primary button's flat\n * off-white, and the black tick or dash sits on it. Base UI owns the checked\n * state, so a controlled parent passes `checked` straight through.\n */\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-(--control) bg-transparent text-primary-foreground\",\n        \"transition-[background-color,border-color] duration-fast ease-out\",\n        \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:border-(--line-strong) data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled)\",\n        controlChecked,\n        \"data-[indeterminate]:border-primary data-[indeterminate]:bg-primary\",\n        \"data-[disabled]:data-[indeterminate]:border-(--line-strong) data-[disabled]:data-[indeterminate]:bg-muted data-[disabled]:data-[indeterminate]:text-(--foreground-disabled)\",\n        className,\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className=\"flex size-full items-center justify-center text-current\"\n      >\n        <Icon\n          icon={indeterminate ? \"ph:minus\" : \"ph:check\"}\n          aria-hidden=\"true\"\n          className=\"size-3\"\n        />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "control": "oklch(0.52 0.006 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

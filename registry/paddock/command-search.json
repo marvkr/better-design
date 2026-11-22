@@ -1,0 +1,26 @@
+{
+  "name": "command-search",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/command-search.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\nimport { focusRing, popoverSurface } from \"./_shared\"\n\n// CommandSearch: command search with live filtering, a clear action, and an\n// empty state. The field and results are directly usable.\n//\n// Usage:\n//   <CommandSearch />\n//   <CommandSearch suggestions={[\"Open today's schedule\"]} onSelect={run} />\n\nconst DEFAULT_ITEMS = [\n  \"Open today's schedule\",\n  \"Create a new project\",\n  \"Invite a teammate\",\n  \"Show urgent projects\",\n  \"Export this view\",\n  \"Archive finished projects\",\n  \"Change the workspace name\",\n]\n\ninterface CommandSearchProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onSelect\"> {\n  suggestions?: string[]\n  placeholder?: string\n  onSelect?: (suggestion: string) => void\n}\n\n/**\n * Paddock CommandSearch: a white floating panel with the search row on top\n * and grey-washed result rows under it.\n */\nfunction CommandSearch({\n  suggestions = DEFAULT_ITEMS,\n  placeholder = \"Search commands\",\n  onSelect,\n  className,\n  ...props\n}: CommandSearchProps) {\n  const [query, setQuery] = React.useState(\"\")\n  const results = query\n    ? suggestions.filter((i) => i.toLowerCase().includes(query.toLowerCase()))\n    : suggestions.slice(0, 5)\n  const empty = query.length > 2 && results.length === 0\n\n  return (\n    <div className={cn(\"flex min-h-64 w-full max-w-xs flex-col items-stretch\", className)} {...props}>\n      <div className={cn(popoverSurface, \"w-full self-start overflow-hidden p-0\")}>\n        <div className=\"flex h-11 items-center gap-2 border-b border-border px-3.5\">\n          <Icon icon=\"mingcute:search-line\" className=\"size-4 shrink-0 text-muted-foreground\" aria-hidden=\"true\" />\n          <input\n            value={query}\n            onChange={(event) => setQuery(event.target.value)}\n            placeholder={placeholder}\n            aria-label={placeholder}\n            className=\"min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground\"\n          />\n          {query && (\n            <button\n              aria-label=\"Clear search\"\n              type=\"button\"\n              onClick={() => setQuery(\"\")}\n              className={cn(\n                focusRing,\n                \"flex size-6 animate-in fade-in items-center justify-center rounded-sm bg-secondary text-muted-foreground transition-colors duration-fast hover:bg-(--track) hover:text-foreground\",\n              )}\n            >\n              <Icon icon=\"mingcute:close-line\" className=\"size-3\" aria-hidden=\"true\" />\n            </button>\n          )}\n        </div>\n\n        {empty ? (\n          <div className=\"flex animate-in fade-in flex-col items-center justify-center gap-1 px-4 py-8 duration-base\">\n            <span className=\"mb-1.5 flex size-9 items-center justify-center rounded-md bg-secondary text-muted-foreground\">\n              <Icon icon=\"mingcute:search-line\" className=\"size-4\" aria-hidden=\"true\" />\n            </span>\n            <span className=\"text-[0.8125rem] font-medium text-foreground\">No matching commands</span>\n            <span className=\"text-xs text-muted-foreground\">Try a shorter word</span>\n          </div>\n        ) : (\n          <div className=\"p-1.5\" role=\"listbox\" aria-label=\"Suggestions\">\n            {results.map((item) => (\n              <button\n                key={item}\n                type=\"button\"\n                role=\"option\"\n                aria-selected={false}\n                onClick={() => {\n                  setQuery(item)\n                  onSelect?.(item)\n                }}\n                className={cn(\n                  focusRing,\n                  \"flex h-9 w-full animate-in fade-in items-center rounded-sm px-2.5 text-left text-sm text-foreground transition-colors duration-fast hover:bg-accent\",\n                )}\n              >\n                {item}\n              </button>\n            ))}\n          </div>\n        )}\n      </div>\n    </div>\n  )\n}\n\nexport { CommandSearch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.945 0.008 230)"
+    },
+    "dark": {
+      "track": "oklch(0.155 0.012 240)"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  message?: string;\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ className, message = \"Nothing here yet\", children, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex items-center justify-center rounded-xl border border-dashed border-border px-6 py-10\",\n        \"text-sm text-muted-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      {children ?? message}\n    </div>\n  ),\n);\nEmpty.displayName = \"Empty\";\n\nexport { Empty };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "progress",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\";\n\nimport { cn } from \"@/lib/utils\";\nimport { oxFace, slotWell } from \"./_shared\";\n\n/**\n * Margin Progress: the slider's thin grey slot behind a hairline, filled with\n * the primary Button's oxblood face.\n */\nconst Progress = React.forwardRef<\n  React.ElementRef<typeof ProgressPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    data-slot=\"progress\"\n    className={cn(\"relative h-1.5 w-full overflow-hidden rounded-full\", slotWell, className)}\n    value={value}\n    {...props}\n  >\n    <ProgressPrimitive.Indicator\n      data-slot=\"progress-indicator\"\n      className={cn(\n        \"h-full w-full flex-1 rounded-full transition-transform duration-slow ease-(--ease-out) motion-reduce:transition-none\",\n        oxFace,\n      )}\n      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}\n    />\n  </ProgressPrimitive.Root>\n));\nProgress.displayName = ProgressPrimitive.Root.displayName;\n\nexport { Progress };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-progress@^1.1.7"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

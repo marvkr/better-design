@@ -1,0 +1,26 @@
+{
+  "name": "code-block-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab } from \"./_shared\";\nimport { CopyButton } from \"./copy-button\";\n\n/** Props for a single code sample with an optional file or language caption and a copy button. */\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showCopy?: boolean;\n}\n\nconst TOKEN =\n  /(\\/\\/[^\\n]*|#[^\\n]*|\\/\\*[\\s\\S]*?\\*\\/)|(\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])*'|`(?:\\\\.|[^`\\\\])*`)|\\b(import|export|from|const|let|var|function|return|await|async|if|else|for|new|class|interface|type|default|def|curl|true|false|null|undefined)\\b|\\b([A-Za-z_$][\\w$]*)(?=\\s*\\()/g;\n\n/** Tone per capture group: plain, comment, string, keyword, call. Teal stays for strings only. */\nconst TONES = [\n  \"\",\n  \"text-muted-foreground\",\n  \"text-(--primary-text)\",\n  \"font-medium text-foreground\",\n  \"text-info-text\",\n];\n\n/** Tones comments, strings, keywords and calls in one pass. */\nfunction highlight(code: string): React.ReactNode[] {\n  const parts: React.ReactNode[] = [];\n  let last = 0;\n  for (const match of code.matchAll(TOKEN)) {\n    const start = match.index ?? 0;\n    if (start > last) parts.push(code.slice(last, start));\n    const group = [1, 2, 3, 4].find((g) => match[g] !== undefined) ?? 0;\n    parts.push(\n      <span key={start} className={TONES[group]}>\n        {match[0]}\n      </span>,\n    );\n    last = start + match[0].length;\n  }\n  if (last < code.length) parts.push(code.slice(last));\n  return parts;\n}\n\n/**\n * Paddock CodeBlock: a white bordered card with a quiet caption row and a ghost\n * copy button, holding the code in a flat grey well set in IBM Plex Mono.\n */\nconst CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(\n  ({ className, code, language, filename, showCopy = true, ...props }, ref) => {\n    const caption = filename ?? language;\n    const hasHeader = Boolean(caption) || showCopy;\n    const tokens = React.useMemo(() => highlight(code), [code]);\n\n    return (\n      <div data-slot=\"code-block\" className={cn(cardSlab, \"overflow-hidden rounded-xl p-2\")}>\n        {hasHeader && (\n          <div\n            data-slot=\"code-block-header\"\n            className=\"flex h-9 items-center justify-between gap-3 ps-2 pb-2\"\n          >\n            <span className=\"min-w-0 truncate font-mono text-xs text-muted-foreground\">{caption}</span>\n            {showCopy && (\n              <CopyButton\n                value={code}\n                size=\"icon-sm\"\n                variant=\"ghost\"\n                label=\"Copy code\"\n                className=\"text-muted-foreground\"\n              />\n            )}\n          </div>\n        )}\n        <pre\n          ref={ref}\n          data-slot=\"code-block-code\"\n          className={cn(\n            \"m-0 overflow-x-auto rounded-lg bg-muted px-4 py-3.5 font-mono text-[0.8125rem] leading-relaxed text-foreground\",\n            className,\n          )}\n          {...props}\n        >\n          <code>{tokens}</code>\n        </pre>\n      </div>\n    );\n  },\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json",
+    "https://better-design.com/registry/paddock/copy-button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.45 0.09 198)",
+      "info-text": "oklch(0.45 0.12 240)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.8 0.09 190)",
+      "info-text": "oklch(0.87 0.07 235)"
+    }
+  }
+}

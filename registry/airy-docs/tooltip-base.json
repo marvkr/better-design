@@ -1,0 +1,17 @@
+{
+  "name": "tooltip-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tooltip as TooltipPrimitive } from \"@base-ui/react/tooltip\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popupMotion } from \"./_shared\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Shares the open and close delay across every tooltip inside it. */\nconst TooltipProvider = TooltipPrimitive.Provider;\n\n/** Airy docs Tooltip root: a short label for one control. */\nconst Tooltip = TooltipPrimitive.Root;\n\n/** The control the tooltip describes. */\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\n/**\n * Airy docs tooltip: a small ink chip with white 0.75rem text and a 0.5rem\n * corner. The ink lifts it off the white page, so it needs no shadow.\n */\nconst TooltipContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TooltipPrimitive.Popup.Props> &\n    Pick<\n      TooltipPrimitive.Positioner.Props,\n      \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n    >\n>(({ className, align, alignOffset, side, sideOffset = 6, ...props }, ref) => (\n  <TooltipPrimitive.Portal>\n    <TooltipPrimitive.Positioner\n      align={align}\n      alignOffset={alignOffset}\n      side={side}\n      sideOffset={sideOffset}\n      className=\"isolate z-50\"\n    >\n      <TooltipPrimitive.Popup\n        ref={ref}\n        data-slot=\"tooltip-content\"\n        className={cn(\n          popupMotion,\n          \"max-w-64 rounded-md bg-foreground px-2 py-1 text-xs font-medium leading-snug text-background\",\n          className,\n        )}\n        {...props}\n      />\n    </TooltipPrimitive.Positioner>\n  </TooltipPrimitive.Portal>\n));\nTooltipContent.displayName = \"TooltipContent\";\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared-base.json"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Progress: gauge bar.\n// Recessed dark channel with a glowing signal-green fill, like the\n// percentage readouts on the system health matrix.\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"]\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-xs\",\n      \"border border-border bg-input\",\n      \"[box-shadow:var(--shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator\n        className={cn(\n          \"h-full w-full flex-1 bg-primary\",\n          \"[box-shadow:inset_0_0.0625rem_0_oklch(0.97_0.08_148/0.35),0_0_0.5rem_oklch(0.78_0.21_148/0.4)]\",\n          \"transition-all\"\n        )}\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

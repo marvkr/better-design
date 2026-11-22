@@ -1,0 +1,29 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Badge: pill chips like the wallet's \"Manage address\" tag.\n// Default is a raised graphite chip; primary glows magenta; light variants are\n// tinted washes of the same hue on the dark canvas.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring/50 focus:ring-offset-2 focus:ring-offset-background\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground border border-border [box-shadow:var(--shadow-raised)]\",\n        primary:\n          \"bg-primary [background-image:var(--gradient-primary)] text-primary-foreground [box-shadow:var(--shadow-button)]\",\n        secondary: \"bg-primary/18 text-[color:oklch(0.875_0.079_350)]\",\n        destructive: \"text-destructive-foreground bg-[color:oklch(0.57_0.21_22)]\",\n        \"destructive-light\": \"bg-destructive/19 text-[color:oklch(0.875_0.066_22)]\",\n        success: \"bg-chart-5 text-background\",\n        \"success-light\": \"bg-chart-5/15 text-[color:oklch(0.875_0.084_345)]\",\n        warning: \"bg-chart-3 text-background\",\n        \"warning-light\": \"bg-chart-3/15 text-[color:oklch(0.875_0.136_85)]\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide\",\n        default: \"h-5 gap-1.5 px-2.5 text-xs\",\n        lg: \"h-6 gap-1.5 px-3 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    }
+  }
+}

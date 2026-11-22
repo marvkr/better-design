@@ -1,0 +1,11 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for a section title with a description and actions. */\nexport interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  eyebrow?: React.ReactNode;\n  actions?: React.ReactNode;\n}\n\n/**\n * Paddock SectionHeader: a compact page header. A tight semibold title, a\n * muted line under it and actions to the right. The optional eyebrow sits\n * beside the title as a grey chip, never above it.\n */\nconst SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps>(\n  ({ className, title, description, eyebrow, actions, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"section-header\"\n      className={cn(\"flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between\", className)}\n      {...props}\n    >\n      <div className=\"min-w-0 flex-1\">\n        <div className=\"flex flex-wrap items-center gap-2.5\">\n          <h2 className=\"text-2xl font-semibold tracking-tight text-balance text-foreground\">{title}</h2>\n          {eyebrow && (\n            <span className=\"inline-flex h-5.5 items-center rounded-sm bg-secondary px-2 text-xs font-medium text-secondary-foreground\">\n              {eyebrow}\n            </span>\n          )}\n        </div>\n        {description && (\n          <p className=\"mt-1.5 max-w-2xl text-[0.9375rem] text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {actions && <div className=\"flex shrink-0 items-center gap-2\">{actions}</div>}\n    </div>\n  ),\n);\nSectionHeader.displayName = \"SectionHeader\";\n\nexport { SectionHeader };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

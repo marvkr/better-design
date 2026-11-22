@@ -1,0 +1,29 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { raisedBevel } from \"./_shared\";\nimport { Card, CardContent } from \"./card\";\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string | number;\n  change?: {\n    value: string | number;\n    trend: \"up\" | \"down\" | \"neutral\";\n  };\n  icon?: React.ReactNode;\n  description?: string;\n}\n\nconst trendTone = {\n  up: \"bg-success/12 text-success\",\n  down: \"bg-destructive/12 text-destructive\",\n  neutral: \"bg-muted text-muted-foreground\",\n} as const;\n\nconst trendIcon = {\n  up: \"ph:arrow-up-right\",\n  down: \"ph:arrow-down-right\",\n  neutral: null,\n} as const;\n\n/** Read before the value, so a screen reader hears the direction too. */\nconst trendSpoken = {\n  up: \"Up \",\n  down: \"Down \",\n  neutral: \"No change \",\n} as const;\n\n/**\n * Burnished StatCard: one figure on an umber slab. A muted label sits over\n * a large semibold number on tabular digits; the icon rests on a small\n * raised graphite bevel tile at the top right. The change is a pill washed\n * in its own hue with an arrow.\n */\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  const arrow = change ? trendIcon[change.trend] : null;\n\n  return (\n    <Card className={cn(\"py-0\", className)} {...props}>\n      <CardContent className=\"flex flex-col gap-3.5 p-6\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"flex min-w-0 flex-col gap-1.5\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"text-3xl font-semibold tracking-tight tabular-nums text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <span\n              aria-hidden=\"true\"\n              className={cn(\n                raisedBevel,\n                \"flex size-9 shrink-0 items-center justify-center rounded-lg text-primary-text [&_svg]:size-4\",\n              )}\n            >\n              {icon}\n            </span>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"flex flex-wrap items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex h-6 items-center gap-0.5 rounded-full px-2.5 text-xs font-semibold tabular-nums\",\n                  trendTone[change.trend],\n                )}\n              >\n                {arrow && (\n                  <Icon icon={arrow} className=\"size-3\" aria-hidden=\"true\" />\n                )}\n                <span className=\"sr-only\">{trendSpoken[change.trend]}</span>\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-sm text-muted-foreground\">\n                {description}\n              </span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { StatCard };\nexport type { StatCardProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json",
+    "https://better-design.com/registry/burnished/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "success": "oklch(0.79 0.12 150)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "success": "oklch(0.79 0.12 150)"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "hover-card-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { PreviewCard as PreviewCardPrimitive } from \"@base-ui/react/preview-card\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popoverSurface, popupMotion } from \"./_shared\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Bold retail HoverCard root: a preview that opens while the pointer rests on a link. */\nconst HoverCard = PreviewCardPrimitive.Root;\n\n/** The link or element that shows the preview on hover and focus. */\nconst HoverCardTrigger = PreviewCardPrimitive.Trigger;\n\n/**\n * Bold retail hover card: the white floating panel, 18rem wide, with a\n * hairline ring and a soft shadow. It settles in from the link it previews,\n * so it reads as a quick look at a product rather than a new page.\n */\nconst HoverCardContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<PreviewCardPrimitive.Popup.Props> &\n    Pick<\n      PreviewCardPrimitive.Positioner.Props,\n      \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n    >\n>(\n  (\n    {\n      className,\n      align = \"center\",\n      alignOffset,\n      side,\n      sideOffset = 8,\n      ...props\n    },\n    ref,\n  ) => (\n    <PreviewCardPrimitive.Portal>\n      <PreviewCardPrimitive.Positioner\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n        className=\"isolate z-50 outline-none\"\n      >\n        <PreviewCardPrimitive.Popup\n          ref={ref}\n          data-slot=\"hover-card-content\"\n          className={cn(\n            popoverSurface,\n            popupMotion,\n            \"flex w-72 max-w-(--available-width) flex-col gap-3 p-4 text-sm text-foreground\",\n            className,\n          )}\n          {...props}\n        />\n      </PreviewCardPrimitive.Positioner>\n    </PreviewCardPrimitive.Portal>\n  ),\n);\nHoverCardContent.displayName = \"HoverCardContent\";\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ]
+}

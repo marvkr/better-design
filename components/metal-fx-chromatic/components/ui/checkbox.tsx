@@ -15,12 +15,12 @@ const Checkbox = React.forwardRef<
     className={cn(
       "peer h-4 w-4 shrink-0 rounded border border-border",
       "bg-input [box-shadow:var(--shadow-inset)]",
-      "transition-[background-color,box-shadow,border-color] duration-150",
+      "transition-[background-color,box-shadow,border-color] duration-fast",
       "hover:border-ring/40",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
       "disabled:cursor-not-allowed disabled:opacity-50",
-      "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground data-[state=checked]:[box-shadow:var(--shadow-s)]",
-      "data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:[box-shadow:var(--shadow-s)]",
+      "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground data-[state=checked]:[box-shadow:var(--shadow-button)]",
+      "data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:[box-shadow:var(--shadow-button)]",
       className
     )}
     {...props}

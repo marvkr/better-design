@@ -1,0 +1,14 @@
+{
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "content": "\"use client\"\n\nimport * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\"\n\n/*\n * Bevel AspectRatio. The primitive holds a box at a ratio and paints\n * nothing, so it carries no styling of its own. Give the child the radius and\n * the shadow the surface needs.\n */\n\nconst AspectRatio = AspectRatioPrimitive.Root\n\nexport { AspectRatio }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-aspect-ratio@^1.1.7"
+  ]
+}

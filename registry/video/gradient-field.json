@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-field",
+  "type": "registry:component",
+  "title": "Gradient Field",
+  "description": "Gradient background animation: soft blobs in tones of the primary colour drift slowly over the page and loop without a seam. Children draw on top.",
+  "dependencies": [
+    "remotion@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/gradient-field.tsx",
+      "target": "components/bd-video/gradient-field.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Gradient field: a few large, soft blobs of the primary and accent tones drift\n * slowly over the page colour, like light through frosted glass. A calm bed to\n * set titles or product shots on.\n *\n * Written by Better Design. The motion is periodic over `loopFrames`, so the\n * last frame meets the first and the background loops without a seam.\n */\nimport type { ReactNode } from \"react\";\nimport { AbsoluteFill, random, useCurrentFrame } from \"remotion\";\nimport { shiftHue, type VideoTheme, useVideoTheme, withAlpha } from \"@/lib/bd-video\";\n\nexport interface GradientFieldProps {\n  /** Drawn on top of the field. */\n  children?: ReactNode;\n  /** Blob colours. Defaults to tones of the theme's primary and accent. */\n  colors?: string[];\n  /** Frames for one full cycle of the drift. The field loops at this length. */\n  loopFrames?: number;\n  /** Strength of the blobs, 0 to 1. Lower is quieter. */\n  intensity?: number;\n  /** Changes the blob layout while keeping it deterministic. */\n  seed?: string;\n  theme?: Partial<VideoTheme>;\n}\n\nconst TAU = Math.PI * 2;\n\n\n/** Slow drifting soft blobs of the theme's colours, looping seamlessly, with children on top. */\nexport function GradientField({ children, colors, loopFrames = 180, intensity = 0.7, seed = \"field\", theme: themeOverride }: GradientFieldProps) {\n  const t = useVideoTheme(themeOverride);\n  const frame = useCurrentFrame();\n  const phase = (frame / loopFrames) * TAU;\n  // Hue neighbours of the primary, plus the accent wash for a quieter patch.\n  const palette = colors ?? [t.primary, shiftHue(t.primary, 40), t.accent, shiftHue(t.primary, -20)];\n\n  const blobs = palette.map((color, i) => {\n    const r = (k: string) => random(`${seed}-${i}-${k}`);\n    // Each blob orbits its home on a small ellipse, a whole number of times per loop.\n    const homeX = 0.15 + r(\"x\") * 0.7;\n    const homeY = 0.15 + r(\"y\") * 0.7;\n    const turns = r(\"dir\") > 0.5 ? 1 : -1;\n    const start = r(\"p\") * TAU;\n    const x = homeX + Math.cos(phase * turns + start) * (0.08 + r(\"ax\") * 0.08);\n    const y = homeY + Math.sin(phase * turns + start) * (0.06 + r(\"ay\") * 0.06);\n    const size = 900 + r(\"s\") * 500;\n    const breathe = 1 + Math.sin(phase * 2 + start) * 0.06;\n    return { color, x, y, size: size * breathe };\n  });\n\n  return (\n    <AbsoluteFill style={{ background: t.background, overflow: \"hidden\" }}>\n      <AbsoluteFill style={{ filter: \"blur(80px)\" }}>\n        {blobs.map((b, i) => (\n          <div\n            key={i}\n            style={{\n              position: \"absolute\",\n              left: `${b.x * 100}%`,\n              top: `${b.y * 100}%`,\n              width: b.size,\n              height: b.size,\n              marginLeft: -b.size / 2,\n              marginTop: -b.size / 2,\n              borderRadius: \"50%\",\n              background: `radial-gradient(circle, ${withAlpha(b.color, intensity)} 0%, ${withAlpha(b.color, intensity * 0.35)} 45%, ${withAlpha(b.color, 0)} 70%)`,\n            }}\n          />\n        ))}\n      </AbsoluteFill>\n      {/* A faint wash of the page colour keeps text on top readable. */}\n      <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, ${withAlpha(t.background, 0.25)} 0%, ${withAlpha(t.background, 0)} 70%)` }} />\n      {children ? <AbsoluteFill>{children}</AbsoluteFill> : null}\n    </AbsoluteFill>\n  );\n}\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

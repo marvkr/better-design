@@ -1,0 +1,21 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Card: one luminance step above the black page, behind a hairline,\n * with a 0.75rem corner and no shadow.\n *\n * Depth comes from surface steps, not shadows. An outline card stays on the\n * page colour behind the hairline, a raised card moves up to the elevated\n * step behind the strong hairline, and the inverse card is the off-white fill\n * with black ink for the one number a screen is about.\n */\nconst cardVariants = cva(\n  \"flex flex-col rounded-lg border text-card-foreground\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-card\",\n        outline: \"border-border bg-background\",\n        raised: \"border-(--line-strong) bg-popover\",\n        inverse:\n          \"border-transparent bg-primary text-primary-foreground \" +\n          \"[&_[data-slot=card-description]]:text-primary-foreground\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface CardProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-1.5 p-6\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\nconst CardTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\"text-base font-medium leading-tight\", className)}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-2 p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)"
+    },
+    "dark": {}
+  }
+}

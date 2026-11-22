@@ -1,0 +1,22 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared surface + form-field recipes for Emerald Analytics.\n *\n * Emerald Analytics' material is the dark dashboard panel: a flat charcoal-green\n * surface with a faint top-down sheen, lit from above, separated from the canvas\n * by a hairline border and a quiet ambient shadow. Raised controls (buttons) and\n * recessed controls (inputs) read as one material: panels sit slightly above the\n * canvas, fields press slightly into it. There is no texture or grain: the look\n * is clean, calm and data-first.\n */\n\nimport type { CSSProperties } from \"react\"\n\n/* Raised panel sheen: a subtle vertical lift from a touch lighter at the top to\n * a touch darker at the base, mirroring --emerald-sheen in globals.css so DS\n * components keep the sheen even when consumed standalone via the shadcn\n * registry (where the showcase's [data-ds] vars are absent). Use on cards,\n * sheets and other large raised surfaces. */\nexport const emeraldSurfaceStyle: CSSProperties = {\n  backgroundImage:\n    \"linear-gradient(oklch(0.235 0.024 164) 0%, oklch(0.205 0.021 163) 100%)\",\n}\n\n/* Panel sheen overlay. Unlike emeraldSurfaceStyle this keeps the element's own\n * background colour (bg-primary, bg-secondary, bg-popover, ...) and lays a very\n * faint top-light gradient over it, so buttons, popovers and filled controls\n * carry the same lit-from-above sheen as cards without losing their token\n * colour. */\nexport const emeraldPanelStyle: CSSProperties = {\n  backgroundImage:\n    \"linear-gradient(oklch(1 0 0 / 0.04) 0%, oklch(1 0 0 / 0) 45%)\",\n}\n\n/* Bright emerald surface — the vivid accent fill used by primary/inverse slots\n * that want the dashboard's CTA look. */\nexport const emeraldBrightStyle: CSSProperties = {\n  backgroundImage:\n    \"linear-gradient(oklch(0.78 0.16 158) 0%, oklch(0.7 0.17 158) 100%)\",\n}\n\nexport const formFieldBase =\n  \"w-full rounded-lg px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/40 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.1 0.02 162 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "emerald-sheen": "linear-gradient(oklch(0.235 0.024 164) 0%, oklch(0.205 0.021 163) 100%)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.1 0.02 162 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "emerald-sheen": "linear-gradient(oklch(0.235 0.024 164) 0%, oklch(0.205 0.021 163) 100%)"
+    }
+  }
+}

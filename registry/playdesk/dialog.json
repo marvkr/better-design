@@ -1,0 +1,30 @@
+{
+  "name": "dialog",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport { X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Dialog — a window lifted off the desk. A brushed titlebar carries\n * the traffic-light dots and the close control; the body below is plain white.\n */\n\nconst Dialog = DialogPrimitive.Root;\nconst DialogTrigger = DialogPrimitive.Trigger;\nconst DialogPortal = DialogPrimitive.Portal;\nconst DialogClose = DialogPrimitive.Close;\n\nconst DialogOverlay = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Overlay\n    ref={ref}\n    className={cn(\n      \"fixed inset-0 z-50 bg-foreground/35\",\n      \"data-[state=open]:animate-in data-[state=closed]:animate-out duration-base\",\n      \"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogOverlay.displayName = DialogPrimitive.Overlay.displayName;\n\n/* The three window dots. Decorative only: the real control is the X button. */\nconst TrafficLights = () => (\n  <span aria-hidden className=\"flex items-center gap-1.5\">\n    <span className=\"size-3 rounded-full bg-foreground/[0.14]\" />\n    <span className=\"size-3 rounded-full bg-foreground/[0.14]\" />\n    <span className=\"size-3 rounded-full bg-foreground/[0.14]\" />\n  </span>\n);\n\nconst DialogContent = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2\",\n        \"overflow-hidden rounded-xl bg-card text-card-foreground\",\n        \"[box-shadow:var(--shadow-window)]\",\n        \"duration-base data-[state=open]:animate-in data-[state=closed]:animate-out\",\n        \"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n        \"data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center gap-2 border-b border-foreground/[0.06] px-3 py-2 [background-image:var(--chrome-brushed)]\">\n        <TrafficLights />\n        <DialogPrimitive.Close\n          className={cn(\n            \"ml-auto inline-flex size-6 items-center justify-center rounded-full\",\n            \"text-muted-foreground transition-colors duration-fast\",\n            \"hover:bg-foreground/[0.06] hover:text-foreground\",\n            \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n          )}\n        >\n          <X className=\"size-3.5\" />\n          <span className=\"sr-only\">Close</span>\n        </DialogPrimitive.Close>\n      </div>\n      <div className=\"p-6\">{children}</div>\n    </DialogPrimitive.Content>\n  </DialogPortal>\n));\nDialogContent.displayName = DialogPrimitive.Content.displayName;\n\nconst DialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"flex flex-col gap-1.5\", className)} {...props} />\n);\nDialogHeader.displayName = \"DialogHeader\";\n\nconst DialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\n      \"mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n      className,\n    )}\n    {...props}\n  />\n);\nDialogFooter.displayName = \"DialogFooter\";\n\nconst DialogTitle = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-lg font-medium tracking-[-0.02em] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogTitle.displayName = DialogPrimitive.Title.displayName;\n\nconst DialogDescription = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDialogDescription.displayName = DialogPrimitive.Description.displayName;\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dialog@^1.1.14",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "chrome-brushed": "linear-gradient( 90deg, oklch(0.8744 0.0029 308.42) 0%, oklch(0.9551 0 0) 50%, oklch(0.8744 0.0029 308.42) 100% )"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "chrome-brushed": "linear-gradient( 90deg, oklch(0.8744 0.0029 308.42) 0%, oklch(0.9551 0 0) 50%, oklch(0.8744 0.0029 308.42) 100% )"
+    }
+  }
+}

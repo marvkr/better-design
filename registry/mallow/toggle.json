@@ -1,0 +1,31 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, quietFinish, pressScale, selectedLift } from \"./_shared\";\n\n/**\n * Mallow Toggle: a rounded button that presses on and off. Off, it is the violet tint\n * or the quiet white finish; on, it takes the solid violet primary. The\n * `inset` variant lies flat until it is pressed, then takes the violet tint and ring.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: cn(\n          selectedLift,\n          \"data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:shadow-(--violet-edge)\",\n        ),\n        outline: cn(\n          quietFinish,\n          \"data-[state=on]:bg-primary data-[state=on]:bg-none data-[state=on]:hover:bg-none data-[state=on]:text-primary-foreground data-[state=on]:shadow-(--violet-edge)\",\n        ),\n        inset:\n          \"bg-transparent text-muted-foreground hover:text-foreground data-[state=on]:bg-(--option-face) data-[state=on]:text-foreground data-[state=on]:shadow-(--option-edge)\",\n      },\n      size: {\n        default: \"h-10 px-4 text-sm\",\n        sm: \"h-8 px-3 text-sm\",\n        lg: \"h-12 px-5 text-base\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = TogglePrimitive.Root.displayName;\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "violet-edge": "inset 0 -0.125rem 0 0 oklch(0.32 0.16 288 / 0.3), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.16), 0 0.25rem 0.75rem -0.25rem oklch(0.45 0.18 288 / 0.35)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)"
+    },
+    "dark": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "violet-edge": "inset 0 -0.125rem 0 0 oklch(0.32 0.16 288 / 0.3), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.16), 0 0.25rem 0.75rem -0.25rem oklch(0.45 0.18 288 / 0.35)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)"
+    }
+  }
+}

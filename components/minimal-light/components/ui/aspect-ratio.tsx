@@ -1,4 +1,3 @@
-import * as React from "react"
 import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio"
 
 // Luxe AspectRatio: thin wrapper around Radix AspectRatio

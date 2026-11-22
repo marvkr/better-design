@@ -44,7 +44,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         className={cn(
           "flex flex-wrap items-center gap-1.5 w-full min-h-9 rounded-md px-2 py-1.5",
           "bg-input border border-border [box-shadow:var(--shadow-inset)]",
-          "transition-[border-color,box-shadow] duration-150",
+          "transition-[border-color,box-shadow] duration-fast",
           "focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/40",
           disabled && "opacity-50 cursor-not-allowed",
           className
@@ -65,7 +65,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
               onClick={() => removeTag(tag)}
               className={cn(
                 "rounded-sm p-0.5 text-muted-foreground",
-                "transition-colors duration-150",
+                "transition-colors duration-fast",
                 "hover:text-foreground hover:bg-accent",
                 "focus:outline-none focus:ring-1 focus:ring-ring/40"
               )}
@@ -84,7 +84,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
           onKeyDown={onKeyDown}
           placeholder={value.length === 0 ? placeholder : ""}
           disabled={disabled}
-          className="flex-1 min-w-[80px] bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+          className="flex-1 min-w-[5rem] bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
         />
       </div>
     )

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "film-grain",
+  "type": "registry:component",
+  "title": "Film Grain",
+  "description": "Film grain overlay: fine animated grain and a soft vignette laid over your footage, deterministic on every render. Children draw underneath.",
+  "dependencies": [
+    "remotion@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/film-grain.tsx",
+      "target": "components/bd-video/film-grain.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Film grain: a fine, living grain and a soft vignette laid over whatever sits\n * underneath, so flat UI footage picks up the texture of a photographed frame.\n *\n * Written by Better Design. The grain is browser noise with a seed stepped by\n * frame, so every render of the same frame is identical.\n */\nimport type { ReactNode } from \"react\";\nimport { useId } from \"react\";\nimport { AbsoluteFill, random, useCurrentFrame } from \"remotion\";\nimport { channels, type VideoTheme, useVideoTheme, withAlpha } from \"@/lib/bd-video\";\n\nexport interface FilmGrainProps {\n  /** Drawn under the grain and the vignette. */\n  children?: ReactNode;\n  /** Grain strength, 0 to 1. 0.1 is subtle, 0.25 is heavy. */\n  grain?: number;\n  /** Grain size. Higher numbers make finer grain. */\n  fineness?: number;\n  /** Frames each grain pattern holds. 2 reads as film at 30 fps. */\n  holdFrames?: number;\n  /** Vignette strength at the corners, 0 to 1. */\n  vignette?: number;\n  /** Changes the grain pattern while keeping it deterministic. */\n  seed?: string;\n  theme?: Partial<VideoTheme>;\n}\n\nconst luminance = (c: string) => {\n  const { r, g, b } = channels(c);\n  return 0.2126 * r + 0.7152 * g + 0.0722 * b;\n};\n\n/** Animated grain and a vignette over the page colour, with children underneath. */\nexport function FilmGrain({ children, grain = 0.12, fineness = 0.85, holdFrames = 2, vignette = 0.5, seed = \"grain\", theme: themeOverride }: FilmGrainProps) {\n  const t = useVideoTheme(themeOverride);\n  const frame = useCurrentFrame();\n  const id = useId().replace(/[^a-zA-Z0-9-]/g, \"\");\n  const step = Math.floor(frame / Math.max(1, holdFrames));\n  const noiseSeed = Math.floor(random(`${seed}-${step}`) * 10000);\n  // Shift the tile each step too, so no grain pattern sits still.\n  const dx = Math.round(random(`${seed}-x-${step}`) * 200);\n  const dy = Math.round(random(`${seed}-y-${step}`) * 200);\n\n  // Grain takes the ink colour: light specks on a dark page, dark on a light one.\n  const dark = luminance(t.background) < 0.4;\n  const ink = channels(t.foreground);\n  // Corners fall toward the ink on a light page and toward black on a dark one.\n  const edge = dark ? \"oklch(0 0 0 / 1)\" : t.foreground;\n  const edgeAlpha = dark ? vignette * 0.85 : vignette * 0.22;\n\n  return (\n    <AbsoluteFill style={{ background: t.background, overflow: \"hidden\" }}>\n      {children ? <AbsoluteFill>{children}</AbsoluteFill> : null}\n      <svg width=\"100%\" height=\"100%\" style={{ position: \"absolute\", inset: 0, opacity: grain }} aria-hidden>\n        <filter id={`grain-${id}`} x=\"0\" y=\"0\" width=\"100%\" height=\"100%\">\n          <feTurbulence type=\"fractalNoise\" baseFrequency={fineness} numOctaves={2} seed={noiseSeed} stitchTiles=\"stitch\" />\n          <feColorMatrix type=\"matrix\" values={`0 0 0 0 ${ink.r}  0 0 0 0 ${ink.g}  0 0 0 0 ${ink.b}  2.6 0 0 0 -1.05`} />\n        </filter>\n        <rect x={-dx} y={-dy} width=\"120%\" height=\"120%\" filter={`url(#grain-${id})`} />\n      </svg>\n      <AbsoluteFill\n        style={{ background: `radial-gradient(ellipse 75% 70% at 50% 50%, ${withAlpha(edge, 0)} 45%, ${withAlpha(edge, edgeAlpha * 0.5)} 78%, ${withAlpha(edge, edgeAlpha)} 100%)` }}\n      />\n    </AbsoluteFill>\n  );\n}\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

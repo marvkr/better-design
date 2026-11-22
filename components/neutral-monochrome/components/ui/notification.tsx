@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 const notificationVariants = cva(
   [
-    "relative flex gap-3 rounded-[10px] border border-border bg-card px-4 py-3",
+    "relative flex gap-3 rounded-[0.625rem] border border-border bg-card px-4 py-3",
     "border-l-4",
   ].join(" "),
   {

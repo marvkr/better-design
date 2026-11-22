@@ -1,0 +1,29 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Cream editorial Drawer: a bottom sheet of cream paper you can pull down\n * to close.\n *\n * The sheet runs edge to edge with a 1.5rem corner on its top edge only and\n * the one deep overlay shadow. A short oat handle at the top shows it can\n * be dragged. The title is the serif at book weight, and the actions stack\n * full width so each one is easy to reach with a thumb.\n */\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\n/** The scrim. The drawer library fades it with the drag, so it needs no animation classes. */\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    data-slot=\"drawer-overlay\"\n    className={cn(\"fixed inset-0 z-50 bg-(--scrim)\", className)}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = \"DrawerOverlay\";\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      data-slot=\"drawer-content\"\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[85dvh] flex-col\",\n        \"rounded-t-2xl bg-background text-foreground shadow-(--shadow-overlay) outline-none\",\n        className,\n      )}\n      {...props}\n    >\n      <div\n        aria-hidden=\"true\"\n        data-slot=\"drawer-handle\"\n        className=\"mx-auto mt-3 h-1 w-10 shrink-0 rounded-full bg-(--line-strong)\"\n      />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\nconst DrawerHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-header\"\n    className={cn(\"flex flex-col gap-1.5 px-6 pt-5 pb-3 text-center sm:text-start\", className)}\n    {...props}\n  />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\nconst DrawerFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-footer\"\n    className={cn(\"mt-auto flex flex-col gap-2 px-6 pt-3 pb-6\", className)}\n    {...props}\n  />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    data-slot=\"drawer-title\"\n    className={cn(\n      \"font-serif text-2xl font-medium leading-snug tracking-tight text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDrawerTitle.displayName = \"DrawerTitle\";\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    data-slot=\"drawer-description\"\n    className={cn(\"text-sm leading-relaxed text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nDrawerDescription.displayName = \"DrawerDescription\";\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "foreground-secondary": "oklch(0.359 0.005 106.7)",
+      "scrim": "oklch(0.191 0.002 106.6 / 0.4)",
+      "shadow-overlay": "0 1.5rem 3rem -0.75rem oklch(0.191 0.002 106.6 / 0.2), 0 0 0 0.0625rem oklch(0.191 0.002 106.6 / 0.08)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "foreground-secondary": "oklch(0.853 0.014 97.5)",
+      "scrim": "oklch(0 0 0 / 0.6)",
+      "shadow-overlay": "0 1.5rem 3rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.1)"
+    }
+  }
+}

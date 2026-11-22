@@ -1,0 +1,39 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Card, CardContent } from \"./card\";\n\n/** Props for StatCard: one metric, its change and an optional icon. */\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string | number;\n  change?: {\n    value: string | number;\n    trend: \"up\" | \"down\" | \"neutral\";\n  };\n  icon?: React.ReactNode;\n  description?: string;\n}\n\nconst trendTone = {\n  up: \"bg-(--success-tint) text-(--success-text)\",\n  down: \"bg-(--destructive-tint) text-(--destructive-text)\",\n  neutral: \"bg-secondary text-(--foreground-secondary)\",\n} as const;\n\nconst trendIcon = {\n  up: \"ph:trend-up-bold\",\n  down: \"ph:trend-down-bold\",\n  neutral: null,\n} as const;\n\n/** Read before the value, so a screen reader hears the direction too. */\nconst trendSpoken = {\n  up: \"Up \",\n  down: \"Down \",\n  neutral: \"No change \",\n} as const;\n\n/**\n * Playful console StatCard: one number on a white card.\n *\n * A small bold uppercase label sits above a heavy figure on tabular digits,\n * the way an analytics tile reads. An optional icon rests on a small orange\n * key at the top right. The change shows as a tinted pill with a trend\n * arrow: green when it rises, red when it falls, cream when it holds.\n */\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  const arrow = change ? trendIcon[change.trend] : null;\n\n  return (\n    <Card className={className} {...props}>\n      <CardContent className=\"flex flex-col gap-3 p-5\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"flex min-w-0 flex-col gap-1\">\n            <span className=\"text-xs font-bold uppercase text-muted-foreground\">\n              {label}\n            </span>\n            <span className=\"text-3xl font-extrabold tracking-tight tabular-nums text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <span\n              aria-hidden=\"true\"\n              className=\"flex size-9 shrink-0 items-center justify-center rounded-[0.5rem] border-[0.09375rem] border-(--primary-rim) bg-primary text-primary-foreground shadow-(--shadow-control) [&_svg]:size-5\"\n            >\n              {icon}\n            </span>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"flex flex-wrap items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex h-6 items-center gap-1 rounded-full px-2 font-mono text-xs font-bold tabular-nums\",\n                  trendTone[change.trend],\n                )}\n              >\n                {arrow && (\n                  <Icon icon={arrow} className=\"size-3.5\" aria-hidden=\"true\" />\n                )}\n                <span className=\"sr-only\">{trendSpoken[change.trend]}</span>\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-sm text-muted-foreground\">\n                {description}\n              </span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { StatCard };\nexport type { StatCardProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "success-tint": "oklch(0.927 0.028 155.3)",
+      "success-text": "oklch(0.47 0.1 162)",
+      "destructive-tint": "oklch(0.903 0.037 24)",
+      "destructive-text": "oklch(0.5 0.17 27.5)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "success-tint": "oklch(0.27 0.04 160)",
+      "success-text": "oklch(0.8 0.11 160)",
+      "destructive-tint": "oklch(0.28 0.06 25)",
+      "destructive-text": "oklch(0.8 0.11 25)"
+    }
+  }
+}

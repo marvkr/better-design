@@ -15,6 +15,8 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
  const [fileName, setFileName] = React.useState<string | null>(null)
  const inputRef = React.useRef<HTMLInputElement>(null)
 
+ // SAFETY: the handle is read only after mount, when the element this
+ // component renders is attached, so the ref is non-null.
  React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
 
  return (
@@ -24,7 +26,7 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
  "group flex flex-col items-center justify-center gap-2 w-full py-6 px-4",
  "rounded-none border border-dashed border-border",
  "bg-card text-card-foreground cursor-pointer",
- "transition-[background-color,box-shadow,border-color] duration-150",
+ "transition-[background-color,box-shadow,border-color] duration-fast",
  "",
  "hover:border-ring/60 hover:bg-accent hover:",
  className

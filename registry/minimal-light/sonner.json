@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "sonner"
-  ],
-  "registryDependencies": [
-    "utils"
+    "sonner@^2.0.5"
   ]
 }

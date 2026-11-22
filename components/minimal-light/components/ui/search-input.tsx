@@ -51,7 +51,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           className={cn(
             "flex h-10 w-full rounded-xl border border-border bg-secondary pl-10 pr-10 py-2 text-sm",
             "text-foreground placeholder:text-muted-foreground",
-            "transition-colors duration-200",
+            "transition-colors duration-base",
             "hover:border-border/80 hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0",
             "focus-visible:border-primary/30",
@@ -70,7 +70,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             aria-label="Clear search"
             className={cn(
               "absolute right-3 flex h-5 w-5 items-center justify-center rounded-md",
-              "text-muted-foreground transition-colors duration-200 hover:text-foreground",
+              "text-muted-foreground transition-colors duration-base hover:text-foreground",
               "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             )}
           >

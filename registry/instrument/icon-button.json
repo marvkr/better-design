@@ -1,0 +1,36 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark IconButton: square key from the same control bank as Button.\n// Default (hero) is the machined gold material; secondary the raised plate.\n\nconst iconButtonVariants = cva(\n  \"relative inline-flex shrink-0 items-center justify-center outline-none transition-all duration-fast ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-45 [&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"border border-[var(--gauge-rim)] text-primary-foreground bg-[linear-gradient(to_bottom,var(--gauge-grad-top),var(--gauge-grad-bottom))] shadow-[var(--shadow-primary)] hover:brightness-[1.06] active:brightness-[0.96] active:shadow-[inset_0_0.0625rem_0.1875rem_oklch(0_0_0/0.35),0_0.0625rem_0_oklch(1_0_0/0.06)]\",\n        secondary:\n          \"border border-border bg-secondary text-secondary-foreground shadow-[var(--shadow-raised)] hover:bg-accent hover:text-accent-foreground active:shadow-[var(--shadow-well)] active:bg-muted\",\n        ghost: \"text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"border border-[oklch(0.45_0.16_25)] bg-destructive text-destructive-foreground shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.2),0_0.0625rem_0.125rem_oklch(0_0_0/0.5)] hover:brightness-110 active:brightness-95\",\n        outline:\n          \"border border-border bg-transparent text-foreground hover:bg-secondary hover:shadow-[var(--shadow-raised)] active:shadow-[var(--shadow-well)]\",\n      },\n      size: {\n        xs: \"h-7 w-7 rounded-md text-xs\",\n        sm: \"h-8 w-8 rounded-md text-sm\",\n        default: \"h-9 w-9 rounded-lg text-sm\",\n        lg: \"h-10 w-10 rounded-lg text-base\",\n        xl: \"h-11 w-11 rounded-xl text-base\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"ghost\",\n      size: \"default\",\n      corners: \"square\",\n    },\n  }\n);\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(iconButtonVariants({ variant, size, corners, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

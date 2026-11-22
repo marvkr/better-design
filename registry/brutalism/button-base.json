@@ -1,0 +1,28 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"font-mono text-xs font-black uppercase tracking-[0.12em] leading-none\",\n    \"rounded-[0.125rem] border-2 border-border cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform,color] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"data-disabled:pointer-events-none data-disabled:opacity-50\",\n    \"hover:-translate-x-px hover:-translate-y-px\",\n    \"active:translate-x-[0.1875rem] active:translate-y-[0.1875rem] active:[box-shadow:0.0625rem_0.0625rem_0_oklch(0.115_0.012_255)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] hover:[box-shadow:var(--shadow-button-hover)]\",\n        secondary:\n          \"bg-card text-foreground [box-shadow:var(--shadow-button)] hover:bg-secondary hover:[box-shadow:var(--shadow-button-hover)]\",\n        outline:\n          \"bg-background text-foreground [box-shadow:var(--shadow-sm)] hover:bg-card hover:[box-shadow:var(--shadow-md)]\",\n        ghost:\n          \"border-transparent bg-transparent text-foreground shadow-none hover:border-border hover:bg-primary hover:text-primary-foreground hover:[box-shadow:var(--shadow-sm)]\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-button)] hover:[box-shadow:var(--shadow-button-hover)]\",\n        link:\n          \"border-transparent bg-transparent p-0 text-foreground underline decoration-2 underline-offset-4 shadow-none hover:translate-x-0 hover:translate-y-0 hover:text-accent\",\n      },\n      size: {\n        sm: \"h-8 px-3\",\n        default: \"h-10 px-4\",\n        lg: \"h-11 px-6 text-sm\",\n        icon: \"h-10 w-10\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      )\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-button": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)",
+      "shadow-button-hover": "0.3125rem 0.3125rem 0 oklch(0.115 0.012 255)",
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    },
+    "dark": {
+      "shadow-button": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)",
+      "shadow-button-hover": "0.3125rem 0.3125rem 0 oklch(0.115 0.012 255)",
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    }
+  }
+}

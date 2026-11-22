@@ -1,0 +1,25 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Frosted Glass Badge — frosted glass pill. Default is the light glass chip;\n// primary tints the glass with the violet accent; status variants use tinted glass.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[oklch(1_0_0/0.08)] text-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_-0.0313rem_oklch(1_0_0/0.4)]\",\n        primary:\n          \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[oklch(0.8_0.13_285/0.22)] shadow-[inset_0_0.0625rem_0_-0.0313rem_oklch(1_0_0/0.35)] text-[color:oklch(0.875_0.064_285)]\",\n        secondary: \"text-secondary-foreground bg-[color:oklch(1_0_201.8/0.08)]\",\n        destructive: \"bg-[oklch(0.62_0.21_18/0.22)] text-[color:oklch(0.875_0.067_18)]\",\n        \"destructive-light\": \"bg-[color:oklch(0.62_0.21_18/0.19)] text-[color:oklch(0.875_0.067_18)]\",\n        success: \"bg-[oklch(0.7_0.15_160/0.22)] text-[color:oklch(0.875_0.15_160)]\",\n        \"success-light\": \"bg-[oklch(0.7_0.15_160/0.12)] text-[color:oklch(0.875_0.15_160)]\",\n        warning: \"bg-[oklch(0.72_0.16_60/0.22)] text-[color:oklch(0.875_0.083_60)]\",\n        \"warning-light\": \"bg-[oklch(0.72_0.16_60/0.12)] text-[oklch(0.82_0.15_60)]\",\n        outline:\n          \"border border-[color:var(--fg-border)] text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem"
+    },
+    "dark": {
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem"
+    }
+  }
+}

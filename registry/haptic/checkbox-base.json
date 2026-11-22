@@ -1,0 +1,29 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useHaptics } from \"./haptics-provider\"\n\nfunction Checkbox({\n  className,\n  indeterminate,\n  onCheckedChange,\n  ...props\n}: CheckboxPrimitive.Root.Props) {\n  const { select } = useHaptics()\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded border border-border\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background-color,box-shadow,border-color] duration-fast\",\n        \"hover:border-ring/40\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:border-primary data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n        \"data-indeterminate:bg-primary data-indeterminate:border-primary data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      indeterminate={indeterminate}\n      onCheckedChange={(checked, eventDetails) => {\n        select()\n        onCheckedChange?.(checked, eventDetails)\n      }}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        {indeterminate ? (\n          <Icon icon=\"tabler:minus\" className=\"h-3 w-3\" />\n        ) : (\n          <Icon icon=\"tabler:check\" className=\"h-3 w-3\" />\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/haptic/haptics-provider-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.22), 0 0 0 0.0625rem oklch(1 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.22), 0 0 0 0.0625rem oklch(1 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

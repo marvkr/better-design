@@ -1,0 +1,27 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Drawer — a window pulled up from the bottom of the desk, with a\n * grab handle where a titlebar would otherwise sit.\n */\n\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root\n    shouldScaleBackground={shouldScaleBackground}\n    {...props}\n  />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    className={cn(\"fixed inset-0 z-50 bg-foreground/35\", className)}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-2xl\",\n        \"bg-card text-card-foreground [box-shadow:var(--shadow-window)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-foreground/15\" />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\nconst DrawerHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"flex flex-col gap-1.5 p-5\", className)} {...props} />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\nconst DrawerFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"mt-auto flex flex-col gap-2 p-5\", className)} {...props} />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-lg font-medium tracking-[-0.02em] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDrawerTitle.displayName = DrawerPrimitive.Title.displayName;\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDrawerDescription.displayName = DrawerPrimitive.Description.displayName;\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    }
+  }
+}

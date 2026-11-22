@@ -1,0 +1,26 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cn } from \"@/lib/utils\";\nimport { creamBevel, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Burnished Progress: a 0.5rem recessed well with a cream bevel fill, the\n * primary's own face. Leave `value` unset for an unknown amount, and a\n * short fill pulses.\n */\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<WithClassName<ProgressPrimitive.Root.Props>, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"];\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    data-slot=\"progress\"\n    value={value ?? null}\n    className={cn(\"relative h-2 w-full overflow-hidden rounded-full\", wellInset, className)}\n    {...props}\n  >\n    <ProgressPrimitive.Track data-slot=\"progress-track\" className=\"size-full\">\n      <ProgressPrimitive.Indicator\n        data-slot=\"progress-indicator\"\n        className={cn(\n          \"h-full rounded-full transition-[width] duration-slow ease-(--ease-out)\",\n          creamBevel,\n          \"data-[indeterminate]:w-1/4 data-[indeterminate]:animate-pulse\",\n        )}\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n));\nProgress.displayName = \"Progress\";\n\nexport { Progress };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

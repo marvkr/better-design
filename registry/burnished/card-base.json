@@ -1,0 +1,32 @@
+{
+  "name": "card-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, surfacePlate } from \"./_shared\";\n\n/**\n * Burnished Card: an umber slab.\n *\n * The default card is the deepest bevel in the system: a gradient that darkens\n * toward the bottom, a lit top edge, a dark rim and a long soft drop, so it\n * sits above the page like a block of stone. `plate` is the flatter finish\n * for a surface nested inside another. `featured` adds the copper rim and an\n * ember glow for the one card a page wants to point at.\n */\nconst cardVariants = cva(\n  \"flex flex-col gap-6 rounded-2xl py-6\",\n  {\n    variants: {\n      variant: {\n        default: cardSlab,\n        plate: surfacePlate,\n        featured:\n          \"border-2 border-transparent text-card-foreground shadow-(--bevel-glow) [background:var(--fill-card)_padding-box,var(--ring-sheen)_border-box,conic-gradient(var(--ring-flow))_border-box]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface CardProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-1.5 px-6\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\nconst CardTitle = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\"text-base font-semibold leading-snug text-card-foreground\", className)}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"px-6\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-3 px-6\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  CardFooter,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-card": "linear-gradient(180deg, oklch(0.241 0.005 67.6), oklch(0.196 0.003 67.7))",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
+      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))"
+    },
+    "dark": {
+      "fill-card": "linear-gradient(180deg, oklch(0.241 0.005 67.6), oklch(0.196 0.003 67.7))",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
+      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))"
+    }
+  }
+}

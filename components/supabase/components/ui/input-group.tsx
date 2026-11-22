@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 // Supabase InputGroup: input with prefix/suffix addons, visually merged inside border
-// Addons share the same rounded-[10px] container as the input
+// Addons share the same rounded-[0.625rem] container as the input
 // Prefix/suffix: bg-secondary border-r/l border-border, text-muted-foreground
 
 interface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "prefix"> {
@@ -33,14 +33,14 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
         className={cn(
           // Outer container acts as the visible border+shadow container
           "flex w-full items-stretch overflow-hidden",
-          "rounded-[10px] border border-border bg-background",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-          "transition duration-200 ease-out",
-          "focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+          "rounded-[0.625rem] border border-border bg-background",
+          "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
+          "transition duration-base ease-out",
+          "focus-within:border-foreground focus-within:shadow-[0_0_0_0.1875rem_oklch(0_0_0/0.06)]",
           "hover:border-foreground/30",
           error && [
             "border-destructive",
-            "focus-within:border-destructive focus-within:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]",
+            "focus-within:border-destructive focus-within:shadow-[0_0_0_0.1875rem_hsl(var(--destructive)/0.12)]",
           ],
           disabled && "cursor-not-allowed bg-secondary opacity-70",
           size === "sm" && "rounded-lg",

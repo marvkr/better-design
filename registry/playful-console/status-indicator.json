@@ -1,0 +1,31 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console StatusIndicator: a small square dot beside a plain label,\n * like a status light on a console panel.\n *\n * The label stays in the secondary ink, so it reads at full contrast, and\n * the dot alone carries the state: olive grey for idle, green for done,\n * orange for attention, red for failure and blue for something running.\n * Each variant sets the dot colour on the wrapper, so the exported variants\n * style any custom marker too.\n */\nconst statusIndicatorVariants = cva(\n  \"inline-flex items-center gap-2 text-sm font-medium text-(--foreground-secondary)\",\n  {\n    variants: {\n      variant: {\n        default: \"[--status-dot:var(--control)]\",\n        success: \"[--status-dot:var(--success)]\",\n        warning: \"[--status-dot:var(--primary)]\",\n        destructive: \"[--status-dot:var(--destructive)]\",\n        info: \"[--status-dot:var(--info)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\n/** Props for StatusIndicator: any span attribute plus the state. */\nexport interface StatusIndicatorProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, variant, children, ...props }, ref) => (\n    <span\n      ref={ref}\n      data-slot=\"status-indicator\"\n      data-variant={variant ?? \"default\"}\n      className={cn(statusIndicatorVariants({ variant }), className)}\n      {...props}\n    >\n      <span\n        aria-hidden=\"true\"\n        className=\"size-2.5 shrink-0 rounded-[0.125rem] border border-(--ink)/20 bg-(--status-dot)\"\n      />\n      {children}\n    </span>\n  ),\n);\nStatusIndicator.displayName = \"StatusIndicator\";\n\nexport { StatusIndicator, statusIndicatorVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.574 0.107 162.9)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "control": "oklch(0.533 0.017 115.3)",
+      "ink": "oklch(0.26 0.015 118.8)",
+      "info": "oklch(0.609 0.162 253.1)"
+    },
+    "dark": {
+      "success": "oklch(0.72 0.12 160)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "control": "oklch(0.62 0.014 114)",
+      "ink": "oklch(0.95 0.008 114.2)",
+      "info": "oklch(0.7 0.15 258)"
+    }
+  }
+}

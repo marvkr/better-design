@@ -1,0 +1,41 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, focusRing, optionTrack } from \"./_shared\";\n\n/**\n * Mallow Notification: a banner on the white card with its icon on a small\n * lilac tile; the warning variant takes a soft orange tint.\n */\nconst notificationVariants = cva([\"relative flex gap-3.5 rounded-2xl p-4\", cardSlab].join(\" \"), {\n  variants: {\n    variant: {\n      default: \"\",\n      info: \"inset-ring-1 inset-ring-info/20\",\n      success: \"inset-ring-1 inset-ring-success/20\",\n      warning: \"inset-ring-1 inset-ring-warning/30\",\n      destructive: \"inset-ring-1 inset-ring-destructive/25\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nconst iconMap = {\n  default: { icon: \"iconoir:bell\", color: \"text-muted-foreground\", tile: \"\" },\n  info: { icon: \"iconoir:info-circle\", color: \"text-info-text\", tile: \"\" },\n  success: { icon: \"iconoir:check-circle\", color: \"text-success-text\", tile: \"\" },\n  warning: { icon: \"iconoir:warning-triangle\", color: \"text-warning-text\", tile: \"bg-warning/15 shadow-none\" },\n  destructive: { icon: \"iconoir:warning-circle\", color: \"text-destructive-text\", tile: \"\" },\n} as const;\n\nexport interface NotificationProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">,\n    VariantProps<typeof notificationVariants> {\n  title?: React.ReactNode;\n  description?: React.ReactNode;\n  icon?: React.ReactNode;\n  onDismiss?: () => void;\n  actions?: React.ReactNode;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant = \"default\", title, description, icon, onDismiss, actions, children, ...props }, ref) => {\n    const meta = iconMap[variant ?? \"default\"];\n    return (\n      <div\n        ref={ref}\n        data-slot=\"notification\"\n        role={variant === \"destructive\" || variant === \"warning\" ? \"alert\" : \"status\"}\n        className={cn(notificationVariants({ variant }), className)}\n        {...props}\n      >\n        <div\n          aria-hidden=\"true\"\n          className={cn(optionTrack, \"flex size-9 shrink-0 items-center justify-center rounded-md\", meta.color, meta.tile)}\n        >\n          {icon ?? <Icon icon={meta.icon} className=\"size-4.5\" />}\n        </div>\n        <div className=\"min-w-0 flex-1 pt-0.5\">\n          {title && <div className=\"text-sm font-medium leading-snug text-foreground\">{title}</div>}\n          {description && (\n            <div className={cn(\"text-sm leading-relaxed text-muted-foreground\", title && \"mt-0.5\")}>{description}</div>\n          )}\n          {children}\n          {actions && <div className=\"mt-3 flex items-center gap-2\">{actions}</div>}\n        </div>\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            aria-label=\"Dismiss\"\n            className={cn(\n              \"-m-1 flex size-8 shrink-0 items-center justify-center rounded-full text-muted-foreground\",\n              \"transition-colors duration-fast ease-(--ease-out) hover:bg-accent hover:text-foreground\",\n              focusRing,\n            )}\n          >\n            <Icon icon=\"iconoir:xmark\" aria-hidden=\"true\" className=\"size-4\" />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nNotification.displayName = \"Notification\";\n\nexport { Notification };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.56 0.14 155)",
+      "warning": "oklch(0.72 0.15 55)",
+      "info": "oklch(0.55 0.14 250)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "warning-text": "oklch(0.46 0.12 55)",
+      "destructive-text": "oklch(0.47 0.18 22)",
+      "info-text": "oklch(0.44 0.13 250)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.56 0.14 155)",
+      "warning": "oklch(0.72 0.15 55)",
+      "info": "oklch(0.55 0.14 250)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "warning-text": "oklch(0.46 0.12 55)",
+      "destructive-text": "oklch(0.47 0.18 22)",
+      "info-text": "oklch(0.44 0.13 250)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

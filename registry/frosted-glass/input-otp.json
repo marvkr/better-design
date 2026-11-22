@@ -1,0 +1,32 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { OTPInput, OTPInputContext } from \"input-otp\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Frosted Glass OTP Input: glass rounded slots\n\nconst InputOTP = React.forwardRef<\n  React.ElementRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    containerClassName={cn(\n      \"flex items-center gap-2 has-[:disabled]:opacity-50\",\n      containerClassName\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n))\nInputOTP.displayName = \"InputOTP\"\n\nconst InputOTPGroup = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"flex items-center gap-2\", className)} {...props} />\n))\nInputOTPGroup.displayName = \"InputOTPGroup\"\n\nconst InputOTPSlot = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\"> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext)\n  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\n        \"relative flex h-14 w-12 items-center justify-center text-[0.9375rem] font-medium text-foreground\",\n        \"rounded-xl backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[var(--fg-fill)] border border-[color:var(--fg-border)] shadow-[var(--fg-shadow)]\",\n        \"transition-all duration-slow\",\n        isActive && \"z-10 border-[color:var(--ring)] ring-2 ring-ring/50\",\n        className\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-4 w-px animate-caret-blink bg-foreground/80 duration-1000\" />\n        </div>\n      )}\n    </div>\n  )\n})\nInputOTPSlot.displayName = \"InputOTPSlot\"\n\nconst InputOTPSeparator = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ ...props }, ref) => (\n  <div ref={ref} role=\"separator\" {...props}>\n    <Icon icon=\"tabler:point\" className=\"h-4 w-4 text-muted-foreground\" />\n  </div>\n))\nInputOTPSeparator.displayName = \"InputOTPSeparator\"\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    },
+    "dark": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    }
+  }
+}

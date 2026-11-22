@@ -9,9 +9,15 @@
     }
   ],
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority@>=0.7.1 <1"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)"
+    }
+  }
 }

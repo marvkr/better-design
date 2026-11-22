@@ -1,0 +1,28 @@
+{
+  "name": "thinking-steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-steps.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, type HTMLMotionProps } from \"motion/react\";\nimport { Check } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\n\n// Talentboard ThinkingSteps: agent progress feed; complete markers wear the\n// scaled-down orange material, the active marker pulses.\n\ntype StepStatus = \"complete\" | \"active\" | \"pending\";\n\ninterface ThinkingStepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  children: React.ReactNode;\n}\n\nfunction ThinkingSteps({ className, children, ...props }: ThinkingStepsProps) {\n  return (\n    <div className={cn(\"flex flex-col\", className)} {...props}>\n      {children}\n    </div>\n  );\n}\n\ninterface ThinkingStepProps extends HTMLMotionProps<\"div\"> {\n  status?: StepStatus;\n  title: string;\n  description?: React.ReactNode;\n  /** When false, hides the vertical connector below this step. */\n  showConnector?: boolean;\n}\n\nfunction ThinkingStep({\n  status = \"pending\",\n  title,\n  description,\n  showConnector = true,\n  className,\n  ...props\n}: ThinkingStepProps) {\n  return (\n    <motion.div\n      initial={{ opacity: 0, y: 4 }}\n      animate={{ opacity: 1, y: 0 }}\n      transition={{ duration: 0.2, ease: \"easeOut\" }}\n      className={cn(\"flex gap-3\", className)}\n      {...props}\n    >\n      <div className=\"flex flex-col items-center\">\n        <span\n          className={cn(\n            \"mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full\",\n            status === \"complete\" &&\n              \"bg-[image:var(--tb-primary-gradient)] text-primary-foreground shadow-[var(--tb-shadow-primary-sm)]\",\n            status === \"active\" &&\n              \"border border-ring/60 bg-secondary shadow-[var(--tb-shadow-raise)]\",\n            status === \"pending\" && \"border border-border/70 bg-input/60\"\n          )}\n        >\n          {status === \"complete\" && <Check className=\"h-3 w-3\" strokeWidth={3} />}\n          {status === \"active\" && (\n            <motion.span\n              className=\"h-1.5 w-1.5 rounded-full bg-primary\"\n              animate={{ opacity: [1, 0.35, 1] }}\n              transition={{ duration: 1.2, repeat: Infinity, ease: \"easeInOut\" }}\n            />\n          )}\n        </span>\n        {showConnector && <span className=\"my-1 w-px flex-1 bg-border/70\" />}\n      </div>\n      <div className={cn(\"min-w-0 flex-1\", showConnector && \"pb-5\")}>\n        <div\n          className={cn(\n            \"text-sm font-medium\",\n            status === \"pending\" ? \"text-muted-foreground\" : \"text-foreground\"\n          )}\n        >\n          {title}\n        </div>\n        {description && <div className=\"mt-1 text-xs text-muted-foreground\">{description}</div>}\n      </div>\n    </motion.div>\n  );\n}\n\ninterface ThinkingStepSourcesProps extends React.HTMLAttributes<HTMLDivElement> {\n  children: React.ReactNode;\n}\n\nfunction ThinkingStepSources({ className, children, ...props }: ThinkingStepSourcesProps) {\n  return (\n    <div className={cn(\"mt-1.5 flex flex-wrap gap-1.5\", className)} {...props}>\n      {React.Children.map(children, (child) => (\n        <span className=\"inline-flex items-center gap-1 rounded-md border border-border/70 bg-secondary px-1.5 py-0.5 text-[0.625rem] font-medium text-muted-foreground\">\n          {child}\n        </span>\n      ))}\n    </div>\n  );\n}\n\nexport { ThinkingSteps, ThinkingStep, ThinkingStepSources };\nexport type { ThinkingStepsProps, ThinkingStepProps, StepStatus };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-shadow-raise": "0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.07), 0 0.125rem 0.375rem -0.0625rem oklch(0.27 0.03 60 / 0.08)",
+      "tb-primary-gradient": "linear-gradient(to bottom, oklch(0.74 0.165 55), oklch(0.67 0.175 48))",
+      "tb-shadow-primary-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), 0 0.0625rem 0.125rem oklch(0.5 0.16 45 / 0.3), 0 0.125rem 0.375rem -0.125rem oklch(0.7 0.17 52 / 0.4)"
+    },
+    "dark": {
+      "tb-shadow-raise": "0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.07), 0 0.125rem 0.375rem -0.0625rem oklch(0.27 0.03 60 / 0.08)",
+      "tb-primary-gradient": "linear-gradient(to bottom, oklch(0.74 0.165 55), oklch(0.67 0.175 48))",
+      "tb-shadow-primary-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), 0 0.0625rem 0.125rem oklch(0.5 0.16 45 / 0.3), 0 0.125rem 0.375rem -0.125rem oklch(0.7 0.17 52 / 0.4)"
+    }
+  }
+}

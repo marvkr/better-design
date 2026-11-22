@@ -14,6 +14,14 @@ import {
 } from "@tanstack/react-table"
 import { ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./table"
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -44,38 +52,42 @@ function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    // Every catalog table sorts ascending on the first click, numbers included.
+    sortDescFirst: false,
   })
 
   return (
     <div
       className={cn(
-        "w-full overflow-hidden rounded-[14px] border border-border bg-card shadow-sm",
+        "w-full overflow-hidden rounded-[0.875rem] border border-border bg-card shadow-sm",
         className
       )}
     >
       <div className="overflow-x-auto">
-        <table className="w-full caption-bottom text-sm">
-          <thead>
+        <Table>
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} className="border-b border-border bg-secondary/40">
+              <TableRow key={headerGroup.id} className="border-b border-border bg-secondary/40 hover:bg-secondary/40">
                 {headerGroup.headers.map((header) => {
                   const canSort = header.column.getCanSort()
                   const sortDir = header.column.getIsSorted()
                   return (
-                    <th
+                    <TableHead
                       key={header.id}
                       colSpan={header.colSpan}
-                      className={cn(
-                        "px-4 py-3 text-left text-sm font-semibold text-foreground",
-                        canSort && "cursor-pointer select-none hover:text-foreground/80 transition-colors"
-                      )}
-                      onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
+                      className="px-4 py-3 text-left text-sm font-semibold text-foreground"
+                      aria-sort={
+                        sortDir === "asc" ? "ascending" : sortDir === "desc" ? "descending" : undefined
+                      }
                     >
-                      {header.isPlaceholder ? null : (
-                        <div className="flex items-center gap-1.5">
+                      {header.isPlaceholder ? null : canSort ? (
+                        <button
+                          type="button"
+                          onClick={header.column.getToggleSortingHandler()}
+                          className="inline-flex items-center gap-1.5 rounded-sm cursor-pointer select-none hover:text-foreground/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        >
                           {flexRender(header.column.columnDef.header, header.getContext())}
-                          {canSort && (
-                            <span className="text-muted-foreground">
+                          <span className="text-muted-foreground">
                               {sortDir === "asc" ? (
                                 <ChevronUp className="h-3.5 w-3.5" />
                               ) : sortDir === "desc" ? (
@@ -83,20 +95,21 @@ function DataTable<TData, TValue>({
                               ) : (
                                 <ChevronsUpDown className="h-3.5 w-3.5 opacity-50" />
                               )}
-                            </span>
-                          )}
-                        </div>
+                          </span>
+                        </button>
+                      ) : (
+                        flexRender(header.column.columnDef.header, header.getContext())
                       )}
-                    </th>
+                    </TableHead>
                   )
                 })}
-              </tr>
+              </TableRow>
             ))}
-          </thead>
-          <tbody>
+          </TableHeader>
+          <TableBody>
             {loading ? (
-              <tr>
-                <td
+              <TableRow className="hover:bg-transparent">
+                <TableCell
                   colSpan={columns.length}
                   className="px-4 py-10 text-center text-sm text-muted-foreground"
                 >
@@ -104,37 +117,37 @@ function DataTable<TData, TValue>({
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-border border-t-foreground" />
                     Loading…
                   </div>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : table.getRowModel().rows.length === 0 ? (
-              <tr>
-                <td
+              <TableRow className="hover:bg-transparent">
+                <TableCell
                   colSpan={columns.length}
                   className="px-4 py-10 text-center text-sm text-muted-foreground"
                 >
                   {emptyMessage}
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : (
               table.getRowModel().rows.map((row) => (
-                <tr
+                <TableRow
                   key={row.id}
                   className="border-b border-border last:border-0 transition-colors hover:bg-secondary/30"
                   data-state={row.getIsSelected() ? "selected" : undefined}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td
+                    <TableCell
                       key={cell.id}
                       className="px-4 py-3 text-sm text-foreground"
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   )

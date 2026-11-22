@@ -1,0 +1,18 @@
+{
+  "name": "chart-pie",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-pie.tsx",
+      "content": "\"use client\";\n\nimport { Label, Pie, PieChart } from \"recharts\";\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { kind: \"notes\", items: 412, fill: \"var(--chart-1)\" },\n  { kind: \"tasks\", items: 268, fill: \"var(--chart-2)\" },\n  { kind: \"files\", items: 154, fill: \"var(--chart-3)\" },\n  { kind: \"events\", items: 97, fill: \"var(--chart-4)\" },\n  { kind: \"other\", items: 41, fill: \"var(--chart-5)\" },\n];\n\nconst chartConfig = {\n  items: { label: \"Items\" },\n  notes: { label: \"Notes\", color: \"var(--chart-1)\" },\n  tasks: { label: \"Tasks\", color: \"var(--chart-2)\" },\n  files: { label: \"Files\", color: \"var(--chart-3)\" },\n  events: { label: \"Events\", color: \"var(--chart-4)\" },\n  other: { label: \"Other\", color: \"var(--chart-5)\" },\n};\n\nconst total = chartData.reduce((sum, row) => sum + row.items, 0);\n\n/** A donut on a paper card: what the workspace holds, with the total in the middle. */\nexport function ChartPieDonut() {\n  return (\n    <Card className=\"flex flex-col\">\n      <CardHeader className=\"items-center pb-0 text-center\">\n        <CardTitle>Workspace contents</CardTitle>\n        <CardDescription>Everything saved so far</CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex-1 pb-0\">\n        <ChartContainer config={chartConfig} className=\"mx-auto aspect-square max-h-64\">\n          <PieChart>\n            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />\n            <Pie\n              data={chartData}\n              dataKey=\"items\"\n              nameKey=\"kind\"\n              innerRadius={62}\n              paddingAngle={2}\n              cornerRadius={4}\n              strokeWidth={2}\n            >\n              <Label\n                content={({ viewBox }) => {\n                  if (!viewBox || !(\"cx\" in viewBox) || !(\"cy\" in viewBox)) return null;\n                  return (\n                    <text x={viewBox.cx} y={viewBox.cy} textAnchor=\"middle\" dominantBaseline=\"middle\">\n                      <tspan x={viewBox.cx} y={viewBox.cy} className=\"fill-foreground text-xl font-semibold\">\n                        {total.toLocaleString()}\n                      </tspan>\n                      <tspan x={viewBox.cx} y={(viewBox.cy ?? 0) + 20} className=\"fill-muted-foreground text-xs\">\n                        items\n                      </tspan>\n                    </text>\n                  );\n                }}\n              />\n            </Pie>\n          </PieChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col gap-1 text-sm\">\n        <div className=\"font-medium leading-snug\">Notes make up 42% of the workspace</div>\n        <div className=\"leading-snug text-muted-foreground\">Archived items are left out</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/card.json",
+    "https://better-design.com/registry/margin/chart.json"
+  ]
+}

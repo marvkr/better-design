@@ -1,0 +1,27 @@
+{
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\nimport type { VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { toggleVariants } from \"./toggle\";\n\n/*\n * Playdesk ToggleGroup — the desk's segmented control: a pill track holding\n * pressed-in segments.\n */\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({ size: \"default\", variant: \"default\" });\n\nconst ToggleGroup = React.forwardRef<\n  React.ElementRef<typeof ToggleGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, children, ...props }, ref) => (\n  <ToggleGroupPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-full bg-secondary p-1\",\n      \"[box-shadow:var(--shadow-rim)]\",\n      className,\n    )}\n    {...props}\n  >\n    <ToggleGroupContext.Provider value={{ variant, size }}>\n      {children}\n    </ToggleGroupContext.Provider>\n  </ToggleGroupPrimitive.Root>\n));\nToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;\n\nconst ToggleGroupItem = React.forwardRef<\n  React.ElementRef<typeof ToggleGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &\n    VariantProps<typeof toggleVariants>\n>(({ className, children, variant, size, ...props }, ref) => {\n  const context = React.useContext(ToggleGroupContext);\n  return (\n    <ToggleGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        toggleVariants({\n          variant: context.variant ?? variant,\n          size: context.size ?? size,\n        }),\n        // Selected segment lifts out of the track instead of pressing in.\n        \"data-[state=on]:bg-card data-[state=on]:[box-shadow:var(--shadow-md)]\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </ToggleGroupPrimitive.Item>\n  );\n});\nToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle-group@^1.1.10",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/toggle.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

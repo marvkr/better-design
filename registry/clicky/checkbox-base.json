@@ -1,0 +1,28 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSound } from \"./sound-provider\"\n\n// Clicky Checkbox — flat square with clean check state + tick sound\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Checkbox = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<CheckboxPrimitive.Root.Props>\n>(({ className, onCheckedChange, ...props }, ref) => {\n  const { playClick } = useSound()\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      ref={ref}\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded-sm\",\n        \"border border-border bg-background\",\n        \"transition-all duration-base ease-out\",\n        \"active:translate-y-px\",\n        \"hover:border-ring/50\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:border-[var(--primary-rim)] data-checked:text-primary-foreground\",\n        \"data-checked:shadow-[var(--shadow-tactile-control)]\",\n        className\n      )}\n      onCheckedChange={(checked, eventDetails) => {\n        playClick()\n        onCheckedChange?.(checked, eventDetails)\n      }}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n})\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/clicky/sound-provider-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.46 0.21 264)",
+      "primary-base": "oklch(0.4 0.18 264)",
+      "shadow-tactile-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0 var(--primary-base), 0 0.0625rem 0.125rem oklch(0.55 0.24 264 / 0.18)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

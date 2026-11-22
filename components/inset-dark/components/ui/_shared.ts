@@ -7,15 +7,15 @@
  */
 
 export const formFieldBase =
-  "w-full rounded-[9px] px-3 text-sm " +
+  "w-full rounded-[0.5625rem] px-3 text-sm " +
   "bg-input text-foreground " +
   "border-0 " +
-  "placeholder:text-[rgba(255,255,255,0.35)] " +
-  "transition-[color,box-shadow] duration-150 " +
+  "placeholder:text-[oklch(1_0_0/0.35)] " +
+  "transition-[color,box-shadow] duration-fast " +
   "[box-shadow:var(--shadow-inset)] " +
   "hover:[box-shadow:var(--shadow-inset-deep)] " +
-  "focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-inset),0_0_0_2px_rgba(255,255,255,0.18)] " +
+  "focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-inset),0_0_0_0.125rem_oklch(1_0_0/0.18)] " +
   "disabled:cursor-not-allowed disabled:opacity-50"
 
 export const formFieldSingleLine = "flex h-9 py-1.5"
-export const formFieldMultiLine = "flex min-h-[80px] py-2 resize-y"
+export const formFieldMultiLine = "flex min-h-[5rem] py-2 resize-y"

@@ -1,0 +1,52 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for the Base UI flavour of Mallow.\n *\n * Mallow is light and soft. A surface is a white card with a soft plum\n * shadow, a lilac option track, or a chosen option in a light violet tint\n * inside a violet ring. An action is the solid violet primary or the quiet\n * white secondary, both rounded rectangles. This file mirrors `../components/_shared.ts` and\n * is copied rather than imported, because the registry ships this folder on\n * its own. Base UI marks state with bare attributes (data-checked,\n * data-highlighted, data-pressed, data-disabled, data-popup-open), so the\n * state selectors here read those.\n *\n * Form fields MUST import `formFieldBase`. Do NOT copy-paste these strings\n * into a component.\n */\n\n/** The violet focus line every interactive part shares, drawn with no offset. */\nexport const focusRing = \"outline-none focus-visible:ring-2 focus-visible:ring-ring\";\n\n/** The focus line for buttons, set off from the button by a card-coloured gap. */\nexport const controlFocusRing =\n  \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card\";\n\n/** The violet primary finish that checked controls share, so they read as one material with the primary Button. */\nexport const primaryFinish = \"bg-(image:--violet-face) text-primary-foreground shadow-(--violet-edge)\";\n\n/** The violet primary a touch lighter under the pointer. */\nexport const primaryFinishHover = \"hover:bg-(image:--violet-face-hover)\";\n\n/** The quiet white action used by secondary buttons and quiet tags. */\nexport const quietFinish =\n  \"bg-(image:--quiet-face) text-foreground shadow-(--quiet-edge) hover:bg-(image:--quiet-face-hover)\";\n\n/** The chosen option, a light violet tint inside a violet ring, that marks the selected option, the active tab and the pressed toggle. */\nexport const selectedOption = \"bg-(--option-face) text-foreground shadow-(--option-edge)\";\n\n/** A small white surface with a hairline: avatars, icon tiles and handles that are not a selection. */\nexport const softPanel = \"bg-card text-foreground shadow-(--panel-edge)\";\n\n/** The option track, a soft lilac fill that holds a set of options. */\nexport const optionTrack = \"bg-(--option-track) shadow-(--option-track-edge)\";\n\n/** The card, a white surface with a hairline and a soft plum shadow. */\nexport const cardSlab = \"bg-card text-card-foreground shadow-(--shadow-card)\";\n\n/** A surface nested inside a card, drawn with a hairline and no drop. */\nexport const surfacePanel = \"bg-popover text-card-foreground shadow-(--panel-edge)\";\n\n/** The press every button shares: a small scale toward the page. */\nexport const pressScale =\n  \"transition-[scale,box-shadow,background-image] duration-fast ease-(--ease-out) active:scale-98 motion-reduce:active:scale-100\";\n\n/** The critically damped spring that carries a moving selection fast and never overshoots. */\nexport const panelSpring = { type: \"spring\", stiffness: 520, damping: 46, mass: 1 } as const;\n\n/** The softer spring for content that swaps in place. */\nexport const swapSpring = { type: \"spring\", stiffness: 420, damping: 38 } as const;\n\n/** The chosen option with a stronger ring on hover, for tags and neutral controls. */\nexport const selectedLift = `${selectedOption} transition-shadow duration-base ease-(--ease-out) hover:shadow-(--option-edge-hover)`;\n\n/** Base styles every form-field surface shares: a white field with a 0.625rem corner and a 3:1 edge that darkens on hover. */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-lg border border-foreground/55 bg-card px-4 text-base text-foreground shadow-xs \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[box-shadow,border-color] duration-base ease-(--ease-out) \" +\n  \"hover:border-foreground/75 \" +\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50 \" +\n  \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\";\n\n/** Height and vertical padding for single-line form fields, 3rem to match the button. */\nexport const formFieldSingleLine = \"flex h-12 py-2\";\n\n/** Vertical padding and minimum height for multi-line form fields. */\nexport const formFieldMultiLine = \"flex min-h-28 py-3 leading-normal\";\n\n/** A field whose popup is open keeps its edge, so it reads as active. */\nexport const fieldOpen = \"data-[popup-open]:border-input\";\n\n/** The floating panel every menu, popover, select and tooltip shares: white, with a hairline and a soft drop. */\nexport const popoverSurface = \"rounded-xl bg-popover text-popover-foreground shadow-(--shadow-menu) outline-none\";\n\n/** Popups grow from their anchor and fade, and leave the same way. */\nexport const popupMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale] duration-fast ease-(--ease-out) \" +\n  \"data-[starting-style]:scale-95 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-95 data-[ending-style]:opacity-0\";\n\n/** The popover settles at the base duration, both ways. */\nexport const popoverMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale] duration-base ease-(--ease-out) \" +\n  \"data-[starting-style]:scale-95 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-95 data-[ending-style]:opacity-0\";\n\n/** A row inside a floating panel that takes the hover tone when highlighted. */\nexport const menuItemBase =\n  \"relative flex min-h-9 cursor-default select-none items-center gap-2 rounded-md px-2.5 py-1.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\";\n\n/** A checked small control (checkbox box, radio, switch track) in the primary finish. */\nexport const controlChecked =\n  \"data-[checked]:bg-(image:--violet-face) data-[checked]:text-primary-foreground data-[checked]:shadow-(--violet-edge)\";\n\n/** A pressed toggle or tag, shown as the chosen option inside its track. */\nexport const pressedOption =\n  \"data-[pressed]:bg-(--option-face) data-[pressed]:text-foreground data-[pressed]:shadow-(--option-edge)\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-track": "oklch(0.955 0.014 295)",
+      "option-face": "oklch(0.955 0.035 290)",
+      "violet-face": "linear-gradient(180deg, oklch(0.54 0.2 288), oklch(0.5 0.205 288))",
+      "violet-face-hover": "linear-gradient(180deg, oklch(0.57 0.2 288), oklch(0.53 0.205 288))",
+      "quiet-face": "linear-gradient(180deg, oklch(1 0 0), oklch(0.985 0.006 295))",
+      "quiet-face-hover": "linear-gradient(180deg, oklch(0.985 0.008 295), oklch(0.965 0.012 295))",
+      "violet-edge": "inset 0 -0.125rem 0 0 oklch(0.32 0.16 288 / 0.3), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.16), 0 0.25rem 0.75rem -0.25rem oklch(0.45 0.18 288 / 0.35)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)",
+      "quiet-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.16), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06)",
+      "card-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 2rem -0.75rem oklch(0.35 0.08 290 / 0.16)",
+      "panel-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08)",
+      "option-track-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06)",
+      "menu-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08), 0 0.125rem 0.25rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 1.75rem -0.5rem oklch(0.35 0.08 290 / 0.22)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "shadow-card": "var(--card-edge)",
+      "shadow-menu": "var(--menu-edge)"
+    },
+    "dark": {
+      "option-track": "oklch(0.955 0.014 295)",
+      "option-face": "oklch(0.955 0.035 290)",
+      "violet-face": "linear-gradient(180deg, oklch(0.54 0.2 288), oklch(0.5 0.205 288))",
+      "violet-face-hover": "linear-gradient(180deg, oklch(0.57 0.2 288), oklch(0.53 0.205 288))",
+      "quiet-face": "linear-gradient(180deg, oklch(1 0 0), oklch(0.985 0.006 295))",
+      "quiet-face-hover": "linear-gradient(180deg, oklch(0.985 0.008 295), oklch(0.965 0.012 295))",
+      "violet-edge": "inset 0 -0.125rem 0 0 oklch(0.32 0.16 288 / 0.3), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.16), 0 0.25rem 0.75rem -0.25rem oklch(0.45 0.18 288 / 0.35)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)",
+      "quiet-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.16), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06)",
+      "card-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 2rem -0.75rem oklch(0.35 0.08 290 / 0.16)",
+      "panel-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08)",
+      "option-track-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06)",
+      "menu-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08), 0 0.125rem 0.25rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 1.75rem -0.5rem oklch(0.35 0.08 290 / 0.22)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "shadow-card": "var(--card-edge)",
+      "shadow-menu": "var(--menu-edge)"
+    }
+  }
+}

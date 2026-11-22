@@ -1,0 +1,14 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Retro-Playful NativeSelect: native <select> styled to match the design system\n// h-10, rounded-lg, border-border\n// Custom chevron via bg-image SVG (light theme: dark chevron)\n// Appearance: none to hide native arrow, pr-8 to make room for custom arrow\n\ninterface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"group relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            \"flex h-10 appearance-none items-center py-2 pr-9 cursor-pointer\",\n            \"[&>option]:bg-card [&>option]:text-foreground\",\n            error && \"border-destructive focus-visible:ring-destructive\",\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon — tracks the field's hover lift */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-transform duration-fast group-hover:-translate-x-px group-hover:-translate-y-[calc(50%+0.0625rem)]\"\n          aria-hidden=\"true\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"m6 9 6 6 6-6\" />\n          </svg>\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/riso/_shared.json"
+  ]
+}

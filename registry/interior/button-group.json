@@ -1,0 +1,22 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior ButtonGroup — segments welded into one cap. The group owns the\n * 9px outer radius and the cap shadow; the segments only separate with\n * hairlines. The active segment says \"selected\" the way everything here\n * does: ink and depth, never accent.\n */\n\nexport interface ButtonGroupProps\n  extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      className={cn(\n        \"inline-flex items-stretch overflow-hidden rounded-[0.5625rem]\",\n        \"bg-card shadow-[var(--shadow-cap)]\",\n        \"divide-x divide-border\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport interface ButtonGroupItemProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  active?: boolean;\n}\n\nconst ButtonGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  ButtonGroupItemProps\n>(({ className, active, ...props }, ref) => (\n  <button\n    ref={ref}\n    type=\"button\"\n    aria-pressed={active}\n    className={cn(\n      \"inline-flex h-10 items-center justify-center gap-2 px-4 text-[0.8125rem] font-medium leading-[1.25rem]\",\n      \"text-foreground\",\n      \"transition-[background-color,color,box-shadow] duration-fast\",\n      \"hover:bg-secondary\",\n      \"focus-visible:outline-none focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      active && [\n        \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        \"focus-visible:bg-primary focus-visible:shadow-[inset_0_0_0_0.0938rem_var(--ring-inverted)]\",\n      ],\n      className,\n    )}\n    {...props}\n  />\n));\nButtonGroupItem.displayName = \"ButtonGroupItem\";\n\nexport { ButtonGroup, ButtonGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)"
+    },
+    "dark": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)"
+    }
+  }
+}

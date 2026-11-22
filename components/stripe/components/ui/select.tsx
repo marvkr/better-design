@@ -7,6 +7,7 @@ import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { springInteraction } from "@/lib/motion"
+import { floatingSurface } from "./_shared"
 
 const Select = SelectPrimitive.Root
 
@@ -22,12 +23,12 @@ function SelectTrigger({
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "flex h-9 w-full items-center justify-between rounded-md border border-border bg-secondary px-3 py-2 text-sm",
-        "shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)]",
+        "flex h-9 w-full items-center justify-between rounded-md bg-input px-3 py-2 text-sm",
+        "[box-shadow:var(--shadow-control)]",
         "placeholder:text-muted-foreground",
-        "transition-[border-color,box-shadow] duration-150",
-        "hover:border-border/80",
-        "focus:outline-none focus:border-primary/60 focus:shadow-[inset_0_1px_2px_rgba(0,0,0,0.1),0_0_0_3px_hsl(235_100%_71%/0.2)]",
+        "transition-[background-color,box-shadow] duration-fast",
+        "hover:bg-secondary hover:[box-shadow:var(--shadow-control-hover)]",
+        "focus:outline-none focus:[box-shadow:var(--shadow-focus)]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
@@ -52,8 +53,8 @@ function SelectContent({
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         className={cn(
-          "relative z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-popover text-popover-foreground",
-          "shadow-[0_4px_6px_-1px_rgba(0,0,0,0.4),0_8px_24px_-4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.04)]",
+          "relative z-50 min-w-[8rem] overflow-hidden",
+          floatingSurface,
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
           className

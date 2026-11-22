@@ -1,0 +1,20 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { format } from \"date-fns\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { Calendar } from \"./calendar\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\n/** Props for `DatePicker`: a controlled single date. */\nexport interface DatePickerProps {\n  value?: Date;\n  onValueChange?: (date: Date | undefined) => void;\n  placeholder?: string;\n  className?: string;\n  disabled?: boolean;\n}\n\n/**\n * Margin DatePicker: the grey filled field that opens the calendar in the\n * shared paper panel. The picked day is solid oxblood.\n */\nconst DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(\n  ({ value, onValueChange, placeholder = \"Pick a date\", className, disabled }, ref) => (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          ref={ref}\n          type=\"button\"\n          disabled={disabled}\n          data-slot=\"date-picker-trigger\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"items-center gap-2 text-left\",\n            !value && \"text-muted-foreground\",\n            className,\n          )}\n        >\n          <Icon icon=\"solar:calendar-linear\" className=\"size-4 shrink-0 text-muted-foreground\" aria-hidden />\n          {value ? format(value, \"PPP\") : <span>{placeholder}</span>}\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar mode=\"single\" selected={value} onSelect={onValueChange} autoFocus />\n      </PopoverContent>\n    </Popover>\n  ),\n);\nDatePicker.displayName = \"DatePicker\";\n\nexport { DatePicker };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json",
+    "https://better-design.com/registry/margin/calendar.json",
+    "https://better-design.com/registry/margin/popover.json"
+  ]
+}

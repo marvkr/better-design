@@ -1,0 +1,11 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Mallow SectionHeader: a medium-weight title with a muted line under it and\n * actions on the right; the optional eyebrow sits after the title as a\n * quiet note, never above it.\n */\nexport interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  eyebrow?: React.ReactNode;\n  actions?: React.ReactNode;\n}\n\nconst SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps>(\n  ({ className, title, description, eyebrow, actions, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"section-header\"\n      className={cn(\"flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between\", className)}\n      {...props}\n    >\n      <div className=\"min-w-0 flex-1\">\n        <h2 className=\"text-2xl font-medium leading-tight tracking-tight text-balance text-foreground\">{title}</h2>\n        {eyebrow && <div className=\"mt-1 text-sm text-muted-foreground\">{eyebrow}</div>}\n        {description && (\n          <p className=\"mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {actions && <div className=\"flex shrink-0 items-center gap-3\">{actions}</div>}\n    </div>\n  ),\n);\nSectionHeader.displayName = \"SectionHeader\";\n\nexport { SectionHeader };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

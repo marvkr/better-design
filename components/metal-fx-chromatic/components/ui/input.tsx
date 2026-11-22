@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       />
     )
     if (!ring) return input
-    return <MetalRing shape="rect" block>{input}</MetalRing>
+    return <MetalRing corners="rect" block>{input}</MetalRing>
   }
 )
 Input.displayName = "Input"

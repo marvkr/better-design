@@ -7,9 +7,9 @@ const statusVariants = cva(
   {
     variants: {
       status: {
-        online:  "bg-primary shadow-[0_0_0_2px_hsl(239_84%_67%/0.25)]",
-        busy:    "bg-destructive shadow-[0_0_0_2px_hsl(var(--destructive)/0.25)]",
-        away:    "bg-orange-500 shadow-[0_0_0_2px_hsl(24_100%_50%/0.25)]",
+        online:  "bg-primary shadow-[0_0_0_0.125rem_oklch(0.5875_0.2039_277.3624/0.25)]",
+        busy:    "bg-destructive shadow-[0_0_0_0.125rem_hsl(var(--destructive)/0.25)]",
+        away:    "bg-orange-500 shadow-[0_0_0_0.125rem_oklch(0.6958_0.2043_43.491/0.25)]",
         offline: "bg-muted-foreground/40",
       },
       size: {
@@ -25,12 +25,12 @@ const statusVariants = cva(
   }
 )
 
-const statusLabels: Record<string, string> = {
+const statusLabels = {
   online:  "Online",
   busy:    "Busy",
   away:    "Away",
   offline: "Offline",
-}
+} satisfies Record<string, string>
 
 export interface StatusIndicatorProps
   extends React.HTMLAttributes<HTMLSpanElement>,

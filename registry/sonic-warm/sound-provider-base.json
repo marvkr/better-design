@@ -1,0 +1,14 @@
+{
+  "name": "sound-provider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sound-provider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { defineSound, ensureReady } from \"@web-kits/audio\"\n\n/*\n * Sonic Warm — soft triangle thump, gentle attack.\n *\n * playClick: triangle 600 Hz, attack 0.01s, decay 0.08s → mellow thump.\n * playTick:  triangle 1200 Hz, no attack, decay 0.015s → soft pip.\n */\n\nconst clickSound = defineSound({\n  source: { type: \"triangle\", frequency: { start: 600, end: 380 } },\n  envelope: { attack: 0.01, decay: 0.08, sustain: 0, release: 0.04 },\n  gain: 0.22,\n})\n\nconst tickSound = defineSound({\n  source: { type: \"triangle\", frequency: 1200 },\n  envelope: { attack: 0, decay: 0.015, sustain: 0, release: 0.006 },\n  gain: 0.14,\n})\n\nlet moduleEnabled = true\n\nfunction getReducedMotion(): boolean {\n  if (!(\"window\" in globalThis)) return false\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches\n}\n\nfunction trigger(fn: () => void) {\n  if (!moduleEnabled || getReducedMotion()) return\n  void ensureReady().then(() => {\n    fn()\n  })\n}\n\ninterface SoundContextValue {\n  enabled: boolean\n  toggle: () => void\n  playTick: () => void\n  playClick: () => void\n}\n\nconst SoundContext = React.createContext<SoundContextValue>({\n  enabled: true,\n  toggle: () => {\n    moduleEnabled = !moduleEnabled\n  },\n  playTick: () => trigger(tickSound),\n  playClick: () => trigger(clickSound),\n})\n\nfunction SoundProvider({ children }: { children: React.ReactNode }) {\n  const [enabled, setEnabled] = React.useState(true)\n  const reducedMotion = React.useSyncExternalStore(\n    (cb) => {\n      if (!(\"window\" in globalThis)) return () => {}\n      const mql = window.matchMedia(\"(prefers-reduced-motion: reduce)\")\n      mql.addEventListener(\"change\", cb)\n      return () => mql.removeEventListener(\"change\", cb)\n    },\n    () => getReducedMotion(),\n    () => false,\n  )\n\n  const toggle = React.useCallback(() => setEnabled((prev) => !prev), [])\n\n  const playTick = React.useCallback(() => {\n    if (!enabled || reducedMotion) return\n    void ensureReady().then(() => {\n      tickSound()\n    })\n  }, [enabled, reducedMotion])\n\n  const playClick = React.useCallback(() => {\n    if (!enabled || reducedMotion) return\n    void ensureReady().then(() => {\n      clickSound()\n    })\n  }, [enabled, reducedMotion])\n\n  const value = React.useMemo(\n    () => ({ enabled, toggle, playTick, playClick }),\n    [enabled, toggle, playTick, playClick],\n  )\n\n  return <SoundContext.Provider value={value}>{children}</SoundContext.Provider>\n}\n\nfunction useSound() {\n  return React.useContext(SoundContext)\n}\n\nexport { SoundProvider, useSound }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@web-kits/audio@>=0.1.0 <1"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "chart-line",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-line.tsx",
+      "content": "\"use client\"\n\nimport { CartesianGrid, Line, LineChart, XAxis } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\"\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\"\n\n/*\n * Bevel line chart.\n *\n * The stroke is 2px of --chart-1 with round joins, which keeps the curve\n * legible at phone width. Dots stay off until a point is hovered, so six\n * months of data read as one line instead of a row of markers.\n */\n\nconst chartData = [\n  { month: \"January\", desktop: 186 },\n  { month: \"February\", desktop: 305 },\n  { month: \"March\", desktop: 237 },\n  { month: \"April\", desktop: 73 },\n  { month: \"May\", desktop: 209 },\n  { month: \"June\", desktop: 214 },\n]\n\nconst chartConfig = {\n  desktop: {\n    label: \"Desktop\",\n    color: \"var(--chart-1)\",\n  },\n}\n\nexport function ChartLineDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Line Chart</CardTitle>\n        <CardDescription>January to June 2024</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <LineChart\n            accessibilityLayer\n            data={chartData}\n            margin={{ left: 12, right: 12 }}\n          >\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <Line\n              dataKey=\"desktop\"\n              type=\"natural\"\n              stroke=\"var(--chart-1)\"\n              strokeWidth={2}\n              strokeLinecap=\"round\"\n              dot={false}\n              activeDot={{ r: 4, strokeWidth: 0 }}\n            />\n          </LineChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1.5\">\n        <div className=\"text-[0.9063rem] leading-[1.125rem] font-semibold tracking-[-0.0125rem] text-foreground\">\n          Trending up by 5.2% this month\n        </div>\n        <div className=\"text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\">\n          Showing total visitors for the last 6 months\n        </div>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/card.json",
+    "https://better-design.com/registry/bevel/chart.json"
+  ]
+}

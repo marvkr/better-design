@@ -1,0 +1,22 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared surface + form-field recipes for Cashmere.\n *\n * Cashmere's material is clean warm paper, NOT a glossy pillow. Cards and\n * floating surfaces are crisp white with a hairline ring + a very soft float\n * (the shadow tokens in globals.css) — no gradient sheen, no inset highlight.\n * The two surface helpers below are therefore intentionally flat (empty); they\n * exist so every surface component shares one import point, and so the DS can\n * dial in a tint later without touching 18 files.\n */\n\nimport type { CSSProperties } from \"react\"\n\n/* Card / sheet surface: flat. Depth comes from the ring + float shadow tokens,\n * never a fill gradient — that is what makes Cashmere read as paper. */\nexport const cashmereSurfaceStyle: CSSProperties = {}\n\n/* Popover / floating-surface: flat. Same reasoning — clean token background,\n * hairline ring from --shadow-l, no top sheen. */\nexport const cashmereGrainStyle: CSSProperties = {}\n\nexport const formFieldBase =\n  \"w-full rounded-lg px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-foreground/20 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/35 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-10 py-2\"\nexport const formFieldMultiLine = \"flex min-h-[5.25rem] py-2.5 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "var(--shadow-lg)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)"
+    },
+    "dark": {
+      "shadow-l": "var(--shadow-lg)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)"
+    }
+  }
+}

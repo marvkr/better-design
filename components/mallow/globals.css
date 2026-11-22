@@ -1,0 +1,357 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&family=Geist+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Mallow: a light, friendly system for money moments such as a payout, a
+  refund or a plan change. The page is a pale lilac grey, cards are white
+  with a soft plum shadow, and the ink is a deep plum navy. The one action
+  colour is a saturated violet, a solid fill with a faint shade along its
+  bottom edge. Green marks what is free or saved, and coral marks a fee.
+  A chosen option takes a light violet tint inside a violet ring, never a
+  heavier surface. Manrope with tabular figures, so amounts line up.
+
+  Each finish has a face (its fill) and an edge (its shadow stack): the
+  violet action, the quiet white action, the option track, the chosen
+  option, the card, the panel and the menu. Shapes are medium and rounded:
+  controls 0.625rem, cards 1rem, dialogs 1.25rem.
+*/
+
+:root {
+  /* ─── Surfaces: a pale lilac page under white cards ─── */
+  --background: oklch(0.97 0.012 295);
+  --foreground: oklch(0.25 0.04 290);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.04 290);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.04 290);
+  /* The track a set of options sits in, and the tint of the chosen one. */
+  --option-track: oklch(0.955 0.014 295);
+  --option-face: oklch(0.955 0.035 290);
+
+  /* ─── The action: solid violet with white text ─── */
+  --primary: oklch(0.52 0.2 288);
+  --primary-foreground: oklch(1 0 0);
+  --primary-text: oklch(0.48 0.2 288);              /* violet links and figures on white */
+
+  --secondary: oklch(0.95 0.02 292);
+  --secondary-foreground: oklch(0.25 0.04 290);
+  --muted: oklch(0.955 0.014 295);
+  --muted-foreground: oklch(0.47 0.03 290);         /* 6:1 on the page, 6.6:1 on a card */
+  --accent: oklch(0.955 0.02 292);                  /* hover rows */
+  --accent-foreground: oklch(0.25 0.04 290);
+
+  --destructive: oklch(0.55 0.2 22);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.56 0.14 155);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.72 0.15 55);
+  --warning-foreground: oklch(0.25 0.04 290);
+  --info: oklch(0.55 0.14 250);
+  --info-foreground: oklch(1 0 0);
+
+  --border: oklch(0.25 0.04 290 / 0.1);
+  --input: oklch(0.25 0.04 290 / 0.2);
+  --ring: oklch(0.6 0.19 288);
+
+  /* ─── Free and fee: green for what costs nothing, coral for a charge ─── */
+  --free: oklch(0.64 0.15 155);
+  --free-text: oklch(0.45 0.12 155);
+  --free-surface: oklch(0.895 0.065 155);
+  --fee: oklch(0.66 0.17 35);
+  --fee-text: oklch(0.5 0.16 35);
+  --fee-surface: oklch(0.9 0.055 35);
+  /* A quiet tag: a lilac fill that reads on the page and on a card. */
+  --tag: oklch(0.9 0.032 292);
+
+  /* ─── Accent hues for badges and charts ─── */
+  --badge-orange: oklch(0.68 0.16 50);
+  --badge-yellow: oklch(0.8 0.14 95);
+  --scrim: oklch(0.25 0.04 290 / 0.32);
+  /* ─── Status text on a tinted badge: dark in its own hue ─── */
+  --success-text: oklch(0.42 0.11 155);
+  --warning-text: oklch(0.46 0.12 55);
+  --destructive-text: oklch(0.47 0.18 22);
+  --info-text: oklch(0.44 0.13 250);
+  --badge-orange-text: oklch(0.47 0.14 50);
+  --badge-yellow-text: oklch(0.44 0.09 95);
+
+  /* ─── Faces: the fill of each finish ─── */
+  --violet-face: linear-gradient(180deg, oklch(0.54 0.2 288), oklch(0.5 0.205 288));
+  --violet-face-hover: linear-gradient(180deg, oklch(0.57 0.2 288), oklch(0.53 0.205 288));
+  --quiet-face: linear-gradient(180deg, oklch(1 0 0), oklch(0.985 0.006 295));
+  --quiet-face-hover: linear-gradient(180deg, oklch(0.985 0.008 295), oklch(0.965 0.012 295));
+  --danger-face: linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22));
+
+  /* ─── Edges: the shadow stack of each finish ─── */
+  /* The violet action: a faint shade along the bottom, a small soft drop. */
+  --violet-edge:
+    inset 0 -0.125rem 0 0 oklch(0.32 0.16 288 / 0.3),
+    0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.16),
+    0 0.25rem 0.75rem -0.25rem oklch(0.45 0.18 288 / 0.35);
+  /* The chosen option: a violet ring and a soft violet glow below. */
+  --option-edge:
+    inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8),
+    0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06),
+    0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2);
+  --option-edge-hover:
+    inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95),
+    0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08),
+    0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24);
+  /* The quiet white action: a hairline and a small soft drop. */
+  --quiet-edge:
+    inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.16),
+    0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06);
+  --card-edge:
+    0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06),
+    0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.05),
+    0 0.75rem 2rem -0.75rem oklch(0.35 0.08 290 / 0.16);
+  --panel-edge: 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08);
+  /* The option track: a hairline drawn just inside its edge. */
+  --option-track-edge: inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06);
+  --menu-edge:
+    0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08),
+    0 0.125rem 0.25rem 0 oklch(0.32 0.08 290 / 0.05),
+    0 0.75rem 1.75rem -0.5rem oklch(0.35 0.08 290 / 0.22);
+
+  /* ─── Type ─── */
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ─── Radius: medium and friendly ─── */
+  --radius: 0.75rem;
+  --radius-sm: 0.375rem;   /* checkbox, inline code */
+  --radius-md: 0.5rem;     /* icon tiles, menu rows */
+  --radius-lg: 0.625rem;   /* buttons, fields and every control */
+  --radius-xl: 0.75rem;    /* a chosen option, popovers */
+  --radius-2xl: 0.875rem;  /* the option track */
+  --radius-3xl: 1rem;      /* cards */
+  --radius-4xl: 1.25rem;   /* dialogs and sheets */
+
+  /* ─── Motion: the standard profile; a moving selection uses a critically damped spring ─── */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  --shadow-xs: 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08);
+  --shadow-sm: var(--option-edge);
+  --shadow-md: var(--menu-edge);
+  --shadow-lg: var(--card-edge);
+  --shadow-card: var(--card-edge);
+  --shadow-menu: var(--menu-edge);
+  --shadow-overlay: var(--card-edge);
+  --shadow-thumb: 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.1), 0 0.0625rem 0.25rem 0 oklch(0.32 0.08 290 / 0.2);
+
+  --chart-1: oklch(0.52 0.2 288);
+  --chart-2: oklch(0.68 0.16 35);
+  --chart-3: oklch(0.64 0.15 155);
+  --chart-4: oklch(0.7 0.11 230);
+  --chart-5: oklch(0.8 0.08 300);
+
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-option-track: var(--option-track);
+  --color-option-face: var(--option-face);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-free: var(--free);
+  --color-free-text: var(--free-text);
+  --color-free-surface: var(--free-surface);
+  --color-fee: var(--fee);
+  --color-fee-text: var(--fee-text);
+  --color-fee-surface: var(--fee-surface);
+  --color-tag: var(--tag);
+  --color-badge-orange: var(--badge-orange);
+  --color-badge-yellow: var(--badge-yellow);
+  --color-scrim: var(--scrim);
+  --color-success-text: var(--success-text);
+  --color-warning-text: var(--warning-text);
+  --color-destructive-text: var(--destructive-text);
+  --color-info-text: var(--info-text);
+  --color-badge-orange-text: var(--badge-orange-text);
+  --color-badge-yellow-text: var(--badge-yellow-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+  /* Mallow's own depth names, one per recipe. */
+  --shadow-violet: var(--violet-edge);
+  --shadow-quiet: var(--quiet-edge);
+  --shadow-option: var(--option-edge);
+  --shadow-option-hover: var(--option-edge-hover);
+  --shadow-option-track: var(--option-track-edge);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 450;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+    text-wrap: pretty;
+  }
+
+  /* Headings: a firm, friendly weight with a little tracking pulled in. */
+  :is(h1, h2) {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  :is(h3, h4) {
+    font-weight: 650;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+  }
+
+  /* Figures line up: every amount on the screen is tabular. */
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

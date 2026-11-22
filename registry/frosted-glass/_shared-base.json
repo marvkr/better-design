@@ -1,0 +1,34 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "// Frosted Glass — shared surface treatments.\n// Centralizes the layered specular-rim + chromatic-fringe glass material so every\n// primitive reads as the SAME piece of glass. All optical values live in\n// globals.css :root as --fg-* tokens; edit them there to retune the whole DS.\n\n// The signature glass surface: heavy backdrop blur+saturate (frosts + picks up\n// backdrop chroma) + the layered --fg-shadow (specular rim + chromatic edge +\n// depth + glow).\nexport const frostedGlassSurface =\n  \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[var(--fg-fill)] border border-[color:var(--fg-border)] shadow-[var(--fg-shadow)]\";\n\n// Hover state: brighter fill + intensified rim/glow (the glass \"lights up\").\nexport const frostedGlassHover =\n  \"hover:bg-[var(--fg-fill-hover)] hover:shadow-[var(--fg-shadow-hover)]\";\n\n// Every form field (Input, Textarea, PasswordInput, SearchInput, NumberInput,\n// PhoneInput, InputOTP) imports this single base — same glass, same focus ring.\nexport const formFieldBase =\n  \"w-full text-foreground placeholder:text-muted-foreground transition-all duration-slow ease-out \" +\n  \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[var(--fg-fill)] \" +\n  \"border border-[color:var(--fg-border)] shadow-[var(--fg-shadow)] \" +\n  \"hover:bg-[var(--fg-fill-hover)] \" +\n  \"focus-visible:outline-none focus-visible:border-[color:var(--ring)] focus-visible:ring-2 focus-visible:ring-ring/50 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)",
+      "fg-shadow-hover": "inset 0 0.125rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.7), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.55), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.5), inset 0 0 1rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0313rem oklch(1 0 0 / 0.28), 0 0.875rem 2.125rem -0.5rem oklch(0 0 0 / 0.6), 0 0 1.875rem -0.125rem var(--fg-glow)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)",
+      "fg-shadow-hover": "inset 0 0.125rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.7), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.55), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.5), inset 0 0 1rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0313rem oklch(1 0 0 / 0.28), 0 0.875rem 2.125rem -0.5rem oklch(0 0 0 / 0.6), 0 0 1.875rem -0.125rem var(--fg-glow)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

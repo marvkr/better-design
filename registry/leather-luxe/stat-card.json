@@ -1,0 +1,20 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe StatCard: the \"$30 Monthly plan\" panel; a card slip with a\n// big confident figure.\n\nconst StatCard = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"rounded-xl bg-card p-6\",\n      \"border border-border [box-shadow:var(--shadow-card)]\",\n      className\n    )}\n    {...props}\n  />\n))\nStatCard.displayName = \"StatCard\"\n\nconst StatCardLabel = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nStatCardLabel.displayName = \"StatCardLabel\"\n\nconst StatCardValue = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-3xl font-bold tracking-tight text-foreground\", className)}\n    {...props}\n  />\n))\nStatCardValue.displayName = \"StatCardValue\"\n\nconst StatCardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"mt-1 text-xs text-muted-foreground\", className)}\n    {...props}\n  />\n))\nStatCardDescription.displayName = \"StatCardDescription\"\n\nexport { StatCard, StatCardLabel, StatCardValue, StatCardDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0 0 0 / 0.25)"
+    },
+    "dark": {
+      "shadow-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0 0 0 / 0.25)"
+    }
+  }
+}

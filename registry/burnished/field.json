@@ -1,0 +1,20 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Field: stacks a label, a control and its helper or error text\n * with even spacing, for forms that do not use react-hook-form.\n */\ninterface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst Field = React.forwardRef<HTMLDivElement, FieldProps>(({ className, ...props }, ref) => (\n  <div ref={ref} data-slot=\"field\" className={cn(\"flex flex-col gap-2\", className)} {...props} />\n));\nField.displayName = \"Field\";\n\nconst FieldLabel = React.forwardRef<\n  HTMLLabelElement,\n  React.LabelHTMLAttributes<HTMLLabelElement> & { required?: boolean }\n>(({ className, children, required, ...props }, ref) => (\n  <label\n    ref={ref}\n    data-slot=\"field-label\"\n    className={cn(\n      \"text-sm font-semibold leading-none tracking-[0.016em] text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  >\n    {children}\n    {required && (\n      <span aria-hidden className=\"ml-0.5 text-primary-text\">\n        *\n      </span>\n    )}\n  </label>\n));\nFieldLabel.displayName = \"FieldLabel\";\n\nconst FieldDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"field-description\"\n    className={cn(\"text-[0.8125rem] leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nFieldDescription.displayName = \"FieldDescription\";\n\nconst FieldError = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(\n  ({ className, ...props }, ref) => (\n    <p\n      ref={ref}\n      role=\"alert\"\n      data-slot=\"field-error\"\n      className={cn(\"text-[0.8125rem] font-medium text-destructive\", className)}\n      {...props}\n    />\n  ),\n);\nFieldError.displayName = \"FieldError\";\n\nexport { Field, FieldLabel, FieldDescription, FieldError };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)"
+    }
+  }
+}

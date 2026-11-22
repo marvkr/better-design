@@ -1,0 +1,25 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Terminal Badge — a status readout cell, not a pill.\n *   - Sharp 2px box, monospace, UPPERCASE, wide tracking (LED legends).\n *   - Hairline ring, tinted phosphor fill. Status hues are CRT-bright\n *     (green = PWR ok, amber = HDD, red = fault), matching the panel LEDs.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-sm px-2 py-0.5 \" +\n    \"font-mono text-[0.6875rem] font-medium uppercase tracking-[0.08em] \" +\n    \"ring-1 ring-inset transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-secondary-foreground ring-border\",\n        primary: \"bg-primary/15 ring-primary/40 text-[color:oklch(0.875_0.132_205)]\",\n        secondary: \"bg-muted ring-border text-[color:oklch(0.875_0.085_210)]\",\n        outline: \"bg-transparent text-foreground ring-border\",\n        success:\n          \"bg-[var(--success)]/15 ring-[var(--success)]/40 text-[color:oklch(0.875_0.17_150)]\",\n        warning:\n          \"bg-[var(--warning)]/15 text-[var(--warning)] ring-[var(--warning)]/40\",\n        destructive: \"bg-destructive/15 ring-destructive/40 text-[color:oklch(0.875_0.066_22)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.80 0.17 150)",
+      "warning": "oklch(0.84 0.16 84)"
+    },
+    "dark": {
+      "success": "oklch(0.80 0.17 150)",
+      "warning": "oklch(0.84 0.16 84)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* A velvet disc: hairline rim catching light on top, soft contact shadow. */\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Avatar = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\",\n      \"ring-1 ring-border\",\n      \"[box-shadow:var(--shadow-s)]\",\n      className\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  HTMLImageElement,\n  WithClassName<AvatarPrimitive.Image.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full\",\n      \"[background-image:var(--velour-raised)]\",\n      \"text-sm font-medium text-secondary-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\nexport { Avatar, AvatarImage, AvatarFallback }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CodeBlock } from \"./code-block\";\n\n/*\n * Playdesk CodeTabs — a dark code window with a segmented strip along its top\n * edge, in the same pill language as Tabs.\n */\n\nexport interface CodeTabsItem {\n  label: string;\n  code: string;\n  language?: string;\n  filename?: string;\n}\n\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[];\n  defaultTab?: string;\n  className?: string;\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label);\n  const current = tabs.find((tab) => tab.label === active) ?? tabs[0];\n\n  if (!current) return null;\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-xl bg-foreground/95 text-background\",\n        \"[box-shadow:var(--shadow-float)]\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-0.5 border-b border-background/10 px-2 py-2\">\n        {tabs.map((tab) => (\n          <button\n            key={tab.label}\n            type=\"button\"\n            onClick={() => setActive(tab.label)}\n            className={cn(\n              \"rounded-full px-3 py-1 text-xs font-medium\",\n              \"transition-colors duration-fast\",\n              \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n              active === tab.label\n                ? \"bg-background/15 text-background\"\n                : \"text-background/55 hover:text-background\",\n            )}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      <CodeBlock\n        code={current.code}\n        language={current.language}\n        filename={current.filename}\n        className=\"rounded-none [box-shadow:none] [&>div]:border-0 [&>div]:pt-1\"\n      />\n    </div>\n  );\n};\nCodeTabs.displayName = \"CodeTabs\";\n\nexport { CodeTabs };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/code-block.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

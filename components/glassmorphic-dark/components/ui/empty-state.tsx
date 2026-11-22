@@ -26,7 +26,7 @@ const EmptyStateIcon = React.forwardRef<
     className={cn(
       "mb-4 flex h-14 w-14 items-center justify-center rounded-full",
       "backdrop-blur-xl bg-white/[0.06]",
-      "shadow-[inset_0_0_8px_rgba(255,255,255,0.08)]",
+      "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.08)]",
       "[&>svg]:h-6 [&>svg]:w-6 [&>svg]:text-muted-foreground",
       className
     )}

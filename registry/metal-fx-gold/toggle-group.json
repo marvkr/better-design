@@ -9,10 +9,19 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-toggle-group",
-    "class-variance-authority"
+    "@radix-ui/react-toggle-group@^1.1.10",
+    "class-variance-authority@>=0.7.1 <1"
   ],
   "registryDependencies": [
-    "utils"
-  ]
+    "https://better-design.com/registry/metal-fx-gold/toggle.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for velour.\n *\n * Fields are recessed velvet wells: they sink below the canvas plane\n * (darker --input fill + deep inset top shadow + a whisper of light along\n * the bottom lip), the inverse of the raised velour buttons. Focus wakes\n * the champagne ring softly; nothing glows hard in this DS.\n */\n\nexport const formFieldBase =\n  \"w-full px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground/80 \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/30 \" +\n  \"focus-visible:outline-none focus-visible:border-ring/60 focus-visible:ring-2 focus-visible:ring-ring/25 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5 rounded-lg\"\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y rounded-lg\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\nconst Avatar = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex size-9 shrink-0 overflow-hidden rounded-full [box-shadow:var(--shadow-rim)]\",\n      className\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  HTMLImageElement,\n  WithClassName<AvatarPrimitive.Image.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\nexport { Avatar, AvatarImage, AvatarFallback }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

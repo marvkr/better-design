@@ -1,0 +1,28 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n/* A recessed velvet well holding raised velour tag chips. */\n\ninterface TagInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\"> {\n  value?: string[]\n  onChange?: (tags: string[]) => void\n  placeholder?: string\n  maxTags?: number\n}\n\nfunction TagInput({\n  value = [],\n  onChange,\n  placeholder = \"Add tag...\",\n  maxTags,\n  className,\n  disabled,\n  ...props\n}: TagInputProps) {\n  const [input, setInput] = React.useState(\"\")\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  const addTag = (tag: string) => {\n    const trimmed = tag.trim()\n    if (trimmed && !value.includes(trimmed) && (!maxTags || value.length < maxTags)) {\n      onChange?.([...value, trimmed])\n      setInput(\"\")\n    }\n  }\n\n  const removeTag = (tagToRemove: string) => {\n    onChange?.(value.filter((t) => t !== tagToRemove))\n  }\n\n  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === \"Enter\" || e.key === \",\") {\n      e.preventDefault()\n      addTag(input)\n    } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n      removeTag(value[value.length - 1])\n    }\n  }\n\n  return (\n    <div\n      className={cn(\n        formFieldBase,\n        \"flex min-h-9 flex-wrap gap-1.5 rounded-lg py-1.5\",\n        \"focus-within:border-ring/60 focus-within:ring-2 focus-within:ring-ring/25\",\n        \"cursor-text\",\n        disabled && \"cursor-not-allowed opacity-70\",\n        className\n      )}\n      onClick={() => inputRef.current?.focus()}\n    >\n      {value.map((tag) => (\n        <span\n          key={tag}\n          className=\"inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium text-secondary-foreground [background-image:var(--velour-raised)] [box-shadow:var(--shadow-s)]\"\n        >\n          {tag}\n          {!disabled && (\n            <button\n              type=\"button\"\n              onClick={(e) => { e.stopPropagation(); removeTag(tag) }}\n              className=\"text-muted-foreground transition-colors duration-fast hover:text-foreground\"\n            >\n              <Icon icon=\"tabler:x\" className=\"h-3 w-3\" />\n            </button>\n          )}\n        </span>\n      ))}\n      <input\n        ref={inputRef}\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        onKeyDown={handleKeyDown}\n        onBlur={() => addTag(input)}\n        placeholder={value.length === 0 ? placeholder : undefined}\n        disabled={disabled || (maxTags !== undefined && value.length >= maxTags)}\n        className=\"min-w-[7.5rem] flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground/80 disabled:cursor-not-allowed\"\n        {...props}\n      />\n    </div>\n  )\n}\n\nexport { TagInput }\nexport type { TagInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/velour/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

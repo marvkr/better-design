@@ -1,0 +1,31 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel StatusIndicator.\n *\n * An 8px dot and a label. The dot takes the 1px ring from the shadow stack so\n * it holds its edge on any surface, and every state pulls a token rather than\n * a color of its own. The optional pulse repeats the dot at full opacity and\n * drops the ring, because a halo with a rim reads as a second dot.\n */\n\nconst dotVariants = cva(\n  \"size-2 shrink-0 rounded-full [box-shadow:var(--shadow-ring)]\",\n  {\n    variants: {\n      status: {\n        online: \"bg-[var(--success)]\",\n        offline: \"bg-muted-foreground\",\n        busy: \"bg-destructive\",\n        away: \"bg-[var(--warning)]\",\n        idle: \"bg-[var(--track)]\",\n      },\n    },\n    defaultVariants: {\n      status: \"online\",\n    },\n  },\n)\n\n/** Props for `StatusIndicator`; `pulse` adds the repeating halo. */\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof dotVariants> {\n  label?: React.ReactNode\n  pulse?: boolean\n}\n\nconst StatusIndicator = React.forwardRef<\n  HTMLSpanElement,\n  StatusIndicatorProps\n>(({ className, status, label, pulse, ...props }, ref) => (\n  <span\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-2 text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  >\n    <span className=\"relative inline-flex\">\n      <span className={cn(dotVariants({ status }))} />\n      {pulse && (\n        <span\n          className={cn(\n            \"absolute inset-0 animate-ping rounded-full\",\n            dotVariants({ status }),\n            \"opacity-60 [box-shadow:none]\",\n          )}\n        />\n      )}\n    </span>\n    {label && (\n      <span className=\"font-semibold text-[var(--strong)]\">{label}</span>\n    )}\n  </span>\n))\nStatusIndicator.displayName = \"StatusIndicator\"\n\nexport { StatusIndicator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5695 0.1372 158)",
+      "warning": "oklch(0.6802 0.1568 62)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06)"
+    },
+    "dark": {
+      "success": "oklch(0.6903 0.1305 158)",
+      "warning": "oklch(0.7807 0.1424 66)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.07)"
+    }
+  }
+}

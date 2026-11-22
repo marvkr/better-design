@@ -1,0 +1,24 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer group inline-flex items-center justify-center h-5 w-5 shrink-0 rounded-[0.125rem] border-2 border-border\",\n        \"bg-card text-foreground [box-shadow:var(--shadow-xs)]\",\n        \"transition-[background-color,box-shadow,transform] duration-fast\",\n        \"hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:var(--shadow-sm)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n        \"data-indeterminate:bg-primary data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        <Icon icon=\"tabler:check\" className=\"h-4 w-4 group-data-indeterminate:hidden\" />\n        <Icon icon=\"tabler:minus\" className=\"hidden h-4 w-4 group-data-indeterminate:block\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    },
+    "dark": {
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    }
+  }
+}

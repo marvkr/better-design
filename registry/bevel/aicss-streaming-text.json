@@ -1,0 +1,26 @@
+{
+  "name": "aicss-streaming-text",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aicss-streaming-text.tsx",
+      "content": "// Ported from the public AIcss React source.\n// Source: https://www.aicss.dev/components/streaming-text\n\"use client\"\n\nimport styles from \"./aicss-streaming-text.module.css\";\nimport { useEffect, useState } from \"react\";\n\nexport function StreamingText({ text }: { text: string }) {\n  const [shown, setShown] = useState(\"\");\n  useEffect(() => {\n    let i = 0;\n    const id = setInterval(() => {\n      i += 2;\n      setShown(text.slice(0, i));\n      if (i >= text.length) clearInterval(id);\n    }, 9);\n    return () => clearInterval(id);\n  }, [text]);\n  const streaming = shown.length < text.length;\n  return (\n    <p className={styles.prose}>\n      {shown}\n      <span className={streaming ? styles.caret + \" \" + styles.caretSteady : styles.caret} />\n    </p>\n  );\n}\n\nexport { StreamingText as AiCssStreamingText }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "components/ui/aicss-streaming-text.module.css",
+      "content": "/* Ported from https://www.aicss.dev/components/streaming-text */\n.prose { font-size: 0.875rem; line-height: 1.1875rem; color: var(--foreground); }\n.caret { display: inline-block; width: 0.5rem; height: 1.05em; margin-left: 0.125rem; background: oklch(0.1593 0.0111 267.9792); vertical-align: text-bottom; animation: caret-blink 1s step-end infinite; }\n/* solid while streaming, blink only once idle (matches the live component) */\n.caretSteady { animation: none; opacity: 1; }\n@keyframes caret-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }\n@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }\n@media (prefers-reduced-motion: reduce) {\n .caret,\n.caretSteady { animation: none !important; transition-duration: 0.01ms !important; } }\n",
+      "type": "registry:file",
+      "target": "components/ui/aicss-streaming-text.module.css"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "text": "var(--foreground)"
+    },
+    "dark": {
+      "text": "var(--foreground)"
+    }
+  }
+}

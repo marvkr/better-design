@@ -1,0 +1,31 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface NumberInputProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\" | \"onChange\"\n> {\n  value?: number;\n  onValueChange?: (value: number) => void;\n  step?: number;\n  min?: number;\n  max?: number;\n}\n\nconst stepButton = cn(\n  \"absolute top-1/2 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-(--foreground-secondary)\",\n  \"transition-colors duration-fast ease-out\",\n  \"hover:bg-secondary hover:text-foreground active:bg-(--surface-3)\",\n  \"disabled:pointer-events-none disabled:text-(--foreground-disabled)\",\n);\n\n/**\n * Firefly NumberInput: a warm field with the number centred in tabular\n * figures between two round ghost steppers, minus at the start and plus at\n * the end. A stepper greys out once the value reaches its limit; the arrow\n * keys still step the value from the keyboard.\n */\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  (\n    { className, value = 0, onValueChange, step = 1, min, max, disabled, ...props },\n    ref,\n  ) => {\n    const clamp = (n: number) => {\n      let next = n;\n      if (min !== undefined) next = Math.max(next, min);\n      if (max !== undefined) next = Math.min(next, max);\n      return next;\n    };\n\n    const atMin = min !== undefined && value <= min;\n    const atMax = max !== undefined && value >= max;\n\n    return (\n      <div data-slot=\"number-input\" className=\"relative\">\n        <button\n          type=\"button\"\n          onClick={() => onValueChange?.(clamp(value - step))}\n          disabled={disabled || atMin}\n          aria-label=\"Decrease\"\n          tabIndex={-1}\n          className={cn(stepButton, \"start-1\")}\n        >\n          <Icon icon=\"carbon:subtract\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          inputMode=\"decimal\"\n          value={value}\n          step={step}\n          min={min}\n          max={max}\n          disabled={disabled}\n          onChange={(event) => {\n            const parsed = parseFloat(event.target.value);\n            if (!Number.isNaN(parsed)) onValueChange?.(clamp(parsed));\n          }}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"px-11 text-center tabular-nums\",\n            \"[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\",\n            className,\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={() => onValueChange?.(clamp(value + step))}\n          disabled={disabled || atMax}\n          aria-label=\"Increase\"\n          tabIndex={-1}\n          className={cn(stepButton, \"end-1\")}\n        >\n          <Icon icon=\"carbon:add\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n      </div>\n    );\n  },\n);\nNumberInput.displayName = \"NumberInput\";\n\nexport { NumberInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "foreground-disabled": "oklch(0.477 0.01 99)"
+    }
+  }
+}

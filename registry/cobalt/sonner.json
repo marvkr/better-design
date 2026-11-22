@@ -1,0 +1,27 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\"\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:rounded-lg group-[.toaster]:[box-shadow:var(--shadow-pop)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:text-primary-foreground group-[.toast]:rounded-md group-[.toast]:[background-image:var(--cobalt)] group-[.toast]:[box-shadow:var(--shadow-primary)]\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground group-[.toast]:rounded-md\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)",
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4), 0 1rem 2.5rem oklch(0 0 0 / 0.55)"
+    },
+    "dark": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)",
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4), 0 1rem 2.5rem oklch(0 0 0 / 0.55)"
+    }
+  }
+}

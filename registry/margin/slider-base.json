@@ -1,0 +1,24 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\";\n\nimport { cn } from \"@/lib/utils\";\nimport { oxFace, oxHairline, slotWell } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Margin Slider: a thin grey slot behind a hairline. The filled part wears\n * the primary Button's oxblood face, and each knob is the small white knob of\n * the Switch with an oxblood edge. Pass an array value for a range.\n */\nconst Slider = React.forwardRef<HTMLDivElement, WithClassName<SliderPrimitive.Root.Props>>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min];\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\n          \"relative w-full data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n          className,\n        )}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"relative flex h-5 w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track\n            data-slot=\"slider-track\"\n            className={cn(\"relative h-1.5 w-full grow overflow-hidden rounded-full\", slotWell)}\n          >\n            <SliderPrimitive.Indicator\n              data-slot=\"slider-range\"\n              className={cn(\"rounded-full\", oxFace)}\n            />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\"\n              key={index}\n              className={cn(\n                \"block size-4 shrink-0 cursor-grab rounded-full bg-primary-foreground\",\n                oxHairline,\n                \"transition-transform duration-fast ease-(--ease-out) active:scale-110 active:cursor-grabbing motion-reduce:active:scale-100\",\n                \"has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring\",\n                \"data-[disabled]:pointer-events-none\",\n              )}\n            />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    );\n  },\n);\nSlider.displayName = \"Slider\";\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

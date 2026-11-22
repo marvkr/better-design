@@ -1,0 +1,28 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk StatCard — a window holding one number. The delta is a small pill,\n * tinted rather than coloured text, so it stays readable at a glance.\n */\n\nexport interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string;\n  delta?: string;\n  trend?: \"up\" | \"down\" | \"flat\";\n  icon?: React.ReactNode;\n}\n\nconst trendStyles = {\n  up: \"bg-[var(--pop-green)] text-[var(--pop-green-foreground)]\",\n  down: \"bg-destructive/10 text-destructive\",\n  flat: \"bg-muted text-muted-foreground\",\n} as const;\n\nconst StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(\n  ({ className, label, value, delta, trend = \"flat\", icon, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"rounded-xl bg-card p-5 [box-shadow:var(--shadow-window)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center gap-2\">\n        <p className=\"text-[0.6875rem] font-bold tracking-[0.08em] text-muted-foreground\">\n          {label}\n        </p>\n        {icon ? (\n          <span className=\"ml-auto text-muted-foreground [&_svg]:size-4\">\n            {icon}\n          </span>\n        ) : null}\n      </div>\n      <p className=\"mt-2 text-3xl font-medium tracking-[-0.04em] text-foreground\">\n        {value}\n      </p>\n      {delta ? (\n        <span\n          className={cn(\n            \"mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-bold tracking-[0.02em]\",\n            trendStyles[trend],\n          )}\n        >\n          {delta}\n        </span>\n      ) : null}\n    </div>\n  ),\n);\nStatCard.displayName = \"StatCard\";\n\nexport { StatCard };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "pop-green": "oklch(0.945 0.0451 163.2)",
+      "pop-green-foreground": "oklch(0.4623 0.1114 158)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "pop-green": "oklch(0.945 0.0451 163.2)",
+      "pop-green-foreground": "oklch(0.4623 0.1114 158)"
+    }
+  }
+}

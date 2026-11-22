@@ -1,0 +1,22 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "// Delphi form-field base — shared across Input, Textarea, PasswordInput, etc.\n// White pill on cream, big radius, soft pillow shadow, no harsh border.\nexport const formFieldBase = [\n  \"w-full bg-card/80 backdrop-blur\",\n  \"border border-border rounded-2xl\",\n  \"px-4 py-3 text-sm text-foreground\",\n  \"placeholder:text-muted-foreground\",\n  \"shadow-[var(--shadow-xs)]\",\n  \"transition-[box-shadow,border-color,background] duration-fast ease-out\",\n  \"hover:bg-card\",\n  \"focus-visible:outline-none focus-visible:border-primary/40 focus-visible:shadow-[var(--shadow-sm)]\",\n  \"disabled:cursor-not-allowed disabled:opacity-50\",\n].join(\" \");\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow": "0 0.0625rem 0.5rem oklch(0 0 0 / 0.035)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "shadow": "0 0.0625rem 0.5rem oklch(0 0 0 / 0.035)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

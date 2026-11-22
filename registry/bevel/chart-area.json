@@ -1,0 +1,18 @@
+{
+  "name": "chart-area",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-area.tsx",
+      "content": "\"use client\"\n\nimport { Area, AreaChart, CartesianGrid, XAxis } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\"\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\"\n\n/*\n * Bevel area chart.\n *\n * One series, so it takes --chart-1, the deepest blue in the ramp. The fill\n * drops to 22 percent because a dense screen only needs enough tint to read\n * the shape, and the horizontal grid is one pixel of the track token.\n */\n\nconst chartData = [\n  { month: \"January\", desktop: 186 },\n  { month: \"February\", desktop: 305 },\n  { month: \"March\", desktop: 237 },\n  { month: \"April\", desktop: 73 },\n  { month: \"May\", desktop: 209 },\n  { month: \"June\", desktop: 214 },\n]\n\nconst chartConfig = {\n  desktop: {\n    label: \"Desktop\",\n    color: \"var(--chart-1)\",\n  },\n}\n\nexport function ChartAreaDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Area Chart</CardTitle>\n        <CardDescription>\n          Showing total visitors for the last 6 months\n        </CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <AreaChart\n            accessibilityLayer\n            data={chartData}\n            margin={{ left: 12, right: 12 }}\n          >\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <Area\n              dataKey=\"desktop\"\n              type=\"natural\"\n              fill=\"var(--chart-1)\"\n              fillOpacity={0.22}\n              stroke=\"var(--chart-1)\"\n              strokeWidth={2}\n            />\n          </AreaChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1.5\">\n        <div className=\"text-[0.9063rem] leading-[1.125rem] font-semibold tracking-[-0.0125rem] text-foreground\">\n          Trending up by 5.2% this month\n        </div>\n        <div className=\"text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\">\n          January to June 2024\n        </div>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/card.json",
+    "https://better-design.com/registry/bevel/chart.json"
+  ]
+}

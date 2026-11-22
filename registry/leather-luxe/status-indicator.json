@@ -1,0 +1,23 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe StatusIndicator: mint for healthy, cognac for info, warm\n// amber and saddle red for trouble. Dots carry a faint matching halo.\n\nconst statusIndicatorVariants = cva(\"inline-flex items-center gap-2 text-sm\", {\n  variants: {\n    variant: {\n      default: \"text-muted-foreground\",\n      success: \"text-mint\",\n      warning: \"text-[oklch(0.78_0.14_75)]\",\n      destructive: \"text-[oklch(0.72_0.14_28)]\",\n      info: \"text-[oklch(0.7_0.11_55)]\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n})\n\nconst dotVariants = cva(\"h-2 w-2 rounded-full\", {\n  variants: {\n    variant: {\n      default: \"bg-muted-foreground\",\n      success: \"bg-mint shadow-[0_0_0.375rem_oklch(0.85_0.12_162/0.45)]\",\n      warning:\n        \"bg-[oklch(0.78_0.14_75)] shadow-[0_0_0.375rem_oklch(0.78_0.14_75/0.45)]\",\n      destructive:\n        \"bg-[oklch(0.6_0.16_28)] shadow-[0_0_0.375rem_oklch(0.6_0.16_28/0.45)]\",\n      info: \"bg-primary shadow-[0_0_0.375rem_oklch(0.55_0.115_52/0.45)]\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n})\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, variant, children, ...props }, ref) => (\n    <span\n      ref={ref}\n      className={cn(statusIndicatorVariants({ variant }), className)}\n      {...props}\n    >\n      <span className={cn(dotVariants({ variant }))} />\n      {children}\n    </span>\n  )\n)\nStatusIndicator.displayName = \"StatusIndicator\"\n\nexport { StatusIndicator, statusIndicatorVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mint": "oklch(0.85 0.12 162)"
+    },
+    "dark": {
+      "mint": "oklch(0.85 0.12 162)"
+    }
+  }
+}

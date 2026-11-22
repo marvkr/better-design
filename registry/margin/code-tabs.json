@@ -1,0 +1,31 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { sheetSurface, codeToneClass, focusRing, tokenizeCodeLines } from \"./_shared\";\nimport { CopyButton } from \"./copy-button\";\n\ninterface CodeTab {\n  label: string;\n  lang: string;\n  code: string;\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[];\n  defaultTab?: number;\n  className?: string;\n}\n\n/** The tab a roving-focus key moves to, wrapping at both ends. */\nfunction nextTabIndex(key: string, index: number, last: number): number | undefined {\n  switch (key) {\n    case \"ArrowRight\":\n      return index === last ? 0 : index + 1;\n    case \"ArrowLeft\":\n      return index === 0 ? last : index - 1;\n    case \"Home\":\n      return 0;\n    case \"End\":\n      return last;\n    default:\n      return undefined;\n  }\n}\n\n/**\n * Margin CodeTabs: one sample in several languages.\n *\n * The bar above the sheet is a grey track of language names; the chosen one\n * is a paper tab with a hairline ring, the others muted text. The copy\n * button closes the bar. Below, the code sits on a white sheet with a gutter\n * of faint line numbers and the editor's clause inks. Arrow keys, Home\n * and End move between tabs.\n */\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(() =>\n    Math.min(Math.max(defaultTab, 0), Math.max(tabs.length - 1, 0)),\n  );\n  const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);\n  const uid = React.useId();\n\n  const index = Math.min(activeIndex, Math.max(tabs.length - 1, 0));\n  const active = tabs[index];\n  const lines = React.useMemo(() => tokenizeCodeLines(active?.code ?? \"\"), [active?.code]);\n\n  if (!active) return null;\n\n  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n    const next = nextTabIndex(event.key, index, tabs.length - 1);\n    if (next === undefined) return;\n    event.preventDefault();\n    setActiveIndex(next);\n    tabRefs.current[next]?.focus();\n  };\n\n  return (\n    <div data-slot=\"code-tabs\" className={cn(\"flex flex-col gap-2\", className)}>\n      <div data-slot=\"code-tabs-header\" className=\"flex items-center justify-between gap-2\">\n        <div\n          role=\"tablist\"\n          aria-label=\"Code examples\"\n          onKeyDown={onKeyDown}\n          className=\"flex min-w-0 gap-0.5 overflow-x-auto rounded-lg bg-(--field) p-0.5 shadow-(--field-shade)\"\n        >\n          {tabs.map((tab, i) => {\n            const selected = i === index;\n            return (\n              <button\n                key={`${tab.label}-${i}`}\n                ref={(node) => {\n                  tabRefs.current[i] = node;\n                }}\n                type=\"button\"\n                role=\"tab\"\n                id={`${uid}-tab-${i}`}\n                aria-selected={selected}\n                aria-controls={`${uid}-panel`}\n                tabIndex={selected ? 0 : -1}\n                onClick={() => setActiveIndex(i)}\n                className={cn(\n                  focusRing,\n                  \"h-6 shrink-0 whitespace-nowrap rounded-md px-2.5 text-sm\",\n                  \"transition duration-fast ease-(--ease-out)\",\n                  selected\n                    ? \"bg-card text-foreground shadow-(--pill-edge)\"\n                    : \"text-muted-foreground hover:text-foreground\",\n                )}\n              >\n                {tab.label}\n              </button>\n            );\n          })}\n        </div>\n        <div className=\"flex shrink-0 items-center gap-2\">\n          <span className=\"font-mono text-xs text-muted-foreground\">{active.lang}</span>\n          <CopyButton value={active.code} size=\"icon-sm\" label=\"Copy code\" />\n        </div>\n      </div>\n\n      <pre\n        role=\"tabpanel\"\n        id={`${uid}-panel`}\n        aria-labelledby={`${uid}-tab-${index}`}\n        tabIndex={0}\n        className={cn(\n          sheetSurface,\n          focusRing,\n          \"m-0 overflow-x-auto rounded-xl pt-4 pb-5 pe-5 font-mono text-[0.8125rem] leading-6\",\n        )}\n      >\n        <code className=\"block\">\n          {lines.map((line, i) => (\n            <span key={i} className=\"block whitespace-pre text-foreground\">\n              <span\n                aria-hidden\n                className=\"me-4 inline-block w-9.5 select-none text-right tabular-nums text-(--clause-gutter)\"\n              >\n                {i + 1}\n              </span>\n              {line.map((token, j) => (\n                <span key={j} className={codeToneClass[token.tone]}>\n                  {token.text}\n                </span>\n              ))}\n            </span>\n          ))}\n        </code>\n      </pre>\n    </div>\n  );\n}\n\nexport { CodeTabs };\nexport type { CodeTabsProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json",
+    "https://better-design.com/registry/margin/copy-button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(0.99 0.008 85)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.82 0.016 85)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)",
+      "clause-gutter": "oklch(0.58 0.015 85)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.014 260)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.36 0.014 260)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)",
+      "clause-gutter": "oklch(0.56 0.015 85)"
+    }
+  }
+}

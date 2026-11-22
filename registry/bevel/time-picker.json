@@ -1,0 +1,17 @@
+{
+  "name": "time-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/time-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n/*\n * Bevel TimePicker.\n *\n * The native time input on the system's field surface, so it matches the\n * inputs it sits between in a stacked form. A clock glyph leads the value from\n * inside the well, and the browser's own picker button keeps its place at the\n * right, dimmed back to the muted tone.\n */\n\n/** Props for `TimePicker`; every native time input attribute passes through. */\nexport interface TimePickerProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {}\n\nconst TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(\n  ({ className, ...props }, ref) => (\n    <div className=\"relative\">\n      <Icon\n        icon=\"solar:clock-circle-linear\"\n        className=\"pointer-events-none absolute left-3.5 top-1/2 size-[1.0625rem] -translate-y-1/2 text-muted-foreground\"\n      />\n      <input\n        ref={ref}\n        type=\"time\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"pl-10 text-[0.9063rem] tracking-[0.0188rem]\",\n          \"[&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-55\",\n          className,\n        )}\n        {...props}\n      />\n    </div>\n  ),\n)\nTimePicker.displayName = \"TimePicker\"\n\nexport { TimePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json"
+  ]
+}

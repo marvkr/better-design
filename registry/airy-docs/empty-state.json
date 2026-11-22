@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs EmptyState: the note a docs page shows when a search finds\n * nothing or a section has no entries. A small square tile holds the icon,\n * a short title says what is missing, and a muted line says what to do\n * next. Pass a Button as `action` for the way forward.\n */\nexport interface EmptyStateProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"title\"\n> {\n  /** An Iconify name, such as `feather:book-open`. */\n  icon?: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  (\n    {\n      className,\n      icon = \"feather:file-text\",\n      title,\n      description,\n      action,\n      ...props\n    },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-state\"\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-xl border border-border bg-card px-6 py-12 text-center text-card-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <span\n        data-slot=\"empty-state-icon\"\n        className=\"flex size-10 items-center justify-center rounded-lg border border-border bg-secondary text-muted-foreground\"\n      >\n        <Icon icon={icon} aria-hidden=\"true\" className=\"size-5\" />\n      </span>\n      <div className=\"flex max-w-sm flex-col gap-1.5\">\n        <div className=\"text-base font-semibold leading-snug text-foreground\">\n          {title}\n        </div>\n        {description && (\n          <div className=\"text-sm leading-6 text-muted-foreground\">\n            {description}\n          </div>\n        )}\n      </div>\n      {action && (\n        <div className=\"mt-1 flex flex-wrap justify-center gap-2\">{action}</div>\n      )}\n    </div>\n  ),\n);\nEmptyState.displayName = \"EmptyState\";\n\nexport { EmptyState };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ]
+}

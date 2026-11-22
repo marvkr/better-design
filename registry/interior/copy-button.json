@@ -1,0 +1,23 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, Copy } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior CopyButton — a quiet 7px icon button that keeps its width when\n * the glyph swaps: both states share one grid cell and trade opacity, so\n * nothing on the row shifts. The confirmation check is moss — success has\n * its own colour; accent stays reserved for interaction.\n */\n\nexport interface CopyButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n}\n\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  ({ className, value, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false);\n\n    const handleCopy = async () => {\n      await navigator.clipboard.writeText(value);\n      setCopied(true);\n      setTimeout(() => setCopied(false), 1800);\n    };\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        onClick={handleCopy}\n        aria-label={copied ? \"Copied\" : \"Copy\"}\n        className={cn(\n          \"inline-flex size-8 items-center justify-center rounded-[0.4375rem]\",\n          \"text-muted-foreground\",\n          \"transition-[background-color,box-shadow,color,transform] duration-fast\",\n          \"hover:bg-secondary hover:text-foreground\",\n          \"focus-visible:outline-none focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n          \"active:translate-y-px\",\n          className,\n        )}\n        {...props}\n      >\n        <span className=\"grid\">\n          <Check\n            className={cn(\n              \"col-start-1 row-start-1 size-3.5 text-success transition-opacity duration-fast\",\n              copied ? \"opacity-100\" : \"opacity-0\",\n            )}\n            strokeWidth={1.5}\n          />\n          <Copy\n            className={cn(\n              \"col-start-1 row-start-1 size-3.5 transition-opacity duration-fast\",\n              copied ? \"opacity-0\" : \"opacity-100\",\n            )}\n            strokeWidth={1.5}\n          />\n        </span>\n      </button>\n    );\n  },\n);\nCopyButton.displayName = \"CopyButton\";\n\nexport { CopyButton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5262 0.0942 151.04)"
+    },
+    "dark": {
+      "success": "oklch(0.5262 0.0942 151.04)"
+    }
+  }
+}

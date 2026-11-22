@@ -14,10 +14,7 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-progress",
-    "motion"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@radix-ui/react-progress@^1.1.7",
+    "motion@^12.25.0"
   ]
 }

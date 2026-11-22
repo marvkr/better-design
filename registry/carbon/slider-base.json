@@ -1,0 +1,25 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Slider = React.forwardRef<HTMLDivElement, SliderPrimitive.Root.Props>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max]\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track data-slot=\"slider-track\" className=\"relative h-2 w-full grow rounded-full backdrop-blur-xl bg-white/[0.08] shadow-[inset_0_0_0.25rem_oklch(1_0_0/0.06)]\">\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full rounded-full bg-primary shadow-[var(--shadow-pillow-primary)]\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\" key={index}\n              className={cn(\n                \"block h-5 w-5 rounded-full\",\n                \"bg-white shadow-[0_0_0.5rem_oklch(0_0_0/0.3),0_0_0.75rem_oklch(0.65_0.19_250/0.2)]\",\n                \"transition-[box-shadow] duration-base\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n                \"hover:shadow-[0_0_0.5rem_oklch(0_0_0/0.3),0_0_1rem_oklch(0.65_0.19_250/0.35)]\",\n                \"data-disabled:pointer-events-none data-disabled:opacity-50\"\n              )}\n            />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    )\n  }\n)\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pillow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.2), inset 0 0.25rem 1rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.5rem 1.25rem -0.25rem oklch(0 0 0 / 0.4)",
+      "shadow": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.5rem 1.25rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "shadow-pillow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.2), inset 0 0.25rem 1rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.5rem 1.25rem -0.25rem oklch(0 0 0 / 0.4)",
+      "shadow": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.5rem 1.25rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

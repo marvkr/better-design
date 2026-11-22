@@ -142,7 +142,7 @@ const Code = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
       className={cn(
         "block w-full rounded-xl border border-border bg-secondary px-5 py-4",
         "font-mono text-sm text-foreground/80 tracking-normal leading-relaxed",
-        "shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]",
+        "shadow-[inset_0_0.125rem_0.25rem_0_color-mix(in_oklch,var(--foreground)_8%,transparent)]",
         "overflow-x-auto",
         className
       )}

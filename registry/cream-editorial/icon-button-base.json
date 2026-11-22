@@ -1,0 +1,34 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { primaryFill } from \"./_shared\";\n\n/**\n * Cream editorial IconButton: one glyph in the same materials as the Button.\n *\n * The default is a quiet oat square with a 0.5rem corner; `circle` rounds it\n * fully. `primary` is the flat terracotta fill, kept for the one action a\n * screen offers. Ghost suits toolbars and rows. Hover only deepens the fill;\n * nothing lifts or scales.\n */\nconst iconButtonVariants = cva(\n  [\n    \"relative inline-flex shrink-0 select-none items-center justify-center\",\n    \"transition-[background-color,color,border-color] duration-fast ease-out\",\n    \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n    \"disabled:pointer-events-none disabled:bg-secondary disabled:text-(--foreground-disabled)\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-secondary-foreground hover:bg-muted\",\n        primary: primaryFill,\n        secondary: \"bg-secondary text-secondary-foreground hover:bg-muted\",\n        ghost:\n          \"bg-transparent text-(--foreground-secondary) hover:bg-secondary hover:text-foreground data-[disabled]:bg-transparent disabled:bg-transparent\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-(--destructive-text)\",\n        outline:\n          \"border border-(--line-strong) bg-transparent text-foreground hover:bg-secondary data-[disabled]:border-border\",\n      },\n      size: {\n        xs: \"size-7 [&_svg]:size-3.5\",\n        sm: \"size-8 [&_svg]:size-4\",\n        default: \"size-9 [&_svg]:size-4\",\n        lg: \"size-11 [&_svg]:size-5\",\n        xl: \"size-12 [&_svg]:size-6\",\n      },\n      corners: {\n        square: \"rounded-md\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      corners: \"square\",\n    },\n  },\n);\n\n/** Props for the IconButton. Give it an `aria-label`, since the glyph carries no text. */\nexport interface IconButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => (\n    <ButtonPrimitive\n      ref={ref}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, corners, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "foreground-secondary": "oklch(0.359 0.005 106.7)",
+      "foreground-disabled": "oklch(0.75 0.013 96.5)",
+      "destructive-text": "oklch(0.48 0.16 26)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "foreground-secondary": "oklch(0.853 0.014 97.5)",
+      "foreground-disabled": "oklch(0.478 0.006 95.2)",
+      "destructive-text": "oklch(0.78 0.13 26)"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Loader2 } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\n\n// neon ThinkingIndicator: animated status indicator with a neon spinner\n// and rotating word labels. The motion/react morphing SVG from the reference is\n// dropped (banned dep); the active thinking accent is the neon Loader2 spinner.\n//\n// Usage:\n//   <ThinkingIndicator />\n//   <ThinkingIndicator words={[\"Searching\", \"Reading\", \"Writing\"]} />\n\nconst DEFAULT_WORDS = [\"Thinking\", \"Planning\", \"Refining\", \"Generating\"]\n\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[]\n  intervalMs?: number\n}\n\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 4000,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0)\n\n  React.useEffect(() => {\n    const id = setInterval(() => {\n      setIndex((i) => (i + 1) % words.length)\n    }, intervalMs)\n    return () => clearInterval(id)\n  }, [words.length, intervalMs])\n\n  const widest = React.useMemo(\n    () => words.reduce((a, b) => (a.length >= b.length ? a : b), \"\"),\n    [words]\n  )\n\n  return (\n    <div\n      role=\"status\"\n      className={cn(\n        \"inline-flex items-center gap-2 px-3 py-2 text-muted-foreground\",\n        className\n      )}\n      {...props}\n    >\n      <Loader2 aria-hidden className=\"h-5 w-5 shrink-0 animate-spin text-primary\" />\n      <span className=\"inline-grid overflow-hidden text-[0.8125rem] font-medium\">\n        <span aria-hidden className=\"invisible col-start-1 row-start-1\">\n          {widest}\n        </span>\n        <span\n          key={words[index]}\n          className=\"col-start-1 row-start-1 text-foreground\"\n        >\n          {words[index]}\n        </span>\n      </span>\n    </div>\n  )\n}\n\nexport { ThinkingIndicator }\nexport type { ThinkingIndicatorProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ]
+}

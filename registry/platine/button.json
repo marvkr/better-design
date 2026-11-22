@@ -1,0 +1,36 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Platine Button — brushed-metal controls on near-black.\n *   - default: a raised neutral bezel frame (the snippet's outer ring).\n *   - primary: the brushed-silver pill (the snippet's active slider material):\n *     a vertical metal gradient under the exact inset-highlight + 1px-rim +\n *     outer-drop shadow stack from --shadow-primary, with dark text.\n * Every variant is a full pill; pressing flattens the lift.\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-full cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform,filter] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-s)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // default IS the signature: the brushed-silver pill (the snippet's\n        // active slider material). The showcase + templates render the hero\n        // CTA with no variant prop, so the metal lives here.\n        default:\n          \"text-primary-foreground [background-image:var(--metal)] \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:[background-image:var(--metal-hover)] hover:brightness-[1.03]\",\n        primary:\n          \"text-primary-foreground [background-image:var(--metal)] \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:[background-image:var(--metal-hover)] hover:brightness-[1.03]\",\n        // secondary is the raised neutral bezel frame (the snippet's outer ring).\n        secondary:\n          \"text-secondary-foreground [background-image:var(--bezel)] \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-110 hover:[box-shadow:var(--shadow-button-hover)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/40\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3.5 text-xs\",\n        default: \"h-9 px-5\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
+      "metal-hover": "linear-gradient( to bottom, oklch(0.95 0 0), oklch(0.855 0 0) 50%, oklch(0.74 0 0) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.37 0 0), oklch(0.27 0 0))",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.4)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.5rem oklch(0 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.25rem oklch(0 0 0 / 0.55), 0 0.125rem 0.375rem oklch(0 0 0 / 0.45)",
+      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)"
+    },
+    "dark": {
+      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
+      "metal-hover": "linear-gradient( to bottom, oklch(0.95 0 0), oklch(0.855 0 0) 50%, oklch(0.74 0 0) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.37 0 0), oklch(0.27 0 0))",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.4)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.5rem oklch(0 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.25rem oklch(0 0 0 / 0.55), 0 0.125rem 0.375rem oklch(0 0 0 / 0.45)",
+      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)"
+    }
+  }
+}

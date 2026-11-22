@@ -1,0 +1,39 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Alert — a tinted note card. Bordered on all four sides, never a\n * single accent stripe, so it reads as a panel rather than a margin mark.\n */\n\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-xl px-4 py-3.5\",\n    \"[&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:size-4\",\n    \"[&>svg~*]:pl-7\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-card text-card-foreground [box-shadow:var(--shadow-window)]\",\n        info: \"bg-[var(--pop-blue)] text-[var(--pop-blue-foreground)]\",\n        success: \"bg-[var(--pop-green)] text-[var(--pop-green-foreground)]\",\n        warning: \"bg-[var(--pop-yellow)] text-[var(--pop-yellow-foreground)]\",\n        destructive:\n          \"bg-destructive/10 text-destructive [box-shadow:inset_0_0_0_0.0625rem_var(--destructive)]\",\n      },\n    },\n    defaultVariants: { variant: \"default\" },\n  },\n);\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 text-sm font-semibold leading-none\", className)}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"text-sm leading-relaxed opacity-90\", className)}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "pop-blue": "oklch(0.9452 0.0243 253.5)",
+      "pop-blue-foreground": "oklch(0.5024 0.1834 258)",
+      "pop-green": "oklch(0.945 0.0451 163.2)",
+      "pop-green-foreground": "oklch(0.4623 0.1114 158)",
+      "pop-yellow": "oklch(0.9612 0.0602 95.1)",
+      "pop-yellow-foreground": "oklch(0.5223 0.1053 78.4)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "pop-blue": "oklch(0.9452 0.0243 253.5)",
+      "pop-blue-foreground": "oklch(0.5024 0.1834 258)",
+      "pop-green": "oklch(0.945 0.0451 163.2)",
+      "pop-green-foreground": "oklch(0.4623 0.1114 158)",
+      "pop-yellow": "oklch(0.9612 0.0602 95.1)",
+      "pop-yellow-foreground": "oklch(0.5223 0.1053 78.4)"
+    }
+  }
+}

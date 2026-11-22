@@ -36,7 +36,7 @@ function CodeBlock({
       className={cn(
         "relative rounded-xl overflow-hidden",
         "backdrop-blur-xl bg-white/[0.03] border border-white/[0.08]",
-        "shadow-[inset_0_0_8px_rgba(255,255,255,0.07)]",
+        "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.07)]",
         className
       )}
       {...props}
@@ -72,9 +72,9 @@ function CodeBlock({
             "absolute right-2 top-2",
             "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1",
             "backdrop-blur-md bg-white/[0.07] border border-white/[0.08]",
-            "text-xs text-white/50 transition-all duration-300",
+            "text-xs text-white/50 transition-all duration-slow",
             "hover:bg-white/[0.12] hover:text-white/80",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(255,255,255)]/40"
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(1_0_0)]/40"
           )}
         >
           <Icon

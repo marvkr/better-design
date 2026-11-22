@@ -1,0 +1,17 @@
+{
+  "name": "number-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Minus, Plus } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number;\n  step?: number;\n  min?: number;\n  max?: number;\n  onValueChange?: (value: number) => void;\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  (\n    { className, value, step = 1, min, max, onValueChange, ...props },\n    ref,\n  ) => {\n    const [internal, setInternal] = React.useState(value ?? 0);\n    const current = value ?? internal;\n\n    const clamp = (next: number) => {\n      if (min !== undefined && next < min) return min;\n      if (max !== undefined && next > max) return max;\n      return next;\n    };\n\n    const commit = (next: number) => {\n      const clamped = clamp(next);\n      setInternal(clamped);\n      onValueChange?.(clamped);\n    };\n\n    const stepper =\n      \"inline-flex size-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.05] hover:text-foreground focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35 disabled:opacity-40\";\n\n    return (\n      <div className=\"relative\">\n        <input\n          ref={ref}\n          type=\"number\"\n          value={current}\n          onChange={(event) => commit(Number(event.target.value))}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"px-11 text-center\",\n            \"[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\",\n            className,\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          aria-label=\"Decrease\"\n          onClick={() => commit(current - step)}\n          disabled={min !== undefined && current <= min}\n          className={cn(stepper, \"absolute left-1.5 top-1/2 -translate-y-1/2\")}\n        >\n          <Minus className=\"size-3.5\" />\n        </button>\n        <button\n          type=\"button\"\n          aria-label=\"Increase\"\n          onClick={() => commit(current + step)}\n          disabled={max !== undefined && current >= max}\n          className={cn(stepper, \"absolute right-1.5 top-1/2 -translate-y-1/2\")}\n        >\n          <Plus className=\"size-3.5\" />\n        </button>\n      </div>\n    );\n  },\n);\nNumberInput.displayName = \"NumberInput\";\n\nexport { NumberInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ]
+}

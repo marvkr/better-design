@@ -1,0 +1,45 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\nimport { Icon } from \"@iconify/react\";\n\nconst focusRing =\n  \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\";\n\n/**\n * Firefly Toaster for sonner: raised white toasts with Carbon status icons.\n *\n * Sonner's own look is switched off and every part is styled here, so the\n * toast is the same floating panel as a menu: white, a 1rem corner, the\n * soft far shadow and no border. Only the status icon takes a colour. The\n * action is a near-black pill and cancel is a warm one, so neither competes\n * with the screen's one lit button.\n */\nconst Toaster = ({ ...props }: ToasterProps) => (\n  <SonnerPrimitive\n    icons={{\n      success: <Icon icon=\"carbon:checkmark-filled\" aria-hidden=\"true\" />,\n      info: <Icon icon=\"carbon:information\" aria-hidden=\"true\" />,\n      warning: <Icon icon=\"carbon:warning-alt\" aria-hidden=\"true\" />,\n      error: <Icon icon=\"carbon:error\" aria-hidden=\"true\" />,\n      loading: (\n        <Icon icon=\"carbon:circle-dash\" className=\"animate-spin\" aria-hidden=\"true\" />\n      ),\n      close: <Icon icon=\"carbon:close\" aria-hidden=\"true\" />,\n    }}\n    toastOptions={{\n      unstyled: true,\n      classNames: {\n        toast:\n          \"flex w-(--width) items-start gap-3 rounded-xl bg-popover p-4 text-sm text-popover-foreground shadow-(--shadow-menu)\",\n        content: \"flex min-w-0 flex-1 flex-col gap-0.5\",\n        title: \"font-semibold leading-snug\",\n        description: \"text-(--foreground-secondary)\",\n        icon: \"mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-4\",\n        actionButton: `inline-flex h-8 shrink-0 items-center rounded-full bg-(--ink) px-3 text-sm font-medium text-(--ink-foreground) transition-colors duration-fast ease-out hover:bg-(--ink-hover) ${focusRing}`,\n        cancelButton: `inline-flex h-8 shrink-0 items-center rounded-full bg-secondary px-3 text-sm font-medium text-secondary-foreground transition-colors duration-fast ease-out hover:bg-(--surface-3) ${focusRing}`,\n        closeButton: `absolute -end-2 -top-2 inline-flex size-6 items-center justify-center rounded-full bg-popover text-muted-foreground shadow-(--shadow-card) transition-colors duration-fast ease-out hover:text-foreground [&_svg]:size-3.5 ${focusRing}`,\n        success: \"[&_[data-icon]]:text-(--success-text)\",\n        error: \"[&_[data-icon]]:text-(--destructive-text)\",\n        warning: \"[&_[data-icon]]:text-(--warning-text)\",\n        info: \"[&_[data-icon]]:text-(--accent-line)\",\n      },\n    }}\n    {...props}\n  />\n);\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "ink": "oklch(0.168 0.004 106.8)",
+      "ink-hover": "oklch(0.284 0.007 106.8)",
+      "ink-foreground": "oklch(1 0 0)",
+      "accent-line": "oklch(0.594 0.135 115.4)",
+      "success-text": "oklch(0.481 0.118 151.5)",
+      "warning-text": "oklch(0.492 0.11 66)",
+      "destructive-text": "oklch(0.501 0.181 26.8)",
+      "shadow-card": "var(--shadow-sm)",
+      "shadow-menu": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "ink": "oklch(0.964 0.007 97.4)",
+      "ink-hover": "oklch(0.903 0.011 95.2)",
+      "ink-foreground": "oklch(0.168 0.004 106.8)",
+      "accent-line": "oklch(0.841 0.161 114)",
+      "success-text": "oklch(0.839 0.154 153.8)",
+      "warning-text": "oklch(0.862 0.139 81.9)",
+      "destructive-text": "oklch(0.761 0.142 20.9)",
+      "shadow-card": "var(--shadow-sm)",
+      "shadow-menu": "var(--shadow-md)"
+    }
+  }
+}

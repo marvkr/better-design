@@ -1,0 +1,24 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* CodeBlock — a recessed code well with a raised copy key in the corner. */\n\ninterface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string\n  language?: string\n  showLineNumbers?: boolean\n  filename?: string\n}\n\nfunction CodeBlock({\n  code,\n  language,\n  showLineNumbers = false,\n  filename,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  const lines = code.split(\"\\n\")\n\n  return (\n    <div\n      className={cn(\n        \"relative overflow-hidden rounded-lg border border-border bg-input\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      {filename && (\n        <div className=\"flex items-center justify-between border-b border-border px-4 py-2 [background-image:var(--bezel)]\">\n          <span className=\"text-xs font-medium text-muted-foreground\">{filename}</span>\n          {language && (\n            <span className=\"text-xs text-muted-foreground\">{language}</span>\n          )}\n        </div>\n      )}\n      <div className=\"relative\">\n        <pre className=\"overflow-x-auto p-4 font-mono text-xs leading-relaxed text-foreground\">\n          <code>\n            {showLineNumbers\n              ? lines.map((line, i) => (\n                  <span key={i} className=\"flex\">\n                    <span className=\"mr-4 w-6 shrink-0 select-none text-right text-muted-foreground/50\">\n                      {i + 1}\n                    </span>\n                    <span>{line}</span>\n                  </span>\n                ))\n              : code}\n          </code>\n        </pre>\n        <button\n          onClick={handleCopy}\n          className={cn(\n            \"absolute right-2 top-2 rounded-sm border border-border px-2 py-1 text-xs text-muted-foreground\",\n            \"[background-image:var(--bezel)] [box-shadow:var(--shadow-raised)]\",\n            \"transition-colors hover:text-foreground\"\n          )}\n        >\n          {copied ? \"Copied!\" : \"Copy\"}\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeBlock }\nexport type { CodeBlockProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

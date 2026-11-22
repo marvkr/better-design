@@ -1,0 +1,25 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\n/*\n * Ops Sharp Sonner — crisp white toasts. White popover surface, hairline border,\n * sharp 8px corner, and the DS popover shadow. Success/error states tint with\n * the DS success + destructive tokens, never raw color utilities.\n */\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:rounded-lg group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:[box-shadow:var(--shadow-popover)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-md\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground group-[.toast]:rounded-md\",\n          error:\n            \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success:\n            \"group-[.toaster]:text-success group-[.toaster]:border-success/30\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.6271 0.1699 149.21)",
+      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "success": "oklch(0.6271 0.1699 149.21)",
+      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

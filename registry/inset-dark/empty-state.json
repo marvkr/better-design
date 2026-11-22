@@ -9,9 +9,15 @@
     }
   ],
   "dependencies": [
-    "@iconify/react"
+    "@iconify/react@^6.0.2"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)"
+    }
+  }
 }

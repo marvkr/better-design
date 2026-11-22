@@ -1,0 +1,26 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { OTPInput, OTPInputContext } from \"input-otp\";\nimport { Minus } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk InputOTP — one recessed well per digit. The active slot lights its\n * rim in sky blue and raises a caret.\n */\n\nconst InputOTP = React.forwardRef<\n  React.ElementRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    containerClassName={cn(\n      \"flex items-center gap-2 has-[:disabled]:opacity-50\",\n      containerClassName,\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n));\nInputOTP.displayName = \"InputOTP\";\n\nconst InputOTPGroup = React.forwardRef<\n  HTMLDivElement,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"flex items-center gap-2\", className)} {...props} />\n));\nInputOTPGroup.displayName = \"InputOTPGroup\";\n\nconst InputOTPSlot = React.forwardRef<\n  HTMLDivElement,\n  React.ComponentPropsWithoutRef<\"div\"> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext);\n  const slot = inputOTPContext.slots[index];\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\n        \"relative flex size-11 items-center justify-center rounded-lg\",\n        \"border border-border bg-input text-base font-medium text-foreground\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        \"transition-[box-shadow,border-color] duration-fast ease-out\",\n        slot?.isActive && \"z-10 border-ring ring-[0.1875rem] ring-ring/25\",\n        className,\n      )}\n      {...props}\n    >\n      {slot?.char}\n      {slot?.hasFakeCaret ? (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-5 w-px animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      ) : null}\n    </div>\n  );\n});\nInputOTPSlot.displayName = \"InputOTPSlot\";\n\nconst InputOTPSeparator = React.forwardRef<\n  HTMLDivElement,\n  React.ComponentPropsWithoutRef<\"div\">\n>((props, ref) => (\n  <div ref={ref} role=\"separator\" {...props}>\n    <Minus className=\"size-4 text-muted-foreground\" />\n  </div>\n));\nInputOTPSeparator.displayName = \"InputOTPSeparator\";\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

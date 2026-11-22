@@ -1,0 +1,26 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Atelier Tabs — the reference toolbar's segmented pill control (USD, 6 Months).\n *\n * A recessed warm-gray track holds the triggers; the active one is marked by a\n * white pill floating a hair above the track (hairline border, one soft\n * shadow), slid into place by a gentle framer-motion spring. Because the tab\n * set is dynamic, the pill's left/width are measured from the active trigger\n * (re-measured on data-state change + resize).\n */\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\n>(({ className, children, ...props }, ref) => {\n  const listRef = React.useRef<HTMLDivElement | null>(null)\n  const [pill, setPill] = React.useState({ left: 0, width: 0, ready: false })\n\n  // SAFETY: the handle is read only after mount, when the element this\n  // component renders is attached, so the ref is non-null.\n  React.useImperativeHandle(ref, () => listRef.current as HTMLDivElement)\n\n  const sync = React.useCallback(() => {\n    const list = listRef.current\n    const active = list?.querySelector<HTMLElement>('[data-state=\"active\"]')\n    if (!list || !active) return\n    const lr = list.getBoundingClientRect()\n    const ar = active.getBoundingClientRect()\n    // A scaled preview (transform: scale) shrinks the rects; undo it so the pill fits the tab.\n    const s = lr.width / list.offsetWidth || 1\n    setPill({ left: (ar.left - lr.left) / s, width: ar.width / s, ready: true })\n  }, [])\n\n  React.useEffect(() => {\n    sync()\n    const list = listRef.current\n    if (!list) return\n    const mo = new MutationObserver(sync)\n    mo.observe(list, {\n      attributes: true,\n      subtree: true,\n      attributeFilter: [\"data-state\"],\n    })\n    const ro = new ResizeObserver(sync)\n    ro.observe(list)\n    return () => {\n      mo.disconnect()\n      ro.disconnect()\n    }\n  }, [sync])\n\n  return (\n    <TabsPrimitive.List\n      ref={listRef}\n      className={cn(\n        \"relative inline-flex h-10 items-center rounded-full p-1\",\n        \"bg-secondary border border-border [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      {/* Active pill: a white card surface sliding along the recessed track */}\n      <motion.span\n        aria-hidden\n        className=\"pointer-events-none absolute top-1 bottom-1 left-0 rounded-full bg-card border border-border [box-shadow:var(--shadow-s)]\"\n        style={{ opacity: pill.ready ? 1 : 0 }}\n        initial={false}\n        animate={{ left: pill.left, width: pill.width }}\n        transition={{ type: \"spring\", stiffness: 300, damping: 30 }}\n      />\n      {/* Tab buttons */}\n      <div className=\"relative z-10 flex items-center\">{children}</div>\n    </TabsPrimitive.List>\n  )\n})\nTabsList.displayName = TabsPrimitive.List.displayName\n\nconst TabsTrigger = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Trigger\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium leading-tight\",\n      \"cursor-pointer transition-colors duration-fast\",\n      \"text-muted-foreground hover:text-foreground\",\n      \"data-[state=active]:text-foreground\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName\n\nconst TabsContent = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Content\n    ref={ref}\n    className={cn(\n      \"mt-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsContent.displayName = TabsPrimitive.Content.displayName\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12",
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.05)"
+    },
+    "dark": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.05)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Margin Breadcrumb: a small grey trail. Links darken to the foreground on\n * hover, the current page sits in the foreground at medium weight, and the\n * separators are faint chevrons.\n */\nconst Breadcrumb = React.forwardRef<\n  HTMLElement,\n  React.ComponentPropsWithoutRef<\"nav\"> & { separator?: React.ReactNode }\n>(({ separator: _separator, ...props }, ref) => (\n  <nav ref={ref} aria-label=\"breadcrumb\" data-slot=\"breadcrumb\" {...props} />\n));\nBreadcrumb.displayName = \"Breadcrumb\";\n\n/** The ordered list that holds the trail. */\nconst BreadcrumbList = React.forwardRef<HTMLOListElement, React.ComponentPropsWithoutRef<\"ol\">>(\n  ({ className, ...props }, ref) => (\n    <ol\n      ref={ref}\n      data-slot=\"breadcrumb-list\"\n      className={cn(\n        \"flex flex-wrap items-center gap-1 break-words text-sm text-muted-foreground sm:gap-1.5\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nBreadcrumbList.displayName = \"BreadcrumbList\";\n\n/** One step in the trail. */\nconst BreadcrumbItem = React.forwardRef<HTMLLIElement, React.ComponentPropsWithoutRef<\"li\">>(\n  ({ className, ...props }, ref) => (\n    <li\n      ref={ref}\n      data-slot=\"breadcrumb-item\"\n      className={cn(\"inline-flex items-center gap-1\", className)}\n      {...props}\n    />\n  ),\n);\nBreadcrumbItem.displayName = \"BreadcrumbItem\";\n\n/** A link to an earlier page, or your own link through `asChild`. */\nconst BreadcrumbLink = React.forwardRef<\n  HTMLAnchorElement,\n  React.ComponentPropsWithoutRef<\"a\"> & { asChild?: boolean }\n>(({ asChild, className, ...props }, ref) => {\n  const Comp = asChild ? Slot : \"a\";\n  return (\n    <Comp\n      ref={ref}\n      data-slot=\"breadcrumb-link\"\n      className={cn(\n        \"rounded-sm transition-colors duration-fast ease-(--ease-out) hover:text-foreground\",\n        focusRing,\n        className,\n      )}\n      {...props}\n    />\n  );\n});\nBreadcrumbLink.displayName = \"BreadcrumbLink\";\n\n/** The page the person is on, marked as current. */\nconst BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<\"span\">>(\n  ({ className, ...props }, ref) => (\n    <span\n      ref={ref}\n      role=\"link\"\n      aria-disabled=\"true\"\n      aria-current=\"page\"\n      data-slot=\"breadcrumb-page\"\n      className={cn(\"font-medium text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nBreadcrumbPage.displayName = \"BreadcrumbPage\";\n\n/** The faint chevron between two steps. */\nconst BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps<\"li\">) => (\n  <li\n    role=\"presentation\"\n    aria-hidden=\"true\"\n    data-slot=\"breadcrumb-separator\"\n    className={cn(\"text-muted-foreground/60 [&>svg]:size-3.5\", className)}\n    {...props}\n  >\n    {children ?? <Icon icon=\"solar:alt-arrow-right-linear\" className=\"size-3.5\" />}\n  </li>\n);\nBreadcrumbSeparator.displayName = \"BreadcrumbSeparator\";\n\n/** Three dots that stand in for steps left out of a long trail. */\nconst BreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps<\"span\">) => (\n  <span\n    role=\"presentation\"\n    aria-hidden=\"true\"\n    data-slot=\"breadcrumb-ellipsis\"\n    className={cn(\"flex size-7 items-center justify-center\", className)}\n    {...props}\n  >\n    <Icon icon=\"solar:menu-dots-linear\" className=\"size-4\" />\n    <span className=\"sr-only\">More</span>\n  </span>\n);\nBreadcrumbEllipsis.displayName = \"BreadcrumbEllipsis\";\n\nexport {\n  Breadcrumb,\n  BreadcrumbList,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n  BreadcrumbEllipsis,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

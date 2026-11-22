@@ -1,0 +1,29 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/* Playdesk Toggle: flat when off, pressed into the desk when on. */\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-full\",\n    \"text-sm font-medium text-muted-foreground cursor-pointer select-none\",\n    \"transition-[box-shadow,background-color,color] duration-fast ease-out\",\n    \"hover:bg-foreground/[0.05] hover:text-foreground\",\n    \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n    \"data-disabled:pointer-events-none data-disabled:opacity-50\",\n    \"data-pressed:bg-secondary data-pressed:text-foreground data-pressed:[box-shadow:var(--shadow-track-inset)]\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-border bg-card\",\n      },\n      size: {\n        default: \"h-9 px-3\",\n        sm: \"h-8 px-2.5 text-xs\",\n        lg: \"h-11 px-5\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"default\" },\n  }\n)\n\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TogglePrimitive.Props> & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

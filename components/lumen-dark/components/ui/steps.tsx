@@ -49,7 +49,7 @@ const Steps = React.forwardRef<HTMLDivElement, StepsProps>(
                 <div
                   className={cn(
                     "flex h-8 w-8 items-center justify-center rounded-full border-2 shrink-0",
-                    "transition-[background-color,border-color,box-shadow] duration-200",
+                    "transition-[background-color,border-color,box-shadow] duration-base",
                     isCompleted &&
                       "bg-primary border-primary text-primary-foreground [box-shadow:var(--shadow-s)]",
                     isCurrent &&

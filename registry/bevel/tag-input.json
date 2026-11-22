@@ -1,0 +1,33 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n/*\n * Bevel TagInput.\n *\n * The shared field well, grown to wrap its tags instead of scrolling them.\n * Each tag is the system's inner surface at the 8px step with its own remove\n * target. Enter and comma commit a tag, backspace on an empty box takes the\n * last one back.\n */\n\n/** Props for `TagInput`, a field whose value is a list of tags. */\nexport interface TagInputProps {\n  value: string[]\n  onValueChange: (tags: string[]) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n  /** Stops accepting new tags once the list reaches this length. */\n  maxTags?: number\n}\n\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  (\n    {\n      value,\n      onValueChange,\n      placeholder = \"Add tag...\",\n      className,\n      disabled,\n      maxTags,\n    },\n    ref,\n  ) => {\n    const [input, setInput] = React.useState(\"\")\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim()\n      if (!trimmed || value.includes(trimmed)) return\n      if (maxTags && value.length >= maxTags) return\n      onValueChange([...value, trimmed])\n      setInput(\"\")\n    }\n\n    const removeTag = (tag: string) => {\n      onValueChange(value.filter((t) => t !== tag))\n    }\n\n    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n      if (e.key === \"Enter\" || e.key === \",\") {\n        e.preventDefault()\n        addTag(input)\n      } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n        removeTag(value[value.length - 1])\n      }\n    }\n\n    return (\n      <div\n        className={cn(\n          formFieldBase,\n          \"flex h-auto min-h-10 flex-wrap items-center gap-1.5 px-2 py-1.5\",\n          \"focus-within:[box-shadow:var(--shadow-inset),0_0_0_0.125rem_var(--ring)]\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className,\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            className={cn(\n              \"inline-flex items-center gap-1 rounded-[0.5rem] py-0.5 pr-1 pl-2\",\n              \"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem]\",\n              \"bg-[var(--inner)] text-[var(--strong)] [box-shadow:var(--shadow-ring)]\",\n            )}\n          >\n            {tag}\n            <button\n              type=\"button\"\n              onClick={() => removeTag(tag)}\n              className={cn(\n                \"flex size-4 items-center justify-center rounded-full\",\n                \"text-muted-foreground transition-colors duration-fast ease-out\",\n                \"hover:bg-muted hover:text-foreground\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n              )}\n              aria-label={`Remove ${tag}`}\n              disabled={disabled}\n            >\n              <Icon icon=\"solar:close-circle-linear\" className=\"size-3.5\" />\n            </button>\n          </span>\n        ))}\n        <input\n          ref={ref}\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyDown={onKeyDown}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          disabled={disabled}\n          className={cn(\n            \"min-w-[5rem] flex-1 bg-transparent px-1.5 outline-none\",\n            \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-foreground\",\n            \"placeholder:text-muted-foreground\",\n          )}\n        />\n      </div>\n    )\n  },\n)\nTagInput.displayName = \"TagInput\"\n\nexport { TagInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.07)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

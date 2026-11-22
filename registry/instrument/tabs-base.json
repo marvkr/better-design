@@ -1,0 +1,29 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark Tabs: a mode-selector bank. The list is a recessed well strip;\n// the active tab is a raised charcoal plate (the secondary Button's material)\n// sitting proud of the well, with its caption lit.\n\nconst Tabs = TabsPrimitive.Root;\n\nconst TabsList = React.forwardRef<HTMLDivElement, TabsPrimitive.List.Props>(\n  ({ className, ...props }, ref) => (\n    <TabsPrimitive.List\n      ref={ref}\n      className={cn(\n        \"inline-flex h-10 items-center justify-center gap-1 rounded-lg border border-[var(--gauge-well-border)] bg-input p-1 text-muted-foreground shadow-[var(--shadow-well)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nTabsList.displayName = \"TabsList\";\n\nconst TabsTrigger = React.forwardRef<HTMLButtonElement, TabsPrimitive.Tab.Props>(\n  ({ className, ...props }, ref) => (\n    <TabsPrimitive.Tab\n      ref={ref}\n      className={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium\",\n        \"transition-all duration-fast ease-out\",\n        \"hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n        \"data-active:border data-active:border-border\",\n        \"data-active:bg-secondary data-active:text-foreground\",\n        \"data-active:shadow-[var(--shadow-raised)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nTabsTrigger.displayName = \"TabsTrigger\";\n\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  TabsPrimitive.Panel.Props\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    className={cn(\n      \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      className\n    )}\n    {...props}\n  />\n));\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

@@ -45,13 +45,13 @@ const NavigationMenuItem = NavigationMenuPrimitive.Item
 const navigationMenuTriggerStyle = cva(
   [
     "group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-medium",
-    "transition-all duration-300",
+    "transition-all duration-slow",
     "bg-transparent text-muted-foreground",
     "hover:bg-white/[0.05] hover:text-foreground",
     "focus:bg-white/[0.05] focus:text-foreground focus:outline-none",
     "disabled:pointer-events-none disabled:opacity-50",
     "data-[active]:bg-white/[0.07] data-[state=open]:bg-white/[0.07]",
-    "data-[active]:shadow-[inset_0_0_8px_rgba(255,255,255,0.09)]",
+    "data-[active]:shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.09)]",
   ].join(" ")
 )
 
@@ -67,7 +67,7 @@ const NavigationMenuTrigger = React.forwardRef<
     {children}{" "}
     <Icon
       icon="tabler:chevron-down"
-      className="relative top-[1px] ml-1 h-3 w-3 transition duration-300 group-data-[state=open]:rotate-180"
+      className="relative top-[0.0625rem] ml-1 h-3 w-3 transition duration-slow group-data-[state=open]:rotate-180"
       aria-hidden="true"
     />
   </NavigationMenuPrimitive.Trigger>
@@ -98,10 +98,10 @@ const NavigationMenuViewport = React.forwardRef<
   <div className={cn("absolute left-0 top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
-        "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden",
+        "origin-top relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden",
         "rounded-xl border border-white/[0.08]",
         "backdrop-blur-2xl bg-white/[0.07]",
-        "shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,255,255,0.05)]",
+        "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.5rem_oklch(1_0_0/0.05)]",
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
         className
       )}

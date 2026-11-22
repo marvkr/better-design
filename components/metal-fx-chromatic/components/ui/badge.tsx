@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
   "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium " +
-    "ring-1 ring-inset transition-colors duration-150",
+    "ring-1 ring-inset transition-colors duration-fast",
   {
     variants: {
       variant: {
@@ -20,9 +20,9 @@ const badgeVariants = cva(
           "[background-image:var(--gradient-chromatic)] [background-size:200%_200%] [background-position:0%_50%]",
         secondary: "bg-muted text-muted-foreground ring-border",
         outline: "bg-transparent text-foreground ring-border",
-        success: "bg-[oklch(0.5_0.15_145)]/15 text-[oklch(0.78_0.15_145)] ring-[oklch(0.5_0.15_145)]/30",
-        warning: "bg-[oklch(0.55_0.18_55)]/15 text-[oklch(0.82_0.14_80)] ring-[oklch(0.55_0.18_55)]/30",
-        destructive: "bg-destructive/15 text-destructive ring-destructive/30",
+        success: "bg-[oklch(0.5_0.15_145)]/15 ring-[oklch(0.5_0.15_145)]/30 text-[color:oklch(0.875_0.15_145)]",
+        warning: "bg-[oklch(0.55_0.18_55)]/15 ring-[oklch(0.55_0.18_55)]/30 text-[color:oklch(0.875_0.119_80)]",
+        destructive: "bg-destructive/15 ring-destructive/30 text-[color:oklch(0.875_0.066_25)]",
       },
     },
     defaultVariants: {

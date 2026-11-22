@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Electric Fintech Badge: rounded-full pills, text-xs.\n// Status colors (success / warning) are explicit oklch greens/ambers tuned to read\n// on the near-black ground; brand variants use the DS semantic tokens.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-foreground border border-border\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"bg-primary/10 text-[color:oklch(0.875_0.191_110)]\",\n        destructive: \"text-destructive-foreground bg-[color:oklch(0.58_0.21_24)]\",\n        \"destructive-light\": \"bg-destructive/19 text-[color:oklch(0.875_0.066_24)]\",\n        success:\n          \"[background:oklch(0.7_0.16_150)] [color:oklch(0.18_0.02_150)]\",\n        \"success-light\":\n          \"[background:oklch(0.7_0.16_150/0.14)] [color:oklch(0.78_0.15_150)]\",\n        warning:\n          \"[background:oklch(0.78_0.16_75)] [color:oklch(0.2_0.03_75)]\",\n        \"warning-light\":\n          \"[background:oklch(0.78_0.16_75/0.14)] [color:oklch(0.82_0.14_80)]\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        // Electric Fintech: sm=h-4 (16px), md=h-5 (20px), lg=h-6 (24px)\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

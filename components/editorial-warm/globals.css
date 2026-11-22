@@ -1,0 +1,257 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Editorial Warm — warm cream canvas with frosted glass surfaces.
+     Surfaces are translucent white with backdrop-blur, ringed by a 0.0938rem
+     directional inner highlight (bright top/left, dim bottom/right) and a
+     soft outer shadow over warm off-white canvas.
+     Typography: Fraunces serif for headings, Inter for body, JetBrains Mono
+     for labels and data. Deep terracotta as the single restrained accent. */
+
+  /* Warm cream canvas (~ #f9f5f0) */
+  --background: oklch(0.96 0.014 80);
+  --foreground: oklch(0.27 0.012 55);
+
+  /* Card / popover : warm cream tile at ~92% opacity. Reads as a soft solid
+     surface with a barely-there shadow, not a heavy glass pane. */
+  --card: oklch(0.985 0.008 80 / 0.92);
+  --card-foreground: oklch(0.27 0.012 55);
+
+  --popover: oklch(0.985 0.008 80 / 0.96);
+  --popover-foreground: oklch(0.27 0.012 55);
+
+  /* Primary — deep terracotta. Considered, never loud. */
+  --primary: oklch(0.50 0.115 38);
+  --primary-foreground: oklch(0.985 0.006 80);
+
+  /* Secondary — glass white surface */
+  --secondary: oklch(1 0 0 / 0.65);
+  --secondary-foreground: oklch(0.30 0.012 55);
+
+  --muted: oklch(1 0 0 / 0.45);
+  --muted-foreground: oklch(0.50 0.012 55);
+
+  /* Accent — pale rose, tinted from terracotta */
+  --accent: oklch(0.94 0.022 38);
+  --accent-foreground: oklch(0.45 0.115 38);
+
+  /* Destructive — saturated red for irreversible actions */
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.985 0.006 80);
+
+  /* Hairline using ink alpha — sits on cream cleanly */
+  --border: oklch(0 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.55);
+  --ring: oklch(0.50 0.115 38);
+  --radius: 1.5rem;                            /* 1.5rem — GlassCard */
+
+  /* Glass surface tiers — every translucent fill references one of these
+     tokens rather than hardcoding rgba/oklch. All tiers stay translucent so
+     backdrop-filter has something to refract through. */
+  --glass-strong: oklch(1 0 0 / 0.65);   /* primary CTA — emphasis glass */
+  --glass:        oklch(1 0 0 / 0.40);   /* secondary surfaces, inputs */
+  --glass-soft:   oklch(1 0 0 / 0.25);   /* muted / lightest tier */
+  --glass-hover-strong: oklch(1 0 0 / 0.80);
+  --glass-hover:        oklch(1 0 0 / 0.55);
+  --glass-hover-soft:   oklch(1 0 0 / 0.40);
+  --glass-blur: blur(1.75rem) saturate(160%);
+
+  /* Glass tokens — soft tile with a faint top inset highlight + tiny outer
+     halo. 0.0938rem white top border ~60% alpha, bottom ~20% alpha. */
+  --shadow-glass-inner:
+    inset 0 0.0938rem 0 oklch(1 0 0 / 0.55),
+    inset 0 -0.0938rem 0 oklch(1 0 0 / 0.18);
+  --shadow-glass-outer:
+    0 0.0625rem 0.1875rem oklch(0 0 0 / 0.04),
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.06);
+  --shadow-glass:
+    inset 0 0.0938rem 0 oklch(1 0 0 / 0.55),
+    inset 0 -0.0938rem 0 oklch(1 0 0 / 0.18),
+    0 0.0625rem 0.1875rem oklch(0 0 0 / 0.04),
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.06);
+  --shadow-glass-hover:
+    inset 0 0.0938rem 0 oklch(1 0 0 / 0.65),
+    inset 0 -0.0938rem 0 oklch(1 0 0 / 0.20),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.05),
+    0 0.25rem 0.625rem oklch(0 0 0 / 0.08);
+
+  /* Standard surface shadows — kept paper-soft, never heavy */
+  --shadow-2xs: 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.03);
+  --shadow-xs:  0 0.0625rem 0.125rem oklch(0 0 0 / 0.04);
+  --shadow-sm:  0 0.0625rem 0.125rem oklch(0 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04);
+  --shadow:     0 0.0625rem 0.1875rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.04);
+  --shadow-md:  0 0.125rem 0.375rem oklch(0 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05), 0 0 0 0.0625rem oklch(0 0 0 / 0.04);
+  --shadow-lg:  0 0.375rem 0.875rem oklch(0 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.04);
+  --shadow-xl:  0 0.75rem 1.5rem oklch(0 0 0 / 0.10), 0 0 0 0.0625rem oklch(0 0 0 / 0.05);
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (soft profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 180ms;
+  --transition-duration-base: 240ms;
+  --transition-duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.75rem);
+  --radius-md: calc(var(--radius) - 0.5rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.005em;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+  code, kbd, samp, pre {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling:
+     smoother writing, easier-to-scan forms. */
+  textarea {
+    /* Fallback for browsers without field-sizing (e.g. Firefox): keep the
+       textarea user-resizable so it can still be grown manually. */
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: spacious;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 62);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 10);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 12);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 6);
+}

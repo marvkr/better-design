@@ -80,7 +80,7 @@ const InlineEdit = React.forwardRef<HTMLDivElement, InlineEditProps>(
         <div ref={ref} className={cn("flex items-start gap-1.5", className)}>
           {as === "textarea" ? (
             <textarea
-              ref={inputRef as React.RefObject<HTMLTextAreaElement>}
+              ref={/* SAFETY: this branch renders the textarea the shared ref points at. */ inputRef as React.RefObject<HTMLTextAreaElement>}
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -90,7 +90,7 @@ const InlineEdit = React.forwardRef<HTMLDivElement, InlineEditProps>(
             />
           ) : (
             <input
-              ref={inputRef as React.RefObject<HTMLInputElement>}
+              ref={/* SAFETY: this branch renders the input the shared ref points at. */ inputRef as React.RefObject<HTMLInputElement>}
               type="text"
               value={draft}
               onChange={(e) => setDraft(e.target.value)}

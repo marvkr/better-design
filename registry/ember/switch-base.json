@@ -1,0 +1,33 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Switch: recessed well track; checked, the track lights up with\n// the same amber material as the primary Button (gradient + rim + glow).\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Switch = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<SwitchPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    className={cn(\n      \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full\",\n      \"transition-all duration-fast ease-out\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-unchecked:bg-[var(--ag-well)] data-unchecked:border data-unchecked:border-[color:var(--ag-border-strong)] data-unchecked:shadow-[var(--shadow-well)]\",\n      \"data-checked:bg-[image:var(--ag-primary-grad)] data-checked:border-0 data-checked:shadow-[var(--shadow-primary)]\",\n      className\n    )}\n    {...props}\n    ref={ref}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-4 w-4 rounded-full\",\n        \"bg-[oklch(0.97_0.005_85)]\",\n        \"shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.4),inset_0_0.0625rem_0_oklch(1_0_0/0.5)]\",\n        \"ring-0 transition-transform duration-fast ease-out\",\n        \"data-checked:translate-x-4 data-unchecked:translate-x-0.5\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = \"Switch\"\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.69 0.195 42 / 0.24), 0 0.625rem 1.875rem -0.5rem oklch(0.69 0.195 42 / 0.18)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.69 0.195 42 / 0.24), 0 0.625rem 1.875rem -0.5rem oklch(0.69 0.195 42 / 0.18)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

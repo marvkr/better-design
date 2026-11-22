@@ -15,8 +15,8 @@ const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
       ref={ref}
       data-collapsed={collapsed}
       className={cn(
-        "flex flex-col h-full border-r border-border bg-card transition-all duration-200",
-        collapsed ? "w-[60px]" : "w-[240px]",
+        "flex flex-col h-full border-r border-border bg-card transition-all duration-base",
+        collapsed ? "w-[3.75rem]" : "w-[15rem]",
         className
       )}
       {...props}
@@ -108,7 +108,7 @@ const SidebarGroupLabel = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      "mb-1 px-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60",
+      "mb-1 px-2 text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground/60",
       className
     )}
     {...props}
@@ -135,7 +135,7 @@ const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>(
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "group flex items-center gap-3 rounded-[10px] px-3 py-2 text-sm font-medium transition-all duration-150",
+        "group flex items-center gap-3 rounded-[0.625rem] px-3 py-2 text-sm font-medium transition-all duration-fast",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "bg-primary/15 text-primary"

@@ -15,12 +15,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-8 w-full rounded-[6px] bg-[rgba(0,0,0,0.04)] px-2.5 py-1.5 text-sm text-foreground",
+          "flex h-8 w-full rounded-[0.375rem] bg-[oklch(0_0_0/0.04)] px-2.5 py-1.5 text-sm text-foreground",
           "border-0 outline-none",
           "placeholder:text-muted-foreground",
-          "transition-[box-shadow] duration-100 ease-in",
-          "hover:bg-[rgba(0,0,0,0.06)]",
-          "focus-visible:bg-white focus-visible:shadow-[0_0_0_2px_color-mix(in_oklch,var(--primary)_35%,transparent)]",
+          "transition-[box-shadow] duration-fast ease-in",
+          "hover:bg-[oklch(0_0_0/0.06)]",
+          "focus-visible:bg-white focus-visible:shadow-[0_0_0_0.125rem_color-mix(in_oklch,var(--primary)_35%,transparent)]",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
           "disabled:cursor-not-allowed disabled:opacity-50",
           className

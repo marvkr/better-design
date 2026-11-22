@@ -1,0 +1,21 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Kbd: a little white key with an olive edge and a thin\n * slab under it, the same press the buttons wear, scaled down. The label\n * runs in bold mono, so a shortcut reads like a key on a real keyboard.\n */\nconst Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(\n  ({ className, ...props }, ref) => (\n    <kbd\n      ref={ref}\n      data-slot=\"kbd\"\n      className={cn(\n        \"inline-flex h-5 min-w-5 shrink-0 items-center justify-center gap-1 rounded-md border border-(--line-strong) bg-card px-1.5 shadow-(--shadow-control-off)\",\n        \"font-mono text-xs font-semibold text-foreground\",\n        \"[&_svg]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nKbd.displayName = \"Kbd\";\n\nexport { Kbd };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "shadow-control-off": "0 0.125rem 0 0 var(--line-strong)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)"
+    }
+  }
+}

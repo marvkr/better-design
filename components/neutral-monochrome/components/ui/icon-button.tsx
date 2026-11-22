@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 const iconButtonVariants = cva(
   [
-    "inline-flex items-center justify-center shrink-0 transition-all duration-150",
+    "inline-flex items-center justify-center shrink-0 transition-all duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:scale-[0.95]",
@@ -14,7 +14,7 @@ const iconButtonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_1px_3px_0_hsl(239_84%_67%/0.3)]",
+          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0.0625rem_0.1875rem_0_oklch(0.5875_0.2039_277.3624/0.3)]",
         secondary:
           "bg-card text-foreground border border-border hover:bg-accent hover:border-border/60",
         neutral:
@@ -29,15 +29,15 @@ const iconButtonVariants = cva(
         default: "h-10 w-10 [&_svg]:h-4 [&_svg]:w-4",
         lg:      "h-11 w-11 [&_svg]:h-5 [&_svg]:w-5",
       },
-      shape: {
-        square: "rounded-[10px]",
+      corners: {
+        square: "rounded-[0.625rem]",
         circle: "rounded-full",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
-      shape: "square",
+      corners: "square",
     },
   }
 )
@@ -50,13 +50,13 @@ export interface IconButtonProps
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, corners, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
         ref={ref}
         type={asChild ? undefined : "button"}
-        className={cn(iconButtonVariants({ variant, size, shape }), className)}
+        className={cn(iconButtonVariants({ variant, size, corners }), className)}
         {...props}
       />
     )

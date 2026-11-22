@@ -1,0 +1,36 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared material recipes for Leather Luxe.\n *\n * Three materials make the whole system read as one object:\n *  - leather: the cognac CTA surface (gradient + glass sheen + warm drop)\n *  - raised: dark charcoal glass pills that catch light on the top edge\n *  - well: recessed tracks and fields pressed into the card surface\n *\n * Every form field imports formFieldBase; every popover surface imports\n * popoverSurface, so the depth language never drifts between components.\n */\n\n/** Recessed field well: pressed into the card, cognac focus halo. */\nexport const formFieldBase =\n  \"w-full rounded-md bg-well px-3 text-sm text-foreground \" +\n  \"border border-border \" +\n  \"[box-shadow:var(--shadow-well)] \" +\n  \"placeholder:text-muted-foreground/70 \" +\n  \"transition-[border-color,box-shadow,background-color] duration-base \" +\n  \"hover:border-highlight \" +\n  \"focus-visible:outline-none focus-visible:border-primary/60 \" +\n  \"focus-visible:[box-shadow:var(--shadow-well),0_0_0_0.1875rem_oklch(0.55_0.115_52/0.25)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\n/** Cognac leather material: shared by the primary Button and every filled control. */\nexport const leatherSurface =\n  \"[background-image:var(--gradient-leather)] text-primary-foreground \" +\n  \"border border-[oklch(0.68_0.115_58/0.55)] \" +\n  \"[box-shadow:var(--shadow-leather)]\"\n\n/** Scaled-down leather for small filled controls (checkbox, switch, slider). */\nexport const leatherSurfaceSm =\n  \"[background-image:var(--gradient-leather)] text-primary-foreground \" +\n  \"border border-[oklch(0.68_0.115_58/0.55)] \" +\n  \"[box-shadow:var(--shadow-leather-sm)]\"\n\n/** Raised dark glass pill: secondary buttons, thumbs, kbd, active tabs. */\nexport const raisedSurface =\n  \"[background-image:var(--gradient-raised)] text-foreground \" +\n  \"border border-highlight \" +\n  \"[box-shadow:var(--shadow-raised)]\"\n\n/** Floating glass panel: every popover-family surface shares this. */\nexport const popoverSurface =\n  \"rounded-lg border border-highlight \" +\n  \"bg-popover text-popover-foreground backdrop-blur-xl \" +\n  \"[box-shadow:var(--shadow-popover)]\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "well": "oklch(0.14 0.005 65)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-leather": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.125rem 0.1875rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.3)",
+      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)",
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "well": "oklch(0.14 0.005 65)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-leather": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.125rem 0.1875rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.3)",
+      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)",
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    }
+  }
+}

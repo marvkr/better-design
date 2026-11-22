@@ -1,0 +1,22 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Timeline — vertical event log milled into the steel plate. Each item has a\n * raised chrome marker dot, a title, a timestamp, and a body. The connecting\n * rail is a recessed hairline channel.\n */\n\nconst Timeline = React.forwardRef<\n  HTMLOListElement,\n  React.HTMLAttributes<HTMLOListElement>\n>(({ className, ...props }, ref) => (\n  <ol\n    ref={ref}\n    className={cn(\"relative flex flex-col gap-6\", className)}\n    {...props}\n  />\n))\nTimeline.displayName = \"Timeline\"\n\nexport interface TimelineItemProps\n  extends Omit<React.LiHTMLAttributes<HTMLLIElement>, \"title\"> {\n  /**\n   * Kept for API compatibility with the shared timeline contract. chrome-toggle\n   * renders a raised chrome marker dot rather than an icon-font glyph.\n   */\n  icon?: string\n  title?: React.ReactNode\n  timestamp?: React.ReactNode\n  isLast?: boolean\n}\n\nconst TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(\n  (\n    { className, icon: _icon, title, timestamp, isLast, children, ...props },\n    ref\n  ) => (\n    <li ref={ref} className={cn(\"relative flex gap-4\", className)} {...props}>\n      <div className=\"relative flex flex-col items-center\">\n        <div\n          className={cn(\n            \"flex h-8 w-8 shrink-0 items-center justify-center rounded-full\",\n            \"bg-card border border-white/10 text-muted-foreground\",\n            \"[box-shadow:var(--shadow-sm)]\"\n          )}\n        >\n          <span\n            aria-hidden=\"true\"\n            className=\"h-2.5 w-2.5 rounded-full [background:var(--knob-on)] [box-shadow:var(--shadow-knob)]\"\n          />\n        </div>\n        {!isLast && <div className=\"mt-1 w-px flex-1 bg-border\" />}\n      </div>\n      <div className=\"min-w-0 flex-1 pb-4\">\n        {(title || timestamp) && (\n          <div className=\"flex items-baseline justify-between gap-2\">\n            {title && (\n              <div className=\"text-sm font-medium text-foreground\">{title}</div>\n            )}\n            {timestamp && (\n              <div className=\"shrink-0 text-xs text-muted-foreground\">\n                {timestamp}\n              </div>\n            )}\n          </div>\n        )}\n        {children && (\n          <div className=\"mt-1 text-sm leading-relaxed text-muted-foreground\">\n            {children}\n          </div>\n        )}\n      </div>\n    </li>\n  )\n)\nTimelineItem.displayName = \"TimelineItem\"\n\nexport { Timeline, TimelineItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "knob-on": "linear-gradient(to bottom, oklch(0.919 0.041 17.9), oklch(0.802 0.08 19), oklch(0.836 0.119 97.8))",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    },
+    "dark": {
+      "knob-on": "linear-gradient(to bottom, oklch(0.919 0.041 17.9), oklch(0.802 0.08 19), oklch(0.836 0.119 97.8))",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    }
+  }
+}

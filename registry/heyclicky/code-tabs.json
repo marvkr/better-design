@@ -1,0 +1,29 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, AnimatePresence } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface CodeTab {\n  label: string;\n  lang: string;\n  code: string;\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[];\n  defaultTab?: number;\n  className?: string;\n}\n\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(defaultTab);\n  const [direction, setDirection] = React.useState(0);\n  const uid = React.useId();\n\n  const handleTabChange = (index: number) => {\n    setDirection(index > activeIndex ? 1 : -1);\n    setActiveIndex(index);\n  };\n\n  const active = tabs[activeIndex];\n\n  return (\n    <div\n      className={cn(\n        \"rounded-lg bg-card overflow-hidden shadow-[var(--shadow-window)]\",\n        className,\n      )}\n    >\n      {/* Title bar: the silver desktop window chrome, traffic lights and all */}\n      <div className=\"relative flex items-center gap-3 bg-[image:var(--gradient-chrome)] px-3 py-2\">\n        <span className=\"flex shrink-0 items-center gap-1.5\" aria-hidden=\"true\">\n          <span className=\"block h-3 w-3 rounded-full bg-[oklch(0.72_0.17_25)]\" />\n          <span className=\"block h-3 w-3 rounded-full bg-[oklch(0.83_0.15_85)]\" />\n          <span className=\"block h-3 w-3 rounded-full bg-[oklch(0.78_0.17_145)]\" />\n        </span>\n        <div className=\"flex items-center gap-1\">\n          {tabs.map((tab, i) => (\n            <button\n              key={tab.label}\n              onClick={() => handleTabChange(i)}\n              className={cn(\n                \"relative rounded-full px-3 py-1 text-xs font-medium transition-colors\",\n                i === activeIndex\n                  ? \"text-foreground\"\n                  : \"text-muted-foreground hover:text-foreground\",\n              )}\n            >\n              {i === activeIndex && (\n                <motion.span\n                  layoutId={`code-tab-indicator-${uid}`}\n                  className=\"absolute inset-0 rounded-full bg-[image:var(--gradient-chip)] shadow-[var(--shadow-button)]\"\n                  transition={{ type: \"spring\", stiffness: 500, damping: 35 }}\n                />\n              )}\n              <span className=\"relative\">{tab.label}</span>\n            </button>\n          ))}\n        </div>\n      </div>\n\n      {/* Code content */}\n      <div className=\"relative overflow-hidden\">\n        <AnimatePresence mode=\"popLayout\" initial={false} custom={direction}>\n          <motion.div\n            key={activeIndex}\n            custom={direction}\n            initial={{ opacity: 0, x: direction * 20 }}\n            animate={{ opacity: 1, x: 0 }}\n            exit={{ opacity: 0, x: direction * -20 }}\n            transition={{ duration: 0.2, ease: \"easeInOut\" }}\n          >\n            <pre className=\"p-4 m-0 bg-transparent text-xs leading-relaxed overflow-x-auto text-foreground\">\n              <code>{active.code}</code>\n            </pre>\n          </motion.div>\n        </AnimatePresence>\n      </div>\n    </div>\n  );\n}\n\nexport { CodeTabs };\nexport type { CodeTabsProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gradient-chip": "linear-gradient( 180deg, oklch(1 0 0) 0%, oklch(0.928 0 0) 42%, oklch(0.988 0 0) 100% )",
+      "gradient-chrome": "linear-gradient( 90deg, oklch(0.874 0.003 308.4) 0%, oklch(0.955 0 0) 50%, oklch(0.874 0.003 308.4) 100% )",
+      "shadow-window": "var(--shadow-xl)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)"
+    },
+    "dark": {
+      "gradient-chip": "linear-gradient( 180deg, oklch(1 0 0) 0%, oklch(0.928 0 0) 42%, oklch(0.988 0 0) 100% )",
+      "gradient-chrome": "linear-gradient( 90deg, oklch(0.874 0.003 308.4) 0%, oklch(0.955 0 0) 50%, oklch(0.874 0.003 308.4) 100% )",
+      "shadow-window": "var(--shadow-xl)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)"
+    }
+  }
+}

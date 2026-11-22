@@ -1,0 +1,20 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Paddock Kbd: a small white key with the card's hairline ring, set in the\n * mono face at note size so a shortcut reads beside a menu label.\n */\nconst Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(\n  ({ className, ...props }, ref) => (\n    <kbd\n      ref={ref}\n      data-slot=\"kbd\"\n      className={cn(\n        \"inline-flex h-5 min-w-5 select-none items-center justify-center gap-0.5 rounded-xs px-1.5\",\n        \"bg-card font-mono text-xs font-medium text-muted-foreground shadow-(--card-ring)\",\n        \"[&_svg]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nKbd.displayName = \"Kbd\";\n\nexport { Kbd };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "card-ring": "0 0 0 0.0625rem oklch(0.915 0.008 230)"
+    },
+    "dark": {
+      "card-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.09)"
+    }
+  }
+}

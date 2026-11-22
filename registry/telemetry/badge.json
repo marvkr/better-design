@@ -1,0 +1,25 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Badge: status tag.\n// Square-cornered uppercase labels like NOM / WRN / CRIT readouts:\n// tinted fill, matching signal-colored text, hairline border in the same hue.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-xs font-semibold uppercase tracking-wider transition-colors focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary/15 border border-primary/30 text-[color:oklch(0.875_0.21_148)]\",\n        primary:\n          \"bg-primary/15 border border-primary/30 text-[color:oklch(0.875_0.21_148)]\",\n        secondary:\n          \"bg-secondary text-secondary-foreground border border-border\",\n        destructive:\n          \"bg-destructive/15 border border-destructive/35 text-[color:oklch(0.875_0.067_27)]\",\n        \"destructive-light\":\n          \"bg-destructive/10 border border-destructive/20 text-[color:oklch(0.875_0.067_27)]\",\n        success:\n          \"bg-primary/15 border border-primary/30 text-[color:oklch(0.875_0.21_148)]\",\n        \"success-light\":\n          \"bg-primary/10 border border-primary/20 text-[color:oklch(0.875_0.21_148)]\",\n        warning:\n          \"bg-(--warning)/15 border border-(--warning)/35 text-[color:oklch(0.875_0.106_75)]\",\n        \"warning-light\":\n          \"bg-(--warning)/10 border border-(--warning)/20 text-[color:oklch(0.875_0.106_75)]\",\n        info:\n          \"bg-(--info)/15 border border-(--info)/35 text-[color:oklch(0.875_0.072_235)]\",\n        outline:\n          \"border border-border text-muted-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem]\",\n        default: \"h-5 gap-1.5 px-2 text-[0.625rem]\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "warning": "oklch(0.78 0.16 75)",
+      "info": "oklch(0.7 0.13 235)"
+    },
+    "dark": {
+      "warning": "oklch(0.78 0.16 75)",
+      "info": "oklch(0.7 0.13 235)"
+    }
+  }
+}

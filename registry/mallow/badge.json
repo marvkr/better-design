@@ -1,0 +1,58 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { quietFinish, primaryFinish } from \"./_shared\";\n\n/**\n * Mallow Badge: a small round tag.\n *\n * The default is a lilac tag fill with ink text that reads on the page and\n * on a card alike. `cost` is the coral tag, kept for a fee or a charge, and\n * `free` is the green tag for what costs nothing or what a choice saves.\n * Status and colour variants are a quiet tint of their hue.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center gap-1 whitespace-nowrap rounded-full font-normal tabular-nums [&_svg]:size-3.5 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-(--tag) text-foreground\",\n        cost: \"bg-(--fee-surface) text-(--fee-text)\",\n        free: \"bg-(--free-surface) text-(--free-text)\",\n        primary: primaryFinish,\n        solid: primaryFinish,\n        secondary: quietFinish,\n        outline: \"bg-transparent text-muted-foreground ring-1 ring-input\",\n        info: \"bg-info/15 text-info-text\",\n        success: \"bg-success/15 text-success-text\",\n        warning: \"bg-warning/25 text-warning-text\",\n        destructive: \"bg-destructive/15 text-destructive-text\",\n        blue: \"bg-info/15 text-info-text\",\n        green: \"bg-success/15 text-success-text\",\n        orange: \"bg-(--badge-orange)/20 text-(--badge-orange-text)\",\n        yellow: \"bg-(--badge-yellow)/38 text-(--badge-yellow-text)\",\n        purple: \"bg-primary/14 text-(--primary-text)\",\n      },\n      size: {\n        sm: \"h-6 px-2 text-xs\",\n        default: \"h-7 px-2.5 text-sm\",\n        lg: \"h-8 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  ),\n);\nBadge.displayName = \"Badge\";\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.48 0.2 288)",
+      "success": "oklch(0.56 0.14 155)",
+      "warning": "oklch(0.72 0.15 55)",
+      "info": "oklch(0.55 0.14 250)",
+      "free-text": "oklch(0.45 0.12 155)",
+      "free-surface": "oklch(0.895 0.065 155)",
+      "fee-text": "oklch(0.5 0.16 35)",
+      "fee-surface": "oklch(0.9 0.055 35)",
+      "tag": "oklch(0.9 0.032 292)",
+      "badge-orange": "oklch(0.68 0.16 50)",
+      "badge-yellow": "oklch(0.8 0.14 95)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "warning-text": "oklch(0.46 0.12 55)",
+      "destructive-text": "oklch(0.47 0.18 22)",
+      "info-text": "oklch(0.44 0.13 250)",
+      "badge-orange-text": "oklch(0.47 0.14 50)",
+      "badge-yellow-text": "oklch(0.44 0.09 95)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.48 0.2 288)",
+      "success": "oklch(0.56 0.14 155)",
+      "warning": "oklch(0.72 0.15 55)",
+      "info": "oklch(0.55 0.14 250)",
+      "free-text": "oklch(0.45 0.12 155)",
+      "free-surface": "oklch(0.895 0.065 155)",
+      "fee-text": "oklch(0.5 0.16 35)",
+      "fee-surface": "oklch(0.9 0.055 35)",
+      "tag": "oklch(0.9 0.032 292)",
+      "badge-orange": "oklch(0.68 0.16 50)",
+      "badge-yellow": "oklch(0.8 0.14 95)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "warning-text": "oklch(0.46 0.12 55)",
+      "destructive-text": "oklch(0.47 0.18 22)",
+      "info-text": "oklch(0.44 0.13 250)",
+      "badge-orange-text": "oklch(0.47 0.14 50)",
+      "badge-yellow-text": "oklch(0.44 0.09 95)"
+    }
+  }
+}

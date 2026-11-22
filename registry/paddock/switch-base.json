@@ -1,0 +1,29 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Paddock Switch: the off track is the segmented control's recessed grey\n * well with a raised white knob. On, the track fills with the primary\n * Button's teal and the white knob rides to the end.\n */\nfunction Switch({ className, ...props }: WithClassName<SwitchPrimitive.Root.Props>) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(\n        \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-sm p-0.5\",\n        wellInset,\n        \"data-[unchecked]:shadow-(--control-ring)\",\n        controlChecked,\n        \"transition-[box-shadow,background-color] duration-base ease-out\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block size-4 rounded-xs bg-card shadow-(--segment-lift)\",\n          \"transition-transform duration-base ease-out\",\n          \"data-[checked]:translate-x-4 data-[unchecked]:translate-x-0 rtl:data-[checked]:-translate-x-4\",\n        )}\n      />\n    </SwitchPrimitive.Root>\n  );\n}\nSwitch.displayName = \"Switch\";\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "control-ring": "0 0 0 0.0625rem oklch(0.62 0.02 245)",
+      "segment-lift": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 0.0625rem 0.0625rem oklch(0.3 0.03 240 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "control-ring": "0 0 0 0.0625rem oklch(0.56 0.012 240)",
+      "segment-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

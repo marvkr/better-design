@@ -1,0 +1,33 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Steps: completed steps carry the amber material; the current\n// step glows.\n\ninterface Step {\n  title: string\n  description?: string\n}\n\ninterface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[]\n  currentStep: number\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, steps, currentStep, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex\",\n        orientation === \"vertical\" ? \"flex-col gap-0\" : \"flex-row items-start gap-0\",\n        className\n      )}\n      {...props}\n    >\n      {steps.map((step, i) => {\n        const complete = i < currentStep\n        const active = i === currentStep\n        const isLast = i === steps.length - 1\n\n        return (\n          <div\n            key={i}\n            className={cn(\n              \"flex flex-1\",\n              orientation === \"vertical\" ? \"flex-row gap-3\" : \"flex-col gap-2\"\n            )}\n          >\n            <div\n              className={cn(\n                \"flex items-center\",\n                orientation === \"vertical\" ? \"flex-col\" : \"flex-row\"\n              )}\n            >\n              <span\n                className={cn(\n                  \"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all duration-base\",\n                  complete &&\n                    \"bg-[image:var(--ag-primary-grad)] text-primary-foreground shadow-[var(--shadow-primary)]\",\n                  active &&\n                    \"bg-[var(--ag-fill-hover)] text-primary border border-[color:oklch(0.69_0.195_42/0.5)] shadow-[0_0_0.75rem_oklch(0.69_0.195_42/0.25)]\",\n                  !complete &&\n                    !active &&\n                    \"bg-[var(--ag-well)] text-muted-foreground border border-[color:var(--ag-border)] shadow-[var(--shadow-well)]\"\n                )}\n                aria-current={active ? \"step\" : undefined}\n              >\n                {complete ? <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" /> : i + 1}\n              </span>\n              {!isLast && (\n                <span\n                  className={cn(\n                    \"bg-[var(--ag-border)]\",\n                    orientation === \"vertical\"\n                      ? \"my-1 h-full min-h-6 w-px\"\n                      : \"mx-2 h-px flex-1 min-w-6\",\n                    complete && \"bg-[oklch(0.69_0.195_42/0.5)]\"\n                  )}\n                />\n              )}\n            </div>\n            <div\n              className={cn(\n                \"flex flex-col gap-0.5\",\n                orientation === \"vertical\" ? \"pb-6\" : \"pr-4\"\n              )}\n            >\n              <span\n                className={cn(\n                  \"text-sm font-semibold tracking-[-0.01em]\",\n                  active || complete ? \"text-foreground\" : \"text-muted-foreground\"\n                )}\n              >\n                {step.title}\n              </span>\n              {step.description && (\n                <span className=\"text-xs text-muted-foreground\">{step.description}</span>\n              )}\n            </div>\n          </div>\n        )\n      })}\n    </div>\n  )\n)\nSteps.displayName = \"Steps\"\n\nexport { Steps }\nexport type { StepsProps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.69 0.195 42 / 0.24), 0 0.625rem 1.875rem -0.5rem oklch(0.69 0.195 42 / 0.18)"
+    },
+    "dark": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.69 0.195 42 / 0.24), 0 0.625rem 1.875rem -0.5rem oklch(0.69 0.195 42 / 0.18)"
+    }
+  }
+}

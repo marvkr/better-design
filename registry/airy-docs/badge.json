@@ -1,0 +1,31 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Badge: a small tinted pill, like the method and status tags in\n * an API reference. The default and primary take the green wash with green\n * text; status badges pair a tint with darker text of the same hue, so each\n * label passes contrast on its own colour.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-full font-medium [&_svg]:size-3 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"text-(--primary-text) bg-[color:oklch(0.476_0.11_154.3/0.15)] dark:bg-[color:oklch(0.476_0.11_154.3/0.23)] dark:text-[color:oklch(0.875_0.169_153.6)]\",\n        primary: \"text-(--primary-text) bg-[color:oklch(0.476_0.11_154.3/0.15)] dark:bg-[color:oklch(0.476_0.11_154.3/0.23)] dark:text-[color:oklch(0.875_0.169_153.6)]\",\n        secondary: \"text-(--foreground-secondary) bg-[color:oklch(0.925_0.004_157.2)] dark:text-[color:oklch(0.51_0.004_160)]\",\n        outline: \"border border-border bg-background text-(--foreground-secondary)\",\n        success: \"text-(--success-text) bg-[color:oklch(0.476_0.11_154.3/0.15)] dark:bg-[color:oklch(0.476_0.11_154.3/0.23)] dark:text-[color:oklch(0.875_0.15_153.6)]\",\n        warning: \"text-(--warning-text) bg-[color:oklch(0.648_0.138_69.8/0.2)] dark:text-[color:oklch(0.875_0.119_80)]\",\n        destructive: \"text-(--destructive-text) bg-[color:oklch(0.577_0.17_25/0.15)] dark:bg-[color:oklch(0.577_0.17_25/0.2)] dark:text-[color:oklch(0.875_0.066_22)]\",\n        solid: \"bg-primary text-primary-foreground\",\n      },\n      size: {\n        sm: \"h-5 px-1.5 text-[0.6875rem]\",\n        default: \"h-5.5 px-2 text-xs\",\n        lg: \"h-6.5 px-2.5 text-[0.8125rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "success-text": "oklch(0.42 0.1 154.3)",
+      "warning-text": "oklch(0.5 0.11 66)",
+      "destructive-text": "oklch(0.5 0.16 25)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "success-text": "oklch(0.78 0.15 153.6)",
+      "warning-text": "oklch(0.84 0.13 80)",
+      "destructive-text": "oklch(0.78 0.13 22)"
+    }
+  }
+}

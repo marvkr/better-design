@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "class-variance-authority"
-  ],
-  "registryDependencies": [
-    "utils"
+    "class-variance-authority@>=0.7.1 <1"
   ]
 }

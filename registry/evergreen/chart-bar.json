@@ -1,0 +1,18 @@
+{
+  "name": "chart-bar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-bar.tsx",
+      "content": "\"use client\"\n\nimport { Bar, BarChart, CartesianGrid, XAxis } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"./card\"\nimport {\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n} from \"./chart\"\n\nconst chartData = [\n  { month: \"January\", desktop: 186 },\n  { month: \"February\", desktop: 305 },\n  { month: \"March\", desktop: 237 },\n  { month: \"April\", desktop: 73 },\n  { month: \"May\", desktop: 209 },\n  { month: \"June\", desktop: 214 },\n]\n\nconst chartConfig = {\n  desktop: {\n    label: \"Desktop\",\n    color: \"var(--chart-1)\",\n  },\n}\n\nexport function ChartBarDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Bar Chart</CardTitle>\n        <CardDescription>January - June 2024</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <BarChart accessibilityLayer data={chartData}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              tickMargin={10}\n              axisLine={false}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <Bar dataKey=\"desktop\" fill=\"var(--chart-1)\" radius={8} />\n          </BarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-2 text-sm\">\n        <div className=\"flex gap-2 leading-none font-medium\">Trending up by 5.2% this month</div>\n        <div className=\"leading-none text-muted-foreground\">Showing total visitors for the last 6 months</div>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/evergreen/card.json",
+    "https://better-design.com/registry/evergreen/chart.json"
+  ]
+}

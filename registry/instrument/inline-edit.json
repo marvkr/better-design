@@ -1,0 +1,39 @@
+{
+  "name": "inline-edit",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, X, Pencil } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark InlineEdit: click-to-edit. Editing opens a small recessed well;\n// confirm is a miniature machined gold key, cancel a raised charcoal one.\n\ninterface InlineEditProps {\n  value: string;\n  onConfirm: (value: string) => void;\n  onCancel?: () => void;\n  placeholder?: string;\n  disabled?: boolean;\n  className?: string;\n  inputClassName?: string;\n  renderValue?: (value: string) => React.ReactNode;\n}\n\nfunction InlineEdit({\n  value,\n  onConfirm,\n  onCancel,\n  placeholder = \"Click to edit\",\n  disabled,\n  className,\n  inputClassName,\n  renderValue,\n}: InlineEditProps) {\n  const [editing, setEditing] = React.useState(false);\n  const [draft, setDraft] = React.useState(value);\n  const inputRef = React.useRef<HTMLInputElement>(null);\n\n  React.useEffect(() => {\n    if (editing) inputRef.current?.focus();\n  }, [editing]);\n\n  const handleEdit = () => {\n    if (disabled) return;\n    setDraft(value);\n    setEditing(true);\n  };\n\n  const handleConfirm = () => {\n    onConfirm(draft);\n    setEditing(false);\n  };\n\n  const handleCancel = () => {\n    setDraft(value);\n    setEditing(false);\n    onCancel?.();\n  };\n\n  const handleKeyDown = (e: React.KeyboardEvent) => {\n    if (e.key === \"Enter\") handleConfirm();\n    if (e.key === \"Escape\") handleCancel();\n  };\n\n  if (editing) {\n    return (\n      <div className={cn(\"flex items-center gap-1.5\", className)}>\n        <input\n          ref={inputRef}\n          value={draft}\n          onChange={(e) => setDraft(e.target.value)}\n          onKeyDown={handleKeyDown}\n          placeholder={placeholder}\n          className={cn(\n            \"h-8 min-w-0 flex-1 rounded-md px-2.5 text-sm\",\n            \"border border-[var(--gauge-well-border)] bg-input text-foreground shadow-[var(--shadow-well)]\",\n            \"placeholder:text-muted-foreground\",\n            \"transition-[border-color,box-shadow] duration-fast ease-out\",\n            \"focus-visible:outline-none focus-visible:border-[var(--gauge-rim)] focus-visible:shadow-[var(--shadow-well),var(--shadow-focus)]\",\n            inputClassName\n          )}\n        />\n        <button\n          type=\"button\"\n          onClick={handleConfirm}\n          className=\"flex h-7 w-7 items-center justify-center rounded-md border border-[var(--gauge-rim)] bg-[linear-gradient(to_bottom,var(--gauge-grad-top),var(--gauge-grad-bottom))] text-primary-foreground shadow-[var(--shadow-primary)] transition-all hover:brightness-[1.06]\"\n        >\n          <Check className=\"h-3.5 w-3.5\" />\n          <span className=\"sr-only\">Confirm</span>\n        </button>\n        <button\n          type=\"button\"\n          onClick={handleCancel}\n          className=\"flex h-7 w-7 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground shadow-[var(--shadow-raised)] transition-colors hover:bg-accent hover:text-accent-foreground\"\n        >\n          <X className=\"h-3.5 w-3.5\" />\n          <span className=\"sr-only\">Cancel</span>\n        </button>\n      </div>\n    );\n  }\n\n  return (\n    <button\n      type=\"button\"\n      onClick={handleEdit}\n      disabled={disabled}\n      className={cn(\n        \"group flex items-center gap-1.5 rounded-md px-1 py-0.5 text-sm\",\n        \"transition-colors hover:bg-secondary\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        !value && \"text-muted-foreground\",\n        className\n      )}\n    >\n      <span className=\"min-w-0 truncate\">\n        {renderValue ? renderValue(value) : value || placeholder}\n      </span>\n      {!disabled && (\n        <Pencil className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100\" />\n      )}\n    </button>\n  );\n}\n\nexport { InlineEdit };\nexport type { InlineEditProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "toaster-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toaster.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toast as ToastPrimitive } from \"@base-ui/react/toast\"\n\nimport {\n  Toast,\n  ToastClose,\n  ToastDescription,\n  ToastProvider,\n  ToastTitle,\n  ToastViewport,\n} from \"./toast\"\nimport {\n  TOAST_LIMIT,\n  syncFromManager,\n  toastManager,\n  type ToastData,\n} from \"./use-toast\"\n\nfunction ToastList() {\n  const { toasts } = ToastPrimitive.useToastManager()\n\n  // Mirror provider-side removals (auto-timeout, swipe, close button) back\n  // into the use-toast module so useToast().toasts never holds ghosts.\n  React.useEffect(() => {\n    syncFromManager(toasts)\n  }, [toasts])\n\n  return (\n    <>\n      {toasts\n        .filter((toastObject) => !toastObject.limited)\n        .map(function (toastObject) {\n          const { id, title, description, data } = toastObject\n          // SAFETY: `data` is what this hook itself stored on the toast, so its shape\n          // is the ToastData written on the way in.\n          const { action, rootProps } = (data ?? {}) as Partial<ToastData>\n          return (\n            <Toast key={id} toast={toastObject} {...rootProps}>\n              <div className=\"grid gap-1\">\n                {title && <ToastTitle>{title}</ToastTitle>}\n                {description && (\n                  <ToastDescription>{description}</ToastDescription>\n                )}\n              </div>\n              {action}\n              <ToastClose />\n            </Toast>\n          )\n        })}\n    </>\n  )\n}\n\nexport function Toaster() {\n  return (\n    <ToastProvider toastManager={toastManager} limit={TOAST_LIMIT}>\n      <ToastViewport>\n        <ToastList />\n      </ToastViewport>\n    </ToastProvider>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cinematic-dark/toast-base.json",
+    "https://better-design.com/registry/cinematic-dark/use-toast-base.json"
+  ]
+}

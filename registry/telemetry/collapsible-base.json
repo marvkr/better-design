@@ -1,0 +1,14 @@
+{
+  "name": "collapsible-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Collapsible: expandable diagnostics row.\n// Trigger reads as a panel header strip; content as the recessed log body.\n\nconst Collapsible = CollapsiblePrimitive.Root\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: CollapsiblePrimitive.Trigger.Props) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      className={cn(\n        \"flex w-full items-center justify-between rounded-sm px-4 py-2.5\",\n        \"bg-card border border-border\",\n        \"text-xs font-semibold uppercase tracking-wider text-foreground\",\n        \"transition-colors duration-fast\",\n        \"hover:border-ring/40 hover:text-primary\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        \"[&[data-panel-open]]:rounded-b-none [&[data-panel-open]]:border-b-0\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nCollapsibleTrigger.displayName = \"CollapsibleTrigger\"\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: CollapsiblePrimitive.Panel.Props) {\n  return (\n    <CollapsiblePrimitive.Panel\n      className={cn(\n        \"overflow-hidden rounded-b-sm\",\n        \"bg-background border border-t-0 border-border\",\n        \"data-closed:animate-collapsible-up data-open:animate-collapsible-down\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nCollapsibleContent.displayName = \"CollapsibleContent\"\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

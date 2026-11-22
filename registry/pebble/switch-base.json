@@ -1,0 +1,29 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\nfunction Switch({ className, ...props }: SwitchPrimitive.Root.Props) {\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-[1.5rem] w-[2.75rem] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-50 data-unchecked:bg-input data-checked:bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_70%,oklch(1_0_0))_0%,var(--primary)_45%,oklch(0_0_0)_100%)] data-checked:shadow-[var(--shadow-pillow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        render={\n          <motion.span\n            layout\n            transition={springInteraction}\n            className=\"pointer-events-none block h-5 w-5 rounded-full bg-background shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.1)] ring-0 data-checked:translate-x-5 data-unchecked:translate-x-0\"\n          />\n        }\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/motion.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pillow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.14), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.3), 0 0.0625rem 0.0625rem 0 oklch(0.1452 0.0021 286.13 / 0.1), 0 0.25rem 0.625rem -0.1875rem oklch(0.1452 0.0021 286.13 / 0.18)"
+    },
+    "dark": {
+      "shadow-pillow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.14), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.3), 0 0.0625rem 0.0625rem 0 oklch(0.1452 0.0021 286.13 / 0.1), 0 0.25rem 0.625rem -0.1875rem oklch(0.1452 0.0021 286.13 / 0.18)"
+    }
+  }
+}

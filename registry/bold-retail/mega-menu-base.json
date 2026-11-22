@@ -1,0 +1,14 @@
+{
+  "name": "mega-menu-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { menuItemBase, popoverSurface } from \"./_shared\";\n\n/**\n * Bold retail MegaMenu: the wide department shelf that drops under the\n * store header. Each group becomes its own equal column from sm up, headed\n * by a black medium label such as Shoes or Clothing. Links below it are\n * grey rows that turn black on a soft grey fill under the pointer.\n */\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"mega-menu\"\n    className={cn(\n      popoverSurface,\n      \"absolute start-0 top-full z-50 mt-2 grid w-full gap-8 p-6 sm:auto-cols-fr sm:grid-flow-col\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenu.displayName = \"MegaMenu\";\n\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"mega-menu-group\"\n    className={cn(\"flex min-w-0 flex-col gap-0.5\", className)}\n    {...props}\n  />\n));\nMegaMenuGroup.displayName = \"MegaMenuGroup\";\n\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"mega-menu-group-title\"\n    className={cn(\n      \"px-3 pb-2 text-base font-medium text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\";\n\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    data-slot=\"mega-menu-item\"\n    className={cn(\n      menuItemBase,\n      \"text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:text-accent-foreground\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenuItem.displayName = \"MegaMenuItem\";\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ]
+}

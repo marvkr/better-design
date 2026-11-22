@@ -1,0 +1,22 @@
+{
+  "name": "avatar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Avatar: a full circle, 2rem by default, behind a translucent\n * hairline so a dark photo still separates from the black page. Set the size\n * with a class: size-6, size-8, size-10 or size-14. Until the photo loads, the\n * initials sit on the secondary step in the secondary ink, and they scale\n * with the circle.\n */\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    data-slot=\"avatar\"\n    className={cn(\n      \"@container relative flex size-8 shrink-0 select-none overflow-hidden rounded-full border border-(--line-strong)\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatar.displayName = AvatarPrimitive.Root.displayName;\n\n/** The photo, cropped to fill the circle. */\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    data-slot=\"avatar-image\"\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n));\nAvatarImage.displayName = AvatarPrimitive.Image.displayName;\n\n/** Initials on the secondary step, shown until the photo loads or when it fails. */\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    data-slot=\"avatar-fallback\"\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full bg-secondary\",\n      \"text-xs font-medium text-(--foreground-secondary)\",\n      \"@max-[1.75rem]:text-[0.625rem] @min-[2.5rem]:text-sm @min-[3rem]:text-base\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-avatar@^1.1.10"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-secondary": "oklch(0.88 0.002 264)"
+    },
+    "dark": {}
+  }
+}

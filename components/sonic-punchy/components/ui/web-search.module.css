@@ -1,0 +1,85 @@
+/* Ported from https://www.aicss.dev/components/web-search */
+.ws {
+  --c-text: var(--foreground);
+  --c-muted: var(--muted-foreground);
+  --c-subtle: var(--muted-foreground);
+  --c-border: var(--border);
+  --c-border-strong: var(--border);
+  --c-surface-2: var(--muted);
+  --c-success: var(--success, var(--chart-2));
+  --c-success-soft: color-mix(in oklch, var(--success, var(--chart-2)) 16%, transparent);
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font: 0.8125rem/1.4 system-ui, -apple-system, sans-serif;
+  color: var(--c-text);
+}
+.wsRow { display: flex; align-items: center; gap: 0.375rem; min-height: 1.25rem; }
+.wsRow > svg { flex: none; color: var(--c-muted); margin-left: -0.0625rem; }
+.wsLabel { display: inline-flex; align-items: center; gap: 0.25rem; font-weight: 550; color: var(--c-text); white-space: nowrap; min-width: 0; }
+.wsQuote { overflow: hidden; text-overflow: ellipsis; }
+.wsShimmer { overflow: hidden; text-overflow: ellipsis; background: linear-gradient(90deg, color-mix(in oklch, var(--c-text) 45%, transparent) 0%, var(--c-text) 44%, color-mix(in oklch, var(--c-text) 45%, transparent) 80%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ws-shimmer 2.7s linear infinite; }
+.wsShimmer.isDone { animation: none; background: none; -webkit-text-fill-color: var(--c-text); color: var(--c-text); }
+.wsChevron { display: inline-flex; align-items: center; justify-content: center; width: 1rem; height: 1rem; border: none; background: none; color: var(--c-subtle); cursor: pointer; border-radius: 0.25rem; transition: color 0.16s var(--ease), transform 0.28s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+.wsChevron:hover { color: var(--c-muted); }
+}
+.wsChevron[aria-expanded="false"] { transform: rotate(180deg); }
+.wsCollapsible { display: grid; grid-template-rows: 1fr; opacity: 1; transition: opacity 0.22s var(--ease); }
+.wsCollapsible.isCollapsed { grid-template-rows: 0fr; opacity: 0; pointer-events: none; }
+.wsCollapsibleInner { min-height: 0; overflow: hidden; }
+.wsResults { position: relative; display: flex; gap: 0.375rem; align-items: stretch; }
+.wsRail { flex: none; width: 0.0625rem; align-self: stretch; border-left: 0.0625rem solid var(--c-border); margin-left: 0.34375rem; }
+.wsList { flex: 1; list-style: none; margin: 0; padding: 0.25rem 0 0.125rem 0.375rem; display: flex; flex-direction: column; gap: 0.375rem; min-width: 0; }
+.wsSite { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; line-height: 1.125rem; color: var(--c-muted); min-width: 0; opacity: 0; transform: translateY(0.25rem); animation: ws-enter 280ms var(--ease) forwards; }
+.wsSite[data-state="done"] { cursor: pointer; }
+.wsBullet { position: relative; width: 0.75rem; height: 0.75rem; flex: none; display: inline-flex; align-items: center; justify-content: center; }
+.wsDots { position: absolute; inset: 0; display: inline-flex; align-items: center; justify-content: center; color: var(--c-subtle); opacity: 1; transition: opacity 280ms var(--ease); pointer-events: none; }
+.wsDots svg, .wsCheck svg { flex: none; }
+.wsSite[data-state="loading"] .wsDots, .wsSite[data-state="done"] .wsDots { opacity: 0; }
+.wsGlobe { position: absolute; inset: 0; display: inline-flex; align-items: center; justify-content: center; color: var(--c-subtle); opacity: 0; transform: scale(0.88); transition: opacity 280ms var(--ease), transform 280ms var(--ease); }
+.wsSite[data-state="loading"] .wsGlobe { opacity: 1; transform: scale(1); }
+.wsSite[data-state="done"] .wsGlobe { opacity: 0; transform: scale(0.775); transition: opacity 0.22s var(--ease), transform 0.26s var(--ease); }
+.wsCheck { display: inline-flex; align-items: center; justify-content: center; color: var(--c-success); opacity: 0; transform: scale(1.175); transition: opacity 0.24s var(--ease) 0.06s, transform 0.28s var(--ease) 0.06s; }
+.wsSite[data-state="done"] .wsCheck { opacity: 1; transform: scale(1); }
+.wsTitle { color: var(--c-text); font-weight: 450; white-space: nowrap; flex: none; }
+.wsSite[data-state="pending"] .wsTitle { color: var(--c-muted); }
+.wsSite[data-state="loading"] .wsTitle { background: linear-gradient(90deg, color-mix(in oklch, var(--c-text) 50%, transparent) 0%, var(--c-text) 44%, color-mix(in oklch, var(--c-text) 50%, transparent) 80%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ws-shimmer 2.7s linear infinite; }
+.wsSep { color: var(--c-subtle); flex: none; }
+.wsUrl { color: var(--c-muted); flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color 0.16s var(--ease); }
+.wsArrow { display: inline-flex; flex: none; color: var(--c-subtle); margin-left: -0.125rem; opacity: 0; transform: rotate(45deg) translate(0, 0.125rem); transition: opacity 0.16s var(--ease), transform 0.22s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+.wsSite[data-state="done"]:hover .wsArrow { opacity: 1; transform: rotate(45deg) translate(0, 0); }
+}
+@media (hover: hover) and (pointer: fine) {
+.wsSite[data-state="done"]:hover .wsUrl { color: var(--c-text); }
+}
+@keyframes ws-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes ws-enter { to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .wsShimmer, .wsSite[data-state="loading"] .wsTitle { animation: none; background: none; -webkit-text-fill-color: var(--c-text); color: var(--c-text); }
+  .wsSite { animation: none; opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wsShimmer,
+.wsShimmer.isDone,
+.wsChevron,
+.wsCollapsible,
+.wsSite,
+.wsDots,
+.wsGlobe,
+.wsSite[data-state="done"] .wsGlobe,
+.wsCheck,
+.wsSite[data-state="loading"] .wsTitle,
+.wsUrl,
+.wsArrow,
+.wsShimmer, .wsSite[data-state="loading"] .wsTitle {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.ws, .wsRow, .wsLabel, .wsShimmer, .wsCollapsible, .wsResults { min-width: 0; max-width: 100%; }
+.ws { width: 100%; overflow: hidden; }
+.wsLabel, .wsShimmer { flex: 1 1 auto; }
+.wsSite { text-decoration: none; }

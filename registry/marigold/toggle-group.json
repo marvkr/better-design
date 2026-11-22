@@ -1,0 +1,27 @@
+{
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\nimport { type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { toggleVariants } from \"./toggle\";\n\n// Talentboard ToggleGroup: a recessed strip; the active item raises into the\n// orange primary material.\n\nconst ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({\n  size: \"default\",\n  variant: \"default\",\n});\n\nconst ToggleGroup = React.forwardRef<\n  React.ComponentRef<typeof ToggleGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, children, ...props }, ref) => (\n  <ToggleGroupPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"flex items-center justify-center gap-1 rounded-lg p-1\",\n      \"border border-border/60 bg-input/60 shadow-[var(--tb-shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ToggleGroupContext.Provider value={{ variant, size }}>\n      {children}\n    </ToggleGroupContext.Provider>\n  </ToggleGroupPrimitive.Root>\n));\nToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;\n\nconst ToggleGroupItem = React.forwardRef<\n  React.ComponentRef<typeof ToggleGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &\n    VariantProps<typeof toggleVariants>\n>(({ className, children, variant, size, ...props }, ref) => {\n  const context = React.useContext(ToggleGroupContext);\n\n  return (\n    <ToggleGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        toggleVariants({\n          variant: context.variant || variant,\n          size: context.size || size,\n        }),\n        \"rounded-md\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </ToggleGroupPrimitive.Item>\n  );\n});\nToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle-group@^1.1.10",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/marigold/toggle.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)"
+    },
+    "dark": {
+      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ring-meter",
+  "type": "registry:component",
+  "title": "Ring Meter",
+  "description": "Progress ring animation: a ring sweeps round to a percentage while the number counts up in its centre, then a caption settles under it.",
+  "dependencies": [
+    "remotion@4.0.513",
+    "@remotion/google-fonts@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/ring-meter.tsx",
+      "target": "components/bd-video/ring-meter.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Ring meter: a progress ring sweeps round to a percentage while the number\n * counts in its centre, then a caption settles under it. One clean share of\n * a whole.\n *\n * Written by Better Design. Painted from the theme prop, so the sweep takes\n * the product's primary colour and the track takes a quiet tint of its ink.\n */\nimport { loadFont } from \"@remotion/google-fonts/Inter\";\nimport { AbsoluteFill, interpolate, useCurrentFrame } from \"remotion\";\nimport { easings, pickFont, type VideoTheme, useVideoTheme, withAlpha } from \"@/lib/bd-video\";\n\nconst { fontFamily: INTER } = loadFont(\"normal\", { weights: [\"500\", \"700\"], subsets: [\"latin\"] });\n\nconst SWEEP_AT = 8;\nconst SWEEP_FRAMES = 56;\nconst CAPTION_AT = 52;\n\nconst SIZE = 560;\nconst STROKE = 36;\n\nexport interface RingMeterProps {\n  /** The share the ring sweeps to, from 0 to 100. */\n  value?: number;\n  /** One line under the ring that says what the share is of. */\n  caption?: string;\n  theme?: Partial<VideoTheme>;\n  /** A CSS font family the project has loaded. Defaults to the theme's face, then Inter. */\n  font?: string;\n}\n\nconst clamp = { extrapolateLeft: \"clamp\", extrapolateRight: \"clamp\" } as const;\n\n/** Sweep a ring to a percentage with the figure counting in its centre. */\nexport function RingMeter({\n  value = 72,\n  caption = \"of the plan is complete\",\n  theme: themeOverride,\n  font,\n}: RingMeterProps) {\n  const theme = useVideoTheme(themeOverride);\n  const frame = useCurrentFrame();\n  const family = pickFont(font, theme, INTER);\n\n  const target = Math.min(100, Math.max(0, value));\n  const enter = easings.out(interpolate(frame, [0, 16], [0, 1], clamp));\n  const sweep = easings.inOut(interpolate(frame, [SWEEP_AT, SWEEP_AT + SWEEP_FRAMES], [0, 1], clamp));\n  const shown = Math.round(target * sweep);\n  const captionT = easings.out(interpolate(frame, [CAPTION_AT, CAPTION_AT + 18], [0, 1], clamp));\n\n  const r = (SIZE - STROKE) / 2;\n  const circumference = 2 * Math.PI * r;\n  const dash = circumference * (target / 100) * sweep;\n\n  return (\n    <AbsoluteFill style={{ background: theme.background, alignItems: \"center\", justifyContent: \"center\", fontFamily: family }}>\n      <div style={{ display: \"flex\", flexDirection: \"column\", alignItems: \"center\", gap: 56 }}>\n        <div style={{ position: \"relative\", width: SIZE, height: SIZE, opacity: enter, transform: `scale(${0.94 + 0.06 * enter})` }}>\n          <svg width={SIZE} height={SIZE} style={{ transform: \"rotate(-90deg)\" }}>\n            <circle cx={SIZE / 2} cy={SIZE / 2} r={r} fill=\"none\" stroke={withAlpha(theme.foreground, 0.08)} strokeWidth={STROKE} />\n            <circle\n              cx={SIZE / 2}\n              cy={SIZE / 2}\n              r={r}\n              fill=\"none\"\n              stroke={theme.primary}\n              strokeWidth={STROKE}\n              strokeLinecap=\"round\"\n              strokeDasharray={`${dash} ${circumference}`}\n              opacity={sweep > 0.002 ? 1 : 0}\n            />\n          </svg>\n          <div\n            style={{\n              position: \"absolute\",\n              inset: 0,\n              display: \"flex\",\n              alignItems: \"center\",\n              justifyContent: \"center\",\n              color: theme.foreground,\n              fontVariantNumeric: \"tabular-nums\",\n            }}\n          >\n            <span style={{ fontSize: 176, fontWeight: 700, letterSpacing: \"-0.05em\", lineHeight: 1 }}>{shown}</span>\n            <span style={{ fontSize: 72, fontWeight: 500, color: theme.mutedForeground, marginLeft: 6, alignSelf: \"flex-start\", marginTop: 196 }}>%</span>\n          </div>\n        </div>\n        <div style={{ fontSize: 44, fontWeight: 500, color: theme.mutedForeground, opacity: captionT, transform: `translateY(${(1 - captionT) * 14}px)` }}>\n          {caption}\n        </div>\n      </div>\n    </AbsoluteFill>\n  );\n}\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

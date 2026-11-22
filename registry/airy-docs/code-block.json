@@ -1,0 +1,33 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showCopy?: boolean;\n}\n\ntype Tone = \"keyword\" | \"string\" | \"fn\" | \"comment\" | \"plain\";\n\nconst TONE_CLASS = {\n  keyword: \"text-(--syntax-keyword)\",\n  string: \"text-(--syntax-string)\",\n  fn: \"text-(--syntax-fn)\",\n  comment: \"text-(--syntax-comment) italic\",\n  plain: \"\",\n} as const satisfies Record<Tone, string>;\n\n// One pass over the source: comments, strings, keywords, then calls.\nconst TOKEN =\n  /(\\/\\/[^\\n]*|#[^\\n]*|\\/\\*[\\s\\S]*?\\*\\/)|(\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])*'|`(?:\\\\.|[^`\\\\])*`)|\\b(import|export|from|const|let|var|function|return|await|async|if|else|for|while|new|class|extends|interface|type|default|true|false|null|undefined|def|curl)\\b|\\b([A-Za-z_$][\\w$]*)(?=\\s*\\()/g;\n\n/** Splits source into coloured spans with a small, language-agnostic lexer. */\nfunction highlight(code: string): React.ReactNode[] {\n  const parts: React.ReactNode[] = [];\n  let last = 0;\n  for (const match of code.matchAll(TOKEN)) {\n    const start = match.index ?? 0;\n    if (start > last) parts.push(code.slice(last, start));\n    const tone: Tone = match[1]\n      ? \"comment\"\n      : match[2]\n        ? \"string\"\n        : match[3]\n          ? \"keyword\"\n          : match[4]\n            ? \"fn\"\n            : \"plain\";\n    parts.push(\n      <span key={start} className={TONE_CLASS[tone]}>\n        {match[0]}\n      </span>,\n    );\n    last = start + match[0].length;\n  }\n  if (last < code.length) parts.push(code.slice(last));\n  return parts;\n}\n\n/**\n * Airy docs CodeBlock: a white code panel set in a pale tray.\n *\n * The tray is the green-grey surface with a hairline and a 1rem corner. Its\n * header row names the file or the language and holds a quiet copy button.\n * The code sits on a white inner panel in Geist Mono, with keywords,\n * strings, calls and comments each in their own syntax colour.\n */\nconst CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(\n  ({ className, code, language, filename, showCopy = true, ...props }, ref) => {\n    const caption = filename ?? language;\n    const hasHeader = Boolean(caption) || showCopy;\n    const tokens = React.useMemo(() => highlight(code), [code]);\n\n    return (\n      <div\n        data-slot=\"code-block\"\n        className=\"overflow-hidden rounded-xl border border-border bg-secondary p-0.5 text-foreground\"\n      >\n        {hasHeader && (\n          <div\n            data-slot=\"code-block-header\"\n            className=\"flex h-9 items-center justify-between gap-3 ps-3 pe-0.5\"\n          >\n            <span className=\"min-w-0 truncate text-xs font-medium text-muted-foreground\">\n              {caption}\n            </span>\n            {showCopy && (\n              <CopyButton\n                value={code}\n                size=\"icon-sm\"\n                label=\"Copy code\"\n                className=\"text-muted-foreground hover:bg-muted hover:text-foreground\"\n              />\n            )}\n          </div>\n        )}\n        <pre\n          ref={ref}\n          data-slot=\"code-block-code\"\n          className={cn(\n            \"overflow-x-auto rounded-lg bg-(--code) p-4 font-mono text-[0.8125rem] leading-relaxed text-(--code-foreground)\",\n            className,\n          )}\n          {...props}\n        >\n          <code>{tokens}</code>\n        </pre>\n      </div>\n    );\n  },\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/copy-button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "code": "oklch(1 0 0)",
+      "code-foreground": "oklch(0.214 0.006 156.7)",
+      "syntax-keyword": "oklch(0.52 0.19 330)",
+      "syntax-string": "oklch(0.476 0.11 154.3)",
+      "syntax-fn": "oklch(0.5 0.15 259)",
+      "syntax-comment": "oklch(0.552 0.005 157.1)"
+    },
+    "dark": {
+      "code": "oklch(0.18 0.006 190)",
+      "code-foreground": "oklch(0.92 0.004 160)",
+      "syntax-keyword": "oklch(0.75 0.15 330)",
+      "syntax-string": "oklch(0.78 0.15 153.6)",
+      "syntax-fn": "oklch(0.76 0.12 259)",
+      "syntax-comment": "oklch(0.6 0.005 160)"
+    }
+  }
+}

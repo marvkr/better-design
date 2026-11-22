@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 // Stripe InputGroup: input with prefix/suffix addons, visually merged inside border
-// Addons share the same rounded-[10px] container as the input
+// Addons share the same rounded-[0.625rem] container as the input
 // Prefix/suffix: bg-secondary border-r/l border-border, text-muted-foreground
 
 interface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "prefix"> {
@@ -31,16 +31,15 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
       <div
         ref={ref}
         className={cn(
-          // Outer container acts as the visible border+shadow container
           "flex w-full items-stretch overflow-hidden",
-          "rounded-[10px] border border-border bg-background",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-          "transition duration-200 ease-out",
-          "focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-          "hover:border-foreground/30",
+          "rounded-md bg-input [box-shadow:var(--shadow-control)]",
+          "transition-[box-shadow] duration-fast",
+          "focus-within:[box-shadow:var(--shadow-focus)]",
+          "hover:[box-shadow:var(--shadow-control-hover)]",
           error && [
-            "border-destructive",
-            "focus-within:border-destructive focus-within:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]",
+            "[box-shadow:var(--shadow-destructive-control)]",
+            "hover:[box-shadow:var(--shadow-destructive-control)]",
+            "focus-within:[box-shadow:var(--shadow-destructive-focus)]",
           ],
           disabled && "cursor-not-allowed bg-secondary opacity-70",
           size === "sm" && "rounded-lg",
@@ -55,7 +54,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
               "flex items-center justify-center border-r border-border bg-secondary px-3",
               "text-sm text-muted-foreground select-none shrink-0",
               "[&>svg]:h-4 [&>svg]:w-4",
-              size === "default" ? "h-10" : "h-9"
+              size === "default" ? "h-9" : "h-8"
             )}
           >
             {prefix}
@@ -81,7 +80,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
               "flex items-center justify-center border-l border-border bg-secondary px-3",
               "text-sm text-muted-foreground select-none shrink-0",
               "[&>svg]:h-4 [&>svg]:w-4",
-              size === "default" ? "h-10" : "h-9"
+              size === "default" ? "h-9" : "h-8"
             )}
           >
             {suffix}

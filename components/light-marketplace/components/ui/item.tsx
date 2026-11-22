@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Energetic Item: light marketplace, rounded-[14px], NO shadows, NO extra borders
+// Energetic Item: light marketplace, rounded-[0.875rem], NO shadows, NO extra borders
 // hover:bg-secondary (#f0f0f0 light gray) — flat tonal hover
 // Charcoal titles, muted gray subtitles; clean and spacious
 
@@ -38,8 +38,8 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           "group flex w-full items-center gap-3.5 px-4 py-3",
           "text-left",
           interactive && [
-            "cursor-pointer rounded-[14px]",
-            "transition-colors duration-150",
+            "cursor-pointer rounded-[0.875rem]",
+            "transition-colors duration-fast",
             "hover:bg-secondary",
             "focus-visible:outline-none focus-visible:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
             "active:scale-[0.98]",
@@ -54,7 +54,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           <div
             className={cn(
               "flex h-10 w-10 shrink-0 items-center justify-center",
-              "rounded-[10px] bg-secondary text-foreground/60",
+              "rounded-[0.625rem] bg-secondary text-foreground/60",
               "[&>svg]:h-5 [&>svg]:w-5"
             )}
           >
@@ -98,8 +98,8 @@ const ItemList = React.forwardRef<HTMLDivElement, ItemListProps>(
       ref={ref}
       className={cn(
         "flex flex-col",
-        // Energetic cards: bg-secondary fill, rounded-[14px], NO border, NO shadow
-        card && "rounded-[14px] bg-secondary overflow-hidden",
+        // Energetic cards: bg-secondary fill, rounded-[0.875rem], NO border, NO shadow
+        card && "rounded-[0.875rem] bg-secondary overflow-hidden",
         divided && [
           "[&>*:not(:last-child)]:border-b",
           "[&>*:not(:last-child)]:border-foreground/5",

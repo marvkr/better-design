@@ -20,7 +20,7 @@ const NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(
             "flex w-full appearance-none cursor-pointer",
             "border border-border bg-secondary text-foreground",
             "pl-3 pr-9 outline-none",
-            "transition-colors duration-150",
+            "transition-colors duration-fast",
             "hover:border-border/60",
             "focus:ring-1 focus:ring-ring focus:ring-offset-0",
             "disabled:cursor-not-allowed disabled:opacity-50",

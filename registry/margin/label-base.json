@@ -1,0 +1,11 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Margin Label: medium weight at 0.875rem above the filled field. A disabled\n * control dims its label too. Base UI has no label primitive, so this is a\n * native label that also watches the data-disabled attribute.\n */\nconst Label = React.forwardRef<HTMLLabelElement, React.ComponentPropsWithoutRef<\"label\">>(\n  ({ className, ...props }, ref) => (\n    <label\n      ref={ref}\n      data-slot=\"label\"\n      className={cn(\n        \"flex select-none items-center gap-2 text-sm font-medium leading-none text-foreground\",\n        \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n        \"peer-data-[disabled]:cursor-not-allowed peer-data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

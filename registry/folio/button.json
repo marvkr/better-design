@@ -1,0 +1,37 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { folioGrainStyle } from \"./_shared\"\n\n/*\n * Folio Button — a raised \"folder tab\".\n * The 4-sided rim (bright top + faint side walls) over a soft ambient pool reads\n * as a card lifted off the folder. Hover lifts higher (brighter rim, deeper\n * ambient); active presses it flat into the surface.\n * Primary swaps the black ambient for a warm amber glow (the paper-amber tab).\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-lg cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-inset)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-primary),0_0.5rem_1.25rem_-0.1875rem_color-mix(in_oklch,var(--primary)_30%,transparent)]\",\n        secondary:\n          \"bg-muted text-muted-foreground \" +\n          \"[box-shadow:var(--shadow-s)] \" +\n          \"hover:bg-accent hover:text-accent-foreground hover:[box-shadow:var(--shadow-m)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/30\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\n// Filled variants carry a solid background, so they get Folio's fractal grain\n// (blended over their token color) to match the cards. Transparent variants\n// (outline/ghost/link) skip it, otherwise raw noise would float on nothing.\nconst GRAINED_VARIANTS = new Set([undefined, \"default\", \"primary\", \"secondary\", \"destructive\"])\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, style, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    const grained = GRAINED_VARIANTS.has(variant ?? undefined)\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        style={grained ? { ...folioGrainStyle, ...style } : style}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/folio/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-m": "var(--shadow-md)",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), inset 0.0625rem 0 0 oklch(1 0 0 / 0.05), inset -0.0625rem 0 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.625rem -0.125rem oklch(0 0 0 / 0.45)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), inset 0.0625rem 0 0 oklch(1 0 0 / 0.07), inset -0.0625rem 0 0 oklch(1 0 0 / 0.07), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.5rem 1.125rem -0.1875rem oklch(0 0 0 / 0.5)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.81 0.115 78 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.375rem 1rem -0.125rem oklch(0.75 0.13 75 / 0.28)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-m": "var(--shadow-md)",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), inset 0.0625rem 0 0 oklch(1 0 0 / 0.05), inset -0.0625rem 0 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.625rem -0.125rem oklch(0 0 0 / 0.45)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), inset 0.0625rem 0 0 oklch(1 0 0 / 0.07), inset -0.0625rem 0 0 oklch(1 0 0 / 0.07), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.5rem 1.125rem -0.1875rem oklch(0 0 0 / 0.5)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.81 0.115 78 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.375rem 1rem -0.125rem oklch(0.75 0.13 75 / 0.28)"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Badge — the small caption pill that labels a section on the desk.\n * Tiny, wide-tracked and bold, so it reads as a tag rather than a button.\n */\n\nconst badgeVariants = cva(\n  [\n    \"inline-flex items-center gap-1 rounded-full\",\n    \"px-2.5 py-0.5 text-[0.6875rem] font-bold tracking-[0.08em]\",\n    \"transition-colors duration-fast\",\n    \"[&_svg]:size-3 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"[background-image:var(--fill-primary)] text-primary-foreground\",\n        secondary: \"bg-[color:oklch(0.9_0_180)] text-[color:oklch(0.488_0_185.2)]\",\n        outline: \"text-foreground [box-shadow:var(--shadow-rim)] bg-[color:oklch(0.9_0_191.3)]\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        success: \"text-[var(--pop-green-foreground)] bg-[color:oklch(0.895_0.045_163.2)]\",\n        warning: \"bg-[color:oklch(0.896_0.06_95.1)] text-[color:oklch(0.492_0.102_78.4)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant }), className)} {...props} />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "pop-green-foreground": "oklch(0.4623 0.1114 158)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "pop-green-foreground": "oklch(0.4623 0.1114 158)"
+    }
+  }
+}

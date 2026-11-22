@@ -1,0 +1,21 @@
+{
+  "name": "data-range-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { type DateRange } from \"react-day-picker\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n// Amber Glass DataRangePicker: two-month glass range picker demo.\n\nexport function DataRangePicker({\n  className,\n}: React.HTMLAttributes<HTMLDivElement>) {\n  const [date, setDate] = React.useState<DateRange | undefined>({\n    from: new Date(2024, 0, 20),\n    to: new Date(2024, 1, 9),\n  })\n\n  return (\n    <div className={cn(\"grid gap-2\", className)}>\n      <Popover>\n        <PopoverTrigger asChild>\n          <Button\n            id=\"date\"\n            variant=\"secondary\"\n            className={cn(\n              \"w-[17.5rem] justify-start text-left font-medium\",\n              !date && \"text-muted-foreground\"\n            )}\n          >\n            <Icon icon=\"tabler:calendar\" className=\"mr-2 h-4 w-4 text-primary\" />\n            {date?.from ? (\n              date.to ? (\n                <>\n                  {format(date.from, \"LLL dd, y\")} - {format(date.to, \"LLL dd, y\")}\n                </>\n              ) : (\n                format(date.from, \"LLL dd, y\")\n              )\n            ) : (\n              <span>Pick a date</span>\n            )}\n          </Button>\n        </PopoverTrigger>\n        <PopoverContent className=\"w-auto p-0\" align=\"start\">\n          <Calendar\n            initialFocus\n            mode=\"range\"\n            defaultMonth={date?.from}\n            selected={date}\n            onSelect={setDate}\n            numberOfMonths={2}\n          />\n        </PopoverContent>\n      </Popover>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/button.json",
+    "https://better-design.com/registry/ember/calendar.json",
+    "https://better-design.com/registry/ember/popover.json"
+  ]
+}

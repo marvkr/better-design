@@ -62,12 +62,20 @@ function DataTable<T>({
             data.map((row, i) => (
               <TableRow
                 key={getRowKey ? getRowKey(row, i) : i}
-                onClick={onRowClick ? () => onRowClick(row) : undefined}
-                className={onRowClick ? "cursor-pointer" : undefined}
               >
-                {columns.map((col) => (
+                {columns.map((col, colIndex) => (
                   <TableCell key={col.key} className={col.className}>
-                    {col.cell(row)}
+                    {onRowClick && colIndex === 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => onRowClick(row)}
+                        className="flex w-full rounded-sm text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+                      >
+                        {col.cell(row)}
+                      </button>
+                    ) : (
+                      col.cell(row)
+                    )}
                   </TableCell>
                 ))}
               </TableRow>

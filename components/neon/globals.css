@@ -1,0 +1,298 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Dark Neon AI - a dark, futuristic consumer voice-intelligence look.
+ *
+ * Defining traits (derived from the PlayAI product UI):
+ *   - Near-black cool-tinted ground, generous breathing room
+ *   - Vivid NEON-GREEN as the single solid primary action color (CTA pills)
+ *   - A VIBRANT RAINBOW / SPECTRUM gradient as the signature accent: hero text,
+ *     primary glow, and the chart palette all draw from the full spectrum
+ *   - Clean modern grotesk sans (Inter), NOT monospace
+ *   - Rounded modern radii (pills fully rounded, containers ~0.75rem)
+ *   - Soft layered glow: low-alpha, large-blur falloff - never a hard ring
+ *
+ * This is a consumer-AI futuristic surface, not an ops console.
+ */
+
+:root {
+  /* ─── Surfaces (deepest → highest) ─── */
+  --background: oklch(0.145 0.01 264);     /* near-black, faint cool tint */
+  --foreground: oklch(0.97 0.005 250);     /* soft white */
+
+  --card: oklch(0.18 0.012 264);           /* raised panel */
+  --card-foreground: oklch(0.97 0.005 250);
+
+  --popover: oklch(0.2 0.013 264);         /* floating surface */
+  --popover-foreground: oklch(0.97 0.005 250);
+
+  /* ─── Primary: neon green solid action color ─── */
+  --primary: oklch(0.86 0.22 145);         /* vivid neon green */
+  --primary-foreground: oklch(0.18 0.04 150); /* near-black-green text on neon */
+
+  --secondary: oklch(0.22 0.014 264);      /* muted raised surface */
+  --secondary-foreground: oklch(0.92 0.006 250);
+
+  --muted: oklch(0.2 0.012 264);
+  --muted-foreground: oklch(0.66 0.012 258); /* dim grey-blue */
+
+  --accent: oklch(0.24 0.015 264);         /* hover surface */
+  --accent-foreground: oklch(0.97 0.005 250);
+
+  --destructive: oklch(0.62 0.23 25);      /* the red "Yes/cancel" action */
+  --destructive-foreground: oklch(0.98 0.01 20);
+
+  --border: oklch(1 0 0 / 0.09);           /* hairline white */
+  --input: oklch(0.2 0.012 264);           /* field well */
+  --ring: oklch(0.86 0.22 145 / 0.55);     /* neon-green focus ring */
+  --radius: 0.75rem;                       /* 0.75rem container radius */
+
+  /* ─── Spacing / radius scale tokens (used by components, no arbitrary px) ─── */
+  --radius-pill: 624.9375rem;
+
+  /*
+   * ─── Signature spectrum gradient ───
+   * The full-spectrum rainbow used on hero text, the primary glow, decorative
+   * media bands, and (as a tonal source) the chart palette.
+   */
+  --spectrum-gradient: linear-gradient(
+    100deg,
+    oklch(0.72 0.2 25) 0%,
+    oklch(0.78 0.19 60) 18%,
+    oklch(0.86 0.22 110) 36%,
+    oklch(0.86 0.22 145) 52%,
+    oklch(0.78 0.16 200) 70%,
+    oklch(0.7 0.19 270) 86%,
+    oklch(0.72 0.21 330) 100%
+  );
+
+  /* Neon-green CTA gradient (the solid primary pill, subtly lifted) */
+  --neon-gradient: linear-gradient(
+    180deg,
+    oklch(0.9 0.21 145) 0%,
+    oklch(0.83 0.22 146) 100%
+  );
+  --neon-gradient-hover: linear-gradient(
+    180deg,
+    oklch(0.93 0.21 145) 0%,
+    oklch(0.86 0.22 146) 100%
+  );
+
+  /*
+   * ─── Shadow / glow scale ───
+   * Soft, layered, low-alpha large-blur falloff - never a hard ring.
+   */
+
+  /* Neutral elevation (panels, popovers) */
+  --shadow-xs:
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4);
+  --shadow-sm:
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.3);
+  --shadow-md:
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.45),
+    0 0.5rem 1.5rem -0.375rem oklch(0 0 0 / 0.4);
+  --shadow-lg:
+    0 0.25rem 0.75rem oklch(0 0 0 / 0.5),
+    0 1.125rem 2.5rem -0.625rem oklch(0 0 0 / 0.5);
+  --shadow-xl:
+    0 0.5rem 1.25rem oklch(0 0 0 / 0.55),
+    0 2rem 4rem -1rem oklch(0 0 0 / 0.55);
+
+  /* Popover surfaces all share this one token */
+  --shadow-popover:
+    0 0 0 0.0625rem oklch(1 0 0 / 0.06),
+    0 0.5rem 1.5rem -0.375rem oklch(0 0 0 / 0.5),
+    0 1.125rem 3rem -0.75rem oklch(0 0 0 / 0.45);
+
+  /* Neon-green glow - the primary button / filled-control material */
+  --shadow-neon:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.35),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.35),
+    0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22),
+    0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16);
+  --shadow-neon-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.45),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.35),
+    0 0.375rem 1rem -0.1875rem oklch(0.86 0.22 145 / 0.3),
+    0 0.875rem 2.375rem -0.5rem oklch(0.86 0.22 145 / 0.22);
+
+  /* Recessed well - fields / tracks that sit down into the surface */
+  --shadow-inset:
+    inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45);
+  --shadow-inset-deep:
+    inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.55);
+
+  /* Legacy aliases - the 90+ shadcn primitives reference these generic names */
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+  --shadow-button: var(--shadow-neon);
+  --shadow-button-hover: var(--shadow-neon-hover);
+  --shadow-primary: var(--shadow-neon);
+
+  /* ─── Chart palette: the FULL SPECTRUM (the DS signature) ─── */
+  /* Mono neon-green ramp: bright → deep, so multi-series charts stay on-brand
+     (no rainbow). Each step drops lightness + chroma along the green hue. */
+  --chart-1: oklch(0.88 0.23 145);         /* bright neon green */
+  --chart-2: oklch(0.78 0.2 148);          /* neon green */
+  --chart-3: oklch(0.66 0.17 150);         /* mid green */
+  --chart-4: oklch(0.54 0.13 152);         /* deep green */
+  --chart-5: oklch(0.42 0.09 155);         /* darkest green */
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+
+  --shadow-popover: var(--shadow-popover);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-inset-deep: var(--shadow-inset-deep);
+  --shadow-neon: var(--shadow-neon);
+  --shadow-neon-hover: var(--shadow-neon-hover);
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.011em;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

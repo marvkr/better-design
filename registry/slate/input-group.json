@@ -1,0 +1,20 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n// Ops Sharp InputGroup - wraps a field with prefix/suffix addons merged inside\n// one shared well. The outer container owns the field border + inset + focus\n// ring; the child input has its own border/shadow/rounding stripped so the\n// group reads as a single control. Addons sit on bg-secondary, divided by a\n// hairline border.\n\ninterface InputGroupProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"prefix\"> {\n  prefix?: React.ReactNode;\n  suffix?: React.ReactNode;\n  size?: \"default\" | \"sm\";\n  disabled?: boolean;\n  error?: boolean;\n}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  (\n    { prefix, suffix, size = \"default\", disabled, error, className, children, ...props },\n    ref\n  ) => {\n    const addonHeight = size === \"default\" ? \"h-9\" : \"h-8\";\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex w-full items-stretch overflow-hidden rounded-md border border-border bg-card\",\n          \"[box-shadow:var(--shadow-inset)]\",\n          \"transition-[border-color,box-shadow] duration-fast\",\n          \"hover:border-ring/30\",\n          \"focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/25\",\n          error &&\n            \"border-destructive focus-within:border-destructive focus-within:ring-destructive/25\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        {/* Prefix addon */}\n        {prefix && (\n          <div\n            className={cn(\n              \"flex items-center justify-center border-r border-border bg-secondary px-3\",\n              \"text-sm text-muted-foreground select-none shrink-0\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              addonHeight\n            )}\n          >\n            {prefix}\n          </div>\n        )}\n\n        {/* Field child - strip its own border/shadow/rounding so the group owns it */}\n        <div\n          className={cn(\n            \"flex-1 [&_input]:border-0 [&_input]:shadow-none [&_input]:rounded-none\",\n            \"[&_input]:focus-visible:ring-0 [&_input]:focus-visible:border-0\",\n            \"[&_input]:h-full [&_input]:w-full [&_input]:bg-transparent\",\n            disabled && \"[&_input]:cursor-not-allowed\"\n          )}\n        >\n          {children}\n        </div>\n\n        {/* Suffix addon */}\n        {suffix && (\n          <div\n            className={cn(\n              \"flex items-center justify-center border-l border-border bg-secondary px-3\",\n              \"text-sm text-muted-foreground select-none shrink-0\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              addonHeight\n            )}\n          >\n            {suffix}\n          </div>\n        )}\n      </div>\n    );\n  }\n);\nInputGroup.displayName = \"InputGroup\";\n\nexport { InputGroup };\nexport type { InputGroupProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

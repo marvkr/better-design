@@ -1,0 +1,36 @@
+{
+  "name": "context-cards",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/context-cards.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// ContextCards: retrieved docs chunks with their source pages, laid out like\n// search results in a knowledge base. Cards enter once, source chips follow,\n// then everything stays.\n//\n// Usage:\n//   <ContextCards />\n//   <ContextCards label=\"All chunks\" count={32} chunks={...} />\n\ninterface ContextChunk {\n  title: string\n  chars: string\n  body: string\n  source: string\n  /** File kind badge, such as \"MDX\" or \"YAML\". */\n  badge: string\n}\n\nconst DEFAULT_CHUNKS: ContextChunk[] = [\n  {\n    title: \"Authentication\",\n    chars: \"290 characters\",\n    body: \"Send the API key in the Authorization header as a bearer token. Keys are scoped to one project.\",\n    source: \"guides/authentication.mdx\",\n    badge: \"MDX\",\n  },\n  {\n    title: \"Rate limits\",\n    chars: \"1,250 characters\",\n    body: \"Each key may make 100 requests per minute. A 429 response carries a Retry-After header in seconds.\",\n    source: \"openapi.yaml\",\n    badge: \"YAML\",\n  },\n]\n\nconst BADGE_TONES = [\n  \"bg-(--primary-wash) text-(--primary-text)\",\n  \"bg-(--info-tint) text-(--info-text)\",\n  \"bg-(--warning-tint) text-(--warning-text)\",\n]\n\ninterface ContextCardsProps extends React.HTMLAttributes<HTMLDivElement> {\n  label?: string\n  count?: number\n  chunks?: ContextChunk[]\n}\n\nfunction ContextCards({\n  label = \"All chunks\",\n  count = 32,\n  chunks = DEFAULT_CHUNKS,\n  className,\n  ...props\n}: ContextCardsProps) {\n  const [chipsShown, setChipsShown] = React.useState(false)\n\n  React.useEffect(() => {\n    const t = setTimeout(() => setChipsShown(true), 700)\n    return () => clearTimeout(t)\n  }, [])\n\n  return (\n    <div className={cn(\"flex w-full max-w-[23.75rem] flex-col gap-2\", className)} {...props}>\n      <div className=\"flex animate-in fade-in items-center gap-2 px-0.5 duration-slow\">\n        <span className=\"text-sm font-semibold text-foreground\">{label}</span>\n        <span className=\"inline-flex h-5 items-center rounded-full bg-secondary px-2 text-xs font-medium text-muted-foreground tabular-nums\">\n          {count}\n        </span>\n      </div>\n\n      {chunks.map((chunk, i) => (\n        <div\n          key={chunk.title}\n          className=\"animate-in fade-in slide-in-from-bottom-1 overflow-hidden rounded-xl border border-border bg-card duration-slow\"\n          style={{ animationDelay: `${i * 100}ms`, animationFillMode: \"both\" }}\n        >\n          <div className=\"flex items-center gap-2 px-4 pt-3\">\n            <Icon icon=\"feather:hash\" className=\"size-3.5 shrink-0 text-(--primary-text)\" aria-hidden=\"true\" />\n            <span className=\"min-w-0 truncate text-sm font-semibold text-foreground\">{chunk.title}</span>\n            <span className=\"ml-auto shrink-0 text-xs text-muted-foreground tabular-nums\">{chunk.chars}</span>\n          </div>\n          <p className=\"px-4 pt-1.5 pb-2 text-[0.8125rem] leading-relaxed text-(--foreground-secondary)\">{chunk.body}</p>\n          <div className=\"px-4 pb-3\">\n            <span\n              className={cn(\n                \"inline-flex h-6 items-center gap-1.5 rounded-full border border-border bg-background px-2 font-mono text-xs text-(--foreground-secondary) transition-[opacity,scale] duration-slow ease-out hover:bg-secondary\",\n                chipsShown ? \"scale-100 opacity-100\" : \"scale-95 opacity-0\",\n              )}\n              style={{ transitionDelay: `${i * 80}ms` }}\n            >\n              <span\n                className={cn(\n                  \"rounded-sm px-1 font-sans text-[0.625rem] font-semibold\",\n                  BADGE_TONES[i % BADGE_TONES.length],\n                )}\n              >\n                {chunk.badge}\n              </span>\n              {chunk.source}\n              <Icon icon=\"feather:arrow-up-right\" className=\"size-3 text-muted-foreground\" aria-hidden=\"true\" />\n            </span>\n          </div>\n        </div>\n      ))}\n    </div>\n  )\n}\n\n// A standalone card, kept for the showcase bundle.\ninterface ContextCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  title: string\n  chars?: number\n  source?: { kind: string; name: string }\n}\n\nfunction ContextCard({ title, chars, source, className, children, ...props }: ContextCardProps) {\n  return (\n    <div className={cn(\"overflow-hidden rounded-xl border border-border bg-card\", className)} {...props}>\n      <div className=\"flex items-center gap-2 px-4 pt-3\">\n        <Icon icon=\"feather:hash\" className=\"size-3.5 shrink-0 text-(--primary-text)\" aria-hidden=\"true\" />\n        <span className=\"min-w-0 truncate text-sm font-semibold text-foreground\">{title}</span>\n        {chars !== undefined && (\n          <span className=\"ml-auto shrink-0 text-xs text-muted-foreground tabular-nums\">\n            {chars.toLocaleString()} characters\n          </span>\n        )}\n      </div>\n      {children && <p className=\"px-4 pt-1.5 pb-2 text-[0.8125rem] leading-relaxed text-(--foreground-secondary)\">{children}</p>}\n      {source && (\n        <div className=\"px-4 pb-3\">\n          <span className=\"inline-flex h-6 items-center gap-1.5 rounded-full border border-border bg-background px-2 font-mono text-xs text-(--foreground-secondary)\">\n            <span className=\"rounded-sm bg-(--primary-wash) px-1 font-sans text-[0.625rem] font-semibold text-(--primary-text)\">\n              {source.kind}\n            </span>\n            {source.name}\n          </span>\n        </div>\n      )}\n      {!source && !children && <div className=\"pb-3\" />}\n    </div>\n  )\n}\n\nexport { ContextCards, ContextCard }\nexport type { ContextChunk }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "primary-wash": "oklch(0.476 0.11 154.3 / 0.08)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "warning-tint": "oklch(0.648 0.138 69.8 / 0.1)",
+      "warning-text": "oklch(0.5 0.11 66)",
+      "info-tint": "oklch(0.562 0.156 259.2 / 0.1)",
+      "info-text": "oklch(0.48 0.15 259.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "primary-wash": "oklch(0.705 0.169 153.6 / 0.12)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "warning-tint": "oklch(0.78 0.14 75 / 0.12)",
+      "warning-text": "oklch(0.84 0.13 80)",
+      "info-tint": "oklch(0.7 0.13 259 / 0.14)",
+      "info-text": "oklch(0.8 0.1 259)"
+    }
+  }
+}

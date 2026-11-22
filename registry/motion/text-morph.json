@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-morph",
+  "type": "registry:ui",
+  "title": "Text morph",
+  "description": "Change a word and watch it become the next one. Shared letters slide to their new place and the rest blur out and in.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/motion/text-morph.tsx",
+      "target": "components/motion/text-morph.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { AnimatePresence, motion, useReducedMotion, type Transition } from \"motion/react\";\nimport { type ComponentPropsWithoutRef } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for a word or short phrase that melts into the next one when `text` changes. */\nexport type TextMorphProps = Omit<ComponentPropsWithoutRef<\"span\">, \"children\"> & {\n  /** The word or short phrase to show. Changing it runs the morph. Keep it on one line. */\n  text: string;\n};\n\n// Critically damped: a shared letter slides to its new place and stops.\nconst SLIDE: Transition = { type: \"spring\", stiffness: 400, damping: 40, mass: 1 };\nconst ARRIVE: Transition = { duration: 0.25, ease: [0.165, 0.84, 0.44, 1] };\nconst LEAVE: Transition = { duration: 0.15, ease: [0.165, 0.84, 0.44, 1] };\n\nconst GONE = { opacity: 0, filter: \"blur(0.25rem)\" };\nconst HERE = { opacity: 1, filter: \"blur(0rem)\" };\n\n/**\n * Pairs each letter with the same letter in the next text: the first \"e\" with\n * the first \"e\", the second with the second. A paired letter keeps its element.\n */\nfunction keyedLetters(text: string) {\n  const seen = new Map<string, number>();\n  return [...text].map((char) => {\n    const nth = seen.get(char) ?? 0;\n    seen.set(char, nth + 1);\n    return { char, key: `${char}-${nth}` };\n  });\n}\n\n/**\n * Swaps one word or short phrase for another by melting the letters together.\n * Letters both texts share slide to their new place; the others blur out and\n * in. Screen readers get the plain text once, and with reduced motion the new\n * text replaces the old one at once.\n */\nexport function TextMorph({ text, className, ...spanProps }: TextMorphProps) {\n  const reduceMotion = useReducedMotion();\n\n  if (reduceMotion) {\n    return (\n      <span {...spanProps} className={className}>\n        {text}\n      </span>\n    );\n  }\n\n  return (\n    <span {...spanProps} className={cn(\"relative inline-flex whitespace-nowrap\", className)}>\n      <span className=\"sr-only\">{text}</span>\n      <span aria-hidden=\"true\" className=\"inline-flex\">\n        <AnimatePresence mode=\"popLayout\" initial={false}>\n          {keyedLetters(text).map(({ char, key }) => (\n            <motion.span\n              key={key}\n              layout=\"position\"\n              initial={GONE}\n              animate={{ ...HERE, transition: ARRIVE }}\n              exit={{ ...GONE, transition: LEAVE }}\n              transition={{ layout: SLIDE }}\n              // A space must keep its width, or two words would run together.\n              className=\"inline-block whitespace-pre\"\n            >\n              {char}\n            </motion.span>\n          ))}\n        </AnimatePresence>\n      </span>\n    </span>\n  );\n}\n"
+    }
+  ],
+  "docs": "Ask the Better Design MCP for get-ui-principle({ topic: \"text-morph\" }) before changing its motion."
+}

@@ -1,0 +1,14 @@
+/* Ported from https://www.aicss.dev/components/comparison-table */
+.tbl { width: 100%; display: flex; flex-direction: column; border: 0.0625rem solid var(--border); border-radius: 0.75rem; overflow: hidden; background: var(--muted); font-size: 0.8125rem; }
+.tblHead { display: flex; color: var(--muted-foreground); font-weight: 500; }
+.tblHead .tblCell { padding-top: 0.4375rem; padding-bottom: 0.4375rem; }
+.tblBody { display: flex; flex-direction: column; background: var(--card); border: 0.0625rem solid var(--border); border-radius: 0.75rem 0.75rem 0 0; margin: 0 -0.0625rem -0.0625rem; }
+.tblRow { display: flex; }
+.tblRow:not(:last-child) { border-bottom: 0.0625rem solid var(--border); }
+.tblCell { flex: 1 1 0; min-width: 0; padding: 0.5625rem 0.75rem; display: flex; align-items: center; color: var(--foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tblCell:not(:last-child) { border-right: 0.0625rem solid var(--border); }
+/* text-overflow:ellipsis has no effect on a flex container's raw text, so the
+   label lives in this shrinkable child instead. */
+.tblCellText { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.yes { color: oklch(0.6247 0.137 159.8934); }
+.no { color: var(--muted-foreground); }

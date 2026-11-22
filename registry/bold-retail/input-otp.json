@@ -1,0 +1,31 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { OTPInput, OTPInputContext } from \"input-otp\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/**\n * Bold retail InputOTP: one white box per digit, 3rem by 3.5rem, with the\n * digit set large in tabular figures. The box waiting for the next digit\n * takes the black edge and grey halo of a focused field, and a thin black\n * caret blinks inside it.\n */\nconst InputOTP = React.forwardRef<\n  React.ComponentRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    data-slot=\"input-otp\"\n    containerClassName={cn(\n      \"group/otp flex items-center gap-3 has-[:disabled]:cursor-not-allowed\",\n      containerClassName,\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n));\nInputOTP.displayName = \"InputOTP\";\n\n/** A run of boxes that belong together, such as the first three digits. */\nconst InputOTPGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"input-otp-group\"\n    className={cn(\"flex items-center gap-2\", className)}\n    {...props}\n  />\n));\nInputOTPGroup.displayName = \"InputOTPGroup\";\n\n/** One digit's box. It reads its character and caret from the OTP input. */\nconst InputOTPSlot = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext);\n  const slot = inputOTPContext.slots[index];\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"input-otp-slot\"\n      data-active={slot?.isActive || undefined}\n      className={cn(\n        formFieldBase,\n        \"relative flex h-14 w-12 items-center justify-center px-0\",\n        \"text-xl font-medium tabular-nums\",\n        \"data-[active]:z-10 data-[active]:border-foreground data-[active]:ring-4 data-[active]:ring-(--halo)\",\n        \"group-has-[:disabled]/otp:bg-secondary group-has-[:disabled]/otp:text-(--foreground-disabled) group-has-[:disabled]/otp:hover:border-(--line-strong)\",\n        className,\n      )}\n      {...props}\n    >\n      {slot?.char}\n      {slot?.hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-6 w-px animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      )}\n    </div>\n  );\n});\nInputOTPSlot.displayName = \"InputOTPSlot\";\n\n/** A short dash between two groups of boxes. */\nconst InputOTPSeparator = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"separator\"\n    data-slot=\"input-otp-separator\"\n    className={cn(\"flex items-center text-muted-foreground\", className)}\n    {...props}\n  >\n    <Icon icon=\"mingcute:minimize-line\" className=\"size-4\" aria-hidden=\"true\" />\n  </div>\n));\nInputOTPSeparator.displayName = \"InputOTPSeparator\";\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.62 0.003 286.3)",
+      "halo": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.32)",
+      "halo": "oklch(1 0 0 / 0.16)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

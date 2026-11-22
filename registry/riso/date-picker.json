@@ -1,0 +1,19 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport { CalendarIcon } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"@/components/ui/popover\"\nimport { formFieldBase } from \"./_shared\"\n\n// Retro-Playful Date Picker: calendar popover triggered by button\n\ninterface DatePickerProps {\n  value?: Date\n  onChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: DatePickerProps) {\n  const formatted = value\n    ? value.toLocaleDateString(\"en-US\", { year: \"numeric\", month: \"long\", day: \"numeric\" })\n    : null\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          disabled={disabled}\n          className={cn(\n            formFieldBase,\n            \"flex h-10 items-center justify-start py-2 text-left font-normal\",\n            !value && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <CalendarIcon className=\"mr-2 h-4 w-4\" />\n          {formatted ?? placeholder}\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          mode=\"single\"\n          selected={value}\n          onSelect={onChange}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/riso/calendar.json",
+    "https://better-design.com/registry/riso/popover.json",
+    "https://better-design.com/registry/riso/_shared.json"
+  ]
+}

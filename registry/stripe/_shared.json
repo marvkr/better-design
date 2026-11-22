@@ -1,0 +1,28 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "export const formFieldSurface = [\n  \"rounded-md bg-input text-sm text-foreground\",\n  \"[box-shadow:var(--shadow-control)]\",\n  \"placeholder:text-muted-foreground\",\n  \"transition-[box-shadow,background-color] duration-fast\",\n  \"hover:[box-shadow:var(--shadow-control-hover)]\",\n  \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)]\",\n  \"disabled:cursor-not-allowed disabled:bg-muted disabled:opacity-70\",\n].join(\" \")\n\nexport const formFieldBase = `${formFieldSurface} w-full`\n\nexport const searchFieldBase = [\n  \"w-full rounded-lg bg-muted text-sm text-foreground\",\n  \"placeholder:text-muted-foreground\",\n  \"transition-[background-color,box-shadow] duration-fast\",\n  \"hover:bg-accent\",\n  \"focus-visible:bg-background focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)]\",\n  \"disabled:cursor-not-allowed disabled:opacity-70\",\n].join(\" \")\n\nexport const floatingSurface =\n  \"rounded-lg bg-popover text-popover-foreground [box-shadow:var(--shadow-popover)]\"\n\nexport const dialogSurface =\n  \"rounded-xl bg-background [box-shadow:var(--shadow-dialog)]\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-control": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-control-hover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.2), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.1)",
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)",
+      "shadow-dialog": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.5rem 1.25rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2), 0 1.5rem 4rem -1.25rem oklch(0.2651 0.0621 251.37 / 0.32)"
+    },
+    "dark": {
+      "shadow-control": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-control-hover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.2), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.1)",
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)",
+      "shadow-dialog": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.5rem 1.25rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2), 0 1.5rem 4rem -1.25rem oklch(0.2651 0.0621 251.37 / 0.32)"
+    }
+  }
+}

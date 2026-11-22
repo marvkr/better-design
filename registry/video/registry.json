@@ -1,0 +1,1568 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-design-video",
+  "homepage": "https://better-design.com/video",
+  "items": [
+    {
+      "name": "video-kit",
+      "type": "registry:lib",
+      "title": "Video Kit",
+      "description": "The Better Design video kit: the theme every video component paints from, shared easing and springs, colour helpers that read any CSS colour, oklch() included, and mix in OKLab, a caret, a text field, phone and laptop frames drawn from real hardware measurements, and sound: cues, a mixer and a SoundTrack that plays the CC0 Better Design sound pack. The install command for any component brings it in.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "culori",
+        "@remotion/media@4.0.513"
+      ],
+      "devDependencies": [
+        "@types/culori"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/video/lib/bd-video/caret.tsx",
+          "target": "lib/bd-video/caret.tsx",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/color.ts",
+          "target": "lib/bd-video/color.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/device-frame.tsx",
+          "target": "lib/bd-video/device-frame.tsx",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/index.ts",
+          "target": "lib/bd-video/index.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/media.ts",
+          "target": "lib/bd-video/media.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/motion.ts",
+          "target": "lib/bd-video/motion.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/sfx-data.ts",
+          "target": "lib/bd-video/sfx-data.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/sound-track.tsx",
+          "target": "lib/bd-video/sound-track.tsx",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/sound.ts",
+          "target": "lib/bd-video/sound.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/text-field.tsx",
+          "target": "lib/bd-video/text-field.tsx",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/video/lib/bd-video/theme.ts",
+          "target": "lib/bd-video/theme.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "stat-count",
+      "type": "registry:component",
+      "title": "Stat Count",
+      "description": "Stat count animation: one sourced number climbs to its value while a hairline under it fills, then the label settles in. The proof beat of a launch film.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/stat-count.tsx",
+          "target": "components/bd-video/stat-count.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bar-rise",
+      "type": "registry:component",
+      "title": "Bar Rise",
+      "description": "Bar chart animation: bars grow from the baseline one after another while each value counts up above it, and the last bar lands in the primary colour.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/bar-rise.tsx",
+          "target": "components/bd-video/bar-rise.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "line-trace",
+      "type": "registry:component",
+      "title": "Line Trace",
+      "description": "Line chart animation: a smooth line draws itself left to right over a soft area fill, a dot rides its leading edge, and the final value is called out where it ends.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513",
+        "@remotion/paths@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/line-trace.tsx",
+          "target": "components/bd-video/line-trace.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ring-meter",
+      "type": "registry:component",
+      "title": "Ring Meter",
+      "description": "Progress ring animation: a ring sweeps round to a percentage while the number counts up in its centre, then a caption settles under it.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/ring-meter.tsx",
+          "target": "components/bd-video/ring-meter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "digit-roll",
+      "type": "registry:component",
+      "title": "Digit Roll",
+      "description": "Odometer number animation: each digit rolls vertically into place, the ones column first and each column to its left a beat later, then a label settles under the figure.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/digit-roll.tsx",
+          "target": "components/bd-video/digit-roll.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "comment-pile",
+      "type": "registry:component",
+      "title": "Comment Pile",
+      "description": "Comment section animation: comment cards land under a launch post faster and faster until they fill the frame, then one comment lifts out of the dimmed pile.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/comment-pile.tsx",
+          "target": "components/bd-video/comment-pile.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "supporter-grid",
+      "type": "registry:component",
+      "title": "Supporter Grid",
+      "description": "Supporter wall animation: a grid of initials avatars switches on in a wave from the centre while the supporter count climbs, then a thank-you line closes the shot.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/supporter-grid.tsx",
+          "target": "components/bd-video/supporter-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "message-bubbles",
+      "type": "registry:component",
+      "title": "Message Bubbles",
+      "description": "Text message animation: a phone thread shares a link to a product video and the replies pop in after typing dots, on alternating sides.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/message-bubbles.tsx",
+          "target": "components/bd-video/message-bubbles.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tool-calls",
+      "type": "registry:component",
+      "title": "Tool Calls",
+      "description": "AI agent tool call animation: tool-call chips arrive one by one and resolve from a spinner to a check, then the agent's short answer writes itself word by word.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/tool-calls.tsx",
+          "target": "components/bd-video/tool-calls.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "file-attach",
+      "type": "registry:component",
+      "title": "File Attach",
+      "description": "File upload to AI prompt animation: file thumbnails slide in, drop into a prompt composer as attachment chips, then the prompt types itself and the send button presses.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/file-attach.tsx",
+          "target": "components/bd-video/file-attach.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "device-drop",
+      "type": "registry:component",
+      "title": "Device Drop",
+      "description": "Phone mockup animation: a headline settles in on the left while a phone is set down on the right with weight, a small overshoot and a soft contact shadow. The screen shows your screenshot or a placeholder app.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/device-drop.tsx",
+          "target": "components/bd-video/device-drop.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-dive",
+      "type": "registry:component",
+      "title": "Button Dive",
+      "description": "Button zoom animation: the camera pushes into a primary button until its fill covers the frame, then the fill opens into the app it leads to.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/button-dive.tsx",
+          "target": "components/bd-video/button-dive.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "screenshot-wall",
+      "type": "registry:component",
+      "title": "Screenshot Wall",
+      "description": "Screenshot wall animation: a tilted wall of product screens drifts slowly on the diagonal, then one screen lifts forward to the centre with a caption.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/screenshot-wall.tsx",
+          "target": "components/bd-video/screenshot-wall.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "compare-split",
+      "type": "registry:component",
+      "title": "Compare Split",
+      "description": "Before and after animation: the old screen and the new one share the frame, split by a handle that stops halfway so both read, then hands the whole frame to the new screen.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/compare-split.tsx",
+          "target": "components/bd-video/compare-split.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "skeleton-build",
+      "type": "registry:component",
+      "title": "Skeleton Build",
+      "description": "UI generation animation: a product screen builds itself. Loading blocks grow in reading order with a soft shimmer, then each one resolves in place into the real interface, with bars rising and figures counting up.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/skeleton-build.tsx",
+          "target": "components/bd-video/skeleton-build.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "picker-spin",
+      "type": "registry:component",
+      "title": "Picker Spin",
+      "description": "Picker wheel animation: an iOS-style wheel is flicked, slows down and lands on one row, which turns the primary colour and confirms with a check.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/picker-spin.tsx",
+          "target": "components/bd-video/picker-spin.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "version-stamp",
+      "type": "registry:component",
+      "title": "Version Stamp",
+      "description": "Release end card animation: the product name types in, a large version number stamps down with a short shake, and a dated line settles under it.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/version-stamp.tsx",
+          "target": "components/bd-video/version-stamp.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "strike-swap",
+      "type": "registry:component",
+      "title": "Strike Swap",
+      "description": "Strikethrough text animation: one phrase in a sentence is struck out with a hand-drawn line and fades back, then a better phrase writes in after it.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/strike-swap.tsx",
+          "target": "components/bd-video/strike-swap.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "transition-iris",
+      "type": "registry:lib",
+      "title": "Iris Transition",
+      "description": "Iris transition: the next scene opens through a circle that grows from any point you choose. Exports iris() for TransitionSeries and a demo.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/transition-iris.tsx",
+          "target": "components/bd-video/transition-iris.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "transition-zoom-through",
+      "type": "registry:lib",
+      "title": "Zoom Through Transition",
+      "description": "Zoom through transition: the outgoing scene scales up and blurs past the lens while the next scene settles in from slightly large. Exports zoomThrough() for TransitionSeries and a demo.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/transition-zoom-through.tsx",
+          "target": "components/bd-video/transition-zoom-through.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "transition-whip-pan",
+      "type": "registry:lib",
+      "title": "Whip Pan Transition",
+      "description": "Whip pan transition: a fast sideways camera move where both scenes travel together under horizontal motion blur. Exports whipPan() for TransitionSeries and a demo.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/transition-whip-pan.tsx",
+          "target": "components/bd-video/transition-whip-pan.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "transition-blur-dissolve",
+      "type": "registry:lib",
+      "title": "Blur Dissolve Transition",
+      "description": "Blur dissolve transition: a cross-dissolve where both scenes go soft at the midpoint. Exports blurDissolve() for TransitionSeries and a demo.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/transition-blur-dissolve.tsx",
+          "target": "components/bd-video/transition-blur-dissolve.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "transition-grid-wipe",
+      "type": "registry:lib",
+      "title": "Grid Wipe Transition",
+      "description": "Grid wipe transition: the next scene appears through a grid of tiles that grow in a diagonal wave. Exports gridWipe() for TransitionSeries and a demo.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/transition-grid-wipe.tsx",
+          "target": "components/bd-video/transition-grid-wipe.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "gradient-field",
+      "type": "registry:component",
+      "title": "Gradient Field",
+      "description": "Gradient background animation: soft blobs in tones of the primary colour drift slowly over the page and loop without a seam. Children draw on top.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/gradient-field.tsx",
+          "target": "components/bd-video/gradient-field.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dot-grid",
+      "type": "registry:component",
+      "title": "Dot Grid",
+      "description": "Dot grid background animation: an even field of dots drifts diagonally while a wave of primary light travels across it, looping without a seam. Children draw on top.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/dot-grid.tsx",
+          "target": "components/bd-video/dot-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-grain",
+      "type": "registry:component",
+      "title": "Film Grain",
+      "description": "Film grain overlay: fine animated grain and a soft vignette laid over your footage, deterministic on every render. Children draw underneath.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-grain.tsx",
+          "target": "components/bd-video/film-grain.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "light-sweep",
+      "type": "registry:component",
+      "title": "Light Sweep",
+      "description": "Light sweep background animation: a soft diagonal band of light crosses the surface every few seconds, like a reflection on glass. Children draw underneath.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/light-sweep.tsx",
+          "target": "components/bd-video/light-sweep.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "answer-select",
+      "type": "registry:component",
+      "title": "Answer Select",
+      "description": "Text selection animation: a question sits in a pill, the answer writes itself word by word, then one phrase is selected and a small toolbar opens under it.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/answer-select.tsx",
+          "target": "components/bd-video/answer-select.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "answer-reply",
+      "type": "registry:component",
+      "title": "Answer Reply",
+      "description": "Chat reply animation: a close shot of the send button being pressed, then a cut to the wide shot where the answer streams in line by line while the camera eases back.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/answer-reply.tsx",
+          "target": "components/bd-video/answer-reply.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "prompt-compose",
+      "type": "registry:component",
+      "title": "Prompt Compose",
+      "description": "Prompt typing animation: a composer card grows out of a thin line, the prompt types itself, and a pointer glides in to press send, which turns into a check.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/prompt-compose.tsx",
+          "target": "components/bd-video/prompt-compose.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "assistant-home",
+      "type": "registry:component",
+      "title": "Assistant Home",
+      "description": "Assistant start screen animation: a greeting, an input and suggestion chips appear, then the chips fall away and the camera pushes into the input as the prompt types.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/assistant-home.tsx",
+          "target": "components/bd-video/assistant-home.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "search-bar",
+      "type": "registry:component",
+      "title": "Search Bar",
+      "description": "Search animation: a query types into a wide search field, the field rises, and a results list drops in with the matching words marked and the first result focused.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/search-bar.tsx",
+          "target": "components/bd-video/search-bar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "status-pill",
+      "type": "registry:component",
+      "title": "Status Pill",
+      "description": "Status badge animation: a centred sentence holds an inline pill that rolls through its states, each with its own icon and colour, until the last one lands.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/status-pill.tsx",
+          "target": "components/bd-video/status-pill.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "phone-mockup",
+      "type": "registry:component",
+      "title": "Phone Mockup",
+      "description": "Phone mockup animation: a phone tilts up into view and settles at an angle beside a caption, showing your screenshot, your screen recording or a placeholder app.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/phone-mockup.tsx",
+          "target": "components/bd-video/phone-mockup.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "laptop-mockup",
+      "type": "registry:component",
+      "title": "Laptop Mockup",
+      "description": "Laptop mockup animation: a closed laptop opens its lid, the screen lights up, then the camera pushes in until the screen fills the frame. Takes an image or a video for the screen.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/laptop-mockup.tsx",
+          "target": "components/bd-video/laptop-mockup.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "terminal-session",
+      "type": "registry:component",
+      "title": "Terminal Session",
+      "description": "Terminal animation: commands type after a prompt, output prints in short bursts, a spinner runs and a green success line lands. Every line is a prop.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/terminal-session.tsx",
+          "target": "components/bd-video/terminal-session.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "recording-shot",
+      "type": "registry:component",
+      "title": "Recording Shot",
+      "description": "Screen recording animation: turns a raw screen capture into a finished shot. It keeps the region you name, frames it to fill or show whole, starts at any frame and moves a camera to any point without showing an empty edge.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/recording-shot.tsx",
+          "target": "components/bd-video/recording-shot.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cursor-path",
+      "type": "registry:component",
+      "title": "Cursor Path",
+      "description": "Cursor animation: a pointer walks a path of waypoints over your screen and clicks where you mark it, with a press and a ripple. The placeholder card answers each click.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/cursor-path.tsx",
+          "target": "components/bd-video/cursor-path.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "screenshot-capture",
+      "type": "registry:component",
+      "title": "Screenshot Capture",
+      "description": "Screenshot capture animation: a browser window is captured while a toast counts to 100 percent, then the window drops away and the toast confirms the copy with a check.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/screenshot-capture.tsx",
+          "target": "components/bd-video/screenshot-capture.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "headline-reveal",
+      "type": "registry:component",
+      "title": "Headline Reveal",
+      "description": "Headline reveal animation: a headline arrives four ways. Words rise out of a soft blur, letters land as the tracking settles, words build the line from the centre, or words fly in out of order and lock into place.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/headline-reveal.tsx",
+          "target": "components/bd-video/headline-reveal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "word-mark",
+      "type": "registry:component",
+      "title": "Word Mark",
+      "description": "Highlight text animation: a sentence settles, then one phrase in it is marked by hand with a highlighter sweep, a drawn underline, a loose ring or a tight box.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/word-mark.tsx",
+          "target": "components/bd-video/word-mark.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "type-line",
+      "type": "registry:component",
+      "title": "Type Line",
+      "description": "Typewriter text animation: a line types out behind a blinking caret, then its ending is deleted and retyped, selected and typed over, or morphed letter by letter into new words.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/type-line.tsx",
+          "target": "components/bd-video/type-line.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "word-rotate",
+      "type": "registry:component",
+      "title": "Word Rotate",
+      "description": "Rotating word animation: a sentence with one slot that cycles through words by sliding, flipping, spinning a reel or ticking a checkbox as each word lands. The slot resizes to each word.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/word-rotate.tsx",
+          "target": "components/bd-video/word-rotate.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "letter-wave",
+      "type": "registry:component",
+      "title": "Letter Wave",
+      "description": "Letter wave animation: a title rides in letter by letter on a travelling wave with a small bounce, its lead words first and scaling toward the viewer, then a soft ripple runs along it.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/letter-wave.tsx",
+          "target": "components/bd-video/letter-wave.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "glyph-decode",
+      "type": "registry:component",
+      "title": "Glyph Decode",
+      "description": "Text decode animation: a line resolves out of scrambled glyphs from left to right, each letter flashing the primary colour before it settles to ink, and a product name lands underneath.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/glyph-decode.tsx",
+          "target": "components/bd-video/glyph-decode.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "title-cards",
+      "type": "registry:component",
+      "title": "Title Cards",
+      "description": "Title card animation: full-frame statements cut hard from one beat to the next, each held long enough to read. The key word on the last card lands in the primary colour.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/title-cards.tsx",
+          "target": "components/bd-video/title-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "launch-title",
+      "type": "registry:component",
+      "title": "Launch Title",
+      "description": "Launch title animation: a small eyebrow line, a cut to the product name assembling large letter by letter, then a cut to the tagline as a primary band sweeps across one word.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/launch-title.tsx",
+          "target": "components/bd-video/launch-title.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "captions",
+      "type": "registry:component",
+      "title": "Captions",
+      "description": "Burned-in captions animation: word-timed captions for vertical and landscape videos, either popping on a few words at a time or filling a full line word by word. They sit in the safe area on a soft backdrop, so they read over any picture.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/captions.tsx",
+          "target": "components/bd-video/captions.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "shape-story",
+      "type": "registry:component",
+      "title": "Shape Story",
+      "description": "Kinetic sentence animation: a sentence told one beat at a time, centred, while soft shapes in primary tints burst from the newest word, split in two and drift into place behind it.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513",
+        "@remotion/shapes@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/shape-story.tsx",
+          "target": "components/bd-video/shape-story.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "glow-frame",
+      "type": "registry:component",
+      "title": "Glow Frame",
+      "description": "Glowing border animation: a soft glow around the whole frame pulses while something is working, then calms to a steady primary line. Any content can sit inside.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/glow-frame.tsx",
+          "target": "components/bd-video/glow-frame.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "logo-cloud",
+      "type": "registry:component",
+      "title": "Logo Cloud",
+      "description": "Logo cloud animation: a field of integration tiles drifts slowly behind a centred headline while the camera pulls back. Logos are names drawn as wordmark chips, or images when you pass image paths.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/logo-cloud.tsx",
+          "target": "components/bd-video/logo-cloud.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "logo-reveal",
+      "type": "registry:component",
+      "title": "Logo Reveal",
+      "description": "Logo reveal animation: a set of pictures collapses into the product mark and the name sets beside it. Choose an orbit, a fast flicker or a flicked stack.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/logo-reveal.tsx",
+          "target": "components/bd-video/logo-reveal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "wordmark-build",
+      "type": "registry:component",
+      "title": "Wordmark Build",
+      "description": "Wordmark animation: solid blocks slide in and stack into a line, then resolve letter by letter into the brand name, with one accent block left as the full stop.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/wordmark-build.tsx",
+          "target": "components/bd-video/wordmark-build.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "end-card",
+      "type": "registry:component",
+      "title": "End Card",
+      "description": "End card animation: the wordmark set huge across the frame, a hard cut to a close-up of part of it, then a calm end card with a call to action and a web address.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/end-card.tsx",
+          "target": "components/bd-video/end-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "launch-hero",
+      "type": "registry:component",
+      "title": "Launch Hero",
+      "description": "Launch hero animation: two product cards slide in from opposite sides into an overlapping pair while the launch headline and subline settle above them.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/launch-hero.tsx",
+          "target": "components/bd-video/launch-hero.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "card-carousel",
+      "type": "registry:component",
+      "title": "Card Carousel",
+      "description": "Card carousel animation: a rail of cards on a tilted plane is flicked sideways, coasts on its momentum and settles with one card centred and lifted.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/card-carousel.tsx",
+          "target": "components/bd-video/card-carousel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "photo-orbit",
+      "type": "registry:component",
+      "title": "Photo Orbit",
+      "description": "Photo gallery intro: pictures spiral in from the edges on one slow orbit around a title, smaller and dimmer as they reach the centre.",
+      "dependencies": [
+        "@remotion/google-fonts@4.0.513",
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/photo-orbit.tsx",
+          "target": "components/bd-video/photo-orbit.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "moodboard",
+      "type": "registry:component",
+      "title": "Moodboard",
+      "description": "Moodboard animation: a headline with one inline picture slot that swaps on the beat, then the camera flies into the last picture until it fills the frame.",
+      "dependencies": [
+        "@remotion/google-fonts@4.0.513",
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/moodboard.tsx",
+          "target": "components/bd-video/moodboard.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "photo-reel",
+      "type": "registry:component",
+      "title": "Photo Reel",
+      "description": "Photo reel animation: pictures cut fast between an opening and a closing caption, the last one zooming, then the frame closes into a collage.",
+      "dependencies": [
+        "@remotion/google-fonts@4.0.513",
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/photo-reel.tsx",
+          "target": "components/bd-video/photo-reel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "team-channel",
+      "type": "registry:component",
+      "title": "Team Channel",
+      "description": "Team chat animation: a work channel fills itself in, typing dots before each message, and a reaction lands on the last one.",
+      "dependencies": [
+        "@remotion/google-fonts@4.0.513",
+        "@remotion/shapes@4.0.513",
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/team-channel.tsx",
+          "target": "components/bd-video/team-channel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "access-grant",
+      "type": "registry:component",
+      "title": "Access Grant",
+      "description": "Access granted animation: a pointer clicks a call to action and team member cards switch from pending to granted one after another.",
+      "dependencies": [
+        "@remotion/google-fonts@4.0.513",
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/access-grant.tsx",
+          "target": "components/bd-video/access-grant.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-product-launch",
+      "type": "registry:block",
+      "title": "Product Launch Film",
+      "description": "Product launch video template: a three-line hook, the name building into a wordmark, the product on a phone, two features, one sourced number and an end card, about 31 seconds.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json",
+        "https://better-design.com/registry/video/title-cards.json",
+        "https://better-design.com/registry/video/wordmark-build.json",
+        "https://better-design.com/registry/video/device-drop.json",
+        "https://better-design.com/registry/video/recording-shot.json",
+        "https://better-design.com/registry/video/tool-calls.json",
+        "https://better-design.com/registry/video/stat-count.json",
+        "https://better-design.com/registry/video/end-card.json",
+        "https://better-design.com/registry/video/transition-whip-pan.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-product-launch.tsx",
+          "target": "components/bd-video/film-product-launch.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-changelog",
+      "type": "registry:block",
+      "title": "Changelog Film",
+      "description": "Changelog video template: the version stamps down, three changes play in turn (a screen recording, a marked sentence, a struck and replaced phrase), then the end card, about 20 seconds.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json",
+        "https://better-design.com/registry/video/version-stamp.json",
+        "https://better-design.com/registry/video/recording-shot.json",
+        "https://better-design.com/registry/video/word-mark.json",
+        "https://better-design.com/registry/video/strike-swap.json",
+        "https://better-design.com/registry/video/end-card.json",
+        "https://better-design.com/registry/video/transition-whip-pan.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-changelog.tsx",
+          "target": "components/bd-video/film-changelog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-onboarding",
+      "type": "registry:block",
+      "title": "Onboarding Film",
+      "description": "Onboarding video template: a welcome headline, three steps (a pointer working through settings, a screen recording, rotating words), a ring that fills when setup is done, then the end card, about 30 seconds.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json",
+        "https://better-design.com/registry/video/headline-reveal.json",
+        "https://better-design.com/registry/video/cursor-path.json",
+        "https://better-design.com/registry/video/recording-shot.json",
+        "https://better-design.com/registry/video/word-rotate.json",
+        "https://better-design.com/registry/video/ring-meter.json",
+        "https://better-design.com/registry/video/end-card.json",
+        "https://better-design.com/registry/video/transition-whip-pan.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-onboarding.tsx",
+          "target": "components/bd-video/film-onboarding.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-app-store-preview",
+      "type": "registry:block",
+      "title": "App Store Preview Film",
+      "description": "App Store preview video template, vertical: a title on a wave, the app on a phone, a plan picker that lands, a shared message thread, then the logo reveal, about 20 seconds at 1080 by 1920, the App Store size for 16:9 iPhones.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json",
+        "https://better-design.com/registry/video/letter-wave.json",
+        "https://better-design.com/registry/video/phone-mockup.json",
+        "https://better-design.com/registry/video/picker-spin.json",
+        "https://better-design.com/registry/video/message-bubbles.json",
+        "https://better-design.com/registry/video/logo-reveal.json",
+        "https://better-design.com/registry/video/transition-whip-pan.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-app-store-preview.tsx",
+          "target": "components/bd-video/film-app-store-preview.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-launch-day",
+      "type": "registry:block",
+      "title": "Launch Day Film",
+      "description": "Launch day video template for Product Hunt or Hacker News: title cards, a dive into the product, a prompt composing itself, the people who backed the launch and an end card that asks for support, about 20 seconds.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json",
+        "https://better-design.com/registry/video/title-cards.json",
+        "https://better-design.com/registry/video/button-dive.json",
+        "https://better-design.com/registry/video/prompt-compose.json",
+        "https://better-design.com/registry/video/supporter-grid.json",
+        "https://better-design.com/registry/video/end-card.json",
+        "https://better-design.com/registry/video/transition-whip-pan.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-launch-day.tsx",
+          "target": "components/bd-video/film-launch-day.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sound-breakdown",
+      "type": "registry:component",
+      "title": "Sound Breakdown",
+      "description": "Sound design breakdown video: a film plays above one lane per sound layer, each pass adds layers with their waveforms and labels, a playhead lights each cue as it sounds, and the last pass plays the full mix with music.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/google-fonts@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/sound-breakdown.tsx",
+          "target": "components/bd-video/sound-breakdown.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-short-demo",
+      "type": "registry:block",
+      "title": "Short Demo Film",
+      "description": "Short product demo video with full sound design: a prompt types and sends, an agent runs its tools, the screen builds itself and the name lands, about 15 seconds, every cue mixed over a music bed.",
+      "dependencies": [
+        "remotion@4.0.513",
+        "@remotion/transitions@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/video-kit.json",
+        "https://better-design.com/registry/video/prompt-compose.json",
+        "https://better-design.com/registry/video/tool-calls.json",
+        "https://better-design.com/registry/video/skeleton-build.json",
+        "https://better-design.com/registry/video/wordmark-build.json",
+        "https://better-design.com/registry/video/transition-whip-pan.json",
+        "https://better-design.com/registry/video/sound-breakdown.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-short-demo.tsx",
+          "target": "components/bd-video/film-short-demo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "film-short-demo-breakdown",
+      "type": "registry:block",
+      "title": "Short Demo Sound Breakdown",
+      "description": "Sound breakdown of the short demo film: four passes, keys and clicks, then pops, then whooshes and hits, then the full mix with music, each layer drawn as a labelled waveform lane.",
+      "dependencies": [
+        "remotion@4.0.513"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "https://better-design.com/registry/video/film-short-demo.json"
+      ],
+      "files": [
+        {
+          "path": "registry/video/components/bd-video/film-short-demo.tsx",
+          "target": "components/bd-video/film-short-demo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

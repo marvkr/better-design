@@ -1,0 +1,28 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Toggle: quiet at rest; pressed, it becomes a raised charcoal\n// pill so the on state reads as a physically latched control.\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium\",\n    \"text-muted-foreground transition-[background,box-shadow,color] duration-base\",\n    \"hover:bg-accent hover:text-foreground\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-[state=on]:[background-image:var(--gradient-raised)]\",\n    \"data-[state=on]:text-foreground data-[state=on]:border data-[state=on]:border-highlight\",\n    \"data-[state=on]:[box-shadow:var(--shadow-raised-sm)]\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-highlight bg-transparent\",\n      },\n      size: {\n        default: \"h-9 px-3.5 min-w-9\",\n        sm: \"h-8 px-2.5 min-w-8\",\n        lg: \"h-10 px-4 min-w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = TogglePrimitive.Root.displayName\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

@@ -31,13 +31,13 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
         className={cn(
           "flex w-full items-stretch overflow-hidden",
           "rounded-full border border-white/10 backdrop-blur-xl bg-white/[0.06]",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.06)]",
-          "transition duration-200 ease-out",
-          "focus-within:shadow-[inset_0_0_6px_rgba(255,255,255,0.06),0_0_0_3px_oklch(0.65_0.19_250/0.2)] focus-within:border-primary/50",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06)]",
+          "transition duration-base ease-out",
+          "focus-within:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06),0_0_0_0.1875rem_oklch(0.65_0.19_250/0.2)] focus-within:border-primary/50",
           "hover:bg-white/[0.08] hover:border-white/[0.15]",
           error && [
             "border-destructive",
-            "focus-within:border-destructive focus-within:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]",
+            "focus-within:border-destructive focus-within:shadow-[0_0_0_0.1875rem_hsl(var(--destructive)/0.12)]",
           ],
           disabled && "cursor-not-allowed opacity-70",
           size === "sm" && "rounded-2xl",

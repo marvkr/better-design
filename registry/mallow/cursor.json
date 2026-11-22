@@ -1,0 +1,14 @@
+{
+  "name": "cursor",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/cursor.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Mallow Cursor: text that types itself out behind a blinking caret. The\n * caret is a plain bar in the ink colour, as tall as the line, with no halo. Under\n * reduced motion the caret holds still.\n */\nexport interface CursorProps extends React.HTMLAttributes<HTMLSpanElement> {\n  text: string;\n  speed?: number;\n  loop?: boolean;\n  pauseMs?: number;\n}\n\nconst Cursor = React.forwardRef<HTMLSpanElement, CursorProps>(\n  ({ className, text, speed = 60, loop = false, pauseMs = 1500, ...props }, ref) => {\n    const [display, setDisplay] = React.useState(\"\");\n    const [phase, setPhase] = React.useState<\"typing\" | \"paused\" | \"deleting\">(\"typing\");\n    const reduceMotion = useReducedMotion();\n\n    React.useEffect(() => {\n      if (phase === \"typing\") {\n        if (display.length < text.length) {\n          const t = setTimeout(() => setDisplay(text.slice(0, display.length + 1)), speed);\n          return () => clearTimeout(t);\n        }\n        if (loop) {\n          const t = setTimeout(() => setPhase(\"deleting\"), pauseMs);\n          return () => clearTimeout(t);\n        }\n        setPhase(\"paused\");\n      } else if (phase === \"deleting\") {\n        if (display.length > 0) {\n          const t = setTimeout(() => setDisplay(text.slice(0, display.length - 1)), speed / 2);\n          return () => clearTimeout(t);\n        }\n        setPhase(\"typing\");\n      }\n    }, [display, phase, text, speed, loop, pauseMs]);\n\n    return (\n      <span\n        ref={ref}\n        data-slot=\"cursor\"\n        aria-label={text}\n        className={cn(\"inline-flex items-center font-mono text-foreground\", className)}\n        {...props}\n      >\n        <span aria-hidden>{display}</span>\n        <motion.span\n          aria-hidden\n          animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 1, 0, 0] }}\n          transition={\n            reduceMotion\n              ? { duration: 0 }\n              : { duration: 1.06, times: [0, 0.5, 0.5, 1], repeat: Infinity, ease: \"linear\" }\n          }\n          className=\"ml-0.5 inline-block h-lh w-0.5 rounded-full bg-foreground\"\n        />\n      </span>\n    );\n  },\n);\nCursor.displayName = \"Cursor\";\n\nexport { Cursor };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ]
+}

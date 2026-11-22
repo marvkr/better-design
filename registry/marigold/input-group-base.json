@@ -1,0 +1,14 @@
+{
+  "name": "input-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n// Talentboard InputGroup: recessed shell with quiet prefix/suffix slots.\n\ninterface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"prefix\"> {\n  prefix?: React.ReactNode;\n  suffix?: React.ReactNode;\n  size?: \"default\" | \"sm\";\n  disabled?: boolean;\n  error?: boolean;\n}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  ({ className, prefix, suffix, size = \"default\", disabled, error, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        data-disabled={disabled || undefined}\n        className={cn(\n          formFieldBase,\n          \"flex items-center gap-2 rounded-lg px-3\",\n          \"focus-within:border-ring/60 focus-within:ring-2 focus-within:ring-ring/35\",\n          size === \"default\" ? \"h-9\" : \"h-8\",\n          error && \"border-destructive/70 focus-within:border-destructive focus-within:ring-destructive/30\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          \"[&>input]:h-full [&>input]:w-full [&>input]:bg-transparent [&>input]:text-sm [&>input]:text-foreground [&>input]:outline-none [&>input]:placeholder:text-muted-foreground\",\n          className\n        )}\n        {...props}\n      >\n        {prefix && <span className=\"flex shrink-0 items-center text-sm text-muted-foreground\">{prefix}</span>}\n        {children}\n        {suffix && <span className=\"flex shrink-0 items-center text-sm text-muted-foreground\">{suffix}</span>}\n      </div>\n    );\n  }\n);\nInputGroup.displayName = \"InputGroup\";\n\nexport { InputGroup };\nexport type { InputGroupProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/marigold/_shared-base.json"
+  ]
+}

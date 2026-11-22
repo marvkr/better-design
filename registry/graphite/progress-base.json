@@ -1,0 +1,27 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"]\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator className=\"h-full w-full flex-1 rounded-full bg-[image:var(--pill-gradient)] transition-all duration-slow [box-shadow:var(--shadow-pill)]\" />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)"
+    },
+    "dark": {
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)"
+    }
+  }
+}

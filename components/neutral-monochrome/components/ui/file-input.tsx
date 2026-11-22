@@ -69,7 +69,7 @@ function FileInput({
         }}
         className={cn(
           "flex cursor-pointer flex-col items-center justify-center gap-3",
-          "rounded-[10px] border-2 border-dashed bg-card px-6 py-10 text-center transition-colors",
+          "rounded-[0.625rem] border-2 border-dashed bg-card px-6 py-10 text-center transition-colors",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           dragging
             ? "border-primary bg-primary/5"
@@ -114,7 +114,7 @@ function FileInput({
           {files.map((file, i) => (
             <li
               key={i}
-              className="flex items-center gap-3 rounded-[10px] border border-border bg-card px-3 py-2"
+              className="flex items-center gap-3 rounded-[0.625rem] border border-border bg-card px-3 py-2"
             >
               <File className="h-4 w-4 shrink-0 text-muted-foreground" />
               <div className="min-w-0 flex-1">

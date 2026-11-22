@@ -1,0 +1,19 @@
+{
+  "name": "combobox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nconst cities = [\n  { value: \"lisbon\", label: \"Lisbon\" },\n  { value: \"nairobi\", label: \"Nairobi\" },\n  { value: \"osaka\", label: \"Osaka\" },\n  { value: \"toronto\", label: \"Toronto\" },\n  { value: \"valparaiso\", label: \"Valparaíso\" },\n];\n\n/**\n * Cream editorial Combobox: a select you can type into.\n *\n * The trigger is the same pale paper field as every input, with an up-down\n * caret at the end; its edge turns terracotta while the list is open. The\n * list is the lightest paper panel, as wide as the trigger, with a search\n * field at the top and a tick at the end of the chosen row.\n */\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n  const selected = cities.find((city) => city.value === value);\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          role=\"combobox\"\n          aria-expanded={open}\n          data-slot=\"combobox-trigger\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"w-56 cursor-pointer items-center justify-between gap-2 text-start\",\n            \"data-[state=open]:border-primary\",\n          )}\n        >\n          <span className={cn(\"truncate\", !selected && \"text-muted-foreground\")}>\n            {selected ? selected.label : \"Choose a city\"}\n          </span>\n          <Icon\n            icon=\"ph:caret-up-down\"\n            className=\"size-4 shrink-0 text-muted-foreground\"\n            aria-hidden=\"true\"\n          />\n        </button>\n      </PopoverTrigger>\n      <PopoverContent\n        align=\"start\"\n        sideOffset={6}\n        className=\"w-(--radix-popover-trigger-width) min-w-56 gap-0 p-0\"\n      >\n        <Command className=\"bg-transparent shadow-none\">\n          <CommandInput placeholder=\"Search cities\" />\n          <CommandList>\n            <CommandEmpty>No city matches that search.</CommandEmpty>\n            <CommandGroup>\n              {cities.map((city) => (\n                <CommandItem\n                  key={city.value}\n                  value={city.value}\n                  keywords={[city.label]}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                  className=\"pe-8\"\n                >\n                  {city.label}\n                  <Icon\n                    icon=\"ph:check\"\n                    className={cn(\n                      \"absolute end-2.5 size-4 text-foreground\",\n                      value === city.value ? \"opacity-100\" : \"opacity-0\",\n                    )}\n                    aria-hidden=\"true\"\n                  />\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json",
+    "https://better-design.com/registry/cream-editorial/command.json",
+    "https://better-design.com/registry/cream-editorial/popover.json"
+  ]
+}

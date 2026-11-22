@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "react-resizable-panels"
-  ],
-  "registryDependencies": [
-    "utils"
+    "react-resizable-panels@^3.0.3"
   ]
 }

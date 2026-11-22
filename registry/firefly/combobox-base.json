@@ -1,0 +1,28 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nconst cities = [\n  { value: \"lisbon\", label: \"Lisbon\" },\n  { value: \"nairobi\", label: \"Nairobi\" },\n  { value: \"seoul\", label: \"Seoul\" },\n  { value: \"toronto\", label: \"Toronto\" },\n  { value: \"mexico-city\", label: \"Mexico City\" },\n];\n\n/**\n * Firefly combobox: a field that opens a searchable list. The trigger is the\n * warm paper well every text field uses, with a sort glyph at the end. The\n * list drops onto the raised white panel, as wide as the trigger, and the\n * chosen row carries a near-black tick.\n */\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n  const selected = cities.find((city) => city.value === value);\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        role=\"combobox\"\n        aria-expanded={open}\n        data-slot=\"combobox-trigger\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"w-56 cursor-default items-center justify-between gap-2 text-start\",\n          \"data-[popup-open]:border-(--accent-line)\",\n          !selected && \"text-muted-foreground\",\n        )}\n      >\n        <span className=\"truncate\">{selected ? selected.label : \"Select a city\"}</span>\n        <Icon\n          icon=\"carbon:caret-sort\"\n          className=\"size-4 shrink-0 text-muted-foreground\"\n          aria-hidden=\"true\"\n        />\n      </PopoverTrigger>\n      <PopoverContent align=\"start\" className=\"w-(--anchor-width) gap-0 p-0\">\n        <Command className=\"bg-transparent shadow-none\">\n          <CommandInput placeholder=\"Search cities\" />\n          <CommandList>\n            <CommandEmpty>No city found.</CommandEmpty>\n            <CommandGroup>\n              {cities.map((city) => (\n                <CommandItem\n                  key={city.value}\n                  value={city.value}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                >\n                  {city.label}\n                  <Icon\n                    icon=\"carbon:checkmark\"\n                    className={cn(\n                      \"ms-auto size-4\",\n                      value === city.value ? \"opacity-100\" : \"opacity-0\",\n                    )}\n                    aria-hidden=\"true\"\n                  />\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json",
+    "https://better-design.com/registry/firefly/command-base.json",
+    "https://better-design.com/registry/firefly/popover-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "accent-line": "oklch(0.594 0.135 115.4)"
+    },
+    "dark": {
+      "accent-line": "oklch(0.841 0.161 114)"
+    }
+  }
+}

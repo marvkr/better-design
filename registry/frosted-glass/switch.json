@@ -1,0 +1,33 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Frosted Glass Switch — track is empty glass; checked lights up with the same\n// glass material as the primary Button (--fg-shadow rim + glow). Thumb is a\n// glossy glass orb with a 45deg specular highlight.\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    className={cn(\n      \"peer inline-flex h-[1.875rem] w-[3.25rem] shrink-0 cursor-pointer items-center rounded-full\",\n      \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[var(--fg-fill)]\",\n      \"border border-[color:var(--fg-border)]\",\n      \"shadow-[inset_0_0.0625rem_0_-0.0313rem_oklch(1_0_0/0.35)]\",\n      \"transition-all duration-slow\",\n      \"hover:bg-[var(--fg-fill-hover)]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-0\",\n      \"disabled:cursor-not-allowed disabled:opacity-40\",\n      \"data-[state=checked]:bg-[var(--fg-fill-hover)] data-[state=checked]:shadow-[var(--fg-shadow)]\",\n      className\n    )}\n    {...props}\n    ref={ref}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-[1.375rem] w-[1.375rem] rounded-full\",\n        \"bg-[radial-gradient(circle_at_35%_30%,oklch(1_0_0),oklch(1_0_0/0.85)_55%,oklch(0.9_0.02_285/0.7))]\",\n        \"shadow-[0_0_0.625rem_oklch(1_0_0/0.3),0_0.0625rem_0.1875rem_oklch(0_0_0/0.35)]\",\n        \"transition-transform duration-slow\",\n        \"data-[state=unchecked]:translate-x-[0.1875rem]\",\n        \"data-[state=checked]:translate-x-[1.4375rem]\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    },
+    "dark": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    }
+  }
+}

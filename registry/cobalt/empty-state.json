@@ -1,0 +1,24 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* EmptyState — a dashed recessed well with a raised bezel icon plinth. */\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nfunction EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  className,\n  ...props\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-lg p-10 text-center\",\n        \"border border-dashed border-border bg-input [box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <div className=\"flex h-12 w-12 items-center justify-center rounded-md border border-border text-muted-foreground [background-image:var(--bezel)] [box-shadow:var(--shadow-raised)]\">\n          {icon}\n        </div>\n      )}\n      <div className=\"flex flex-col gap-1\">\n        <p className=\"text-sm font-medium text-foreground\">{title}</p>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {action && <div>{action}</div>}\n    </div>\n  )\n}\n\nexport { EmptyState }\nexport type { EmptyStateProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

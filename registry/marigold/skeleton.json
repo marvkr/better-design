@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n// Talentboard Skeleton: pulsing recessed placeholder.\n\nfunction Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\n        \"animate-pulse rounded-lg bg-muted shadow-[var(--tb-shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)"
+    },
+    "dark": {
+      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)"
+    }
+  }
+}

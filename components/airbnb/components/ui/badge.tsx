@@ -3,31 +3,27 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Airbnb Badge — extracted from airbnb.com (2026-04)
-// "Guest favorite" badge: white text, semi-transparent dark bg, rounded-full, px-2
-// Default badges: pill shape, light bg, medium weight text
+// Airbnb Badge, measured on airbnb.com (13 November 2026)
+// Pill shape, weight 500. Status colours come from the site's own scale.
 
 const badgeVariants = cva(
   "inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
-        // Guest favorite — white on dark overlay
         default: "bg-foreground text-background",
-        // Light subtle — Airbnb's category pills
-        secondary: "bg-muted text-foreground border border-border",
-        // Rausch accent
+        secondary: "border border-border bg-secondary text-secondary-foreground",
         primary: "bg-primary text-primary-foreground",
         destructive: "bg-destructive text-destructive-foreground",
-        "destructive-light": "bg-destructive/10 text-destructive",
-        success: "bg-emerald-600 text-white",
-        "success-light": "bg-emerald-600/10 text-emerald-700",
-        warning: "bg-amber-500 text-white",
-        "warning-light": "bg-amber-500/10 text-amber-700",
+        "destructive-light": "bg-destructive-tint text-destructive-tint-foreground",
+        success: "bg-success text-primary-foreground",
+        "success-light": "bg-success-tint text-success-tint-foreground",
+        warning: "bg-warning text-primary-foreground",
+        "warning-light": "bg-warning-tint text-warning-tint-foreground",
         outline: "border border-border text-foreground bg-transparent",
       },
       size: {
-        sm: "h-5 gap-1 px-2 text-[11px] font-semibold",
+        sm: "h-5 gap-1 px-2 text-[0.6875rem]",
         default: "h-6 gap-1.5 px-2.5 text-xs",
         lg: "h-7 gap-1.5 px-3 text-sm",
       },

@@ -71,7 +71,7 @@ function TimePicker({
 
   const inputCls = cn(
     "h-10 w-12 rounded-xl border border-border bg-secondary px-0 text-center text-sm font-medium text-foreground",
-    "transition-colors duration-200 hover:bg-accent",
+    "transition-colors duration-base hover:bg-accent",
     "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary/30",
     "disabled:cursor-not-allowed disabled:opacity-40",
     "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
@@ -109,7 +109,7 @@ function TimePicker({
           className={cn(
             "flex h-10 items-center justify-center rounded-xl border border-border bg-secondary px-3",
             "text-sm font-medium text-foreground tracking-wide",
-            "transition-all duration-200 hover:bg-accent",
+            "transition-all duration-base hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
             "disabled:cursor-not-allowed disabled:opacity-40",
             "active:scale-[0.97]"

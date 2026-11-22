@@ -1,0 +1,27 @@
+{
+  "name": "color-swatch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Margin ColorSwatch: a paper card with the colour as a block on top and its\n * name and value below. A press copies the value and the copy icon turns to\n * an oxblood tick for two seconds.\n */\nexport interface ColorSwatchProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, \"onClick\"> {\n  color: string;\n  name?: string;\n  showValue?: boolean;\n  onCopy?: () => void;\n}\n\nconst ColorSwatch = React.forwardRef<HTMLButtonElement, ColorSwatchProps>(\n  ({ className, color, name, showValue = true, onCopy, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false);\n    const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);\n\n    React.useEffect(\n      () => () => {\n        if (timer.current) clearTimeout(timer.current);\n      },\n      [],\n    );\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(color);\n        setCopied(true);\n        onCopy?.();\n        if (timer.current) clearTimeout(timer.current);\n        timer.current = setTimeout(() => setCopied(false), 2000);\n      } catch {\n        // Copy is best effort; the swatch stays as it was.\n      }\n    };\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        onClick={copy}\n        data-slot=\"color-swatch\"\n        aria-label={`Copy color ${name ?? color}`}\n        className={cn(\n          \"group flex flex-col items-stretch gap-2 rounded-xl border border-border bg-card p-1.5 pb-2 text-left\",\n          \"transition duration-fast ease-(--ease-out) hover:border-input hover:shadow-xs\",\n          \"active:scale-97 motion-reduce:active:scale-100\",\n          focusRing,\n          className,\n        )}\n        {...props}\n      >\n        <span\n          aria-hidden=\"true\"\n          className=\"h-14 w-full rounded-lg ring-1 ring-inset ring-border\"\n          style={{ backgroundColor: color }}\n        />\n        <span className=\"flex w-full items-center justify-between gap-2 px-1\">\n          <span className=\"min-w-0 flex-1\">\n            {name && <span className=\"block truncate text-xs font-medium text-foreground\">{name}</span>}\n            {showValue && (\n              <span className=\"block truncate font-mono text-xs text-muted-foreground\">{color}</span>\n            )}\n          </span>\n          <Icon\n            icon={copied ? \"solar:check-circle-linear\" : \"solar:copy-linear\"}\n            aria-hidden=\"true\"\n            className={cn(\n              \"size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-fast\",\n              \"group-hover:opacity-100 group-focus-visible:opacity-100\",\n              copied && \"text-(--primary-text) opacity-100\",\n            )}\n          />\n        </span>\n        <span className=\"sr-only\" aria-live=\"polite\">\n          {copied ? \"Copied\" : \"\"}\n        </span>\n      </button>\n    );\n  },\n);\nColorSwatch.displayName = \"ColorSwatch\";\n\nexport { ColorSwatch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)"
+    }
+  }
+}

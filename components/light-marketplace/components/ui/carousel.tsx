@@ -95,6 +95,17 @@ const Carousel = React.forwardRef<
       >
         <div
           ref={ref}
+          onKeyDownCapture={(e) => {
+            const prevKey = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp"
+            const nextKey = orientation === "horizontal" ? "ArrowRight" : "ArrowDown"
+            if (e.key === prevKey) {
+              e.preventDefault()
+              scrollPrev()
+            } else if (e.key === nextKey) {
+              e.preventDefault()
+              scrollNext()
+            }
+          }}
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
@@ -114,7 +125,7 @@ const CarouselContent = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel()
   return (
-    <div ref={carouselRef} className="overflow-hidden rounded-[14px]">
+    <div ref={carouselRef} className="overflow-hidden rounded-[0.875rem]">
       <div
         ref={ref}
         className={cn(
@@ -151,7 +162,7 @@ const CarouselItem = React.forwardRef<
 CarouselItem.displayName = "CarouselItem"
 
 const navBtnClass = cn(
-  "absolute flex h-9 w-9 items-center justify-center rounded-[14px]",
+  "absolute flex h-9 w-9 items-center justify-center rounded-[0.875rem]",
   "bg-background text-foreground border border-border shadow-sm",
   "hover:bg-secondary transition-colors",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",

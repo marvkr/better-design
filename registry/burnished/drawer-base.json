@@ -1,0 +1,26 @@
+{
+  "name": "drawer-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, wellInset } from \"./_shared\";\n\n/**\n * Burnished Drawer: the umber slab rising from the bottom edge, rounded\n * only on its top corners. The grab handle is a small recessed well, pressed\n * into the slab rather than drawn on it.\n */\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    data-slot=\"drawer-overlay\"\n    className={cn(\"fixed inset-0 z-50 bg-scrim\", className)}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = \"DrawerOverlay\";\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      data-slot=\"drawer-content\"\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[85vh] flex-col rounded-t-3xl outline-none\",\n        cardSlab,\n        className,\n      )}\n      {...props}\n    >\n      <div aria-hidden className={cn(wellInset, \"mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full\")} />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\nconst DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-header\"\n    className={cn(\"grid gap-1.5 px-6 pb-2 pt-5 text-center sm:text-left\", className)}\n    {...props}\n  />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\nconst DrawerFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-footer\"\n    className={cn(\"mt-auto flex flex-col gap-3 p-6\", className)}\n    {...props}\n  />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    data-slot=\"drawer-title\"\n    className={cn(\"text-lg font-semibold leading-snug text-foreground\", className)}\n    {...props}\n  />\n));\nDrawerTitle.displayName = \"DrawerTitle\";\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    data-slot=\"drawer-description\"\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDrawerDescription.displayName = \"DrawerDescription\";\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "scrim": "oklch(0.12 0.003 67.7 / 0.6)"
+    },
+    "dark": {
+      "scrim": "oklch(0.12 0.003 67.7 / 0.6)"
+    }
+  }
+}

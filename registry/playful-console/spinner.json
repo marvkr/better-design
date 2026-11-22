@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Spinner: a chunky ring with one third drawn solid and a\n * round cap, turning in the colour of the text around it. Inside a button\n * it takes the button's ink; on its own, give it the orange with\n * `text-primary`.\n */\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\n        \"inline-flex shrink-0\",\n        size === \"sm\" && \"size-4\",\n        size === \"default\" && \"size-5\",\n        size === \"lg\" && \"size-8\",\n        className,\n      )}\n      {...props}\n    >\n      <svg\n        viewBox=\"0 0 20 20\"\n        fill=\"none\"\n        aria-hidden=\"true\"\n        className=\"size-full animate-spin\"\n      >\n        <circle\n          cx=\"10\"\n          cy=\"10\"\n          r=\"7.5\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2.75\"\n          opacity=\"0.2\"\n        />\n        <path\n          d=\"M10 2.5a7.5 7.5 0 0 1 6.5 3.75\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2.75\"\n          strokeLinecap=\"round\"\n        />\n      </svg>\n    </div>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

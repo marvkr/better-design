@@ -1,0 +1,24 @@
+{
+  "name": "dialog-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Dialog: command modal.\n// Heavy darkening overlay; the panel is a raised console plate with the\n// strongest glow-elevation token (--shadow-overlay) and a hairline border.\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Dialog = DialogPrimitive.Root\nconst DialogTrigger = DialogPrimitive.Trigger\nconst DialogPortal = DialogPrimitive.Portal\nconst DialogClose = DialogPrimitive.Close\n\nconst DialogOverlay = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<DialogPrimitive.Backdrop.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Backdrop\n    ref={ref}\n    className={cn(\n      \"fixed inset-0 z-50 bg-[oklch(0_0_0/0.7)]\",\n      \"transition-opacity data-starting-style:opacity-0 data-ending-style:opacity-0 duration-base\",\n      className\n    )}\n    {...props}\n  />\n))\nDialogOverlay.displayName = \"DialogOverlay\"\n\nconst DialogContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<DialogPrimitive.Popup.Props>\n>(({ className, children, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Popup\n      ref={ref}\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 p-6\",\n        \"rounded-md border border-border bg-popover text-popover-foreground\",\n        \"[box-shadow:var(--shadow-overlay)]\",\n        \"transition-all duration-base data-starting-style:opacity-0 data-ending-style:opacity-0 data-starting-style:scale-95 data-ending-style:scale-95\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      <DialogPrimitive.Close\n        className={cn(\n          \"absolute right-4 top-4 rounded-xs p-0.5 text-muted-foreground\",\n          \"transition-colors hover:text-destructive\",\n          \"focus:outline-none focus:ring-2 focus:ring-ring/60\",\n          \"disabled:pointer-events-none\"\n        )}\n      >\n        <Icon icon=\"tabler:x\" className=\"size-4\" />\n        <span className=\"sr-only\">Close</span>\n      </DialogPrimitive.Close>\n    </DialogPrimitive.Popup>\n  </DialogPortal>\n))\nDialogContent.displayName = \"DialogContent\"\n\nconst DialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"flex flex-col space-y-1.5 text-left\", className)}\n    {...props}\n  />\n)\nDialogHeader.displayName = \"DialogHeader\"\n\nconst DialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\n      \"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n      className\n    )}\n    {...props}\n  />\n)\nDialogFooter.displayName = \"DialogFooter\"\n\nconst DialogTitle = React.forwardRef<\n  HTMLHeadingElement,\n  WithClassName<DialogPrimitive.Title.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-sm font-semibold uppercase tracking-widest text-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nDialogTitle.displayName = \"DialogTitle\"\n\nconst DialogDescription = React.forwardRef<\n  HTMLParagraphElement,\n  WithClassName<DialogPrimitive.Description.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    className={cn(\"text-xs leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n))\nDialogDescription.displayName = \"DialogDescription\"\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-overlay": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 1.5rem 4rem oklch(0 0 0 / 0.7), 0 0 2rem oklch(0.78 0.21 148 / 0.1)"
+    },
+    "dark": {
+      "shadow-overlay": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 1.5rem 4rem oklch(0 0 0 / 0.7), 0 0 2rem oklch(0.78 0.21 148 / 0.1)"
+    }
+  }
+}

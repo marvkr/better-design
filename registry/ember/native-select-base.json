@@ -1,0 +1,17 @@
+{
+  "name": "native-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass NativeSelect: platform select on the recessed well.\n\ninterface NativeSelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => (\n    <div className=\"relative w-full\">\n      <select\n        ref={ref}\n        className={cn(\n          \"flex h-9 w-full cursor-pointer appearance-none rounded-lg px-3 py-2 pr-9 text-sm\",\n          formFieldBase,\n          \"[&>option]:bg-[oklch(0.22_0.006_70)] [&>option]:text-foreground\",\n          error &&\n            \"border-[color:oklch(0.6_0.21_27/0.5)] focus-visible:border-[color:oklch(0.6_0.21_27/0.7)] focus-visible:ring-[oklch(0.6_0.21_27/0.3)]\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </select>\n      <Icon\n        icon=\"tabler:chevron-down\"\n        className=\"pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground\"\n      />\n    </div>\n  )\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared-base.json"
+  ]
+}

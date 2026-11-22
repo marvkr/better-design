@@ -1,0 +1,41 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Notification: a soft tinted panel, edged on all four sides.\n *\n * The default sits on the white page behind a warm hairline. Info takes the\n * pale yellow-green wash behind a faint olive line, and success, warning\n * and danger each pair a tint with their own darker text, so the words pass\n * contrast on the tint. The tone is carried by the fill, never by a stripe\n * down one side. Nothing here glows.\n */\nconst notificationVariants = cva(\n  \"relative flex w-full items-start gap-3 rounded-xl border p-4 text-sm\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-background text-foreground\",\n        info: \"border-(--accent-line)/40 bg-(--accent-wash) text-foreground\",\n        success:\n          \"border-transparent bg-(--success-tint) text-(--success-text) [&_[data-slot=notification-description]]:text-current\",\n        warning:\n          \"border-transparent bg-(--warning-tint) text-(--warning-text) [&_[data-slot=notification-description]]:text-current\",\n        destructive:\n          \"border-transparent bg-(--destructive-tint) text-(--destructive-text) [&_[data-slot=notification-description]]:text-current\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface NotificationProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  onClose?: () => void;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant, onClose, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      role={variant === \"destructive\" ? \"alert\" : \"status\"}\n      data-slot=\"notification\"\n      data-variant={variant ?? \"default\"}\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className=\"min-w-0 flex-1\">{children}</div>\n      {onClose && (\n        <button\n          type=\"button\"\n          onClick={onClose}\n          aria-label=\"Dismiss\"\n          className={cn(\n            \"-me-1.5 -mt-1.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full text-current\",\n            \"transition-colors duration-fast ease-out hover:bg-foreground/5 active:bg-foreground/10\",\n            \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n          )}\n        >\n          <Icon icon=\"carbon:close\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n      )}\n    </div>\n  ),\n);\nNotification.displayName = \"Notification\";\n\nconst NotificationTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h4\n    ref={ref}\n    data-slot=\"notification-title\"\n    className={cn(\"text-sm font-semibold leading-snug\", className)}\n    {...props}\n  />\n));\nNotificationTitle.displayName = \"NotificationTitle\";\n\nconst NotificationDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"notification-description\"\n    className={cn(\n      \"mt-0.5 text-sm text-(--foreground-secondary) first:mt-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nNotificationDescription.displayName = \"NotificationDescription\";\n\nexport { Notification, NotificationTitle, NotificationDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "accent-wash": "oklch(0.966 0.068 111.2)",
+      "accent-line": "oklch(0.594 0.135 115.4)",
+      "success-tint": "oklch(0.955 0.022 155.9)",
+      "success-text": "oklch(0.481 0.118 151.5)",
+      "warning-tint": "oklch(0.966 0.04 88.2)",
+      "warning-text": "oklch(0.492 0.11 66)",
+      "destructive-tint": "oklch(0.954 0.02 17.5)",
+      "destructive-text": "oklch(0.501 0.181 26.8)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "accent-wash": "oklch(0.29 0.052 113.9)",
+      "accent-line": "oklch(0.841 0.161 114)",
+      "success-tint": "oklch(0.254 0.039 154.6)",
+      "success-text": "oklch(0.839 0.154 153.8)",
+      "warning-tint": "oklch(0.26 0.043 83.1)",
+      "warning-text": "oklch(0.862 0.139 81.9)",
+      "destructive-tint": "oklch(0.228 0.041 18.3)",
+      "destructive-text": "oklch(0.761 0.142 20.9)"
+    }
+  }
+}

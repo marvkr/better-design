@@ -1,0 +1,29 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Check, Copy } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* CopyButton — a small raised bezel key that flashes the cobalt check. */\n\ninterface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string\n  timeout?: number\n}\n\nfunction CopyButton({\n  value,\n  timeout = 2000,\n  className,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(value)\n    setCopied(true)\n    setTimeout(() => setCopied(false), timeout)\n  }\n\n  return (\n    <button\n      onClick={handleCopy}\n      className={cn(\n        \"inline-flex h-8 w-8 items-center justify-center rounded-sm border border-border text-muted-foreground\",\n        \"[background-image:var(--bezel)] [box-shadow:var(--shadow-raised)]\",\n        \"transition-[color,box-shadow] hover:text-foreground hover:[box-shadow:var(--shadow-raised-hover)]\",\n        \"active:translate-y-px active:[box-shadow:var(--shadow-press)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? (\n        <Check className=\"h-3.5 w-3.5 text-primary\" />\n      ) : (\n        <Copy className=\"h-3.5 w-3.5\" />\n      )}\n      <span className=\"sr-only\">{copied ? \"Copied\" : \"Copy to clipboard\"}</span>\n    </button>\n  )\n}\n\nexport { CopyButton }\nexport type { CopyButtonProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem oklch(0 0 0 / 0.35)",
+      "shadow-press": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem oklch(0 0 0 / 0.35)",
+      "shadow-press": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

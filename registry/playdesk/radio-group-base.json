@@ -1,0 +1,38 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Playdesk RadioGroup: the selected dial takes the primary Button's blue fill\n * with a white centre dot punched out of it.\n */\n\nconst RadioGroup = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<RadioGroupPrimitive.Props>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive\n    data-slot=\"radio-group\"\n    ref={ref}\n    className={cn(\"grid gap-2.5\", className)}\n    {...props}\n  />\n))\nRadioGroup.displayName = \"RadioGroup\"\n\nconst RadioGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<RadioPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <RadioPrimitive.Root\n    data-slot=\"radio-group-item\"\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center aspect-square size-[1.125rem] shrink-0 rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-image,box-shadow,border-color] duration-fast ease-out\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:border-transparent data-checked:[background-origin:border-box]\",\n      \"data-checked:[background-image:var(--fill-primary)] data-checked:[box-shadow:var(--shadow-primary)]\",\n      className\n    )}\n    {...props}\n  >\n    <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"flex size-full items-center justify-center\">\n      <span className=\"block size-1.5 rounded-full bg-primary-foreground\" />\n    </RadioPrimitive.Indicator>\n  </RadioPrimitive.Root>\n))\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

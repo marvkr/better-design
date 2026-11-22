@@ -33,7 +33,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
         className={cn(
           "flex w-full items-stretch overflow-hidden",
           "rounded-lg border border-border bg-secondary",
-          "transition-colors duration-150",
+          "transition-colors duration-fast",
           "hover:border-border/60",
           "focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-0",
           error && "border-destructive focus-within:ring-destructive",

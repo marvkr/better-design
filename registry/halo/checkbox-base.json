@@ -1,0 +1,26 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-5 w-5 shrink-0 rounded-xs\",\n        \"backdrop-blur-xl bg-foreground/[0.06]\",\n        \"border border-foreground/[0.15]\",\n        \"shadow-[inset_0_0_0.25rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n        \"transition-all duration-base\",\n        \"hover:border-foreground/[0.25] hover:bg-foreground/[0.1]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-checked:bg-gradient-to-t data-checked:from-primary data-checked:to-primary/85 data-checked:text-primary-foreground\",\n        \"data-checked:border-primary-foreground/20\",\n        \"data-checked:shadow-[0_0.125rem_0.25rem_-0.0625rem_color-mix(in_oklch,var(--shade)_30%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.22)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className={cn(\"flex items-center justify-center text-current\")}\n      >\n        <Icon icon=\"tabler:check\" className=\"size-full h-3.5 w-3.5\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked } from \"./_shared\";\n\n/**\n * Airy docs Switch: a 2.25rem by 1.25rem grey track with a white knob. On,\n * the track takes the primary button's flat green and the knob slides over.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer group/switch inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-(--line-strong) p-0.5\",\n      \"transition-colors duration-fast ease-out\",\n      \"hover:data-[state=unchecked]:bg-(--control)\",\n      \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:bg-muted\",\n      controlChecked,\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-4 rounded-full bg-(--thumb) shadow-(--shadow-thumb)\",\n        \"transition-transform duration-fast ease-out\",\n        \"data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0\",\n        \"group-disabled/switch:shadow-none\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.65 0.004 160)",
+      "control": "oklch(0.6 0.004 160)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.0625rem 0.1875rem oklch(0.155 0.005 173.5 / 0.16), 0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "control": "oklch(0.52 0.005 170)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.0625rem 0.1875rem oklch(0 0 0 / 0.4), 0 0 0 0.0625rem oklch(1 0 0 / 0.1)"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "dialog-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"@/components/ui/button\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Margin Dialog root: owns the open state of one modal window. */\nconst Dialog = DialogPrimitive.Root;\n\n/** The control that opens the dialog. */\nconst DialogTrigger = DialogPrimitive.Trigger;\n\n/** Moves the dialog to the end of the document body. */\nconst DialogPortal = DialogPrimitive.Portal;\n\n/** Closes the dialog; wrap a Cancel or Done button in it. */\nconst DialogClose = DialogPrimitive.Close;\n\n/** Margin dialog scrim: a soft grey veil that fades in. */\nconst DialogOverlay = React.forwardRef<HTMLDivElement, WithClassName<DialogPrimitive.Backdrop.Props>>(\n  ({ className, ...props }, ref) => (\n    <DialogPrimitive.Backdrop\n      ref={ref}\n      data-slot=\"dialog-overlay\"\n      className={cn(\n        \"fixed inset-0 z-50 bg-(--scrim)\",\n        \"transition-opacity duration-base ease-(--ease-out)\",\n        \"data-[starting-style]:opacity-0 data-[ending-style]:opacity-0\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nDialogOverlay.displayName = \"DialogOverlay\";\n\n/**\n * Margin dialog window: a white panel with the large corner and a long soft\n * drop. It grows in a little as it fades, and a ghost button closes it.\n */\nconst DialogContent = React.forwardRef<HTMLDivElement, WithClassName<DialogPrimitive.Popup.Props>>(\n  ({ className, children, ...props }, ref) => (\n    <DialogPortal>\n      <DialogOverlay />\n      <DialogPrimitive.Popup\n        ref={ref}\n        data-slot=\"dialog-content\"\n        className={cn(\n          \"fixed inset-x-4 top-1/2 z-50 mx-auto grid max-w-lg -translate-y-1/2 gap-4\",\n          \"rounded-3xl bg-popover p-5 text-popover-foreground shadow-(--shadow-overlay) outline-none\",\n          \"transition-[opacity,scale] duration-base ease-(--ease-out)\",\n          \"data-[starting-style]:scale-97 data-[starting-style]:opacity-0\",\n          \"data-[ending-style]:scale-97 data-[ending-style]:opacity-0\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        <DialogPrimitive.Close\n          data-slot=\"dialog-close\"\n          className={cn(buttonVariants({ variant: \"ghost\", size: \"icon-sm\" }), \"absolute end-3 top-3\")}\n        >\n          <Icon icon=\"solar:close-circle-linear\" className=\"size-4\" aria-hidden=\"true\" />\n          <span className=\"sr-only\">Close</span>\n        </DialogPrimitive.Close>\n      </DialogPrimitive.Popup>\n    </DialogPortal>\n  ),\n);\nDialogContent.displayName = \"DialogContent\";\n\n/** The title block at the top of a dialog, leaving room for the close button. */\nconst DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-header\"\n    className={cn(\"flex flex-col gap-1 pe-8 text-start\", className)}\n    {...props}\n  />\n);\nDialogHeader.displayName = \"DialogHeader\";\n\n/** The action row: stacked on a phone, in a row at the end from the small breakpoint. */\nconst DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-footer\"\n    className={cn(\"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\", className)}\n    {...props}\n  />\n);\nDialogFooter.displayName = \"DialogFooter\";\n\n/** The dialog title in semibold. */\nconst DialogTitle = React.forwardRef<HTMLHeadingElement, WithClassName<DialogPrimitive.Title.Props>>(\n  ({ className, ...props }, ref) => (\n    <DialogPrimitive.Title\n      ref={ref}\n      data-slot=\"dialog-title\"\n      className={cn(\"text-base font-semibold leading-snug text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nDialogTitle.displayName = \"DialogTitle\";\n\n/** The supporting line under the title, in muted grey. */\nconst DialogDescription = React.forwardRef<\n  HTMLParagraphElement,\n  WithClassName<DialogPrimitive.Description.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    data-slot=\"dialog-description\"\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDialogDescription.displayName = \"DialogDescription\";\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "scrim": "oklch(0.24 0.02 260 / 0.32)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)",
+      "shadow-overlay": "var(--shadow-lg)"
+    },
+    "dark": {
+      "scrim": "oklch(0 0 0 / 0.55)"
+    }
+  }
+}

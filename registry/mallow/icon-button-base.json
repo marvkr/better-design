@@ -1,0 +1,27 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, quietFinish, pressScale, primaryFinish, primaryFinishHover } from \"./_shared\";\n\n/** Mallow IconButton classes: one glyph on the quiet white action by default, round unless `corners` says square. */\nconst iconButtonVariants = cva(\n  [\n    \"relative inline-flex shrink-0 select-none items-center justify-center\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: quietFinish,\n        primary: `${primaryFinish} ${primaryFinishHover}`,\n        secondary: quietFinish,\n        ghost: \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive: \"bg-(image:--danger-face) text-destructive-foreground shadow-xs\",\n        outline: \"bg-transparent text-foreground inset-ring-1 inset-ring-input hover:bg-accent\",\n      },\n      size: {\n        xs: \"size-7 rounded-sm [&_svg]:size-3.5\",\n        sm: \"size-9 rounded-md [&_svg]:size-4\",\n        default: \"size-12 rounded-lg [&_svg]:size-5\",\n        lg: \"size-14 rounded-xl [&_svg]:size-5\",\n        xl: \"size-16 rounded-2xl [&_svg]:size-6\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      corners: \"circle\",\n    },\n  },\n);\n\n/** Props for the IconButton, which needs an `aria-label` because the glyph carries no text. */\nexport interface IconButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string;\n}\n\n/** Mallow IconButton on a Base UI button, with the same finishes as the Button. */\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => (\n    <ButtonPrimitive\n      ref={ref}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, corners, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    },
+    "dark": {
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    }
+  }
+}

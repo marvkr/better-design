@@ -1,0 +1,31 @@
+{
+  "name": "dialog",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, focusRing } from \"./_shared\";\n\n/**\n * Mallow Dialog: the white card with 1rem corners and a soft plum shadow,\n * over a plum scrim. It fades in with a slight grow, and appears at once\n * under reduced motion. Footer actions are Mallow Buttons the caller places.\n */\nconst Dialog = DialogPrimitive.Root;\nconst DialogTrigger = DialogPrimitive.Trigger;\nconst DialogPortal = DialogPrimitive.Portal;\nconst DialogClose = DialogPrimitive.Close;\n\nconst DialogOverlay = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Overlay\n    ref={ref}\n    data-slot=\"dialog-overlay\"\n    className={cn(\n      \"fixed inset-0 z-50 bg-(--scrim) backdrop-blur-xs\",\n      \"duration-base data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n      \"motion-reduce:animate-none\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogOverlay.displayName = DialogPrimitive.Overlay.displayName;\n\nconst DialogContent = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Content\n      ref={ref}\n      data-slot=\"dialog-content\"\n      className={cn(\n        \"fixed inset-x-4 top-1/2 z-50 mx-auto grid max-w-lg -translate-y-1/2 gap-5 rounded-4xl p-7\",\n        cardSlab,\n        \"outline-none duration-base ease-(--ease-out) data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n        \"motion-reduce:animate-none\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <DialogPrimitive.Close\n        data-slot=\"dialog-close\"\n        className={cn(\n          \"absolute end-4 top-4 inline-flex size-9 items-center justify-center rounded-full text-muted-foreground\",\n          \"transition-colors duration-fast hover:bg-(--option-face) hover:text-foreground\",\n          focusRing,\n          \"disabled:pointer-events-none\",\n        )}\n      >\n        <Icon icon=\"iconoir:xmark\" aria-hidden=\"true\" className=\"size-4\" />\n        <span className=\"sr-only\">Close</span>\n      </DialogPrimitive.Close>\n    </DialogPrimitive.Content>\n  </DialogPortal>\n));\nDialogContent.displayName = DialogPrimitive.Content.displayName;\n\nconst DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-header\"\n    className={cn(\"flex flex-col gap-1 pe-8 text-start\", className)}\n    {...props}\n  />\n);\nDialogHeader.displayName = \"DialogHeader\";\n\nconst DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-footer\"\n    className={cn(\"flex flex-col-reverse gap-3 pt-1 sm:flex-row sm:justify-end\", className)}\n    {...props}\n  />\n);\nDialogFooter.displayName = \"DialogFooter\";\n\nconst DialogTitle = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    data-slot=\"dialog-title\"\n    className={cn(\"text-lg font-medium leading-snug text-foreground\", className)}\n    {...props}\n  />\n));\nDialogTitle.displayName = DialogPrimitive.Title.displayName;\n\nconst DialogDescription = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    data-slot=\"dialog-description\"\n    className={cn(\"text-base leading-snug text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDialogDescription.displayName = DialogPrimitive.Description.displayName;\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dialog@^1.1.14",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "scrim": "oklch(0.25 0.04 290 / 0.32)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "scrim": "oklch(0.25 0.04 290 / 0.32)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

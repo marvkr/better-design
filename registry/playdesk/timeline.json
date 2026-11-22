@@ -1,0 +1,11 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Timeline — a hairline spine with a dot per entry. The dot is the\n * accent, the spine stays at border weight.\n */\n\nexport interface TimelineItem {\n  title: string;\n  description?: string;\n  time?: string;\n}\n\nexport interface TimelineProps extends React.HTMLAttributes<HTMLOListElement> {\n  items: TimelineItem[];\n}\n\nconst Timeline = React.forwardRef<HTMLOListElement, TimelineProps>(\n  ({ className, items, ...props }, ref) => (\n    <ol\n      ref={ref}\n      className={cn(\"relative space-y-6 border-l border-border pl-6\", className)}\n      {...props}\n    >\n      {items.map((item) => (\n        <li key={item.title} className=\"relative\">\n          <span className=\"absolute -left-[1.9375rem] top-1 size-2.5 rounded-full bg-primary ring-4 ring-background\" />\n          <div className=\"space-y-0.5\">\n            <p className=\"text-sm font-medium text-foreground\">{item.title}</p>\n            {item.description ? (\n              <p className=\"text-sm leading-relaxed text-muted-foreground\">\n                {item.description}\n              </p>\n            ) : null}\n            {item.time ? (\n              <p className=\"text-[0.6875rem] text-muted-foreground\">{item.time}</p>\n            ) : null}\n          </div>\n        </li>\n      ))}\n    </ol>\n  ),\n);\nTimeline.displayName = \"Timeline\";\n\nexport { Timeline };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

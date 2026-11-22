@@ -1,0 +1,35 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\n\nimport { cn } from \"@/lib/utils\";\nimport { glowControlChecked } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Firefly Checkbox: a 1.25rem box with a 0.375rem corner and a warm grey\n * edge. Checked or mixed, it fills with the primary button's lit material,\n * scaled down, and the near-black tick or dash sits on the glow. Base UI\n * owns the checked state, so a controlled parent passes `checked` straight\n * through.\n */\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer inline-flex size-5 shrink-0 items-center justify-center rounded-sm border border-(--control) bg-background text-primary-foreground\",\n        \"transition-[background-color,border-color,box-shadow] duration-fast ease-out\",\n        \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:border-(--line-strong) data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled)\",\n        glowControlChecked,\n        \"data-[indeterminate]:border-transparent data-[indeterminate]:bg-primary data-[indeterminate]:bg-(image:--gradient-primary) data-[indeterminate]:shadow-(--shadow-control)\",\n        \"data-[disabled]:data-[indeterminate]:bg-secondary data-[disabled]:data-[indeterminate]:bg-none data-[disabled]:data-[indeterminate]:shadow-none data-[disabled]:data-[indeterminate]:text-(--foreground-disabled)\",\n        className,\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className=\"flex size-full items-center justify-center text-current\"\n      >\n        {indeterminate ? (\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" className=\"size-3.5\">\n            <path d=\"M4 8h8\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" />\n          </svg>\n        ) : (\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" className=\"size-3.5\">\n            <path\n              d=\"M3.75 8.25 6.5 11l5.75-6\"\n              stroke=\"currentColor\"\n              strokeWidth=\"2\"\n              strokeLinecap=\"round\"\n              strokeLinejoin=\"round\"\n            />\n          </svg>\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "control": "oklch(0.607 0.012 89.8)",
+      "gradient-primary": "linear-gradient(180deg, oklch(1 0 0 / 0.3) 0%, oklch(1 0 0 / 0) 45%), radial-gradient(110% 90% at 22% 0%, oklch(1 0 0 / 0.24) 0%, oklch(1 0 0 / 0) 60%), radial-gradient(70% 60% at 50% 115%, oklch(1 0 0 / 0.32) 0%, oklch(1 0 0 / 0) 70%), linear-gradient(0deg, oklch(0 0 0 / 0.05) 0%, oklch(0 0 0 / 0) 18%), linear-gradient(180deg, oklch(0.9 0.199 115) 0%, oklch(0.968 0.155 112.5) 100%)",
+      "shadow-control": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0.09375rem 0 oklch(1 0 0 / 0.7), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.18), inset 0 0 0.375rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.548 0.116 114.4 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "control": "oklch(0.626 0.012 95.3)",
+      "gradient-primary": "linear-gradient(180deg, oklch(1 0 0 / 0.075) 0%, oklch(1 0 0 / 0) 45%), radial-gradient(110% 90% at 22% 0%, oklch(1 0 0 / 0.06) 0%, oklch(1 0 0 / 0) 60%), radial-gradient(70% 60% at 50% 115%, oklch(1 0 0 / 0.08) 0%, oklch(1 0 0 / 0) 70%), linear-gradient(0deg, oklch(0 0 0 / 0.05) 0%, oklch(0 0 0 / 0) 18%), linear-gradient(180deg, oklch(0.814 0.16 113.8) 0%, oklch(0.879 0.136 117) 100%)",
+      "shadow-control": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.175), inset 0 -0.0625rem 0.09375rem 0 oklch(1 0 0 / 0.3), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.045), inset 0 0 0.375rem 0 oklch(1 0 0 / 0.12), 0 0 0 0.0625rem oklch(0 0 0 / 0.2)"
+    }
+  }
+}

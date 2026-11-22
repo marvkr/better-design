@@ -14,7 +14,7 @@ function Toaster({ className, ...props }: ToasterProps) {
       toastOptions={{
         classNames: {
           toast: [
-            "group toast rounded-[10px] border border-border bg-card text-foreground shadow-xl",
+            "group toast rounded-[0.625rem] border border-border bg-card text-foreground shadow-xl",
             "group-[.toaster]:bg-card group-[.toaster]:text-foreground group-[.toaster]:border-border",
           ].join(" "),
           description: "group-[.toast]:text-muted-foreground",

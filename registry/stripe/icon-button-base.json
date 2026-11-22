@@ -1,0 +1,30 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst iconButtonVariants = cva(\n  \"relative inline-flex shrink-0 items-center justify-center outline-none transition-[background-color,color,box-shadow] duration-fast focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)] disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] hover:bg-primary/90\",\n        secondary: \"bg-background text-foreground [box-shadow:var(--shadow-control)] hover:bg-secondary hover:[box-shadow:var(--shadow-control-hover)]\",\n        ghost: \"text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        destructive: \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-control)] hover:bg-destructive/90\",\n        outline: \"bg-background text-foreground [box-shadow:var(--shadow-control)] hover:bg-secondary hover:[box-shadow:var(--shadow-control-hover)]\",\n      },\n      size: {\n        xs: \"h-7 w-7 rounded text-xs\",\n        sm: \"h-8 w-8 rounded-md text-sm\",\n        default: \"h-9 w-9 rounded-md text-sm\",\n        lg: \"h-10 w-10 rounded-lg text-base\",\n        xl: \"h-11 w-11 rounded-lg text-base\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"ghost\",\n      size: \"default\",\n      corners: \"square\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => {\n    return (\n      <ButtonPrimitive\n        className={cn(iconButtonVariants({ variant, size, corners, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-control": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-control-hover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.2), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.1)",
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)"
+    },
+    "dark": {
+      "shadow-control": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-control-hover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.2), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.1)",
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)"
+    }
+  }
+}

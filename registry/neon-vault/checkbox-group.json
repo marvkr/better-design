@@ -1,0 +1,31 @@
+{
+  "name": "checkbox-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\n\n// Neon Vault CheckboxGroup: a contiguous stack of selectable rows inside a\n// rounded vault panel. Selected rows wash in the accent and the small check\n// square takes the hero magenta material like the standalone Checkbox.\n//\n// Usage:\n//   <CheckboxGroup\n//     value={selected}\n//     onValueChange={setSelected}\n//     options={[\n//       { value: \"a\", label: \"Apple\" },\n//       { value: \"b\", label: \"Banana\" },\n//       { value: \"c\", label: \"Cherry\" },\n//     ]}\n//   />\n\ninterface CheckboxGroupOption {\n  value: string\n  label: React.ReactNode\n  description?: React.ReactNode\n  disabled?: boolean\n}\n\ninterface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: CheckboxGroupOption[]\n  value: string[]\n  onValueChange: (value: string[]) => void\n  orientation?: \"vertical\" | \"horizontal\"\n  name?: string\n}\n\nfunction CheckboxGroup({\n  options,\n  value,\n  onValueChange,\n  orientation = \"vertical\",\n  name,\n  className,\n  ...props\n}: CheckboxGroupProps) {\n  const isSelected = React.useCallback(\n    (v: string) => value.includes(v),\n    [value]\n  )\n\n  const toggle = (v: string) => {\n    if (isSelected(v)) {\n      onValueChange(value.filter((x) => x !== v))\n    } else {\n      onValueChange([...value, v])\n    }\n  }\n\n  return (\n    <div\n      role=\"group\"\n      className={cn(\n        \"relative inline-flex overflow-hidden rounded-xl border border-border bg-card [box-shadow:var(--shadow-raised)]\",\n        orientation === \"vertical\" ? \"flex-col\" : \"flex-row\",\n        className\n      )}\n      {...props}\n    >\n      {options.map((opt, i) => {\n        const selected = isSelected(opt.value)\n\n        return (\n          <label\n            key={opt.value}\n            className={cn(\n              \"relative flex cursor-pointer items-start gap-3 px-3.5 py-2.5 text-[0.8125rem] transition-colors\",\n              \"hover:bg-accent/50\",\n              selected && \"bg-accent\",\n              opt.disabled && \"cursor-not-allowed opacity-50\",\n              orientation === \"vertical\" && i > 0 && \"border-t border-border\",\n              orientation === \"horizontal\" && i > 0 && \"border-l border-border\"\n            )}\n          >\n            <span className=\"relative z-10 flex items-center pt-0.5\">\n              <span\n                className={cn(\n                  \"flex h-4 w-4 items-center justify-center rounded-xs border transition-all\",\n                  selected\n                    ? \"border-transparent bg-primary [background-image:var(--gradient-primary)] text-primary-foreground [box-shadow:var(--shadow-button)]\"\n                    : \"border-border bg-input [box-shadow:var(--shadow-inset)]\"\n                )}\n              >\n                {selected && (\n                  <Icon icon=\"ph:check-bold\" className=\"h-2.5 w-2.5\" aria-hidden />\n                )}\n              </span>\n            </span>\n\n            <input\n              type=\"checkbox\"\n              name={name}\n              value={opt.value}\n              checked={selected}\n              disabled={opt.disabled}\n              onChange={() => toggle(opt.value)}\n              className=\"sr-only\"\n            />\n\n            <span className=\"relative z-10 flex flex-col gap-0.5\">\n              <span className=\"font-medium text-foreground\">{opt.label}</span>\n              {opt.description && (\n                <span className=\"text-[0.75rem] text-muted-foreground\">\n                  {opt.description}\n                </span>\n              )}\n            </span>\n          </label>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { CheckboxGroup }\nexport type { CheckboxGroupProps, CheckboxGroupOption }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    }
+  }
+}

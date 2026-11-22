@@ -1,0 +1,29 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/** Shared surface, form-field and type recipes for Bevel. */\n\n/**\n * The card recipe: no border, an inset highlight along the top edge, a 1px\n * ring and a soft drop shadow. Every raised surface in the system uses it, so\n * a card, a popover and a sheet read as the same material.\n */\nexport const surfaceBase =\n  \"bg-card text-card-foreground rounded-[1.25rem] [box-shadow:var(--shadow-card)]\"\n\n/**\n * A popover, menu or tooltip surface: the card recipe at a smaller radius with\n * a deeper drop, so it separates from the card it opens over.\n */\nexport const popoverSurface =\n  \"bg-popover text-popover-foreground rounded-[0.875rem] [box-shadow:var(--shadow-lg)]\"\n\n/**\n * An inner surface: a row, a well or a chip pressed into a card. It sits on\n * the inner token and takes the inset shadow instead of a raised one.\n */\nexport const innerSurface =\n  \"bg-[var(--inner)] text-[var(--inner-foreground)] rounded-[0.75rem] [box-shadow:var(--shadow-inset)]\"\n\n/**\n * Every form field starts here so an input, a textarea and a select share one\n * surface. The field is a pressed well, not a bordered box, and focus swaps\n * the well for a ring in the accent.\n */\nexport const formFieldBase =\n  \"w-full rounded-[0.75rem] px-3.5 text-sm text-foreground \" +\n  \"bg-input placeholder:text-muted-foreground \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"transition-[color,box-shadow] duration-fast ease-out \" +\n  \"hover:[box-shadow:var(--shadow-inset),0_0_0_0.0625rem_var(--strong)] \" +\n  \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-inset),0_0_0_0.125rem_var(--ring)] \" +\n  \"aria-invalid:[box-shadow:var(--shadow-inset),0_0_0_0.0625rem_var(--destructive)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\n/** A single-line field: 40px tall, dense enough for a stacked mobile form. */\nexport const formFieldSingleLine = \"flex h-10 py-2\"\n\n/** A multi-line field: the same well, grown and resizable on the y axis. */\nexport const formFieldMultiLine = \"flex min-h-[5.5rem] py-2.5 resize-y\"\n\n/**\n * The interactive-row recipe used by menu items, list rows and command items:\n * 8px radius, tight padding and an accent-tinted hover.\n */\nexport const rowBase =\n  \"relative flex cursor-default select-none items-center gap-2.5 rounded-[0.5rem] \" +\n  \"px-2.5 py-2 text-sm outline-none transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground \" +\n  \"data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\"\n\n/**\n * The type ramp, as class strings. A screen picks a step instead of inventing\n * a size, which is what keeps a dense layout calm.\n */\nexport const type = {\n  /** 26px greeting at the top of a screen. */\n  greeting: \"text-[1.625rem] leading-[1.875rem] font-semibold tracking-[-0.0563rem]\",\n  /** 22px screen or card title. */\n  title: \"text-[1.375rem] leading-7 font-semibold tracking-[-0.0438rem]\",\n  /** 19px section heading above a group of cards. */\n  section: \"text-[1.1875rem] leading-6 font-semibold tracking-[-0.0375rem]\",\n  /** 16px lead copy. */\n  lead: \"text-[1rem] leading-[1.375rem] tracking-[-0.0063rem]\",\n  /** 14.5px body and day labels. */\n  body: \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem]\",\n  /** 12.5px label, the smallest readable step. */\n  label: \"text-[0.7813rem] leading-4 tracking-[0.0188rem]\",\n} as const\n\n/**\n * The circular icon-button sizes the spec names, 38px to 46px. Row actions take\n * `sm`, a screen's primary action takes `lg`.\n */\nexport const iconButtonSize = {\n  sm: \"size-[2.375rem]\",\n  default: \"size-[2.625rem]\",\n  lg: \"size-[2.875rem]\",\n} as const\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "inner-foreground": "oklch(0.1593 0.0111 267.98)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-card": "var(--shadow-md)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "inner-foreground": "oklch(0.9666 0.0027 264.5)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)",
+      "shadow-card": "var(--shadow-md)"
+    }
+  }
+}

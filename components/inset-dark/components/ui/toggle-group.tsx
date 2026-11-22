@@ -35,7 +35,7 @@ const ToggleGroup = React.forwardRef<
   <ToggleGroupPrimitive.Root
     ref={ref}
     className={cn(
-      "inline-flex items-center p-1 rounded-[12px] bg-card",
+      "inline-flex items-center p-1 rounded-[0.75rem] bg-card",
       "[box-shadow:var(--shadow-inset)]",
       className
     )}
@@ -59,7 +59,7 @@ const ToggleGroupItem = React.forwardRef<
   ToggleGroupItemProps
 >(({ className, children, variant, size, ...props }, ref) => {
   const ctx = React.useContext(ToggleGroupContext)
-  const resolvedSize = (size ?? ctx.size) as Size
+  const resolvedSize = size ?? ctx.size
   return (
     <ToggleGroupPrimitive.Item
       ref={ref}

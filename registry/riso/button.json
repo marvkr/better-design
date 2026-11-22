@@ -1,0 +1,26 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Retro-Playful Button — Y2K poster CTA.\n// Signature material (the `default` hero variant): solid poster-blue fill,\n// chunky 2px ink border, a hard offset ink shadow with NO blur, and a press\n// that slides the button into its own shadow. Filled controls reuse this.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-bold\",\n    \"rounded-md border-2 border-border transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0\",\n    \"active:translate-x-[0.1875rem] active:translate-y-[0.1875rem] active:shadow-none\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Hero — poster-blue slab, hard ink offset, lifts on hover.\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[var(--shadow-hard)] \" +\n          \"hover:translate-x-[var(--riso-btn-hover-x,-0.0313rem)] hover:translate-y-[var(--riso-btn-hover-y,-0.0313rem)] hover:shadow-[var(--riso-btn-hover-shadow,var(--shadow-hard))]\",\n        // Same material, sunbeam-yellow fill — the alternate poster CTA.\n        primary:\n          \"bg-accent text-accent-foreground \" +\n          \"shadow-[var(--shadow-hard)] \" +\n          \"hover:translate-x-[var(--riso-btn-hover-x,-0.0313rem)] hover:translate-y-[var(--riso-btn-hover-y,-0.0313rem)] hover:shadow-[var(--riso-btn-hover-shadow,var(--shadow-hard))]\",\n        // Secondary: paper card slab.\n        secondary:\n          \"bg-card text-card-foreground \" +\n          \"shadow-[var(--shadow-hard)] \" +\n          \"hover:translate-x-[var(--riso-btn-hover-x,-0.0313rem)] hover:translate-y-[var(--riso-btn-hover-y,-0.0313rem)] hover:shadow-[var(--riso-btn-hover-shadow,var(--shadow-hard))]\",\n        // Outline: flat bordered, no offset.\n        outline: \"bg-transparent text-foreground hover:bg-secondary\",\n        // Ghost: borderless, understated.\n        ghost: \"border-transparent bg-transparent text-foreground hover:bg-secondary\",\n        // Destructive — same slab in alarm red.\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[var(--shadow-hard)] \" +\n          \"hover:translate-x-[var(--riso-btn-hover-x,-0.0313rem)] hover:translate-y-[var(--riso-btn-hover-y,-0.0313rem)] hover:shadow-[var(--riso-btn-hover-shadow,var(--shadow-hard))]\",\n        // Link\n        link: \"border-transparent text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs rounded-sm\",\n        default: \"h-10 px-5\",\n        lg: \"h-12 px-7 text-base\",\n        icon: \"h-10 w-10\",\n        \"icon-sm\": \"h-8 w-8 rounded-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-hard": "0.25rem 0.25rem 0 0 var(--foreground)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "shadow-hard": "0.25rem 0.25rem 0 0 var(--foreground)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

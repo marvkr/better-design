@@ -30,7 +30,7 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(
             className={cn(
               "flex h-14 w-14 items-center justify-center rounded-xl",
               "border border-border bg-secondary",
-              "shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]",
+              "shadow-[inset_0_0.125rem_0.25rem_0_color-mix(in_oklch,var(--foreground)_8%,transparent)]",
               "text-muted-foreground",
               "[&>svg]:h-6 [&>svg]:w-6"
             )}

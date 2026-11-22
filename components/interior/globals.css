@@ -1,0 +1,270 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Interior — a three-material kit built for the half-second
+ * after a click.
+ *
+ * Everything on screen is one of three materials. The bezel is the warm
+ * off-white frame the page sits in. The panel is the lifted white card where
+ * content lives. The well is the recessed slot things go into: inputs, code,
+ * previews, chips. Depth is real: wells are cut in, panels are lifted out,
+ * caps have a bottom lip you could press. A plain border never carries
+ * elevation.
+ *
+ * Shadows are warm ink, never neutral black: a black shadow on a warm surface
+ * reads as dirt. The accent blue marks interaction and focus only; a control
+ * whose only news is "this one is selected" says it with ink and depth.
+ * Nothing is a pill: radii nest on the 20/16/14/11/10/9/8/7/6/5 scale, outer
+ * radius = inner radius + the padding between them. Headings are medium with
+ * negative tracking; mono is for metadata and numbers only.
+ */
+
+:root {
+  /* bezel / panel / well */
+  --background: oklch(0.9488 0.0054 95.1);
+  --foreground: oklch(0.2213 0.0038 106.71);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2213 0.0038 106.71);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2213 0.0038 106.71);
+
+  /* Selection and "on" states are ink, not blue. The primary action is a
+     dark surface on a light page, so its focus mark is the dark-mode accent. */
+  --primary: oklch(0.2685 0.0063 34.3);
+  --primary-foreground: oklch(0.9848 0.0013 106.42);
+
+  /* the well, as a surface */
+  --secondary: oklch(0.9726 0.0026 106.45);
+  --secondary-foreground: oklch(0.3919 0.0115 106.92);
+
+  --muted: oklch(0.9726 0.0026 106.45);
+  --muted-foreground: oklch(0.5357 0.0122 106.8);
+
+  /* accent-soft surface, accent-blue ink on it */
+  --accent: oklch(0.9592 0.0193 273.24);
+  --accent-foreground: oklch(0.5832 0.227 268.34);
+
+  /* flag — rejection, validation errors, failed states */
+  --destructive: oklch(0.5563 0.1632 32);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* moss — success, confirmation */
+  --success: oklch(0.5262 0.0942 151.04);
+  --warning: oklch(0.6658 0.1574 58.32);
+
+  --border: oklch(0.9232 0.0026 48.72);
+  --input: oklch(0.9699 0.0013 106.42 / 0.7);
+  --ring: oklch(0.5832 0.227 268.34);
+
+  /* the dark-mode accent, spent on inverted surfaces: focus drawn on the ink
+     primary button, per "the accent is chosen against the surface it is drawn
+     on, not against the page" */
+  --ring-inverted: oklch(0.7666 0.1184 268.16);
+
+  /* field radius; buttons are 9, caps and chips 6, cells 5 */
+  --radius: 0.625rem;
+
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, ui-sans-serif,
+    system-ui, "Segoe UI", sans-serif;
+  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  /*
+   * The material shadows. rgba(28,25,23,·) is the ink shadow, written as
+   * oklch. Never hand-write a box-shadow; these five are the whole system.
+   */
+  --shadow-lift: 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.06),
+    0 0.25rem 0.625rem -0.5rem oklch(0.2161 0.0061 56.04 / 0.45);
+  --shadow-well: inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07);
+  --shadow-cap: 0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09),
+    inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11);
+  --shadow-row: inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07),
+    0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05);
+
+  /* floats, by distance: a dropdown is close, a modal is far */
+  --shadow-float-dropdown: 0 1rem 2.25rem -1.125rem oklch(0.2161 0.0061 56.04 / 0.5);
+  --shadow-float-popover: 0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5);
+  --shadow-float-modal: 0 1.75rem 3.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.45);
+
+  /* the pressed ink thumb (segmented control, primary button) */
+  --shadow-thumb: 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28);
+
+  /* a standalone control gaining focus comes further forward */
+  --shadow-focus-lift: 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.08),
+    0 0.625rem 1.25rem -0.875rem oklch(0.5832 0.227 268.34 / 0.6);
+
+  /* aliases the shared showcase reads */
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.06);
+  --shadow-sm: var(--shadow-lift);
+  --shadow-md: var(--shadow-float-dropdown);
+  --shadow-lg: var(--shadow-float-popover);
+  --shadow-xl: var(--shadow-float-modal);
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+
+  /* charts: accent first, then the warm supporting ramp */
+  --chart-1: oklch(0.5832 0.227 268.34);
+  --chart-2: oklch(0.5262 0.0942 151.04);
+  --chart-3: oklch(0.6658 0.1574 58.32);
+  --chart-4: oklch(0.5563 0.1632 32);
+  --chart-5: oklch(0.5534 0.0116 58.07);
+
+  --sidebar: oklch(0.9488 0.0054 95.1);
+  --sidebar-foreground: oklch(0.2213 0.0038 106.71);
+  --sidebar-primary: oklch(0.2685 0.0063 34.3);
+  --sidebar-primary-foreground: oklch(0.9848 0.0013 106.42);
+  --sidebar-accent: oklch(0.9726 0.0026 106.45);
+  --sidebar-accent-foreground: oklch(0.2213 0.0038 106.71);
+  --sidebar-border: oklch(0.9232 0.0026 48.72);
+  --sidebar-ring: oklch(0.5832 0.227 268.34);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+  ::-moz-selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

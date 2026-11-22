@@ -1,0 +1,237 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Neon Vault: dark crypto wallet UI. Deep violet-black canvas, soft layered
+     elevation on raised cards, hot-magenta primary with a neon glow, lavender
+     and gold support accents. Pill controls, generous radii, Inter numerals. */
+  --background: oklch(0.16 0.008 300);
+  --foreground: oklch(0.96 0.005 320);
+
+  --card: oklch(0.21 0.011 300);
+  --card-foreground: oklch(0.96 0.005 320);
+
+  --popover: oklch(0.23 0.012 300);
+  --popover-foreground: oklch(0.96 0.005 320);
+
+  /* Hot magenta, the wallet's action color */
+  --primary: oklch(0.65 0.24 350);
+  --primary-foreground: oklch(0.99 0.005 350);
+  /* Brighter magenta for the top of the hero gradient */
+  --primary-bright: oklch(0.71 0.25 350);
+  /* Deep vault tone for surfaces under the magenta key color */
+  --primary-deep: oklch(0.3 0.07 350);
+
+  --secondary: oklch(0.27 0.014 300);
+  --secondary-foreground: oklch(0.93 0.008 320);
+
+  --muted: oklch(0.25 0.012 300);
+  --muted-foreground: oklch(0.66 0.02 310);
+
+  --accent: oklch(0.29 0.018 310);
+  --accent-foreground: oklch(0.97 0.005 320);
+
+  --destructive: oklch(0.62 0.21 22);
+  --destructive-foreground: oklch(0.98 0.01 22);
+
+  --border: oklch(1 0 0 / 0.09);
+  --input: oklch(0.14 0.008 300);
+  --ring: oklch(0.65 0.24 350);
+
+  /* Radius scale lives in :root (not only @theme) so the showcase, which
+     injects :root vars at runtime, renders Neon Vault's radii instead of the
+     host app's. Controls map onto these steps, never arbitrary px values. */
+  --radius: 1rem;
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+
+  /* Layered soft elevation: hairline top light, contact shadow, ambient drop */
+  --shadow-card:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.05),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.5rem 1.5rem oklch(0 0 0 / 0.35);
+  --shadow-popover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.06),
+    0 0.5rem 1.5rem oklch(0 0 0 / 0.5),
+    0 1.25rem 3rem oklch(0 0 0 / 0.45);
+  /* Hero magenta material: top sheen, hairline rim, contact shadow, neon glow */
+  --shadow-button:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.28),
+    0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.45),
+    0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32);
+  /* Raised graphite material for secondary / outline controls */
+  --shadow-raised:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.07),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4);
+  /* Recessed track for form fields */
+  --shadow-inset: inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45);
+  /* Hero gradient shared by the primary button and filled controls */
+  --gradient-primary: linear-gradient(
+    to bottom,
+    var(--primary-bright),
+    var(--primary)
+  );
+
+  /* Wallet chart palette, in-family: deep magenta, lavender, gold, bright
+     magenta, soft rose, all near the primary key color */
+  --chart-1: oklch(0.65 0.24 350);
+  --chart-2: oklch(0.74 0.13 295);
+  --chart-3: oklch(0.8 0.14 85);
+  --chart-4: oklch(0.71 0.2 350);
+  --chart-5: oklch(0.78 0.12 345);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-bright: var(--primary-bright);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

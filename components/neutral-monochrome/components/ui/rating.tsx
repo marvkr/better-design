@@ -56,7 +56,7 @@ function Rating({
             onMouseEnter={() => !readOnly && setHovered(starValue)}
             onMouseLeave={() => !readOnly && setHovered(null)}
             className={cn(
-              "transition-all duration-100",
+              "transition-all duration-fast",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm",
               readOnly ? "cursor-default" : "cursor-pointer hover:scale-110"
             )}

@@ -1,0 +1,11 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Skeleton: a square soft grey block, the same grey as the\n * photo stage, that pulses while the real content loads. Shape it with size\n * classes, and round it fully for avatars and pills.\n */\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      aria-hidden=\"true\"\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-none bg-secondary motion-reduce:animate-none\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

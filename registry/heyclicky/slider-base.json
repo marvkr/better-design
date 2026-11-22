@@ -1,0 +1,29 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * The filled range and the knob are both cut from the button's material: the\n * same blue gradient, gloss line, and soft blue throw.\n */\nconst Slider = React.forwardRef<HTMLDivElement, SliderPrimitive.Root.Props>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max];\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track data-slot=\"slider-track\" className=\"relative h-1.5 w-full grow rounded-full bg-secondary shadow-[var(--shadow-inset)]\">\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full rounded-full bg-[image:var(--gradient-primary)]\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\"\n              key={index}\n              className={cn(\n                \"block h-5 w-5 rounded-full bg-[image:var(--gradient-primary)]\",\n                \"shadow-[var(--shadow-control)]\",\n                \"transition-[box-shadow,transform] duration-base ease-out\",\n                \"hover:scale-105\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                \"data-disabled:pointer-events-none data-disabled:opacity-45\",\n              )}\n            />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    );\n  },\n);\nSlider.displayName = \"Slider\";\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

@@ -1,0 +1,326 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Terminal — 1987 CRT phosphor terminal.
+ *
+ * Authored from the "Neural Systems Inc." NeuralTerminal reference:
+ *   - Deep-blue CRT screen (gradient #0F4B8F top -> #042852 bottom), all oklch here.
+ *   - Cyan phosphor text (#67e8f9) with a soft glow halo.
+ *   - Hairline scanlines + a corner vignette baked into the canvas via body overlays.
+ *   - Monospace everything, sharp 0.125rem corners (boxes drawn in character cells).
+ *   - Interactive surfaces glow cyan instead of casting black shadows: light is
+ *     EMITTED by the phosphor, not reflected, so depth reads as bloom + a rim.
+ */
+
+:root {
+  /* ─── Surfaces: the CRT screen. Deeper = further back in the tube. ─── */
+  --background: oklch(0.21 0.058 256);     /* Deep CRT navy (#042852 family) */
+  --foreground: oklch(0.88 0.13 207);      /* Cyan phosphor (#67e8f9) */
+
+  --card: oklch(0.27 0.072 255);           /* Lit panel (toward #0F4B8F) */
+  --card-foreground: oklch(0.88 0.13 207);
+
+  --popover: oklch(0.30 0.078 255);        /* Floating panel, one notch brighter */
+  --popover-foreground: oklch(0.88 0.13 207);
+
+  /* ─── Primary: bright phosphor cyan (the live, emitting accent) ─── */
+  --primary: oklch(0.80 0.15 205);         /* Cyan-400/500 phosphor */
+  --primary-foreground: oklch(0.18 0.05 256);
+
+  --secondary: oklch(0.26 0.062 255);
+  --secondary-foreground: oklch(0.86 0.115 207);
+
+  --muted: oklch(0.25 0.05 255);
+  --muted-foreground: oklch(0.68 0.085 210);  /* Dimmed phosphor (cyan-400/60 output) */
+
+  --accent: oklch(0.32 0.085 250);
+  --accent-foreground: oklch(0.90 0.13 207);
+
+  --destructive: oklch(0.70 0.19 22);      /* Phosphor red (#f87171) */
+  --destructive-foreground: oklch(0.18 0.05 256);
+
+  --border: oklch(0.86 0.13 207 / 0.18);   /* Cyan hairline rim */
+  --input: oklch(0.86 0.13 207 / 0.07);    /* Recessed cyan-tinted field */
+  --ring: oklch(0.80 0.15 205);            /* Cyan focus glow */
+  --radius: 0.125rem;                      /* 0.125rem: terminal sharp */
+
+  /* ─── Status phosphors + modal scrim (single source for component literals) ─── */
+  --success: oklch(0.80 0.17 150);         /* PWR-ok green */
+  --success-foreground: oklch(0.18 0.05 256);
+  --warning: oklch(0.84 0.16 84);          /* HDD amber */
+  --warning-foreground: oklch(0.18 0.05 256);
+  --overlay: oklch(0.10 0.03 256 / 0.7);   /* Dim the tube behind modals */
+
+  /* ─── Phosphor glow tokens ─── */
+  --glow-soft: oklch(0.86 0.13 207 / 0.3);
+  --glow-mid: oklch(0.86 0.13 207 / 0.45);
+  --text-glow: 0 0 0.25rem oklch(0.86 0.13 207 / 0.45);
+
+  /*
+   * ─── Shadow scale ───
+   * On a CRT, elevation reads as glow, not as a cast shadow. Each tier = a faint
+   * dark contact (so panels separate against the navy) + a cyan rim/bloom (the
+   * phosphor emitting outward). xs/sm barely lift; lg/xl float dropdowns/dialogs.
+   */
+  --shadow-xs:
+    inset 0 0.0625rem 0 oklch(0.86 0.13 207 / 0.06),
+    0 0.0625rem 0.0625rem oklch(0 0 0 / 0.4);
+
+  --shadow-sm:
+    inset 0 0.0625rem 0 oklch(0.86 0.13 207 / 0.08),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.45);
+
+  --shadow-md:
+    inset 0 0.0625rem 0 oklch(0.86 0.13 207 / 0.1),
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.5),
+    0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.08);
+
+  --shadow-lg:
+    inset 0 0.0625rem 0 oklch(0.86 0.13 207 / 0.12),
+    0 0.375rem 1rem oklch(0 0 0 / 0.6),
+    0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.12),
+    0 0 1.5rem oklch(0.80 0.15 205 / 0.1);
+
+  --shadow-xl:
+    inset 0 0.0625rem 0 oklch(0.86 0.13 207 / 0.15),
+    0 0.75rem 1.75rem oklch(0 0 0 / 0.7),
+    0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.14),
+    0 0 2.25rem oklch(0.80 0.15 205 / 0.14);
+
+  /* lumen-derived aliases the shared component tail references */
+  --shadow-s: var(--shadow-sm);
+  --shadow-m: var(--shadow-md);
+  --shadow-l: var(--shadow-lg);
+
+  /* Recessed inputs: the field sits below the glass, faint inner darkening */
+  --shadow-inset:
+    inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    inset 0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.05);
+
+  /* Resting button: dark contact + a thin cyan rim */
+  --shadow-button:
+    inset 0 0.0625rem 0 oklch(0.95 0.05 207 / 0.18),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.5),
+    0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.14);
+
+  --shadow-button-hover:
+    inset 0 0.0625rem 0 oklch(0.95 0.05 207 / 0.22),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.5),
+    0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.22),
+    0 0 0.75rem oklch(0.80 0.15 205 / 0.2);
+
+  /* Primary button: live phosphor — cyan bloom emitting outward */
+  --shadow-primary:
+    inset 0 0.0625rem 0 oklch(0.98 0.03 207 / 0.4),
+    0 0 0 0.0625rem oklch(0.80 0.15 205 / 0.5),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0 0.875rem oklch(0.80 0.15 205 / 0.4);
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (crisp profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 120ms;
+  --transition-duration-base: 160ms;
+  --transition-duration-slow: 220ms;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --font-mono: var(--font-terminal);
+  --font-sans: var(--font-terminal);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.0625rem);
+  --radius-xl: calc(var(--radius) + 0.1875rem);
+
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+}
+
+@layer base {
+  /* Monospace stack — the terminal's only typeface. */
+  :root {
+    --font-terminal: "Geist Mono", ui-monospace, "SFMono-Regular", "SF Mono",
+      Menlo, "Consolas", "Liberation Mono", monospace;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+    font-variant-ligatures: none;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-terminal);
+    letter-spacing: 0.01em;
+  }
+
+  /* Phosphor glow on the headline text. */
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: var(--text-glow);
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* ─── CRT canvas: hairline scanlines + corner vignette ───
+     Lifted from the reference (0.25rem scanline band, radial vignette).
+     Fixed, non-interactive overlays so every surface sits "inside the tube". */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: linear-gradient(
+      oklch(0 0 0 / 0) 50%,
+      oklch(0 0 0 / 0.18) 50%
+    );
+    background-size: 100% 0.25rem;
+    opacity: 0.6;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      oklch(0 0 0 / 0) 55%,
+      oklch(0 0 0 / 0.35) 100%
+    );
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling. */
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
+}

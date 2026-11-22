@@ -1,0 +1,28 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Interior Tabs — the signature control. The list is a well cut into the\n * panel; the triggers are plateaus seated in it, and the active one is a\n * lifted cap you could press. Radii nest: a 12px shell holds 8px plateaus\n * with 4px of padding between them. Selection is depth, never blue; focus\n * is the inset accent line, drawn over the cap when the trigger is active.\n */\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-[0.75rem] bg-secondary p-1\",\n      \"shadow-[var(--shadow-well)]\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsList.displayName = \"TabsList\"\n\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-[0.5rem] px-3 py-1.5\",\n      \"text-[0.8125rem] font-medium leading-[1.4] text-muted-foreground\",\n      \"transition-[background-color,color,box-shadow] duration-fast\",\n      \"hover:text-foreground\",\n      \"focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n      \"data-disabled:pointer-events-none data-disabled:opacity-50\",\n      \"data-selected:bg-card data-selected:text-foreground\",\n      \"data-selected:shadow-[var(--shadow-cap)]\",\n      \"data-selected:focus-visible:shadow-[var(--shadow-cap),inset_0_0_0_0.0625rem_var(--ring)]\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsTrigger.displayName = \"TabsTrigger\"\n\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    className={cn(\n      \"mt-4 focus-visible:outline-none focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)"
+    }
+  }
+}

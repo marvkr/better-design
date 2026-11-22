@@ -1,0 +1,28 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { hlCardSurface } from \"./_shared\";\n\n// Hyperline Notification: inbox row on the card surface; unread shows the\n// cyan dot.\n\ninterface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode;\n  title: string;\n  description?: string;\n  action?: React.ReactNode;\n  onDismiss?: () => void;\n  variant?: \"default\" | \"success\" | \"warning\" | \"destructive\";\n  unread?: boolean;\n}\n\nconst iconVariant = {\n  default: \"text-primary\",\n  success: \"text-[color:var(--hl-success)]\",\n  warning: \"text-[color:var(--hl-gold)]\",\n  destructive: \"text-destructive\",\n};\n\nfunction Notification({\n  icon,\n  title,\n  description,\n  action,\n  onDismiss,\n  variant = \"default\",\n  unread,\n  className,\n  ...props\n}: NotificationProps) {\n  return (\n    <div\n      className={cn(hlCardSurface, \"relative flex items-start gap-3 rounded-xl p-4\", className)}\n      {...props}\n    >\n      {unread && (\n        <span className=\"absolute left-1.5 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_0.375rem_oklch(0.79_0.125_200/0.6)]\" />\n      )}\n      {icon && (\n        <span className={cn(\"mt-0.5 shrink-0 [&_svg]:size-4\", iconVariant[variant])}>{icon}</span>\n      )}\n      <div className=\"min-w-0 flex-1\">\n        <div className=\"text-sm font-medium text-foreground\">{title}</div>\n        {description && <div className=\"mt-0.5 text-xs text-muted-foreground\">{description}</div>}\n        {action && <div className=\"mt-2\">{action}</div>}\n      </div>\n      {onDismiss && (\n        <button\n          type=\"button\"\n          onClick={onDismiss}\n          aria-label=\"Dismiss notification\"\n          className=\"shrink-0 rounded-md p-0.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n        >\n          <X className=\"h-3.5 w-3.5\" />\n        </button>\n      )}\n    </div>\n  );\n}\n\nexport { Notification };\nexport type { NotificationProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/hyperline/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-gold": "oklch(0.82 0.12 85)",
+      "hl-success": "oklch(0.74 0.17 155)"
+    },
+    "dark": {
+      "hl-gold": "oklch(0.82 0.12 85)",
+      "hl-success": "oklch(0.74 0.17 155)"
+    }
+  }
+}

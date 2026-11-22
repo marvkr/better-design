@@ -1,0 +1,26 @@
+{
+  "name": "popover-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Popover as PopoverPrimitive } from \"@base-ui/react/popover\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popoverSurface, popoverMotion } from \"./_shared\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Playful console Popover root: owns the open state of one floating panel. */\nconst Popover = PopoverPrimitive.Root;\n\n/** The control the popover opens from. */\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\n/**\n * Playful console popover panel: a white card with the olive hairline, the\n * card corner and a soft drop. It is 18rem wide, stacks its content with a\n * 0.75rem gap, and pops from its anchor.\n */\nconst PopoverContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<PopoverPrimitive.Popup.Props> &\n    Pick<\n      PopoverPrimitive.Positioner.Props,\n      \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n    >\n>(\n  (\n    {\n      className,\n      align = \"center\",\n      alignOffset,\n      side,\n      sideOffset = 6,\n      ...props\n    },\n    ref,\n  ) => (\n    <PopoverPrimitive.Portal>\n      <PopoverPrimitive.Positioner\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n        className=\"isolate z-50 outline-none\"\n      >\n        <PopoverPrimitive.Popup\n          ref={ref}\n          data-slot=\"popover-content\"\n          className={cn(\n            popoverSurface,\n            popoverMotion,\n            \"flex w-72 max-w-(--available-width) flex-col gap-3 p-4 text-sm text-(--foreground-secondary)\",\n            className,\n          )}\n          {...props}\n        />\n      </PopoverPrimitive.Positioner>\n    </PopoverPrimitive.Portal>\n  ),\n);\nPopoverContent.displayName = \"PopoverContent\";\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.031 259.7)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.84 0.01 114)"
+    }
+  }
+}

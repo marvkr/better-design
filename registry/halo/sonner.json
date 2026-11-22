@@ -1,0 +1,25 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\nconst SonnerToaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:backdrop-blur-2xl group-[.toaster]:bg-foreground/[0.08] group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-[0_0.5rem_2rem_color-mix(in_oklch,var(--shade)_50%,transparent),inset_0_0_0.5rem_color-mix(in_oklch,var(--halo)_6%,transparent)] group-[.toaster]:rounded-xl\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-full\",\n          cancelButton:\n            \"group-[.toast]:bg-foreground/[0.06] group-[.toast]:text-muted-foreground group-[.toast]:rounded-full\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { SonnerToaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    }
+  }
+}

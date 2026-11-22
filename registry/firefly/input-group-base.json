@@ -1,0 +1,27 @@
+{
+  "name": "input-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\ninterface InputGroupProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"prefix\"\n> {\n  prefix?: React.ReactNode;\n  suffix?: React.ReactNode;\n  size?: \"default\" | \"sm\";\n  disabled?: boolean;\n  error?: boolean;\n}\n\n/**\n * Firefly InputGroup: one warm field shell with room for a prefix and a\n * suffix in muted ink, such as a currency sign, a unit or an icon. The\n * whole shell takes the olive line and flush outline while the input inside\n * has focus, and turns red when the value is wrong.\n */\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  (\n    {\n      className,\n      prefix,\n      suffix,\n      size = \"default\",\n      disabled,\n      error,\n      children,\n      ...props\n    },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      data-slot=\"input-group\"\n      data-disabled={disabled || undefined}\n      data-invalid={error || undefined}\n      className={cn(\n        formFieldBase,\n        \"flex items-center gap-2\",\n        size === \"sm\" ? \"h-8\" : \"h-10\",\n        \"focus-within:border-(--accent-line) focus-within:outline-2 focus-within:outline-offset-0 focus-within:outline-ring\",\n        \"data-[invalid]:border-destructive data-[invalid]:focus-within:border-destructive data-[invalid]:focus-within:outline-destructive\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled) data-[disabled]:hover:border-(--line-strong)\",\n        \"[&>input]:h-full [&>input]:min-w-0 [&>input]:flex-1 [&>input]:bg-transparent [&>input]:text-sm [&>input]:outline-none\",\n        \"[&>input]:placeholder:text-muted-foreground [&>input:disabled]:cursor-not-allowed\",\n        className,\n      )}\n      {...props}\n    >\n      {prefix && (\n        <span\n          data-slot=\"input-group-prefix\"\n          className=\"flex shrink-0 items-center text-sm text-muted-foreground [&_svg]:size-4\"\n        >\n          {prefix}\n        </span>\n      )}\n      {children}\n      {suffix && (\n        <span\n          data-slot=\"input-group-suffix\"\n          className=\"flex shrink-0 items-center text-sm text-muted-foreground [&_svg]:size-4\"\n        >\n          {suffix}\n        </span>\n      )}\n    </div>\n  ),\n);\nInputGroup.displayName = \"InputGroup\";\n\nexport { InputGroup };\nexport type { InputGroupProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "accent-line": "oklch(0.594 0.135 115.4)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "accent-line": "oklch(0.841 0.161 114)"
+    }
+  }
+}

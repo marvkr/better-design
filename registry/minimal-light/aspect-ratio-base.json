@@ -1,0 +1,11 @@
+{
+  "name": "aspect-ratio-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\n// Luxe AspectRatio: use ratio prop (e.g., 16/9, 4/3, 1) to constrain container proportions\n// Base UI has no AspectRatio primitive: plain div with CSS aspect-ratio.\n// position: relative + width: 100% mirror the old primitive's root box so\n// absolutely positioned children (e.g. next/image fill) keep working.\n\nexport interface AspectRatioProps\n  extends React.ComponentPropsWithoutRef<\"div\"> {\n  ratio?: number\n}\n\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  ({ ratio = 1, style, ...props }, ref) => (\n    <div\n      ref={ref}\n      style={{\n        position: \"relative\",\n        width: \"100%\",\n        aspectRatio: String(ratio),\n        ...style,\n      }}\n      {...props}\n    />\n  )\n)\nAspectRatio.displayName = \"AspectRatio\"\n\nexport { AspectRatio }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

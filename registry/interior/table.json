@@ -1,0 +1,20 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Table — hairline rules only, no vertical lines, no tinted header\n * strip. Column headers are section labels: 11px semibold uppercase with\n * 0.08em tracking. A selected row is picked out of the list with the well\n * tint and the row shadow — ink and depth, never accent.\n */\n\nconst Table = React.forwardRef<\n  HTMLTableElement,\n  React.HTMLAttributes<HTMLTableElement>\n>(({ className, ...props }, ref) => (\n  <div className=\"relative w-full overflow-auto\">\n    <table\n      ref={ref}\n      className={cn(\"w-full caption-bottom text-[0.8125rem]\", className)}\n      {...props}\n    />\n  </div>\n));\nTable.displayName = \"Table\";\n\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead ref={ref} className={cn(className)} {...props} />\n));\nTableHeader.displayName = \"TableHeader\";\n\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    className={cn(\"[&_tr:last-child]:border-0\", className)}\n    {...props}\n  />\n));\nTableBody.displayName = \"TableBody\";\n\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    className={cn(\n      \"border-t border-border bg-secondary/50 font-medium\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableFooter.displayName = \"TableFooter\";\n\nconst TableRow = React.forwardRef<\n  HTMLTableRowElement,\n  React.HTMLAttributes<HTMLTableRowElement>\n>(({ className, ...props }, ref) => (\n  <tr\n    ref={ref}\n    className={cn(\n      \"border-b border-border\",\n      \"transition-[background-color,box-shadow] duration-fast\",\n      \"hover:bg-secondary/50\",\n      \"data-[state=selected]:bg-secondary data-[state=selected]:shadow-[var(--shadow-row)]\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableRow.displayName = \"TableRow\";\n\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    className={cn(\n      \"h-10 px-4 text-left align-middle\",\n      \"text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHead.displayName = \"TableHead\";\n\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    className={cn(\"px-4 py-3 align-middle text-foreground\", className)}\n    {...props}\n  />\n));\nTableCell.displayName = \"TableCell\";\n\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    className={cn(\"mt-4 text-[0.7813rem] text-muted-foreground\", className)}\n    {...props}\n  />\n));\nTableCaption.displayName = \"TableCaption\";\n\nexport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-row": "inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07), 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05)"
+    },
+    "dark": {
+      "shadow-row": "inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07), 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05)"
+    }
+  }
+}

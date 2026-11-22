@@ -1,0 +1,23 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Tabs = TabsPrimitive.Root\n\nfunction TabsList({ className, ...props }: TabsPrimitive.List.Props) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-10 items-center justify-center rounded-lg p-1\",\n        \"bg-card text-muted-foreground border border-border\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = \"TabsList\"\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      className={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium\",\n        \"transition-[background-color,color,box-shadow] duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"data-active:bg-popover data-active:text-foreground data-active:[box-shadow:var(--shadow-s)]\",\n        \"hover:text-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsTrigger.displayName = \"TabsTrigger\"\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      className={cn(\n        \"mt-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)"
+    }
+  }
+}

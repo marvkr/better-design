@@ -1,0 +1,32 @@
+{
+  "name": "dialog",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\n/**\n * Cream editorial Dialog: a sheet of cream paper over a warm ink scrim.\n *\n * The panel is the page colour with a 1.5rem corner and the one deep\n * overlay shadow, so it lifts off the page without a border. The title is\n * set in the serif at book weight. It fades in and settles from 95% scale\n * in 150ms; the close control is a quiet ghost button in the top end corner.\n */\nconst Dialog = DialogPrimitive.Root;\nconst DialogTrigger = DialogPrimitive.Trigger;\nconst DialogPortal = DialogPrimitive.Portal;\nconst DialogClose = DialogPrimitive.Close;\n\n/** The scrim: warm ink at 40%, fading in and out. */\nconst DialogOverlay = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Overlay\n    ref={ref}\n    data-slot=\"dialog-overlay\"\n    className={cn(\n      \"fixed inset-0 z-50 bg-(--scrim)\",\n      \"data-[state=open]:animate-in data-[state=open]:fade-in-0 duration-base data-[state=open]:ease-out\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogOverlay.displayName = DialogPrimitive.Overlay.displayName;\n\ninterface DialogContentProps\n  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {\n  /** Renders the ghost close button in the top end corner. Defaults to true. */\n  showCloseButton?: boolean;\n}\n\nconst DialogContent = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Content>,\n  DialogContentProps\n>(({ className, children, showCloseButton = true, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Content\n      ref={ref}\n      data-slot=\"dialog-content\"\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-5 sm:max-w-lg\",\n        \"rounded-2xl bg-background p-7 text-foreground shadow-(--shadow-overlay) outline-none\",\n        \"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 duration-base data-[state=open]:ease-out\",\n        \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      {showCloseButton ? (\n        <DialogPrimitive.Close\n          data-slot=\"dialog-close\"\n          className={cn(\n            buttonVariants({ variant: \"ghost\", size: \"icon-sm\" }),\n            \"absolute end-4 top-4 text-muted-foreground\",\n          )}\n        >\n          <Icon icon=\"ph:x\" className=\"size-4\" aria-hidden=\"true\" />\n          <span className=\"sr-only\">Close</span>\n        </DialogPrimitive.Close>\n      ) : null}\n    </DialogPrimitive.Content>\n  </DialogPortal>\n));\nDialogContent.displayName = DialogPrimitive.Content.displayName;\n\nconst DialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-header\"\n    className={cn(\"flex flex-col gap-2 pe-8 text-start\", className)}\n    {...props}\n  />\n);\nDialogHeader.displayName = \"DialogHeader\";\n\n/** Actions stack on a phone with the main one on top, and sit in a row at the end from sm up. */\nconst DialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-footer\"\n    className={cn(\n      \"flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end\",\n      className,\n    )}\n    {...props}\n  />\n);\nDialogFooter.displayName = \"DialogFooter\";\n\nconst DialogTitle = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    data-slot=\"dialog-title\"\n    className={cn(\n      \"font-serif text-2xl font-medium leading-snug tracking-tight text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogTitle.displayName = DialogPrimitive.Title.displayName;\n\nconst DialogDescription = React.forwardRef<\n  React.ElementRef<typeof DialogPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    data-slot=\"dialog-description\"\n    className={cn(\"text-sm leading-relaxed text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nDialogDescription.displayName = DialogPrimitive.Description.displayName;\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dialog@^1.1.14",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.359 0.005 106.7)",
+      "scrim": "oklch(0.191 0.002 106.6 / 0.4)",
+      "shadow-overlay": "0 1.5rem 3rem -0.75rem oklch(0.191 0.002 106.6 / 0.2), 0 0 0 0.0625rem oklch(0.191 0.002 106.6 / 0.08)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.853 0.014 97.5)",
+      "scrim": "oklch(0 0 0 / 0.6)",
+      "shadow-overlay": "0 1.5rem 3rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.1)"
+    }
+  }
+}

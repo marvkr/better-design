@@ -1,0 +1,14 @@
+{
+  "name": "separator-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Separator = React.forwardRef<\n  HTMLDivElement,\n  Omit<SeparatorPrimitive.Props, \"className\"> & {\n    className?: string\n    /**\n     * Accepted for API compatibility with the previous wrapper and ignored:\n     * the Base UI separator is always semantic (role=\"separator\").\n     */\n    decorative?: boolean\n  }\n>(({ className, orientation = \"horizontal\", decorative: _decorative, ...props }, ref) => (\n  <SeparatorPrimitive\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"shrink-0 bg-border\",\n      orientation === \"horizontal\" ? \"h-px w-full\" : \"h-full w-px\",\n      className\n    )}\n    {...props}\n  />\n))\nSeparator.displayName = \"Separator\"\n\nexport { Separator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

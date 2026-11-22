@@ -1,0 +1,29 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/** Props for InputGroup: an input with optional leading and trailing adornments. */\ninterface InputGroupProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"prefix\"\n> {\n  prefix?: React.ReactNode;\n  suffix?: React.ReactNode;\n  size?: \"default\" | \"sm\";\n  disabled?: boolean;\n  error?: boolean;\n}\n\n/**\n * Playful console InputGroup: one white well with room for a prefix and a\n * suffix, such as a protocol, a unit or an icon. Text adornments sit in mono\n * type like console output. The whole shell takes the blue edge and ring\n * while the input inside has focus, and turns red when the value is wrong.\n */\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  (\n    {\n      className,\n      prefix,\n      suffix,\n      size = \"default\",\n      disabled,\n      error,\n      children,\n      ...props\n    },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      data-slot=\"input-group\"\n      data-disabled={disabled || undefined}\n      data-invalid={error || undefined}\n      className={cn(\n        formFieldBase,\n        \"flex items-center gap-2\",\n        size === \"sm\" ? \"h-8\" : \"h-9\",\n        \"focus-within:border-ring focus-within:ring-3 focus-within:ring-(--highlight-blue)\",\n        \"data-[invalid]:border-destructive data-[invalid]:focus-within:border-destructive data-[invalid]:focus-within:ring-(--destructive-tint)\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled) data-[disabled]:hover:border-(--line-strong)\",\n        \"[&>input]:h-full [&>input]:min-w-0 [&>input]:flex-1 [&>input]:bg-transparent [&>input]:text-sm [&>input]:outline-none\",\n        \"[&>input]:placeholder:text-muted-foreground [&>input:disabled]:cursor-not-allowed\",\n        className,\n      )}\n      {...props}\n    >\n      {prefix && (\n        <span\n          data-slot=\"input-group-prefix\"\n          className=\"flex shrink-0 items-center font-mono text-[0.8125rem] text-muted-foreground [&_svg]:size-4\"\n        >\n          {prefix}\n        </span>\n      )}\n      {children}\n      {suffix && (\n        <span\n          data-slot=\"input-group-suffix\"\n          className=\"flex shrink-0 items-center font-mono text-[0.8125rem] text-muted-foreground [&_svg]:size-4\"\n        >\n          {suffix}\n        </span>\n      )}\n    </div>\n  ),\n);\nInputGroup.displayName = \"InputGroup\";\n\nexport { InputGroup };\nexport type { InputGroupProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "highlight-blue": "oklch(0.623 0.188 259.8 / 0.2)",
+      "destructive-tint": "oklch(0.903 0.037 24)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "highlight-blue": "oklch(0.7 0.15 258 / 0.3)",
+      "destructive-tint": "oklch(0.28 0.06 25)"
+    }
+  }
+}

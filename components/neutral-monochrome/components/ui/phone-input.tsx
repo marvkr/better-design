@@ -34,7 +34,6 @@ export interface PhoneInputProps {
 }
 
 function PhoneInput({
-  value: controlledValue,
   onValueChange,
   dialCodes = DEFAULT_DIAL_CODES,
   defaultDialCode = "+1",
@@ -65,7 +64,7 @@ function PhoneInput({
 
   React.useEffect(() => {
     function onOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (containerRef.current && !(e.target instanceof Node && containerRef.current.contains(e.target))) {
         setOpen(false)
       }
     }
@@ -83,7 +82,7 @@ function PhoneInput({
         disabled={disabled}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex h-10 items-center gap-1.5 rounded-l-[10px] border border-r-0 border-border bg-card px-3",
+          "flex h-10 items-center gap-1.5 rounded-l-[0.625rem] border border-r-0 border-border bg-card px-3",
           "text-sm text-foreground transition-colors hover:bg-accent",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           disabled && "opacity-50 pointer-events-none"
@@ -107,7 +106,7 @@ function PhoneInput({
         placeholder={placeholder}
         disabled={disabled}
         className={cn(
-          "flex h-10 flex-1 rounded-r-[10px] border border-border bg-card px-3 py-2 text-sm",
+          "flex h-10 flex-1 rounded-r-[0.625rem] border border-border bg-card px-3 py-2 text-sm",
           "text-foreground placeholder:text-muted-foreground/50",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           "disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
@@ -116,7 +115,7 @@ function PhoneInput({
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute left-0 top-11 z-50 w-52 rounded-[10px] border border-border bg-card shadow-xl overflow-hidden">
+        <div className="absolute left-0 top-11 z-50 w-52 rounded-[0.625rem] border border-border bg-card shadow-xl overflow-hidden">
           <div className="max-h-48 overflow-y-auto py-1">
             {dialCodes.map((dc) => (
               <button

@@ -1,0 +1,27 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Progress — a recessed steel channel (inset shadow) with a glossy azure alloy\n * fill that reads as the same metal as the primary button / active toggle.\n * Base UI computes the Indicator fill width itself, so the old manual\n * translateX transform is gone.\n */\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"]\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full border border-white/10\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator className=\"h-full w-full flex-1 rounded-full [background:var(--surface-on)] [box-shadow:var(--shadow-primary)] transition-all duration-slow\" />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    },
+    "dark": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    }
+  }
+}

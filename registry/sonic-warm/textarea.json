@@ -1,0 +1,11 @@
+{
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(\n          \"flex min-h-[5rem] w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-colors duration-fast\",\n          \"hover:border-foreground/40\",\n          \"focus-visible:outline-none focus-visible:border-foreground\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

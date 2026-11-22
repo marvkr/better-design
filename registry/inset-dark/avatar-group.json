@@ -8,7 +8,13 @@
       "type": "registry:ui"
     }
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)"
+    }
+  }
 }

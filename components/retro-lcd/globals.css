@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Retro LCD — vintage digital-watch / calculator screen.
+     Greenish-grey LCD field, dark-olive 7-segment ink. All oklch. */
+
+  /* LCD screen field */
+  --background: oklch(0.7152 0.0314 126.14);
+  /* Dark-olive active segment ink */
+  --foreground: oklch(0.2776 0.0445 144.26);
+
+  /* Slightly raised LCD panel */
+  --card: oklch(0.7480 0.0286 126.14);
+  --card-foreground: oklch(0.2776 0.0445 144.26);
+
+  --popover: oklch(0.7480 0.0286 126.14);
+  --popover-foreground: oklch(0.2776 0.0445 144.26);
+
+  /* Active segment = the accent. A pressed segment reads dark on green. */
+  --primary: oklch(0.2776 0.0445 144.26);
+  --primary-foreground: oklch(0.7480 0.0286 126.14);
+
+  /* Casing plate — neutral graphite key */
+  --secondary: oklch(0.3715 0.0000 89.88);
+  --secondary-foreground: oklch(0.8200 0.0250 126.14);
+
+  /* Faint ghost-segment field */
+  --muted: oklch(0.6960 0.0210 126.14);
+  --muted-foreground: oklch(0.4150 0.0360 144.26);
+
+  --accent: oklch(0.6960 0.0210 126.14);
+  --accent-foreground: oklch(0.2776 0.0445 144.26);
+
+  /* Muted brick — the only warm tone an LCD ever shows (low-battery dot) */
+  --destructive: oklch(0.5050 0.1300 28.00);
+  --destructive-foreground: oklch(0.9400 0.0200 126.14);
+
+  /* Olive grid lines, low alpha — like the pixel grid */
+  --border: oklch(0.2776 0.0445 144.26 / 0.28);
+  --input: oklch(0.6850 0.0320 126.14);
+  --ring: oklch(0.2776 0.0445 144.26);
+
+  /* LCD screens have a slightly rounded glass corner */
+  --radius: 0.5rem;
+
+  /* Olive-tinted depth: subtle drop + the screen's inset glass shadow.
+     Border-driven elevation; nothing heavier than a watch face. */
+  --shadow-2xs: 0 0.0625rem 0.0625rem oklch(0.2776 0.0445 144.26 / 0.10);
+  --shadow-xs:  0 0.0625rem 0.125rem oklch(0.2776 0.0445 144.26 / 0.14);
+  --shadow-sm:  0 0.0625rem 0.125rem oklch(0.2776 0.0445 144.26 / 0.16), inset 0 0.0625rem 0 oklch(1 0 0 / 0.10);
+  --shadow:     0 0.125rem 0.25rem oklch(0.2776 0.0445 144.26 / 0.18), inset 0 0.0625rem 0 oklch(1 0 0 / 0.10);
+  --shadow-md:  0 0.125rem 0.375rem oklch(0.2776 0.0445 144.26 / 0.20), inset 0 0.0625rem 0 oklch(1 0 0 / 0.10);
+  --shadow-lg:  0 0.25rem 0.75rem oklch(0.2776 0.0445 144.26 / 0.22), inset 0 0.0625rem 0 oklch(1 0 0 / 0.10);
+  --shadow-xl:  0 0.375rem 1.125rem oklch(0.2776 0.0445 144.26 / 0.24), 0 0 0 0.0625rem oklch(0.2776 0.0445 144.26 / 0.10);
+
+  /* Inset screen-glass shadow — used by the clock + recessed surfaces */
+  --shadow-inset: inset 0 0.25rem 0.625rem oklch(0 0 0 / 0.20);
+
+  /* ─── Chart palette: tonal ramp of the olive ink ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l + 0.10) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l + 0.20) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l + 0.30) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l + 0.40) calc(c * 0.68) h);
+
+  /* --- Motion (crisp profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 120ms;
+  --transition-duration-base: 160ms;
+  --transition-duration-slow: 220ms;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--font-geist-mono), "Geist Mono", ui-monospace, "SF Mono",
+      "JetBrains Mono", Menlo, Monaco, "Cascadia Mono", "Roboto Mono",
+      "Courier New", monospace;
+    letter-spacing: -0.01em;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling. */
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

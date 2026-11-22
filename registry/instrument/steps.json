@@ -1,0 +1,37 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Check } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark Steps: completed steps wear the machined gold control; the\n// active step rims itself in gold over a recessed face; upcoming steps stay\n// as quiet raised plates.\n\ninterface Step {\n  title: string;\n  description?: string;\n}\n\ninterface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  currentStep: number;\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nfunction Steps({\n  steps,\n  currentStep,\n  orientation = \"horizontal\",\n  className,\n  ...props\n}: StepsProps) {\n  return (\n    <div\n      className={cn(\n        \"flex\",\n        orientation === \"horizontal\"\n          ? \"flex-row items-start gap-0\"\n          : \"flex-col gap-0\",\n        className\n      )}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep;\n        const isActive = index === currentStep;\n        const isLast = index === steps.length - 1;\n\n        return (\n          <div\n            key={index}\n            className={cn(\n              \"flex\",\n              orientation === \"horizontal\"\n                ? \"flex-1 flex-col items-center\"\n                : \"flex-row gap-3\"\n            )}\n          >\n            <div\n              className={cn(\n                \"flex\",\n                orientation === \"horizontal\"\n                  ? \"flex-col items-center\"\n                  : \"flex-row items-start gap-3\"\n              )}\n            >\n              {/* Step indicator */}\n              <div\n                className={cn(\n                  \"flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium transition-all duration-fast\",\n                  isCompleted &&\n                    \"border border-[var(--gauge-rim)] bg-[linear-gradient(to_bottom,var(--gauge-grad-top),var(--gauge-grad-bottom))] text-primary-foreground shadow-[var(--shadow-primary)]\",\n                  isActive &&\n                    \"border border-[var(--gauge-rim)] bg-input text-primary shadow-[var(--shadow-well),var(--shadow-focus)]\",\n                  !isCompleted &&\n                    !isActive &&\n                    \"border border-border bg-secondary text-muted-foreground shadow-[var(--shadow-raised)]\"\n                )}\n              >\n                {isCompleted ? (\n                  <Check className=\"h-4 w-4\" />\n                ) : (\n                  <span>{index + 1}</span>\n                )}\n              </div>\n\n              {/* Connector line */}\n              {orientation === \"horizontal\" && !isLast && (\n                <div\n                  className={cn(\n                    \"mt-4 h-px w-full flex-1\",\n                    isCompleted ? \"bg-[var(--gauge-line)]\" : \"bg-border\"\n                  )}\n                />\n              )}\n            </div>\n\n            {/* Step content */}\n            <div\n              className={cn(\n                orientation === \"horizontal\" ? \"mt-2 text-center\" : \"pb-6\"\n              )}\n            >\n              <p\n                className={cn(\n                  \"text-sm font-medium\",\n                  isActive ? \"text-foreground\" : \"text-muted-foreground\"\n                )}\n              >\n                {step.title}\n              </p>\n              {step.description && (\n                <p className=\"mt-0.5 text-xs text-muted-foreground\">\n                  {step.description}\n                </p>\n              )}\n            </div>\n\n            {/* Vertical connector */}\n            {orientation === \"vertical\" && !isLast && (\n              <div\n                className={cn(\n                  \"ml-4 h-6 w-px\",\n                  isCompleted ? \"bg-[var(--gauge-line)]\" : \"bg-border\"\n                )}\n              />\n            )}\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n\nexport { Steps };\nexport type { StepsProps, Step };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "gauge-line": "oklch(0.8 0.115 85 / 0.6)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)"
+    },
+    "dark": {
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "gauge-line": "oklch(0.8 0.115 85 / 0.6)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)"
+    }
+  }
+}

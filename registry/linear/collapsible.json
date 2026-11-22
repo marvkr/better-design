@@ -4,11 +4,11 @@
   "files": [
     {
       "path": "components/ui/collapsible.tsx",
-      "content": "\"use client\"\n\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\n\nconst Collapsible = CollapsiblePrimitive.Root\n\nconst CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger\n\nconst CollapsibleContent = CollapsiblePrimitive.CollapsibleContent\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "content": "\"use client\"\n\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\n\nconst Collapsible = CollapsiblePrimitive.Root\n\nconst CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger\n\nconst CollapsibleContent = CollapsiblePrimitive.CollapsibleContent\nconst CollapsiblePanel = CollapsibleContent\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsiblePanel }\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@radix-ui/react-collapsible"
+    "@radix-ui/react-collapsible@^1.1.11"
   ]
 }

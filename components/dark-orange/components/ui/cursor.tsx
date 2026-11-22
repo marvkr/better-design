@@ -65,14 +65,14 @@ function Cursor({
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="rounded-[12px] bg-card px-3 py-2 text-sm text-foreground ring-1 ring-border"
+            className="rounded-[0.75rem] bg-card px-3 py-2 text-sm text-foreground ring-1 ring-border"
             style={{ minHeight: "36px" }}
           >
             <span>{displayedText}</span>
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-              className="inline-block w-[2px] h-[14px] ml-[1px] align-middle"
+              className="inline-block w-[0.125rem] h-[0.875rem] ml-[0.0625rem] align-middle"
               style={{ backgroundColor: color }}
             />
           </motion.div>

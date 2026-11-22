@@ -1,0 +1,15 @@
+{
+  "name": "textarea-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\"\nimport { MetalRing } from \"./metal-ring\"\n\nexport interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  ring?: boolean\n}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ring = true, ...props }, ref) => {\n    const textarea = (\n      <textarea\n        ref={ref}\n        className={cn(formFieldBase, formFieldMultiLine, className)}\n        {...props}\n      />\n    )\n    if (!ring) return textarea\n    return <MetalRing corners=\"rect\" block>{textarea}</MetalRing>\n  }\n)\nTextarea.displayName = \"Textarea\"\n\nexport { Textarea }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/metal-fx-gold/_shared.json",
+    "https://better-design.com/registry/metal-fx-gold/metal-ring-base.json"
+  ]
+}

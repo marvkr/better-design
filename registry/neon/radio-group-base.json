@@ -1,0 +1,25 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst RadioGroup = React.forwardRef<\n  HTMLDivElement,\n  Omit<RadioGroupPrimitive.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive data-slot=\"radio-group\" ref={ref} className={cn(\"grid gap-2\", className)} {...props} />\n))\nRadioGroup.displayName = \"RadioGroup\"\n\n/* Checked ring reuses the primary Button's neon material, scaled down. */\nconst RadioGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  Omit<RadioPrimitive.Root.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <RadioPrimitive.Root\n    data-slot=\"radio-group-item\"\n    ref={ref}\n    className={cn(\n      \"aspect-square h-[1.125rem] w-[1.125rem] shrink-0 rounded-full border border-border\",\n      \"flex items-center justify-center\",\n      \"bg-input [box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0_/_0.4)]\",\n      \"transition-[background,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:[background:var(--neon-gradient)] data-checked:border-transparent data-checked:[box-shadow:var(--shadow-neon)]\",\n      className\n    )}\n    {...props}\n  >\n    <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"size-full flex items-center justify-center\">\n      <span className=\"h-2 w-2 rounded-full bg-primary-foreground\" />\n    </RadioPrimitive.Indicator>\n  </RadioPrimitive.Root>\n))\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)"
+    },
+    "dark": {
+      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)"
+    }
+  }
+}

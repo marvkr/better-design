@@ -33,9 +33,9 @@ const ScrollBar = React.forwardRef<
     className={cn(
       "flex touch-none select-none transition-colors",
       orientation === "vertical" &&
-        "h-full w-2.5 border-l border-l-transparent p-[1px]",
+        "h-full w-2.5 border-l border-l-transparent p-[0.0625rem]",
       orientation === "horizontal" &&
-        "h-2.5 flex-col border-t border-t-transparent p-[1px]",
+        "h-2.5 flex-col border-t border-t-transparent p-[0.0625rem]",
       className
     )}
     {...props}
@@ -44,8 +44,8 @@ const ScrollBar = React.forwardRef<
       className={cn(
         "relative rounded-full",
         "bg-white/[0.11] backdrop-blur-sm",
-        "shadow-[inset_0_0_4px_rgba(255,255,255,0.07)]",
-        "hover:bg-white/[0.19] transition-colors duration-300",
+        "shadow-[inset_0_0_0.25rem_oklch(1_0_0/0.07)]",
+        "hover:bg-white/[0.19] transition-colors duration-slow",
         orientation === "vertical" && "flex-1"
       )}
     />

@@ -1,0 +1,29 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Cream editorial Badge: a small pill.\n *\n * The default is the oat pill with ink type. The primary badge is the one\n * terracotta label, set in small capitals with open tracking, the way a\n * reading room marks something new. Status badges pair a quiet tint with\n * their own darker text, and the solid badge is a warm ink chip.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-full font-medium [&_svg]:size-3 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"text-foreground bg-[color:oklch(0.894_0.014_97.5)] dark:bg-[color:oklch(0.539_0.014_97.5)]\",\n        primary:\n          \"bg-primary text-[0.6875rem] uppercase tracking-wider text-primary-foreground\",\n        secondary: \"text-secondary-foreground bg-[color:oklch(0.893_0.011_95.2)] dark:bg-[color:oklch(0.538_0.011_95.2)]\",\n        outline: \"border border-(--line-strong) bg-transparent text-foreground\",\n        success: \"text-(--success-text) bg-[color:oklch(0.52_0.09_160/0.17)] dark:text-[color:oklch(0.875_0.08_160)]\",\n        warning: \"text-(--warning-text) bg-[color:oklch(0.772_0.121_67.4/0.34)] dark:text-[color:oklch(0.875_0.106_75)]\",\n        destructive: \"text-(--destructive-text) bg-[color:oklch(0.53_0.17_26/0.15)] dark:bg-[color:oklch(0.53_0.17_26/0.22)] dark:text-[color:oklch(0.875_0.066_26)]\",\n        solid: \"bg-foreground text-background\",\n      },\n      size: {\n        sm: \"h-5 px-2 text-xs\",\n        default: \"h-6 px-2.5 py-0.5 text-xs\",\n        lg: \"h-7 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "success-text": "oklch(0.44 0.08 160)",
+      "warning-text": "oklch(0.47 0.09 60)",
+      "destructive-text": "oklch(0.48 0.16 26)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "success-text": "oklch(0.8 0.08 160)",
+      "warning-text": "oklch(0.85 0.11 75)",
+      "destructive-text": "oklch(0.78 0.13 26)"
+    }
+  }
+}

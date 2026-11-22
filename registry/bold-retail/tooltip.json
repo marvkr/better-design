@@ -1,0 +1,21 @@
+{
+  "name": "tooltip",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Tooltip: a small black chip with white text and a 0.5rem\n * corner. No arrow and no shadow; it reads as a label, not a panel.\n */\nconst TooltipProvider = TooltipPrimitive.Provider;\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 6, ...props }, ref) => (\n  <TooltipPrimitive.Content\n    ref={ref}\n    sideOffset={sideOffset}\n    data-slot=\"tooltip-content\"\n    className={cn(\n      \"z-50 max-w-64 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-balance text-primary-foreground\",\n      \"origin-(--radix-tooltip-content-transform-origin) duration-fast ease-out\",\n      \"animate-in fade-in-0 zoom-in-95\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n      className,\n    )}\n    {...props}\n  />\n));\nTooltipContent.displayName = TooltipPrimitive.Content.displayName;\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tooltip@^1.2.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

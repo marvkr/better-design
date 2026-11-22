@@ -14,9 +14,15 @@ export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: React.ReactNode
 }
 
+/** Narrows a stat delta to a number, so a negative one points the trend down. */
+function isNumericDelta<TValue>(value: TValue | number): value is number {
+  return typeof value === "number"
+}
+
 const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
   ({ className, label, value, icon, change, description, ...props }, ref) => {
-    const direction = change?.direction ?? (typeof change?.value === "number" && change.value < 0 ? "down" : "up")
+    const delta = change?.value
+    const direction = change?.direction ?? (isNumericDelta(delta) && delta < 0 ? "down" : "up")
     const changeColor =
       direction === "up"
         ? "text-[oklch(0.78_0.15_145)]"
@@ -32,7 +38,7 @@ const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
         className={cn(
           "rounded-lg p-5 bg-card text-card-foreground",
           "[box-shadow:var(--shadow-s)]",
-          "transition-[background-color,box-shadow] duration-200",
+          "transition-[background-color,box-shadow] duration-base",
           "hover:[box-shadow:var(--shadow-m)]",
           className
         )}

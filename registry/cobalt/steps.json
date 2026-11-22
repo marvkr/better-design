@@ -1,0 +1,31 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\nimport { Check } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Steps — completed indicators wear the cobalt material; the active one is\n * a raised bezel ring lit by the cyan focus ring.\n */\n\ninterface Step {\n  title: string\n  description?: string\n}\n\ninterface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[]\n  currentStep: number\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nfunction Steps({\n  steps,\n  currentStep,\n  orientation = \"horizontal\",\n  className,\n  ...props\n}: StepsProps) {\n  return (\n    <div\n      className={cn(\n        \"flex\",\n        orientation === \"horizontal\" ? \"flex-row items-start gap-0\" : \"flex-col gap-0\",\n        className\n      )}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep\n        const isActive = index === currentStep\n        const isLast = index === steps.length - 1\n\n        return (\n          <div\n            key={index}\n            className={cn(\n              \"flex\",\n              orientation === \"horizontal\"\n                ? \"flex-1 flex-col items-center\"\n                : \"flex-row gap-3\"\n            )}\n          >\n            <div\n              className={cn(\n                \"flex\",\n                orientation === \"horizontal\" ? \"flex-col items-center\" : \"flex-row items-start gap-3\"\n              )}\n            >\n              <div\n                className={cn(\n                  \"flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium transition-[background-color,box-shadow]\",\n                  isCompleted &&\n                    \"text-primary-foreground [background-image:var(--cobalt)] [box-shadow:var(--shadow-primary)]\",\n                  isActive &&\n                    \"border border-border text-primary [background-image:var(--bezel)] [box-shadow:var(--shadow-raised)] ring-2 ring-ring/40 ring-offset-2 ring-offset-background\",\n                  !isCompleted && !isActive &&\n                    \"border border-border bg-input text-muted-foreground [box-shadow:var(--shadow-inset)]\"\n                )}\n              >\n                {isCompleted ? (\n                  <Check className=\"h-4 w-4\" />\n                ) : (\n                  <span>{index + 1}</span>\n                )}\n              </div>\n\n              {orientation === \"horizontal\" && !isLast && (\n                <div\n                  className={cn(\n                    \"mt-4 h-px w-full flex-1\",\n                    isCompleted ? \"bg-primary\" : \"bg-border\"\n                  )}\n                />\n              )}\n            </div>\n\n            <div\n              className={cn(\n                orientation === \"horizontal\" ? \"mt-2 text-center\" : \"pb-6\"\n              )}\n            >\n              <p\n                className={cn(\n                  \"text-sm font-medium\",\n                  isActive ? \"text-foreground\" : \"text-muted-foreground\"\n                )}\n              >\n                {step.title}\n              </p>\n              {step.description && (\n                <p className=\"mt-0.5 text-xs text-muted-foreground\">\n                  {step.description}\n                </p>\n              )}\n            </div>\n\n            {orientation === \"vertical\" && !isLast && (\n              <div\n                className={cn(\n                  \"ml-4 h-6 w-px\",\n                  isCompleted ? \"bg-primary\" : \"bg-border\"\n                )}\n              />\n            )}\n          </div>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { Steps }\nexport type { StepsProps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)"
+    },
+    "dark": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)"
+    }
+  }
+}

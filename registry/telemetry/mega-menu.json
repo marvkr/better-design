@@ -1,0 +1,20 @@
+{
+  "name": "mega-menu",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room MegaMenu: full-width command panel dropping from the\n// console header in the shared glow-elevated popover surface.\n\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute left-0 top-full z-50 w-full p-4\",\n      \"rounded-md border border-border bg-popover text-popover-foreground\",\n      \"[box-shadow:var(--shadow-popover)]\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenu.displayName = \"MegaMenu\"\n\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"space-y-3\", className)} {...props} />\n))\nMegaMenuGroup.displayName = \"MegaMenuGroup\"\n\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\n      \"text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\"\n\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    className={cn(\n      \"block rounded-xs px-3 py-2 text-xs\",\n      \"transition-colors duration-fast\",\n      \"hover:bg-accent hover:text-foreground\",\n      \"text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuItem.displayName = \"MegaMenuItem\"\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 0.75rem 1.75rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.78 0.21 148 / 0.07)"
+    },
+    "dark": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 0.75rem 1.75rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.78 0.21 148 / 0.07)"
+    }
+  }
+}

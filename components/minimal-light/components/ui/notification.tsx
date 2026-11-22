@@ -74,7 +74,7 @@ function Notification({
           type="button"
           onClick={onDismiss}
           aria-label="Dismiss notification"
-          className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground hover:text-foreground transition-colors duration-base focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

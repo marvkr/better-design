@@ -40,11 +40,11 @@ const ContextMenuSubContent = React.forwardRef<
   <ContextMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "z-50 min-w-[8rem] overflow-hidden p-1",
+      "origin-(--radix-context-menu-content-transform-origin) z-50 min-w-[8rem] overflow-hidden p-1",
       "rounded-xl border border-white/[0.08]",
       "backdrop-blur-2xl bg-white/[0.07]",
       "text-foreground",
-      "shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,255,255,0.05)]",
+      "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.5rem_oklch(1_0_0/0.05)]",
       "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
       className
     )}
@@ -61,11 +61,11 @@ const ContextMenuContent = React.forwardRef<
     <ContextMenuPrimitive.Content
       ref={ref}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden p-1",
+        "origin-(--radix-context-menu-content-transform-origin) z-50 min-w-[8rem] overflow-hidden p-1",
         "rounded-xl border border-white/[0.08]",
         "backdrop-blur-2xl bg-white/[0.07]",
         "text-foreground",
-        "shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,255,255,0.05)]",
+        "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.5rem_oklch(1_0_0/0.05)]",
         "animate-in fade-in-80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
       )}

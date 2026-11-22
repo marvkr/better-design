@@ -1,0 +1,31 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Margin Tabs: a segmented control in the paper field. The list is a filled\n * track with a faint inner shade, and the active trigger is the white\n * toolbar pill with its hairline ring, set into the track.\n */\nconst Tabs = TabsPrimitive.Root;\n\nconst TabsList = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    data-slot=\"tabs-list\"\n    className={cn(\n      \"inline-flex h-8 items-center justify-center gap-0.5 rounded-lg bg-(--field) p-0.5 text-muted-foreground shadow-(--field-shade)\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = TabsPrimitive.List.displayName;\n\nconst TabsTrigger = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Trigger\n    ref={ref}\n    data-slot=\"tabs-trigger\"\n    className={cn(\n      \"inline-flex h-full items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 text-sm\",\n      \"text-muted-foreground transition duration-fast ease-(--ease-out) hover:text-foreground\",\n      focusRing,\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      \"data-[state=active]:bg-card data-[state=active]:font-medium data-[state=active]:text-foreground data-[state=active]:shadow-(--pill-edge)\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName;\n\nconst TabsContent = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Content\n    ref={ref}\n    data-slot=\"tabs-content\"\n    className={cn(\"mt-3 rounded-lg\", focusRing, className)}\n    {...props}\n  />\n));\nTabsContent.displayName = TabsPrimitive.Content.displayName;\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(0.99 0.008 85)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.82 0.016 85)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.014 260)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.36 0.014 260)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string;\n  helperText?: string;\n}\n\n/** Names the picked files: one file by its name, several by their count. */\nfunction describeFiles(files: FileList | null): string | null {\n  if (!files || files.length === 0) return null;\n  return files.length === 1 ? files[0].name : `${files.length} files`;\n}\n\n/**\n * Ink mail FileInput: a dark drop zone behind a dashed hairline, with a\n * hairline-edged square holding the upload icon. Dragging a file over it\n * lifts the zone one luminance step and brightens the line to the off-white\n * ink; the chosen file's name replaces the prompt.\n */\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  (\n    {\n      className,\n      label = \"Choose a file or drop it here\",\n      helperText,\n      onChange,\n      disabled,\n      ...props\n    },\n    ref,\n  ) => {\n    const [fileName, setFileName] = React.useState<string | null>(null);\n    const [dragging, setDragging] = React.useState(false);\n    const inputRef = React.useRef<HTMLInputElement>(null);\n\n    // SAFETY: inputRef is attached to the input this component always renders,\n    // so it is set by the time a parent can reach the handle.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);\n\n    const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {\n      event.preventDefault();\n      setDragging(false);\n      const input = inputRef.current;\n      if (disabled || !input || event.dataTransfer.files.length === 0) return;\n      input.files = event.dataTransfer.files;\n      // React listens for the native change event, so onChange runs as if\n      // the person had picked the files from the dialog.\n      input.dispatchEvent(new Event(\"change\", { bubbles: true }));\n    };\n\n    return (\n      <label\n        data-slot=\"file-input\"\n        data-dragging={dragging || undefined}\n        onDragOver={(event) => {\n          event.preventDefault();\n          if (!disabled) setDragging(true);\n        }}\n        onDragLeave={() => setDragging(false)}\n        onDrop={handleDrop}\n        className={cn(\n          \"group flex w-full cursor-pointer flex-col items-center justify-center gap-3 px-4 py-8 text-center\",\n          \"rounded-lg border border-dashed border-(--line-strong) bg-(--field)\",\n          \"transition-[background-color,border-color] duration-fast ease-out\",\n          \"hover:border-(--control) hover:bg-secondary\",\n          \"data-[dragging]:border-foreground data-[dragging]:bg-secondary\",\n          \"has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring\",\n          \"has-[:disabled]:cursor-not-allowed has-[:disabled]:border-border has-[:disabled]:bg-secondary\",\n          className,\n        )}\n      >\n        <span className=\"flex size-10 items-center justify-center rounded-lg border border-(--line-strong) bg-secondary text-foreground group-has-[:disabled]:text-(--foreground-disabled)\">\n          <Icon icon=\"ph:upload-simple\" className=\"size-5\" aria-hidden=\"true\" />\n        </span>\n        <span className=\"text-sm font-medium text-foreground group-has-[:disabled]:text-(--foreground-disabled)\">\n          {fileName ?? label}\n        </span>\n        {helperText && (\n          <span className=\"text-sm text-muted-foreground group-has-[:disabled]:text-(--foreground-disabled)\">\n            {helperText}\n          </span>\n        )}\n        <input\n          ref={inputRef}\n          type=\"file\"\n          className=\"sr-only\"\n          disabled={disabled}\n          onChange={(event) => {\n            setFileName(describeFiles(event.target.files));\n            onChange?.(event);\n          }}\n          {...props}\n        />\n      </label>\n    );\n  },\n);\nFileInput.displayName = \"FileInput\";\n\nexport { FileInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "control": "oklch(0.52 0.006 240)",
+      "field": "oklch(0.146 0.004 286)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

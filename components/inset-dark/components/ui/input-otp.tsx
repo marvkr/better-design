@@ -47,7 +47,7 @@ const InputOTPSlot = React.forwardRef<
         "relative flex h-10 w-10 items-center justify-center rounded-md text-base",
         "bg-input text-foreground border border-border",
         "[box-shadow:var(--shadow-inset)]",
-        "transition-[border-color,box-shadow] duration-150",
+        "transition-[border-color,box-shadow] duration-fast",
         isActive && "border-ring ring-2 ring-ring/40 z-10",
         className
       )}

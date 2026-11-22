@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Skeleton: a warm paper block, rounded at the 0.625rem row corner,\n * that breathes slowly while the real content loads. Shape it with size\n * classes, and round it fully for avatars and pills.\n */\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      aria-hidden=\"true\"\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-(--surface-2)\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-2": "oklch(0.949 0.005 95.1)"
+    },
+    "dark": {
+      "surface-2": "oklch(0.267 0.007 106.9)"
+    }
+  }
+}

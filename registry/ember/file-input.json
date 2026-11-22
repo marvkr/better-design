@@ -1,0 +1,33 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass FileInput: dashed glass drop zone that warms up on drag-over.\n\ninterface FileInputProps extends React.HTMLAttributes<HTMLDivElement> {\n  accept?: string\n  multiple?: boolean\n  onFileChange?: (files: File[]) => void\n  disabled?: boolean\n  maxSize?: number // in bytes\n}\n\nconst FileInput = React.forwardRef<HTMLDivElement, FileInputProps>(\n  (\n    { className, accept, multiple, onFileChange, disabled, maxSize, ...props },\n    ref\n  ) => {\n    const inputRef = React.useRef<HTMLInputElement>(null)\n    const [dragging, setDragging] = React.useState(false)\n    const [files, setFiles] = React.useState<File[]>([])\n\n    const handleFiles = (list: FileList | null) => {\n      if (!list) return\n      let next = Array.from(list)\n      if (maxSize) next = next.filter((f) => f.size <= maxSize)\n      setFiles(next)\n      onFileChange?.(next)\n    }\n\n    return (\n      <div\n        ref={ref}\n        role=\"button\"\n        tabIndex={disabled ? -1 : 0}\n        aria-disabled={disabled}\n        onClick={() => !disabled && inputRef.current?.click()}\n        onKeyDown={(e) => {\n          if (!disabled && (e.key === \"Enter\" || e.key === \" \")) {\n            e.preventDefault()\n            inputRef.current?.click()\n          }\n        }}\n        onDragOver={(e) => {\n          e.preventDefault()\n          if (!disabled) setDragging(true)\n        }}\n        onDragLeave={() => setDragging(false)}\n        onDrop={(e) => {\n          e.preventDefault()\n          setDragging(false)\n          if (!disabled) handleFiles(e.dataTransfer.files)\n        }}\n        className={cn(\n          \"flex w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl px-6 py-8 text-center\",\n          \"border border-dashed border-[color:var(--ag-border-strong)]\",\n          \"bg-[var(--ag-fill)] backdrop-blur-[var(--ag-blur)]\",\n          \"transition-all duration-fast ease-out\",\n          \"hover:bg-[var(--ag-fill-hover)]\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n          dragging &&\n            \"border-[color:oklch(0.69_0.195_42/0.6)] bg-[oklch(0.69_0.195_42/0.06)] shadow-[0_0_1.5rem_oklch(0.69_0.195_42/0.2)]\",\n          disabled && \"pointer-events-none opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        <input\n          ref={inputRef}\n          type=\"file\"\n          className=\"sr-only\"\n          accept={accept}\n          multiple={multiple}\n          disabled={disabled}\n          onChange={(e) => handleFiles(e.target.files)}\n        />\n        <span className=\"flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ag-fill)] border border-[color:var(--ag-border)]\">\n          <Icon icon=\"tabler:upload\" className=\"h-5 w-5 text-primary\" />\n        </span>\n        <div className=\"text-sm font-semibold\">\n          {files.length > 0\n            ? `${files.length} file${files.length > 1 ? \"s\" : \"\"} selected`\n            : \"Drop files here or click to browse\"}\n        </div>\n        <p className=\"text-xs text-muted-foreground\">\n          {accept ? `Accepts ${accept}` : \"Any file type\"}\n          {maxSize ? `, up to ${Math.round(maxSize / 1024 / 1024)}MB` : \"\"}\n        </p>\n      </div>\n    )\n  }\n)\nFileInput.displayName = \"FileInput\"\n\nexport { FileInput }\nexport type { FileInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

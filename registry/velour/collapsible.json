@@ -1,0 +1,33 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\nimport { cn } from \"@/lib/utils\"\n\n/* Trigger is a raised velour bar; the open body settles into a quieter face. */\n\nconst Collapsible = CollapsiblePrimitive.Root\n\nconst CollapsibleTrigger = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleTrigger>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleTrigger\n    ref={ref}\n    className={cn(\n      \"flex w-full items-center justify-between rounded-lg px-4 py-3\",\n      \"[background-image:var(--velour-raised)] [box-shadow:var(--shadow-button)]\",\n      \"text-sm font-medium text-foreground\",\n      \"transition-[background-image,box-shadow] duration-fast\",\n      \"hover:[background-image:var(--velour-hover)] hover:[box-shadow:var(--shadow-button-hover)]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30\",\n      \"[&[data-state=open]]:rounded-b-none\",\n      className\n    )}\n    {...props}\n  />\n))\nCollapsibleTrigger.displayName = CollapsiblePrimitive.CollapsibleTrigger.displayName\n\nconst CollapsibleContent = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleContent>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleContent>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleContent\n    ref={ref}\n    className={cn(\n      \"overflow-hidden rounded-b-lg\",\n      \"[background-image:var(--velour)] [box-shadow:var(--shadow-s)]\",\n      \"data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down\",\n      className\n    )}\n    {...props}\n  />\n))\nCollapsibleContent.displayName = CollapsiblePrimitive.CollapsibleContent.displayName\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible@^1.1.11"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "velour-hover": "linear-gradient( to bottom, oklch(0.335 0.015 286), oklch(0.27 0.013 286) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.5rem 1.375rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "velour-hover": "linear-gradient( to bottom, oklch(0.335 0.015 286), oklch(0.27 0.013 286) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.5rem 1.375rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

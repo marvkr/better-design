@@ -1,0 +1,42 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Heyclicky Button — the glossy download pill.\n *\n * Full-round, borderless, filled with a vertical gradient and lit by a white\n * gloss line along the top edge. Depth comes from one wide soft throw, so the\n * pill floats over the dotted desktop rather than sitting on a rule. Hover\n * lifts it a pixel; press puts it back down.\n */\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-full font-medium leading-none tracking-[-0.01em]\",\n    \"transition-[background,box-shadow,transform,color] duration-base ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-45\",\n    \"hover:-translate-y-px active:translate-y-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-[image:var(--gradient-primary)] text-primary-foreground \" +\n          \"shadow-[var(--shadow-primary)] \" +\n          \"hover:bg-[image:var(--gradient-primary-hover)] hover:shadow-[var(--shadow-primary-hover)]\",\n        secondary:\n          \"bg-[image:var(--gradient-silver)] text-foreground \" +\n          \"shadow-[var(--shadow-button)] \" +\n          \"hover:bg-[image:var(--gradient-silver-hover)] hover:shadow-[var(--shadow-button-hover)]\",\n        outline:\n          \"border border-border bg-card text-foreground \" +\n          \"shadow-[var(--shadow-xs)] \" +\n          \"hover:border-ring/35 hover:shadow-[var(--shadow-sm)]\",\n        ghost:\n          \"text-muted-foreground hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-[image:var(--gradient-destructive)] text-destructive-foreground \" +\n          \"shadow-[var(--shadow-primary)] \" +\n          \"hover:shadow-[var(--shadow-button-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline hover:translate-y-0\",\n      },\n      size: {\n        sm: \"h-8 px-4 text-[0.8125rem]\",\n        default: \"h-10 px-5 text-sm\",\n        lg: \"h-11 px-7 text-base\",\n        icon: \"h-10 w-10 px-0\",\n        \"icon-sm\": \"h-8 w-8 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, ...props }, ref) => {\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
+      "gradient-primary-hover": "linear-gradient( 180deg, oklch(0.71 0.163 252.2) 0%, oklch(0.62 0.216 259) 100% )",
+      "gradient-silver": "linear-gradient( 180deg, oklch(0.952 0 0) 0%, oklch(0.894 0 0) 100% )",
+      "gradient-silver-hover": "linear-gradient( 180deg, oklch(0.973 0 0) 0%, oklch(0.919 0 0) 100% )",
+      "gradient-destructive": "linear-gradient( 180deg, oklch(0.69 0.19 25.7) 0%, oklch(0.6 0.224 27) 100% )",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), 0 0.25rem 0.875rem oklch(0 0 0 / 0.1)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.625rem 1.875rem oklch(0.591 0.224 259 / 0.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
+      "gradient-primary-hover": "linear-gradient( 180deg, oklch(0.71 0.163 252.2) 0%, oklch(0.62 0.216 259) 100% )",
+      "gradient-silver": "linear-gradient( 180deg, oklch(0.952 0 0) 0%, oklch(0.894 0 0) 100% )",
+      "gradient-silver-hover": "linear-gradient( 180deg, oklch(0.973 0 0) 0%, oklch(0.919 0 0) 100% )",
+      "gradient-destructive": "linear-gradient( 180deg, oklch(0.69 0.19 25.7) 0%, oklch(0.6 0.224 27) 100% )",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), 0 0.25rem 0.875rem oklch(0 0 0 / 0.1)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.625rem 1.875rem oklch(0.591 0.224 259 / 0.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

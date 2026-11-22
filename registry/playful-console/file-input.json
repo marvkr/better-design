@@ -1,0 +1,37 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for FileInput: a file input with a prompt label and an optional hint. */\nexport interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string;\n  helperText?: string;\n}\n\n/** Names the picked files: one file by its name, several by their count. */\nfunction describeFiles(files: FileList | null): string | null {\n  if (!files || files.length === 0) return null;\n  return files.length === 1 ? files[0].name : `${files.length} files`;\n}\n\n/**\n * Playful console FileInput: a white drop zone behind a dashed olive edge,\n * with the upload icon on a small orange key. Dragging a file over it washes\n * the zone in orange and turns the edge to the orange rim; the chosen file's\n * name replaces the prompt in mono type.\n */\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  (\n    {\n      className,\n      label = \"Choose a file or drop it here\",\n      helperText,\n      onChange,\n      disabled,\n      ...props\n    },\n    ref,\n  ) => {\n    const [fileName, setFileName] = React.useState<string | null>(null);\n    const [dragging, setDragging] = React.useState(false);\n    const inputRef = React.useRef<HTMLInputElement>(null);\n\n    // SAFETY: inputRef is attached to the input this component always renders,\n    // so it is set by the time a parent can reach the handle.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);\n\n    const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {\n      event.preventDefault();\n      setDragging(false);\n      const input = inputRef.current;\n      if (disabled || !input || event.dataTransfer.files.length === 0) return;\n      input.files = event.dataTransfer.files;\n      // React listens for the native change event, so onChange runs as if\n      // the person had picked the files from the dialog.\n      input.dispatchEvent(new Event(\"change\", { bubbles: true }));\n    };\n\n    return (\n      <label\n        data-slot=\"file-input\"\n        data-dragging={dragging || undefined}\n        onDragOver={(event) => {\n          event.preventDefault();\n          if (!disabled) setDragging(true);\n        }}\n        onDragLeave={() => setDragging(false)}\n        onDrop={handleDrop}\n        className={cn(\n          \"group flex w-full cursor-pointer flex-col items-center justify-center gap-2.5 px-4 py-7 text-center\",\n          \"rounded-lg border-[0.09375rem] border-dashed border-(--line-strong) bg-(--field)\",\n          \"transition-[background-color,border-color] duration-fast ease-out\",\n          \"hover:border-(--control) hover:bg-card\",\n          \"data-[dragging]:border-(--primary-rim) data-[dragging]:bg-(--primary-wash)\",\n          \"has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring\",\n          \"has-[:disabled]:cursor-not-allowed has-[:disabled]:border-(--line-strong) has-[:disabled]:bg-secondary\",\n          className,\n        )}\n      >\n        <span className=\"flex size-9 items-center justify-center rounded-[0.5rem] border-[0.09375rem] border-(--primary-rim) bg-primary text-primary-foreground shadow-(--shadow-control) group-has-[:disabled]:border-(--line-strong) group-has-[:disabled]:bg-secondary group-has-[:disabled]:text-(--foreground-disabled) group-has-[:disabled]:shadow-none\">\n          <Icon icon=\"ph:upload-simple-bold\" className=\"size-4.5\" aria-hidden=\"true\" />\n        </span>\n        <span\n          className={cn(\n            \"text-sm font-bold text-foreground group-has-[:disabled]:text-(--foreground-disabled)\",\n            fileName && \"font-mono font-semibold\",\n          )}\n        >\n          {fileName ?? label}\n        </span>\n        {helperText && (\n          <span className=\"text-[0.8125rem] text-muted-foreground group-has-[:disabled]:text-(--foreground-disabled)\">\n            {helperText}\n          </span>\n        )}\n        <input\n          ref={inputRef}\n          type=\"file\"\n          className=\"sr-only\"\n          disabled={disabled}\n          onChange={(event) => {\n            setFileName(describeFiles(event.target.files));\n            onChange?.(event);\n          }}\n          {...props}\n        />\n      </label>\n    );\n  },\n);\nFileInput.displayName = \"FileInput\";\n\nexport { FileInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "field": "oklch(1 0 0)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "control": "oklch(0.533 0.017 115.3)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "field": "oklch(0.225 0.009 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "control": "oklch(0.62 0.014 114)"
+    }
+  }
+}

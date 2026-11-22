@@ -1,0 +1,47 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Alert: a callout edged on all four sides, never a stripe\n * down one. The default is a white card behind the hairline. Info is a pale\n * blue panel, success green, warning orange and destructive red; each tint\n * carries its own darker text and a matching edge, like the tip boxes in a\n * friendly engineering handbook.\n */\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-lg border px-4 py-3 text-sm\",\n    \"[&>svg]:absolute [&>svg]:start-4 [&>svg]:top-3.5 [&>svg]:size-5\",\n    \"[&>svg~*]:ps-8\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-border bg-card text-foreground [&>svg]:text-foreground [&_[data-slot=alert-description]]:text-(--foreground-secondary)\",\n        info:\n          \"border-(--info)/40 bg-(--info-tint) text-(--info-text) [&>svg]:text-(--info)\",\n        success:\n          \"border-(--success)/40 bg-(--success-tint) text-(--success-text) [&>svg]:text-(--success)\",\n        warning:\n          \"border-(--primary-rim)/50 bg-(--warning-tint) text-(--warning-text) [&>svg]:text-(--primary-text)\",\n        destructive:\n          \"border-(--destructive)/40 bg-(--destructive-tint) text-(--destructive-text) [&>svg]:text-(--destructive)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\n/** A callout that announces itself to assistive technology. */\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    data-slot=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\n/** The alert's bold one-line headline, set on the icon's first line. */\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    data-slot=\"alert-title\"\n    className={cn(\"mb-0.5 text-sm font-bold leading-5\", className)}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\n/** The body text: secondary ink on the default alert, the tone's text on tints. */\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"alert-description\"\n    className={cn(\"text-sm leading-relaxed\", className)}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "primary-text": "oklch(0.56 0.13 62)",
+      "success": "oklch(0.574 0.107 162.9)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "info": "oklch(0.609 0.162 253.1)",
+      "info-tint": "oklch(0.93 0.022 243.8)",
+      "info-text": "oklch(0.488 0.217 264.4)",
+      "success-tint": "oklch(0.927 0.028 155.3)",
+      "success-text": "oklch(0.47 0.1 162)",
+      "warning-tint": "oklch(0.93 0.06 80)",
+      "warning-text": "oklch(0.52 0.12 62)",
+      "destructive-tint": "oklch(0.903 0.037 24)",
+      "destructive-text": "oklch(0.5 0.17 27.5)"
+    },
+    "dark": {
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "primary-text": "oklch(0.82 0.14 74)",
+      "success": "oklch(0.72 0.12 160)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "info": "oklch(0.7 0.15 258)",
+      "info-tint": "oklch(0.28 0.05 255)",
+      "info-text": "oklch(0.8 0.11 255)",
+      "success-tint": "oklch(0.27 0.04 160)",
+      "success-text": "oklch(0.8 0.11 160)",
+      "warning-tint": "oklch(0.3 0.05 75)",
+      "warning-text": "oklch(0.84 0.13 76)",
+      "destructive-tint": "oklch(0.28 0.06 25)",
+      "destructive-text": "oklch(0.8 0.11 25)"
+    }
+  }
+}

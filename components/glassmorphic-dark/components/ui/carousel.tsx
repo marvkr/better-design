@@ -72,8 +72,15 @@ const Carousel = React.forwardRef<
       <div
         ref={ref}
         onKeyDownCapture={(e) => {
-          if (e.key === "ArrowLeft") api?.scrollPrev()
-          if (e.key === "ArrowRight") api?.scrollNext()
+          const prevKey = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp"
+          const nextKey = orientation === "horizontal" ? "ArrowRight" : "ArrowDown"
+          if (e.key === prevKey) {
+            e.preventDefault()
+            api?.scrollPrev()
+          } else if (e.key === nextKey) {
+            e.preventDefault()
+            api?.scrollNext()
+          }
         }}
         className={cn("relative", className)}
         role="region"
@@ -131,9 +138,9 @@ const CarouselPrevious = React.forwardRef<
         "absolute left-3 top-1/2 -translate-y-1/2",
         "inline-flex h-10 w-10 items-center justify-center rounded-full",
         "backdrop-blur-xl bg-white/[0.08] border border-white/10",
-        "text-white/70 transition-all duration-200",
-        "shadow-[inset_0_0_8px_rgba(255,255,255,0.08)]",
-        "hover:bg-white/[0.14] hover:text-white hover:shadow-[0_0_16px_rgba(255,255,255,0.1)]",
+        "text-white/70 transition-all duration-base",
+        "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.08)]",
+        "hover:bg-white/[0.14] hover:text-white hover:shadow-[0_0_1rem_oklch(1_0_0/0.1)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.65_0.19_250)]/40",
         "disabled:opacity-30 disabled:pointer-events-none",
         className
@@ -161,9 +168,9 @@ const CarouselNext = React.forwardRef<
         "absolute right-3 top-1/2 -translate-y-1/2",
         "inline-flex h-10 w-10 items-center justify-center rounded-full",
         "backdrop-blur-xl bg-white/[0.08] border border-white/10",
-        "text-white/70 transition-all duration-200",
-        "shadow-[inset_0_0_8px_rgba(255,255,255,0.08)]",
-        "hover:bg-white/[0.14] hover:text-white hover:shadow-[0_0_16px_rgba(255,255,255,0.1)]",
+        "text-white/70 transition-all duration-base",
+        "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.08)]",
+        "hover:bg-white/[0.14] hover:text-white hover:shadow-[0_0_1rem_oklch(1_0_0/0.1)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.65_0.19_250)]/40",
         "disabled:opacity-30 disabled:pointer-events-none",
         className

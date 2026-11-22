@@ -1,0 +1,29 @@
+{
+  "name": "calendar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ChevronLeft, ChevronRight } from \"lucide-react\";\nimport { DayPicker } from \"react-day-picker\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\n// Talentboard Calendar: quiet grid; selected day wears the raised orange material.\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>;\n\nfunction Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"flex flex-col sm:flex-row gap-4 relative\",\n        month: \"space-y-4\",\n        month_caption: \"flex justify-center pt-1 relative items-center\",\n        caption_label: \"text-sm font-medium\",\n        nav: \"absolute inset-x-0 top-0 z-10 flex items-center justify-between px-1\",\n        button_previous: cn(\n          buttonVariants({ variant: \"ghost\" }),\n          \"h-7 w-7 p-0 text-muted-foreground hover:text-foreground\"\n        ),\n        button_next: cn(\n          buttonVariants({ variant: \"ghost\" }),\n          \"h-7 w-7 p-0 text-muted-foreground hover:text-foreground\"\n        ),\n        month_grid: \"w-full border-collapse space-y-1\",\n        weekdays: \"flex\",\n        weekday: \"w-9 rounded-md text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground\",\n        week: \"flex w-full mt-2\",\n        day: cn(\n          \"relative h-9 w-9 p-0 text-center text-sm focus-within:relative focus-within:z-20\",\n          \"[&:has([aria-selected])]:bg-transparent\"\n        ),\n        day_button: cn(\n          \"h-9 w-9 rounded-lg p-0 font-normal text-foreground\",\n          \"transition-colors duration-fast hover:bg-accent\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n          \"aria-selected:opacity-100\"\n        ),\n        selected:\n          \"[&>button]:bg-[image:var(--tb-primary-gradient)] [&>button]:text-primary-foreground [&>button]:shadow-[var(--tb-shadow-primary-sm)] [&>button]:hover:bg-[image:var(--tb-primary-gradient)]\",\n        today: \"[&>button]:border [&>button]:border-ring/40 [&>button]:font-medium\",\n        outside: \"[&>button]:text-muted-foreground/50\",\n        disabled: \"[&>button]:text-muted-foreground/40 [&>button]:pointer-events-none\",\n        range_middle: \"[&>button]:bg-accent [&>button]:text-foreground [&>button]:shadow-none\",\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, ...chevronProps }) =>\n          orientation === \"left\" ? (\n            <ChevronLeft className=\"h-4 w-4\" {...chevronProps} />\n          ) : (\n            <ChevronRight className=\"h-4 w-4\" {...chevronProps} />\n          ),\n      }}\n      {...props}\n    />\n  );\n}\nCalendar.displayName = \"Calendar\";\n\nexport { Calendar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1",
+    "react-day-picker@^9.7.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/marigold/button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-primary-gradient": "linear-gradient(to bottom, oklch(0.74 0.165 55), oklch(0.67 0.175 48))",
+      "tb-shadow-primary-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), 0 0.0625rem 0.125rem oklch(0.5 0.16 45 / 0.3), 0 0.125rem 0.375rem -0.125rem oklch(0.7 0.17 52 / 0.4)"
+    },
+    "dark": {
+      "tb-primary-gradient": "linear-gradient(to bottom, oklch(0.74 0.165 55), oklch(0.67 0.175 48))",
+      "tb-shadow-primary-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), 0 0.0625rem 0.125rem oklch(0.5 0.16 45 / 0.3), 0 0.125rem 0.375rem -0.125rem oklch(0.7 0.17 52 / 0.4)"
+    }
+  }
+}

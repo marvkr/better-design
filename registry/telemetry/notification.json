@@ -1,0 +1,26 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Notification: event card from the alarm feed.\n// Signal-tinted plate with matching border; severity is carried by the\n// status color, not by decoration.\n\nconst notificationVariants = cva(\n  [\n    \"relative flex w-full items-start gap-3 rounded-sm border p-4\",\n    \"border-l-2\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-card border-border border-l-border text-foreground\",\n        success:\n          \"bg-primary/10 border-primary/30 border-l-primary text-primary\",\n        warning:\n          \"bg-(--warning)/10 border-(--warning)/30 border-l-(--warning) text-(--warning)\",\n        destructive:\n          \"bg-destructive/10 border-destructive/30 border-l-destructive text-destructive\",\n        info: \"bg-(--info)/10 border-(--info)/30 border-l-(--info) text-(--info)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface NotificationProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  onClose?: () => void\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant, onClose, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className=\"flex-1\">{children}</div>\n      {onClose && (\n        <button\n          type=\"button\"\n          onClick={onClose}\n          aria-label=\"Dismiss notification\"\n          className=\"shrink-0 rounded-xs p-0.5 opacity-60 transition-opacity hover:opacity-100\"\n        >\n          <Icon icon=\"tabler:x\" className=\"size-4\" />\n        </button>\n      )}\n    </div>\n  )\n)\nNotification.displayName = \"Notification\"\n\nconst NotificationTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\n      \"mb-1 text-xs font-semibold uppercase tracking-widest leading-none\",\n      className\n    )}\n    {...props}\n  />\n))\nNotificationTitle.displayName = \"NotificationTitle\"\n\nconst NotificationDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p ref={ref} className={cn(\"text-xs opacity-80\", className)} {...props} />\n))\nNotificationDescription.displayName = \"NotificationDescription\"\n\nexport { Notification, NotificationTitle, NotificationDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "warning": "oklch(0.78 0.16 75)",
+      "info": "oklch(0.7 0.13 235)"
+    },
+    "dark": {
+      "warning": "oklch(0.78 0.16 75)",
+      "info": "oklch(0.7 0.13 235)"
+    }
+  }
+}

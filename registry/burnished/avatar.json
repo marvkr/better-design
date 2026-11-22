@@ -1,0 +1,27 @@
+{
+  "name": "avatar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Avatar: a round portrait held in a dark rim, the same rim that\n * frames the copper ring on the primary button. The fallback is a small\n * graphite bevel with the initials on it.\n */\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    data-slot=\"avatar\"\n    className={cn(\n      \"relative flex size-10 shrink-0 overflow-hidden rounded-full shadow-(--ring-rim)\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatar.displayName = AvatarPrimitive.Root.displayName;\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    data-slot=\"avatar-image\"\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n));\nAvatarImage.displayName = AvatarPrimitive.Image.displayName;\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    data-slot=\"avatar-fallback\"\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full text-sm font-semibold\",\n      \"bg-(image:--fill-raised) text-foreground shadow-(--bevel-raised)\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-avatar@^1.1.10"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ring-rim": "0 0 0 0.0625rem oklch(0 0 0 / 0.35)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ring-rim": "0 0 0 0.0625rem oklch(0 0 0 / 0.35)"
+    }
+  }
+}

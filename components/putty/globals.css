@@ -1,0 +1,247 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Clay Product, light claymorphic system derived from clay.com.
+  Defining trait: soft 3D "clay" material. Every raised surface is built from a
+  pillowy double-shadow recipe, a soft ambient outer drop + an inset top
+  highlight (light from above) + a faint inset bottom contact shadow, over a
+  warm cream ground, with a vivid friendly blue accent and generous radii.
+
+  Clay shadow recipe (authored first-hand, oklch only):
+    --shadow-clay        raised surfaces (cards, popovers, buttons-secondary)
+    --shadow-clay-sm     small raised chips/controls
+    --shadow-clay-lg     hero / floating surfaces
+    --shadow-clay-primary  the blue primary Button material (filled controls reuse this)
+    --shadow-clay-inset  recessed fields (inputs), pressed INTO the clay
+*/
+
+:root {
+  /* Warm cream ground + lighter clay surfaces */
+  --background: oklch(0.972 0.018 96);
+  --foreground: oklch(0.255 0.022 64);
+
+  --card: oklch(0.995 0.006 96);
+  --card-foreground: oklch(0.255 0.022 64);
+
+  --popover: oklch(0.995 0.006 96);
+  --popover-foreground: oklch(0.255 0.022 64);
+
+  /* Vivid clay blue (clay.com "Continue" CTA) */
+  --primary: oklch(0.585 0.188 256);
+  --primary-foreground: oklch(0.995 0.01 250);
+
+  /* Soft clay secondary, warm putty */
+  --secondary: oklch(0.935 0.022 92);
+  --secondary-foreground: oklch(0.34 0.026 66);
+
+  --muted: oklch(0.945 0.018 94);
+  --muted-foreground: oklch(0.52 0.028 70);
+
+  /* Warm peach accent for hover wells */
+  --accent: oklch(0.93 0.03 88);
+  --accent-foreground: oklch(0.34 0.026 66);
+
+  --destructive: oklch(0.62 0.2 26);
+  --destructive-foreground: oklch(0.995 0.01 30);
+
+  --border: oklch(0.9 0.022 90);
+  --input: oklch(0.955 0.016 94);
+  --ring: oklch(0.585 0.188 256);
+  --radius: 0.875rem;
+
+  /* ─── Clay material recipe, paired inset-highlight + outer-soft-drop, oklch only ─── */
+  /* Light from above: top inset highlight (near-white), bottom inset contact (warm shadow),
+     plus a soft ambient outer drop. Forms the pillowy "clay" look on every raised surface. */
+  --shadow-clay-sm:
+    inset 0 0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.85),
+    inset 0 -0.0625rem 0.0625rem 0 oklch(0.62 0.04 70 / 0.14),
+    0 0.0625rem 0.125rem -0.0313rem oklch(0.5 0.04 70 / 0.16),
+    0 0.1875rem 0.375rem -0.125rem oklch(0.5 0.04 70 / 0.14);
+
+  --shadow-clay:
+    inset 0 0.0938rem 0.0313rem 0 oklch(1 0 0 / 0.9),
+    inset 0 -0.125rem 0.125rem 0 oklch(0.62 0.04 70 / 0.16),
+    0 0.125rem 0.25rem -0.0625rem oklch(0.5 0.04 70 / 0.16),
+    0 0.5rem 1.125rem -0.375rem oklch(0.5 0.04 70 / 0.2);
+
+  --shadow-clay-lg:
+    inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95),
+    inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16),
+    0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16),
+    0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24);
+
+  /* Primary blue Button material, the same pillowy clay, tinted into the blue.
+     Filled controls (checkbox/switch/radio/slider) reuse this EXACT recipe, scaled down. */
+  --shadow-clay-primary:
+    inset 0 0.0938rem 0.0313rem 0 oklch(0.82 0.1 250 / 0.85),
+    inset 0 -0.125rem 0.1563rem 0 oklch(0.36 0.14 258 / 0.55),
+    0 0.125rem 0.25rem -0.0625rem oklch(0.4 0.14 258 / 0.34),
+    0 0.5rem 1rem -0.3125rem oklch(0.45 0.16 256 / 0.4);
+
+  --shadow-clay-primary-sm:
+    inset 0 0.0625rem 0.0313rem 0 oklch(0.82 0.1 250 / 0.85),
+    inset 0 -0.0625rem 0.0938rem 0 oklch(0.36 0.14 258 / 0.5),
+    0 0.0625rem 0.125rem -0.0313rem oklch(0.4 0.14 258 / 0.32),
+    0 0.1875rem 0.375rem -0.125rem oklch(0.45 0.16 256 / 0.36);
+
+  /* Recessed fields, pressed INTO the clay (inputs) */
+  --shadow-clay-inset:
+    inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16),
+    inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7);
+
+  /* Shared popover/overlay shadow token, every floating surface uses this clay drop */
+  --shadow-overlay: var(--shadow-clay-lg);
+
+  /* ─── Chart palette: tonal ramp of the clay-blue primary ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l + 0.08) calc(c * 0.9) calc(h + 18));
+  --chart-3: oklch(from var(--primary) calc(l + 0.04) calc(c * 0.78) calc(h - 36));
+  --chart-4: oklch(from var(--primary) calc(l - 0.06) calc(c * 0.86) calc(h + 40));
+  --chart-5: oklch(from var(--primary) calc(l + 0.12) calc(c * 0.7) calc(h - 70));
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.375rem);
+  --radius-md: calc(var(--radius) - 0.25rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: "Nunito", ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN", var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling. */
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: spacious;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 62);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 10);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 12);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 6);
+}

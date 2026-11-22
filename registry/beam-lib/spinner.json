@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "@iconify/react"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@iconify/react@^6.0.2"
   ]
 }

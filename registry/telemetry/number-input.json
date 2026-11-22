@@ -1,0 +1,26 @@
+{
+  "name": "number-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Control Room NumberInput: setpoint stepper. Recessed well flanked by\n// square minus/plus keys, like a threshold adjuster.\n\ninterface NumberInputProps\n  extends Omit<\n    React.InputHTMLAttributes<HTMLInputElement>,\n    \"type\" | \"onChange\"\n  > {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  (\n    { className, value = 0, onChange, min, max, step = 1, disabled, ...props },\n    ref\n  ) => {\n    // Local draft lets the field be cleared mid-edit without the controlled\n    // numeric value snapping back. It re-syncs whenever `value` changes externally.\n    const [draft, setDraft] = React.useState(String(value))\n\n    React.useEffect(() => {\n      setDraft(String(value))\n    }, [value])\n\n    const clamp = (n: number) => {\n      const lower = min !== undefined ? Math.max(min, n) : n\n      return max !== undefined ? Math.min(max, lower) : lower\n    }\n\n    const handleDecrement = () => {\n      onChange?.(clamp(value - step))\n    }\n\n    const handleIncrement = () => {\n      onChange?.(clamp(value + step))\n    }\n\n    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n      setDraft(e.target.value)\n      const parsed = parseFloat(e.target.value)\n      if (!isNaN(parsed)) {\n        onChange?.(parsed)\n      }\n    }\n\n    return (\n      <div\n        className={cn(\n          formFieldBase,\n          \"flex h-9 w-full overflow-hidden p-0\",\n          \"focus-within:border-ring/70\",\n          \"focus-within:[box-shadow:var(--shadow-inset),0_0_0_0.0625rem_oklch(0.78_0.21_148/0.5),0_0_0.625rem_oklch(0.78_0.21_148/0.25)]\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n      >\n        <button\n          type=\"button\"\n          onClick={handleDecrement}\n          disabled={disabled || (min !== undefined && value <= min)}\n          className=\"flex h-full w-9 shrink-0 items-center justify-center border-r border-border text-muted-foreground transition-colors hover:bg-accent hover:text-primary disabled:opacity-40\"\n        >\n          <Icon icon=\"tabler:minus\" className=\"size-3.5\" />\n        </button>\n        <input\n          ref={ref}\n          type=\"number\"\n          value={draft}\n          onChange={handleChange}\n          disabled={disabled}\n          min={min}\n          max={max}\n          step={step}\n          className=\"flex-1 bg-transparent px-2 text-center text-sm text-foreground focus:outline-none disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\"\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleIncrement}\n          disabled={disabled || (max !== undefined && value >= max)}\n          className=\"flex h-full w-9 shrink-0 items-center justify-center border-l border-border text-muted-foreground transition-colors hover:bg-accent hover:text-primary disabled:opacity-40\"\n        >\n          <Icon icon=\"tabler:plus\" className=\"size-3.5\" />\n        </button>\n      </div>\n    )\n  }\n)\nNumberInput.displayName = \"NumberInput\"\n\nexport { NumberInput }\nexport type { NumberInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/telemetry/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

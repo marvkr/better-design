@@ -1,5 +1,13 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./table"
 
 // Luxe DataTable: card bg table with rounded-xl wrapper, subtle row hover
 // Column definitions drive rendering — flexible, no external table library
@@ -19,7 +27,10 @@ export interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> 
   loading?: boolean
 }
 
-function DataTable<T extends Record<string, unknown>>({
+/** A row's cell values: primitives the table can sort and print. */
+type DataTableCell = string | number | boolean | null | undefined
+
+function DataTable<T extends Record<string, DataTableCell>>({
   columns,
   data,
   emptyMessage = "No results found.",
@@ -29,6 +40,8 @@ function DataTable<T extends Record<string, unknown>>({
 }: DataTableProps<T>) {
   const getCellValue = (row: T, col: Column<T>): React.ReactNode => {
     if (col.cell) return col.cell(row)
+    // SAFETY: a column key is either a row property or a synthetic name whose
+    // cell renderer never reads the row by key; a miss prints the dash below.
     const val = row[col.key as keyof T]
     if (val === null || val === undefined) return "—"
     return String(val)
@@ -43,11 +56,11 @@ function DataTable<T extends Record<string, unknown>>({
       {...props}
     >
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-border/60">
+        <Table>
+          <TableHeader>
+            <TableRow className="border-b border-border/60 hover:bg-transparent">
               {columns.map((col) => (
-                <th
+                <TableHead
                   key={String(col.key)}
                   className={cn(
                     "px-5 py-3.5 text-left text-xs font-medium text-muted-foreground tracking-widest uppercase",
@@ -55,37 +68,37 @@ function DataTable<T extends Record<string, unknown>>({
                   )}
                 >
                   {col.header}
-                </th>
+                </TableHead>
               ))}
-            </tr>
-          </thead>
-          <tbody>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {loading ? (
-              <tr>
-                <td colSpan={columns.length} className="px-5 py-10 text-center text-sm text-muted-foreground">
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={columns.length} className="px-5 py-10 text-center text-sm text-muted-foreground">
                   <div className="flex items-center justify-center gap-2">
                     <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-border border-t-foreground" />
                     Loading…
                   </div>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : data.length === 0 ? (
-              <tr>
-                <td colSpan={columns.length} className="px-5 py-10 text-center text-sm text-muted-foreground">
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={columns.length} className="px-5 py-10 text-center text-sm text-muted-foreground">
                   {emptyMessage}
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : (
               data.map((row, i) => (
-                <tr
+                <TableRow
                   key={i}
                   className={cn(
                     "border-b border-border/40 last:border-0",
-                    "transition-colors duration-150 hover:bg-accent/50"
+                    "transition-colors duration-fast hover:bg-accent/50"
                   )}
                 >
                   {columns.map((col) => (
-                    <td
+                    <TableCell
                       key={String(col.key)}
                       className={cn(
                         "px-5 py-3.5 text-foreground tracking-wide",
@@ -93,13 +106,13 @@ function DataTable<T extends Record<string, unknown>>({
                       )}
                     >
                       {getCellValue(row, col)}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   )

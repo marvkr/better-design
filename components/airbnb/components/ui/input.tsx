@@ -2,11 +2,9 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Input — extracted from airbnb.com (2026-04)
-// Rounded 8px, 1px #DDDDDD border, white bg
-// Focus: border goes #222, no shadow bloom — just the border change
-// Height: ~48px on search fields, 40px on forms
-// No inset shadows
+// Airbnb Input, measured on airbnb.com (13 November 2026)
+// 12px radius, a 1px grey line, clear fill, 16px text
+// Focus: the line turns dark and thickens to 2px, with no glow
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -17,11 +15,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-12 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground",
+          "flex h-12 w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground",
           "placeholder:text-muted-foreground",
-          "transition-border duration-150",
-          "hover:border-foreground/40",
-          "focus-visible:outline-none focus-visible:border-foreground",
+          "transition-[border-color,box-shadow] duration-fast ease-in-out",
+          "hover:border-foreground",
+          "focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
           "disabled:cursor-not-allowed disabled:opacity-50",
           className

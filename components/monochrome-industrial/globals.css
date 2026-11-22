@@ -18,76 +18,76 @@
 
 :root {
   /* --- Monochrome Industrial raw palette (dark / OLED) --- */
-  --mono-black: #000000;
-  --mono-surface: #111111;
-  --mono-surface-raised: #1a1a1a;
-  --mono-border: #222222;
-  --mono-border-visible: #333333;
-  --mono-text-disabled: #666666;
-  --mono-text-secondary: #999999;
-  --mono-text-primary: #e8e8e8;
-  --mono-text-display: #ffffff;
+  --mono-black: oklch(0 0 0);
+  --mono-surface: oklch(0.1776 0 0);
+  --mono-surface-raised: oklch(0.2178 0 0);
+  --mono-border: oklch(0.252 0 0);
+  --mono-border-visible: oklch(0.3211 0 0);
+  --mono-text-disabled: oklch(0.5103 0 0);
+  --mono-text-secondary: oklch(0.683 0 0);
+  --mono-text-primary: oklch(0.931 0 0);
+  --mono-text-display: oklch(1 0 0);
 
   /* --- Monochrome Industrial accent + status (identical across modes) --- */
-  --mono-accent: #d71921;          /* signal-light red — one per screen */
-  --mono-accent-subtle: rgba(215, 25, 33, 0.15);
-  --mono-success: #4a9e5c;
-  --mono-warning: #d4a843;
-  --mono-error: #d71921;
-  --mono-info: #999999;
-  --mono-interactive: #5b9bf6;
+  --mono-accent: oklch(0.5607 0.2177 26.79);          /* signal-light red — one per screen */
+  --mono-accent-subtle: oklch(0.5607 0.2177 26.79 / 0.15);
+  --mono-success: oklch(0.6299 0.1279 148.63);
+  --mono-warning: oklch(0.7534 0.1274 84.93);
+  --mono-error: oklch(0.5607 0.2177 26.79);
+  --mono-info: oklch(0.683 0 0);
+  --mono-interactive: oklch(0.688 0.1502 257.38);
 
   /* --- shadcn-shaped tokens mapped to Monochrome Industrial dark mode --- */
-  --background: #000000;
-  --foreground: #e8e8e8;
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.931 0 0);
 
-  --card: #111111;
-  --card-foreground: #e8e8e8;
+  --card: oklch(0.1776 0 0);
+  --card-foreground: oklch(0.931 0 0);
 
-  --popover: #111111;
-  --popover-foreground: #e8e8e8;
+  --popover: oklch(0.1776 0 0);
+  --popover-foreground: oklch(0.931 0 0);
 
-  --primary: #ffffff;
-  --primary-foreground: #000000;
+  --primary: oklch(1 0 0);
+  --primary-foreground: oklch(0 0 0);
 
-  --secondary: #1a1a1a;
-  --secondary-foreground: #e8e8e8;
+  --secondary: oklch(0.2178 0 0);
+  --secondary-foreground: oklch(0.931 0 0);
 
-  --muted: #111111;
-  --muted-foreground: #999999;
+  --muted: oklch(0.1776 0 0);
+  --muted-foreground: oklch(0.683 0 0);
 
-  --accent: #d71921;
-  --accent-foreground: #ffffff;
+  --accent: oklch(0.5607 0.2177 26.79);
+  --accent-foreground: oklch(1 0 0);
 
-  --destructive: #d71921;
-  --destructive-foreground: #ffffff;
+  --destructive: oklch(0.5607 0.2177 26.79);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: #222222;
-  --input: #222222;
-  --ring: #d71921;
-  --radius: 0rem; /* Monochrome Industrial is sharp — pill (999px) or technical (4–8px) only */
+  --border: oklch(0.252 0 0);
+  --input: oklch(0.252 0 0);
+  --ring: oklch(0.5607 0.2177 26.79);
+  --radius: 0rem; /* Monochrome Industrial is sharp — pill (62.4375rem) or technical (0.25–0.5rem) only */
 
   /* --- Type scale --- */
-  --display-xl: 72px;
-  --display-lg: 48px;
-  --display-md: 36px;
-  --heading: 24px;
-  --subheading: 18px;
-  --body: 16px;
-  --body-sm: 14px;
-  --caption: 12px;
-  --label: 11px;
+  --display-xl: 4.5rem;
+  --display-lg: 3rem;
+  --display-md: 2.25rem;
+  --heading: 1.5rem;
+  --subheading: 1.125rem;
+  --body: 1rem;
+  --body-sm: 0.875rem;
+  --caption: 0.75rem;
+  --label: 0.6875rem;
 
-  /* --- Spacing scale (8px base) --- */
-  --space-2xs: 2px;
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
-  --space-4xl: 96px;
+  /* --- Spacing scale (0.5rem base) --- */
+  --space-2xs: 0.125rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
 
   /* --- Motion --- */
   --ease-mono: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -98,48 +98,79 @@
   --font-display: "Doto", "Space Mono", monospace;
   --font-sans: "Space Grotesk", "DM Sans", system-ui, sans-serif;
   --font-mono: "Space Mono", "JetBrains Mono", "SF Mono", monospace;
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (the same values as --ease-mono and --duration-* above) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 200ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 350ms;
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
 }
 
 /* --- Light mode: printed technical manual --- */
 .light {
-  --mono-black: #f5f5f5;
-  --mono-surface: #ffffff;
-  --mono-surface-raised: #f0f0f0;
-  --mono-border: #e8e8e8;
-  --mono-border-visible: #cccccc;
-  --mono-text-disabled: #999999;
-  --mono-text-secondary: #666666;
-  --mono-text-primary: #1a1a1a;
-  --mono-text-display: #000000;
-  --mono-interactive: #007aff;
+  --mono-black: oklch(0.9702 0 0);
+  --mono-surface: oklch(1 0 0);
+  --mono-surface-raised: oklch(0.9551 0 0);
+  --mono-border: oklch(0.931 0 0);
+  --mono-border-visible: oklch(0.8452 0 0);
+  --mono-text-disabled: oklch(0.683 0 0);
+  --mono-text-secondary: oklch(0.5103 0 0);
+  --mono-text-primary: oklch(0.2178 0 0);
+  --mono-text-display: oklch(0 0 0);
+  --mono-interactive: oklch(0.6028 0.2177 257.42);
 
-  --background: #f5f5f5;
-  --foreground: #1a1a1a;
+  --background: oklch(0.9702 0 0);
+  --foreground: oklch(0.2178 0 0);
 
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2178 0 0);
 
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2178 0 0);
 
-  --primary: #000000;
-  --primary-foreground: #ffffff;
+  --primary: oklch(0 0 0);
+  --primary-foreground: oklch(1 0 0);
 
-  --secondary: #f0f0f0;
-  --secondary-foreground: #1a1a1a;
+  --secondary: oklch(0.9551 0 0);
+  --secondary-foreground: oklch(0.2178 0 0);
 
-  --muted: #ffffff;
-  --muted-foreground: #666666;
+  --muted: oklch(1 0 0);
+  --muted-foreground: oklch(0.5103 0 0);
 
-  --accent: #d71921;
-  --accent-foreground: #ffffff;
+  --accent: oklch(0.5607 0.2177 26.79);
+  --accent-foreground: oklch(1 0 0);
 
-  --destructive: #d71921;
-  --destructive-foreground: #ffffff;
+  --destructive: oklch(0.5607 0.2177 26.79);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: #e8e8e8;
-  --input: #e8e8e8;
-  --ring: #d71921;
+  --border: oklch(0.931 0 0);
+  --input: oklch(0.931 0 0);
+  --ring: oklch(0.5607 0.2177 26.79);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
 }
 
 @theme inline {
@@ -179,10 +210,16 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
 }
 
 @layer base {
@@ -197,6 +234,46 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling:
+     smoother writing, easier-to-scan forms. */
+  textarea {
+    /* Fallback for browsers without field-sizing (e.g. Firefox): keep the
+       textarea user-resizable so it can still be grown manually. */
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
 }
 
 @layer components {
@@ -205,28 +282,28 @@
   .dot-grid {
     background-image: radial-gradient(
       circle,
-      var(--mono-border-visible) 1px,
-      transparent 1px
+      var(--mono-border-visible) 0.0625rem,
+      transparent 0.0625rem
     );
-    background-size: 16px 16px;
+    background-size: 1rem 1rem;
   }
 
   .dot-grid-subtle {
     background-image: radial-gradient(
       circle,
-      var(--mono-border) 0.5px,
-      transparent 0.5px
+      var(--mono-border) 0.0313rem,
+      transparent 0.0313rem
     );
-    background-size: 12px 12px;
+    background-size: 0.75rem 0.75rem;
   }
 
   .dot-grid-tight {
     background-image: radial-gradient(
       circle,
-      var(--mono-border-visible) 1px,
-      transparent 1px
+      var(--mono-border-visible) 0.0625rem,
+      transparent 0.0625rem
     );
-    background-size: 8px 8px;
+    background-size: 0.5rem 0.5rem;
   }
 
   /* --- Type role helpers --- */
@@ -255,4 +332,43 @@
     font-feature-settings: "tnum";
     color: var(--mono-text-primary);
   }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
 }

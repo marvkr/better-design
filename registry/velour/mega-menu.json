@@ -1,0 +1,22 @@
+{
+  "name": "mega-menu",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/*\n * A wide floating velvet panel: opaque dark-to-darker gradient, inset top\n * rim + hairline ring + deep ambient drop (--shadow-l). No blur.\n */\n\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute left-0 top-full z-50 w-full p-4\",\n      \"rounded-xl bg-popover [background-image:var(--velour)] text-popover-foreground\",\n      \"[box-shadow:var(--shadow-l)]\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenu.displayName = \"MegaMenu\"\n\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"space-y-3\", className)} {...props} />\n))\nMegaMenuGroup.displayName = \"MegaMenuGroup\"\n\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\n      \"text-xs font-medium uppercase tracking-wider text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\"\n\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    className={cn(\n      \"block rounded-md px-3 py-2 text-sm text-muted-foreground\",\n      \"transition-colors duration-fast\",\n      \"hover:bg-accent hover:text-accent-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nMegaMenuItem.displayName = \"MegaMenuItem\"\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.05), 0 1rem 3rem oklch(0 0 0 / 0.55), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.05), 0 1rem 3rem oklch(0 0 0 / 0.55), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

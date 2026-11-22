@@ -1,0 +1,30 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { pressedWash } from \"./_shared\";\n\n/**\n * Playful console Toggle: a chip that stays pressed. Pressed, it takes the\n * orange wash behind the orange rim, never the full orange key, which stays\n * with the one primary action. The default chip is bare and turns cream\n * under the pointer; the outline chip is a white face with an olive edge.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-md border font-semibold text-foreground\",\n    \"transition-[background-color,border-color,color] duration-fast ease-out\",\n    \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n    \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n    pressedWash,\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"border-transparent bg-transparent hover:bg-secondary\",\n        outline:\n          \"border-(--line-strong) bg-card hover:bg-secondary disabled:border-border disabled:bg-secondary\",\n      },\n      size: {\n        sm: \"h-7 px-2.5 text-xs\",\n        default: \"h-8 px-3 text-sm\",\n        lg: \"h-10 px-4 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** A two-state chip; pass `pressed` and `onPressedChange` to control it. */\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = TogglePrimitive.Root.displayName;\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)"
+    }
+  }
+}

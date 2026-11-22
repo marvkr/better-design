@@ -1,0 +1,29 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  oxFace,\n  oxFaceHover,\n  destructiveFace,\n  focusRing,\n  pillFace,\n  pressScale,\n  quietFace,\n  markFace,\n} from \"./_shared\";\n\n/**\n * Margin Button: a plain ruled label, near square.\n *\n * The default is the signature: flat oxblood ink inside a darker rule, with no\n * light and no drop. It is the one coloured object on a page, so a page\n * carries one or two. `secondary` is the ruled toolbar tab; `outline` keeps\n * only the hairline; `ghost` shows its face on hover alone. `lit` is the pale oxblood mark for a gentle call to\n * action. Every press settles the button a little toward the page.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap\",\n    \"rounded-lg font-medium\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: cn(oxFace, oxFaceHover),\n        primary: cn(oxFace, oxFaceHover),\n        lit: markFace,\n        solid: cn(oxFace, oxFaceHover),\n        secondary: cn(pillFace, \"font-normal\"),\n        outline:\n          \"bg-transparent text-foreground shadow-(--pill-edge) font-normal hover:bg-accent\",\n        ghost:\n          \"bg-transparent font-normal text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive: destructiveFace,\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline decoration-current/30 underline-offset-4 hover:decoration-current\",\n        quiet: quietFace,\n      },\n      size: {\n        sm: \"h-8 px-3 text-sm\",\n        default: \"h-9 px-4 text-sm\",\n        lg: \"h-10 px-5 text-base\",\n        icon: \"size-9 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-10 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        data-slot=\"button\"\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.82 0.016 85)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.36 0.014 260)"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "inline-edit",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n/*\n * Bevel InlineEdit.\n *\n * At rest the value is plain text in a row, with a pencil that fades in on\n * hover, so a settings screen stays quiet until you reach for it. Tapping the\n * row swaps the text for the system's field, the same pressed well every other\n * input uses. Enter commits, Escape restores the value you started with, and\n * moving focus away commits as well.\n */\n\n/** Props for `InlineEdit`; `displayClassName` styles the resting row only. */\nexport interface InlineEditProps {\n  value: string\n  onValueChange: (value: string) => void\n  placeholder?: string\n  className?: string\n  displayClassName?: string\n  disabled?: boolean\n}\n\nconst InlineEdit = React.forwardRef<HTMLInputElement, InlineEditProps>(\n  (\n    {\n      value,\n      onValueChange,\n      placeholder = \"Tap to edit\",\n      className,\n      displayClassName,\n      disabled,\n    },\n    ref,\n  ) => {\n    const [editing, setEditing] = React.useState(false)\n    const [draft, setDraft] = React.useState(value)\n    const inputRef = React.useRef<HTMLInputElement>(null)\n\n    // SAFETY: the handle is read only after mount, when the element this\n    // component renders is attached, so the ref is non-null.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)\n\n    React.useEffect(() => {\n      if (editing) inputRef.current?.focus()\n    }, [editing])\n\n    const commit = () => {\n      onValueChange(draft)\n      setEditing(false)\n    }\n\n    const cancel = () => {\n      setDraft(value)\n      setEditing(false)\n    }\n\n    if (editing) {\n      return (\n        <input\n          ref={inputRef}\n          value={draft}\n          onChange={(event) => setDraft(event.target.value)}\n          onBlur={commit}\n          onKeyDown={(event) => {\n            if (event.key === \"Enter\") commit()\n            else if (event.key === \"Escape\") cancel()\n          }}\n          placeholder={placeholder}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"text-[0.9063rem] tracking-[0.0188rem]\",\n            className,\n          )}\n        />\n      )\n    }\n\n    return (\n      <button\n        type=\"button\"\n        onClick={() => !disabled && setEditing(true)}\n        disabled={disabled}\n        className={cn(\n          \"group inline-flex items-center gap-2 rounded-[0.75rem] px-3 py-2 text-left\",\n          \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-foreground\",\n          \"transition-colors duration-fast ease-out\",\n          \"hover:bg-muted\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          displayClassName,\n        )}\n      >\n        <span className={cn(!value && \"text-muted-foreground\")}>\n          {value || placeholder}\n        </span>\n        <Icon\n          icon=\"solar:pen-2-linear\"\n          className=\"size-[0.9375rem] shrink-0 text-muted-foreground opacity-0 transition-opacity duration-fast ease-out group-hover:opacity-100\"\n        />\n      </button>\n    )\n  },\n)\nInlineEdit.displayName = \"InlineEdit\"\n\nexport { InlineEdit }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

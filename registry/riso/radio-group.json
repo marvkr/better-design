@@ -1,0 +1,23 @@
+{
+  "name": "radio-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Retro-Playful RadioGroup — selected ring becomes a poster-blue slab matching\n// the primary Button (same fill + chunky ink border-2 + hard offset). The\n// indicator dot is a paper knob, so it reads as one cut-out material.\n\nfunction RadioGroup({\n  className,\n  ...props\n}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {\n  return (\n    <RadioGroupPrimitive.Root className={cn(\"grid gap-2\", className)} {...props} />\n  )\n}\nRadioGroup.displayName = RadioGroupPrimitive.Root.displayName\n\nfunction RadioGroupItem({\n  className,\n  ...props\n}: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {\n  return (\n    <RadioGroupPrimitive.Item\n      className={cn(\n        \"aspect-square h-5 w-5 rounded-full border-2 border-border bg-card text-primary-foreground transition-all\",\n        \"ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-[state=checked]:bg-primary data-[state=checked]:shadow-[var(--shadow-hard-sm)]\",\n        className\n      )}\n      {...props}\n    >\n      <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n        <span className=\"block h-2 w-2 rounded-full border-2 border-border bg-card\" />\n      </RadioGroupPrimitive.Indicator>\n    </RadioGroupPrimitive.Item>\n  )\n}\nRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-radio-group@^1.3.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
+    },
+    "dark": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
+    }
+  }
+}

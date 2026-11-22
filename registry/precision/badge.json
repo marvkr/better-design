@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Precision Badge - crisp, small-radius pills for a data-dense CRM.\n// default (primary blue), secondary (quiet neutral fill), outline (hairline),\n// destructive, plus light + status tints. Restrained, border-first.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"bg-secondary text-secondary-foreground border border-border\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive/14 text-[color:oklch(0.535_0.211_24)]\",\n        success: \"text-[oklch(1_0_0)] bg-[color:oklch(0.545_0.15_150)]\",\n        \"success-light\": \"text-[oklch(0.46_0.14_150)] bg-[color:oklch(0.62_0.16_150/0.19)]\",\n        warning: \"text-[oklch(1_0_0)] bg-[color:oklch(0.57_0.128_65)]\",\n        \"warning-light\": \"text-[oklch(0.5_0.13_60)] bg-[color:oklch(0.72_0.16_65/0.23)]\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        // Precision: sm=h-4 (16px), md=h-5 (20px), lg=h-6 (24px)\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

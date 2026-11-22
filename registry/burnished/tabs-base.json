@@ -1,0 +1,30 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Burnished Tabs root: owns which panel shows. */\nconst Tabs = TabsPrimitive.Root;\n\n/**\n * Burnished TabsList: a row of pill labels pressed into a recessed well,\n * like a segmented switch cut into the page.\n */\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    data-slot=\"tabs-list\"\n    className={cn(\n      \"inline-flex h-11 items-center gap-1 rounded-full p-1 text-muted-foreground\",\n      wellInset,\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = \"TabsList\";\n\n/**\n * Burnished TabsTrigger: muted semibold text in a pill. The active tab\n * rises out of the well as a graphite bevel in full ink.\n */\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    data-slot=\"tabs-trigger\"\n    className={cn(\n      \"inline-flex h-9 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4\",\n      \"text-sm font-semibold tracking-[0.016em] text-muted-foreground\",\n      \"transition-[box-shadow,color] duration-base ease-(--ease-out)\",\n      \"[@media(hover:hover)_and_(pointer:fine)]:hover:text-foreground\",\n      \"data-[active]:bg-(image:--fill-raised) data-[active]:text-foreground data-[active]:shadow-(--bevel-raised)\",\n      focusRing,\n      \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n      \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = \"TabsTrigger\";\n\n/** Burnished TabsContent: the active panel, set below the tab row. */\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    data-slot=\"tabs-content\"\n    className={cn(\"mt-4 rounded-lg\", focusRing, className)}\n    {...props}\n  />\n));\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

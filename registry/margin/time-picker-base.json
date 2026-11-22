@@ -1,0 +1,17 @@
+{
+  "name": "time-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/time-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/** Props for `TimePicker`: every native input prop except `type`. */\nexport interface TimePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {}\n\n/**\n * Margin TimePicker: the native time input on the grey filled field, with a\n * small clock at its start and figures set in tabular numerals.\n */\nconst TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(\n  ({ className, ...props }, ref) => (\n    <div className=\"relative\">\n      <Icon\n        icon=\"solar:clock-circle-linear\"\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground\"\n      />\n      <input\n        ref={ref}\n        type=\"time\"\n        data-slot=\"time-picker\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"pl-8 tabular-nums [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-50\",\n          className,\n        )}\n        {...props}\n      />\n    </div>\n  ),\n);\nTimePicker.displayName = \"TimePicker\";\n\nexport { TimePicker };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ]
+}

@@ -22,7 +22,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         className={cn(
           "rounded-2xl bg-card text-card-foreground",
           "[box-shadow:var(--shadow-m)]",
-          "transition-[background-color,box-shadow] duration-200",
+          "transition-[background-color,box-shadow] duration-base",
           interactive && "cursor-pointer hover:bg-accent/40 hover:[box-shadow:var(--shadow-l)]",
           className,
         )}

@@ -1,0 +1,20 @@
+{
+  "name": "sidebar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sidebar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Sidebar — a translucent rail over the desk, so the wallpaper still\n * shows through. The active row is a filled pill, matching the segmented\n * control rather than a full-bleed highlight bar.\n */\n\nconst Sidebar = React.forwardRef<\n  HTMLElement,\n  React.HTMLAttributes<HTMLElement>\n>(({ className, ...props }, ref) => (\n  <aside\n    ref={ref}\n    className={cn(\n      \"flex h-full w-60 flex-col gap-1 p-3\",\n      \"bg-card/70 backdrop-blur-md [box-shadow:inset_-0.0625rem_0_0_var(--border)]\",\n      className,\n    )}\n    {...props}\n  />\n));\nSidebar.displayName = \"Sidebar\";\n\nconst SidebarHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex items-center gap-2 px-2 pb-3 pt-1\", className)}\n    {...props}\n  />\n));\nSidebarHeader.displayName = \"SidebarHeader\";\n\nconst SidebarContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex-1 space-y-4 overflow-y-auto\", className)}\n    {...props}\n  />\n));\nSidebarContent.displayName = \"SidebarContent\";\n\nconst SidebarFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"border-t border-border pt-3\", className)}\n    {...props}\n  />\n));\nSidebarFooter.displayName = \"SidebarFooter\";\n\nconst SidebarGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"space-y-0.5\", className)} {...props} />\n));\nSidebarGroup.displayName = \"SidebarGroup\";\n\nconst SidebarGroupLabel = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"px-2.5 pb-1 text-[0.6875rem] font-bold tracking-[0.08em] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nSidebarGroupLabel.displayName = \"SidebarGroupLabel\";\n\nconst SidebarItem = React.forwardRef<\n  HTMLButtonElement,\n  React.ButtonHTMLAttributes<HTMLButtonElement> & { active?: boolean }\n>(({ className, active, ...props }, ref) => (\n  <button\n    ref={ref}\n    type=\"button\"\n    aria-current={active ? \"page\" : undefined}\n    className={cn(\n      \"flex w-full items-center gap-2.5 rounded-full px-2.5 py-1.5 text-left text-sm\",\n      \"transition-colors duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      active\n        ? \"bg-secondary font-medium text-foreground [box-shadow:var(--shadow-rim)]\"\n        : \"text-muted-foreground hover:bg-foreground/[0.04] hover:text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nSidebarItem.displayName = \"SidebarItem\";\n\nexport {\n  Sidebar,\n  SidebarHeader,\n  SidebarContent,\n  SidebarFooter,\n  SidebarGroup,\n  SidebarGroupLabel,\n  SidebarItem,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

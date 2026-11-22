@@ -13,10 +13,7 @@ export interface NotificationProps extends React.HTMLAttributes<HTMLDivElement> 
   action?: React.ReactNode
 }
 
-const variantStyles: Record<
-  NotificationVariant,
-  { container: string; icon: React.ReactNode; accent: string }
-> = {
+const variantStyles = {
   default: {
     container: "border-border",
     icon: <Info className="h-4 w-4 text-foreground" />,
@@ -42,7 +39,10 @@ const variantStyles: Record<
     icon: <XCircle className="h-4 w-4 text-destructive" />,
     accent: "bg-destructive",
   },
-}
+} satisfies Record<
+  NotificationVariant,
+  { container: string; icon: React.ReactNode; accent: string }
+>
 
 const Notification = React.forwardRef<HTMLDivElement, NotificationProps>(
   (
@@ -66,7 +66,7 @@ const Notification = React.forwardRef<HTMLDivElement, NotificationProps>(
         ref={ref}
         role="alert"
         className={cn(
-          "relative flex gap-3 overflow-hidden rounded-[14px] border bg-card p-4 shadow-sm",
+          "relative flex gap-3 overflow-hidden rounded-[0.875rem] border bg-card p-4 shadow-sm",
           styles.container,
           className
         )}
@@ -74,7 +74,7 @@ const Notification = React.forwardRef<HTMLDivElement, NotificationProps>(
       >
         {/* Colored left accent bar */}
         <div
-          className={cn("absolute left-0 inset-y-0 w-1 rounded-l-[14px]", styles.accent)}
+          className={cn("absolute left-0 inset-y-0 w-1 rounded-l-[0.875rem]", styles.accent)}
         />
 
         {/* Icon */}

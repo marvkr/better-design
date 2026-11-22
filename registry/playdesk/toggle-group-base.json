@@ -1,0 +1,28 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\"\nimport type { VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants } from \"./toggle\"\nimport type { WithClassName } from \"./_shared\"\n\n/* Playdesk ToggleGroup: the desk's segmented control. */\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({ size: \"default\", variant: \"default\" })\n\nconst ToggleGroup = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ToggleGroupPrimitive.Props> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, children, ...props }, ref) => (\n  <ToggleGroupPrimitive\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-full bg-secondary p-1 [box-shadow:var(--shadow-rim)]\",\n      className\n    )}\n    {...props}\n  >\n    <ToggleGroupContext.Provider value={{ variant, size }}>\n      {children}\n    </ToggleGroupContext.Provider>\n  </ToggleGroupPrimitive>\n))\nToggleGroup.displayName = \"ToggleGroup\"\n\nconst ToggleGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TogglePrimitive.Props> & VariantProps<typeof toggleVariants>\n>(({ className, children, variant, size, ...props }, ref) => {\n  const context = React.useContext(ToggleGroupContext)\n  return (\n    <TogglePrimitive\n      ref={ref}\n      className={cn(\n        toggleVariants({\n          variant: context.variant ?? variant,\n          size: context.size ?? size,\n        }),\n        // Selected segment lifts out of the track instead of pressing in.\n        \"data-pressed:bg-card data-pressed:[box-shadow:var(--shadow-md)]\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </TogglePrimitive>\n  )\n})\nToggleGroupItem.displayName = \"ToggleGroupItem\"\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/toggle-base.json",
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

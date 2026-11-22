@@ -1,0 +1,23 @@
+{
+  "name": "cursor",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/cursor.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, AnimatePresence } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Cursor: live operator feed.\n// Types into a console plate chip with a blinking block caret in signal\n// green, tagged with a glowing operator lamp.\n\ninterface CursorProps {\n  text: string\n  label?: string\n  color?: string\n  speed?: number\n  delay?: number\n  loop?: boolean\n  className?: string\n}\n\nfunction Cursor({\n  text,\n  label,\n  color = \"oklch(0.78 0.21 148)\",\n  speed = 60,\n  delay = 500,\n  loop = false,\n  className,\n}: CursorProps) {\n  const [displayedText, setDisplayedText] = React.useState(\"\")\n  const [isTyping, setIsTyping] = React.useState(false)\n\n  React.useEffect(() => {\n    let timeout: ReturnType<typeof setTimeout>\n    let charIndex = 0\n\n    const startTyping = () => {\n      setIsTyping(true)\n      setDisplayedText(\"\")\n      charIndex = 0\n\n      const typeChar = () => {\n        if (charIndex < text.length) {\n          setDisplayedText(text.slice(0, charIndex + 1))\n          charIndex++\n          timeout = setTimeout(typeChar, speed + Math.random() * 40)\n        } else {\n          setIsTyping(false)\n          if (loop) {\n            timeout = setTimeout(() => {\n              setDisplayedText(\"\")\n              timeout = setTimeout(startTyping, delay)\n            }, 2000)\n          }\n        }\n      }\n\n      timeout = setTimeout(typeChar, 100)\n    }\n\n    timeout = setTimeout(startTyping, delay)\n    return () => clearTimeout(timeout)\n  }, [text, speed, delay, loop])\n\n  return (\n    <div className={cn(\"relative inline-flex flex-col gap-2\", className)}>\n      <AnimatePresence>\n        {(isTyping || displayedText) && (\n          <motion.div\n            initial={{ opacity: 0, scale: 0.8 }}\n            animate={{ opacity: 1, scale: 1 }}\n            className={cn(\n              \"rounded-sm px-3 py-2 text-sm text-foreground\",\n              \"border border-border bg-card\",\n              \"[box-shadow:var(--shadow-popover)]\"\n            )}\n            style={{ minHeight: \"36px\" }}\n          >\n            <span>{displayedText}</span>\n            <motion.span\n              animate={{ opacity: [1, 0] }}\n              transition={{\n                duration: 0.6,\n                repeat: Infinity,\n                repeatType: \"reverse\",\n              }}\n              className=\"ml-0.5 inline-block h-[0.875rem] w-[0.4375rem] align-middle\"\n              style={{\n                backgroundColor: color,\n                boxShadow: `0 0 6px ${color}`,\n              }}\n            />\n          </motion.div>\n        )}\n      </AnimatePresence>\n\n      {label && (\n        <motion.div\n          initial={{ opacity: 0, y: 4 }}\n          animate={{ opacity: 1, y: 0 }}\n          transition={{ delay: 0.1 }}\n          className=\"flex items-center gap-1.5\"\n        >\n          <div\n            className=\"size-2.5 rounded-full\"\n            style={{\n              backgroundColor: color,\n              boxShadow: `0 0 8px ${color}`,\n            }}\n          />\n          <span className=\"text-[0.625rem] font-semibold uppercase tracking-wider text-muted-foreground\">\n            {label}\n          </span>\n        </motion.div>\n      )}\n    </div>\n  )\n}\n\nexport { Cursor }\nexport type { CursorProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 0.75rem 1.75rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.78 0.21 148 / 0.07)"
+    },
+    "dark": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 0.75rem 1.75rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.78 0.21 148 / 0.07)"
+    }
+  }
+}

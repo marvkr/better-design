@@ -1,0 +1,14 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[];\n  intervalMs?: number;\n}\n\nconst DEFAULT_WORDS = [\"Searching the docs\", \"Reading\", \"Checking the API\", \"Writing\"];\n\n/**\n * Airy docs ThinkingIndicator: a small green spinner arc beside a muted\n * status word, the way a docs assistant shows it is looking something up.\n *\n * The word fades across every couple of seconds. A screen reader hears the\n * first word once, not every change. With reduced motion on, the arc holds\n * still.\n */\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 1800,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0);\n  const reduceMotion = useReducedMotion();\n  const count = words.length;\n\n  React.useEffect(() => {\n    if (count < 2) return;\n    const timer = setInterval(\n      () => setIndex((current) => (current + 1) % count),\n      intervalMs,\n    );\n    return () => clearInterval(timer);\n  }, [count, intervalMs]);\n\n  const word = words[index % Math.max(count, 1)] ?? \"\";\n\n  return (\n    <div\n      role=\"status\"\n      data-slot=\"thinking-indicator\"\n      className={cn(\"inline-flex items-center gap-2 text-sm text-muted-foreground\", className)}\n      {...props}\n    >\n      <span className=\"sr-only\">{words[0] ?? \"Thinking\"}</span>\n      <motion.span\n        aria-hidden=\"true\"\n        className=\"size-3.5 rounded-full border-2 border-muted border-t-primary\"\n        animate={reduceMotion ? { rotate: 0 } : { rotate: 360 }}\n        transition={\n          reduceMotion ? { duration: 0 } : { duration: 0.9, repeat: Infinity, ease: \"linear\" }\n        }\n      />\n      <span aria-hidden=\"true\" className=\"relative inline-flex h-5 items-center overflow-hidden\">\n        <AnimatePresence mode=\"wait\" initial={false}>\n          <motion.span\n            key={word}\n            initial={{ opacity: 0 }}\n            animate={{ opacity: 1 }}\n            exit={{ opacity: 0 }}\n            transition={{ duration: 0.15, ease: \"easeOut\" }}\n            className=\"whitespace-nowrap\"\n          >\n            {word}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  );\n}\n\nexport { ThinkingIndicator };\nexport type { ThinkingIndicatorProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ]
+}

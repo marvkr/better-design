@@ -14,14 +14,14 @@ const Progress = React.forwardRef<
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
-      "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
+      "relative h-1.5 w-full overflow-hidden rounded-full bg-border",
       className
     )}
     {...props}
   >
     <ProgressPrimitive.Indicator asChild>
       <motion.div
-        className="h-full w-full flex-1 bg-primary"
+        className="h-full w-full flex-1 rounded-full bg-foreground"
         animate={{ x: `-${100 - (value || 0)}%` }}
         transition={springStateChange}
         initial={false}

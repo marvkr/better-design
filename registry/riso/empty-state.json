@@ -1,0 +1,20 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n// Retro-Playful Empty State: centered content with icon, title, description, and optional action\n// Uses rounded-xl bg-secondary/50 pattern from Linear's empty states\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nfunction EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  className,\n  ...props\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-border bg-secondary/30 p-10 text-center\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <div className=\"flex h-12 w-12 items-center justify-center rounded-lg bg-background ring-1 ring-border shadow-[var(--shadow-hard-sm)] text-muted-foreground\">\n          {icon}\n        </div>\n      )}\n      <div className=\"flex flex-col gap-1\">\n        <p className=\"text-sm font-medium text-foreground\">{title}</p>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {action && <div>{action}</div>}\n    </div>\n  )\n}\n\nexport { EmptyState }\nexport type { EmptyStateProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
+    },
+    "dark": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
+    }
+  }
+}

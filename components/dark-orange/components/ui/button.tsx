@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 // 10px radius (medium), 8px (small)
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-200 ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground disabled:shadow-none disabled:ring-0 disabled:hover:shadow-none font-medium",
+  "relative inline-flex items-center justify-center whitespace-nowrap outline-none transition duration-base ease-out focus-visible:outline-none disabled:pointer-events-none disabled:bg-secondary disabled:text-muted-foreground disabled:shadow-none disabled:ring-0 disabled:hover:shadow-none font-medium",
   {
     variants: {
       variant: {
@@ -18,31 +18,31 @@ const buttonVariants = cva(
         // Mirrors the precision shadow treatment from alignui-light, using orange as the shadow color
         default:
           "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/95 " +
-          "shadow-[0_16px_8px_color-mix(in_oklch,var(--primary)_5%,transparent),0_8px_6px_color-mix(in_oklch,var(--primary)_8%,transparent),0_4px_4px_color-mix(in_oklch,var(--primary)_14%,transparent),0_1.5px_3px_color-mix(in_oklch,var(--primary)_22%,transparent),0_0_0_1px_color-mix(in_oklch,var(--primary)_85%,transparent),inset_0_1px_2px_rgba(255,255,255,0.14)] " +
-          "hover:shadow-[0_16px_8px_color-mix(in_oklch,var(--primary)_7%,transparent),0_8px_6px_color-mix(in_oklch,var(--primary)_12%,transparent),0_4px_4px_color-mix(in_oklch,var(--primary)_20%,transparent),0_1.5px_3px_color-mix(in_oklch,var(--primary)_30%,transparent),0_0_0_1px_color-mix(in_oklch,var(--primary)_90%,transparent),inset_0_1px_2px_rgba(255,255,255,0.16)] " +
+          "shadow-[0_1rem_0.5rem_color-mix(in_oklch,var(--primary)_5%,transparent),0_0.5rem_0.375rem_color-mix(in_oklch,var(--primary)_8%,transparent),0_0.25rem_0.25rem_color-mix(in_oklch,var(--primary)_14%,transparent),0_0.0938rem_0.1875rem_color-mix(in_oklch,var(--primary)_22%,transparent),0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_85%,transparent),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.14)] " +
+          "hover:shadow-[0_1rem_0.5rem_color-mix(in_oklch,var(--primary)_7%,transparent),0_0.5rem_0.375rem_color-mix(in_oklch,var(--primary)_12%,transparent),0_0.25rem_0.25rem_color-mix(in_oklch,var(--primary)_20%,transparent),0_0.0938rem_0.1875rem_color-mix(in_oklch,var(--primary)_30%,transparent),0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_90%,transparent),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.16)] " +
           "focus-visible:ring-2 focus-visible:ring-primary/40",
         // Neutral (white surface on dark) — precision layered shadow matching alignui-light's charcoal button
         neutral:
           "bg-foreground text-background hover:bg-foreground/90 active:bg-foreground/95 " +
-          "shadow-[0_16px_8px_rgba(31,31,31,0.01),0_12px_6px_rgba(31,31,31,0.04),0_4px_4px_rgba(31,31,31,0.07),0_1.5px_3px_rgba(31,31,31,0.08),0_0_0_1px_rgb(15,15,15),inset_0_1px_2px_rgba(255,255,255,0.12)] " +
-          "hover:shadow-[0_16px_8px_rgba(31,31,31,0.02),0_12px_6px_rgba(31,31,31,0.06),0_4px_4px_rgba(31,31,31,0.10),0_1.5px_3px_rgba(31,31,31,0.12),0_0_0_1px_rgb(15,15,15),inset_0_1px_2px_rgba(255,255,255,0.14)] " +
+          "shadow-[0_1rem_0.5rem_oklch(0.2393_0_0/0.01),0_0.75rem_0.375rem_oklch(0.2393_0_0/0.04),0_0.25rem_0.25rem_oklch(0.2393_0_0/0.07),0_0.0938rem_0.1875rem_oklch(0.2393_0_0/0.08),0_0_0_0.0625rem_oklch(0.1684_0_0),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.12)] " +
+          "hover:shadow-[0_1rem_0.5rem_oklch(0.2393_0_0/0.02),0_0.75rem_0.375rem_oklch(0.2393_0_0/0.06),0_0.25rem_0.25rem_oklch(0.2393_0_0/0.1),0_0.0938rem_0.1875rem_oklch(0.2393_0_0/0.12),0_0_0_0.0625rem_oklch(0.1684_0_0),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.14)] " +
           "focus-visible:ring-2 focus-visible:ring-foreground/20",
         // Error/destructive red
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/85 active:bg-destructive/90 " +
-          "shadow-[0_4px_4px_rgba(251,55,72,0.14),0_1.5px_3px_rgba(251,55,72,0.22),0_0_0_1px_rgba(180,20,30,0.8),inset_0_1px_2px_rgba(255,255,255,0.10)] " +
-          "hover:shadow-[0_4px_4px_rgba(251,55,72,0.22),0_1.5px_3px_rgba(251,55,72,0.30),0_0_0_1px_rgba(180,20,30,0.9),inset_0_1px_2px_rgba(255,255,255,0.12)] " +
+          "shadow-[0_0.25rem_0.25rem_oklch(0.6471_0.2288_22.467/0.14),0_0.0938rem_0.1875rem_oklch(0.6471_0.2288_22.467/0.22),0_0_0_0.0625rem_oklch(0.4919_0.1898_25.8984/0.8),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.1)] " +
+          "hover:shadow-[0_0.25rem_0.25rem_oklch(0.6471_0.2288_22.467/0.22),0_0.0938rem_0.1875rem_oklch(0.6471_0.2288_22.467/0.3),0_0_0_0.0625rem_oklch(0.4919_0.1898_25.8984/0.9),inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.12)] " +
           "focus-visible:ring-2 focus-visible:ring-destructive/40",
         // Outline: primary ring + subtle surface — gains glow on hover
         outline:
           "ring-1 ring-inset ring-primary bg-background text-primary " +
-          "hover:bg-primary/10 hover:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_12%,transparent)] " +
-          "focus-visible:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_18%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/40",
+          "hover:bg-primary/10 hover:shadow-[0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_12%,transparent)] " +
+          "focus-visible:shadow-[0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_18%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/40",
         // Secondary: dark surface with layered card shadow + subtle white ring
         secondary:
           "bg-secondary text-secondary-foreground " +
-          "shadow-[0_1px_1px_0.5px_rgba(0,0,0,0.2),0_3px_3px_-1.5px_rgba(0,0,0,0.15),0_0_0_1px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.06)] " +
-          "hover:bg-accent hover:text-foreground hover:shadow-[0_1px_1px_0.5px_rgba(0,0,0,0.25),0_3px_3px_-1.5px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] " +
+          "shadow-[0_0.0625rem_0.0625rem_0.0313rem_oklch(0_0_0/0.2),0_0.1875rem_0.1875rem_-0.0938rem_oklch(0_0_0/0.15),0_0_0_0.0625rem_oklch(1_0_0/0.06),inset_0_0.0625rem_0_oklch(1_0_0/0.06)] " +
+          "hover:bg-accent hover:text-foreground hover:shadow-[0_0.0625rem_0.0625rem_0.0313rem_oklch(0_0_0/0.25),0_0.1875rem_0.1875rem_-0.0938rem_oklch(0_0_0/0.2),0_0_0_0.0625rem_oklch(1_0_0/0.08),inset_0_0.0625rem_0_oklch(1_0_0/0.08)] " +
           "focus-visible:ring-1 focus-visible:ring-foreground/20",
         // Ghost
         ghost:
@@ -51,8 +51,8 @@ const buttonVariants = cva(
         link: "bg-transparent text-foreground/60 hover:bg-secondary hover:text-foreground",
       },
       size: {
-        // medium: h-10 rounded-[10px] px-3.5
-        default: "h-10 gap-3 rounded-[10px] px-3.5 text-sm",
+        // medium: h-10 rounded-[0.625rem] px-3.5
+        default: "h-10 gap-3 rounded-[0.625rem] px-3.5 text-sm",
         // small: h-9 rounded-lg px-3
         sm: "h-9 gap-3 rounded-lg px-3 text-sm",
         // xsmall: h-8 rounded-lg px-2.5
@@ -60,9 +60,9 @@ const buttonVariants = cva(
         // xxsmall: h-7 rounded-lg px-2
         xxs: "h-7 gap-2.5 rounded-lg px-2 text-xs",
         // large
-        lg: "h-11 gap-3 rounded-[10px] px-4 text-sm",
+        lg: "h-11 gap-3 rounded-[0.625rem] px-4 text-sm",
         // icon (square)
-        icon: "h-10 w-10 rounded-[10px]",
+        icon: "h-10 w-10 rounded-[0.625rem]",
         "icon-sm": "h-9 w-9 rounded-lg",
       },
     },
@@ -84,6 +84,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

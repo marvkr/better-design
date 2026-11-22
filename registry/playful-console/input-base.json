@@ -1,0 +1,14 @@
+{
+  "name": "input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Playful console Input: a plain white well on the cream page with a firm\n * olive edge. The edge darkens under the pointer and turns bold blue, with a\n * soft blue ring, on focus.\n */\nconst Input = React.forwardRef<\n  HTMLInputElement,\n  React.InputHTMLAttributes<HTMLInputElement>\n>(({ className, type = \"text\", ...props }, ref) => (\n  <input\n    type={type}\n    ref={ref}\n    data-slot=\"input\"\n    className={cn(\n      formFieldBase,\n      formFieldSingleLine,\n      \"file:me-3 file:border-0 file:bg-transparent file:text-sm file:font-bold file:text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json"
+  ]
+}

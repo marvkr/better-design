@@ -12,8 +12,8 @@ interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const sizeClasses = {
   sm: "h-6 w-6 rounded-lg",
-  md: "h-8 w-8 rounded-[10px]",
-  lg: "h-12 w-12 rounded-[12px]",
+  md: "h-8 w-8 rounded-[0.625rem]",
+  lg: "h-12 w-12 rounded-[0.75rem]",
 }
 
 function ColorSwatch({
@@ -29,7 +29,7 @@ function ColorSwatch({
       <div
         className={cn(
           sizeClasses[size],
-          "ring-1 ring-border/50 shadow-[0_1px_2px_0_rgb(0_0_0/0.08)]"
+          "ring-1 ring-border/50 shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.08)]"
         )}
         style={{ backgroundColor: color }}
         title={color}
@@ -40,7 +40,7 @@ function ColorSwatch({
             <span className="text-xs font-medium text-foreground">{label}</span>
           )}
           {showHex && (
-            <span className="font-mono text-[10px] text-muted-foreground">{color}</span>
+            <span className="font-mono text-[0.625rem] text-muted-foreground">{color}</span>
           )}
         </div>
       )}

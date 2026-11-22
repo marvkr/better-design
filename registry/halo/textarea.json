@@ -1,0 +1,22 @@
+{
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(\n          \"flex min-h-[5rem] w-full rounded-sm px-3.5 py-2 text-sm text-foreground\",\n          \"backdrop-blur-xl bg-foreground/[0.06]\",\n          \"border border-border\",\n          \"shadow-[inset_0_0.0625rem_0.125rem_color-mix(in_oklch,var(--shade)_18%,transparent)]\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-all duration-base ease-out\",\n          \"hover:bg-foreground/[0.08] hover:border-foreground/[0.15]\",\n          \"focus-visible:outline-none focus-visible:border-primary/60\",\n          \"focus-visible:shadow-[inset_0_0.0625rem_0.125rem_color-mix(in_oklch,var(--shade)_18%,transparent),0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_25%,transparent)]\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shade": "oklch(0 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shade": "oklch(0 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

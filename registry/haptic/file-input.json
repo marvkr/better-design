@@ -1,0 +1,25 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string\n  helperText?: string\n}\n\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  ({ className, label = \"Choose file or drop here\", helperText, onChange, ...props }, ref) => {\n    const [fileName, setFileName] = React.useState<string | null>(null)\n    const inputRef = React.useRef<HTMLInputElement>(null)\n\n    // SAFETY: the handle is read only after mount, when the element this\n    // component renders is attached, so the ref is non-null.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)\n\n    return (\n      <div className=\"w-full\">\n        <label\n          className={cn(\n            \"group flex flex-col items-center justify-center gap-2 w-full py-6 px-4\",\n            \"rounded-lg border border-dashed border-border\",\n            \"bg-card text-card-foreground cursor-pointer\",\n            \"transition-[background-color,box-shadow,border-color] duration-fast\",\n            \"[box-shadow:var(--shadow-s)]\",\n            \"hover:border-ring/60 hover:bg-accent hover:[box-shadow:var(--shadow-m)]\",\n            className\n          )}\n        >\n          <span className=\"flex h-10 w-10 items-center justify-center rounded-full bg-muted text-primary [box-shadow:var(--shadow-s)]\">\n            <Icon icon=\"tabler:upload\" className=\"h-5 w-5\" />\n          </span>\n          <span className=\"text-sm font-medium text-foreground\">\n            {fileName ?? label}\n          </span>\n          {helperText && (\n            <span className=\"text-xs text-muted-foreground\">{helperText}</span>\n          )}\n          <input\n            {...props}\n            ref={inputRef}\n            type=\"file\"\n            className=\"sr-only\"\n            onChange={(e) => {\n              const file = e.target.files?.[0]\n              setFileName(file?.name ?? null)\n              onChange?.(e)\n            }}\n          />\n        </label>\n      </div>\n    )\n  }\n)\nFileInput.displayName = \"FileInput\"\n\nexport { FileInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.25rem oklch(0 0 0 / 0.22)",
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)"
+    },
+    "dark": {
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.25rem oklch(0 0 0 / 0.22)",
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)"
+    }
+  }
+}

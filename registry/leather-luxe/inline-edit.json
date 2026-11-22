@@ -1,0 +1,34 @@
+{
+  "name": "inline-edit",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Check, Pencil, X } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Leather Luxe Inline Edit: flat text at rest; editing opens a recessed\n// well with leather confirm and raised cancel coins.\n\ninterface InlineEditProps {\n  value: string\n  onConfirm: (value: string) => void\n  onCancel?: () => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n  inputClassName?: string\n  renderValue?: (value: string) => React.ReactNode\n}\n\nfunction InlineEdit({\n  value,\n  onConfirm,\n  onCancel,\n  placeholder = \"Click to edit\",\n  disabled,\n  className,\n  inputClassName,\n  renderValue,\n}: InlineEditProps) {\n  const [editing, setEditing] = React.useState(false)\n  const [draft, setDraft] = React.useState(value)\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  React.useEffect(() => {\n    if (!editing) setDraft(value)\n  }, [value, editing])\n\n  React.useEffect(() => {\n    if (editing) inputRef.current?.focus()\n  }, [editing])\n\n  const handleEdit = () => {\n    if (disabled) return\n    setDraft(value)\n    setEditing(true)\n  }\n\n  const handleConfirm = () => {\n    onConfirm(draft)\n    setEditing(false)\n  }\n\n  const handleCancel = () => {\n    setDraft(value)\n    setEditing(false)\n    onCancel?.()\n  }\n\n  const handleKeyDown = (e: React.KeyboardEvent) => {\n    if (e.key === \"Enter\") handleConfirm()\n    if (e.key === \"Escape\") handleCancel()\n  }\n\n  if (editing) {\n    return (\n      <div className={cn(\"flex items-center gap-1.5\", className)}>\n        <input\n          ref={inputRef}\n          value={draft}\n          onChange={(e) => setDraft(e.target.value)}\n          onKeyDown={handleKeyDown}\n          placeholder={placeholder}\n          className={cn(\n            formFieldBase,\n            \"h-8 min-w-0 flex-1 px-2.5 py-1 text-sm\",\n            inputClassName\n          )}\n        />\n        <button\n          type=\"button\"\n          onClick={handleConfirm}\n          className={cn(\n            \"flex h-7 w-7 items-center justify-center rounded-full\",\n            \"[background-image:var(--gradient-leather)] text-primary-foreground\",\n            \"border border-[oklch(0.68_0.115_58/0.55)]\",\n            \"[box-shadow:var(--shadow-leather-sm)]\",\n            \"transition-[filter] hover:brightness-110\"\n          )}\n        >\n          <Check className=\"h-3.5 w-3.5\" />\n          <span className=\"sr-only\">Confirm</span>\n        </button>\n        <button\n          type=\"button\"\n          onClick={handleCancel}\n          className={cn(\n            \"flex h-7 w-7 items-center justify-center rounded-full\",\n            \"[background-image:var(--gradient-raised)] border border-highlight\",\n            \"[box-shadow:var(--shadow-raised-sm)]\",\n            \"text-muted-foreground transition-[filter,color]\",\n            \"hover:brightness-125 hover:text-foreground\"\n          )}\n        >\n          <X className=\"h-3.5 w-3.5\" />\n          <span className=\"sr-only\">Cancel</span>\n        </button>\n      </div>\n    )\n  }\n\n  return (\n    <button\n      type=\"button\"\n      onClick={handleEdit}\n      disabled={disabled}\n      className={cn(\n        \"group flex items-center gap-1.5 rounded-full px-1.5 py-0.5 text-sm\",\n        \"text-foreground/90 transition-colors hover:bg-accent\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        disabled && \"cursor-not-allowed opacity-60\",\n        !value && \"text-muted-foreground/70\",\n        className\n      )}\n    >\n      <span className=\"min-w-0 truncate\">\n        {renderValue ? renderValue(value) : value || placeholder}\n      </span>\n      {!disabled && (\n        <Pencil className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100\" />\n      )}\n    </button>\n  )\n}\n\nexport { InlineEdit }\nexport type { InlineEditProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/leather-luxe/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

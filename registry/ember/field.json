@@ -1,0 +1,11 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Field: label + control + description/error stack.\n\ninterface FieldProps extends React.HTMLAttributes<HTMLDivElement> {\n  label?: string\n  htmlFor?: string\n  description?: string\n  error?: string\n  required?: boolean\n  optional?: boolean\n}\n\nconst Field = React.forwardRef<HTMLDivElement, FieldProps>(\n  (\n    { className, label, htmlFor, description, error, required, optional, children, ...props },\n    ref\n  ) => (\n    <div ref={ref} className={cn(\"flex flex-col gap-1.5\", className)} {...props}>\n      {label && (\n        <label\n          htmlFor={htmlFor}\n          className=\"flex items-center gap-1 text-sm font-semibold leading-none tracking-[-0.01em]\"\n        >\n          {label}\n          {required && <span className=\"text-primary\">*</span>}\n          {optional && (\n            <span className=\"text-xs font-normal text-muted-foreground\">(optional)</span>\n          )}\n        </label>\n      )}\n      {children}\n      {description && !error && (\n        <p className=\"text-xs text-muted-foreground\">{description}</p>\n      )}\n      {error && (\n        <p className=\"text-xs font-medium text-[oklch(0.74_0.16_27)]\">{error}</p>\n      )}\n    </div>\n  )\n)\nField.displayName = \"Field\"\n\nexport { Field }\nexport type { FieldProps }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

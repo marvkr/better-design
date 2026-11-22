@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { Toaster as SonnerPrimitive, type ToasterProps } from "sonner"
 
 const Toaster = ({ ...props }: ToasterProps) => {

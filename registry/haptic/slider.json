@@ -1,0 +1,30 @@
+{
+  "name": "slider",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SliderPrimitive from \"@radix-ui/react-slider\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useHaptics } from \"./haptics-provider\"\n\nconst Slider = React.forwardRef<\n  React.ElementRef<typeof SliderPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>\n>(({ className, onValueChange, onValueCommit, ...props }, ref) => {\n  const { select, trigger } = useHaptics()\n  return (\n  <SliderPrimitive.Root\n    ref={ref}\n    className={cn(\"relative flex w-full touch-none select-none items-center\", className)}\n    onValueChange={(value) => {\n      select()\n      onValueChange?.(value)\n    }}\n    onValueCommit={(value) => {\n      trigger(\"rigid\")\n      onValueCommit?.(value)\n    }}\n    {...props}\n  >\n    <SliderPrimitive.Track\n      className={cn(\n        \"relative h-1.5 w-full grow overflow-hidden rounded-full border border-border\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\"\n      )}\n    >\n      <SliderPrimitive.Range className=\"absolute h-full bg-primary [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0_/_0.5),inset_0_-0.0625rem_0_oklch(0_0_0_/_0.22)]\" />\n    </SliderPrimitive.Track>\n    <SliderPrimitive.Thumb\n      className={cn(\n        \"block h-4 w-4 rounded-full border border-border bg-popover\",\n        \"[box-shadow:var(--shadow-m)]\",\n        \"transition-[background-color,box-shadow] duration-fast\",\n        \"hover:[box-shadow:var(--shadow-l)] hover:bg-accent\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"disabled:pointer-events-none disabled:opacity-50\"\n      )}\n    />\n  </SliderPrimitive.Root>\n  )\n})\nSlider.displayName = SliderPrimitive.Root.displayName\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slider@^1.3.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/haptic/haptics-provider.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)",
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.22), 0 0.25rem 0.5rem oklch(0 0 0 / 0.65), 0 0.5rem 1rem oklch(0 0 0 / 0.32)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)",
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.22), 0 0.25rem 0.5rem oklch(0 0 0 / 0.65), 0 0.5rem 1rem oklch(0 0 0 / 0.32)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

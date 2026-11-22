@@ -17,7 +17,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       data-collapsed={collapsed}
       className={cn(
         "flex h-full flex-col border-r border-border bg-background",
-        "transition-[width] duration-200",
+        "transition-[width] duration-base",
         collapsed ? "w-16" : "w-60",
         className
       )}

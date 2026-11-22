@@ -1,0 +1,22 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished AvatarGroup: rimmed portraits overlapped like coins on a table.\n * A ring in the page colour cuts each one from the next, and the overflow\n * count sits on a graphite bevel of the same size.\n */\ninterface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  max?: number;\n  total?: number;\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ className, children, max, total, ...props }, ref) => {\n    const childArray = React.Children.toArray(children);\n    const visible = max ? childArray.slice(0, max) : childArray;\n    const hiddenCount = (total ?? childArray.length) - visible.length;\n\n    return (\n      <div\n        ref={ref}\n        data-slot=\"avatar-group\"\n        className={cn(\"flex items-center -space-x-2.5\", className)}\n        {...props}\n      >\n        {visible.map((child, i) => (\n          <div key={i} className=\"rounded-full ring-2 ring-background\">\n            {child}\n          </div>\n        ))}\n        {hiddenCount > 0 && (\n          <div\n            className={cn(\n              \"relative flex size-10 items-center justify-center rounded-full text-xs font-semibold tabular-nums\",\n              \"bg-(image:--fill-raised) text-muted-foreground shadow-(--bevel-raised) ring-2 ring-background\",\n            )}\n          >\n            +{hiddenCount}\n          </div>\n        )}\n      </div>\n    );\n  },\n);\nAvatarGroup.displayName = \"AvatarGroup\";\n\nexport { AvatarGroup };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

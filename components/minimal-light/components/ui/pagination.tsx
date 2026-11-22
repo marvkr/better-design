@@ -46,7 +46,7 @@ const PaginationLink = ({
   <a
     aria-current={isActive ? "page" : undefined}
     className={cn(
-      "inline-flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium tracking-wide transition-all duration-200",
+      "inline-flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium tracking-wide transition-all duration-base",
       "outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",
       "active:scale-[0.98]",
       isActive

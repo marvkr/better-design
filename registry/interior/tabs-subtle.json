@@ -1,0 +1,20 @@
+{
+  "name": "tabs-subtle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs-subtle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior TabsSubtle — the quiet sibling of the segmented control. No well,\n * no underline: the active tab is a row picked out of the list, an 8px\n * plateau carrying the row shadow. Everything else is just text.\n */\n\nexport interface TabsSubtleProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n  onValueChange: (value: string) => void;\n}\n\nconst TabsSubtleContext = React.createContext<{\n  value: string;\n  onValueChange: (value: string) => void;\n}>({ value: \"\", onValueChange: () => {} });\n\nconst TabsSubtle = React.forwardRef<HTMLDivElement, TabsSubtleProps>(\n  ({ className, value, onValueChange, children, ...props }, ref) => (\n    <TabsSubtleContext.Provider value={{ value, onValueChange }}>\n      <div ref={ref} className={cn(\"w-full\", className)} {...props}>\n        <div role=\"tablist\" className=\"flex items-center gap-1\">\n          {children}\n        </div>\n      </div>\n    </TabsSubtleContext.Provider>\n  ),\n);\nTabsSubtle.displayName = \"TabsSubtle\";\n\nexport interface TabsSubtleItemProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n}\n\nconst TabsSubtleItem = React.forwardRef<\n  HTMLButtonElement,\n  TabsSubtleItemProps\n>(({ className, value, children, ...props }, ref) => {\n  const ctx = React.useContext(TabsSubtleContext);\n  const active = ctx.value === value;\n\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      role=\"tab\"\n      aria-selected={active}\n      onClick={() => ctx.onValueChange(value)}\n      className={cn(\n        \"rounded-[0.5rem] px-3 py-1.5 text-[0.8125rem] font-medium leading-[1.4]\",\n        \"transition-[background-color,color,box-shadow] duration-fast\",\n        \"focus-visible:outline-none focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n        active\n          ? \"bg-secondary text-foreground shadow-[var(--shadow-row)]\"\n          : \"text-muted-foreground hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </button>\n  );\n});\nTabsSubtleItem.displayName = \"TabsSubtleItem\";\n\nexport interface TabsSubtlePanelProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n}\n\nconst TabsSubtlePanel = React.forwardRef<HTMLDivElement, TabsSubtlePanelProps>(\n  ({ className, value, children, ...props }, ref) => {\n    const ctx = React.useContext(TabsSubtleContext);\n    if (ctx.value !== value) return null;\n\n    return (\n      <div ref={ref} role=\"tabpanel\" className={cn(\"pt-4\", className)} {...props}>\n        {children}\n      </div>\n    );\n  },\n);\nTabsSubtlePanel.displayName = \"TabsSubtlePanel\";\n\nexport { TabsSubtle, TabsSubtleItem, TabsSubtlePanel };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-row": "inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07), 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05)"
+    },
+    "dark": {
+      "shadow-row": "inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07), 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05)"
+    }
+  }
+}

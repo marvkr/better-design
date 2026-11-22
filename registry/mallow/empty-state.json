@@ -1,0 +1,17 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { softPanel, optionTrack } from \"./_shared\";\n\n/**\n * Mallow EmptyState: a lilac option track where content will land, with the\n * icon on a violet-ringed tile, a title, a muted line and an optional action.\n */\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon = \"iconoir:archive\", title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-state\"\n      className={cn(\n        optionTrack,\n        \"flex flex-col items-center justify-center gap-4 rounded-2xl px-6 py-10 text-center\",\n        className,\n      )}\n      {...props}\n    >\n      <div className={cn(softPanel, \"flex size-12 items-center justify-center rounded-md text-muted-foreground\")}>\n        <Icon icon={icon} aria-hidden=\"true\" className=\"size-5\" />\n      </div>\n      <div className=\"max-w-md space-y-1\">\n        <div className=\"text-base font-medium text-foreground\">{title}</div>\n        {description && <div className=\"text-sm leading-relaxed text-muted-foreground\">{description}</div>}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  ),\n);\nEmptyState.displayName = \"EmptyState\";\n\nexport { EmptyState };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Halo Button — translucent controls.\n// default/primary: bright-blue vertical gradient, hairline white rim, soft drop shadow.\n// secondary/outline/ghost: translucent over the dark canvas.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-1.5 whitespace-nowrap\",\n    \"text-sm font-semibold tracking-tight leading-none\",\n    \"rounded-sm transition-all duration-base ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:scale-[0.98]\",\n    \"select-none\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-gradient-to-t from-primary to-primary/85 text-primary-foreground \" +\n          \"border border-primary-foreground/20 \" +\n          \"shadow-[0_0.25rem_0.375rem_-0.0625rem_color-mix(in_oklch,var(--shade)_25%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.18)] \" +\n          \"hover:brightness-110\",\n        primary:\n          \"bg-gradient-to-t from-primary to-primary/85 text-primary-foreground \" +\n          \"border border-primary-foreground/20 \" +\n          \"shadow-[0_0.25rem_0.375rem_-0.0625rem_color-mix(in_oklch,var(--shade)_25%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.18)] \" +\n          \"hover:brightness-110\",\n        secondary:\n          \"backdrop-blur-xl bg-foreground/[0.08] text-foreground \" +\n          \"border border-border \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.08)] \" +\n          \"hover:bg-foreground/[0.12]\",\n        outline:\n          \"bg-transparent text-foreground \" +\n          \"border border-foreground/[0.15] \" +\n          \"hover:bg-foreground/[0.06] hover:border-foreground/[0.25]\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-foreground/[0.06] hover:text-foreground\",\n        destructive:\n          \"bg-gradient-to-t from-destructive to-destructive/85 text-destructive-foreground \" +\n          \"border border-destructive-foreground/15 \" +\n          \"shadow-[0_0.25rem_0.375rem_-0.0625rem_color-mix(in_oklch,var(--shade)_25%,transparent)] \" +\n          \"hover:brightness-110\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-10 px-4\",\n        lg: \"h-12 px-5 text-sm\",\n        icon: \"h-10 w-10\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shade": "oklch(0 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shade": "oklch(0 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

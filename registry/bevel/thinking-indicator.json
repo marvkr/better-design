@@ -1,0 +1,25 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, AnimatePresence } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel ThinkingIndicator.\n *\n * A chip pressed into the card, with the three dots iOS uses while a message\n * is on its way. The dots ride the accent and lift in sequence; the label\n * beside them swaps on a timer, sliding up out of a fixed slot so the chip\n * never changes width mid-sentence.\n */\n\nconst DEFAULT_WORDS = [\"Thinking\", \"Planning\", \"Refining\", \"Generating\"]\n\n/** Props for `ThinkingIndicator`; `words` rotate every `intervalMs`. */\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[]\n  intervalMs?: number\n}\n\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 4000,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0)\n\n  React.useEffect(() => {\n    const id = setInterval(() => {\n      setIndex((i) => (i + 1) % words.length)\n    }, intervalMs)\n    return () => clearInterval(id)\n  }, [words.length, intervalMs])\n\n  const widest = React.useMemo(\n    () => words.reduce((a, b) => (a.length >= b.length ? a : b), \"\"),\n    [words],\n  )\n\n  return (\n    <div\n      role=\"status\"\n      className={cn(\n        \"inline-flex items-center gap-2.5 rounded-full px-3.5 py-2\",\n        \"bg-[var(--inner)] [box-shadow:var(--shadow-inset)]\",\n        className,\n      )}\n      {...props}\n    >\n      <span aria-hidden className=\"flex items-center gap-1\">\n        {[0, 1, 2].map((dot) => (\n          <motion.span\n            key={dot}\n            className=\"size-[0.3125rem] rounded-full bg-primary\"\n            animate={{ y: [0, -3, 0], opacity: [0.45, 1, 0.45] }}\n            transition={{\n              duration: 1.1,\n              repeat: Infinity,\n              ease: \"easeInOut\",\n              delay: dot * 0.15,\n            }}\n          />\n        ))}\n      </span>\n      <span className=\"inline-grid overflow-hidden text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem]\">\n        <span aria-hidden className=\"invisible col-start-1 row-start-1\">\n          {widest}\n        </span>\n        <AnimatePresence mode=\"popLayout\" initial={false}>\n          <motion.span\n            key={words[index]}\n            className=\"col-start-1 row-start-1 text-foreground\"\n            initial={{ y: \"80%\", opacity: 0 }}\n            animate={{\n              y: 0,\n              opacity: 1,\n              transition: { duration: 0.24, ease: [0.4, 0, 0.2, 1] },\n            }}\n            exit={{\n              y: \"-80%\",\n              opacity: 0,\n              transition: { duration: 0.16, ease: [0.4, 0, 0.2, 1] },\n            }}\n          >\n            {words[index]}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  )\n}\n\nexport { ThinkingIndicator }\nexport type { ThinkingIndicatorProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

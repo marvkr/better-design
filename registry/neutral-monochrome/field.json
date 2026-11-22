@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/neutral-monochrome/label.json"
   ]
 }

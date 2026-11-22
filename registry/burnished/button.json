@@ -1,0 +1,51 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot, Slottable } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, pressScale, quietBevel, raisedBevel } from \"./_shared\";\n\n/**\n * Burnished Button: a bevelled pill.\n *\n * The default is the signature: a cream bevel set inside a copper ring that\n * turns once every fourteen seconds while a fine pointer rests on it or it has keyboard focus, and glows ember on hover. At rest the ring stays still, so a page full of buttons paints nothing per frame.\n * The ring and the cream face are layers behind the label, so the button\n * keeps one box and `asChild` still works. Every other variant is a bevel\n * from `_shared`: graphite for outline, a darker quiet face for secondary,\n * and the warm \"lit\" gradient for the one featured action on a page.\n * Every press scales the pill a little toward the page.\n */\nconst buttonVariants = cva(\n  [\n    \"group/button relative isolate inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2.5 whitespace-nowrap\",\n    \"rounded-full font-semibold tracking-[0.016em]\",\n    pressScale,\n    focusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"text-primary-foreground\",\n        primary: \"text-primary-foreground\",\n        lit: \"bg-(image:--fill-lit) text-(--lit-foreground) shadow-(--bevel-lit)\",\n        secondary: quietBevel,\n        outline: raisedBevel,\n        ghost:\n          \"bg-transparent text-muted-foreground [@media(hover:hover)_and_(pointer:fine)]:hover:bg-accent [@media(hover:hover)_and_(pointer:fine)]:hover:text-foreground\",\n        destructive:\n          \"bg-(image:--fill-destructive) text-destructive-foreground shadow-(--bevel-primary)\",\n        link: \"h-auto rounded-sm px-0 text-primary-text underline decoration-current/30 underline-offset-4 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-current\",\n      },\n      size: {\n        sm: \"h-9 px-4 text-sm\",\n        default: \"h-11 px-5 text-[0.9375rem]\",\n        lg: \"h-12 px-6 text-base\",\n        icon: \"size-11 px-0\",\n        \"icon-sm\": \"size-9 px-0\",\n        \"icon-lg\": \"size-12 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Variants that wear the copper ring and the cream face. */\nconst RINGED = new Set([\"default\", \"primary\"]);\n\n/**\n * The copper ring and the cream face, drawn behind the label. The ring sits\n * 0.1875rem outside the button's box and its conic gradient turns; a sheen\n * lights its top and shades its bottom so it reads as metal.\n */\nfunction ButtonRing() {\n  return (\n    <>\n      <span\n        aria-hidden\n        data-slot=\"button-ring\"\n        className={cn(\n          \"pointer-events-none absolute -inset-[0.1875rem] -z-20 overflow-hidden rounded-[inherit]\",\n          \"shadow-(--ring-rim) transition-shadow duration-slow ease-(--ease-out)\",\n          \"[@media(hover:hover)_and_(pointer:fine)]:group-hover/button:shadow-(--bevel-glow)\",\n        )}\n      >\n        <span className=\"absolute left-1/2 top-1/2 aspect-square w-[max(150%,6rem)] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(var(--ring-flow))] [@media(hover:hover)_and_(pointer:fine)]:group-hover/button:animate-[spin_14s_linear_infinite] group-focus-visible/button:animate-[spin_14s_linear_infinite] motion-reduce:animate-none!\" />\n        <span className=\"absolute inset-0 bg-(image:--ring-sheen)\" />\n      </span>\n      <span\n        aria-hidden\n        data-slot=\"button-face\"\n        className={cn(\n          \"pointer-events-none absolute inset-0 -z-10 rounded-[inherit]\",\n          \"bg-(image:--fill-primary) shadow-(--bevel-primary)\",\n          \"[@media(hover:hover)_and_(pointer:fine)]:group-hover/button:bg-(image:--fill-primary-hover)\",\n        )}\n      />\n    </>\n  );\n}\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    const ringed = RINGED.has(variant ?? \"default\");\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        data-slot=\"button\"\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      >\n        {ringed && <ButtonRing />}\n        <Slottable>{children}</Slottable>\n      </Comp>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
+      "fill-primary-hover": "linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5))",
+      "fill-lit": "linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2))",
+      "fill-destructive": "linear-gradient(180deg, oklch(0.78 0.14 29), oklch(0.7 0.15 29))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
+      "bevel-lit": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.0625rem 0 oklch(0.446 0.087 56.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.375rem -0.625rem oklch(0.73 0.177 45.6 / 0.4)",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
+      "ring-rim": "0 0 0 0.0625rem oklch(0 0 0 / 0.35)",
+      "lit-foreground": "oklch(0.192 0.003 67.7)",
+      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
+      "fill-primary-hover": "linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5))",
+      "fill-lit": "linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2))",
+      "fill-destructive": "linear-gradient(180deg, oklch(0.78 0.14 29), oklch(0.7 0.15 29))",
+      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
+      "bevel-lit": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.0625rem 0 oklch(0.446 0.087 56.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.375rem -0.625rem oklch(0.73 0.177 45.6 / 0.4)",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
+      "ring-rim": "0 0 0 0.0625rem oklch(0 0 0 / 0.35)",
+      "lit-foreground": "oklch(0.192 0.003 67.7)",
+      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

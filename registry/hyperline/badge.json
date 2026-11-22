@@ -1,0 +1,25 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Badge: compact status chips. Tinted fills with hairline rims;\n// gold variant carries the signature warm accent.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring/50 focus:ring-offset-2 focus:ring-offset-background\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-transparent bg-primary/15 shadow-[inset_0_0_0_0.0625rem_oklch(0.79_0.125_200/0.3)] text-[color:oklch(0.875_0.125_200)]\",\n        secondary:\n          \"border-border/70 bg-secondary text-secondary-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.05)]\",\n        outline: \"border-border text-foreground\",\n        destructive:\n          \"border-transparent shadow-[inset_0_0_0_0.0625rem_oklch(0.6_0.21_22/0.35)] bg-destructive/19 text-[color:oklch(0.875_0.066_22)]\",\n        success:\n          \"border-transparent bg-[oklch(0.74_0.17_155/0.14)] shadow-[inset_0_0_0_0.0625rem_oklch(0.74_0.17_155/0.3)] text-[color:oklch(0.875_0.17_155)]\",\n        gold:\n          \"border-transparent bg-[image:none] bg-[color:var(--hl-gold-soft)] text-[color:var(--hl-gold)] \" +\n          \"shadow-[inset_0_0_0_0.0625rem_oklch(0.82_0.12_85/0.35)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n);\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, ...props }: BadgeProps) {\n  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-gold": "oklch(0.82 0.12 85)",
+      "hl-gold-soft": "oklch(0.82 0.12 85 / 0.16)"
+    },
+    "dark": {
+      "hl-gold": "oklch(0.82 0.12 85)",
+      "hl-gold-soft": "oklch(0.82 0.12 85 / 0.16)"
+    }
+  }
+}

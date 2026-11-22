@@ -1,0 +1,1540 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-design-motion",
+  "homepage": "https://better-design.com/motion",
+  "items": [
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented control",
+      "description": "Pick one of a few options. The thumb slides to it.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/segmented-control.tsx",
+          "target": "components/motion/segmented-control.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Turn a setting on or off. The thumb stretches as you press.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/switch.tsx",
+          "target": "components/motion/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Drag to pick a number. The fill stays under your finger.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/slider.tsx",
+          "target": "components/motion/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy button",
+      "description": "Copy a value. The button confirms without changing size.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/copy-button.tsx",
+          "target": "components/motion/copy-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "reactions",
+      "type": "registry:ui",
+      "title": "Reactions",
+      "description": "React with one tap. The count rolls the way it moved.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/reactions.tsx",
+          "target": "components/motion/reactions.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "word-rotate",
+      "type": "registry:ui",
+      "title": "Word rotate",
+      "description": "Swap one word in a sentence. Hover to pause it.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/word-rotate.tsx",
+          "target": "components/motion/word-rotate.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "number-field",
+      "type": "registry:ui",
+      "title": "Number field",
+      "description": "Type or step a number. Changed digits roll.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/number-field.tsx",
+          "target": "components/motion/number-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "hold-to-confirm",
+      "type": "registry:ui",
+      "title": "Hold to confirm",
+      "description": "Hold to delete. Let go early and it drains back.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/hold-to-confirm.tsx",
+          "target": "components/motion/hold-to-confirm.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "status-badge",
+      "type": "registry:ui",
+      "title": "Status badge",
+      "description": "Show where a job stands. The icon and label roll to the new state.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/status-badge.tsx",
+          "target": "components/motion/status-badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "overflow-actions",
+      "type": "registry:ui",
+      "title": "Overflow actions",
+      "description": "Keep the main actions in view. The row widens to show the rest.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/overflow-actions.tsx",
+          "target": "components/motion/overflow-actions.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pull-to-refresh",
+      "type": "registry:ui",
+      "title": "Pull to refresh",
+      "description": "Pull a list down to reload it. The pull resists, then holds while it loads.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/pull-to-refresh.tsx",
+          "target": "components/motion/pull-to-refresh.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "feedback-widget",
+      "type": "registry:ui",
+      "title": "Feedback widget",
+      "description": "Send a short message. The panel grows from its corner and confirms or retries.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/feedback-widget.tsx",
+          "target": "components/motion/feedback-widget.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "number-ticker",
+      "type": "registry:ui",
+      "title": "Number ticker",
+      "description": "Show a dashboard figure. Each digit rolls to the new value.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/number-ticker.tsx",
+          "target": "components/motion/number-ticker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "expandable-action-bar",
+      "type": "registry:ui",
+      "title": "Expandable action bar",
+      "description": "Keep a row of icons small. Point or tab in and each one shows its label.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/expandable-action-bar.tsx",
+          "target": "components/motion/expandable-action-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "availability-scheduler",
+      "type": "registry:ui",
+      "title": "Availability scheduler",
+      "description": "Set the hours someone is open each week. Days switch on and off, and hours copy across.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/availability-scheduler.tsx",
+          "target": "components/motion/availability-scheduler.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dock",
+      "type": "registry:ui",
+      "title": "Dock",
+      "description": "Switch between the places of an app. A pill glides to the one you choose.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/dock.tsx",
+          "target": "components/motion/dock.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "voice-note",
+      "type": "registry:ui",
+      "title": "Voice note",
+      "description": "Play a voice message. The waveform fills as it plays, and you drag it to seek.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/voice-note.tsx",
+          "target": "components/motion/voice-note.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "confirm-button",
+      "type": "registry:ui",
+      "title": "Confirm button",
+      "description": "Delete without a dialog. The button widens to ask, then acts on the second press.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/confirm-button.tsx",
+          "target": "components/motion/confirm-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "notification-bell",
+      "type": "registry:ui",
+      "title": "Notification bell",
+      "description": "Show unread notifications. The bell swings and the count rolls up when one arrives.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/notification-bell.tsx",
+          "target": "components/motion/notification-bell.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checklist",
+      "type": "registry:ui",
+      "title": "Checklist",
+      "description": "Tick off tasks. A done task greys out and slides below the open ones.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/checklist.tsx",
+          "target": "components/motion/checklist.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "page-transition",
+      "type": "registry:ui",
+      "title": "Page transition",
+      "description": "Move between pages. A cover, a wave of tiles, a soft blur or a band of light carries the swap.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/page-transition.tsx",
+          "target": "components/motion/page-transition.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "theme-transition",
+      "type": "registry:ui",
+      "title": "Theme transition",
+      "description": "Switch light and dark. The new theme spreads out from the button or opens from the middle.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/theme-transition.tsx",
+          "target": "components/motion/theme-transition.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scroll-reveal",
+      "type": "registry:ui",
+      "title": "Scroll reveal",
+      "description": "Bring text in as it scrolls into view. Words sharpen, lines rise, blocks fade in.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/scroll-reveal.tsx",
+          "target": "components/motion/scroll-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "magnify-dock",
+      "type": "registry:ui",
+      "title": "Magnifying dock",
+      "description": "Open an app from a row of icons. The icons near the pointer grow.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/magnify-dock.tsx",
+          "target": "components/motion/magnify-dock.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radial-menu",
+      "type": "registry:ui",
+      "title": "Radial menu",
+      "description": "Pick one of a few actions. They fan out in a ring around the button.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/radial-menu.tsx",
+          "target": "components/motion/radial-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Show that work is in progress. Pick one of 29 shapes. Each takes the text colour around it.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/motion/spinner.tsx",
+          "target": "components/motion/spinner.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/arc.tsx",
+          "target": "components/motion/spinner/arc.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/atom.tsx",
+          "target": "components/motion/spinner/atom.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/blocks.tsx",
+          "target": "components/motion/spinner/blocks.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/bouncing-dots.tsx",
+          "target": "components/motion/spinner/bouncing-dots.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/cap.ts",
+          "target": "components/motion/spinner/cap.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/cascade.tsx",
+          "target": "components/motion/spinner/cascade.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/circular-dots.tsx",
+          "target": "components/motion/spinner/circular-dots.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/classic-v2.tsx",
+          "target": "components/motion/spinner/classic-v2.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/classic.tsx",
+          "target": "components/motion/spinner/classic.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/clock.tsx",
+          "target": "components/motion/spinner/clock.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/comet.tsx",
+          "target": "components/motion/spinner/comet.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/compass.tsx",
+          "target": "components/motion/spinner/compass.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/dual.tsx",
+          "target": "components/motion/spinner/dual.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/easing.ts",
+          "target": "components/motion/spinner/easing.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/eclipse.tsx",
+          "target": "components/motion/spinner/eclipse.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/fade.ts",
+          "target": "components/motion/spinner/fade.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/flip.tsx",
+          "target": "components/motion/spinner/flip.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/frame.tsx",
+          "target": "components/motion/spinner/frame.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/gather.tsx",
+          "target": "components/motion/spinner/gather.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/leap.tsx",
+          "target": "components/motion/spinner/leap.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/linear-dots.tsx",
+          "target": "components/motion/spinner/linear-dots.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/morph.tsx",
+          "target": "components/motion/spinner/morph.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/motion.ts",
+          "target": "components/motion/spinner/motion.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/orbit.tsx",
+          "target": "components/motion/spinner/orbit.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/pixel-ring.tsx",
+          "target": "components/motion/spinner/pixel-ring.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/pulse.tsx",
+          "target": "components/motion/spinner/pulse.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/radar.tsx",
+          "target": "components/motion/spinner/radar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/ring.tsx",
+          "target": "components/motion/spinner/ring.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/ripple.tsx",
+          "target": "components/motion/spinner/ripple.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/slide.tsx",
+          "target": "components/motion/spinner/slide.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/snake.tsx",
+          "target": "components/motion/spinner/snake.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/swirl.tsx",
+          "target": "components/motion/spinner/swirl.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/trace.tsx",
+          "target": "components/motion/spinner/trace.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/types.ts",
+          "target": "components/motion/spinner/types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/motion/spinner/wave.tsx",
+          "target": "components/motion/spinner/wave.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:ui",
+      "title": "Magnetic button",
+      "description": "Move the pointer near the main action. The button leans a few pixels toward it and settles back.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/magnetic-button.tsx",
+          "target": "components/motion/magnetic-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "submit-button",
+      "type": "registry:ui",
+      "title": "Submit button",
+      "description": "Press to run an action that takes time. A spinner, then a check or a retry label, swap in without changing the width.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/submit-button.tsx",
+          "target": "components/motion/submit-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "shortcut-button",
+      "type": "registry:ui",
+      "title": "Shortcut button",
+      "description": "Press the button or its keyboard shortcut. The key cap sinks when the real keys land.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/shortcut-button.tsx",
+          "target": "components/motion/shortcut-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slide-to-confirm",
+      "type": "registry:ui",
+      "title": "Slide to confirm",
+      "description": "Drag the handle to the end to confirm a serious action. Let go early and it slides back.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/slide-to-confirm.tsx",
+          "target": "components/motion/slide-to-confirm.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "undo-button",
+      "type": "registry:ui",
+      "title": "Undo button",
+      "description": "Act at once, then undo while the ring drains. Come back to the button to pause the countdown.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/undo-button.tsx",
+          "target": "components/motion/undo-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "cart-button",
+      "type": "registry:ui",
+      "title": "Cart button",
+      "description": "Add a product, then step the quantity. The count rolls the way it changed.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/cart-button.tsx",
+          "target": "components/motion/cart-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "billing-toggle",
+      "type": "registry:ui",
+      "title": "Billing toggle",
+      "description": "Choose monthly or yearly billing. The price digits roll and a save badge appears.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/billing-toggle.tsx",
+          "target": "components/motion/billing-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pull-cord",
+      "type": "registry:ui",
+      "title": "Pull cord",
+      "description": "Drag the cord down and let go to toggle. It stretches with resistance and springs back.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/pull-cord.tsx",
+          "target": "components/motion/pull-cord.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "equalizer-toggle",
+      "type": "registry:ui",
+      "title": "Equalizer toggle",
+      "description": "Play or pause a sound. The bars move while it plays and rest flat when paused.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/equalizer-toggle.tsx",
+          "target": "components/motion/equalizer-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "character-limit",
+      "type": "registry:ui",
+      "title": "Character limit",
+      "description": "Type up to a letter limit. A ring fills, and the count shakes once when you go over.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/character-limit.tsx",
+          "target": "components/motion/character-limit.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "file-drop",
+      "type": "registry:ui",
+      "title": "File drop",
+      "description": "Drop a file or choose one. The area lifts under the file, then shows the upload as a bar.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/file-drop.tsx",
+          "target": "components/motion/file-drop.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "floating-label-field",
+      "type": "registry:ui",
+      "title": "Floating label field",
+      "description": "Type in a field with its label inside. The label moves up and shrinks on focus.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/floating-label-field.tsx",
+          "target": "components/motion/floating-label-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "otp-field",
+      "type": "registry:ui",
+      "title": "One-time code field",
+      "description": "Enter a one-time code, one box per digit. A wrong code shakes the row once and clears it.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/otp-field.tsx",
+          "target": "components/motion/otp-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "star-rating",
+      "type": "registry:ui",
+      "title": "Star rating",
+      "description": "Pick 1 to 5 stars. The chosen star pops and a word for the score rolls in.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/star-rating.tsx",
+          "target": "components/motion/star-rating.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag input",
+      "description": "Type a word and press Enter or comma to add a tag. Tags scale in, fade out and glide to close the gap.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/tag-input.tsx",
+          "target": "components/motion/tag-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "password-strength",
+      "type": "registry:ui",
+      "title": "Password strength",
+      "description": "Type a new password. Four segments fill one by one and each rule ticks.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/password-strength.tsx",
+          "target": "components/motion/password-strength.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dial",
+      "type": "registry:ui",
+      "title": "Dial",
+      "description": "Turn the ring to set a number. The mark ticks at each step and the number rolls.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/dial.tsx",
+          "target": "components/motion/dial.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "wheel-picker",
+      "type": "registry:ui",
+      "title": "Wheel picker",
+      "description": "Spin the wheel to pick a time. It snaps to the nearest option and the others fade.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/wheel-picker.tsx",
+          "target": "components/motion/wheel-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "signature-pad",
+      "type": "registry:ui",
+      "title": "Signature pad",
+      "description": "Draw your signature or type your name. Clear wipes it with a quick fade.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/signature-pad.tsx",
+          "target": "components/motion/signature-pad.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card-number-field",
+      "type": "registry:ui",
+      "title": "Card number field",
+      "description": "Type a card number. Each new group of four slides in.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/card-number-field.tsx",
+          "target": "components/motion/card-number-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "voice-input",
+      "type": "registry:ui",
+      "title": "Voice input",
+      "description": "Press to dictate. The bars follow your voice and a timer counts up.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/voice-input.tsx",
+          "target": "components/motion/voice-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown",
+      "type": "registry:ui",
+      "title": "Dropdown",
+      "description": "Pick one option from a short list. The list grows from the trigger and the choice shows a check.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/dropdown.tsx",
+          "target": "components/motion/dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gliding-tooltip",
+      "type": "registry:ui",
+      "title": "Gliding tooltip",
+      "description": "Hover or focus a row of icon buttons. One tooltip glides between them and swaps its text.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/gliding-tooltip.tsx",
+          "target": "components/motion/gliding-tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "status-island",
+      "type": "registry:ui",
+      "title": "Status island",
+      "description": "Follow one live activity at the top of the screen. The pill resizes and its content cross-fades.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/status-island.tsx",
+          "target": "components/motion/status-island.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar-collapse",
+      "type": "registry:ui",
+      "title": "Sidebar collapse",
+      "description": "Collapse the sidebar to its icons. The width springs and the labels fade and slide away.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/sidebar-collapse.tsx",
+          "target": "components/motion/sidebar-collapse.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "learned-width-panel",
+      "type": "registry:ui",
+      "title": "Learned width panel",
+      "description": "Drag a side panel's edge to size it. It learns your usual width and snaps back to it.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/learned-width-panel.tsx",
+          "target": "components/motion/learned-width-panel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination-dots",
+      "type": "registry:ui",
+      "title": "Pagination dots",
+      "description": "Jump between slides with a row of dots. The active dot stretches into a bar that slides to the next.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/pagination-dots.tsx",
+          "target": "components/motion/pagination-dots.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:ui",
+      "title": "Command palette",
+      "description": "Search commands and run one with Enter. The highlight glides between rows as you arrow.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/command-palette.tsx",
+          "target": "components/motion/command-palette.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "step-progress",
+      "type": "registry:ui",
+      "title": "Step progress",
+      "description": "Move through a short flow with Back and Next. The line fills and a finished step turns into a check.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/step-progress.tsx",
+          "target": "components/motion/step-progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "drill-menu",
+      "type": "registry:ui",
+      "title": "Drill menu",
+      "description": "Open a submenu in the same panel. It slides in from the right as the panel resizes.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/drill-menu.tsx",
+          "target": "components/motion/drill-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "roll-links",
+      "type": "registry:ui",
+      "title": "Roll links",
+      "description": "Point at a large link. Its letters roll up one by one and the others dim.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/roll-links.tsx",
+          "target": "components/motion/roll-links.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "swipe-deck",
+      "type": "registry:ui",
+      "title": "Swipe deck",
+      "description": "Swipe a card left to skip it or right to save it. The card tilts under your finger, then flies off or springs back.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/swipe-deck.tsx",
+          "target": "components/motion/swipe-deck.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:ui",
+      "title": "Tilt card",
+      "description": "Press the card to turn it over. It leans toward your pointer as you move.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/tilt-card.tsx",
+          "target": "components/motion/tilt-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "lens",
+      "type": "registry:ui",
+      "title": "Lens",
+      "description": "Move over the content to see it enlarged. The lens stays under your pointer, or moves with the arrow keys.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/lens.tsx",
+          "target": "components/motion/lens.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "expand-card",
+      "type": "registry:ui",
+      "title": "Expand card",
+      "description": "Press a card to open its details in place. The cards below move aside.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/expand-card.tsx",
+          "target": "components/motion/expand-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat card",
+      "description": "Pick a week, month or year for one figure. The digits roll and the trend line morphs.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/stat-card.tsx",
+          "target": "components/motion/stat-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:ui",
+      "title": "Profile card",
+      "description": "Follow a person from their card. The button confirms with a check and the count rolls up by one.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/profile-card.tsx",
+          "target": "components/motion/profile-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "notification-stack",
+      "type": "registry:ui",
+      "title": "Notification stack",
+      "description": "Press the pile to spread it into a list. Dismiss one and the rest close the gap.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/notification-stack.tsx",
+          "target": "components/motion/notification-stack.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "prompt-box",
+      "type": "registry:ui",
+      "title": "Prompt box",
+      "description": "Write a message and send it with Enter. The send button turns into stop while the answer is written.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/prompt-box.tsx",
+          "target": "components/motion/prompt-box.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "streaming-reply",
+      "type": "registry:ui",
+      "title": "Streaming reply",
+      "description": "Read an answer as it arrives. New words fade in and the block grows without a jump.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/streaming-reply.tsx",
+          "target": "components/motion/streaming-reply.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "ghost-suggestion",
+      "type": "registry:ui",
+      "title": "Ghost suggestion",
+      "description": "Type and press Tab to take the greyed completion. The accepted words settle with a brief tint.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/ghost-suggestion.tsx",
+          "target": "components/motion/ghost-suggestion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "thinking-indicator",
+      "type": "registry:ui",
+      "title": "Thinking indicator",
+      "description": "See that the assistant is working. Three dots swell in turn beside a label that shimmers.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/thinking-indicator.tsx",
+          "target": "components/motion/thinking-indicator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "agent-steps",
+      "type": "registry:ui",
+      "title": "Agent steps",
+      "description": "Follow each step an agent takes. The list collapses under a header that shows the current step.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/agent-steps.tsx",
+          "target": "components/motion/agent-steps.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tool-approval",
+      "type": "registry:ui",
+      "title": "Tool approval",
+      "description": "Allow or deny one action an agent asks for. The card shrinks to a line that states the decision.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/tool-approval.tsx",
+          "target": "components/motion/tool-approval.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "voice-orb",
+      "type": "registry:ui",
+      "title": "Voice orb",
+      "description": "See whether the assistant listens, thinks or speaks. The disc breathes, swells with your voice, turns a ring and pulses.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/voice-orb.tsx",
+          "target": "components/motion/voice-orb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "weight-wave",
+      "type": "registry:ui",
+      "title": "Weight wave",
+      "description": "Read a headline as a wave of heavier weight crosses it. Each letter swells in a fixed slot, so the line never reflows.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/weight-wave.tsx",
+          "target": "components/motion/weight-wave.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "text-morph",
+      "type": "registry:ui",
+      "title": "Text morph",
+      "description": "Change a word and watch it become the next one. Shared letters slide to their new place and the rest blur out and in.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/text-morph.tsx",
+          "target": "components/motion/text-morph.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scramble-text",
+      "type": "registry:ui",
+      "title": "Scramble text",
+      "description": "Get a new code or value. It resolves from random characters, left to right.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/scramble-text.tsx",
+          "target": "components/motion/scramble-text.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "read-along",
+      "type": "registry:ui",
+      "title": "Read along",
+      "description": "Follow a paragraph at reading pace, or tie it to audio or scroll. Each word turns from muted to full colour in order.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/read-along.tsx",
+          "target": "components/motion/read-along.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "marker-text",
+      "type": "registry:ui",
+      "title": "Marker text",
+      "description": "Scroll to the phrase that matters. A highlighter stroke draws itself behind it, left to right.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/marker-text.tsx",
+          "target": "components/motion/marker-text.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "typewriter",
+      "type": "registry:ui",
+      "title": "Typewriter",
+      "description": "Watch example lines type themselves. Each one is typed, held, deleted and replaced by the next.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/typewriter.tsx",
+          "target": "components/motion/typewriter.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "image-compare",
+      "type": "registry:ui",
+      "title": "Image compare",
+      "description": "Drag a divider to compare two views of one picture.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/image-compare.tsx",
+          "target": "components/motion/image-compare.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "time-scrubber",
+      "type": "registry:ui",
+      "title": "Time scrubber",
+      "description": "Drag or fling a ruler of ticks to set a time.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/time-scrubber.tsx",
+          "target": "components/motion/time-scrubber.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "search-reveal",
+      "type": "registry:ui",
+      "title": "Search reveal",
+      "description": "A search button that opens into a field as one object.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/search-reveal.tsx",
+          "target": "components/motion/search-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "assignee-picker",
+      "type": "registry:ui",
+      "title": "Assignee picker",
+      "description": "Pick assignees from a list; avatars stack with a +N count.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/assignee-picker.tsx",
+          "target": "components/motion/assignee-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "context-meter",
+      "type": "registry:ui",
+      "title": "Context meter",
+      "description": "Stacked bar of what fills a model's context window.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/context-meter.tsx",
+          "target": "components/motion/context-meter.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "hover-fan",
+      "type": "registry:ui",
+      "title": "Hover fan",
+      "description": "A card stack that fans out to preview what it holds.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/hover-fan.tsx",
+          "target": "components/motion/hover-fan.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "arrow-link",
+      "type": "registry:ui",
+      "title": "Arrow link",
+      "description": "A text link whose chevron grows into an arrow on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/arrow-link.tsx",
+          "target": "components/motion/arrow-link.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar-lift",
+      "type": "registry:ui",
+      "title": "Avatar lift",
+      "description": "Overlapping avatars that lift and show a name on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/motion/avatar-lift.tsx",
+          "target": "components/motion/avatar-lift.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

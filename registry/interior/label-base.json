@@ -1,0 +1,11 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Label — a control label is 13px medium, never bold; leading-none\n * is banned on anything containing a word.\n */\n\n// Base UI ships no Label primitive; a plain label carries the same semantics.\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.LabelHTMLAttributes<HTMLLabelElement>\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    className={cn(\n      \"text-[0.8125rem] font-medium leading-[1.125rem] text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

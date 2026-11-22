@@ -1,0 +1,11 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Empty: dashed standby frame for a panel with no data feed.\n\nconst Empty = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"flex min-h-[12.5rem] flex-col items-center justify-center rounded-md p-8 text-center\",\n      \"border border-dashed border-border\",\n      className\n    )}\n    {...props}\n  />\n))\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Platine — a brushed-metal control panel on near-black.
+ *
+ * Authored solely from a user-provided PremiumNavBar snippet (framer-motion
+ * silver pill nav). The visual language extracted from that one component:
+ *   - Near-black canvas (#101010) with raised neutral bezels.
+ *   - Recessed dark tracks (neutral-800 -> 900) that controls sit inside.
+ *   - A brushed-silver active material: vertical gradient (#E8E8E8 -> #C0C0C0
+ *     -> #A0A0A0) with strong inset white highlights, a 0.0625rem white rim, and a
+ *     soft outer drop shadow. Dark text rides on it.
+ *   - Fully-rounded pills, spring-driven active indicators.
+ * Every shadow below reproduces the snippet's exact layer stack, converted
+ * from its rgba() values to oklch() per the repo color rule.
+ */
+
+:root {
+  /* ─── Surfaces (raised bezels are lighter than the canvas) ─── */
+  --background: oklch(0.18 0 0);          /* #101010 canvas */
+  --foreground: oklch(0.93 0 0);
+
+  --card: oklch(0.3 0 0);                  /* raised bezel face (neutral-700) */
+  --card-foreground: oklch(0.93 0 0);
+
+  --popover: oklch(0.27 0 0);              /* floating bezel (neutral-800) */
+  --popover-foreground: oklch(0.93 0 0);
+
+  /* ─── Primary: brushed silver (mid stop of the slider gradient) ─── */
+  --primary: oklch(0.82 0 0);
+  --primary-foreground: oklch(0.22 0 0);   /* dark text on silver (neutral-900) */
+
+  --secondary: oklch(0.27 0 0);
+  --secondary-foreground: oklch(0.92 0 0);
+
+  --muted: oklch(0.24 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+
+  --accent: oklch(0.34 0 0);
+  --accent-foreground: oklch(0.96 0 0);
+
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.36 0 0);               /* neutral-700 bezel rim */
+  --input: oklch(0.205 0 0);               /* recessed dark track */
+  --ring: oklch(0.82 0 0);                 /* silver focus ring */
+  --radius: 0.875rem;
+
+  /*
+   * ─── Brushed-metal gradients ───
+   * --metal mirrors the snippet's slider fill (E8E8E8 -> C0C0C0 -> A0A0A0).
+   * --bezel/--recess mirror the outer frame and the inner sunken track.
+   */
+  --metal: linear-gradient(
+    to bottom,
+    oklch(0.925 0 0),
+    oklch(0.82 0 0) 50%,
+    oklch(0.7 0 0)
+  );
+  --metal-hover: linear-gradient(
+    to bottom,
+    oklch(0.95 0 0),
+    oklch(0.855 0 0) 50%,
+    oklch(0.74 0 0)
+  );
+  --bezel: linear-gradient(to bottom, oklch(0.37 0 0), oklch(0.27 0 0));
+  --recess: linear-gradient(to bottom, oklch(0.24 0 0), oklch(0.18 0 0));
+  /* Inner sunken ring of the segmented track (neutral-800 -> neutral-900). */
+  --ring-recess: linear-gradient(to bottom, oklch(0.27 0 0), oklch(0.205 0 0));
+  /* Translucent glass strip the slider rides on (white 10% -> 5%). */
+  --track-sheen: linear-gradient(to bottom, oklch(1 0 0 / 0.1), oklch(1 0 0 / 0.05));
+
+  /*
+   * ─── Shadow scale ───
+   * Raised surfaces: inset top highlight + inset bottom darkening + outer drop
+   * (the bezel look). Recessed track: deep inset top shadow. oklch only.
+   */
+  --shadow-s:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.08),
+    inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5),
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.4);
+
+  --shadow-m:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.1),
+    inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5),
+    0 0.375rem 1.125rem oklch(0 0 0 / 0.5);
+
+  --shadow-l:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.1),
+    0 0.5rem 2rem oklch(0 0 0 / 0.6),
+    0 0.125rem 0.5rem oklch(0 0 0 / 0.4);
+
+  /* Recessed/pressed — inputs and tracks sit below the plane. */
+  --shadow-inset:
+    inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.8),
+    inset 0 -0.0625rem 0.125rem oklch(1 0 0 / 0.05);
+
+  /* Default/secondary raised metal bezel button. */
+  --shadow-button:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.12),
+    inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5),
+    0 0.125rem 0.5rem oklch(0 0 0 / 0.45),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4);
+
+  --shadow-button-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.16),
+    inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5),
+    0 0.375rem 1.25rem oklch(0 0 0 / 0.55),
+    0 0.125rem 0.375rem oklch(0 0 0 / 0.45);
+
+  /*
+   * The brushed-silver primary pill. This is the snippet's slider shadow stack
+   * verbatim (rgba -> oklch): top/bottom white highlight bars, the -8/16 inner
+   * bloom, the 0.0625rem white rim, the soft outer drop. Filled controls reuse it.
+   */
+  --shadow-primary:
+    0 0.125rem 0.5rem oklch(0 0 0 / 0.4),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.3),
+    inset 0 0.125rem 0 oklch(1 0 0 / 0.5),
+    inset 0 -0.125rem 0 oklch(1 0 0 / 0.3),
+    inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2),
+    inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4),
+    inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1);
+
+  /* Outer bezel ring of the segmented track (snippet's outer frame shadow). */
+  --shadow-bezel:
+    0 0.5rem 2rem oklch(0 0 0 / 0.6),
+    0 0.125rem 0.5rem oklch(0 0 0 / 0.4),
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.1),
+    inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5);
+
+  /* Glass track strip highlight. */
+  --shadow-track: inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.2);
+
+  /* ─── Chart palette: a tonal silver ramp (monochrome DS) ─── */
+  --chart-1: oklch(0.92 0 0);
+  --chart-2: oklch(0.78 0 0);
+  --chart-3: oklch(0.64 0 0);
+  --chart-4: oklch(0.5 0 0);
+  --chart-5: oklch(0.36 0 0);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.125rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.125rem);
+  --radius-xl: calc(var(--radius) + 0.375rem);
+
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

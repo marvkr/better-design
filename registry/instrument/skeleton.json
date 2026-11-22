@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n// Gauge Dark Skeleton: a shimmer on the nested-panel surface so loading\n// blocks sit one level above the card they occupy, like blank gauge faces.\n\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\n        \"animate-pulse rounded-md bg-[var(--gauge-nested)] shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.04)]\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-nested": "oklch(0.235 0.015 283)"
+    },
+    "dark": {
+      "gauge-nested": "oklch(0.235 0.015 283)"
+    }
+  }
+}

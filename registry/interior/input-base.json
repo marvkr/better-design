@@ -1,0 +1,14 @@
+{
+  "name": "input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/*\n * Interior Input — an empty field is a slot; entering it brings it to the\n * surface. Rest is a recessed well; focus is an accent border on a white\n * fill with the well shadow gone. No focus ring.\n */\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => (\n    <input\n      type={type}\n      ref={ref}\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"file:border-0 file:bg-transparent file:text-[0.8125rem] file:font-medium file:text-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared-base.json"
+  ]
+}

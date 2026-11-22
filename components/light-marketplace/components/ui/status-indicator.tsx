@@ -10,12 +10,12 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
   showLabel?: boolean
 }
 
-const statusStyles: Record<StatusType, { dot: string; label: string }> = {
+const statusStyles = {
   online:  { dot: "bg-green-500",                            label: "Online" },
   busy:    { dot: "bg-red-500",                              label: "Busy" },
   away:    { dot: "bg-amber-400",                            label: "Away" },
   offline: { dot: "bg-transparent border-2 border-border",  label: "Offline" },
-}
+} satisfies Record<StatusType, { dot: string; label: string }>
 
 const dotSizes = {
   sm:      "h-2 w-2",

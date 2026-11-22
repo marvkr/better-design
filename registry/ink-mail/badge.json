@@ -1,0 +1,30 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Badge: a small pill in Inter medium.\n *\n * The default is the secondary step behind the strong hairline. Solid and\n * primary take the off-white fill with black ink. Status badges lay a tint\n * under the matching text and lead with a dot in the full status colour:\n * delivered green, queued yellow, bounced red, opened blue.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-medium [&_svg]:size-3 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"border border-(--line-strong) bg-secondary text-(--foreground-secondary)\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"text-secondary-foreground bg-[color:oklch(0.235_0.004_286)]\",\n        outline: \"border border-(--line-strong) bg-transparent text-foreground\",\n        success:\n          \"bg-(--success-tint) text-(--success-text) before:size-1.5 before:shrink-0 before:rounded-full before:bg-success\",\n        warning:\n          \"bg-(--warning-tint) text-(--warning-text) before:size-1.5 before:shrink-0 before:rounded-full before:bg-warning\",\n        destructive:\n          \"before:size-1.5 before:shrink-0 before:rounded-full before:bg-destructive bg-[color:oklch(0.641_0.245_20.6/0.21)] text-[color:oklch(0.875_0.066_20.6)]\",\n        info:\n          \"bg-(--info-tint) before:size-1.5 before:shrink-0 before:rounded-full before:bg-info text-[color:oklch(0.875_0.063_251.4)]\",\n        solid: \"bg-primary text-primary-foreground\",\n      },\n      size: {\n        sm: \"h-5 px-2 text-xs\",\n        default: \"h-6 px-2.5 text-xs\",\n        lg: \"h-7 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.88 0.212 155.8)",
+      "warning": "oklch(0.854 0.157 84.1)",
+      "info": "oklch(0.688 0.169 251.4)",
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-secondary": "oklch(0.88 0.002 264)",
+      "success-tint": "oklch(0.88 0.212 155.8 / 0.12)",
+      "success-text": "oklch(0.88 0.19 155.8)",
+      "warning-tint": "oklch(0.854 0.157 84.1 / 0.12)",
+      "warning-text": "oklch(0.87 0.14 84.1)",
+      "info-tint": "oklch(0.688 0.169 251.4 / 0.14)"
+    },
+    "dark": {}
+  }
+}

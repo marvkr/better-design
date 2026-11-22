@@ -1,0 +1,29 @@
+{
+  "name": "accordion",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, softPanel } from \"./_shared\";\n\n/**\n * Mallow Accordion: rows ruled by a hairline. Each trigger holds its chevron\n * in a small violet-ringed tile that turns when the row opens. The row opens at\n * once under reduced motion.\n */\nconst Accordion = AccordionPrimitive.Root;\n\nconst AccordionItem = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    data-slot=\"accordion-item\"\n    className={cn(\"border-b border-border last:border-b-0\", className)}\n    {...props}\n  />\n));\nAccordionItem.displayName = \"AccordionItem\";\n\nconst AccordionTrigger = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      data-slot=\"accordion-trigger\"\n      className={cn(\n        \"group/accordion flex flex-1 items-center justify-between gap-4 rounded-md py-4 text-start text-base font-medium text-foreground\",\n        \"transition-colors duration-fast ease-(--ease-out)\",\n        focusRing,\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <span\n        aria-hidden=\"true\"\n        className={cn(\n          softPanel,\n          \"inline-flex size-7 shrink-0 items-center justify-center rounded-full text-muted-foreground\",\n          \"transition-shadow duration-fast group-hover/accordion:text-foreground group-hover/accordion:shadow-(--option-edge-hover)\",\n        )}\n      >\n        <Icon\n          icon=\"iconoir:nav-arrow-down\"\n          className=\"size-3.5 transition-transform duration-base ease-(--ease-out) group-data-[state=open]/accordion:rotate-180 motion-reduce:transition-none\"\n        />\n      </span>\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n));\nAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;\n\nconst AccordionContent = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Content\n    ref={ref}\n    data-slot=\"accordion-content\"\n    className=\"overflow-hidden text-sm text-muted-foreground data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down motion-reduce:animate-none\"\n    {...props}\n  >\n    <div className={cn(\"pb-5 pt-0 leading-relaxed\", className)}>{children}</div>\n  </AccordionPrimitive.Content>\n));\nAccordionContent.displayName = AccordionPrimitive.Content.displayName;\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-accordion@^1.2.11",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

@@ -9,10 +9,12 @@
     }
   ],
   "dependencies": [
-    "date-fns",
-    "@iconify/react"
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/lumen-dark/button.json",
+    "https://better-design.com/registry/lumen-dark/calendar.json",
+    "https://better-design.com/registry/lumen-dark/popover.json"
   ]
 }

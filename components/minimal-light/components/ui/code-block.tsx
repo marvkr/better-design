@@ -42,7 +42,7 @@ function CodeBlock({
               </span>
             )}
             {language && (
-              <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground/60 bg-secondary px-2 py-0.5 rounded-md border border-border">
+              <span className="text-[0.625rem] font-medium tracking-widest uppercase text-muted-foreground/60 bg-secondary px-2 py-0.5 rounded-md border border-border">
                 {language}
               </span>
             )}
@@ -52,7 +52,7 @@ function CodeBlock({
       )}
       {/* No header: floating copy button */}
       {!filename && !language && (
-        <div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        <div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity duration-base group-hover:opacity-100">
           <CopyButton value={code} />
         </div>
       )}

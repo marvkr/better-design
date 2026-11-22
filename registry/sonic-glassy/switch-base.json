@@ -1,0 +1,28 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSound } from \"./sound-provider\"\n\nfunction Switch({\n  className,\n  onCheckedChange,\n  ...props\n}: SwitchPrimitive.Root.Props) {\n  const { playClick } = useSound()\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-border\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background-color,box-shadow,border-color] duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:border-primary data-checked:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      onCheckedChange={(checked, eventDetails) => {\n        playClick()\n        onCheckedChange?.(checked, eventDetails)\n      }}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        className={cn(\n          \"pointer-events-none block h-4 w-4 rounded-full bg-foreground\",\n          \"[box-shadow:var(--shadow-s)]\",\n          \"ring-0 transition-transform duration-fast\",\n          \"data-checked:translate-x-4 data-checked:bg-primary-foreground\",\n          \"data-unchecked:translate-x-0.5\"\n        )}\n      />\n    </SwitchPrimitive.Root>\n  )\n}\nSwitch.displayName = \"Switch\"\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/sonic-glassy/sound-provider-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.6911 0.1421 250.62 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 1rem oklch(0.6066 0.1541 255.99 / 0.35)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.6911 0.1421 250.62 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 1rem oklch(0.6066 0.1541 255.99 / 0.35)"
+    }
+  }
+}

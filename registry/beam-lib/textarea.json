@@ -9,6 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/beam-lib/border-beam.json",
+    "https://better-design.com/registry/beam-lib/_shared.json"
   ]
 }

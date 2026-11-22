@@ -1,0 +1,29 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { quietFinish, controlFocusRing, pressScale, primaryFinish, primaryFinishHover } from \"./_shared\";\n\n/** Mallow Button classes: a rounded rectangle, solid violet by default and quiet white for secondary. */\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex max-w-full shrink-0 select-none items-center justify-center whitespace-nowrap\",\n    \"rounded-lg font-semibold\",\n    pressScale,\n    controlFocusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: `${primaryFinish} ${primaryFinishHover}`,\n        primary: `${primaryFinish} ${primaryFinishHover}`,\n        lit: `${primaryFinish} ${primaryFinishHover}`,\n        solid: `${primaryFinish} ${primaryFinishHover}`,\n        secondary: quietFinish,\n        outline: \"bg-transparent text-foreground inset-ring-1 inset-ring-input hover:bg-accent\",\n        ghost: \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive: \"bg-(image:--danger-face) text-destructive-foreground shadow-xs\",\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline decoration-current/30 underline-offset-4 hover:decoration-current\",\n      },\n      size: {\n        sm: \"h-9 gap-2 px-4 text-sm [&_svg:not([class*='size-'])]:size-4\",\n        default: \"h-12 gap-2.5 px-5 text-base [&_svg:not([class*='size-'])]:size-5\",\n        lg: \"h-14 gap-2.5 px-6 text-lg [&_svg:not([class*='size-'])]:size-5\",\n        icon: \"size-12 px-0 [&_svg:not([class*='size-'])]:size-5\",\n        \"icon-sm\": \"size-9 px-0 [&_svg:not([class*='size-'])]:size-4\",\n        \"icon-lg\": \"size-14 px-0 [&_svg:not([class*='size-'])]:size-6\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Props for the Base UI Button, where `asChild` turns its single child element into the button. */\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  asChild?: boolean;\n}\n\n/** Mallow Button on a Base UI button, styled exactly like its Radix twin. */\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const classes = cn(buttonVariants({ variant, size, className }));\n\n    if (asChild && React.isValidElement(children)) {\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          data-slot=\"button\"\n          className={classes}\n          nativeButton={false}\n          {...props}\n          render={children}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive ref={ref} data-slot=\"button\" className={classes} {...props}>\n        {children}\n      </ButtonPrimitive>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.48 0.2 288)",
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    },
+    "dark": {
+      "primary-text": "oklch(0.48 0.2 288)",
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nconst languages = [\n  { value: \"typescript\", label: \"TypeScript\" },\n  { value: \"python\", label: \"Python\" },\n  { value: \"go\", label: \"Go\" },\n  { value: \"ruby\", label: \"Ruby\" },\n  { value: \"curl\", label: \"cURL\" },\n];\n\n/**\n * Airy docs combobox: a white field that opens a searchable list, here the\n * SDK language picker a reference page offers. The list drops onto the\n * floating panel as wide as the field, and the chosen row shows a green tick.\n */\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n  const selected = languages.find((language) => language.value === value);\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        role=\"combobox\"\n        aria-expanded={open}\n        data-slot=\"combobox-trigger\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"w-56 cursor-default items-center justify-between gap-2 text-start\",\n          \"data-[popup-open]:border-primary\",\n          !selected && \"text-muted-foreground\",\n        )}\n      >\n        <span className=\"truncate\">{selected ? selected.label : \"Select a language\"}</span>\n        <Icon\n          icon=\"feather:chevron-down\"\n          className=\"size-4 shrink-0 text-muted-foreground\"\n          aria-hidden=\"true\"\n        />\n      </PopoverTrigger>\n      <PopoverContent align=\"start\" className=\"w-(--anchor-width) gap-0 p-0\">\n        <Command className=\"bg-transparent shadow-none\">\n          <CommandInput placeholder=\"Search languages\" />\n          <CommandList>\n            <CommandEmpty>No language found.</CommandEmpty>\n            <CommandGroup>\n              {languages.map((language) => (\n                <CommandItem\n                  key={language.value}\n                  value={language.value}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                >\n                  {language.label}\n                  <Icon\n                    icon=\"feather:check\"\n                    className={cn(\n                      \"ms-auto size-4 text-(--primary-text)\",\n                      value === language.value ? \"opacity-100\" : \"opacity-0\",\n                    )}\n                    aria-hidden=\"true\"\n                  />\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared-base.json",
+    "https://better-design.com/registry/airy-docs/command-base.json",
+    "https://better-design.com/registry/airy-docs/popover-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)"
+    }
+  }
+}

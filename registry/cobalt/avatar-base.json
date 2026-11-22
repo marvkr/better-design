@@ -1,0 +1,23 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Avatar = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full\",\n      \"[box-shadow:inset_0_0.0625rem_0_oklch(1_0_0_/_0.08),0_0.0625rem_0.125rem_oklch(0_0_0_/_0.4)]\",\n      className\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  HTMLImageElement,\n  WithClassName<AvatarPrimitive.Image.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full object-cover\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full\",\n      \"border border-border [background-image:var(--bezel)]\",\n      \"text-xs font-medium text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\nexport { Avatar, AvatarImage, AvatarFallback }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))"
+    }
+  }
+}

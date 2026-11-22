@@ -1,0 +1,29 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Chrome Azure Checkbox — a recessed steel channel that fills with the azure\n * alloy when checked, matching the primary button material so filled controls\n * read as one metal.\n */\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nfunction Checkbox({\n  className,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer h-4 w-4 shrink-0 rounded-[0.3125rem] border-[0.0938rem] border-white/10 bg-origin-border\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background,box-shadow,border-color] duration-fast\",\n        \"hover:border-ring/40\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        // Checked/indeterminate = the primary button material: metal-rim border + azure alloy fill.\n        \"data-checked:border-transparent data-checked:[background:var(--surface-on)_padding-box,var(--metal-rim)_border-box] data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n        \"data-indeterminate:border-transparent data-indeterminate:[background:var(--surface-on)_padding-box,var(--metal-rim)_border-box] data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      nativeButton\n      render={<button type=\"button\" />}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        {props.indeterminate ? (\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth={3} strokeLinecap=\"round\" className=\"h-3 w-3\">\n            <path d=\"M5 12h14\" />\n          </svg>\n        ) : (\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth={3} strokeLinecap=\"round\" strokeLinejoin=\"round\" className=\"h-3 w-3\">\n            <path d=\"M5 12l5 5L20 7\" />\n          </svg>\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "metal-rim": "linear-gradient(to bottom, oklch(0 0 0), oklch(0.706 0 0))",
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    },
+    "dark": {
+      "metal-rim": "linear-gradient(to bottom, oklch(0 0 0), oklch(0.706 0 0))",
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Playful console Avatar: a 2.5rem round photo inside a firm olive ring, or\n * bold initials on an orange wash when there is no photo. Resize it with a\n * size class (size-6, size-8, size-14); the initials follow the circle.\n */\nconst Avatar = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    data-slot=\"avatar\"\n    className={cn(\n      \"@container relative flex size-10 shrink-0 select-none overflow-hidden rounded-full border-[0.09375rem] border-(--line-strong) bg-card\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatar.displayName = \"Avatar\";\n\n/** The photo, cropped to fill the circle. */\nconst AvatarImage = React.forwardRef<\n  HTMLImageElement,\n  WithClassName<AvatarPrimitive.Image.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    data-slot=\"avatar-image\"\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n));\nAvatarImage.displayName = \"AvatarImage\";\n\n/** Bold initials on the orange wash, shown while the photo loads or when it fails. */\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    data-slot=\"avatar-fallback\"\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full bg-(--primary-wash)\",\n      \"text-sm font-bold text-foreground\",\n      \"@max-[2.25rem]:text-xs @min-[3rem]:text-lg\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = \"AvatarFallback\";\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "line-strong": "oklch(0.69 0.016 114)"
+    },
+    "dark": {
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "line-strong": "oklch(0.48 0.014 114)"
+    }
+  }
+}

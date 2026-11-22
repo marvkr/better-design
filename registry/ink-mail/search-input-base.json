@@ -1,0 +1,25 @@
+{
+  "name": "search-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void;\n}\n\n/**\n * Ink mail SearchInput: the dark field with a grey magnifier at its start.\n * Once it holds a query and a clear handler is given, a small ghost clear\n * button appears at its end; the browser's own clear cross is hidden.\n */\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, type = \"search\", value, onClear, ...props }, ref) => {\n    const showClear = Boolean(onClear && value);\n\n    return (\n      <div data-slot=\"search-input\" className=\"relative\">\n        <Icon\n          icon=\"ph:magnifying-glass\"\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground\"\n        />\n        <input\n          ref={ref}\n          type={type}\n          value={value}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"ps-9 [&::-webkit-search-cancel-button]:appearance-none\",\n            showClear && \"pe-10\",\n            className,\n          )}\n          {...props}\n        />\n        {showClear && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            aria-label=\"Clear search\"\n            className={cn(\n              \"absolute end-1.5 top-1/2 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground\",\n              \"transition-colors duration-fast ease-out\",\n              \"hover:bg-secondary hover:text-foreground active:bg-muted\",\n              \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n            )}\n          >\n            <Icon icon=\"ph:x\" className=\"size-4\" aria-hidden=\"true\" />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nSearchInput.displayName = \"SearchInput\";\n\nexport { SearchInput };\nexport type { SearchInputProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glass": "linear-gradient(104deg, oklch(1 0 0 / 0.05) 5%, oklch(0.95 0.01 100 / 0.1) 100%)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

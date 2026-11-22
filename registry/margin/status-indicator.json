@@ -1,0 +1,25 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Margin StatusIndicator: a small solid dot and a label, the way a presence\n * mark sits beside a name. The dot wears a thin ring in the card colour so\n * it stays crisp on any surface; `pulse` adds a soft ring that fades out.\n */\nconst dotVariants = cva(\"size-2 shrink-0 rounded-full\", {\n  variants: {\n    status: {\n      online: \"bg-success\",\n      offline: \"bg-muted-foreground/50\",\n      busy: \"bg-destructive\",\n      away: \"bg-warning\",\n      idle: \"bg-input\",\n    },\n  },\n  defaultVariants: {\n    status: \"online\",\n  },\n});\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof dotVariants> {\n  label?: React.ReactNode;\n  pulse?: boolean;\n}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, status, label, pulse, ...props }, ref) => (\n    <span\n      ref={ref}\n      data-slot=\"status-indicator\"\n      data-status={status ?? \"online\"}\n      className={cn(\"inline-flex items-center gap-1.5 text-xs text-muted-foreground\", className)}\n      {...props}\n    >\n      <span className=\"relative inline-flex\">\n        <span className={cn(dotVariants({ status }), \"ring-2 ring-card\")} />\n        {pulse && (\n          <span\n            aria-hidden\n            className={cn(\n              dotVariants({ status }),\n              \"absolute inset-0 animate-ping opacity-50 motion-reduce:hidden\",\n            )}\n          />\n        )}\n      </span>\n      {label && <span className=\"font-medium text-foreground\">{label}</span>}\n    </span>\n  ),\n);\nStatusIndicator.displayName = \"StatusIndicator\";\n\nexport { StatusIndicator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5 0.09 115)",
+      "warning": "oklch(0.74 0.13 75)"
+    },
+    "dark": {
+      "success": "oklch(0.7 0.14 115)",
+      "warning": "oklch(0.8 0.12 78)"
+    }
+  }
+}

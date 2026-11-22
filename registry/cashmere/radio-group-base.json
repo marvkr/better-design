@@ -1,0 +1,25 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Cashmere RadioGroup: a soft recessed pocket; the checked indicator dot is\n * the flat near-black fill (bg-primary + --shadow-primary), matching the primary\n * Button.\n */\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst RadioGroup = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<RadioGroupPrimitive.Props>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive data-slot=\"radio-group\" ref={ref} className={cn(\"grid gap-2\", className)} {...props} />\n))\nRadioGroup.displayName = \"RadioGroup\"\n\nconst RadioGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<RadioPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <RadioPrimitive.Root\n    data-slot=\"radio-group-item\"\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center aspect-square h-4 w-4 shrink-0 rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-color,box-shadow,border-color] duration-fast\",\n      \"hover:border-ring/40\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:border-primary\",\n      className\n    )}\n    {...props}\n  >\n    <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"size-full flex items-center justify-center\">\n      <span className=\"h-2 w-2 rounded-full bg-primary [box-shadow:var(--shadow-primary)]\" />\n    </RadioPrimitive.Indicator>\n  </RadioPrimitive.Root>\n))\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)",
+      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)",
+      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

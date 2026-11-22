@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console ButtonGroup: keys joined into one bar. Only the outer ends\n * keep the 0.5rem key corner; the inner edges go square and overlap by the\n * rim, so neighbouring keys share one border. A hovered or focused key lifts\n * above its neighbours so its slab and ring are never cut off. Stacked\n * vertically, the top and bottom keep the corner instead.\n */\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"inline-flex w-fit items-stretch *:rounded-none *:hover:z-10 *:focus-visible:z-10\",\n        orientation === \"horizontal\"\n          ? \"*:first:rounded-s-[0.5rem] *:last:rounded-e-[0.5rem] [&>*+*]:-ms-[0.09375rem]\"\n          : \"flex-col *:first:rounded-t-[0.5rem] *:last:rounded-b-[0.5rem] [&>*+*]:-mt-[0.09375rem]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

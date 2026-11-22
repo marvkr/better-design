@@ -1,0 +1,27 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Item: one row of a settings-style list. The leading icon\n * sits on a small cream tile with an olive edge, the title reads bold, and\n * a muted line can sit under it. Trailing values run in mono figures. A row\n * you can press takes the cream wash under the pointer and a deeper step\n * while held.\n */\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** An icon or avatar, shown on a small tile at the start. */\n  leading?: React.ReactNode;\n  /** A value, badge or chevron at the end of the row. */\n  trailing?: React.ReactNode;\n  title: string;\n  subtitle?: string;\n  disabled?: boolean;\n  /** Adds the hover and press surfaces for a row that does something. */\n  interactive?: boolean;\n  as?: React.ElementType;\n  href?: string;\n}\n\n/** One list row with an optional leading tile, subtitle and trailing value. */\nfunction Item({\n  leading,\n  trailing,\n  title,\n  subtitle,\n  disabled,\n  interactive,\n  as,\n  href,\n  className,\n  ...props\n}: ItemProps) {\n  const Comp: React.ElementType = as ?? (href ? \"a\" : \"div\");\n\n  return (\n    <Comp\n      href={disabled ? undefined : href}\n      tabIndex={disabled ? -1 : undefined}\n      aria-disabled={disabled || undefined}\n      data-slot=\"item\"\n      className={cn(\n        \"relative flex min-h-14 w-full items-center gap-3 rounded-lg px-4 py-3 text-start\",\n        interactive &&\n          \"cursor-pointer transition-colors duration-fast ease-out hover:bg-secondary active:bg-(--surface-3) focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring\",\n        disabled && \"pointer-events-none\",\n        className,\n      )}\n      {...props}\n    >\n      {leading && (\n        <span\n          data-slot=\"item-leading\"\n          className={cn(\n            \"flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md border border-(--line-strong) bg-secondary [&_svg]:size-5\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {leading}\n        </span>\n      )}\n      <span className=\"flex min-w-0 flex-1 flex-col gap-0.5\">\n        <span\n          className={cn(\n            \"truncate text-[0.9375rem] font-bold leading-snug\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {title}\n        </span>\n        {subtitle && (\n          <span\n            className={cn(\n              \"truncate text-sm\",\n              disabled ? \"text-(--foreground-disabled)\" : \"text-muted-foreground\",\n            )}\n          >\n            {subtitle}\n          </span>\n        )}\n      </span>\n      {trailing && (\n        <span\n          data-slot=\"item-trailing\"\n          className={cn(\n            \"flex shrink-0 items-center gap-2 font-mono text-sm font-medium tabular-nums [&_svg]:size-4 [&_svg]:text-muted-foreground\",\n            disabled ? \"text-(--foreground-disabled)\" : \"text-foreground\",\n          )}\n        >\n          {trailing}\n        </span>\n      )}\n    </Comp>\n  );\n}\n\n/**\n * Playful console ItemList: rows grouped on one white card behind the olive\n * hairline. With `divided`, the soft line runs between rows, inset from both\n * edges, and the last row has none.\n */\ninterface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {\n  divided?: boolean;\n}\n\n/** A white card that stacks Item rows. */\nfunction ItemList({ divided, className, ...props }: ItemListProps) {\n  return (\n    <div\n      data-slot=\"item-list\"\n      className={cn(\n        \"flex flex-col overflow-hidden rounded-lg border border-border bg-card *:rounded-none\",\n        divided &&\n          \"*:after:pointer-events-none *:after:absolute *:after:inset-x-4 *:after:bottom-0 *:after:h-px *:after:bg-(--line-soft) *:last:after:hidden\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Item, ItemList };\nexport type { ItemProps, ItemListProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-soft": "oklch(0.898 0.018 117.3)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "surface-3": "oklch(0.898 0.018 117.3)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-soft": "oklch(0.31 0.012 114)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "surface-3": "oklch(0.34 0.012 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)"
+    }
+  }
+}

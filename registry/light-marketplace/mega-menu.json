@@ -9,6 +9,6 @@
     }
   ],
   "dependencies": [
-    "motion"
+    "motion@^12.25.0"
   ]
 }

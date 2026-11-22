@@ -1,0 +1,45 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { DayPicker } from \"react-day-picker\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Calendar.\n *\n * A month grid at iOS density: 36px day cells, weekday labels on the 12.5px\n * step, and no grid lines at all. Every day is a circle, so the selected day\n * can take the primary Button's own surface, the gradient between\n * --primary-from and --primary-to over the primary shadow, and still read as a\n * dot rather than a block. A range paints its middle days in the blue tint at\n * a square radius, so the run joins up between the two round ends. The month\n * arrows are the system's circular icon buttons.\n */\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>\n\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-[1.125rem]\", className)}\n      classNames={{\n        months: \"flex flex-col sm:flex-row gap-5\",\n        month: \"flex flex-col gap-3.5\",\n        month_caption: \"relative flex h-[2.125rem] items-center justify-center\",\n        caption_label:\n          \"text-[1rem] leading-[1.375rem] font-semibold tracking-[-0.025rem] text-foreground\",\n        nav: \"flex items-center\",\n        button_previous: cn(\n          \"absolute left-0 top-0 z-10 inline-flex size-[2.125rem] items-center justify-center\",\n          \"rounded-full bg-card text-[var(--strong)]\",\n          \"[box-shadow:var(--shadow-button)]\",\n          \"transition-[box-shadow,transform] duration-fast ease-out\",\n          \"hover:[box-shadow:var(--shadow-button-hover)] active:translate-y-px\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          \"disabled:pointer-events-none disabled:opacity-40\",\n        ),\n        button_next: cn(\n          \"absolute right-0 top-0 z-10 inline-flex size-[2.125rem] items-center justify-center\",\n          \"rounded-full bg-card text-[var(--strong)]\",\n          \"[box-shadow:var(--shadow-button)]\",\n          \"transition-[box-shadow,transform] duration-fast ease-out\",\n          \"hover:[box-shadow:var(--shadow-button-hover)] active:translate-y-px\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          \"disabled:pointer-events-none disabled:opacity-40\",\n        ),\n        month_grid: \"w-full border-collapse\",\n        weekdays: \"flex\",\n        weekday:\n          \"w-9 text-[0.7813rem] leading-4 font-medium tracking-[0.0188rem] text-muted-foreground\",\n        week: \"mt-1 flex w-full\",\n        day: cn(\n          \"relative size-9 p-0 text-center\",\n          \"focus-within:relative focus-within:z-20\",\n        ),\n        day_button: cn(\n          \"inline-flex size-9 items-center justify-center rounded-full\",\n          \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-foreground\",\n          \"transition-[background-color,box-shadow,color] duration-fast ease-out\",\n          \"hover:bg-muted\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        ),\n        /* The selected day takes the primary Button's surface, at a circle. */\n        selected: cn(\n          \"[&_button]:font-semibold [&_button]:text-primary-foreground\",\n          /* The solid fill sits under the gradient, so the circle keeps a\n             real background-color if the gradient never paints. */\n          \"[&_button]:bg-primary\",\n          \"[&_button]:bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)]\",\n          \"[&_button]:[box-shadow:var(--shadow-primary)]\",\n          \"[&_button]:hover:bg-[linear-gradient(180deg,var(--primary-hover-from)_0%,var(--primary-hover-to)_100%)]\",\n        ),\n        /* Today reads in the accent until it is the day you picked. */\n        today: cn(\n          \"[&_button:not([aria-selected])]:bg-[var(--inner)]\",\n          \"[&_button:not([aria-selected])]:font-semibold\",\n          \"[&_button:not([aria-selected])]:text-primary\",\n        ),\n        outside: cn(\n          \"[&_button:not([aria-selected])]:text-muted-foreground\",\n          \"[&_button:not([aria-selected])]:opacity-45\",\n        ),\n        disabled: \"[&_button]:text-muted-foreground [&_button]:opacity-40\",\n        /* The middle of a range squares off, so the run joins its round ends. */\n        range_middle: cn(\n          \"[&_button]:aria-selected:rounded-none [&_button]:aria-selected:bg-none\",\n          \"[&_button]:aria-selected:bg-[var(--pop-blue)]\",\n          \"[&_button]:aria-selected:font-medium [&_button]:aria-selected:text-[var(--pop-blue-foreground)]\",\n          \"[&_button]:aria-selected:[box-shadow:none]\",\n          \"[&_button]:aria-selected:hover:bg-none [&_button]:aria-selected:hover:bg-[var(--pop-blue)]\",\n        ),\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, className: chevronClassName }) => (\n          <Icon\n            icon={\n              orientation === \"left\" ? \"solar:alt-arrow-left-linear\"\n              : orientation === \"right\" ? \"solar:alt-arrow-right-linear\"\n              : orientation === \"up\" ? \"solar:alt-arrow-up-linear\"\n              : \"solar:alt-arrow-down-linear\"\n            }\n            className={cn(\"size-[1.0625rem]\", chevronClassName)}\n          />\n        ),\n      }}\n      {...props}\n    />\n  )\n}\nCalendar.displayName = \"Calendar\"\n\nexport { Calendar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "primary-hover-from": "oklch(0.625 0.168 264.8)",
+      "primary-hover-to": "oklch(0.54 0.18 263.6)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-button": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.85), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.28), 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.07), 0 0.0625rem 0.125rem oklch(0.1593 0.0111 267.98 / 0.07), 0 0.375rem 0.875rem -0.625rem oklch(0.1593 0.0111 267.98 / 0.2)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.22), 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.08), 0 0.125rem 0.25rem oklch(0.1593 0.0111 267.98 / 0.08), 0 0.625rem 1.25rem -0.75rem oklch(0.1593 0.0111 267.98 / 0.26)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55), 0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4)",
+      "pop-blue": "oklch(0.9426 0.0308 264.5)",
+      "pop-blue-foreground": "oklch(0.4416 0.1683 264)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)",
+      "primary-hover-from": "oklch(0.7 0.152 265.4)",
+      "primary-hover-to": "oklch(0.618 0.172 264)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-button": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08), inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.375rem 0.875rem -0.625rem oklch(0 0 0 / 0.6)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.1), inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.42), 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.42), 0 0.625rem 1.25rem -0.75rem oklch(0 0 0 / 0.66)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5), 0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55)",
+      "pop-blue": "oklch(0.3113 0.0709 264.5)",
+      "pop-blue-foreground": "oklch(0.8306 0.0902 265)"
+    }
+  }
+}

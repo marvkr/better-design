@@ -1,0 +1,26 @@
+{
+  "name": "alert-dialog-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert-dialog.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { AlertDialog as AlertDialogPrimitive } from \"@base-ui/react/alert-dialog\"\n\nimport { cn } from \"@/lib/utils\"\nimport { buttonVariants } from \"./button\"\n\n// Control Room AlertDialog: critical-action confirmation.\n// Same raised console plate as Dialog; Action ships the destructive\n// alarm-red plate by default since these gates guard irreversible ops.\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst AlertDialog = AlertDialogPrimitive.Root\nconst AlertDialogTrigger = AlertDialogPrimitive.Trigger\nconst AlertDialogPortal = AlertDialogPrimitive.Portal\n\nconst AlertDialogOverlay = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AlertDialogPrimitive.Backdrop.Props>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Backdrop\n    className={cn(\n      \"fixed inset-0 z-50 bg-[oklch(0_0_0/0.7)]\",\n      \"transition-opacity data-starting-style:opacity-0 data-ending-style:opacity-0\",\n      className\n    )}\n    {...props}\n    ref={ref}\n  />\n))\nAlertDialogOverlay.displayName = \"AlertDialogOverlay\"\n\nconst AlertDialogContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AlertDialogPrimitive.Popup.Props>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPortal>\n    <AlertDialogOverlay />\n    <AlertDialogPrimitive.Popup\n      ref={ref}\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 p-6\",\n        \"rounded-md border border-border bg-popover text-popover-foreground\",\n        \"[box-shadow:var(--shadow-overlay)]\",\n        \"transition-all duration-base data-starting-style:opacity-0 data-ending-style:opacity-0 data-starting-style:scale-95 data-ending-style:scale-95\",\n        className\n      )}\n      {...props}\n    />\n  </AlertDialogPortal>\n))\nAlertDialogContent.displayName = \"AlertDialogContent\"\n\nconst AlertDialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"flex flex-col space-y-1.5 text-left\", className)}\n    {...props}\n  />\n)\nAlertDialogHeader.displayName = \"AlertDialogHeader\"\n\nconst AlertDialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\n      \"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n      className\n    )}\n    {...props}\n  />\n)\nAlertDialogFooter.displayName = \"AlertDialogFooter\"\n\nconst AlertDialogTitle = React.forwardRef<\n  HTMLHeadingElement,\n  WithClassName<AlertDialogPrimitive.Title.Props>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-sm font-semibold uppercase tracking-widest text-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nAlertDialogTitle.displayName = \"AlertDialogTitle\"\n\nconst AlertDialogDescription = React.forwardRef<\n  HTMLParagraphElement,\n  WithClassName<AlertDialogPrimitive.Description.Props>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Description\n    ref={ref}\n    className={cn(\"text-xs leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n))\nAlertDialogDescription.displayName = \"AlertDialogDescription\"\n\nconst AlertDialogAction = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<AlertDialogPrimitive.Close.Props>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Close\n    ref={ref}\n    className={cn(buttonVariants({ variant: \"destructive\" }), className)}\n    {...props}\n  />\n))\nAlertDialogAction.displayName = \"AlertDialogAction\"\n\nconst AlertDialogCancel = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<AlertDialogPrimitive.Close.Props>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Close\n    ref={ref}\n    className={cn(buttonVariants({ variant: \"outline\" }), className)}\n    {...props}\n  />\n))\nAlertDialogCancel.displayName = \"AlertDialogCancel\"\n\nexport {\n  AlertDialog,\n  AlertDialogPortal,\n  AlertDialogOverlay,\n  AlertDialogTrigger,\n  AlertDialogContent,\n  AlertDialogHeader,\n  AlertDialogFooter,\n  AlertDialogTitle,\n  AlertDialogDescription,\n  AlertDialogAction,\n  AlertDialogCancel,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/telemetry/button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-overlay": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 1.5rem 4rem oklch(0 0 0 / 0.7), 0 0 2rem oklch(0.78 0.21 148 / 0.1)"
+    },
+    "dark": {
+      "shadow-overlay": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 1.5rem 4rem oklch(0 0 0 / 0.7), 0 0 2rem oklch(0.78 0.21 148 / 0.1)"
+    }
+  }
+}

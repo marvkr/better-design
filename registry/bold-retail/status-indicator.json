@@ -1,0 +1,31 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail StatusIndicator: a small dot beside a plain label, the way a\n * product page says \"In stock\" or \"Only a few left\".\n *\n * The label stays in secondary ink at full contrast, and the dot alone\n * carries the state: grey for idle, green for done, amber for attention,\n * red for failure and blue for information. Each variant sets the dot colour\n * on the wrapper, so the exported variants style any custom marker too.\n */\nconst statusIndicatorVariants = cva(\n  \"inline-flex items-center gap-2 text-sm text-(--foreground-secondary)\",\n  {\n    variants: {\n      variant: {\n        default: \"[--status-dot:var(--control)]\",\n        success: \"[--status-dot:var(--success)]\",\n        warning: \"[--status-dot:var(--warning)]\",\n        destructive: \"[--status-dot:var(--destructive)]\",\n        info: \"[--status-dot:var(--info)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface StatusIndicatorProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, variant, children, ...props }, ref) => (\n    <span\n      ref={ref}\n      data-slot=\"status-indicator\"\n      data-variant={variant ?? \"default\"}\n      className={cn(statusIndicatorVariants({ variant }), className)}\n      {...props}\n    >\n      <span\n        aria-hidden=\"true\"\n        className=\"size-2 shrink-0 rounded-full bg-(--status-dot)\"\n      />\n      {children}\n    </span>\n  ),\n);\nStatusIndicator.displayName = \"StatusIndicator\";\n\nexport { StatusIndicator, statusIndicatorVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.518 0.126 155.8)",
+      "warning": "oklch(0.72 0.15 70)",
+      "info": "oklch(0.528 0.262 263.8)",
+      "foreground-secondary": "oklch(0.345 0.003 286.2)",
+      "control": "oklch(0.546 0.003 286.3)"
+    },
+    "dark": {
+      "success": "oklch(0.648 0.17 149.9)",
+      "warning": "oklch(0.78 0.14 75)",
+      "info": "oklch(0.68 0.17 262)",
+      "foreground-secondary": "oklch(0.839 0.001 286.4)",
+      "control": "oklch(0.7 0.003 286.3)"
+    }
+  }
+}

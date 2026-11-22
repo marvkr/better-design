@@ -17,7 +17,7 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(
       <div
         ref={ref}
         className={cn(
-          "flex flex-col items-center justify-center gap-5 rounded-[20px]",
+          "flex flex-col items-center justify-center gap-5 rounded-[1.25rem]",
           "border border-dashed border-border",
           "bg-secondary/30 p-12 text-center",
           className
@@ -28,8 +28,8 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(
           <div
             className={cn(
               "flex h-14 w-14 items-center justify-center",
-              "rounded-[12px] border border-border bg-background",
-              "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+              "rounded-[0.75rem] border border-border bg-background",
+              "[box-shadow:var(--shadow-control)]",
               "text-muted-foreground"
             )}
           >

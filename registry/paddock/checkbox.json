@@ -1,0 +1,32 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing } from \"./_shared\";\n\n/**\n * Paddock Checkbox: an empty box is a small white tile with a 1px cool\n * border, the card finish at the size of a tick. Checked, it fills with the\n * primary Button's teal and its top highlight, so a ticked box and the button\n * read as one material.\n */\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    data-slot=\"checkbox\"\n    className={cn(\n      \"peer relative grid size-4.5 shrink-0 place-items-center rounded-xs border border-transparent\",\n      \"bg-(--field) text-primary-foreground shadow-(--control-ring)\",\n      controlChecked,\n      \"transition-[box-shadow,background-color] duration-fast ease-out\",\n      \"data-[state=unchecked]:hover:shadow-(--control-lift)\",\n      focusRing,\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      data-slot=\"checkbox-indicator\"\n      className=\"flex items-center justify-center text-current\"\n    >\n      {props.checked === \"indeterminate\" ? (\n        <Icon icon=\"mingcute:minimize-line\" className=\"size-3\" />\n      ) : (\n        <Icon icon=\"mingcute:check-line\" className=\"size-3\" />\n      )}\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n));\nCheckbox.displayName = CheckboxPrimitive.Root.displayName;\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox@^1.3.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(1 0 0)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.62 0.02 245)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.5 0.02 245)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.012 240)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.56 0.012 240)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.66 0.012 240)"
+    }
+  }
+}

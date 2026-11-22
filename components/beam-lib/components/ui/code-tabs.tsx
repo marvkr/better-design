@@ -40,7 +40,7 @@ const CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {
             onClick={() => setActive(tab.label)}
             className={cn(
               "relative px-3 py-1.5 text-xs font-medium rounded-t-md",
-              "transition-[background-color,color] duration-150",
+              "transition-[background-color,color] duration-fast",
               active === tab.label
                 ? "bg-card text-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent/40"

@@ -34,7 +34,7 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           isHorizontal ? "flex-row" : "flex-col",
           variant === "bordered" && [
             "rounded-xl border border-border overflow-hidden",
-            "shadow-[inset_0_2px_4px_0_rgba(35,35,35,0.8)]",
+            "shadow-[inset_0_0.125rem_0.25rem_0_color-mix(in_oklch,var(--foreground)_8%,transparent)]",
           ],
           attached && [
             "*:rounded-none",

@@ -1,0 +1,25 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Badge — a 6px-radius chip, never a pill. A chip on a light surface\n * is filled, not outlined: a 1px outline on a white chip sitting on a white\n * field is invisible. Counts and ids inside a chip run mono with\n * tabular-nums.\n */\n\nconst badgeVariants = cva(\n  [\n    \"inline-flex items-center gap-1 rounded-[0.375rem] px-2 py-0.5\",\n    \"text-[0.7188rem] font-medium leading-[1rem] whitespace-nowrap\",\n    \"transition-colors duration-fast\",\n    \"[&_svg]:size-3 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground\",\n        secondary: \"text-secondary-foreground shadow-[var(--shadow-row)] bg-[color:oklch(0.88_0.003_106.5)]\",\n        outline: \"border border-border text-foreground bg-[color:oklch(0.88_0_187.6)]\",\n        accent: \"bg-[color:oklch(0.879_0.019_273.2)] text-[color:oklch(0.493_0.227_268.3)]\",\n        destructive: \"bg-destructive/16 text-[color:oklch(0.491_0.163_32)]\",\n        success: \"bg-success/17 text-[color:oklch(0.466_0.094_151)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant }), className)} {...props} />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5262 0.0942 151.04)",
+      "shadow-row": "inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07), 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05)"
+    },
+    "dark": {
+      "success": "oklch(0.5262 0.0942 151.04)",
+      "shadow-row": "inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.07), 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.05)"
+    }
+  }
+}

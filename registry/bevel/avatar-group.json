@@ -1,0 +1,24 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel AvatarGroup.\n *\n * Faces overlap by 8px and each one carries a ring in the page color, which is\n * what cuts the circle behind it cleanly. The overflow count is an inner\n * surface at the same size, so it reads as another seat in the row rather than\n * a control.\n */\n\n/** Props for `AvatarGroup`; `max` caps the faces, `total` names the real count. */\ninterface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  max?: number\n  total?: number\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ className, children, max, total, ...props }, ref) => {\n    const childArray = React.Children.toArray(children)\n    const visible = max ? childArray.slice(0, max) : childArray\n    const hiddenCount = (total ?? childArray.length) - visible.length\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex items-center -space-x-2\", className)}\n        {...props}\n      >\n        {visible.map((child, i) => (\n          <div key={i} className=\"rounded-full ring-2 ring-background\">\n            {child}\n          </div>\n        ))}\n        {hiddenCount > 0 && (\n          <div\n            className={cn(\n              \"relative flex size-10 items-center justify-center rounded-full\",\n              \"bg-[var(--inner)] text-[var(--strong)]\",\n              \"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem]\",\n              \"ring-2 ring-background [box-shadow:var(--shadow-inset)]\",\n            )}\n          >\n            +{hiddenCount}\n          </div>\n        )}\n      </div>\n    )\n  },\n)\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { AvatarGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Toggle — idle: a flat ghost. Pressed on: the raised bezel material with a\n * cyan-tinted text so the active state matches the toolbar pills.\n */\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium\",\n    \"text-muted-foreground transition-[color,box-shadow,background-color] duration-fast\",\n    \"hover:bg-accent hover:text-accent-foreground\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-pressed:text-foreground data-pressed:border data-pressed:border-border\",\n    \"data-pressed:[background-image:var(--bezel)]\",\n    \"data-pressed:[box-shadow:var(--shadow-raised)]\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-border bg-transparent\",\n      },\n      size: {\n        sm: \"h-8 px-2.5 min-w-8\",\n        default: \"h-9 px-3 min-w-9\",\n        lg: \"h-10 px-4 min-w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  TogglePrimitive.Props & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Talentboard Kbd: tiny raised keycap, the same layered language as buttons.\n\ninterface KbdProps extends React.HTMLAttributes<HTMLElement> {}\n\nfunction Kbd({ className, ...props }: KbdProps) {\n  return (\n    <kbd\n      className={cn(\n        \"inline-flex items-center justify-center rounded-md px-1.5 py-0.5\",\n        \"border border-border bg-card font-mono text-xs font-medium text-muted-foreground\",\n        \"shadow-[var(--tb-shadow-raise)]\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Kbd };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-shadow-raise": "0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.07), 0 0.125rem 0.375rem -0.0625rem oklch(0.27 0.03 60 / 0.08)"
+    },
+    "dark": {
+      "tb-shadow-raise": "0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.07), 0 0.125rem 0.375rem -0.0625rem oklch(0.27 0.03 60 / 0.08)"
+    }
+  }
+}

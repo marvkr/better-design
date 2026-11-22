@@ -1,0 +1,31 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toaster as Sonner } from \"sonner\"\n\n// Amber Glass Sonner: glass toast surface via CSS variables.\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      theme=\"dark\"\n      className=\"toaster group\"\n      style={\n        // SAFETY: CSS custom properties are valid inline style keys that\n        // CSSProperties cannot spell.\n        {\n          \"--normal-bg\": \"var(--popover)\",\n          \"--normal-text\": \"var(--popover-foreground)\",\n          \"--normal-border\": \"var(--ag-border)\",\n        } as React.CSSProperties\n      }\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:backdrop-blur-[var(--ag-blur)] group-[.toaster]:shadow-[var(--shadow-popover)] group-[.toaster]:rounded-lg\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-[image:var(--ag-primary-grad)] group-[.toast]:text-primary-foreground group-[.toast]:font-semibold\",\n          cancelButton:\n            \"group-[.toast]:bg-[var(--ag-fill)] group-[.toast]:text-muted-foreground\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 1.125rem 3.125rem oklch(0 0 0 / 0.55)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 1.125rem 3.125rem oklch(0 0 0 / 0.55)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))"
+    }
+  }
+}

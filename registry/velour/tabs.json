@@ -1,0 +1,27 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * The list is a recessed velvet well; the active tab is a raised velour\n * pill lifting out of it, the same material as secondary buttons.\n */\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(\n      \"inline-flex h-10 items-center justify-center gap-1 rounded-lg p-1\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsList.displayName = TabsPrimitive.List.displayName\n\nconst TabsTrigger = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Trigger\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3.5 py-1.5 text-sm font-medium\",\n      \"transition-[background-image,box-shadow,color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      \"data-[state=active]:text-foreground\",\n      \"data-[state=active]:[background-image:var(--velour-raised)]\",\n      \"data-[state=active]:[box-shadow:var(--shadow-button)]\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName\n\nconst TabsContent = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Content\n    ref={ref}\n    className={cn(\n      \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsContent.displayName = TabsPrimitive.Content.displayName\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

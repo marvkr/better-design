@@ -1,0 +1,37 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for Bold retail components.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes. This keeps the background,\n * border, focus ring, hover, disabled and transition behaviour identical\n * across every form field in the design system.\n *\n * Bold retail fields are white boxes behind a grey edge with a 0.75rem\n * corner, the way a checkout form reads. Focus turns the edge black and adds\n * a soft grey halo around it, the only focus halo the system uses.\n *\n * Do NOT copy-paste these classes into individual components - always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-lg border border-(--line-strong) bg-(--field) px-4 text-base text-foreground \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-(--control) \" +\n  \"focus-visible:border-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-(--halo) \" +\n  \"disabled:cursor-not-allowed disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\";\n\n/** Height + vertical padding for single-line form fields (3rem, the button height) */\nexport const formFieldSingleLine = \"flex h-12 py-3\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-28 py-3\";\n\n/**\n * The soft grey search pill from the store header: filled, borderless, a\n * 1.5rem corner. Focus turns it white with a black edge and the grey halo.\n */\nexport const searchPill =\n  \"w-full min-w-0 rounded-3xl border border-transparent bg-secondary px-4 text-base text-foreground \" +\n  \"placeholder:text-muted-foreground transition-[background-color,border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:bg-(--secondary-hover) \" +\n  \"focus-visible:border-foreground focus-visible:bg-background focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-(--halo) \" +\n  \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\";\n\n/**\n * The floating panel shared by every menu, popover and dropdown: a white\n * panel with a 1rem corner, edged by a hairline ring folded into a soft\n * shadow token, so it reads in both themes without a separate border.\n */\nexport const popoverSurface =\n  \"rounded-xl bg-popover text-popover-foreground shadow-(--shadow-menu)\";\n\n/** A highlighted row inside a floating panel: soft grey fill, 0.5rem corner. */\nexport const menuItemBase =\n  \"relative flex min-h-9 cursor-default select-none items-center gap-2 rounded-md px-3 py-2 text-sm font-medium outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:text-(--foreground-disabled)\";\n\n/**\n * The primary fill: flat black, no gradient and no shadow. Hover lifts it to\n * charcoal; the press shrinks the pill a little. The pill shape comes from\n * the caller.\n */\nexport const primaryFill =\n  \"bg-primary text-primary-foreground hover:bg-(--primary-hover) active:bg-(--primary-active)\";\n\n/**\n * The same flat black on a small checked control (checkbox, radio, switch\n * track). Radix marks the checked state with data-state=\"checked\"; Base UI\n * with data-checked. A disabled control goes quiet even when checked.\n */\nexport const controlChecked =\n  \"data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground \" +\n  \"data-[checked]:border-primary data-[checked]:bg-primary data-[checked]:text-primary-foreground \" +\n  \"disabled:data-[state=checked]:border-(--line-strong) disabled:data-[state=checked]:bg-muted disabled:data-[state=checked]:text-(--foreground-disabled) \" +\n  \"data-[disabled]:data-[checked]:border-(--line-strong) data-[disabled]:data-[checked]:bg-muted data-[disabled]:data-[checked]:text-(--foreground-disabled)\";\n\n/**\n * A selected filter chip, toggle or segment: it flips fully to black with\n * white text. There is no middle state.\n */\nexport const activeInvert =\n  \"data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-primary-foreground\";\n\n/** The focus ring every interactive element uses: a black ring offset from the part. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.345 0.003 286.2)",
+      "primary-active": "oklch(0.414 0.003 286.3)",
+      "secondary-hover": "oklch(0.922 0 0)",
+      "line-strong": "oklch(0.62 0.003 286.3)",
+      "halo": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "control": "oklch(0.546 0.003 286.3)",
+      "field": "oklch(1 0 0)",
+      "shadow-menu": "0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.18), 0 0 0 0.0625rem oklch(0.178 0 0 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.922 0 0)",
+      "primary-active": "oklch(0.839 0.001 286.4)",
+      "secondary-hover": "oklch(0.31 0 0)",
+      "line-strong": "oklch(1 0 0 / 0.32)",
+      "halo": "oklch(1 0 0 / 0.16)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)",
+      "control": "oklch(0.7 0.003 286.3)",
+      "field": "oklch(0.178 0 0)",
+      "shadow-menu": "0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.12)"
+    }
+  }
+}

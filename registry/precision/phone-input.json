@@ -1,0 +1,26 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { ChevronDown } from \"lucide-react\"\nimport { formFieldBase } from \"./_shared\"\n\n// Precision Phone Input - crisp field surface with a country-code selector.\n\ninterface Country {\n  code: string\n  dial: string\n  name: string\n}\n\nconst COUNTRIES: Country[] = [\n  { code: \"US\", dial: \"+1\", name: \"United States\" },\n  { code: \"GB\", dial: \"+44\", name: \"United Kingdom\" },\n  { code: \"AU\", dial: \"+61\", name: \"Australia\" },\n  { code: \"CA\", dial: \"+1\", name: \"Canada\" },\n  { code: \"DE\", dial: \"+49\", name: \"Germany\" },\n  { code: \"FR\", dial: \"+33\", name: \"France\" },\n  { code: \"IN\", dial: \"+91\", name: \"India\" },\n  { code: \"JP\", dial: \"+81\", name: \"Japan\" },\n  { code: \"BR\", dial: \"+55\", name: \"Brazil\" },\n  { code: \"MX\", dial: \"+52\", name: \"Mexico\" },\n]\n\ninterface PhoneInputProps {\n  value?: string\n  onChange?: (value: string) => void\n  defaultCountry?: string\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction PhoneInput({\n  value = \"\",\n  onChange,\n  defaultCountry = \"US\",\n  placeholder = \"Phone number\",\n  disabled,\n  className,\n}: PhoneInputProps) {\n  const [open, setOpen] = React.useState(false)\n  const [country, setCountry] = React.useState(\n    () => COUNTRIES.find((c) => c.code === defaultCountry) ?? COUNTRIES[0]!\n  )\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const handler = (e: MouseEvent) => {\n      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) setOpen(false)\n    }\n    document.addEventListener(\"mousedown\", handler)\n    return () => document.removeEventListener(\"mousedown\", handler)\n  }, [])\n\n  const handleSelect = (c: Country) => {\n    setCountry(c)\n    setOpen(false)\n  }\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\n        formFieldBase,\n        \"relative flex h-9 items-stretch p-0 has-[input:focus-visible]:border-ring has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring/25\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        className\n      )}\n    >\n      {/* Country selector */}\n      <button\n        type=\"button\"\n        disabled={disabled}\n        onClick={() => setOpen((o) => !o)}\n        className={cn(\n          \"flex h-full items-center gap-1.5 rounded-l-md border-r border-border bg-muted px-3\",\n          \"text-sm font-medium text-foreground transition-colors hover:bg-accent\",\n          \"focus-visible:outline-none\",\n          disabled && \"cursor-not-allowed\"\n        )}\n      >\n        <span>{country?.dial}</span>\n        <ChevronDown className=\"h-3.5 w-3.5 text-muted-foreground\" />\n      </button>\n\n      {/* Phone input */}\n      <input\n        type=\"tel\"\n        value={value}\n        onChange={(e) => onChange?.(e.target.value)}\n        placeholder={placeholder}\n        disabled={disabled}\n        className=\"h-full flex-1 bg-transparent px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed\"\n      />\n\n      {/* Dropdown */}\n      {open && (\n        <div className=\"absolute left-0 top-11 z-50 w-56 rounded-md border border-border bg-popover p-1.5 shadow-[var(--shadow-popover)]\">\n          {COUNTRIES.map((c) => (\n            <button\n              key={c.code}\n              type=\"button\"\n              onClick={() => handleSelect(c)}\n              className={cn(\n                \"flex w-full items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm\",\n                \"transition-colors hover:bg-accent\",\n                country?.code === c.code\n                  ? \"text-primary font-medium\"\n                  : \"text-foreground\"\n              )}\n            >\n              <span className=\"w-8 font-mono text-xs text-muted-foreground\">{c.dial}</span>\n              <span className=\"truncate\">{c.name}</span>\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { PhoneInput }\nexport type { PhoneInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/precision/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.21 0.006 271 / 0.06), 0 0.0625rem 0.0625rem oklch(0.21 0.006 271 / 0.04), 0 0.25rem 0.5rem -0.125rem oklch(0.21 0.006 271 / 0.08), 0 0.625rem 1.25rem -0.375rem oklch(0.21 0.006 271 / 0.06)"
+    },
+    "dark": {
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.21 0.006 271 / 0.06), 0 0.0625rem 0.0625rem oklch(0.21 0.006 271 / 0.04), 0 0.25rem 0.5rem -0.125rem oklch(0.21 0.006 271 / 0.08), 0 0.625rem 1.25rem -0.375rem oklch(0.21 0.006 271 / 0.06)"
+    }
+  }
+}

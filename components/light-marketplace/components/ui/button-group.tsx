@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Energetic ButtonGroup: light marketplace, rounded-[14px] outer, charcoal theme
+// Energetic ButtonGroup: light marketplace, rounded-[0.875rem] outer, charcoal theme
 // No shadows, no extra borders — Energetic philosophy is borderless and flat
 // Divider: very subtle bg separation between attached buttons
 
@@ -34,11 +34,11 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
             "*:rounded-none",
             isHorizontal
               ? [
-                  "[&>*:first-child]:rounded-l-[14px] [&>*:last-child]:rounded-r-[14px]",
+                  "[&>*:first-child]:rounded-l-[0.875rem] [&>*:last-child]:rounded-r-[0.875rem]",
                   "[&>*:not(:first-child)]:-ml-px",
                 ]
               : [
-                  "[&>*:first-child]:rounded-t-[14px] [&>*:last-child]:rounded-b-[14px]",
+                  "[&>*:first-child]:rounded-t-[0.875rem] [&>*:last-child]:rounded-b-[0.875rem]",
                   "[&>*:not(:first-child)]:-mt-px",
                 ],
             "*:relative [&>*:focus-visible]:z-10 [&>*:hover]:z-10",

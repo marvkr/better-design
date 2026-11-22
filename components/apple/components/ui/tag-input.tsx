@@ -49,9 +49,9 @@ function TagInput({
   return (
     <div
       className={cn(
-        "flex min-h-10 w-full flex-wrap gap-1.5 rounded-[10px] border border-border bg-background px-3 py-2",
-        "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-        "transition duration-200 focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+        "flex min-h-10 w-full flex-wrap gap-1.5 rounded-[0.625rem] border border-border bg-background px-3 py-2",
+        "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
+        "transition duration-base focus-within:border-foreground focus-within:shadow-[0_0_0_0.1875rem_oklch(0_0_0/0.06)]",
         "cursor-text",
         disabled && "opacity-70 cursor-not-allowed",
         className
@@ -83,7 +83,7 @@ function TagInput({
         onBlur={() => addTag(input)}
         placeholder={value.length === 0 ? placeholder : undefined}
         disabled={disabled || (maxTags !== undefined && value.length >= maxTags)}
-        className="flex-1 min-w-[120px] bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
+        className="flex-1 min-w-[7.5rem] bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
         {...props}
       />
     </div>

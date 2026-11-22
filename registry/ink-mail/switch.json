@@ -1,0 +1,28 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Ink mail Switch: a 2.25rem by 1.25rem track. Off, it is a quiet well inside\n * an inset strong hairline with a grey knob. On, the track takes the off-white\n * primary fill and the knob turns black, the same flat material as the\n * primary button.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer group/switch inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full p-0.5\",\n      \"transition-[background-color,box-shadow] duration-fast ease-out\",\n      \"data-[state=unchecked]:bg-input data-[state=unchecked]:inset-ring data-[state=unchecked]:inset-ring-(--line-strong)\",\n      \"hover:data-[state=unchecked]:inset-ring-(--control)\",\n      \"data-[state=checked]:bg-primary\",\n      focusRing,\n      \"disabled:cursor-not-allowed disabled:data-[state=checked]:bg-muted disabled:data-[state=checked]:inset-ring disabled:data-[state=checked]:inset-ring-(--line-strong)\",\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-4 rounded-full shadow-(--shadow-thumb)\",\n        \"transition-[transform,background-color] duration-fast ease-out\",\n        \"data-[state=unchecked]:translate-x-0 data-[state=unchecked]:bg-muted-foreground\",\n        \"data-[state=checked]:translate-x-4 data-[state=checked]:bg-primary-foreground\",\n        \"group-disabled/switch:bg-(--foreground-disabled) group-disabled/switch:shadow-none\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "control": "oklch(0.52 0.006 240)",
+      "shadow-thumb": "0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

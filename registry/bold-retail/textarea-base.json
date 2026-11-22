@@ -1,0 +1,14 @@
+{
+  "name": "textarea-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\";\n\n/**\n * Bold retail Textarea: the checkout field grown to several lines, for a\n * delivery note or a product review.\n */\nconst Textarea = React.forwardRef<\n  HTMLTextAreaElement,\n  React.TextareaHTMLAttributes<HTMLTextAreaElement>\n>(({ className, ...props }, ref) => (\n  <textarea\n    ref={ref}\n    data-slot=\"textarea\"\n    className={cn(formFieldBase, formFieldMultiLine, \"leading-relaxed\", className)}\n    {...props}\n  />\n));\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ]
+}

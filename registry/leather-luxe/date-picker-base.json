@@ -1,0 +1,32 @@
+{
+  "name": "date-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport { Calendar as CalendarIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"@/components/ui/popover\"\nimport { formFieldBase } from \"./_shared\"\n\n// Leather Luxe Date Picker: recessed-well trigger that matches the Select\n// trigger and every form field, opening a glass calendar panel.\n\ninterface DatePickerProps {\n  value?: Date\n  onChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: DatePickerProps) {\n  const formatted = value\n    ? value.toLocaleDateString(\"en-US\", {\n        year: \"numeric\",\n        month: \"long\",\n        day: \"numeric\",\n      })\n    : null\n\n  return (\n    <Popover>\n      <PopoverTrigger\n        render={\n          <button\n            type=\"button\"\n            disabled={disabled}\n            className={cn(\n              formFieldBase,\n              \"flex h-10 items-center justify-start py-2 text-left font-normal\",\n              !value && \"text-muted-foreground\",\n              className\n            )}\n          />\n        }\n      >\n        <CalendarIcon className=\"mr-2 h-4 w-4 shrink-0 text-muted-foreground\" />\n        {formatted ?? placeholder}\n      </PopoverTrigger>\n      <PopoverContent\n        className={cn(\n          \"w-auto p-0 rounded-lg\",\n          \"border border-highlight bg-popover backdrop-blur-xl\",\n          \"[box-shadow:var(--shadow-popover)]\"\n        )}\n        align=\"start\"\n      >\n        <Calendar mode=\"single\" selected={value} onSelect={onChange} initialFocus />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/leather-luxe/calendar.json",
+    "https://better-design.com/registry/leather-luxe/popover-base.json",
+    "https://better-design.com/registry/leather-luxe/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "well": "oklch(0.14 0.005 65)",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "well": "oklch(0.14 0.005 65)",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

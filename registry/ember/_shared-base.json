@@ -1,0 +1,44 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "// Amber Glass: shared material recipes.\n// Centralizes the dark-glass surface, the recessed input well and the amber\n// primary material so every primitive reads as the SAME pane of glass lit by\n// the same warm glow. All optical values live in globals.css :root as\n// --ag-* / --shadow-* tokens; edit them there to retune the whole DS.\n\n// Raised translucent panel: blur + hairline rim + top sheen + soft drop.\nexport const glassSurface =\n  \"backdrop-blur-[var(--ag-blur)] bg-[var(--ag-fill)] border border-[color:var(--ag-border)] shadow-[var(--shadow-glass)]\";\n\n// Hover state: the glass brightens and its rim sharpens.\nexport const glassHover =\n  \"hover:bg-[var(--ag-fill-hover)] hover:border-[color:var(--ag-border-strong)]\";\n\n// Floating glass: dropdown, select, popover, context-menu, tooltip,\n// hover-card, menubar, command and navigation-menu all share this surface.\nexport const popoverSurface =\n  \"bg-popover text-popover-foreground backdrop-blur-[var(--ag-blur)] border border-[color:var(--ag-border)] shadow-[var(--shadow-popover)]\";\n\n// The amber primary material: gradient fill, rim, sheen and warm glow.\n// Shared by the Button default variant and every filled control (checkbox,\n// switch track, radio dot, slider range and thumb), scaled to size.\nexport const primaryMaterial =\n  \"text-primary-foreground bg-[image:var(--ag-primary-grad)] shadow-[var(--shadow-primary)] border-0\";\n\nexport const primaryMaterialHover =\n  \"hover:shadow-[var(--shadow-primary-hover)] hover:brightness-[1.04]\";\n\n// Every form field (Input, Textarea, PasswordInput, SearchInput, NumberInput,\n// PhoneInput, InputOTP) imports this single base: same recessed well, same\n// amber focus glow.\nexport const formFieldBase =\n  \"w-full bg-[var(--ag-well)] text-foreground placeholder:text-muted-foreground \" +\n  \"border border-[color:var(--ag-border)] shadow-[var(--shadow-well)] \" +\n  \"transition-[border-color,box-shadow,background-color] duration-fast ease-out \" +\n  \"hover:border-[color:var(--ag-border-strong)] \" +\n  \"focus-visible:outline-none focus-visible:border-[color:oklch(0.69_0.195_42/0.55)] focus-visible:ring-2 focus-visible:ring-ring/35 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 1.125rem 3.125rem oklch(0 0 0 / 0.55)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.69 0.195 42 / 0.24), 0 0.625rem 1.875rem -0.5rem oklch(0.69 0.195 42 / 0.18)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.36), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.4), 0 0.375rem 1rem -0.1875rem oklch(0.69 0.195 42 / 0.3), 0 0.875rem 2.375rem -0.625rem oklch(0.69 0.195 42 / 0.24)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 1.125rem 3.125rem oklch(0 0 0 / 0.55)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.69 0.195 42 / 0.24), 0 0.625rem 1.875rem -0.5rem oklch(0.69 0.195 42 / 0.18)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.36), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.4), 0 0.375rem 1rem -0.1875rem oklch(0.69 0.195 42 / 0.3), 0 0.875rem 2.375rem -0.625rem oklch(0.69 0.195 42 / 0.24)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

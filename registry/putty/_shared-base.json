@@ -1,0 +1,20 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for putty.\n *\n * Clay fields are pressed INTO the surface: a soft recessed well rather than a\n * raised pillow. The recipe is the clay inset shadow (--shadow-clay-inset) on a\n * warm --input fill, so fields read as scooped-out clay next to the raised,\n * pillowy buttons. Focus brings up a soft blue ring that tracks --primary.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-[var(--radius-lg)] px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-base \" +\n  \"[box-shadow:var(--shadow-clay-inset)] \" +\n  \"hover:border-ring/30 \" +\n  \"focus-visible:outline-none focus-visible:border-ring \" +\n  \"focus-visible:[box-shadow:var(--shadow-clay-inset),0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_28%,transparent)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-10 py-2\"\nexport const formFieldMultiLine = \"flex min-h-[5.5rem] py-2.5 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
+    },
+    "dark": {
+      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
+    }
+  }
+}

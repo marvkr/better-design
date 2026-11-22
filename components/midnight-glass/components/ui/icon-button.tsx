@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const iconButtonVariants = cva(
   [
     "relative inline-flex items-center justify-center",
-    "rounded-full transition-all duration-300 ease-out",
+    "rounded-full transition-all duration-slow ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
     "active:scale-[0.95]",
@@ -21,7 +21,7 @@ const iconButtonVariants = cva(
         default:
           "bg-transparent text-foreground " +
           "border border-white/[0.15] " +
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.1)] " +
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.1)] " +
           "hover:bg-white/[0.1]",
         ghost:
           "bg-transparent text-muted-foreground " +

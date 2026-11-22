@@ -1,0 +1,11 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Item: list row like the portal's payment-method entry.\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  leading?: React.ReactNode;\n  trailing?: React.ReactNode;\n  title: string;\n  subtitle?: string;\n  disabled?: boolean;\n  interactive?: boolean;\n  as?: React.ElementType;\n  href?: string;\n}\n\nfunction Item({\n  leading,\n  trailing,\n  title,\n  subtitle,\n  disabled,\n  interactive,\n  as,\n  href,\n  className,\n  ...props\n}: ItemProps) {\n  const Comp = as ?? (href ? \"a\" : \"div\");\n\n  return (\n    <Comp\n      href={disabled ? undefined : href}\n      tabIndex={disabled ? -1 : undefined}\n      aria-disabled={disabled || undefined}\n      className={cn(\n        \"flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left\",\n        interactive &&\n          \"cursor-pointer transition-colors duration-fast hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        disabled && \"pointer-events-none opacity-50\",\n        className\n      )}\n      {...props}\n    >\n      {leading && <span className=\"flex shrink-0 items-center text-muted-foreground\">{leading}</span>}\n      <span className=\"min-w-0 flex-1\">\n        <span className=\"block truncate text-sm font-medium text-foreground\">{title}</span>\n        {subtitle && (\n          <span className=\"block truncate text-xs text-muted-foreground\">{subtitle}</span>\n        )}\n      </span>\n      {trailing && <span className=\"flex shrink-0 items-center text-muted-foreground\">{trailing}</span>}\n    </Comp>\n  );\n}\n\ninterface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {\n  divided?: boolean;\n}\n\nfunction ItemList({ divided, className, ...props }: ItemListProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col\",\n        divided && \"divide-y divide-border/60 [&>*]:rounded-none\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Item, ItemList };\nexport type { ItemProps, ItemListProps };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Ops Sharp Button — the precise graphite control of a developer ops surface.\n *\n * The hero (`default`) is the solid near-black tile: graphite fill, a hairline\n * top highlight, a tight contact drop, and a 1px rim (--shadow-primary). It is\n * the same material the active sidebar tile + filled controls wear. Secondary\n * is a crisp white panel button with a hairline border; outline/ghost stay\n * understated for a dense toolbar.\n */\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-md transition-[background-color,box-shadow,border-color,transform] duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Hero — solid graphite tile.\n        default:\n          \"bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] \" +\n          \"hover:bg-primary/90\",\n        // Same material under an explicit name for showcases that ask for it.\n        primary:\n          \"bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)] \" +\n          \"hover:bg-primary/90\",\n        // Secondary — crisp white panel button.\n        secondary:\n          \"bg-card text-secondary-foreground border border-border [box-shadow:var(--shadow-s)] \" +\n          \"hover:bg-secondary hover:border-ring/30\",\n        // Outline — transparent with a full hairline border.\n        outline:\n          \"border border-border bg-transparent text-foreground \" +\n          \"hover:bg-secondary hover:border-ring/30\",\n        // Ghost — no chrome, understated toolbar action.\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-secondary hover:text-foreground\",\n        // Destructive.\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-s)] \" +\n          \"hover:bg-destructive/90\",\n        // Link.\n        link: \"text-foreground underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6 text-sm\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

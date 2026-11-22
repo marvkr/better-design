@@ -1,0 +1,24 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { DayPicker } from \"react-day-picker\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>\n\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\n        \"p-4 backdrop-blur-xl bg-foreground/[0.06] rounded-2xl border border-border shadow-[inset_0_0_0.5rem_color-mix(in_oklch,var(--halo)_8%,transparent)]\",\n        className\n      )}\n      classNames={{\n        months:\n          \"flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0\",\n        month: \"space-y-4\",\n        month_caption: \"flex justify-center pt-1 relative items-center\",\n        caption_label: \"text-sm font-medium text-foreground/90\",\n        nav: \"space-x-1 flex items-center\",\n        button_previous: cn(\n          \"absolute left-1 inline-flex items-center justify-center\",\n          \"h-7 w-7 rounded-full\",\n          \"backdrop-blur-md bg-foreground/[0.08] border border-border\",\n          \"text-foreground/60 transition-all duration-base\",\n          \"hover:bg-foreground/[0.14] hover:text-foreground hover:shadow-[0_0_0.75rem_color-mix(in_oklch,var(--halo)_8%,transparent)]\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40\"\n        ),\n        button_next: cn(\n          \"absolute right-1 inline-flex items-center justify-center\",\n          \"h-7 w-7 rounded-full\",\n          \"backdrop-blur-md bg-foreground/[0.08] border border-border\",\n          \"text-foreground/60 transition-all duration-base\",\n          \"hover:bg-foreground/[0.14] hover:text-foreground hover:shadow-[0_0_0.75rem_color-mix(in_oklch,var(--halo)_8%,transparent)]\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40\"\n        ),\n        month_grid: \"w-full border-collapse space-y-1\",\n        weekdays: \"flex\",\n        weekday:\n          \"text-foreground/40 rounded-md w-9 font-normal text-[0.8rem]\",\n        week: \"flex w-full mt-2\",\n        day: cn(\n          \"h-9 w-9 text-center text-sm p-0 relative\",\n          \"[&:has([aria-selected])]:bg-primary/15 [&:has([aria-selected])]:backdrop-blur-sm\",\n          \"first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full\",\n          \"focus-within:relative focus-within:z-20\"\n        ),\n        day_button: cn(\n          \"inline-flex items-center justify-center\",\n          \"h-9 w-9 p-0 rounded-full font-normal text-foreground/80\",\n          \"transition-all duration-base\",\n          \"hover:bg-foreground/[0.08] hover:text-foreground hover:shadow-[0_0_0.75rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40\",\n          \"aria-selected:opacity-100\"\n        ),\n        selected: cn(\n          \"[&_button]:bg-primary [&_button]:text-primary-foreground [&_button]:font-medium\",\n          \"[&_button]:shadow-[0_0_1rem_color-mix(in_oklch,var(--primary)_40%,transparent)]\",\n          \"[&_button]:hover:brightness-110 [&_button]:hover:text-primary-foreground\",\n          \"[&_button]:focus:bg-primary [&_button]:focus:text-primary-foreground\"\n        ),\n        today: cn(\n          \"[&_button]:bg-foreground/[0.08] [&_button]:text-foreground [&_button]:border [&_button]:border-border\"\n        ),\n        outside: \"text-foreground/20 opacity-50\",\n        disabled: \"text-foreground/20 opacity-30\",\n        range_middle:\n          \"aria-selected:bg-primary/15 aria-selected:text-foreground/90\",\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, ...chevronProps }) => (\n          <Icon\n            icon={\n              orientation === \"left\"\n                ? \"tabler:chevron-left\"\n                : orientation === \"right\"\n                  ? \"tabler:chevron-right\"\n                  : orientation === \"up\"\n                    ? \"tabler:chevron-up\"\n                    : \"tabler:chevron-down\"\n            }\n            className=\"h-4 w-4\"\n            {...chevronProps}\n          />\n        ),\n      }}\n      {...props}\n    />\n  )\n}\nCalendar.displayName = \"Calendar\"\n\nexport { Calendar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2",
+    "react-day-picker@^9.7.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)"
+    }
+  }
+}

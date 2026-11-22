@@ -1,0 +1,29 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/**\n * Margin TagInput: the grey filled field collecting soft oxblood tag chips, the\n * same chips as the tag bar above a note. Enter or a comma adds a tag;\n * Backspace on an empty input removes the last one.\n */\nexport interface TagInputProps {\n  value: string[];\n  onValueChange: (tags: string[]) => void;\n  placeholder?: string;\n  className?: string;\n  disabled?: boolean;\n  /** The most tags the field accepts; further entries are ignored. */\n  maxTags?: number;\n}\n\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  ({ value, onValueChange, placeholder = \"Add tag...\", className, disabled, maxTags }, ref) => {\n    const [input, setInput] = React.useState(\"\");\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim();\n      if (!trimmed || value.includes(trimmed)) return;\n      if (maxTags && value.length >= maxTags) return;\n      onValueChange([...value, trimmed]);\n      setInput(\"\");\n    };\n\n    const removeTag = (tag: string) => {\n      onValueChange(value.filter((t) => t !== tag));\n    };\n\n    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n      if (e.key === \"Enter\" || e.key === \",\") {\n        e.preventDefault();\n        addTag(input);\n      } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n        removeTag(value[value.length - 1]);\n      }\n    };\n\n    return (\n      <div\n        data-slot=\"tag-input\"\n        className={cn(\n          formFieldBase,\n          \"flex min-h-7.5 flex-wrap items-center gap-1 px-1 py-0.5\",\n          \"focus-within:border-primary/45 focus-within:bg-card focus-within:ring-3 focus-within:ring-ring\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className,\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            className=\"inline-flex h-6 items-center gap-0.5 rounded-md bg-(--mark) pl-2 pr-0.5 text-xs font-medium text-(--mark-foreground)\"\n          >\n            {tag}\n            <button\n              type=\"button\"\n              onClick={() => removeTag(tag)}\n              className={cn(\n                \"flex size-5 items-center justify-center rounded-sm text-current opacity-55\",\n                \"transition duration-fast ease-(--ease-out) hover:bg-primary/12 hover:opacity-100\",\n                \"outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring\",\n              )}\n              aria-label={`Remove ${tag}`}\n              disabled={disabled}\n            >\n              <Icon icon=\"solar:close-circle-linear\" className=\"size-3.5\" aria-hidden />\n            </button>\n          </span>\n        ))}\n        <input\n          ref={ref}\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyDown={onKeyDown}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          disabled={disabled}\n          className=\"h-6 min-w-20 flex-1 bg-transparent px-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        />\n      </div>\n    );\n  },\n);\nTagInput.displayName = \"TagInput\";\n\nexport { TagInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mark": "oklch(0.895 0.04 28)",
+      "mark-foreground": "oklch(0.38 0.12 25)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "mark": "oklch(0.32 0.05 25)",
+      "mark-foreground": "oklch(0.88 0.06 30)"
+    }
+  }
+}

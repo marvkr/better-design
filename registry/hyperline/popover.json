@@ -1,0 +1,17 @@
+{
+  "name": "popover",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\n\nimport { cn } from \"@/lib/utils\";\nimport { hlPopSurface } from \"./_shared\";\n\n// Hyperline Popover: floating surface on the shared layered pop shadow.\n\nconst Popover = PopoverPrimitive.Root;\n\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\nconst PopoverContent = React.forwardRef<\n  React.ComponentRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 6, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      data-slot=\"popover-content\"\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(\n        hlPopSurface,\n        \"origin-(--radix-popover-content-transform-origin) z-50 w-72 rounded-lg p-4 outline-none\",\n        \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 duration-base\",\n        className\n      )}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = PopoverPrimitive.Content.displayName;\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-popover@^1.1.14"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/hyperline/_shared.json"
+  ]
+}

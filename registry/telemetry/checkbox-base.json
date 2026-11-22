@@ -1,0 +1,26 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Checkbox: square acknowledge toggle.\n// Unchecked: recessed dark well. Checked: the same signal-green plate as the\n// primary Button (rim + inner highlight + green glow, scaled down).\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nfunction Checkbox({\n  className,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center size-4 shrink-0 rounded-xs\",\n        \"border border-border bg-input\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        \"transition-all duration-fast\",\n        \"hover:border-ring/50\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-40\",\n        \"data-checked:border-transparent data-checked:bg-primary data-checked:text-primary-foreground\",\n        \"data-checked:[box-shadow:var(--shadow-control)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className={cn(\"flex items-center justify-center text-current\")}\n      >\n        <Icon icon=\"tabler:check\" className=\"size-full size-3\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-control": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.4), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.35), 0 0 0.75rem oklch(0.78 0.21 148 / 0.3)",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-control": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.4), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.35), 0 0 0.75rem oklch(0.78 0.21 148 / 0.3)",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

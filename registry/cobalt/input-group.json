@@ -1,0 +1,22 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * InputGroup — one shared recessed well; prefix/suffix addons are raised\n * bezel caps fused to its ends, divided by quiet 1px borders.\n */\n\ninterface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"prefix\"> {\n  prefix?: React.ReactNode\n  suffix?: React.ReactNode\n  size?: \"default\" | \"sm\"\n  disabled?: boolean\n  error?: boolean\n}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  (\n    {\n      prefix,\n      suffix,\n      size = \"default\",\n      disabled,\n      error,\n      className,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex w-full items-stretch overflow-hidden\",\n          \"rounded-md border border-border bg-input\",\n          \"[box-shadow:var(--shadow-inset)]\",\n          \"transition-[border-color,box-shadow] duration-fast\",\n          \"focus-within:border-ring/60 focus-within:ring-2 focus-within:ring-ring/35\",\n          \"hover:border-ring/30\",\n          error && \"border-destructive/60 focus-within:border-destructive focus-within:ring-destructive/30\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        {prefix && (\n          <div\n            className={cn(\n              \"flex shrink-0 select-none items-center justify-center border-r border-border px-3\",\n              \"[background-image:var(--bezel)]\",\n              \"text-sm text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              size === \"default\" ? \"h-9\" : \"h-8\"\n            )}\n          >\n            {prefix}\n          </div>\n        )}\n\n        <div\n          className={cn(\n            \"flex-1 [&_input]:rounded-none [&_input]:border-0 [&_input]:shadow-none\",\n            \"[&_input]:focus-visible:border-0 [&_input]:focus-visible:ring-0 [&_input]:focus-visible:shadow-none\",\n            \"[&_input]:h-full [&_input]:w-full [&_input]:bg-transparent\",\n            disabled && \"[&_input]:cursor-not-allowed\"\n          )}\n        >\n          {children}\n        </div>\n\n        {suffix && (\n          <div\n            className={cn(\n              \"flex shrink-0 select-none items-center justify-center border-l border-border px-3\",\n              \"[background-image:var(--bezel)]\",\n              \"text-sm text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              size === \"default\" ? \"h-9\" : \"h-8\"\n            )}\n          >\n            {suffix}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nInputGroup.displayName = \"InputGroup\"\n\nexport { InputGroup }\nexport type { InputGroupProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

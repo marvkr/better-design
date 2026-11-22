@@ -1,0 +1,30 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Checkbox: a recessed dark square at rest; checked, it adopts the\n// hero magenta material (gradient + sheen + rim + glow), the same surface as\n// the primary Button, scaled to control size.\n\nfunction Checkbox({\n  className,\n  ...props\n}: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4.5 w-4.5 shrink-0 rounded-xs border border-border bg-input\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        \"transition-[background,box-shadow,border-color] duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:border-transparent data-checked:bg-primary\",\n        \"data-checked:[background-image:var(--gradient-primary)]\",\n        \"data-checked:[box-shadow:var(--shadow-button)]\",\n        \"data-checked:text-primary-foreground\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        <Icon icon=\"ph:check-bold\" className=\"h-3 w-3\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    }
+  }
+}

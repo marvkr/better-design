@@ -1,0 +1,20 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Kbd — the shortcut chip from the desk's hint bar: a small recessed\n * key with a hairline rim.\n */\n\nconst Kbd = React.forwardRef<\n  HTMLElement,\n  React.HTMLAttributes<HTMLElement>\n>(({ className, ...props }, ref) => (\n  <kbd\n    ref={ref}\n    className={cn(\n      \"inline-flex h-5 min-w-5 items-center justify-center rounded-md px-1.5\",\n      \"bg-muted font-sans text-[0.6875rem] font-medium tracking-[0.02em] text-muted-foreground\",\n      \"[box-shadow:var(--shadow-rim)]\",\n      className,\n    )}\n    {...props}\n  />\n));\nKbd.displayName = \"Kbd\";\n\nexport { Kbd };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

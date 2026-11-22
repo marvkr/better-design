@@ -1,0 +1,27 @@
+{
+  "name": "rating-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Margin Rating: a row of small stars that fill in amber. Pointing at a star\n * previews the value without moving it, and unfilled stars stay a pale grey\n * outline.\n */\nexport interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number;\n  max?: number;\n  onRatingChange?: (value: number) => void;\n  readOnly?: boolean;\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst sizes = {\n  sm: \"size-3.5\",\n  default: \"size-4\",\n  lg: \"size-5\",\n};\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  ({ className, value = 0, max = 5, onRatingChange, readOnly, size = \"default\", ...props }, ref) => {\n    const [hover, setHover] = React.useState<number | null>(null);\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        aria-label={`Rating: ${value} out of ${max}`}\n        data-slot=\"rating\"\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        onMouseLeave={() => !readOnly && setHover(null)}\n        {...props}\n      >\n        {Array.from({ length: max }).map((_, i) => {\n          const starValue = i + 1;\n          const active = (hover ?? value) >= starValue;\n\n          return (\n            <button\n              key={i}\n              type=\"button\"\n              disabled={readOnly}\n              aria-pressed={value >= starValue}\n              onMouseEnter={() => !readOnly && setHover(starValue)}\n              onClick={() => !readOnly && onRatingChange?.(starValue)}\n              className={cn(\n                \"rounded-sm p-0.5 transition-colors duration-fast ease-(--ease-out)\",\n                readOnly ? \"cursor-default\" : \"cursor-pointer\",\n                focusRing,\n              )}\n              aria-label={`${starValue} star${starValue > 1 ? \"s\" : \"\"}`}\n            >\n              <Icon\n                icon={active ? \"solar:star-bold\" : \"solar:star-linear\"}\n                className={cn(sizes[size], active ? \"text-warning\" : \"text-muted-foreground/40\")}\n                aria-hidden\n              />\n            </button>\n          );\n        })}\n      </div>\n    );\n  },\n);\nRating.displayName = \"Rating\";\n\nexport { Rating };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "warning": "oklch(0.74 0.13 75)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "warning": "oklch(0.8 0.12 78)"
+    }
+  }
+}

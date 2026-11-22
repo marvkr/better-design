@@ -1,0 +1,25 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Alert: inline status panel.\n// Tinted signal fill with a matching hairline border and a thick signal\n// edge on the left, like a severity row in the alarm console.\n\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-sm border p-4\",\n    \"border-l-2\",\n    \"[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-0.1875rem] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-card border-border border-l-primary text-foreground [&>svg]:text-primary\",\n        destructive:\n          \"bg-destructive/10 border-destructive/30 border-l-destructive text-destructive [&>svg]:text-destructive\",\n        warning:\n          \"bg-(--warning)/10 border-(--warning)/30 border-l-(--warning) text-(--warning) [&>svg]:text-(--warning)\",\n        info:\n          \"bg-(--info)/10 border-(--info)/30 border-l-(--info) text-(--info) [&>svg]:text-(--info)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n))\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\n      \"mb-1 text-xs font-semibold uppercase tracking-widest leading-none\",\n      className\n    )}\n    {...props}\n  />\n))\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"text-xs leading-relaxed opacity-90 [&_p]:leading-relaxed\", className)}\n    {...props}\n  />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "warning": "oklch(0.78 0.16 75)",
+      "info": "oklch(0.7 0.13 235)"
+    },
+    "dark": {
+      "warning": "oklch(0.78 0.16 75)",
+      "info": "oklch(0.7 0.13 235)"
+    }
+  }
+}

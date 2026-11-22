@@ -1,0 +1,33 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Frosted Glass Radio — empty glass ring; checked lights up with the same glass\n// material as the primary Button. The dot is a glossy specular orb.\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nfunction RadioGroup({\n  className,\n  ...props\n}: WithClassName<RadioGroupPrimitive.Props>) {\n  return (\n    <RadioGroupPrimitive data-slot=\"radio-group\" className={cn(\"grid gap-2\", className)} {...props} />\n  )\n}\nRadioGroup.displayName = \"RadioGroup\"\n\nfunction RadioGroupItem({\n  className,\n  ...props\n}: WithClassName<RadioPrimitive.Root.Props>) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square h-5 w-5 rounded-full\",\n        \"backdrop-blur-[var(--fg-blur)] backdrop-saturate-150 bg-[var(--fg-fill)]\",\n        \"border border-[color:var(--fg-border)]\",\n        \"shadow-[inset_0_0.0625rem_0_-0.0313rem_oklch(1_0_0/0.35)]\",\n        \"transition-all duration-base\",\n        \"hover:bg-[var(--fg-fill-hover)]\",\n        \"focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-0\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-[var(--fg-fill-hover)] data-checked:shadow-[var(--fg-shadow)]\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"size-full flex items-center justify-center\">\n        <div className=\"h-2.5 w-2.5 rounded-full bg-[radial-gradient(circle_at_35%_30%,oklch(1_0_0),oklch(1_0_0/0.85)_55%,oklch(0.9_0.02_285/0.7))] shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.5),0_0_0.375rem_oklch(1_0_0/0.4)]\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  )\n}\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    },
+    "dark": {
+      "fg-fill": "oklch(1 0 0 / 0.08)",
+      "fg-fill-hover": "oklch(1 0 0 / 0.14)",
+      "fg-border": "oklch(1 0 0 / 0.14)",
+      "fg-blur": "1.125rem",
+      "fg-glow": "oklch(0.8 0.13 285 / 0.18)",
+      "fg-shadow": "inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55), inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45), inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4), inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0313rem oklch(1 0 0 / 0.18), 0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0 1.375rem -0.125rem var(--fg-glow)"
+    }
+  }
+}

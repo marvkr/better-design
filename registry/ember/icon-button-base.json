@@ -1,0 +1,32 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { glassHover, primaryMaterial, primaryMaterialHover } from \"./_shared\"\n\n// Amber Glass IconButton: square glass chip; primary carries the amber material.\n\nconst iconButtonVariants = cva(\n  \"inline-flex items-center justify-center rounded-lg transition-all duration-fast ease-out \" +\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background \" +\n    \"disabled:pointer-events-none disabled:opacity-40 active:translate-y-px\",\n  {\n    variants: {\n      variant: {\n        default: cn(\n          \"backdrop-blur-[var(--ag-blur)] bg-[var(--ag-fill)] text-foreground\",\n          \"border border-[color:var(--ag-border)]\",\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.06)]\",\n          glassHover\n        ),\n        primary: cn(primaryMaterial, primaryMaterialHover),\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-[var(--ag-fill)] hover:text-foreground\",\n        destructive:\n          \"bg-destructive/15 text-[oklch(0.74_0.16_27)] border border-[color:oklch(0.6_0.21_27/0.3)] hover:bg-destructive/25\",\n      },\n      size: {\n        sm: \"h-7 w-7 [&>svg]:h-3.5 [&>svg]:w-3.5\",\n        default: \"h-9 w-9 [&>svg]:h-4 [&>svg]:w-4\",\n        lg: \"h-10 w-10 [&>svg]:h-5 [&>svg]:w-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <button\n      ref={ref}\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

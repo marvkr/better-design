@@ -1,0 +1,14 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Dim status hues like the reference's \"optimistic\" mint label. No glow. */\n\nconst statusIndicatorVariants = cva(\n  \"inline-flex items-center gap-2 text-sm\",\n  {\n    variants: {\n      variant: {\n        default: \"text-muted-foreground\",\n        success: \"text-[oklch(0.82_0.11_165)]\",\n        warning: \"text-[oklch(0.85_0.1_85)]\",\n        destructive: \"text-[oklch(0.78_0.14_22)]\",\n        info: \"text-primary\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst dotVariants = cva(\n  \"h-2 w-2 rounded-full [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.25)]\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-muted-foreground\",\n        success: \"bg-[oklch(0.7_0.12_165)]\",\n        warning: \"bg-[oklch(0.75_0.12_80)]\",\n        destructive: \"bg-destructive\",\n        info: \"bg-primary\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, variant, children, ...props }, ref) => (\n    <span\n      ref={ref}\n      className={cn(statusIndicatorVariants({ variant }), className)}\n      {...props}\n    >\n      <span className={cn(dotVariants({ variant }))} />\n      {children}\n    </span>\n  )\n)\nStatusIndicator.displayName = \"StatusIndicator\"\n\nexport { StatusIndicator, statusIndicatorVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

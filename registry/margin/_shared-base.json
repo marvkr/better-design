@@ -1,0 +1,55 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared finishes for the Base UI flavour of Margin.\n *\n * Each finish is the same constant, with the same value, as its twin in\n * `../components/_shared.ts`, so a component picks a finish instead of\n * writing its own shadow:\n *\n * - the oxblood face: flat oxblood ink inside a darker rule, worn by the\n *   primary Button and by every checked control;\n * - the tab: a paper face inside one ruled hairline, with no shadow;\n * - the clean field: a lighter sheet inside a firm rule;\n * - the sheet: a paper card bounded by one hairline.\n *\n * Base UI marks state with bare attributes (data-checked, data-unchecked,\n * data-highlighted, data-pressed, data-disabled, data-popup-open), so the\n * state selectors here read those instead of data-state. The file is copied\n * rather than imported because the registry ships this folder on its own.\n *\n * Form fields MUST import `formFieldBase`. Do NOT copy-paste these strings\n * into a component.\n */\n\n/** The focus ring every interactive part shares: a soft oxblood halo, no offset. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-3 focus-visible:ring-ring\";\n\n/**\n * The oxblood face: the primary Button's fill, darker oxblood rule.\n * Checkbox, switch, radio and slider wear the same classes on their checked\n * parts, so they read as one material with the button.\n */\nexport const oxFace =\n  \"bg-(image:--ox-face) text-primary-foreground shadow-(--ox-edge)\";\n\n/** The oxblood face, a step deeper, for hover. */\nexport const oxFaceHover = \"hover:bg-(image:--ox-face-hover)\";\n\n/** The darker oxblood rule on its own, around a paper slider thumb. */\nexport const oxHairline = \"shadow-(--ox-hairline)\";\n\n/** The pale oxblood mark for a gentle call to action. */\nexport const markFace =\n  \"bg-(image:--mark-face) text-(--mark-foreground) shadow-(--mark-edge) hover:brightness-97\";\n\n/** The ruled toolbar tab: a hairline ring and a shadow one step above flat. */\nexport const pillFace =\n  \"bg-card text-foreground shadow-(--pill-edge) \" +\n  \"transition duration-fast ease-(--ease-out) \" +\n  \"hover:bg-(--pill-face-hover) hover:shadow-(--pill-edge-hover)\";\n\n/** The quiet face: a step of paper for quiet buttons and neutral chips. */\nexport const quietFace =\n  \"bg-(--field) text-foreground shadow-(--field-shade) \" +\n  \"transition duration-fast ease-(--ease-out) hover:bg-(--field-hover)\";\n\n/** The red face for a destructive action, as flat as the oxblood. */\nexport const destructiveFace =\n  \"bg-(image:--destructive-face) text-destructive-foreground shadow-xs hover:brightness-105\";\n\n/** The sheet: a paper face bounded by one hairline, with no drop. */\nexport const sheetSurface = \"bg-card text-card-foreground shadow-(--shadow-card)\";\n\n/** The desk: one paper step below a card, for nested areas. */\nexport const canvasSurface = \"bg-muted text-card-foreground shadow-(--shadow-card)\";\n\n/** The slot: tracks and resting switch wells, sunk behind a firmer hairline. */\nexport const slotWell = \"bg-(--field) shadow-(--slot-edge)\";\n\n/** The press every button shares: a small scale toward the page. */\nexport const pressScale =\n  \"transition duration-fast ease-(--ease-out) active:scale-97 motion-reduce:active:scale-100\";\n\n/**\n * Base styles shared by every form-field surface: a clean sheet inside a\n * firm rule. On focus it takes an oxblood edge and wears the oxblood halo. The transparent border is there\n * so an invalid field can turn it red.\n */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-lg border border-transparent bg-(--field) px-3 text-sm text-foreground \" +\n  \"shadow-(--field-edge) placeholder:text-muted-foreground \" +\n  \"transition duration-fast ease-(--ease-out) \" +\n  \"focus-visible:outline-none focus-visible:border-primary/45 focus-visible:bg-card focus-visible:ring-3 focus-visible:ring-ring \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50 \" +\n  \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\";\n\n/** Height and vertical padding for single-line form fields (2.25rem). */\nexport const formFieldSingleLine = \"flex h-9 py-1.5\";\n\n/** Vertical padding and min-height for multi-line form fields. */\nexport const formFieldMultiLine = \"flex min-h-24 py-2 leading-normal\";\n\n/** The floating panel shared by every menu, popover, select and tooltip. */\nexport const popoverSurface =\n  \"rounded-xl bg-popover text-popover-foreground shadow-(--shadow-menu) outline-none\";\n\n/** A row inside a floating panel; the highlighted row turns a step of paper. */\nexport const menuItemBase =\n  \"relative flex h-8 cursor-default select-none items-center gap-2 rounded-md px-2.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-(--field) focus:text-accent-foreground data-[highlighted]:bg-(--field) data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:text-muted-foreground \" +\n  \"[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground\";\n\n/**\n * A checked small control (checkbox box, radio, switch track) in the oxblood\n * face. Radix marks it with data-state=\"checked\"; Base UI with data-checked.\n */\nexport const controlChecked =\n  \"data-[state=checked]:bg-(image:--ox-face) data-[state=checked]:text-primary-foreground data-[state=checked]:shadow-(--ox-edge) \" +\n  \"data-[checked]:bg-(image:--ox-face) data-[checked]:text-primary-foreground data-[checked]:shadow-(--ox-edge)\";\n\n/** A field whose popup is open keeps its focus look, so it reads as active. */\nexport const fieldOpen =\n  \"data-[popup-open]:border-primary/45 data-[popup-open]:bg-card data-[popup-open]:ring-3 data-[popup-open]:ring-ring\";\n\n/** Popups grow from their anchor and fade, and leave the same way. */\nexport const popupMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale] duration-fast ease-(--ease-out) \" +\n  \"data-[starting-style]:scale-97 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-97 data-[ending-style]:opacity-0\";\n\n/** The popover settles at the base duration, both ways. */\nexport const popoverMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale] duration-base ease-(--ease-out) \" +\n  \"data-[starting-style]:scale-97 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-97 data-[ending-style]:opacity-0\";\n\n/** A pressed toggle or chip rises out of the field as the paper tab. */\nexport const pressedFace =\n  \"data-[pressed]:bg-card data-[pressed]:text-foreground data-[pressed]:shadow-(--pill-edge)\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mark-foreground": "oklch(0.38 0.12 25)",
+      "field": "oklch(0.99 0.008 85)",
+      "ox-face": "linear-gradient(oklch(0.42 0.13 25), oklch(0.42 0.13 25))",
+      "ox-face-hover": "linear-gradient(oklch(0.37 0.12 25), oklch(0.37 0.12 25))",
+      "ox-edge": "0 0 0 0.0625rem oklch(0.35 0.11 25)",
+      "ox-hairline": "0 0 0 0.0625rem oklch(0.35 0.11 25)",
+      "mark-face": "linear-gradient(oklch(0.895 0.04 28), oklch(0.895 0.04 28))",
+      "mark-edge": "inset 0 0 0 0.0625rem oklch(0.42 0.13 25 / 0.2)",
+      "pill-face-hover": "oklch(0.955 0.014 85)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.82 0.016 85)",
+      "pill-edge-hover": "inset 0 0 0 0.0625rem oklch(0.72 0.02 85)",
+      "field-hover": "oklch(0.965 0.012 85)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)",
+      "slot-edge": "inset 0 0 0 0.0625rem oklch(0.57 0.02 80)",
+      "field-edge": "inset 0 0 0 0.0625rem oklch(0.6 0.02 80)",
+      "destructive-face": "linear-gradient(oklch(0.52 0.18 29), oklch(0.52 0.18 29))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)",
+      "shadow-card": "0 0 0 0.0625rem oklch(0.89 0.014 85)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(0.24 0.02 260 / 0.1), 0 0.5rem 1.5rem -0.5rem oklch(0.24 0.02 260 / 0.18)"
+    },
+    "dark": {
+      "mark-foreground": "oklch(0.88 0.06 30)",
+      "field": "oklch(0.22 0.014 260)",
+      "ox-face": "linear-gradient(oklch(0.52 0.14 25), oklch(0.52 0.14 25))",
+      "ox-face-hover": "linear-gradient(oklch(0.56 0.14 25), oklch(0.56 0.14 25))",
+      "ox-edge": "0 0 0 0.0625rem oklch(0.6 0.13 25)",
+      "ox-hairline": "0 0 0 0.0625rem oklch(0.6 0.13 25)",
+      "mark-face": "linear-gradient(oklch(0.32 0.05 25), oklch(0.32 0.05 25))",
+      "mark-edge": "inset 0 0 0 0.0625rem oklch(0.76 0.1 25 / 0.25)",
+      "pill-face-hover": "oklch(0.28 0.014 260)",
+      "pill-edge": "inset 0 0 0 0.0625rem oklch(0.36 0.014 260)",
+      "pill-edge-hover": "inset 0 0 0 0.0625rem oklch(0.46 0.014 260)",
+      "field-hover": "oklch(0.26 0.014 260)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)",
+      "slot-edge": "inset 0 0 0 0.0625rem oklch(0.58 0.015 85)",
+      "field-edge": "inset 0 0 0 0.0625rem oklch(0.56 0.015 85)",
+      "destructive-face": "linear-gradient(oklch(0.62 0.17 29), oklch(0.62 0.17 29))",
+      "shadow-card": "0 0 0 0.0625rem oklch(0.3 0.014 260)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(1 0 0 / 0.08), 0 0.75rem 1.5rem -0.5rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

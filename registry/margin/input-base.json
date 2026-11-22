@@ -1,0 +1,14 @@
+{
+  "name": "input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Margin Input: the grey filled field from the sidebar search, 1.875rem tall\n * with a 0.625rem corner. On focus it turns white, takes an oxblood edge and the\n * oxblood halo.\n */\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"file:mr-2 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground\",\n        className,\n      )}\n      ref={ref}\n      {...props}\n    />\n  ),\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "calendar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { DayPicker } from \"react-day-picker\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Calendar: shift-schedule grid.\n// Console panel with hairline frame; the selected day carries the\n// signal-green plate, today is an outlined cell.\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>\n\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\n        \"rounded-md border border-border bg-card p-4\",\n        className\n      )}\n      classNames={{\n        months:\n          \"flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0\",\n        month: \"space-y-4\",\n        month_caption: \"flex justify-center pt-1 relative items-center\",\n        caption_label:\n          \"text-xs font-semibold uppercase tracking-widest text-foreground\",\n        nav: \"space-x-1 flex items-center\",\n        button_previous: cn(\n          \"absolute left-1 inline-flex items-center justify-center\",\n          \"h-7 w-7 rounded-sm\",\n          \"border border-border bg-secondary\",\n          \"text-muted-foreground transition-colors duration-fast\",\n          \"hover:border-ring/50 hover:text-primary\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n        ),\n        button_next: cn(\n          \"absolute right-1 inline-flex items-center justify-center\",\n          \"h-7 w-7 rounded-sm\",\n          \"border border-border bg-secondary\",\n          \"text-muted-foreground transition-colors duration-fast\",\n          \"hover:border-ring/50 hover:text-primary\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n        ),\n        month_grid: \"w-full border-collapse space-y-1\",\n        weekdays: \"flex\",\n        weekday:\n          \"w-9 rounded-xs text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground\",\n        week: \"flex w-full mt-2\",\n        day: cn(\n          \"relative h-9 w-9 p-0 text-center text-xs\",\n          \"[&:has([aria-selected])]:bg-primary/10\",\n          \"first:[&:has([aria-selected])]:rounded-l-xs last:[&:has([aria-selected])]:rounded-r-xs\",\n          \"focus-within:relative focus-within:z-20\"\n        ),\n        day_button: cn(\n          \"inline-flex items-center justify-center\",\n          \"h-9 w-9 rounded-xs p-0 font-normal text-foreground/80\",\n          \"transition-colors duration-fast\",\n          \"hover:bg-accent hover:text-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n          \"aria-selected:opacity-100\"\n        ),\n        selected: cn(\n          \"[&_button]:bg-primary [&_button]:font-semibold [&_button]:text-primary-foreground\",\n          \"[&_button]:[box-shadow:var(--shadow-control)]\",\n          \"[&_button]:hover:bg-primary [&_button]:hover:text-primary-foreground\",\n          \"[&_button]:focus:bg-primary [&_button]:focus:text-primary-foreground\"\n        ),\n        today: cn(\n          \"[&_button]:border [&_button]:border-primary/50 [&_button]:text-primary\"\n        ),\n        outside: \"text-muted-foreground/40 opacity-50\",\n        disabled: \"text-muted-foreground/40 opacity-30\",\n        range_middle:\n          \"aria-selected:bg-primary/10 aria-selected:text-foreground\",\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, ...chevronProps }) => (\n          <Icon\n            icon={\n              orientation === \"left\"\n                ? \"tabler:chevron-left\"\n                : orientation === \"right\"\n                  ? \"tabler:chevron-right\"\n                  : orientation === \"up\"\n                    ? \"tabler:chevron-up\"\n                    : \"tabler:chevron-down\"\n            }\n            className=\"size-4\"\n            {...chevronProps}\n          />\n        ),\n      }}\n      {...props}\n    />\n  )\n}\nCalendar.displayName = \"Calendar\"\n\nexport { Calendar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2",
+    "react-day-picker@^9.7.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-control": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.4), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.35), 0 0 0.75rem oklch(0.78 0.21 148 / 0.3)"
+    },
+    "dark": {
+      "shadow-control": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.4), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.35), 0 0 0.75rem oklch(0.78 0.21 148 / 0.3)"
+    }
+  }
+}

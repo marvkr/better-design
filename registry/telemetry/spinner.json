@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Spinner: radar sweep. Dark ring with a signal-green\n// sweeping arc and a faint green glow.\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"animate-spin rounded-full border-2 border-border border-t-primary\",\n        \"shadow-[0_0_0.5rem_oklch(0.78_0.21_148/0.2)]\",\n        size === \"sm\" && \"size-4\",\n        size === \"default\" && \"size-6\",\n        size === \"lg\" && \"size-8\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nSpinner.displayName = \"Spinner\"\n\nexport { Spinner }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

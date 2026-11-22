@@ -1,0 +1,30 @@
+{
+  "name": "resizable",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ResizablePrimitive from \"react-resizable-panels\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst ResizablePanelGroup = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (\n  <ResizablePrimitive.PanelGroup\n    className={cn(\n      \"flex h-full w-full data-[panel-group-direction=vertical]:flex-col\",\n      className\n    )}\n    {...props}\n  />\n)\n\nconst ResizablePanel = ResizablePrimitive.Panel\n\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {\n  withHandle?: boolean\n}) => (\n  <ResizablePrimitive.PanelResizeHandle\n    className={cn(\n      \"relative flex w-px items-center justify-center bg-border\",\n      \"after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2\",\n      \"transition-colors duration-fast\",\n      \"hover:bg-ring focus-visible:bg-ring focus-visible:outline-none\",\n      \"data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0\",\n      className\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div\n        className={cn(\n          \"z-10 flex h-5 w-3.5 items-center justify-center rounded-full\",\n          \"bg-[image:var(--pill-gradient)] hover:bg-[image:var(--pill-gradient-hover)]\",\n          \"border border-border [box-shadow:var(--shadow-pill)] hover:[box-shadow:var(--shadow-pill-hover)]\",\n          \"transition-[box-shadow,background] duration-fast\"\n        )}\n      >\n        <Icon\n          icon=\"tabler:grip-vertical\"\n          className=\"h-2.5 w-2.5 text-primary-foreground\"\n        />\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n)\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels@^3.0.3",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-pill-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.28), 0 0.25rem 0.625rem oklch(0 0 0 / 0.3)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "pill-gradient-hover": "linear-gradient(180deg, oklch(0.45 0 0) 0%, oklch(0.4 0 0) 100%)"
+    },
+    "dark": {
+      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
+      "shadow-pill-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.28), 0 0.25rem 0.625rem oklch(0 0 0 / 0.3)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
+      "pill-gradient-hover": "linear-gradient(180deg, oklch(0.45 0 0) 0%, oklch(0.4 0 0) 100%)"
+    }
+  }
+}

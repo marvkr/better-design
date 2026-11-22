@@ -1,0 +1,29 @@
+{
+  "name": "code-block-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showCopy?: boolean;\n}\n\n/**\n * Cream editorial CodeBlock: the dark warm panel a reading room shows its\n * product in.\n *\n * Code sits on warm charcoal with a 1.5rem corner, in pale monospace. A\n * slightly lighter header row names the file or the language on the left\n * and holds a quiet copy button on the right.\n */\nconst CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(\n  ({ className, code, language, filename, showCopy = true, ...props }, ref) => {\n    const caption = filename ?? language;\n    const hasHeader = Boolean(caption) || showCopy;\n\n    return (\n      <div\n        data-slot=\"code-block\"\n        className=\"overflow-hidden rounded-xl bg-(--code) text-(--code-foreground)\"\n      >\n        {hasHeader && (\n          <div\n            data-slot=\"code-block-header\"\n            className=\"flex h-10 items-center justify-between gap-3 bg-(--code-header) ps-4 pe-1.5 text-xs text-(--code-muted)\"\n          >\n            <span className=\"min-w-0 truncate font-mono\">{caption}</span>\n            {showCopy && (\n              <CopyButton\n                value={code}\n                size=\"icon-sm\"\n                label=\"Copy code\"\n                className=\"text-(--code-muted) hover:bg-(--code-foreground)/10 hover:text-(--code-foreground)\"\n              />\n            )}\n          </div>\n        )}\n        <pre\n          ref={ref}\n          data-slot=\"code-block-code\"\n          className={cn(\n            \"overflow-x-auto p-5 font-mono text-[0.8125rem] leading-relaxed\",\n            className,\n          )}\n          {...props}\n        >\n          <code>{code}</code>\n        </pre>\n      </div>\n    );\n  },\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/copy-button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "code": "oklch(0.214 0.002 67.7)",
+      "code-foreground": "oklch(0.948 0.011 95.2)",
+      "code-header": "oklch(0.257 0.006 78.2)",
+      "code-muted": "oklch(0.696 0.011 87.5)"
+    },
+    "dark": {
+      "code": "oklch(0.155 0.002 67.7)",
+      "code-foreground": "oklch(0.948 0.011 95.2)",
+      "code-header": "oklch(0.214 0.002 67.7)",
+      "code-muted": "oklch(0.696 0.011 87.5)"
+    }
+  }
+}

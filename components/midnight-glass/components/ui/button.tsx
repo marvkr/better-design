@@ -13,8 +13,8 @@ import { cn } from "@/lib/utils";
 const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "text-[15px] font-medium leading-none tracking-[0.01em]",
-    "rounded-full transition-all duration-300 ease-out",
+    "text-[0.9375rem] font-medium leading-none tracking-[0.01em]",
+    "rounded-full transition-all duration-slow ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
     "active:bg-white/[0.15] active:scale-[0.98]",
@@ -26,17 +26,17 @@ const buttonVariants = cva(
         default:
           "bg-transparent text-white " +
           "border border-white/[0.15] " +
-          "shadow-[inset_0_0_8px_rgba(255,255,255,0.15)] " +
+          "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.15)] " +
           "hover:bg-white/[0.1]",
         primary:
           "backdrop-blur-xl bg-white/[0.15] text-white " +
           "border border-white/[0.25] " +
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_0_16px_rgba(255,255,255,0.08)] " +
-          "hover:bg-white/[0.2] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_0_24px_rgba(255,255,255,0.12)]",
+          "shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.2),0_0_1rem_oklch(1_0_0/0.08)] " +
+          "hover:bg-white/[0.2] hover:shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.25),0_0_1.5rem_oklch(1_0_0/0.12)]",
         secondary:
           "backdrop-blur-xl bg-white/[0.06] text-secondary-foreground " +
           "border border-white/[0.12] " +
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.08)] " +
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.08)] " +
           "hover:bg-white/[0.1] hover:text-foreground",
         outline:
           "bg-transparent text-foreground " +
@@ -48,7 +48,7 @@ const buttonVariants = cva(
         destructive:
           "backdrop-blur-xl bg-destructive/80 text-destructive-foreground " +
           "border border-white/[0.12] " +
-          "shadow-[inset_0_0_8px_rgba(255,100,100,0.15)] " +
+          "shadow-[inset_0_0_0.5rem_oklch(0.7017_0.1895_23.3274/0.15)] " +
           "hover:brightness-110",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -57,6 +57,7 @@ const buttonVariants = cva(
         default: "h-12 px-8",
         lg: "h-14 px-10 text-base",
         icon: "h-12 w-12",
+        "icon-sm": "h-9 w-9",
       },
     },
     defaultVariants: {
@@ -82,7 +83,7 @@ const GradientRing = React.forwardRef<
     ref={ref}
     className={cn(
       "inline-flex p-px rounded-full",
-      "bg-[linear-gradient(165deg,rgba(255,255,255,0.42)_0%,rgba(255,255,255,0.16)_20%,rgba(255,255,255,0.03)_50%,rgba(255,255,255,0.08)_80%,rgba(255,255,255,0.21)_100%)]",
+      "bg-[linear-gradient(165deg,oklch(1_0_0/0.42)_0%,oklch(1_0_0/0.16)_20%,oklch(1_0_0/0.03)_50%,oklch(1_0_0/0.08)_80%,oklch(1_0_0/0.21)_100%)]",
       className
     )}
     {...props}
@@ -95,6 +96,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     const btn = (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for telemetry.\n *\n * Fields read as recessed instrument wells: near-black fill, hairline border,\n * inner shadow. Focus does not lift the field; it energizes it with the\n * signal-green ring glow, matching the console's glow-based elevation.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-sm px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast \" +\n  \"hover:border-ring/40 \" +\n  \"focus-visible:outline-none focus-visible:border-ring/70 \" +\n  \"focus-visible:[box-shadow:var(--shadow-inset),0_0_0_0.0625rem_oklch(0.78_0.21_148/0.5),0_0_0.625rem_oklch(0.78_0.21_148/0.25)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-20 py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Cobalt Inset Button — carved dark controls with a cobalt hero material.\n *   - default/primary: the cobalt material from the spec's active elements:\n *     a vertical blue gradient under a white top highlight, a 1px cyan rim,\n *     and a blue-tinted outer bloom (--shadow-primary). Checked controls\n *     reuse this exact stack.\n *   - secondary: the raised dark bezel of the spec's \"Monthly\" and\n *     \"This month\" pills: dark gradient face, 1px border, top inset\n *     highlight plus a soft outer drop.\n * Pressing flattens the lift into the surface (--shadow-press).\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-md cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,border-color,transform] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-press)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // default IS the signature: the cobalt material. The showcase and\n        // templates render the hero CTA with no variant prop.\n        default:\n          \"text-primary-foreground [background-image:var(--cobalt)] \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:[background-image:var(--cobalt-hover)] hover:[box-shadow:var(--shadow-primary-hover)]\",\n        primary:\n          \"text-primary-foreground [background-image:var(--cobalt)] \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:[background-image:var(--cobalt-hover)] hover:[box-shadow:var(--shadow-primary-hover)]\",\n        // secondary is the raised dark bezel pill from the spec's toolbar.\n        secondary:\n          \"text-secondary-foreground border border-border [background-image:var(--bezel)] \" +\n          \"[box-shadow:var(--shadow-raised)] \" +\n          \"hover:[box-shadow:var(--shadow-raised-hover)] hover:border-ring/30\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/30\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-raised)] \" +\n          \"hover:brightness-110 hover:[box-shadow:var(--shadow-raised-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "cobalt-hover": "linear-gradient( to bottom, oklch(0.67 0.17 250), oklch(0.57 0.19 258) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.78 0.12 235 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1.25rem oklch(0.55 0.18 255 / 0.5)",
+      "shadow-press": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "cobalt-hover": "linear-gradient( to bottom, oklch(0.67 0.17 250), oklch(0.57 0.19 258) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.78 0.12 235 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1.25rem oklch(0.55 0.18 255 / 0.5)",
+      "shadow-press": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

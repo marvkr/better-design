@@ -1,0 +1,24 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst iconButtonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center\",\n    \"rounded-full transition-all duration-base ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:brightness-90 active:scale-[0.98]\",\n    \"select-none\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"backdrop-blur-xl bg-white/10 text-white \" +\n          \"shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.15)] \" +\n          \"hover:brightness-125\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-white/[0.06] hover:text-foreground\",\n        outline:\n          \"bg-transparent text-foreground \" +\n          \"border border-white/[0.15] \" +\n          \"hover:bg-white/[0.06]\",\n      },\n      size: {\n        sm: \"h-8 w-8 [&>svg]:h-3.5 [&>svg]:w-3.5\",\n        default: \"h-10 w-10 [&>svg]:h-4 [&>svg]:w-4\",\n        lg: \"h-11 w-11 [&>svg]:h-5 [&>svg]:w-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(iconButtonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Airy docs Progress: a thin 0.375rem pale track with a flat green fill.\n * Leave `value` unset for an unknown amount, and a short fill pulses.\n */\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<WithClassName<ProgressPrimitive.Root.Props>, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"];\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    data-slot=\"progress\"\n    value={value ?? null}\n    className={cn(\"relative h-1.5 w-full overflow-hidden rounded-full bg-muted\", className)}\n    {...props}\n  >\n    <ProgressPrimitive.Track data-slot=\"progress-track\" className=\"size-full\">\n      <ProgressPrimitive.Indicator\n        data-slot=\"progress-indicator\"\n        className=\"h-full rounded-full bg-primary transition-[width] duration-slow ease-out data-[indeterminate]:w-1/4 data-[indeterminate]:animate-pulse\"\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n));\nProgress.displayName = \"Progress\";\n\nexport { Progress };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

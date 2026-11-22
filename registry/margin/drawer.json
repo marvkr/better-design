@@ -1,0 +1,23 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Margin Drawer: a white sheet rising from the bottom edge, rounded only on\n * its top corners, with a soft drop. The grab handle is a short grey bar.\n */\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />\n);\nDrawer.displayName = \"Drawer\";\n\nconst DrawerTrigger = DrawerPrimitive.Trigger;\nconst DrawerPortal = DrawerPrimitive.Portal;\nconst DrawerClose = DrawerPrimitive.Close;\n\n/** The grey scrim behind the drawer. */\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    data-slot=\"drawer-overlay\"\n    className={cn(\"fixed inset-0 z-50 bg-(--scrim)\", className)}\n    {...props}\n  />\n));\nDrawerOverlay.displayName = \"DrawerOverlay\";\n\n/** The sheet that slides up, with its grab handle on top. */\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      data-slot=\"drawer-content\"\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-4/5 flex-col rounded-t-2xl outline-none\",\n        \"bg-popover text-popover-foreground shadow-lg\",\n        className,\n      )}\n      {...props}\n    >\n      <div aria-hidden className=\"mx-auto mt-2.5 h-1 w-9 shrink-0 rounded-full bg-input\" />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n));\nDrawerContent.displayName = \"DrawerContent\";\n\n/** Holds the drawer's title and description. */\nconst DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-header\"\n    className={cn(\"grid gap-1 px-5 pb-1.5 pt-4 text-center sm:text-left\", className)}\n    {...props}\n  />\n);\nDrawerHeader.displayName = \"DrawerHeader\";\n\n/** Holds the drawer's actions at its foot. */\nconst DrawerFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"drawer-footer\"\n    className={cn(\"mt-auto flex flex-col gap-2 p-5\", className)}\n    {...props}\n  />\n);\nDrawerFooter.displayName = \"DrawerFooter\";\n\n/** The drawer's heading. */\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    data-slot=\"drawer-title\"\n    className={cn(\"text-base font-semibold leading-snug text-foreground\", className)}\n    {...props}\n  />\n));\nDrawerTitle.displayName = \"DrawerTitle\";\n\n/** The grey line under the heading. */\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    data-slot=\"drawer-description\"\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nDrawerDescription.displayName = \"DrawerDescription\";\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "scrim": "oklch(0.24 0.02 260 / 0.32)"
+    },
+    "dark": {
+      "scrim": "oklch(0 0 0 / 0.55)"
+    }
+  }
+}

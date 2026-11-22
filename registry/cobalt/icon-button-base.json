@@ -1,0 +1,38 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * IconButton — the spec's circular toolbar keys (refresh, bell): raised\n * bezel discs by default, the cobalt material for the primary action.\n */\n\nconst iconButtonVariants = cva(\n  [\n    \"relative inline-flex shrink-0 items-center justify-center outline-none\",\n    \"transition-[background-color,box-shadow,border-color] duration-fast\",\n    \"focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-press)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"text-primary-foreground [background-image:var(--cobalt)] [box-shadow:var(--shadow-primary)] hover:[background-image:var(--cobalt-hover)] hover:[box-shadow:var(--shadow-primary-hover)]\",\n        secondary:\n          \"text-secondary-foreground border border-border [background-image:var(--bezel)] [box-shadow:var(--shadow-raised)] hover:[box-shadow:var(--shadow-raised-hover)]\",\n        ghost:\n          \"text-muted-foreground hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-raised)] hover:brightness-110\",\n        outline:\n          \"border border-border bg-transparent text-foreground hover:bg-accent\",\n      },\n      size: {\n        xs: \"h-7 w-7 rounded-sm text-xs\",\n        sm: \"h-8 w-8 rounded-sm text-sm\",\n        default: \"h-9 w-9 rounded-md text-sm\",\n        lg: \"h-10 w-10 rounded-md text-base\",\n        xl: \"h-11 w-11 rounded-lg text-base\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"ghost\",\n      size: \"default\",\n      corners: \"square\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => {\n    return (\n      <ButtonPrimitive\n        className={cn(iconButtonVariants({ variant, size, corners, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "cobalt-hover": "linear-gradient( to bottom, oklch(0.67 0.17 250), oklch(0.57 0.19 258) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.78 0.12 235 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1.25rem oklch(0.55 0.18 255 / 0.5)",
+      "shadow-press": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)"
+    },
+    "dark": {
+      "cobalt": "linear-gradient( to bottom, oklch(0.64 0.17 250), oklch(0.54 0.19 258) )",
+      "cobalt-hover": "linear-gradient( to bottom, oklch(0.67 0.17 250), oklch(0.57 0.19 258) )",
+      "bezel": "linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255))",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1rem oklch(0 0 0 / 0.35)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45), inset 0 0 0 0.0625rem oklch(0.78 0.12 235 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.45), 0 0.375rem 1.25rem oklch(0.55 0.18 255 / 0.5)",
+      "shadow-press": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)"
+    }
+  }
+}

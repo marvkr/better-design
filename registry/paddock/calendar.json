@@ -1,0 +1,28 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { DayButton, DayPicker, type DayButtonProps } from \"react-day-picker\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { primaryFace, focusRing, raisedSurface } from \"./_shared\";\n\n/** Props for `Calendar`: everything react-day-picker's DayPicker accepts. */\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>;\n\nconst navButton = cn(\n  raisedSurface,\n  \"inline-flex size-7 items-center justify-center rounded-md text-muted-foreground hover:text-foreground\",\n  focusRing,\n  \"aria-disabled:pointer-events-none aria-disabled:opacity-40\",\n);\n\nconst chevronIcons = {\n  left: \"mingcute:left-line\",\n  right: \"mingcute:right-line\",\n  up: \"mingcute:up-line\",\n  down: \"mingcute:down-line\",\n} as const;\n\n/**\n * One day. A single pick and both ends of a range take the teal fill of the\n * primary Button; days between sit on the grey band the cells draw. Today,\n * until picked, is set in semibold primary teal text.\n */\nfunction CalendarDayButton({ className, modifiers, ...props }: DayButtonProps) {\n  const filled = modifiers.selected && !modifiers.range_middle;\n  return (\n    <DayButton\n      modifiers={modifiers}\n      data-slot=\"calendar-day\"\n      className={cn(\n        className,\n        modifiers.outside && \"text-muted-foreground\",\n        modifiers.today && !filled && \"font-semibold text-(--primary-text)\",\n        modifiers.range_middle && \"rounded-none hover:bg-transparent\",\n        filled && cn(primaryFace, \"font-medium hover:bg-primary/88\"),\n        modifiers.disabled && \"opacity-40\",\n      )}\n      {...props}\n    />\n  );\n}\n\n/**\n * Paddock Calendar: a month of 2.25rem round days in tabular figures. Month\n * arrows are small rounded buttons, a hovered day turns light grey and the\n * picked day takes the teal fill.\n */\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  components,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      data-slot=\"calendar\"\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"relative flex flex-col gap-4 sm:flex-row\",\n        month: \"flex flex-col gap-3\",\n        month_caption: \"flex h-7 items-center justify-center\",\n        caption_label: \"inline-flex items-center gap-1 text-sm font-semibold text-foreground [&_svg]:size-3.5\",\n        dropdowns: \"flex items-center gap-2\",\n        dropdown_root: \"relative inline-flex items-center rounded-md px-2 has-focus-visible:ring-2 has-focus-visible:ring-ring\",\n        dropdown: \"absolute inset-0 cursor-pointer opacity-0\",\n        nav: \"absolute inset-x-0 top-0 flex h-7 items-center justify-between\",\n        button_previous: navButton,\n        button_next: navButton,\n        month_grid: \"w-full border-collapse\",\n        weekdays: \"flex\",\n        weekday: \"w-9 text-xs font-medium text-muted-foreground\",\n        week: \"mt-0.5 flex w-full\",\n        day: \"relative size-9 p-0 text-center\",\n        day_button: cn(\n          \"inline-flex size-9 items-center justify-center rounded-md text-sm tabular-nums text-foreground\",\n          \"transition-colors duration-fast ease-out hover:bg-accent\",\n          focusRing,\n          \"disabled:pointer-events-none\",\n        ),\n        range_start: \"rounded-s-full bg-accent\",\n        range_end: \"rounded-e-full bg-accent\",\n        range_middle: \"bg-accent\",\n        outside: \"text-muted-foreground\",\n        disabled: \"opacity-40\",\n        hidden: \"invisible\",\n        week_number: \"w-9 text-xs text-muted-foreground\",\n        footer: \"pt-3 text-[0.8125rem] text-muted-foreground\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({\n          orientation = \"left\",\n          className: chevronClassName,\n        }: {\n          orientation?: keyof typeof chevronIcons;\n          className?: string;\n        }) => (\n          <Icon icon={chevronIcons[orientation]} aria-hidden=\"true\" className={cn(\"size-4\", chevronClassName)} />\n        ),\n        DayButton: CalendarDayButton,\n        ...components,\n      }}\n      {...props}\n    />\n  );\n}\nCalendar.displayName = \"Calendar\";\n\nexport { Calendar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.45 0.09 198)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.8 0.09 190)"
+    }
+  }
+}

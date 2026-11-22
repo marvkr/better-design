@@ -7,8 +7,8 @@ const alertVariants = cva(
   [
     "relative w-full rounded-xl p-4",
     "backdrop-blur-xl border border-white/10",
-    "shadow-[inset_0_0_8px_rgba(255,255,255,0.06)]",
-    "[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+    "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.06)]",
+    "[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-0.1875rem] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   ].join(" "),
   {
     variants: {

@@ -1,0 +1,31 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Chrome Azure Slider — a recessed steel channel; the filled range is the\n * azure alloy and the thumb is a raised chrome knob with a wet sheen, matching\n * the switch.\n */\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Slider = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SliderPrimitive.Root.Props>\n>(({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max]\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track\n            data-slot=\"slider-track\"\n            className={cn(\n              \"relative h-1.5 w-full grow overflow-hidden rounded-full border border-white/10\",\n              \"bg-input [box-shadow:var(--shadow-inset)]\"\n            )}\n          >\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full [background:var(--surface-on)]\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\" key={index}\n              className={cn(\n                \"relative block h-4 w-4 overflow-hidden rounded-full [background:var(--knob-off)]\",\n                \"[box-shadow:var(--shadow-knob)]\",\n                \"transition-[transform] duration-fast hover:scale-110\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n                \"data-disabled:pointer-events-none data-disabled:opacity-50\"\n              )}\n            >\n              <span aria-hidden className=\"absolute inset-0 rounded-full [background:var(--gloss-top)]\" />\n            </SliderPrimitive.Thumb>\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    )\n  }\n)\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.687 0.13 260.2), oklch(0.636 0.132 260.1), oklch(0.584 0.134 260.1))",
+      "knob-off": "linear-gradient(to bottom, oklch(0.719 0.053 246.8), oklch(0.569 0.067 251.9))",
+      "gloss-top": "linear-gradient(to top, transparent, oklch(1 0 0 / 0.2))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    },
+    "dark": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.687 0.13 260.2), oklch(0.636 0.132 260.1), oklch(0.584 0.134 260.1))",
+      "knob-off": "linear-gradient(to bottom, oklch(0.719 0.053 246.8), oklch(0.569 0.067 251.9))",
+      "gloss-top": "linear-gradient(to top, transparent, oklch(1 0 0 / 0.2))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "scroll-area-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Interior ScrollArea — the scrollbar is metadata, not furniture: a 3px ink\n * thumb at 15% on a transparent track, squared off to the 2px rail radius.\n */\n\nconst ScrollBar = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Scrollbar.Props>\n>(({ className, orientation = \"vertical\", ...props }, ref) => (\n  <ScrollAreaPrimitive.Scrollbar\n    data-slot=\"scroll-area-scrollbar\"\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"flex touch-none select-none bg-transparent p-[0.125rem]\",\n      orientation === \"vertical\" ? \"h-full w-[0.4375rem]\" : \"h-[0.4375rem] w-full flex-col\",\n      className\n    )}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Thumb data-slot=\"scroll-area-thumb\" className=\"relative flex-1 rounded-[0.125rem] bg-foreground/15\" />\n  </ScrollAreaPrimitive.Scrollbar>\n))\nScrollBar.displayName = \"ScrollBar\"\n\nconst ScrollArea = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Root.Props>\n>(({ className, children, ...props }, ref) => (\n  <ScrollAreaPrimitive.Root\n    data-slot=\"scroll-area\"\n    ref={ref}\n    className={cn(\"relative overflow-hidden\", className)}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Viewport data-slot=\"scroll-area-viewport\" className=\"size-full rounded-[inherit]\">\n      {children}\n    </ScrollAreaPrimitive.Viewport>\n    <ScrollBar />\n    <ScrollAreaPrimitive.Corner data-slot=\"scroll-area-corner\" />\n  </ScrollAreaPrimitive.Root>\n))\nScrollArea.displayName = \"ScrollArea\"\n\nexport { ScrollArea, ScrollBar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared-base.json"
+  ]
+}

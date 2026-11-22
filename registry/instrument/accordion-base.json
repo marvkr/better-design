@@ -1,0 +1,24 @@
+{
+  "name": "accordion-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\nimport { ChevronDown } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark Accordion: rows divided by machined grooves (dark line + faint\n// highlight). The open trigger lights its caption gold like an active gauge.\n\nconst Accordion = AccordionPrimitive.Root;\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst AccordionItem = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AccordionPrimitive.Item.Props>\n>(({ className, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"border-b border-border shadow-[0_0.0625rem_0_oklch(1_0_0/0.03)] last:border-b-0 last:shadow-none\",\n      className\n    )}\n    {...props}\n  />\n));\nAccordionItem.displayName = \"AccordionItem\";\n\nconst AccordionTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<AccordionPrimitive.Trigger.Props>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"flex flex-1 items-center justify-between py-4 text-sm font-medium text-foreground\",\n        \"rounded-md transition-colors duration-fast ease-out\",\n        \"hover:text-primary\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        \"data-panel-open:text-primary\",\n        \"[&[data-panel-open]>svg]:rotate-180\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      <ChevronDown className=\"h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base ease-out\" />\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n));\nAccordionTrigger.displayName = \"AccordionTrigger\";\n\nconst AccordionContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AccordionPrimitive.Panel.Props>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Panel\n    ref={ref}\n    className=\"h-[var(--accordion-panel-height)] overflow-hidden text-sm text-muted-foreground transition-[height] duration-base ease-out data-starting-style:h-0 data-ending-style:h-0\"\n    {...props}\n  >\n    <div className={cn(\"pb-4 pt-0 leading-relaxed\", className)}>{children}</div>\n  </AccordionPrimitive.Panel>\n));\nAccordionContent.displayName = \"AccordionContent\";\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

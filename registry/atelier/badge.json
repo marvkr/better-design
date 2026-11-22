@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Atelier Badge — the reference's quiet chips: the pale mint \"+82%\" pill and\n * warm gray reference-number tags. Flat fills, hairline rings, full pills.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium \" +\n    \"ring-1 ring-inset transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-accent text-accent-foreground ring-accent-foreground/15\",\n        primary: \"bg-primary/10 text-primary ring-primary/25\",\n        secondary: \"text-secondary-foreground ring-border bg-[color:oklch(0.902_0.004_95)]\",\n        outline: \"bg-transparent text-foreground border-[color:oklch(0.903_0.004_95)]\",\n        success: \"bg-[oklch(0.93_0.05_152)] text-[oklch(0.4_0.08_152)] ring-[oklch(0.45_0.09_152)]/25\",\n        warning: \"bg-[oklch(0.95_0.05_85)] text-[oklch(0.5_0.1_70)] ring-[oklch(0.55_0.12_75)]/25\",\n        destructive: \"bg-destructive/10 ring-destructive/25 text-[color:oklch(0.528_0.184_28)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

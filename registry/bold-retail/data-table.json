@@ -1,0 +1,23 @@
+{
+  "name": "data-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-table.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"./table\";\n\nexport interface DataTableColumn<T> {\n  key: string;\n  header: React.ReactNode;\n  cell: (row: T) => React.ReactNode;\n  className?: string;\n}\n\nexport interface DataTableProps<T> {\n  columns: DataTableColumn<T>[];\n  data: T[];\n  getRowKey?: (row: T, index: number) => string | number;\n  emptyMessage?: React.ReactNode;\n  className?: string;\n  onRowClick?: (row: T) => void;\n}\n\n/**\n * Bold retail DataTable: the hairline table, driven by a column list, for\n * orders, returns and stock. Each column says how to draw its cell. When a\n * row opens something, the whole row takes the pointer and its first cell\n * holds a real button, so a keyboard user can open the row too. An empty\n * table says so in grey across every column.\n */\nfunction DataTable<T>({\n  columns,\n  data,\n  getRowKey,\n  emptyMessage = \"Nothing here yet.\",\n  className,\n  onRowClick,\n}: DataTableProps<T>) {\n  return (\n    <div data-slot=\"data-table\" className={cn(\"w-full\", className)}>\n      <Table>\n        <TableHeader>\n          <TableRow>\n            {columns.map((column) => (\n              <TableHead key={column.key} className={column.className}>\n                {column.header}\n              </TableHead>\n            ))}\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          {data.length === 0 ? (\n            <TableRow className=\"hover:bg-transparent\">\n              <TableCell\n                colSpan={columns.length}\n                className=\"h-24 text-center text-muted-foreground\"\n              >\n                {emptyMessage}\n              </TableCell>\n            </TableRow>\n          ) : (\n            data.map((row, rowIndex) => (\n              <TableRow\n                key={getRowKey ? getRowKey(row, rowIndex) : rowIndex}\n                onClick={onRowClick ? () => onRowClick(row) : undefined}\n                className={cn(onRowClick && \"cursor-pointer active:bg-(--secondary-hover)\")}\n              >\n                {columns.map((column, columnIndex) => (\n                  <TableCell key={column.key} className={column.className}>\n                    {onRowClick && columnIndex === 0 ? (\n                      <button\n                        type=\"button\"\n                        onClick={(event) => {\n                          // The row listens for clicks too; stop here so one\n                          // press opens the row once.\n                          event.stopPropagation();\n                          onRowClick(row);\n                        }}\n                        className=\"flex w-full rounded-sm text-start outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n                      >\n                        {column.cell(row)}\n                      </button>\n                    ) : (\n                      column.cell(row)\n                    )}\n                  </TableCell>\n                ))}\n              </TableRow>\n            ))\n          )}\n        </TableBody>\n      </Table>\n    </div>\n  );\n}\n\nexport { DataTable };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/table.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "secondary-hover": "oklch(0.922 0 0)"
+    },
+    "dark": {
+      "secondary-hover": "oklch(0.31 0 0)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "code-block-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, wellInset } from \"./_shared\";\nimport { CopyButton } from \"./copy-button\";\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showCopy?: boolean;\n}\n\ntype Tone = \"keyword\" | \"string\" | \"fn\" | \"comment\" | \"plain\";\n\n/**\n * Burnished has no syntax palette, so code is coloured with the warm light\n * alone: keywords in the copper link colour, strings in a dimmer glow,\n * calls in full cream, comments in muted italic.\n */\nconst TONE_CLASS = {\n  keyword: \"text-primary-text\",\n  string: \"text-glow/75\",\n  fn: \"font-medium text-foreground\",\n  comment: \"italic text-muted-foreground\",\n  plain: \"\",\n} as const satisfies { [tone in Tone]: string };\n\n// One pass over the source: comments, strings, keywords, then calls.\nconst TOKEN =\n  /(\\/\\/[^\\n]*|#[^\\n]*|\\/\\*[\\s\\S]*?\\*\\/)|(\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])*'|`(?:\\\\.|[^`\\\\])*`)|\\b(import|export|from|const|let|var|function|return|await|async|if|else|for|while|new|class|extends|interface|type|default|true|false|null|undefined|def|curl)\\b|\\b([A-Za-z_$][\\w$]*)(?=\\s*\\()/g;\n\n/** The tone for one lexer match, by the capture group that matched. */\nfunction toneOf(match: RegExpMatchArray): Tone {\n  if (match[1]) return \"comment\";\n  if (match[2]) return \"string\";\n  if (match[3]) return \"keyword\";\n  if (match[4]) return \"fn\";\n  return \"plain\";\n}\n\n/** Splits source into toned spans with a small, language-agnostic lexer. */\nfunction highlight(code: string): React.ReactNode[] {\n  const parts: React.ReactNode[] = [];\n  let last = 0;\n  for (const match of code.matchAll(TOKEN)) {\n    const start = match.index ?? 0;\n    if (start > last) parts.push(code.slice(last, start));\n    parts.push(\n      <span key={start} className={TONE_CLASS[toneOf(match)]}>\n        {match[0]}\n      </span>,\n    );\n    last = start + match[0].length;\n  }\n  if (last < code.length) parts.push(code.slice(last));\n  return parts;\n}\n\n/**\n * Burnished CodeBlock: a recessed well cut into an umber slab.\n *\n * The slab carries a slim header with the file or language name and a ghost\n * copy button. The code sits below in a well, sunk into the slab and lit\n * along its bottom lip, set in Geist Mono.\n */\nconst CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(\n  ({ className, code, language, filename, showCopy = true, ...props }, ref) => {\n    const caption = filename ?? language;\n    const hasHeader = Boolean(caption) || showCopy;\n    const tokens = React.useMemo(() => highlight(code), [code]);\n\n    return (\n      <div\n        data-slot=\"code-block\"\n        className={cn(cardSlab, \"overflow-hidden rounded-2xl p-1.5\")}\n      >\n        {hasHeader && (\n          <div\n            data-slot=\"code-block-header\"\n            className=\"flex h-10 items-center justify-between gap-3 ps-3 pe-0.5\"\n          >\n            <span className=\"min-w-0 truncate font-mono text-xs text-muted-foreground\">\n              {caption}\n            </span>\n            {showCopy && (\n              <CopyButton\n                value={code}\n                size=\"icon-sm\"\n                label=\"Copy code\"\n                className=\"text-muted-foreground\"\n              />\n            )}\n          </div>\n        )}\n        <pre\n          ref={ref}\n          data-slot=\"code-block-code\"\n          className={cn(\n            wellInset,\n            \"overflow-x-auto rounded-xl px-4 py-3.5 font-mono text-[0.8125rem] leading-relaxed tracking-normal text-foreground/85\",\n            className,\n          )}\n          {...props}\n        >\n          <code>{tokens}</code>\n        </pre>\n      </div>\n    );\n  },\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json",
+    "https://better-design.com/registry/burnished/copy-button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "glow": "oklch(0.798 0.084 66.7)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.798 0.084 66.7)",
+      "glow": "oklch(0.798 0.084 66.7)"
+    }
+  }
+}

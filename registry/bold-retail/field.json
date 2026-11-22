@@ -1,0 +1,20 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Field: one checkout row. The label sits on top, the field\n * under it, then a grey hint or a red error line, 0.5rem apart.\n */\nconst Field = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"field\"\n    className={cn(\"flex flex-col gap-2\", className)}\n    {...props}\n  />\n));\nField.displayName = \"Field\";\n\n/** A hint under the field, in grey at the small size. */\nconst FieldDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"field-description\"\n    className={cn(\"text-sm leading-normal text-muted-foreground\", className)}\n    {...props}\n  />\n));\nFieldDescription.displayName = \"FieldDescription\";\n\n/**\n * The error line under the field, in the red that passes contrast on white.\n * It announces itself to screen readers as soon as it appears.\n */\nconst FieldError = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    role=\"alert\"\n    data-slot=\"field-error\"\n    className={cn(\n      \"text-sm font-medium leading-normal text-(--destructive-text)\",\n      className,\n    )}\n    {...props}\n  />\n));\nFieldError.displayName = \"FieldError\";\n\nexport { Field, FieldDescription, FieldError };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "destructive-text": "oklch(0.5 0.2 28.8)"
+    },
+    "dark": {
+      "destructive-text": "oklch(0.78 0.14 25)"
+    }
+  }
+}

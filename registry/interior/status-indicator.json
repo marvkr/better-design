@@ -1,0 +1,22 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior StatusIndicator — a small 2px-radius square mark plus a label,\n * never a round dot and never a pulse: a status is a fact, not an animation.\n * Presence is a genuine multi-verdict scale, so warning amber is allowed for\n * away. AvatarStatus seats the same mark on the corner of an avatar tile,\n * punched out in the card colour.\n */\n\nexport type StatusType = \"online\" | \"away\" | \"busy\" | \"offline\";\n\nconst markStyles = {\n  online: \"bg-success\",\n  away: \"bg-warning\",\n  busy: \"bg-destructive\",\n  offline: \"bg-muted-foreground/40\",\n} satisfies Record<StatusType, string>;\n\nconst labels = {\n  online: \"Online\",\n  away: \"Away\",\n  busy: \"Busy\",\n  offline: \"Offline\",\n} satisfies Record<StatusType, string>;\n\nexport interface StatusIndicatorProps\n  extends React.HTMLAttributes<HTMLSpanElement> {\n  status: StatusType;\n  showLabel?: boolean;\n}\n\nconst StatusIndicator = React.forwardRef<\n  HTMLSpanElement,\n  StatusIndicatorProps\n>(({ className, status, showLabel = true, ...props }, ref) => (\n  <span\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-1.5 text-[0.7813rem] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  >\n    <span className={cn(\"size-[0.4375rem] rounded-[0.125rem]\", markStyles[status])} />\n    {showLabel ? labels[status] : <span className=\"sr-only\">{labels[status]}</span>}\n  </span>\n));\nStatusIndicator.displayName = \"StatusIndicator\";\n\nexport interface AvatarStatusProps extends React.HTMLAttributes<HTMLDivElement> {\n  status: StatusType;\n}\n\nconst AvatarStatus = React.forwardRef<HTMLDivElement, AvatarStatusProps>(\n  ({ className, status, children, ...props }, ref) => (\n    <div ref={ref} className={cn(\"relative inline-flex\", className)} {...props}>\n      {children}\n      <span\n        aria-label={labels[status]}\n        className={cn(\n          \"absolute bottom-0 right-0 size-[0.4375rem] rounded-[0.125rem] shadow-[0_0_0_0.125rem_var(--card)]\",\n          markStyles[status],\n        )}\n      />\n    </div>\n  ),\n);\nAvatarStatus.displayName = \"AvatarStatus\";\n\nexport { StatusIndicator, AvatarStatus };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5262 0.0942 151.04)",
+      "warning": "oklch(0.6658 0.1574 58.32)"
+    },
+    "dark": {
+      "success": "oklch(0.5262 0.0942 151.04)",
+      "warning": "oklch(0.6658 0.1574 58.32)"
+    }
+  }
+}

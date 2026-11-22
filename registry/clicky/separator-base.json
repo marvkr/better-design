@@ -1,0 +1,14 @@
+{
+  "name": "separator-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Clicky Separator — thin line using border token\n// Supports solid (default) and dotted variants\n\nexport interface SeparatorProps\n  extends Omit<SeparatorPrimitive.Props, \"className\"> {\n  className?: string\n  variant?: \"solid\" | \"dotted\"\n  /**\n   * Accepted for API compatibility with the previous wrapper and ignored:\n   * the Base UI separator is always semantic (role=\"separator\").\n   */\n  decorative?: boolean\n}\n\nconst Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(\n  (\n    {\n      className,\n      orientation = \"horizontal\",\n      decorative: _decorative,\n      variant = \"solid\",\n      ...props\n    },\n    ref\n  ) => {\n    if (variant === \"dotted\") {\n      return (\n        <SeparatorPrimitive\n          ref={ref}\n          orientation={orientation}\n          className={cn(\n            \"shrink-0 border-0\",\n            orientation === \"horizontal\"\n              ? \"h-px w-full border-t border-dotted border-border bg-transparent\"\n              : \"h-full w-px border-l border-dotted border-border bg-transparent\",\n            className\n          )}\n          {...props}\n        />\n      )\n    }\n\n    return (\n      <SeparatorPrimitive\n        ref={ref}\n        orientation={orientation}\n        className={cn(\n          \"shrink-0 bg-border\",\n          orientation === \"horizontal\" ? \"h-px w-full\" : \"h-full w-px\",\n          className\n        )}\n        {...props}\n      />\n    )\n  }\n)\nSeparator.displayName = \"Separator\"\n\nexport { Separator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

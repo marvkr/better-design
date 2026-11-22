@@ -1,0 +1,23 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Star } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Rating — a row of stars in the warning amber.\n *\n * Interactive ratings are a real radio group: each star carries role=\"radio\"\n * with aria-checked, only the selected star is tabbable, and the arrow keys\n * move the selection. A read-only rating drops out of the tab order entirely\n * and reports its value once, as an image.\n */\n\nexport interface RatingProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number;\n  max?: number;\n  readOnly?: boolean;\n  onChange?: (value: number) => void;\n  label?: string;\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  (\n    { className, value, max = 5, readOnly, onChange, label = \"Rating\", ...props },\n    ref,\n  ) => {\n    // Controlled when a value prop is present, uncontrolled otherwise. Keying\n    // off onChange instead would leave a handler-only Rating stuck at zero.\n    const isControlled = value !== undefined;\n    const [internal, setInternal] = React.useState(value ?? 0);\n    const current = isControlled ? value : internal;\n\n    const select = (next: number) => {\n      if (readOnly) return;\n      if (!isControlled) setInternal(next);\n      onChange?.(next);\n    };\n\n    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n      if (readOnly) return;\n      const delta =\n        event.key === \"ArrowRight\" || event.key === \"ArrowUp\"\n          ? 1\n          : event.key === \"ArrowLeft\" || event.key === \"ArrowDown\"\n            ? -1\n            : 0;\n      if (!delta) return;\n      event.preventDefault();\n      select(Math.min(max, Math.max(1, current + delta)));\n    };\n\n    const stars = Array.from({ length: max }, (_, index) => index + 1);\n\n    if (readOnly) {\n      return (\n        <div\n          ref={ref}\n          role=\"img\"\n          aria-label={`${label}: ${current} out of ${max}`}\n          className={cn(\"inline-flex items-center gap-0.5\", className)}\n          {...props}\n        >\n          {stars.map((step) => (\n            <span\n              key={step}\n              className=\"inline-flex size-6 items-center justify-center\"\n            >\n              <Star\n                aria-hidden\n                className={cn(\n                  \"size-4\",\n                  step <= current\n                    ? \"fill-[var(--warning)] text-[var(--warning)]\"\n                    : \"text-foreground/20\",\n                )}\n              />\n            </span>\n          ))}\n        </div>\n      );\n    }\n\n    return (\n      <div\n        ref={ref}\n        role=\"radiogroup\"\n        aria-label={label}\n        onKeyDown={handleKeyDown}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        {...props}\n      >\n        {stars.map((step) => (\n          <button\n            key={step}\n            type=\"button\"\n            role=\"radio\"\n            aria-checked={step === current}\n            aria-label={`${step} of ${max}`}\n            // Roving tab index: the group is one tab stop, arrows move within it.\n            tabIndex={step === current || (current === 0 && step === 1) ? 0 : -1}\n            onClick={() => select(step)}\n            className={cn(\n              \"inline-flex size-6 items-center justify-center rounded-full transition-colors\",\n              \"hover:bg-foreground/[0.05]\",\n              \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n            )}\n          >\n            <Star\n              aria-hidden\n              className={cn(\n                \"size-4\",\n                step <= current\n                  ? \"fill-[var(--warning)] text-[var(--warning)]\"\n                  : \"text-foreground/20\",\n              )}\n            />\n          </button>\n        ))}\n      </div>\n    );\n  },\n);\nRating.displayName = \"Rating\";\n\nexport { Rating };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "warning": "oklch(0.7686 0.1647 70.08)"
+    },
+    "dark": {
+      "warning": "oklch(0.7686 0.1647 70.08)"
+    }
+  }
+}

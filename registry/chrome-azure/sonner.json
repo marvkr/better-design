@@ -1,0 +1,25 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\"\n\n/*\n * Chrome Azure Toaster — toasts render on the floating popover material with a\n * hairline rim and a soft ambient drop shadow. The action button wears the\n * azure alloy so it reads as the primary metal chip.\n */\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:rounded-lg group-[.toaster]:[box-shadow:var(--shadow-md)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:[background:var(--surface-on)] group-[.toast]:text-primary-foreground group-[.toast]:rounded-md group-[.toast]:[box-shadow:var(--shadow-primary)]\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground group-[.toast]:rounded-md\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.687 0.13 260.2), oklch(0.636 0.132 260.1), oklch(0.584 0.134 260.1))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.636 0.132 260.1 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.687 0.13 260.2 / 0.35)"
+    },
+    "dark": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.687 0.13 260.2), oklch(0.636 0.132 260.1), oklch(0.584 0.134 260.1))",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.636 0.132 260.1 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.687 0.13 260.2 / 0.35)"
+    }
+  }
+}

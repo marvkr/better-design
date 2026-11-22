@@ -1,0 +1,32 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { DayButton, DayPicker, type DayButtonProps } from \"react-day-picker\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>;\n\nconst navButton = cn(\n  buttonVariants({ variant: \"secondary\", size: \"icon-sm\" }),\n  \"aria-disabled:pointer-events-none aria-disabled:text-(--foreground-disabled)\",\n);\n\nconst chevronIcons = {\n  left: \"mingcute:left-line\",\n  right: \"mingcute:right-line\",\n  up: \"mingcute:up-line\",\n  down: \"mingcute:down-line\",\n} as const;\n\n/**\n * One day's round button. A single pick and the two ends of a range are a\n * black circle with white figures; the days between sit on the soft grey\n * band the cells draw; today carries a hairline ring until it is picked.\n */\nfunction CalendarDayButton({ className, modifiers, ...props }: DayButtonProps) {\n  const picked = modifiers.selected && !modifiers.range_middle;\n  return (\n    <DayButton\n      modifiers={modifiers}\n      data-slot=\"calendar-day\"\n      className={cn(\n        className,\n        modifiers.outside && \"text-muted-foreground\",\n        modifiers.today && !modifiers.selected && \"font-semibold ring-1 ring-inset ring-foreground\",\n        modifiers.range_middle && \"hover:bg-(--secondary-hover)\",\n        picked && \"bg-primary font-medium text-primary-foreground hover:bg-(--primary-hover)\",\n        modifiers.disabled && \"text-(--foreground-disabled)\",\n      )}\n      {...props}\n    />\n  );\n}\n\n/**\n * Bold retail Calendar: a month of round 2.5rem days on white. The picked day\n * is a black circle, a range runs between its two black ends on a soft grey\n * band, and today carries a hairline ring. Month arrows are grey circle buttons.\n */\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  components,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      data-slot=\"calendar\"\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-4\", className)}\n      classNames={{\n        months: \"relative flex flex-col gap-6 sm:flex-row\",\n        month: \"flex flex-col gap-3\",\n        month_caption: \"flex h-8 items-center justify-center\",\n        caption_label:\n          \"inline-flex items-center gap-1 text-base font-medium text-foreground [&_svg]:size-4 [&_svg]:text-foreground\",\n        dropdowns: \"flex items-center gap-2\",\n        dropdown_root:\n          \"relative inline-flex items-center rounded-full px-2 hover:bg-secondary has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring\",\n        dropdown: \"absolute inset-0 cursor-pointer opacity-0\",\n        nav: \"absolute inset-x-0 top-0 flex h-8 items-center justify-between\",\n        button_previous: navButton,\n        button_next: navButton,\n        month_grid: \"w-full border-collapse\",\n        weekdays: \"flex\",\n        weekday: \"w-10 text-xs font-medium text-muted-foreground\",\n        week: \"mt-1 flex w-full\",\n        day: \"relative size-10 p-0 text-center\",\n        day_button: cn(\n          \"inline-flex size-10 items-center justify-center rounded-full text-sm tabular-nums text-foreground\",\n          \"transition-colors duration-fast ease-out\",\n          \"hover:bg-secondary\",\n          \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n          \"disabled:pointer-events-none\",\n        ),\n        range_start: \"rounded-s-full bg-secondary\",\n        range_end: \"rounded-e-full bg-secondary\",\n        range_middle: \"bg-secondary first:rounded-s-full last:rounded-e-full\",\n        outside: \"text-muted-foreground\",\n        disabled: \"text-(--foreground-disabled)\",\n        hidden: \"invisible\",\n        week_number: \"w-10 text-xs text-muted-foreground\",\n        footer: \"pt-3 text-sm text-muted-foreground\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({\n          orientation = \"left\",\n          className: chevronClassName,\n        }: {\n          orientation?: keyof typeof chevronIcons;\n          className?: string;\n        }) => (\n          <Icon\n            icon={chevronIcons[orientation]}\n            aria-hidden=\"true\"\n            className={cn(\"size-4\", chevronClassName)}\n          />\n        ),\n        DayButton: CalendarDayButton,\n        ...components,\n      }}\n      {...props}\n    />\n  );\n}\nCalendar.displayName = \"Calendar\";\n\nexport { Calendar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.345 0.003 286.2)",
+      "secondary-hover": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.922 0 0)",
+      "secondary-hover": "oklch(0.31 0 0)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

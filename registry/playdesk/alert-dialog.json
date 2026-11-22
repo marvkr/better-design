@@ -1,0 +1,32 @@
+{
+  "name": "alert-dialog",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert-dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AlertDialogPrimitive from \"@radix-ui/react-alert-dialog\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\n/*\n * Playdesk AlertDialog — the same window as Dialog, minus the close control,\n * because the decision has to be made with one of the two pills.\n */\n\nconst AlertDialog = AlertDialogPrimitive.Root;\nconst AlertDialogTrigger = AlertDialogPrimitive.Trigger;\nconst AlertDialogPortal = AlertDialogPrimitive.Portal;\n\nconst AlertDialogOverlay = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Overlay\n    ref={ref}\n    className={cn(\n      \"fixed inset-0 z-50 bg-foreground/35\",\n      \"data-[state=open]:animate-in data-[state=closed]:animate-out\",\n      \"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nAlertDialogOverlay.displayName = AlertDialogPrimitive.Overlay.displayName;\n\nconst AlertDialogContent = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <AlertDialogPortal>\n    <AlertDialogOverlay />\n    <AlertDialogPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2\",\n        \"overflow-hidden rounded-xl bg-card text-card-foreground\",\n        \"[box-shadow:var(--shadow-window)]\",\n        \"duration-base data-[state=open]:animate-in data-[state=closed]:animate-out\",\n        \"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n        \"data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n        className,\n      )}\n      {...props}\n    >\n      <div\n        aria-hidden\n        className=\"flex items-center gap-1.5 border-b border-foreground/[0.06] px-3 py-2 [background-image:var(--chrome-brushed)]\"\n      >\n        <span className=\"size-3 rounded-full bg-foreground/[0.14]\" />\n        <span className=\"size-3 rounded-full bg-foreground/[0.14]\" />\n        <span className=\"size-3 rounded-full bg-foreground/[0.14]\" />\n      </div>\n      <div className=\"p-6\">{children}</div>\n    </AlertDialogPrimitive.Content>\n  </AlertDialogPortal>\n));\nAlertDialogContent.displayName = AlertDialogPrimitive.Content.displayName;\n\nconst AlertDialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div className={cn(\"flex flex-col gap-1.5\", className)} {...props} />\n);\nAlertDialogHeader.displayName = \"AlertDialogHeader\";\n\nconst AlertDialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\n      \"mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n      className,\n    )}\n    {...props}\n  />\n);\nAlertDialogFooter.displayName = \"AlertDialogFooter\";\n\nconst AlertDialogTitle = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-lg font-medium tracking-[-0.02em] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nAlertDialogTitle.displayName = AlertDialogPrimitive.Title.displayName;\n\nconst AlertDialogDescription = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nAlertDialogDescription.displayName =\n  AlertDialogPrimitive.Description.displayName;\n\nconst AlertDialogAction = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Action>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Action\n    ref={ref}\n    className={cn(buttonVariants(), className)}\n    {...props}\n  />\n));\nAlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName;\n\nconst AlertDialogCancel = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Cancel>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Cancel\n    ref={ref}\n    className={cn(buttonVariants({ variant: \"secondary\" }), className)}\n    {...props}\n  />\n));\nAlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName;\n\nexport {\n  AlertDialog,\n  AlertDialogPortal,\n  AlertDialogOverlay,\n  AlertDialogTrigger,\n  AlertDialogContent,\n  AlertDialogHeader,\n  AlertDialogFooter,\n  AlertDialogTitle,\n  AlertDialogDescription,\n  AlertDialogAction,\n  AlertDialogCancel,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-alert-dialog@^1.1.14"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "chrome-brushed": "linear-gradient( 90deg, oklch(0.8744 0.0029 308.42) 0%, oklch(0.9551 0 0) 50%, oklch(0.8744 0.0029 308.42) 100% )"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
+      "chrome-brushed": "linear-gradient( 90deg, oklch(0.8744 0.0029 308.42) 0%, oklch(0.9551 0 0) 50%, oklch(0.8744 0.0029 308.42) 100% )"
+    }
+  }
+}

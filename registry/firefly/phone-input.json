@@ -1,0 +1,30 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\nexport interface PhoneInputProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\"\n> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\n/**\n * Firefly PhoneInput: one warm field split by a hairline. The country code\n * sits at the start behind a phone icon, the number fills the rest, and the\n * whole shell takes the olive line and flush outline while either part has\n * focus.\n */\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode = \"+1\", onCountryCodeChange, disabled, ...props }, ref) => (\n    <div\n      data-slot=\"phone-input\"\n      className={cn(\n        formFieldBase,\n        \"flex h-10 items-stretch overflow-hidden px-0\",\n        \"focus-within:border-(--accent-line) focus-within:outline-2 focus-within:outline-offset-0 focus-within:outline-ring\",\n        \"has-[[aria-invalid=true]]:border-destructive\",\n        \"has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-secondary has-[:disabled]:text-(--foreground-disabled) has-[:disabled]:hover:border-(--line-strong)\",\n        className,\n      )}\n    >\n      <div className=\"flex shrink-0 items-center gap-1.5 border-e border-(--line-strong) ps-3 pe-2 text-muted-foreground\">\n        <Icon icon=\"carbon:phone\" className=\"size-4\" aria-hidden=\"true\" />\n        <input\n          type=\"tel\"\n          value={countryCode}\n          onChange={(event) => onCountryCodeChange?.(event.target.value)}\n          disabled={disabled}\n          aria-label=\"Country code\"\n          className=\"w-10 bg-transparent text-sm tabular-nums text-foreground outline-none disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\"\n        />\n      </div>\n      <input\n        ref={ref}\n        type=\"tel\"\n        autoComplete=\"tel-national\"\n        disabled={disabled}\n        className=\"min-w-0 flex-1 bg-transparent px-3 text-sm tabular-nums text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\"\n        {...props}\n      />\n    </div>\n  ),\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "accent-line": "oklch(0.594 0.135 115.4)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "accent-line": "oklch(0.841 0.161 114)"
+    }
+  }
+}

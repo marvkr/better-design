@@ -65,7 +65,7 @@ const Field = React.forwardRef<HTMLDivElement, FieldProps>(
             hasError && [
               "[&_input]:border-destructive",
               "[&_input]:focus-visible:border-destructive",
-              "[&_input]:focus-visible:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]",
+              "[&_input]:focus-visible:shadow-[0_0_0_0.1875rem_hsl(var(--destructive)/0.12)]",
               "[&_textarea]:border-destructive",
               "[&_select]:border-destructive",
             ]

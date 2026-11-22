@@ -16,9 +16,9 @@ const CollapsibleTrigger = React.forwardRef<
       "flex w-full items-center justify-between rounded-xl px-4 py-3",
       "backdrop-blur-md bg-white/[0.05] border border-white/[0.08]",
       "text-sm font-medium text-white/90",
-      "transition-all duration-300",
-      "hover:bg-white/[0.09] hover:shadow-[0_0_12px_rgba(255,255,255,0.05)]",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(255,255,255)]/40",
+      "transition-all duration-slow",
+      "hover:bg-white/[0.09] hover:shadow-[0_0_0.75rem_oklch(1_0_0/0.05)]",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(1_0_0)]/40",
       "[&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-b-white/[0.03]",
       className
     )}

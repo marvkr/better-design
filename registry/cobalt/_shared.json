@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for cobalt.\n *\n * Fields are recessed wells carved into the panel: darker than the canvas,\n * sunk with the stacked --shadow-inset recipe (two dark insets plus a faint\n * bottom lip), the inverse of the raised cobalt button. Focus lights the\n * cyan ring. All fields share the 10px control radius from the spec.\n */\n\nexport const formFieldBase =\n  \"w-full px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/30 \" +\n  \"focus-visible:outline-none focus-visible:border-ring/60 focus-visible:ring-2 focus-visible:ring-ring/35 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5 rounded-md\"\nexport const formFieldMultiLine = \"flex min-h-20 py-2 resize-y rounded-lg\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for Ink mail components.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes. This keeps the background,\n * border, focus ring, hover, disabled and transition behaviour identical\n * across every form field in the design system.\n *\n * Ink mail fields are a dark card-step well behind a translucent white\n * hairline, with a 0.75rem corner. Focus brightens the edge to the off-white\n * ink and adds a faint white halo: no colour, the way the rest of the system\n * marks state with luminance.\n *\n * Do NOT copy-paste these classes into individual components - always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.) */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-lg border border-(--line-strong) bg-(--field) px-3.5 text-sm text-foreground \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-(--control) \" +\n  \"focus-visible:border-foreground focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring \" +\n  \"disabled:cursor-not-allowed disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\";\n\n/** Height + vertical padding for single-line form fields (2.5rem) */\nexport const formFieldSingleLine = \"flex h-10 py-2\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-24 py-2.5\";\n\n/**\n * The floating panel shared by every menu, popover and dropdown: the\n * elevated surface step with a 0.75rem corner, edged by a translucent white\n * ring folded into a deep shadow token, so it lifts off the black page.\n */\nexport const popoverSurface =\n  \"rounded-lg bg-popover text-popover-foreground shadow-(--shadow-menu)\";\n\n/** A highlighted row inside a floating panel: one step lighter, 0.5rem corner. */\nexport const menuItemBase =\n  \"relative flex min-h-8 cursor-default select-none items-center gap-2 rounded-md px-2.5 py-1.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:text-(--foreground-disabled)\";\n\n/**\n * The primary fill: flat off-white with black ink, the brightest pixel on the\n * page. Hover dims it one step; the press turns it a cool blue-white.\n */\nexport const primaryFill =\n  \"bg-primary text-primary-foreground hover:bg-(--primary-hover) active:bg-(--primary-active)\";\n\n/**\n * The glass fill: a faint white gradient behind a translucent edge, for the\n * call to action that sits beside the solid one.\n */\nexport const glassFill =\n  \"border-2 border-(--glass-edge) bg-(image:--glass) text-foreground hover:bg-(image:--glass-hover)\";\n\n/**\n * The same off-white on a small checked control (checkbox, radio, switch\n * track). Radix marks the checked state with data-state=\"checked\"; Base UI\n * with data-checked. A disabled control goes quiet even when checked.\n */\nexport const controlChecked =\n  \"data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground \" +\n  \"data-[checked]:border-primary data-[checked]:bg-primary data-[checked]:text-primary-foreground \" +\n  \"disabled:data-[state=checked]:border-(--line-strong) disabled:data-[state=checked]:bg-muted disabled:data-[state=checked]:text-(--foreground-disabled) \" +\n  \"data-[disabled]:data-[checked]:border-(--line-strong) data-[disabled]:data-[checked]:bg-muted data-[disabled]:data-[checked]:text-(--foreground-disabled)\";\n\n/** A selected chip, toggle or nav row: a white wash at one tenth with full ink. */\nexport const activeWash =\n  \"data-[state=on]:bg-(--wash) data-[state=on]:text-foreground data-[state=on]:border-(--line-strong)\";\n\n/** The focus ring every interactive element uses: a faint white halo. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-3 focus-visible:ring-ring\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.88 0.004 264)",
+      "primary-active": "oklch(0.974 0.011 252.1)",
+      "glass": "linear-gradient(104deg, oklch(1 0 0 / 0.05) 5%, oklch(0.95 0.01 100 / 0.1) 100%)",
+      "glass-hover": "linear-gradient(104deg, oklch(1 0 0 / 0.08) 5%, oklch(0.95 0.01 100 / 0.14) 100%)",
+      "glass-edge": "oklch(1 0 0 / 0.06)",
+      "wash": "oklch(1 0 0 / 0.1)",
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "control": "oklch(0.52 0.006 240)",
+      "field": "oklch(0.146 0.004 286)",
+      "shadow-menu": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 1rem 2rem -0.75rem oklch(0 0 0 / 0.8)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.88 0.004 264)",
+      "primary-active": "oklch(0.974 0.011 252.1)"
+    }
+  }
+}

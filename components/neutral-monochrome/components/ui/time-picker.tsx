@@ -24,10 +24,10 @@ function TimePicker({
 }: TimePickerProps) {
   // Parse controlled value (HH:MM or HH:MM AM/PM)
   const parse = (v: string | undefined) => {
-    if (!v) return { hours: 12, minutes: 0, period: "AM" as "AM" | "PM" }
+    if (!v) return { hours: 12, minutes: 0, period: "AM" as const }
     const [time, period] = v.split(" ")
     const [h, m] = time.split(":").map(Number)
-    return { hours: h ?? 12, minutes: m ?? 0, period: (period ?? "AM") as "AM" | "PM" }
+    return { hours: h ?? 12, minutes: m ?? 0, period: period === "PM" ? ("PM" as const) : ("AM" as const) }
   }
 
   const parsed = parse(value)
@@ -69,7 +69,7 @@ function TimePicker({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 rounded-[10px] border border-border bg-card px-4 py-2",
+        "inline-flex items-center gap-2 rounded-[0.625rem] border border-border bg-card px-4 py-2",
         disabled && "opacity-50 pointer-events-none",
         className
       )}

@@ -1,0 +1,26 @@
+{
+  "name": "input-copy",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, AnimatePresence } from \"motion/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n// InputCopy: read-only input with a copy-to-clipboard button and animated\n// success feedback. The field is a recessed graphite well; the copy button\n// reads as a small raised tile that lifts on hover.\n//\n// Usage:\n//   <InputCopy value=\"sk_live_abc123\" />\n//   <InputCopy label=\"API key\" value={apiKey} />\n\ninterface InputCopyProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\" | \"readOnly\"> {\n  value: string\n  label?: React.ReactNode\n  /** ms before the copied state resets. Default 1800. */\n  copiedTimeoutMs?: number\n}\n\nfunction InputCopy({\n  value,\n  label,\n  copiedTimeoutMs = 1800,\n  className,\n  id: idProp,\n  ...props\n}: InputCopyProps) {\n  const generatedId = React.useId()\n  const id = idProp ?? generatedId\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value)\n      setCopied(true)\n    } catch {\n      // Clipboard may be unavailable (insecure context, permissions).\n      // Fail silently, the input remains selectable for manual copy.\n    }\n  }, [value])\n\n  React.useEffect(() => {\n    if (!copied) return\n    const t = setTimeout(() => setCopied(false), copiedTimeoutMs)\n    return () => clearTimeout(t)\n  }, [copied, copiedTimeoutMs])\n\n  return (\n    <div className={cn(\"flex flex-col gap-1.5\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-[0.75rem] font-medium text-secondary-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(e) => e.currentTarget.select()}\n          className={cn(formFieldBase, formFieldSingleLine, \"pr-10 text-[0.8125rem]\")}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute right-1 flex h-7 w-7 items-center justify-center rounded-md\",\n            \"bg-popover text-muted-foreground [box-shadow:var(--shadow-tile)]\",\n            \"transition-[color,background-color,box-shadow] duration-fast\",\n            \"hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-sm)]\",\n            \"active:translate-y-px\",\n            \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-tile),0_0_0_0.125rem_var(--ring)]\"\n          )}\n        >\n          <AnimatePresence mode=\"wait\" initial={false}>\n            {copied ? (\n              <motion.svg\n                key=\"check\"\n                width=\"14\"\n                height=\"14\"\n                viewBox=\"0 0 16 16\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                strokeWidth={2}\n                strokeLinecap=\"round\"\n                strokeLinejoin=\"round\"\n                initial={{ opacity: 0, scale: 0.6 }}\n                animate={{ opacity: 1, scale: 1 }}\n                exit={{ opacity: 0, scale: 0.6 }}\n                transition={{ duration: 0.16, ease: [0.4, 0, 0.2, 1] }}\n                aria-hidden\n              >\n                <path d=\"M3 8.5 L6.5 12 L13 4.5\" />\n              </motion.svg>\n            ) : (\n              <motion.svg\n                key=\"copy\"\n                width=\"14\"\n                height=\"14\"\n                viewBox=\"0 0 16 16\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                strokeWidth={1.5}\n                strokeLinecap=\"round\"\n                strokeLinejoin=\"round\"\n                initial={{ opacity: 0, scale: 0.6 }}\n                animate={{ opacity: 1, scale: 1 }}\n                exit={{ opacity: 0, scale: 0.6 }}\n                transition={{ duration: 0.16, ease: [0.4, 0, 0.2, 1] }}\n                aria-hidden\n              >\n                <rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\" />\n                <path d=\"M3 11 V3 a1.5 1.5 0 0 1 1.5 -1.5 H11\" />\n              </motion.svg>\n            )}\n          </AnimatePresence>\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport { InputCopy }\nexport type { InputCopyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/graphite/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)"
+    },
+    "dark": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)"
+    }
+  }
+}

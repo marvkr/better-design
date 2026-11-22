@@ -1,0 +1,29 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-[0.125rem] border-2 px-2 py-0.5 \" +\n    \"font-mono text-[0.6875rem] font-black uppercase tracking-[0.1em] \" +\n    \"transition-[background-color,box-shadow,color] duration-fast [box-shadow:var(--shadow-xs)]\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-card text-foreground\",\n        primary: \"border-border bg-primary text-primary-foreground\",\n        secondary: \"border-border bg-secondary text-secondary-foreground\",\n        outline: \"border-border bg-background text-foreground\",\n        success:\n          \"border-border bg-[var(--success)] text-[var(--success-foreground)]\",\n        warning:\n          \"border-border bg-[var(--warning)] text-[var(--warning-foreground)]\",\n        destructive: \"border-border bg-destructive text-destructive-foreground\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.78 0.2 145)",
+      "success-foreground": "oklch(0.105 0.01 255)",
+      "warning": "var(--primary)",
+      "warning-foreground": "var(--primary-foreground)"
+    },
+    "dark": {
+      "success": "oklch(0.78 0.2 145)",
+      "success-foreground": "oklch(0.105 0.01 255)",
+      "warning": "var(--primary)",
+      "warning-foreground": "var(--primary-foreground)"
+    }
+  }
+}

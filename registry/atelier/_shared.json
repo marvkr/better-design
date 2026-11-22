@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for atelier.\n *\n * Fields are quiet near-white surfaces resting a hair below the card plane:\n * a hairline warm border, a whisper of inset shade, generous pill rounding on\n * single-line fields. Focus draws the refined green ring, softly.\n */\n\nexport const formFieldBase =\n  \"w-full px-4 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/35 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5 rounded-full\"\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y rounded-xl\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.05)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.2 0.01 110 / 0.05)"
+    }
+  }
+}

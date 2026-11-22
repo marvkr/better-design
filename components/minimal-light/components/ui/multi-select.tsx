@@ -48,7 +48,7 @@ function MultiSelect({
   // Close on outside click
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {
         setOpen(false)
       }
     }
@@ -75,7 +75,7 @@ function MultiSelect({
         aria-expanded={open}
         className={cn(
           "flex h-10 w-full items-center justify-between rounded-xl border border-border bg-secondary px-4 py-2 text-sm",
-          "text-foreground transition-colors duration-200",
+          "text-foreground transition-colors duration-base",
           "hover:bg-accent",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           "disabled:cursor-not-allowed disabled:opacity-40"
@@ -94,7 +94,7 @@ function MultiSelect({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={cn("shrink-0 text-muted-foreground transition-transform duration-200", open && "rotate-180")}
+          className={cn("shrink-0 text-muted-foreground transition-transform duration-base", open && "rotate-180")}
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
@@ -103,7 +103,7 @@ function MultiSelect({
       {open && (
         <div
           className={cn(
-            "absolute z-50 mt-1 w-full overflow-hidden rounded-xl border border-border bg-card shadow-xl",
+            "absolute z-50 mt-1 w-full overflow-hidden rounded-xl bg-card shadow-xl",
             "animate-in fade-in-0 zoom-in-95"
           )}
           role="listbox"
@@ -121,14 +121,14 @@ function MultiSelect({
                   onClick={() => toggle(option.value)}
                   className={cn(
                     "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-foreground tracking-wide",
-                    "transition-colors duration-150 hover:bg-accent",
+                    "transition-colors duration-fast hover:bg-accent",
                     "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   )}
                 >
                   {/* Checkbox */}
                   <span
                     className={cn(
-                      "flex h-4 w-4 shrink-0 items-center justify-center rounded border border-border transition-colors duration-150",
+                      "flex h-4 w-4 shrink-0 items-center justify-center rounded border border-border transition-colors duration-fast",
                       checked ? "bg-primary border-primary" : "bg-secondary"
                     )}
                   >
@@ -159,7 +159,7 @@ function MultiSelect({
               <button
                 type="button"
                 onClick={() => { if (!controlled) setSelected([]); onChange?.([]) }}
-                className="flex w-full items-center justify-center rounded-lg px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors duration-150"
+                className="flex w-full items-center justify-center rounded-lg px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors duration-fast"
               >
                 Clear all
               </button>

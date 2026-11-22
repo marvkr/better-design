@@ -10,7 +10,7 @@ export interface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
-  ({ value, onCopied, className, ...props }, ref) => {
+  ({ value, onCopied, className, onClick, ...props }, ref) => {
     const [copied, setCopied] = React.useState(false)
 
     const handleCopy = async () => {
@@ -28,7 +28,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
       <button
         ref={ref}
         type="button"
-        onClick={handleCopy}
+        onClick={(e) => { onClick?.(e); handleCopy(); }}
         aria-label={copied ? "Copied" : "Copy to clipboard"}
         className={cn(
           "inline-flex h-8 w-8 items-center justify-center rounded-lg",

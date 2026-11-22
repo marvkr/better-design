@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "https://www.better-design.com/registry/minimal-light/toast.json",
-    "https://www.better-design.com/registry/minimal-light/use-toast.json"
+    "https://better-design.com/registry/minimal-light/toast.json",
+    "https://better-design.com/registry/minimal-light/use-toast.json"
   ]
 }

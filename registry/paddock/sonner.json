@@ -1,0 +1,35 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\nimport { Icon } from \"@iconify/react\";\n\n/**\n * Paddock Toaster (Sonner): each toast is the shared floating panel, white\n * with a faint drop and small rounded corners. The action is the teal\n * primary button and cancel the quiet grey chip. Sonner ships its own unlayered styles,\n * so these classes carry the important flag.\n */\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      icons={{\n        success: <Icon icon=\"mingcute:check-circle-line\" className=\"size-4 text-success\" />,\n        info: <Icon icon=\"mingcute:information-line\" className=\"size-4 text-info\" />,\n        warning: <Icon icon=\"mingcute:warning-line\" className=\"size-4 text-warning-text\" />,\n        error: <Icon icon=\"mingcute:close-circle-line\" className=\"size-4 text-destructive\" />,\n        loading: <Icon icon=\"mingcute:loading-line\" className=\"size-4 animate-spin text-muted-foreground\" />,\n      }}\n      toastOptions={{\n        classNames: {\n          toast:\n            \"rounded-lg! border-0! bg-popover! font-sans text-popover-foreground! shadow-(--shadow-menu)!\",\n          title: \"font-semibold!\",\n          description: \"text-muted-foreground!\",\n          actionButton:\n            \"rounded-md! bg-primary! font-medium! text-primary-foreground! shadow-(--primary-face)!\",\n          cancelButton:\n            \"rounded-md! bg-secondary! text-secondary-foreground! shadow-(--plate-ring)!\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.56 0.12 160)",
+      "info": "oklch(0.6 0.12 235)",
+      "warning-text": "oklch(0.48 0.1 75)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.42 0.085 198), 0 0.0625rem 0.125rem oklch(0.3 0.05 210 / 0.14)",
+      "plate-ring": "0 0 0 0.0625rem oklch(0.93 0.008 230)",
+      "menu-lift": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 0.25rem 0.75rem -0.125rem oklch(0.3 0.03 240 / 0.1)",
+      "shadow-menu": "var(--menu-lift)"
+    },
+    "dark": {
+      "success": "oklch(0.72 0.13 160)",
+      "info": "oklch(0.74 0.11 235)",
+      "warning-text": "oklch(0.87 0.1 85)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.66 0.1 190), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "plate-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.06)",
+      "menu-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.25rem 0.75rem -0.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

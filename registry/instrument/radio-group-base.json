@@ -1,0 +1,35 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\";\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark RadioGroup.\n// Item: small recessed well; checked, the gold control material takes over\n// (gradient ring + rim + glow, mirroring the primary Button) with a dark\n// indicator dot pressed into the gold face.\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst RadioGroup = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<RadioGroupPrimitive.Props>\n>(({ className, ...props }, ref) => {\n  return (\n    <RadioGroupPrimitive\n      data-slot=\"radio-group\"\n      className={cn(\"grid gap-2\", className)}\n      {...props}\n      ref={ref}\n    />\n  );\n});\nRadioGroup.displayName = \"RadioGroup\";\n\nconst RadioGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<RadioPrimitive.Root.Props>\n>(({ className, ...props }, ref) => {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      ref={ref}\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square h-4 w-4 rounded-full\",\n        \"border border-[var(--gauge-well-border)] bg-input shadow-[var(--shadow-well)]\",\n        \"transition-all duration-fast ease-out\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:border-[var(--gauge-rim)]\",\n        \"data-checked:bg-[linear-gradient(to_bottom,var(--gauge-grad-top),var(--gauge-grad-bottom))]\",\n        \"data-checked:shadow-[var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"size-full flex items-center justify-center\">\n        <span className=\"block h-1.5 w-1.5 rounded-full bg-primary-foreground shadow-[0_0.0625rem_0_oklch(1_0_0/0.25)]\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  );\n});\nRadioGroupItem.displayName = \"RadioGroupItem\";\n\nexport { RadioGroup, RadioGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.1875rem 0.625rem -0.125rem oklch(0.8 0.115 85 / 0.28)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "marker-text",
+  "type": "registry:ui",
+  "title": "Marker text",
+  "description": "Scroll to the phrase that matters. A highlighter stroke draws itself behind it, left to right.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/motion/marker-text.tsx",
+      "target": "components/motion/marker-text.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { motion, useInView, useReducedMotion, type Transition } from \"motion/react\";\nimport { type ComponentPropsWithoutRef, type RefObject, useRef } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for a phrase with a highlighter stroke that draws itself behind it. */\nexport type MarkerTextProps = ComponentPropsWithoutRef<\"mark\"> & {\n  /**\n   * Draws or clears the stroke on demand. Leave it out and the stroke draws\n   * once, the first time the phrase scrolls into view.\n   */\n  shown?: boolean;\n  /** The element that scrolls, when it is not the page. */\n  root?: RefObject<HTMLElement | null>;\n  /** Classes for the stroke, such as another tint. Check the text still reads at 4.5 to 1 on it. */\n  strokeClassName?: string;\n};\n\n// The system points at a phrase once, so the stroke is an ease-out that lands.\nconst DRAW: Transition = { duration: 0.5, ease: [0.165, 0.84, 0.44, 1] };\nconst INSTANT: Transition = { duration: 0 };\n\n// The clip is rounded too, so the leading edge of the stroke is round while it draws.\nconst HIDDEN = \"inset(0% 100% 0% 0% round 0.375rem)\";\nconst DRAWN = \"inset(0% 0% 0% 0% round 0.375rem)\";\n\n/**\n * Draws a highlighter stroke behind a short phrase, left to right, when the\n * phrase scrolls into view or when `shown` turns true. The stroke is a tint of\n * the primary colour behind text in the foreground colour, so the phrase reads\n * the same in both themes. The text is never hidden, and with reduced motion\n * the stroke is simply there.\n */\nexport function MarkerText({ shown, root, strokeClassName, className, children, ...markProps }: MarkerTextProps) {\n  const reduceMotion = useReducedMotion();\n  const phrase = useRef<HTMLElement>(null);\n  const seen = useInView(phrase, { once: true, amount: 0.8, root });\n  const drawn = shown ?? seen;\n\n  return (\n    // The element is a real `mark`. Its default colours are cleared, because the stroke replaces them.\n    <mark\n      {...markProps}\n      ref={phrase}\n      data-drawn={drawn ? \"true\" : \"false\"}\n      className={cn(\"relative isolate inline-block bg-transparent text-foreground\", className)}\n    >\n      <motion.span\n        aria-hidden=\"true\"\n        data-stroke=\"\"\n        initial={false}\n        animate={{ clipPath: drawn ? DRAWN : HIDDEN }}\n        transition={reduceMotion ? INSTANT : DRAW}\n        // A round-ended band, leaning one degree like a stroke made by hand.\n        className={cn(\"absolute -inset-x-1 inset-y-0.5 -z-10 -rotate-1 rounded-md bg-primary/25\", strokeClassName)}\n      />\n      {children}\n    </mark>\n  );\n}\n"
+    }
+  ],
+  "docs": "Ask the Better Design MCP for get-ui-principle({ topic: \"marker-text\" }) before changing its motion."
+}

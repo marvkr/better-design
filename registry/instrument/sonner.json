@@ -1,0 +1,31 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as Sonner } from \"sonner\";\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>;\n\n// Gauge Dark Sonner: toasts as floating readout panels with the deep popover\n// shadow; action buttons wear the gold control.\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:rounded-lg group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:shadow-[var(--shadow-pop)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-[linear-gradient(to_bottom,var(--gauge-grad-top),var(--gauge-grad-bottom))] group-[.toast]:text-primary-foreground group-[.toast]:rounded-md group-[.toast]:border group-[.toast]:border-[var(--gauge-rim)]\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-md\",\n          error:\n            \"group-[.toaster]:text-[oklch(0.78_0.14_25)] group-[.toaster]:border-destructive/40\",\n          success:\n            \"group-[.toaster]:text-[var(--gauge-ok)] group-[.toaster]:border-[oklch(0.74_0.12_152/0.35)]\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "gauge-ok": "oklch(0.74 0.12 152)",
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-grad-top": "oklch(0.845 0.108 88)",
+      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
+      "gauge-ok": "oklch(0.74 0.12 152)",
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

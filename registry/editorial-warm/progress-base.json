@@ -1,0 +1,23 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI Progress computes the Indicator fill itself (inline width), so the old\n// motion translateX pattern is dropped; the primitive owns the fill.\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"]\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-4 w-full overflow-hidden rounded-full bg-secondary\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator className=\"h-full w-full flex-1 bg-primary transition-[width] duration-500 ease-out\" />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

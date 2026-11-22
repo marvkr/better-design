@@ -1,0 +1,23 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Command Noir Badge — a keycap-style chip with a hairline ring.\n * Default sits flat on the surface; \"primary\" lights up with the accent\n * material used across the system.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 \" +\n    \"text-[0.6875rem] font-medium tracking-[0.02em] \" +\n    \"ring-1 ring-inset transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-foreground ring-border\",\n        primary:\n          \"[background:var(--accent-fill)] text-primary-foreground \" +\n          \"ring-[oklch(1_0_0/0.08)]\",\n        secondary:\n          \"bg-card text-muted-foreground ring-border\",\n        outline: \"bg-transparent text-foreground ring-border\",\n        success:\n          \"bg-[oklch(0.4_0.1_145)]/30 ring-[oklch(0.5_0.15_145)]/30 text-[color:oklch(0.875_0.15_145)]\",\n        warning:\n          \"bg-[oklch(0.45_0.12_70)]/30 ring-[oklch(0.55_0.18_55)]/30 text-[color:oklch(0.875_0.119_80)]\",\n        destructive:\n          \"bg-destructive/20 ring-destructive/30 text-[color:oklch(0.875_0.066_25)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)"
+    },
+    "dark": {
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)"
+    }
+  }
+}

@@ -16,9 +16,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        "rounded-[12px] bg-card text-card-foreground",
+        "rounded-[0.75rem] bg-card text-card-foreground",
         "[box-shadow:var(--shadow-md)]",
-        "transition-[background-color,box-shadow] duration-200",
+        "transition-[background-color,box-shadow] duration-base",
         interactive &&
           "cursor-pointer hover:bg-accent/60 hover:[box-shadow:var(--shadow-lg)]",
         className

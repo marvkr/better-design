@@ -1,0 +1,11 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Empty: a square soft grey well that centres whatever you put\n * in it. Use it where a product grid or a result list would sit, so the\n * space keeps its shape while there is nothing to show.\n */\nconst Empty = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"empty\"\n    className={cn(\n      \"flex min-h-48 flex-col items-center justify-center gap-3 rounded-none bg-secondary p-8 text-center text-sm text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nEmpty.displayName = \"Empty\";\n\nexport { Empty };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Velour Glass Card - the velvet panel from the reference widgets:\n * an opaque vertical gradient that runs dark-to-darker (the top edge\n * catches the light), a 1px inset light rim, and a deep soft ambient\n * drop. Generous 16px radius, no blur, no hard border line.\n */\n\ninterface CardProps extends React.HTMLAttributes<HTMLDivElement> {\n  interactive?: boolean\n}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, interactive, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"rounded-xl text-card-foreground\",\n        \"bg-card [background-image:var(--velour)]\",\n        \"[box-shadow:var(--shadow-s)]\",\n        \"transition-[box-shadow,filter] duration-base\",\n        interactive &&\n          \"cursor-pointer hover:[box-shadow:var(--shadow-m)] hover:brightness-[1.06]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nCard.displayName = \"Card\"\n\nconst CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex flex-col gap-1.5 p-5\", className)} {...props} />\n  )\n)\nCardHeader.displayName = \"CardHeader\"\n\nconst CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"text-base font-semibold tracking-tight text-foreground leading-snug\", className)}\n      {...props}\n    />\n  )\n)\nCardTitle.displayName = \"CardTitle\"\n\nconst CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-sm text-muted-foreground leading-relaxed\", className)} {...props} />\n  )\n)\nCardDescription.displayName = \"CardDescription\"\n\nconst CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"px-5 pb-5\", className)} {...props} />\n  )\n)\nCardContent.displayName = \"CardContent\"\n\nconst CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex items-center gap-2 px-5 pb-5\", className)} {...props} />\n  )\n)\nCardFooter.displayName = \"CardFooter\"\n\nexport { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.125rem 0.375rem oklch(0 0 0 / 0.5), 0 0.625rem 1.75rem oklch(0 0 0 / 0.38)"
+    },
+    "dark": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.125rem 0.375rem oklch(0 0 0 / 0.5), 0 0.625rem 1.75rem oklch(0 0 0 / 0.38)"
+    }
+  }
+}

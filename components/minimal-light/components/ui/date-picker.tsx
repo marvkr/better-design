@@ -35,7 +35,7 @@ function DatePicker({
 
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {
         setOpen(false)
       }
     }
@@ -90,7 +90,7 @@ function DatePicker({
         aria-expanded={open}
         className={cn(
           "flex h-10 w-full items-center justify-start gap-3 rounded-xl border border-border bg-secondary px-4 text-sm",
-          "text-foreground transition-colors duration-200 hover:bg-accent",
+          "text-foreground transition-colors duration-base hover:bg-accent",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           "disabled:cursor-not-allowed disabled:opacity-40"
         )}
@@ -122,7 +122,7 @@ function DatePicker({
           role="dialog"
           aria-label="Date picker"
           className={cn(
-            "absolute z-50 mt-1 w-72 rounded-xl border border-border bg-card p-4 shadow-xl",
+            "absolute z-50 mt-1 w-72 rounded-xl bg-card p-4 shadow-xl",
             "animate-in fade-in-0 zoom-in-95"
           )}
         >
@@ -154,7 +154,7 @@ function DatePicker({
           {/* Day headers */}
           <div className="grid grid-cols-7 gap-1 mb-2">
             {DAYS.map((d) => (
-              <div key={d} className="text-center text-[11px] font-medium text-muted-foreground/60 tracking-wider">
+              <div key={d} className="text-center text-[0.6875rem] font-medium text-muted-foreground/60 tracking-wider">
                 {d}
               </div>
             ))}
@@ -175,7 +175,7 @@ function DatePicker({
                   type="button"
                   onClick={() => handleSelect(day)}
                   className={cn(
-                    "flex h-8 w-8 items-center justify-center rounded-lg text-sm transition-colors duration-150",
+                    "flex h-8 w-8 items-center justify-center rounded-lg text-sm transition-colors duration-fast",
                     "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                     selected && "bg-primary text-primary-foreground font-medium",
                     !selected && today && "border border-border text-foreground",

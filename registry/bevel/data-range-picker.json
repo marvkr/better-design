@@ -1,0 +1,21 @@
+{
+  "name": "data-range-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { type DateRange } from \"react-day-picker\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n/*\n * Bevel DateRangePicker.\n *\n * The same field trigger as the single DatePicker, reading \"6 Jan to 14 Jan\"\n * once both ends are set. The popover holds two months side by side on wide\n * screens, where the two round ends of the range join through the tinted\n * middle days.\n */\n\n/** Props for `DateRangePicker`, a two-date field with a calendar popover. */\nexport interface DateRangePickerProps {\n  value?: DateRange\n  onValueChange?: (range: DateRange | undefined) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n}\n\nconst DateRangePicker = React.forwardRef<\n  HTMLButtonElement,\n  DateRangePickerProps\n>(\n  (\n    {\n      value,\n      onValueChange,\n      placeholder = \"Pick a date range\",\n      className,\n      disabled,\n    },\n    ref,\n  ) => (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          ref={ref}\n          type=\"button\"\n          disabled={disabled}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"items-center justify-start gap-2 text-left text-[0.9063rem] tracking-[0.0188rem]\",\n            !value?.from && \"text-muted-foreground\",\n            className,\n          )}\n        >\n          <Icon\n            icon=\"solar:calendar-linear\"\n            className=\"size-[1.0625rem] shrink-0 text-muted-foreground\"\n          />\n          {value?.from ?\n            value.to ?\n              <>\n                {format(value.from, \"LLL dd, y\")} to{\" \"}\n                {format(value.to, \"LLL dd, y\")}\n              </>\n            : format(value.from, \"LLL dd, y\")\n          : <span>{placeholder}</span>}\n        </button>\n      </PopoverTrigger>\n      <PopoverContent\n        align=\"start\"\n        className=\"w-auto rounded-[0.875rem] bg-popover p-0 text-popover-foreground [box-shadow:var(--shadow-lg)]\"\n      >\n        <Calendar\n          autoFocus\n          mode=\"range\"\n          defaultMonth={value?.from}\n          selected={value}\n          onSelect={onValueChange}\n          numberOfMonths={2}\n        />\n      </PopoverContent>\n    </Popover>\n  ),\n)\nDateRangePicker.displayName = \"DateRangePicker\"\n\nexport { DateRangePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json",
+    "https://better-design.com/registry/bevel/calendar.json",
+    "https://better-design.com/registry/bevel/popover.json"
+  ]
+}

@@ -42,9 +42,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         className={cn(
           "flex h-12 w-full overflow-hidden",
           "rounded-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05]",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
-          "transition duration-300",
-          "focus-within:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)] focus-within:border-primary/50",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
+          "transition duration-slow",
+          "focus-within:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)] focus-within:border-primary/50",
           disabled && "opacity-70 cursor-not-allowed",
           className
         )}
@@ -66,7 +66,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           min={min}
           max={max}
           step={step}
-          className="flex-1 bg-transparent px-2 text-center text-[15px] text-white/90 focus:outline-none disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="flex-1 bg-transparent px-2 text-center text-[0.9375rem] text-white/90 focus:outline-none disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           {...props}
         />
         <button

@@ -30,7 +30,7 @@ const MegaMenu = ({ trigger, sections, className }: MegaMenuProps) => {
       <PopoverTrigger asChild>{trigger}</PopoverTrigger>
       <PopoverContent
         align="start"
-        className={cn("w-[640px] p-0", className)}
+        className={cn("w-[40rem] p-0", className)}
       >
         <div className="grid grid-cols-2 gap-0 p-4">
           {sections.map((section) => (
@@ -45,7 +45,7 @@ const MegaMenu = ({ trigger, sections, className }: MegaMenuProps) => {
                     href={item.href ?? "#"}
                     className={cn(
                       "group flex items-start gap-3 rounded-md p-2",
-                      "transition-[background-color,box-shadow] duration-150",
+                      "transition-[background-color,box-shadow] duration-fast",
                       "hover:bg-accent hover:text-accent-foreground"
                     )}
                   >

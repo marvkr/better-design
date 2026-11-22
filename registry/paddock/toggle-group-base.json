@@ -1,0 +1,19 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\";\nimport { type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { wellInset } from \"./_shared\";\nimport { toggleVariants } from \"./toggle\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({});\n\n/**\n * Paddock ToggleGroup: a view switch. A row of segments in one recessed\n * grey track; the pressed segment rises as a white segment. The group\n * passes its variant and size to every item.\n */\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  children,\n  ...props\n}: WithClassName<ToggleGroupPrimitive.Props<string>> &\n  VariantProps<typeof toggleVariants>) {\n  return (\n    <ToggleGroupPrimitive\n      data-slot=\"toggle-group\"\n      className={cn(\n        \"inline-flex flex-wrap items-center gap-0.5 rounded-md p-1\",\n        wellInset,\n        \"data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch data-[orientation=vertical]:rounded-lg\",\n        className,\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size }}>\n        {children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive>\n  );\n}\nToggleGroup.displayName = \"ToggleGroup\";\n\n/** One option in the track; flat until pressed, unless the group names another variant. */\nfunction ToggleGroupItem({\n  className,\n  variant,\n  size,\n  ...props\n}: WithClassName<TogglePrimitive.Props<string>> &\n  VariantProps<typeof toggleVariants>) {\n  const context = React.useContext(ToggleGroupContext);\n  const resolved = context.variant || variant || \"inset\";\n  const resolvedSize = context.size || size;\n\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle-group-item\"\n      className={cn(\n        toggleVariants({ variant: resolved, size: resolvedSize }),\n        resolved === \"inset\" && (!resolvedSize || resolvedSize === \"default\") && \"h-8 px-3.5\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nToggleGroupItem.displayName = \"ToggleGroupItem\";\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json",
+    "https://better-design.com/registry/paddock/toggle-base.json"
+  ]
+}

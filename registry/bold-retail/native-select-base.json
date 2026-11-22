@@ -1,0 +1,26 @@
+{
+  "name": "native-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface NativeSelectProps\n  extends React.SelectHTMLAttributes<HTMLSelectElement> {}\n\n/**\n * Bold retail NativeSelect: the browser's own select, dressed as a checkout\n * field. The browser arrow gives way to a black chevron at the end. The list\n * stays native, which suits a long country list and phones.\n */\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, children, ...props }, ref) => (\n    <div data-slot=\"native-select-wrapper\" className=\"relative w-full\">\n      <select\n        ref={ref}\n        data-slot=\"native-select\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"peer cursor-pointer appearance-none pe-11\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </select>\n      <Icon\n        icon=\"mingcute:down-line\"\n        className=\"pointer-events-none absolute end-4 top-1/2 size-5 -translate-y-1/2 text-foreground peer-disabled:text-(--foreground-disabled)\"\n        aria-hidden=\"true\"\n      />\n    </div>\n  ),\n);\nNativeSelect.displayName = \"NativeSelect\";\n\nexport { NativeSelect };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.7 0.003 286.3)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

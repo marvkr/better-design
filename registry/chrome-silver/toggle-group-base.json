@@ -1,0 +1,31 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants } from \"./toggle\"\n\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants>\n>({\n  size: \"default\",\n  variant: \"default\",\n})\n\nconst ToggleGroup = React.forwardRef<\n  HTMLDivElement,\n  ToggleGroupPrimitive.Props & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, children, ...props }, ref) => (\n  <ToggleGroupPrimitive\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-lg p-1\",\n      \"bg-card border border-white/10 [box-shadow:var(--shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ToggleGroupContext.Provider value={{ variant, size }}>\n      {children}\n    </ToggleGroupContext.Provider>\n  </ToggleGroupPrimitive>\n))\nToggleGroup.displayName = \"ToggleGroup\"\n\nconst ToggleGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  TogglePrimitive.Props & VariantProps<typeof toggleVariants>\n>(({ className, children, variant, size, ...props }, ref) => {\n  const context = React.useContext(ToggleGroupContext)\n  return (\n    <TogglePrimitive\n      ref={ref}\n      className={cn(\n        toggleVariants({\n          variant: context.variant || variant,\n          size: context.size || size,\n        }),\n        \"data-pressed:[background:var(--surface-on)] data-pressed:text-primary-foreground data-pressed:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </TogglePrimitive>\n  )\n})\nToggleGroupItem.displayName = \"ToggleGroupItem\"\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/chrome-silver/toggle-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    },
+    "dark": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    }
+  }
+}

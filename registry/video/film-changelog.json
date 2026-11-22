@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "film-changelog",
+  "type": "registry:block",
+  "title": "Changelog Film",
+  "description": "Changelog video template: the version stamps down, three changes play in turn (a screen recording, a marked sentence, a struck and replaced phrase), then the end card, about 20 seconds.",
+  "dependencies": [
+    "remotion@4.0.513",
+    "@remotion/transitions@4.0.513"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "https://better-design.com/registry/video/video-kit.json",
+    "https://better-design.com/registry/video/version-stamp.json",
+    "https://better-design.com/registry/video/recording-shot.json",
+    "https://better-design.com/registry/video/word-mark.json",
+    "https://better-design.com/registry/video/strike-swap.json",
+    "https://better-design.com/registry/video/end-card.json",
+    "https://better-design.com/registry/video/transition-whip-pan.json"
+  ],
+  "files": [
+    {
+      "path": "registry/video/components/bd-video/film-changelog.tsx",
+      "target": "components/bd-video/film-changelog.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Changelog film: the version stamps down, three changes play one after the\n * other (a screen recording, a marked sentence, a struck and replaced\n * phrase), then the end card. About 20 seconds at 1920 by 1080. Every scene\n * is a Better Design video component, cut together with the whip pan\n * transition.\n *\n * Written by Better Design.\n */\nimport { linearTiming, TransitionSeries } from \"@remotion/transitions\";\nimport { Easing } from \"remotion\";\nimport { EndCard } from \"@/components/bd-video/end-card\";\nimport { RecordingShot } from \"@/components/bd-video/recording-shot\";\nimport { StrikeSwap } from \"@/components/bd-video/strike-swap\";\nimport { VersionStamp } from \"@/components/bd-video/version-stamp\";\nimport { WordMark } from \"@/components/bd-video/word-mark\";\nimport { whipPan } from \"@/components/bd-video/transition-whip-pan\";\nimport { type VideoTheme, VideoThemeProvider } from \"@/lib/bd-video\";\n\n/** Every piece of copy and picture the changelog film shows. */\nexport interface ChangelogFilmContent {\n  /** The product name, typed in before the version and set on the end card. */\n  name: string;\n  /** The version as you want it shown, such as \"2.4\" or \"v4\". */\n  version: string;\n  /** One line under the version, such as the release date. */\n  dateLine: string;\n  /** First change: a screen recording (.mp4, .webm, .mov) or a still. A placeholder page is drawn when unset. */\n  recording?: string;\n  /** The capture's pixel size, as ffprobe reports it. */\n  recordingSize: { width: number; height: number };\n  /** Second change: one sentence, with the phrase inside it that gets marked. */\n  markText: string;\n  markPhrase: string;\n  /** Third change: the sentence reads before, struck, replacement, after. */\n  swap: { before: string; struck: string; replacement: string; after: string };\n  /** The call to action on the end card button. */\n  cta: string;\n  /** The web address under the button. */\n  url: string;\n}\n\nconst DEFAULT_CONTENT: ChangelogFilmContent = {\n  name: \"Your product\",\n  version: \"2.4\",\n  dateLine: \"Available today\",\n  recordingSize: { width: 1440, height: 900 },\n  markText: \"Search now finds files by what is inside them\",\n  markPhrase: \"what is inside them\",\n  swap: { before: \"Exports used to take\", struck: \"a minute\", replacement: \"two seconds\", after: \".\" },\n  cta: \"Read the full changelog\",\n  url: \"yourproduct.com/changelog\",\n};\n\nexport interface ChangelogFilmProps {\n  content?: Partial<ChangelogFilmContent>;\n  theme?: Partial<VideoTheme>;\n}\n\n/** Frames per scene, in order: version, recording, marked sentence, swap, end. */\nconst SCENES = [120, 150, 110, 120, 160] as const;\nconst CUT = 15;\nconst cut = () => <TransitionSeries.Transition presentation={whipPan({ direction: \"left\" })} timing={linearTiming({ durationInFrames: CUT, easing: Easing.bezier(0.7, 0, 0.3, 1) })} />;\n\n/** A release changelog film built from Better Design video components. */\nexport function ChangelogFilm({ content, theme }: ChangelogFilmProps) {\n  const c = { ...DEFAULT_CONTENT, ...content };\n  const swap = { ...DEFAULT_CONTENT.swap, ...content?.swap };\n  return (\n    <VideoThemeProvider theme={theme}>\n      <TransitionSeries>\n        <TransitionSeries.Sequence durationInFrames={SCENES[0]}>\n          <VersionStamp product={c.name} version={c.version} dateLine={c.dateLine} theme={theme} />\n        </TransitionSeries.Sequence>\n        {cut()}\n        <TransitionSeries.Sequence durationInFrames={SCENES[1]}>\n          <RecordingShot recording={c.recording} captureSize={c.recordingSize} theme={theme} />\n        </TransitionSeries.Sequence>\n        {cut()}\n        <TransitionSeries.Sequence durationInFrames={SCENES[2]}>\n          <WordMark text={c.markText} phrase={c.markPhrase} variant=\"marker\" theme={theme} />\n        </TransitionSeries.Sequence>\n        {cut()}\n        <TransitionSeries.Sequence durationInFrames={SCENES[3]}>\n          <StrikeSwap before={swap.before} struck={swap.struck} replacement={swap.replacement} after={swap.after} theme={theme} />\n        </TransitionSeries.Sequence>\n        {cut()}\n        <TransitionSeries.Sequence durationInFrames={SCENES[4]}>\n          <EndCard name={c.name} cta={c.cta} url={c.url} theme={theme} />\n        </TransitionSeries.Sequence>\n      </TransitionSeries>\n    </VideoThemeProvider>\n  );\n}\n\n/** Composition settings. The duration is the scenes minus the four 15-frame cuts. */\nexport const CHANGELOG_FILM = { durationInFrames: 600, fps: 30, width: 1920, height: 1080 } as const;\n"
+    }
+  ],
+  "docs": "Written by Better Design. Pass the product's tokens through the theme prop so the film matches the app."
+}

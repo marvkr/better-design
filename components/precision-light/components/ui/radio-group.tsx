@@ -29,7 +29,7 @@ function RadioGroupItem({
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-transparent data-[state=checked]:shadow-[inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.12),0_0_0_0.0625rem_oklch(0.059_0_0),0_0.0938rem_0.1875rem_oklch(0.122_0_0/0.08)]",
         className
       )}
       {...props}
@@ -39,7 +39,7 @@ function RadioGroupItem({
           {isSelected && (
             <motion.div
               key="dot"
-              className="absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current"
+              className="absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current shadow-[inset_0_0.0625rem_0.125rem_oklch(1_0_0/0.12)]"
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}

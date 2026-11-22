@@ -1,0 +1,27 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Interior Slider — a 4px-radius track cut into the panel as a well, a\n * 2px-radius ink fill, and a cap for a thumb: the same flat ink fill and\n * thumb shadow as the primary Button. A meter should not spring past the\n * number it is reporting, so nothing here overshoots.\n */\n\nconst Slider = React.forwardRef<HTMLDivElement, SliderPrimitive.Root.Props>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max]\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track data-slot=\"slider-track\" className=\"relative h-[0.375rem] w-full grow overflow-hidden rounded-[0.25rem] bg-secondary shadow-[var(--shadow-well)]\">\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full rounded-[0.125rem] bg-primary\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\" key={index}\n              className={cn(\n                \"block h-[1.125rem] w-[0.625rem] rounded-[0.25rem] bg-primary\",\n                \"shadow-[var(--shadow-thumb)]\",\n                \"transition-[box-shadow] duration-fast\",\n                \"focus-visible:outline-none focus-visible:shadow-[var(--shadow-thumb),0_0_0_0.0938rem_var(--ring-inverted)]\",\n                \"data-disabled:pointer-events-none data-disabled:opacity-50\"\n              )}\n            />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    )\n  }\n)\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    },
+    "dark": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    }
+  }
+}

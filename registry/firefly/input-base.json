@@ -1,0 +1,14 @@
+{
+  "name": "input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Firefly Input: a warm paper well behind a strong hairline. The line darkens\n * under the pointer and turns olive with a flush outline on focus.\n */\nconst Input = React.forwardRef<\n  HTMLInputElement,\n  React.InputHTMLAttributes<HTMLInputElement>\n>(({ className, type = \"text\", ...props }, ref) => (\n  <input\n    type={type}\n    ref={ref}\n    data-slot=\"input\"\n    className={cn(\n      formFieldBase,\n      formFieldSingleLine,\n      \"file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json"
+  ]
+}

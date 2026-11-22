@@ -1,0 +1,24 @@
+{
+  "name": "search-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Margin SearchInput: the grey filled search field from the top of the\n * sidebar, with a magnifier at its start and a small clear button once there\n * is a query.\n */\nexport interface SearchInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  /** Shows a clear button while the field holds a value, and calls this when it is pressed. */\n  onClear?: () => void;\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, onClear, value, ...props }, ref) => {\n    const hasValue = value !== undefined && value !== \"\";\n\n    return (\n      <div data-slot=\"search-input\" className=\"relative\">\n        <Icon\n          icon=\"solar:magnifer-linear\"\n          aria-hidden\n          className=\"pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground\"\n        />\n        <input\n          ref={ref}\n          type=\"search\"\n          value={value}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"pl-8\",\n            hasValue && onClear && \"pr-8\",\n            \"[&::-webkit-search-cancel-button]:appearance-none\",\n            className,\n          )}\n          {...props}\n        />\n        {hasValue && onClear && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            className={cn(\n              \"absolute right-1 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded-md\",\n              \"text-muted-foreground transition-colors duration-fast ease-(--ease-out) hover:bg-accent hover:text-foreground\",\n              focusRing,\n            )}\n            aria-label=\"Clear search\"\n          >\n            <Icon icon=\"solar:close-circle-bold\" className=\"size-3.5\" aria-hidden />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nSearchInput.displayName = \"SearchInput\";\n\nexport { SearchInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

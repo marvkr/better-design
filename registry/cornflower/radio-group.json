@@ -1,0 +1,23 @@
+{
+  "name": "radio-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ledger Light Radio — checked ring becomes the primary blue chip (same rim +\n// soft glow as the Button) with a white centered dot.\n\nconst RadioGroup = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Root\n    className={cn(\"grid gap-2\", className)}\n    {...props}\n    ref={ref}\n  />\n))\nRadioGroup.displayName = RadioGroupPrimitive.Root.displayName\n\nconst RadioGroupItem = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"aspect-square h-4 w-4 rounded-full\",\n      \"border border-border bg-input text-primary\",\n      \"transition-all duration-fast ease-out\",\n      \"hover:border-ring/45\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/30\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:border-[var(--primary-rim)] data-[state=checked]:bg-primary\",\n      \"data-[state=checked]:shadow-[var(--shadow-primary-control)]\",\n      className\n    )}\n    {...props}\n  >\n    <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n      <div className=\"h-1.5 w-1.5 rounded-full bg-primary-foreground\" />\n    </RadioGroupPrimitive.Indicator>\n  </RadioGroupPrimitive.Item>\n))\nRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-radio-group@^1.3.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.5 0.19 264)",
+      "shadow-primary-control": "0 0.0625rem 0.125rem oklch(0.5 0.19 264 / 0.25)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

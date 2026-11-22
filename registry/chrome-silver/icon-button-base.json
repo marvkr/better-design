@@ -1,0 +1,32 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * IconButton — square metal chip sized for a single icon. Mirrors Button's\n * chrome material: `default` is brushed silver, `primary` the azure alloy, both\n * carry a beveled rim + soft drop shadow and depress a pixel on press. Provide\n * `aria-label` for accessibility.\n */\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center shrink-0\",\n    \"rounded-md cursor-pointer select-none\",\n    \"transition-[background,box-shadow,transform,color] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"[background:var(--surface-silver)] text-foreground [box-shadow:var(--shadow-button)] hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"[background:var(--surface-on)] text-primary-foreground [box-shadow:var(--shadow-primary)] hover:brightness-110\",\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground\",\n        outline:\n          \"bg-transparent text-foreground border border-border hover:bg-accent hover:border-ring/40\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-button)] hover:brightness-110 hover:[box-shadow:var(--shadow-button-hover)]\",\n      },\n      size: {\n        sm: \"h-7 w-7 [&>svg]:h-3.5 [&>svg]:w-3.5\",\n        default: \"h-9 w-9 [&>svg]:h-4 [&>svg]:w-4\",\n        lg: \"h-10 w-10 [&>svg]:h-5 [&>svg]:w-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <ButtonPrimitive\n      ref={ref}\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "surface-silver": "linear-gradient(to bottom, oklch(0.468 0 0), oklch(0.348 0 0))",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.26), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.4)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    },
+    "dark": {
+      "surface-on": "linear-gradient(to bottom, oklch(0.783 0 0), oklch(0.686 0 0), oklch(0.58 0 0))",
+      "surface-silver": "linear-gradient(to bottom, oklch(0.468 0 0), oklch(0.348 0 0))",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.26), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.4)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.686 0 0 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.783 0 0 / 0.35)"
+    }
+  }
+}

@@ -50,7 +50,7 @@ const Sidebar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>
         data-collapsed={collapsed}
         className={cn(
           "flex h-full flex-col border-r border-border bg-background",
-          "transition-all duration-300 ease-out",
+          "transition-all duration-slow ease-out",
           collapsed ? "w-16" : "w-64",
           className
         )}
@@ -120,8 +120,8 @@ const SidebarGroupLabel = React.forwardRef<HTMLParagraphElement, React.HTMLAttri
       <p
         ref={ref}
         className={cn(
-          "px-2 pb-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60",
-          "transition-opacity duration-200",
+          "px-2 pb-1 text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground/60",
+          "transition-opacity duration-base",
           collapsed && "sr-only",
           className
         )}
@@ -150,7 +150,7 @@ const SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>(
         data-active={active}
         className={cn(
           "relative flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm tracking-wide",
-          "transition-all duration-200 outline-none",
+          "transition-all duration-base outline-none",
           "focus-visible:ring-1 focus-visible:ring-ring",
           "disabled:pointer-events-none disabled:opacity-40",
           active
@@ -195,7 +195,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttri
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         className={cn(
           "flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground",
-          "hover:bg-accent hover:text-foreground transition-colors duration-200",
+          "hover:bg-accent hover:text-foreground transition-colors duration-base",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           className
         )}
@@ -211,7 +211,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttri
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={cn("transition-transform duration-300", collapsed && "rotate-180")}
+          className={cn("transition-transform duration-slow", collapsed && "rotate-180")}
         >
           <path d="m15 18-6-6 6-6" />
         </svg>

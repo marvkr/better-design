@@ -1,0 +1,25 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Item — a list row rendered as a calm raised tile. Use for navigation lists,\n * file rows, results, etc. Hover lifts the tile to the brighter hover surface;\n * the active state sinks it a hair (pressed). Selected reads as a slightly\n * brighter, more lifted tile, not a hued highlight.\n */\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  asChild?: boolean\n  interactive?: boolean\n  selected?: boolean\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"div\"\n    return (\n      <Comp\n        ref={ref}\n        className={cn(\n          \"flex items-center gap-3 rounded-lg px-3 py-2\",\n          \"bg-card text-card-foreground border border-border\",\n          \"[box-shadow:var(--shadow-tile)]\",\n          \"transition-[background-color,box-shadow,border-color,transform] duration-fast\",\n          interactive &&\n            \"cursor-pointer hover:bg-accent hover:[box-shadow:var(--shadow-md)] active:translate-y-px active:[box-shadow:var(--shadow-tile)]\",\n          selected && \"bg-accent [box-shadow:var(--shadow-md)]\",\n          className\n        )}\n        {...props}\n      />\n    )\n  }\n)\nItem.displayName = \"Item\"\n\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary text-muted-foreground\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nItemIcon.displayName = \"ItemIcon\"\n\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex-1 min-w-0\", className)} {...props} />\n  )\n)\nItemContent.displayName = \"ItemContent\"\n\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-sm font-medium text-foreground truncate\", className)} {...props} />\n  )\n)\nItemTitle.displayName = \"ItemTitle\"\n\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-xs text-muted-foreground truncate\", className)} {...props} />\n  )\n)\nItemDescription.displayName = \"ItemDescription\"\n\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex items-center gap-1 shrink-0\", className)} {...props} />\n  )\n)\nItemActions.displayName = \"ItemActions\"\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)"
+    },
+    "dark": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)"
+    }
+  }
+}

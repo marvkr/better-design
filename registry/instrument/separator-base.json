@@ -1,0 +1,14 @@
+{
+  "name": "separator-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark Separator: a machined groove. Dark line with a faint highlight\n// underneath so the cut reads as carved into the panel, not painted on.\n\nconst Separator = React.forwardRef<\n  HTMLDivElement,\n  Omit<SeparatorPrimitive.Props, \"className\"> & {\n    className?: string;\n    /**\n     * Accepted for API compatibility with the previous wrapper and ignored:\n     * the Base UI separator is always semantic (role=\"separator\").\n     */\n    decorative?: boolean;\n  }\n>(\n  (\n    { className, orientation = \"horizontal\", decorative: _decorative, ...props },\n    ref\n  ) => (\n    <SeparatorPrimitive\n      ref={ref}\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-border\",\n        orientation === \"horizontal\"\n          ? \"h-px w-full shadow-[0_0.0625rem_0_oklch(1_0_0/0.04)]\"\n          : \"h-full w-px shadow-[0.0625rem_0_0_oklch(1_0_0/0.04)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nSeparator.displayName = \"Separator\";\n\nexport { Separator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

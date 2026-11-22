@@ -1,0 +1,33 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Bold retail Switch: a 2.75rem by 1.5rem grey track with a white knob on the\n * small thumb shadow. On, the track turns the flat black of the primary\n * button and the knob slides to the end.\n */\nfunction Switch({ className, ...props }: WithClassName<SwitchPrimitive.Root.Props>) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(\n        \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-(--line-strong) p-0.5\",\n        \"transition-colors duration-fast ease-out\",\n        \"hover:data-[unchecked]:bg-(--control)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:bg-secondary\",\n        controlChecked,\n        className,\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block size-5 rounded-full bg-(--thumb) shadow-(--shadow-thumb)\",\n          \"transition-transform duration-fast ease-out motion-reduce:transition-none\",\n          \"data-[checked]:translate-x-4.5 data-[unchecked]:translate-x-0 rtl:data-[checked]:-translate-x-4.5\",\n          \"data-[disabled]:shadow-none\",\n        )}\n      />\n    </SwitchPrimitive.Root>\n  );\n}\nSwitch.displayName = \"Switch\";\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.62 0.003 286.3)",
+      "control": "oklch(0.546 0.003 286.3)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.0625rem 0.25rem oklch(0 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.178 0 0 / 0.1)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.32)",
+      "control": "oklch(0.7 0.003 286.3)",
+      "thumb": "oklch(1 0 0)",
+      "shadow-thumb": "0 0.0625rem 0.25rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.12)"
+    }
+  }
+}

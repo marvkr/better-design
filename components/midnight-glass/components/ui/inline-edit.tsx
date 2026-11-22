@@ -67,12 +67,12 @@ function InlineEdit({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className={cn(
-            "h-10 min-w-0 flex-1 px-4 text-[15px]",
+            "h-10 min-w-0 flex-1 px-4 text-[0.9375rem]",
             "rounded-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05]",
-            "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
+            "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
             "text-white/90 placeholder:text-white/40",
-            "focus-visible:outline-none focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)] focus-visible:border-primary/50",
-            "transition duration-300",
+            "focus-visible:outline-none focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)] focus-visible:border-primary/50",
+            "transition duration-slow",
             inputClassName
           )}
         />
@@ -102,9 +102,9 @@ function InlineEdit({
       onClick={handleEdit}
       disabled={disabled}
       className={cn(
-        "group flex items-center gap-1.5 rounded-full px-1 py-0.5 text-[15px]",
+        "group flex items-center gap-1.5 rounded-full px-1 py-0.5 text-[0.9375rem]",
         "text-white/80 transition-colors hover:bg-white/[0.05]",
-        "focus-visible:outline-none focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)]",
+        "focus-visible:outline-none focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)]",
         disabled && "cursor-not-allowed opacity-60",
         !value && "text-white/40",
         className

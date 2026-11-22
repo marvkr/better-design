@@ -1,0 +1,23 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\n/*\n * Playdesk CodeBlock — the one dark panel on the desk. Code is a different\n * kind of surface from a window, so it inverts rather than tinting.\n */\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n}\n\nconst CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(\n  ({ className, code, language, filename, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"overflow-hidden rounded-xl bg-foreground/95 text-background\",\n        \"[box-shadow:var(--shadow-float)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center gap-2 border-b border-background/10 px-3.5 py-2\">\n        <span className=\"font-mono text-[0.6875rem] tracking-[0.02em] text-background/70\">\n          {filename ?? language ?? \"code\"}\n        </span>\n        <CopyButton\n          value={code}\n          className=\"ml-auto text-background/60 hover:bg-background/10 hover:text-background\"\n        />\n      </div>\n      <pre className=\"overflow-x-auto p-4\">\n        <code className=\"font-mono text-[0.8125rem] leading-relaxed\">{code}</code>\n      </pre>\n    </div>\n  ),\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/copy-button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

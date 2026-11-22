@@ -1,0 +1,18 @@
+{
+  "name": "chart-area",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-area.tsx",
+      "content": "\"use client\"\n\nimport { Area, AreaChart, CartesianGrid, XAxis } from \"recharts\"\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\"\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\"\n\nconst chartData = [\n  { month: \"January\", settled: 186 },\n  { month: \"February\", settled: 305 },\n  { month: \"March\", settled: 237 },\n  { month: \"April\", settled: 73 },\n  { month: \"May\", settled: 209 },\n  { month: \"June\", settled: 214 },\n]\n\nconst chartConfig = {\n  settled: { label: \"Settled\", color: \"var(--chart-1)\" },\n}\n\n/** Mallow area chart: one violet series over faint grid lines, inside a card. */\nexport function ChartAreaDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Settled transfers</CardTitle>\n        <CardDescription>January to June</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <AreaChart accessibilityLayer data={chartData} margin={{ left: 12, right: 12 }}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator=\"line\" />} />\n            <Area\n              dataKey=\"settled\"\n              type=\"monotone\"\n              fill=\"var(--chart-1)\"\n              fillOpacity={0.12}\n              stroke=\"var(--chart-1)\"\n              strokeWidth={1.5}\n            />\n          </AreaChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1\">\n        <span className=\"text-sm text-muted-foreground\">Total this half</span>\n        <span className=\"text-2xl font-medium tabular-nums\">1,224</span>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/card.json",
+    "https://better-design.com/registry/mallow/chart.json"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Card } from \"./card\"\n\n/*\n * Bevel StatCard.\n *\n * Built on the Card, so a metric tile and a content card are the same surface.\n * The label sits at the 12.5px step above a 26px number, which is the greeting\n * step and the only place a dashboard needs it. The glyph sits in an inner\n * well, and the delta uses the success and destructive tokens rather than a\n * color of its own.\n */\n\n/** Props for `StatCard`; `icon` takes an Iconify name such as a Solar glyph. */\nexport interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string\n  value: React.ReactNode\n  icon?: string\n  change?: {\n    value: string | number\n    direction?: \"up\" | \"down\" | \"neutral\"\n  }\n  description?: React.ReactNode\n}\n\n/** Narrows a stat delta to a number, so a negative one points the trend down. */\nfunction isNumericDelta<TValue>(value: TValue | number): value is number {\n  return typeof value === \"number\"\n}\n\nconst StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(\n  (\n    { className, label, value, icon, change, description, ...props },\n    ref,\n  ) => {\n    const delta = change?.value\n    const direction =\n      change?.direction ?? (isNumericDelta(delta) && delta < 0 ? \"down\" : \"up\")\n    const changeColor =\n      direction === \"up\" ? \"text-[var(--success)]\"\n      : direction === \"down\" ? \"text-destructive\"\n      : \"text-muted-foreground\"\n    const changeIcon =\n      direction === \"up\" ? \"solar:arrow-up-linear\"\n      : direction === \"down\" ? \"solar:arrow-down-linear\"\n      : \"solar:minus-square-linear\"\n\n    return (\n      <Card ref={ref} className={cn(\"p-[1.125rem]\", className)} {...props}>\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem] text-muted-foreground\">\n            {label}\n          </div>\n          {icon && (\n            <div className=\"flex size-9 shrink-0 items-center justify-center rounded-[0.75rem] bg-[var(--inner)] text-primary [box-shadow:var(--shadow-inset)]\">\n              <Icon icon={icon} className=\"size-[1.125rem]\" />\n            </div>\n          )}\n        </div>\n        <div className=\"mt-2.5 text-[1.625rem] leading-[1.875rem] font-semibold tracking-[-0.0563rem] text-foreground\">\n          {value}\n        </div>\n        {(change || description) && (\n          <div className=\"mt-2 flex items-center gap-2 text-[0.7813rem] leading-4 tracking-[0.0188rem]\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex items-center gap-0.5 font-semibold\",\n                  changeColor,\n                )}\n              >\n                <Icon icon={changeIcon} className=\"size-3.5\" />\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-muted-foreground\">{description}</span>\n            )}\n          </div>\n        )}\n      </Card>\n    )\n  },\n)\nStatCard.displayName = \"StatCard\"\n\nexport { StatCard }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "success": "oklch(0.5695 0.1372 158)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "success": "oklch(0.6903 0.1305 158)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

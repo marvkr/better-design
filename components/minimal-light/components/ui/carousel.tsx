@@ -74,6 +74,17 @@ const Carousel = React.forwardRef<
       >
         <div
           ref={ref}
+          onKeyDownCapture={(e) => {
+            const prevKey = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp"
+            const nextKey = orientation === "horizontal" ? "ArrowRight" : "ArrowDown"
+            if (e.key === prevKey) {
+              e.preventDefault()
+              scrollPrev()
+            } else if (e.key === nextKey) {
+              e.preventDefault()
+              scrollNext()
+            }
+          }}
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
@@ -144,7 +155,7 @@ const CarouselPrevious = React.forwardRef<
       className={cn(
         "absolute flex h-9 w-9 items-center justify-center rounded-xl",
         "border border-border bg-secondary text-muted-foreground",
-        "transition-all duration-200 hover:bg-accent hover:text-foreground",
+        "transition-all duration-base hover:bg-accent hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         "disabled:pointer-events-none disabled:opacity-30",
         "active:scale-[0.96]",
@@ -178,7 +189,7 @@ const CarouselNext = React.forwardRef<
       className={cn(
         "absolute flex h-9 w-9 items-center justify-center rounded-xl",
         "border border-border bg-secondary text-muted-foreground",
-        "transition-all duration-200 hover:bg-accent hover:text-foreground",
+        "transition-all duration-base hover:bg-accent hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         "disabled:pointer-events-none disabled:opacity-30",
         "active:scale-[0.96]",

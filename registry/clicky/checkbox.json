@@ -1,0 +1,28 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSound } from \"./sound-provider\"\n\n// Clicky Checkbox — flat square with clean check state + tick sound\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, onCheckedChange, ...props }, ref) => {\n  const { playClick } = useSound()\n  return (\n    <CheckboxPrimitive.Root\n      ref={ref}\n      className={cn(\n        \"peer h-4 w-4 shrink-0 rounded-sm\",\n        \"border border-border bg-background\",\n        \"transition-all duration-base ease-out\",\n        \"active:translate-y-px\",\n        \"hover:border-ring/50\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-[state=checked]:bg-primary data-[state=checked]:border-[var(--primary-rim)] data-[state=checked]:text-primary-foreground\",\n        \"data-[state=checked]:shadow-[var(--shadow-tactile-control)]\",\n        className\n      )}\n      onCheckedChange={(checked) => {\n        playClick()\n        onCheckedChange?.(checked)\n      }}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator className=\"flex items-center justify-center text-current\">\n        <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n})\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox@^1.3.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/clicky/sound-provider.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.46 0.21 264)",
+      "primary-base": "oklch(0.4 0.18 264)",
+      "shadow-tactile-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0.0625rem 0 var(--primary-base), 0 0.0625rem 0.125rem oklch(0.55 0.24 264 / 0.18)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

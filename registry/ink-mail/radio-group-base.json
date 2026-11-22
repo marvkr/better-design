@@ -1,0 +1,26 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\";\n\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\";\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Ink mail RadioGroup: a column of choices with 0.75rem between them. */\nfunction RadioGroup({\n  className,\n  ...props\n}: WithClassName<RadioGroupPrimitive.Props>) {\n  return (\n    <RadioGroupPrimitive\n      data-slot=\"radio-group\"\n      className={cn(\"grid gap-3\", className)}\n      {...props}\n    />\n  );\n}\nRadioGroup.displayName = \"RadioGroup\";\n\n/**\n * Ink mail RadioGroupItem: a 1rem circle with a grey edge on the black page.\n * Chosen, it fills with the primary button's off-white and holds a small\n * black dot at its centre.\n */\nfunction RadioGroupItem({\n  className,\n  ...props\n}: WithClassName<RadioPrimitive.Root.Props>) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square size-4 shrink-0 rounded-full border border-(--control) bg-transparent\",\n        \"transition-[background-color,border-color] duration-fast ease-out\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:border-(--line-strong)\",\n        controlChecked,\n        className,\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator\n        data-slot=\"radio-group-indicator\"\n        className=\"flex size-full items-center justify-center\"\n      >\n        <span className=\"block size-1.5 rounded-full bg-primary-foreground\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  );\n}\nRadioGroupItem.displayName = \"RadioGroupItem\";\n\nexport { RadioGroup, RadioGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "control": "oklch(0.52 0.006 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

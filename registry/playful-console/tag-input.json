@@ -1,0 +1,37 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/** Props for TagInput: a controlled list of tags with an optional cap. */\nexport interface TagInputProps {\n  value: string[];\n  onValueChange: (tags: string[]) => void;\n  placeholder?: string;\n  className?: string;\n  disabled?: boolean;\n  maxTags?: number;\n}\n\n/**\n * Playful console TagInput: a white well that grows as tags are added, like\n * filter chips on an analytics query. Each tag is a pill in the orange wash\n * with the orange rim and a small remove button. Enter or a comma adds the\n * typed text, and Backspace in an empty field removes the last tag.\n */\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  (\n    {\n      value,\n      onValueChange,\n      placeholder = \"Add a tag\",\n      className,\n      disabled,\n      maxTags,\n    },\n    ref,\n  ) => {\n    const [input, setInput] = React.useState(\"\");\n    const inputRef = React.useRef<HTMLInputElement>(null);\n    const full = maxTags !== undefined && value.length >= maxTags;\n\n    // SAFETY: inputRef is attached to the input this component always renders,\n    // so it is set by the time a parent can reach the handle.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim();\n      if (!trimmed || value.includes(trimmed) || full) return;\n      onValueChange([...value, trimmed]);\n      setInput(\"\");\n    };\n\n    const removeTag = (tag: string) => {\n      onValueChange(value.filter((t) => t !== tag));\n    };\n\n    const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {\n      if (event.key === \"Enter\" || event.key === \",\") {\n        event.preventDefault();\n        addTag(input);\n      } else if (event.key === \"Backspace\" && !input && value.length > 0) {\n        removeTag(value[value.length - 1]);\n      }\n    };\n\n    return (\n      <div\n        data-slot=\"tag-input\"\n        data-disabled={disabled || undefined}\n        onClick={() => inputRef.current?.focus()}\n        className={cn(\n          formFieldBase,\n          \"flex min-h-9 cursor-text flex-wrap items-center gap-1.5 px-1.5 py-1\",\n          \"focus-within:border-ring focus-within:ring-3 focus-within:ring-(--highlight-blue)\",\n          \"data-[disabled]:cursor-not-allowed data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled) data-[disabled]:hover:border-(--line-strong)\",\n          className,\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            data-slot=\"tag-input-chip\"\n            className={cn(\n              \"inline-flex h-6 max-w-48 items-center gap-1 rounded-full border border-(--primary-rim) bg-(--primary-wash) ps-2.5 pe-1 text-xs font-bold text-foreground\",\n              disabled && \"border-(--line-strong) bg-transparent pe-2.5 text-(--foreground-disabled)\",\n            )}\n          >\n            <span className=\"truncate\">{tag}</span>\n            {!disabled && (\n              <button\n                type=\"button\"\n                onClick={(event) => {\n                  event.stopPropagation();\n                  removeTag(tag);\n                }}\n                aria-label={`Remove ${tag}`}\n                className={cn(\n                  \"inline-flex size-4 shrink-0 items-center justify-center rounded-full text-(--foreground-secondary)\",\n                  \"transition-colors duration-fast ease-out\",\n                  \"hover:bg-primary hover:text-primary-foreground\",\n                  \"focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring\",\n                )}\n              >\n                <Icon icon=\"ph:x-bold\" className=\"size-2.5\" aria-hidden=\"true\" />\n              </button>\n            )}\n          </span>\n        ))}\n        <input\n          ref={inputRef}\n          type=\"text\"\n          value={input}\n          onChange={(event) => setInput(event.target.value)}\n          onKeyDown={onKeyDown}\n          onBlur={() => addTag(input)}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          disabled={disabled}\n          aria-label={placeholder}\n          className=\"h-6 min-w-20 flex-1 bg-transparent px-1 text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        />\n      </div>\n    );\n  },\n);\nTagInput.displayName = \"TagInput\";\n\nexport { TagInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "highlight-blue": "oklch(0.623 0.188 259.8 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "highlight-blue": "oklch(0.7 0.15 258 / 0.3)"
+    }
+  }
+}

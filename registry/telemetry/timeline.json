@@ -1,0 +1,11 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Timeline: event log spine. Hairline rail with glowing\n// signal-green event lamps, like timestamps in the alarm console.\n\nconst Timeline = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"relative space-y-6 pl-8\", className)}\n    {...props}\n  />\n))\nTimeline.displayName = \"Timeline\"\n\nconst TimelineItem = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"relative\", className)} {...props} />\n))\nTimelineItem.displayName = \"TimelineItem\"\n\nconst TimelineDot = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute -left-8 top-1 flex h-4 w-4 items-center justify-center\",\n      className\n    )}\n    {...props}\n  >\n    <div className=\"size-2 rounded-full bg-primary shadow-[0_0_0.5rem_oklch(0.78_0.21_148/0.5)]\" />\n  </div>\n))\nTimelineDot.displayName = \"TimelineDot\"\n\nconst TimelineLine = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"absolute -left-[1.5625rem] top-5 h-[calc(100%+1.5rem)] w-px bg-border\",\n      className\n    )}\n    {...props}\n  />\n))\nTimelineLine.displayName = \"TimelineLine\"\n\nconst TimelineContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"pb-2\", className)} {...props} />\n))\nTimelineContent.displayName = \"TimelineContent\"\n\nexport { Timeline, TimelineItem, TimelineDot, TimelineLine, TimelineContent }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

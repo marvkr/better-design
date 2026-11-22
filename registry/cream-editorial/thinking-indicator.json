@@ -1,0 +1,23 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[];\n  intervalMs?: number;\n}\n\nconst DEFAULT_WORDS = [\"Thinking\", \"Reading\", \"Working it out\", \"Writing\"];\n\n/**\n * Cream editorial ThinkingIndicator: a small terracotta asterisk that turns\n * slowly beside a word in the serif, set in italic, that changes every\n * couple of seconds.\n *\n * Waiting is a pause in the reading, not an action, so the word stays in\n * muted ink. Each new word fades up into place. A screen reader hears the\n * first word once, not every change, and with reduced motion the mark\n * holds still.\n */\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 1800,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0);\n  const reduceMotion = useReducedMotion();\n  const count = words.length;\n\n  React.useEffect(() => {\n    if (count < 2) return;\n    const timer = setInterval(\n      () => setIndex((current) => (current + 1) % count),\n      intervalMs,\n    );\n    return () => clearInterval(timer);\n  }, [count, intervalMs]);\n\n  const word = words[index % Math.max(count, 1)] ?? \"\";\n\n  return (\n    <div\n      role=\"status\"\n      data-slot=\"thinking-indicator\"\n      className={cn(\n        \"inline-flex items-center gap-2 text-sm text-muted-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <span className=\"sr-only\">{words[0] ?? \"Thinking\"}</span>\n      <motion.svg\n        aria-hidden=\"true\"\n        viewBox=\"0 0 16 16\"\n        fill=\"none\"\n        className=\"size-3.5 shrink-0 text-(--primary-text)\"\n        animate={reduceMotion ? { rotate: 0 } : { rotate: 360, opacity: [0.6, 1, 0.6] }}\n        transition={\n          reduceMotion\n            ? { duration: 0 }\n            : {\n                rotate: { duration: 6, repeat: Infinity, ease: \"linear\" },\n                opacity: { duration: 1.8, repeat: Infinity, ease: \"easeInOut\" },\n              }\n        }\n      >\n        <path\n          d=\"M8 1.5v13M1.5 8h13M3.4 3.4l9.2 9.2M12.6 3.4l-9.2 9.2\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1.6\"\n          strokeLinecap=\"round\"\n        />\n      </motion.svg>\n      <span\n        aria-hidden=\"true\"\n        className=\"relative inline-flex h-5 items-center overflow-hidden\"\n      >\n        <AnimatePresence mode=\"wait\" initial={false}>\n          <motion.span\n            key={word}\n            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: \"0.375rem\" }}\n            animate={{ opacity: 1, y: \"0rem\" }}\n            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: \"-0.375rem\" }}\n            transition={{ duration: 0.15, ease: \"easeOut\" }}\n            className=\"whitespace-nowrap font-serif text-[0.9375rem] italic\"\n          >\n            {word}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  );\n}\n\nexport { ThinkingIndicator };\nexport type { ThinkingIndicatorProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.55 0.135 39)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.72 0.12 38.8)"
+    }
+  }
+}

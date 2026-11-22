@@ -1,0 +1,36 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Steps.\n *\n * Three states, three surfaces, no borders. A completed step takes the primary\n * Button's own gradient and shadow, so progress reads as the same material as\n * the control that made it. The current step sits on the card with the button\n * shadow, and a step still ahead is a well pressed into the page. The\n * connector between markers is one pixel of the track, and it turns to the\n * accent once the step behind it is done.\n */\n\n/** One step in a `Steps` run. `icon` accepts any Iconify glyph name. */\nexport interface Step {\n  title: string\n  description?: string\n  icon?: string\n}\n\n/** Props for `Steps`; `currentStep` is the zero-based index of the live step. */\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[]\n  currentStep: number\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  (\n    { className, steps, currentStep, orientation = \"horizontal\", ...props },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex\",\n        orientation === \"horizontal\" ? \"flex-row items-start\" : \"flex-col\",\n        className,\n      )}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep\n        const isCurrent = index === currentStep\n        const isLast = index === steps.length - 1\n\n        return (\n          <div\n            key={index}\n            className={cn(\n              \"flex gap-3\",\n              orientation === \"horizontal\" ?\n                \"flex-1 flex-col items-start\"\n              : \"flex-row\",\n            )}\n          >\n            <div\n              className={cn(\n                \"flex w-full items-start gap-3\",\n                orientation === \"horizontal\" ? \"flex-row\" : \"flex-col\",\n              )}\n            >\n              <div className=\"flex flex-col items-center\">\n                <div\n                  className={cn(\n                    \"flex size-8 shrink-0 items-center justify-center rounded-full\",\n                    \"transition-[background-color,background-image,box-shadow] duration-base ease-out\",\n                    isCompleted &&\n                      \"text-primary-foreground bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)] [box-shadow:var(--shadow-primary)]\",\n                    isCurrent &&\n                      \"bg-card text-primary [box-shadow:var(--shadow-button)]\",\n                    !isCompleted &&\n                      !isCurrent &&\n                      \"bg-[var(--inner)] text-muted-foreground [box-shadow:var(--shadow-inset)]\",\n                  )}\n                >\n                  {isCompleted ?\n                    <Icon icon=\"solar:check-read-linear\" className=\"size-4\" />\n                  : step.icon ?\n                    <Icon icon={step.icon} className=\"size-4\" />\n                  : <span className=\"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem]\">\n                      {index + 1}\n                    </span>\n                  }\n                </div>\n                {orientation === \"vertical\" && !isLast && (\n                  <div\n                    className={cn(\n                      \"my-1 min-h-6 w-px flex-1\",\n                      isCompleted ? \"bg-[var(--primary)]\" : \"bg-[var(--track)]\",\n                    )}\n                  />\n                )}\n              </div>\n              <div\n                className={cn(\n                  orientation === \"vertical\" && \"pb-6\",\n                  \"min-w-0 flex-1\",\n                )}\n              >\n                <div\n                  className={cn(\n                    \"text-[0.9063rem] leading-[1.125rem] font-semibold tracking-[-0.0125rem]\",\n                    isCurrent ? \"text-foreground\" : \"text-muted-foreground\",\n                  )}\n                >\n                  {step.title}\n                </div>\n                {step.description && (\n                  <div className=\"mt-1 text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\">\n                    {step.description}\n                  </div>\n                )}\n              </div>\n            </div>\n            {orientation === \"horizontal\" && !isLast && (\n              <div className=\"mt-4 hidden w-full sm:block\">\n                <div\n                  className={cn(\n                    \"h-px w-full\",\n                    index < currentStep ?\n                      \"bg-[var(--primary)]\"\n                    : \"bg-[var(--track)]\",\n                  )}\n                />\n              </div>\n            )}\n          </div>\n        )\n      })}\n    </div>\n  ),\n)\nSteps.displayName = \"Steps\"\n\nexport { Steps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)",
+      "shadow-button": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.85), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.28), 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.07), 0 0.0625rem 0.125rem oklch(0.1593 0.0111 267.98 / 0.07), 0 0.375rem 0.875rem -0.625rem oklch(0.1593 0.0111 267.98 / 0.2)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55), 0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)",
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)",
+      "shadow-button": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08), inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.375rem 0.875rem -0.625rem oklch(0 0 0 / 0.6)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5), 0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55)"
+    }
+  }
+}

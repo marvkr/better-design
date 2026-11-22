@@ -1,0 +1,27 @@
+{
+  "name": "accordion-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Mallow Accordion: a stack of questions on one white card with a 1rem corner. */\nconst Accordion = React.forwardRef<HTMLDivElement, WithClassName<AccordionPrimitive.Root.Props>>(\n  ({ className, ...props }, ref) => (\n    <AccordionPrimitive.Root\n      ref={ref}\n      data-slot=\"accordion\"\n      className={cn(\"w-full rounded-3xl px-6\", cardSlab, className)}\n      {...props}\n    />\n  ),\n);\nAccordion.displayName = \"Accordion\";\n\n/** One row of the accordion, divided from the next by a faint hairline. */\nconst AccordionItem = React.forwardRef<HTMLDivElement, WithClassName<AccordionPrimitive.Item.Props>>(\n  ({ className, ...props }, ref) => (\n    <AccordionPrimitive.Item\n      ref={ref}\n      data-slot=\"accordion-item\"\n      className={cn(\"border-b border-border last:border-b-0\", className)}\n      {...props}\n    />\n  ),\n);\nAccordionItem.displayName = \"AccordionItem\";\n\n/** The question in medium weight, with an arrow at the end that turns over as the answer opens. */\nconst AccordionTrigger = React.forwardRef<HTMLButtonElement, WithClassName<AccordionPrimitive.Trigger.Props>>(\n  ({ className, children, ...props }, ref) => (\n    <AccordionPrimitive.Header data-slot=\"accordion-header\" className=\"flex\">\n      <AccordionPrimitive.Trigger\n        ref={ref}\n        data-slot=\"accordion-trigger\"\n        className={cn(\n          \"group/trigger flex flex-1 items-center justify-between gap-3 rounded-md py-4 text-start\",\n          \"text-base font-medium text-foreground\",\n          focusRing,\n          \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        <Icon\n          icon=\"iconoir:nav-arrow-down\"\n          aria-hidden=\"true\"\n          className=\"size-4 shrink-0 text-muted-foreground transition-transform duration-base ease-(--ease-out) group-data-[panel-open]/trigger:rotate-180\"\n        />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  ),\n);\nAccordionTrigger.displayName = \"AccordionTrigger\";\n\n/** The answer in muted text, growing to its measured height as it opens. */\nconst AccordionContent = React.forwardRef<HTMLDivElement, WithClassName<AccordionPrimitive.Panel.Props>>(\n  ({ className, children, ...props }, ref) => (\n    <AccordionPrimitive.Panel\n      ref={ref}\n      data-slot=\"accordion-content\"\n      className={cn(\n        \"h-(--accordion-panel-height) overflow-hidden text-sm leading-relaxed text-muted-foreground\",\n        \"transition-[height] duration-base ease-(--ease-out)\",\n        \"data-[starting-style]:h-0 data-[ending-style]:h-0\",\n      )}\n      {...props}\n    >\n      <div className={cn(\"pb-4\", className)}>{children}</div>\n    </AccordionPrimitive.Panel>\n  ),\n);\nAccordionContent.displayName = \"AccordionContent\";\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

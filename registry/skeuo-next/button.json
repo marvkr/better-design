@@ -1,0 +1,36 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Skeuo Next Button — Skeuomorphism 2.0 bendy plastic surface.\n// Glossy top highlight + dark inset lip + soft ground shadow. Hover lifts;\n// press squishes (translate down + vertical compress) for reactive plasticity.\n// Primary: graphite plastic with vertical gloss gradient.\n// Secondary: white glass pebble with hairline ring.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold tracking-[-0.012em]\",\n    \"rounded-full transition-all duration-base ease-out\",\n    \"origin-bottom will-change-transform\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-[0.125rem] active:scale-y-[0.97] active:duration-fast\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary — graphite plastic w/ glossy top + dark inset lip\n        default: [\n          \"text-primary-foreground\",\n          \"bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_78%,oklch(1_0_none))_0%,var(--primary)_48%,color-mix(in_oklch,var(--primary)_88%,oklch(0_0_none))_100%)]\",\n          \"shadow-[var(--shadow-pillow-primary)]\",\n          \"hover:-translate-y-px\",\n          \"hover:shadow-[var(--shadow-pillow-primary-hover)]\",\n        ].join(\" \"),\n        // Secondary — white glass pebble w/ hairline ring\n        secondary: [\n          \"text-foreground\",\n          \"bg-[linear-gradient(180deg,oklch(1_0_0)_0%,oklch(0.985_0.004_240)_100%)]\",\n          \"shadow-[var(--shadow-pillow-secondary)]\",\n          \"hover:-translate-y-px\",\n          \"hover:shadow-[var(--shadow-pillow-secondary-hover)]\",\n        ].join(\" \"),\n        // Outline — minimal hairline\n        outline:\n          \"border border-border bg-background text-foreground hover:bg-muted hover:border-foreground/20\",\n        // Ghost — flat\n        ghost: \"bg-transparent text-foreground hover:bg-muted\",\n        // Destructive — vivid red plastic w/ tinted glow\n        destructive: [\n          \"text-destructive-foreground\",\n          \"bg-[linear-gradient(180deg,color-mix(in_oklch,var(--destructive)_85%,oklch(1_0_none))_0%,var(--destructive)_55%,color-mix(in_oklch,var(--destructive)_82%,oklch(0_0_none))_100%)]\",\n          \"shadow-[var(--shadow-pillow-destructive)]\",\n          \"hover:-translate-y-px\",\n          \"hover:shadow-[var(--shadow-pillow-destructive-hover)]\",\n        ].join(\" \"),\n        link: \"text-primary underline-offset-4 hover:underline shadow-none\",\n      },\n      size: {\n        default: \"h-11 px-6 py-2.5\",\n        sm: \"h-9 px-4 text-xs\",\n        lg: \"h-14 px-8 text-base\",\n        icon: \"h-11 w-11\",\n        \"icon-sm\": \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pillow-primary": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.18), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.4), 0 0.0625rem 0.0625rem 0 oklch(0 0 0 / 0.12), 0 0.375rem 0.875rem -0.25rem oklch(0 0 0 / 0.28)",
+      "shadow-pillow-primary-hover": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.22), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.42), 0 0.125rem 0.1875rem 0 oklch(0 0 0 / 0.12), 0 0.75rem 1.625rem -0.375rem oklch(0 0 0 / 0.34)",
+      "shadow-pillow-secondary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.05), 0 0 0 0.0625rem oklch(0 0 0 / 0.05), 0 0.0625rem 0.0625rem 0 oklch(0 0 0 / 0.05), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.1)",
+      "shadow-pillow-secondary-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 1), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.07), 0 0 0 0.0625rem oklch(0 0 0 / 0.07), 0 0.125rem 0.125rem 0 oklch(0 0 0 / 0.07), 0 0.75rem 1.5rem -0.25rem oklch(0 0 0 / 0.14)",
+      "shadow-pillow-destructive": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.2), 0 0.0625rem 0.0625rem 0 oklch(0 0 0 / 0.08), 0 0.5rem 1.25rem -0.125rem color-mix(in oklch, var(--destructive) 45%, transparent)",
+      "shadow-pillow-destructive-hover": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.32), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.22), 0 0.125rem 0.125rem 0 oklch(0 0 0 / 0.1), 0 0.75rem 1.75rem -0.1875rem color-mix(in oklch, var(--destructive) 55%, transparent)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-pillow-primary": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.18), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.4), 0 0.0625rem 0.0625rem 0 oklch(0 0 0 / 0.12), 0 0.375rem 0.875rem -0.25rem oklch(0 0 0 / 0.28)",
+      "shadow-pillow-primary-hover": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.22), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.42), 0 0.125rem 0.1875rem 0 oklch(0 0 0 / 0.12), 0 0.75rem 1.625rem -0.375rem oklch(0 0 0 / 0.34)",
+      "shadow-pillow-secondary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.05), 0 0 0 0.0625rem oklch(0 0 0 / 0.05), 0 0.0625rem 0.0625rem 0 oklch(0 0 0 / 0.05), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.1)",
+      "shadow-pillow-secondary-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 1), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.07), 0 0 0 0.0625rem oklch(0 0 0 / 0.07), 0 0.125rem 0.125rem 0 oklch(0 0 0 / 0.07), 0 0.75rem 1.5rem -0.25rem oklch(0 0 0 / 0.14)",
+      "shadow-pillow-destructive": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.2), 0 0.0625rem 0.0625rem 0 oklch(0 0 0 / 0.08), 0 0.5rem 1.25rem -0.125rem color-mix(in oklch, var(--destructive) 45%, transparent)",
+      "shadow-pillow-destructive-hover": "inset 0 0.0938rem 0 0 oklch(1 0 0 / 0.32), inset 0 -0.125rem 0.0625rem 0 oklch(0 0 0 / 0.22), 0 0.125rem 0.125rem 0 oklch(0 0 0 / 0.1), 0 0.75rem 1.75rem -0.1875rem color-mix(in oklch, var(--destructive) 55%, transparent)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

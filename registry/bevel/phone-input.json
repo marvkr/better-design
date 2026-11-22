@@ -1,0 +1,28 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n/*\n * Bevel PhoneInput.\n *\n * One field well split into a country code and a number. The outer well\n * carries the surface and the focus ring, so typing in either half lights\n * the whole control. One pixel of the track token parts the two, which is\n * how every other split row in the system is divided.\n */\n\n/** Props for `PhoneInput`; the country code is held separately from the number. */\nexport interface PhoneInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  countryCode?: string\n  onCountryCodeChange?: (code: string) => void\n}\n\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  (\n    { className, countryCode = \"+1\", onCountryCodeChange, disabled, ...props },\n    ref,\n  ) => (\n    <div\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"items-stretch overflow-hidden px-0 py-0\",\n        \"focus-within:[box-shadow:var(--shadow-inset),0_0_0_0.125rem_var(--ring)]\",\n      )}\n    >\n      <div\n        className={cn(\n          \"flex shrink-0 items-center gap-1.5 pr-2.5 pl-3.5\",\n          \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-muted-foreground\",\n          \"[box-shadow:0.0625rem_0_0_0_var(--track)]\",\n          disabled && \"cursor-not-allowed opacity-60\",\n        )}\n      >\n        <Icon icon=\"solar:phone-linear\" className=\"size-4 shrink-0\" />\n        <input\n          type=\"tel\"\n          value={countryCode}\n          onChange={(e) => onCountryCodeChange?.(e.target.value)}\n          disabled={disabled}\n          className=\"w-11 bg-transparent text-foreground outline-none disabled:cursor-not-allowed\"\n          aria-label=\"Country code\"\n        />\n      </div>\n      <input\n        ref={ref}\n        type=\"tel\"\n        disabled={disabled}\n        className={cn(\n          \"min-w-0 flex-1 bg-transparent px-3.5 outline-none\",\n          \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-foreground\",\n          \"placeholder:text-muted-foreground\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className,\n        )}\n        {...props}\n      />\n    </div>\n  ),\n)\nPhoneInput.displayName = \"PhoneInput\"\n\nexport { PhoneInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

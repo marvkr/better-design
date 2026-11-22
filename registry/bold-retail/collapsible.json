@@ -1,0 +1,26 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Collapsible: a section that folds away under a plain row, the\n * way a product page hides Size and Fit or Shipping. The row reads at body\n * size in medium weight; a chevron placed inside it turns over as the\n * section opens. Pass `asChild` to use your own button as the row, unstyled.\n */\nconst Collapsible = CollapsiblePrimitive.Root;\n\n/** The row that opens and closes the section. */\nfunction CollapsibleTrigger({\n  className,\n  asChild,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Trigger>) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      asChild={asChild}\n      className={cn(\n        !asChild && [\n          \"flex w-full items-center justify-between gap-4 rounded-none py-3 text-start text-base font-medium text-foreground\",\n          \"transition-colors duration-fast ease-out hover:text-(--foreground-secondary)\",\n          \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\",\n          \"[&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-foreground [&_svg]:transition-transform [&_svg]:duration-fast [&_svg]:ease-out\",\n          \"[&[data-state=open]_svg]:rotate-180 motion-reduce:[&_svg]:transition-none\",\n        ],\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nCollapsibleTrigger.displayName = CollapsiblePrimitive.Trigger.displayName;\n\n/** The section itself: opens and closes on its own height. */\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Content>) {\n  return (\n    <CollapsiblePrimitive.Content\n      data-slot=\"collapsible-content\"\n      className={cn(\n        \"overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down motion-reduce:animate-none\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nCollapsibleContent.displayName = CollapsiblePrimitive.Content.displayName;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible@^1.1.11"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.345 0.003 286.2)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.839 0.001 286.4)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

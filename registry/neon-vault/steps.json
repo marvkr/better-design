@@ -1,0 +1,29 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Steps: send-flow progress. Completed steps wear the hero magenta\n// material with a check; the active step is a graphite pill lit by the magenta\n// ring; upcoming steps stay quiet on the vault canvas.\n\ninterface Step {\n  title: string\n  description?: string\n}\n\ninterface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[]\n  currentStep: number\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nfunction Steps({\n  steps,\n  currentStep,\n  orientation = \"horizontal\",\n  className,\n  ...props\n}: StepsProps) {\n  return (\n    <div\n      className={cn(\n        \"flex\",\n        orientation === \"horizontal\"\n          ? \"flex-row items-start gap-0\"\n          : \"flex-col gap-0\",\n        className\n      )}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep\n        const isActive = index === currentStep\n        const isLast = index === steps.length - 1\n\n        return (\n          <div\n            key={index}\n            className={cn(\n              \"flex\",\n              orientation === \"horizontal\"\n                ? \"flex-col items-center flex-1\"\n                : \"flex-row gap-3\"\n            )}\n          >\n            <div\n              className={cn(\n                \"flex\",\n                orientation === \"horizontal\"\n                  ? \"flex-col items-center\"\n                  : \"flex-row items-start gap-3\"\n              )}\n            >\n              {/* Step indicator */}\n              <div\n                className={cn(\n                  \"flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium transition-colors\",\n                  isCompleted &&\n                    \"bg-primary [background-image:var(--gradient-primary)] text-primary-foreground [box-shadow:var(--shadow-button)]\",\n                  isActive &&\n                    \"bg-secondary text-primary-bright ring-2 ring-ring/60 ring-offset-2 ring-offset-background [box-shadow:var(--shadow-raised)]\",\n                  !isCompleted &&\n                    !isActive &&\n                    \"border border-border bg-secondary text-muted-foreground\"\n                )}\n              >\n                {isCompleted ? (\n                  <Icon icon=\"ph:check-bold\" className=\"h-4 w-4\" />\n                ) : (\n                  <span>{index + 1}</span>\n                )}\n              </div>\n\n              {/* Connector line */}\n              {orientation === \"horizontal\" && !isLast && (\n                <div\n                  className={cn(\n                    \"mt-4 h-px w-full flex-1\",\n                    isCompleted ? \"bg-primary\" : \"bg-border\"\n                  )}\n                />\n              )}\n            </div>\n\n            {/* Step content */}\n            <div\n              className={cn(\n                orientation === \"horizontal\" ? \"mt-2 text-center\" : \"pb-6\"\n              )}\n            >\n              <p\n                className={cn(\n                  \"text-sm font-medium\",\n                  isActive ? \"text-foreground\" : \"text-muted-foreground\"\n                )}\n              >\n                {step.title}\n              </p>\n              {step.description && (\n                <p className=\"mt-0.5 text-xs text-muted-foreground\">\n                  {step.description}\n                </p>\n              )}\n            </div>\n\n            {/* Vertical connector */}\n            {orientation === \"vertical\" && !isLast && (\n              <div\n                className={cn(\n                  \"ml-4 h-6 w-px\",\n                  isCompleted ? \"bg-primary\" : \"bg-border\"\n                )}\n              />\n            )}\n          </div>\n        )\n      })}\n    </div>\n  )\n}\n\nexport { Steps }\nexport type { StepsProps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    }
+  }
+}

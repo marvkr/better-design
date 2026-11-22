@@ -1,0 +1,30 @@
+{
+  "name": "multi-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, ChevronDown, X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n// Ops Sharp MultiSelect - a field-surface trigger holding removable chips, with\n// a floating dropdown panel (bg-popover + --shadow-popover). Checked rows show\n// the graphite tile so the check material matches the rest of the DS.\n\ninterface MultiSelectOption {\n  label: string;\n  value: string;\n}\n\ninterface MultiSelectProps {\n  options: MultiSelectOption[];\n  value?: string[];\n  onChange?: (value: string[]) => void;\n  placeholder?: string;\n  disabled?: boolean;\n  className?: string;\n}\n\nfunction MultiSelect({\n  options,\n  value = [],\n  onChange,\n  placeholder = \"Select options...\",\n  disabled,\n  className,\n}: MultiSelectProps) {\n  const [open, setOpen] = React.useState(false);\n  const ref = React.useRef<HTMLDivElement>(null);\n\n  React.useEffect(() => {\n    const handleClickOutside = (e: MouseEvent) => {\n      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {\n        setOpen(false);\n      }\n    };\n    document.addEventListener(\"mousedown\", handleClickOutside);\n    return () => document.removeEventListener(\"mousedown\", handleClickOutside);\n  }, []);\n\n  const toggle = (optionValue: string) => {\n    if (value.includes(optionValue)) {\n      onChange?.(value.filter((v) => v !== optionValue));\n    } else {\n      onChange?.([...value, optionValue]);\n    }\n  };\n\n  const selectedLabels = options\n    .filter((o) => value.includes(o.value))\n    .map((o) => o.label);\n\n  return (\n    <div ref={ref} className={cn(\"relative w-full\", className)}>\n      <button\n        type=\"button\"\n        onClick={() => !disabled && setOpen(!open)}\n        disabled={disabled}\n        className={cn(\n          formFieldBase,\n          \"flex min-h-9 flex-wrap items-center gap-1.5 py-1.5 text-left\",\n          open && \"border-ring ring-2 ring-ring/25\"\n        )}\n      >\n        <div className=\"flex flex-1 flex-wrap gap-1\">\n          {selectedLabels.length > 0 ? (\n            selectedLabels.map((label) => (\n              <span\n                key={label}\n                className=\"inline-flex items-center gap-1 rounded-sm bg-secondary px-2 py-0.5 text-xs font-medium text-foreground\"\n              >\n                {label}\n                <X\n                  className=\"h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground\"\n                  onClick={(e) => {\n                    e.stopPropagation();\n                    const opt = options.find((o) => o.label === label);\n                    if (opt) toggle(opt.value);\n                  }}\n                />\n              </span>\n            ))\n          ) : (\n            <span className=\"text-muted-foreground\">{placeholder}</span>\n          )}\n        </div>\n        <ChevronDown\n          className={cn(\n            \"h-4 w-4 shrink-0 text-muted-foreground transition-transform\",\n            open && \"rotate-180\"\n          )}\n        />\n      </button>\n\n      {open && (\n        <div className=\"absolute z-50 mt-1 w-full rounded-md border border-border bg-popover p-1.5 [box-shadow:var(--shadow-popover)]\">\n          {options.map((option) => {\n            const checked = value.includes(option.value);\n            return (\n              <button\n                key={option.value}\n                type=\"button\"\n                onClick={() => toggle(option.value)}\n                className=\"flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-secondary\"\n              >\n                <div\n                  className={cn(\n                    \"flex h-4 w-4 items-center justify-center rounded-sm border transition-colors\",\n                    checked\n                      ? \"border-primary bg-primary text-primary-foreground [box-shadow:var(--shadow-primary)]\"\n                      : \"border-border bg-card [box-shadow:var(--shadow-inset)]\"\n                  )}\n                >\n                  {checked && <Check className=\"h-3 w-3\" strokeWidth={3} />}\n                </div>\n                <span className={checked ? \"text-foreground\" : \"text-muted-foreground\"}>\n                  {option.label}\n                </span>\n              </button>\n            );\n          })}\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport { MultiSelect };\nexport type { MultiSelectProps, MultiSelectOption };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/slate/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

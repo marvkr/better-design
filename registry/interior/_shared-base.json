@@ -1,0 +1,20 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field recipe for Interior.\n *\n * The input standard, derived from the OTP cell: an empty field is\n * a slot cut into the panel; entering it brings it to the surface. At rest the\n * field is a recessed well — a 2px quiet border, a tinted fill, an inset\n * shadow. On focus the border goes accent blue, the fill rises to white, and\n * the well shadow disappears. No focus ring: a 2px border plus the surface\n * lifting is already two signals.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-[0.625rem] px-3 text-[0.8125rem] leading-[1.25rem] \" +\n  \"border-2 border-border bg-input text-foreground \" +\n  \"shadow-[var(--shadow-well)] \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[background-color,border-color,box-shadow] duration-fast \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:bg-card focus-visible:shadow-none \" +\n  \"aria-invalid:border-destructive aria-invalid:bg-card \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-10 py-2\"\nexport const formFieldMultiLine = \"flex min-h-[5.5rem] py-2.5 resize-y\"\n\n/* Base UI passes a state object to className; the wrappers feed cn(), so the\n * prop is narrowed to a plain string throughout this variant. */\nexport type WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

@@ -18,26 +18,41 @@ const ToggleGroupContext = React.createContext<
   isSingle: false,
 })
 
+type CompatToggleGroupProps = Omit<React.ComponentPropsWithoutRef<"div">, "defaultValue" | "onChange"> &
+  VariantProps<typeof toggleVariants> & {
+    type?: "single" | "multiple"
+    multiple?: boolean
+    spacing?: string
+    value?: string | string[]
+    defaultValue?: string | string[]
+    disabled?: boolean
+    onValueChange?: (value: string | string[]) => void
+  }
+
 function ToggleGroup({
   className,
   variant,
   size,
   children,
+  multiple,
+  spacing,
   ...props
-}: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &
-  VariantProps<typeof toggleVariants>) {
+}: CompatToggleGroupProps) {
   const uid = React.useId()
-  const isSingle = (props as { type?: string }).type === "single"
+  const type = multiple ? "multiple" : (props.type ?? (Array.isArray(props.value) ? "multiple" : "single"))
+  // SAFETY: `type` is normalized above to the discriminant Radix requires.
+  const primitiveProps = { ...props, type } as React.ComponentProps<typeof ToggleGroupPrimitive.Root>
 
   return (
     <ToggleGroupPrimitive.Root
       className={cn(
-        "flex items-center gap-1 rounded-[10px] border border-border bg-secondary p-1",
+        "flex items-center rounded-[0.625rem] border border-border bg-secondary p-1",
+        spacing === "0" ? "gap-0" : "gap-1",
         className
       )}
-      {...props}
+      {...primitiveProps}
     >
-      <ToggleGroupContext.Provider value={{ variant, size, uid, isSingle }}>
+      <ToggleGroupContext.Provider value={{ variant, size, uid, isSingle: type === "single" }}>
         {children}
       </ToggleGroupContext.Provider>
     </ToggleGroupPrimitive.Root>

@@ -72,7 +72,7 @@ function Cursor({
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-              className="inline-block w-[2px] h-[14px] ml-[1px] align-middle rounded-full"
+              className="inline-block w-[0.125rem] h-[0.875rem] ml-[0.0625rem] align-middle rounded-full"
               style={{ backgroundColor: color }}
             />
           </motion.div>

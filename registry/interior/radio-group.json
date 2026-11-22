@@ -1,0 +1,25 @@
+{
+  "name": "radio-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior RadioGroup — circles are banned, so a radio is a 5px-radius cell\n * like the checkbox, told apart by its indicator: a small 1.5px-radius ink\n * dot seated in the cell, not a tick. Checked, the cell stays a well and the\n * dot carries the primary Button's ink fill and thumb shadow — the selected\n * state is ink and depth, never blue.\n */\n\nconst RadioGroup = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Root\n    className={cn(\"grid gap-2.5\", className)}\n    {...props}\n    ref={ref}\n  />\n));\nRadioGroup.displayName = RadioGroupPrimitive.Root.displayName;\n\nconst RadioGroupItem = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"flex size-[1.125rem] shrink-0 items-center justify-center rounded-[0.3125rem]\",\n      \"border-2 border-border bg-input\",\n      \"shadow-[var(--shadow-well)]\",\n      \"transition-[background-color,border-color,box-shadow] duration-fast\",\n      \"focus-visible:outline-none focus-visible:border-ring focus-visible:bg-card focus-visible:shadow-none\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:border-primary/20 data-[state=checked]:bg-card data-[state=checked]:shadow-none\",\n      className,\n    )}\n    {...props}\n  >\n    <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n      <span className=\"block size-2 rounded-[0.0938rem] bg-primary shadow-[var(--shadow-thumb)]\" />\n    </RadioGroupPrimitive.Indicator>\n  </RadioGroupPrimitive.Item>\n));\nRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;\n\nexport { RadioGroup, RadioGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-radio-group@^1.3.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Empty: quiet centered prompt (the board's Add new affordance).\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ className, icon, title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 px-6 py-12 text-center\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <span className=\"flex h-12 w-12 items-center justify-center rounded-full bg-[var(--ag-fill)] border border-[color:var(--ag-border)] text-primary [&>svg]:h-5 [&>svg]:w-5\">\n          {icon}\n        </span>\n      )}\n      <div className=\"flex flex-col gap-1\">\n        <span className=\"text-sm font-bold tracking-[-0.01em]\">{title}</span>\n        {description && (\n          <span className=\"max-w-xs text-xs text-muted-foreground\">{description}</span>\n        )}\n      </div>\n      {action}\n    </div>\n  )\n)\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

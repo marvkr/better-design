@@ -1,0 +1,32 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { glowDestructive, glowPrimary } from \"./_shared\";\n\n/** A disabled lit button keeps a warm paper fill, so its shape stays in place. */\nconst litDisabled = \"disabled:bg-secondary data-[disabled]:bg-secondary\";\n\n/**\n * Firefly IconButton: a single glyph in the same materials as the Button.\n *\n * It is round by default, like every Firefly pill. The square shape keeps a\n * corner that grows with the button, so a small one never reads as a\n * circle. The default is a warm paper disc; `primary` is the lit pill, kept\n * for the one action a screen offers; ghost is the quiet choice for\n * toolbars and rows.\n */\nconst iconButtonVariants = cva(\n  [\n    \"relative inline-flex shrink-0 select-none items-center justify-center\",\n    \"transition-[background-color,color,border-color,scale] duration-fast ease-out\",\n    \"active:scale-95\",\n    \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n    \"disabled:pointer-events-none disabled:bg-none disabled:text-(--foreground-disabled) disabled:shadow-none disabled:before:hidden\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:bg-none data-[disabled]:text-(--foreground-disabled) data-[disabled]:shadow-none data-[disabled]:before:hidden\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground hover:bg-(--surface-3) data-[disabled]:bg-secondary\",\n        primary: `${glowPrimary} ${litDisabled}`,\n        secondary:\n          \"bg-secondary text-secondary-foreground hover:bg-(--surface-3) data-[disabled]:bg-secondary\",\n        ghost: \"bg-transparent text-foreground hover:bg-secondary\",\n        destructive: `${glowDestructive} ${litDisabled}`,\n        outline:\n          \"border border-(--line-strong) bg-transparent text-foreground hover:bg-muted data-[disabled]:border-border\",\n      },\n      size: {\n        xs: \"size-7 rounded-md [&_svg]:size-3.5\",\n        sm: \"size-8 rounded-md [&_svg]:size-4\",\n        default: \"size-10 rounded-lg [&_svg]:size-5\",\n        lg: \"size-12 rounded-xl [&_svg]:size-6\",\n        xl: \"size-14 rounded-xl [&_svg]:size-6\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      corners: \"circle\",\n    },\n  },\n);\n\n/** Props for the IconButton. Give it an `aria-label`, since the glyph carries no text. */\nexport interface IconButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => (\n    <ButtonPrimitive\n      ref={ref}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, corners, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)"
+    }
+  }
+}

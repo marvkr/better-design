@@ -1,0 +1,26 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Cashmere Checkbox: a soft recessed pocket when empty (faint inset), and\n * when checked it becomes the same flat near-black fill as the primary Button\n * (bg-primary + --shadow-primary), so the filled control and the button read as\n * one material.\n */\n\n// Base UI splits Radix's checked=\"indeterminate\" into a separate boolean\n// prop; the wrapper keeps the Radix-shaped `checked` API and maps it.\ntype CheckboxProps = Omit<\n  CheckboxPrimitive.Root.Props,\n  \"className\" | \"checked\"\n> & {\n  className?: string\n  checked?: boolean | \"indeterminate\"\n}\n\nconst Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(\n  ({ className, checked, ...props }, ref) => {\n    const isIndeterminate = checked === \"indeterminate\"\n    return (\n      <CheckboxPrimitive.Root\n        data-slot=\"checkbox\"\n        ref={ref}\n        className={cn(\n          \"peer h-4 w-4 shrink-0 rounded-sm border border-border\",\n          \"bg-input [box-shadow:var(--shadow-inset)]\",\n          \"transition-[background-color,box-shadow,border-color] duration-fast\",\n          \"hover:border-ring/40\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          \"data-checked:bg-primary data-checked:border-primary data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n          \"data-indeterminate:bg-primary data-indeterminate:border-primary data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n          className\n        )}\n        checked={isIndeterminate ? false : checked}\n        indeterminate={isIndeterminate}\n        nativeButton\n        render={<button type=\"button\" />}\n        {...props}\n      >\n        <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n          {isIndeterminate ? (\n            <Icon icon=\"ph:minus-bold\" className=\"h-3 w-3\" />\n          ) : (\n            <Icon icon=\"ph:check-bold\" className=\"h-3 w-3\" />\n          )}\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n    )\n  }\n)\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)",
+      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)",
+      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

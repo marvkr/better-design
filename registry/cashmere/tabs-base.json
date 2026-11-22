@@ -1,0 +1,25 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(\n      \"inline-flex h-10 items-center justify-center rounded-xl p-1\",\n      \"bg-muted/30 text-muted-foreground border border-border\",\n      \"[box-shadow:var(--shadow-inset)]\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsList.displayName = \"TabsList\"\n\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium\",\n      \"transition-[background-color,color,box-shadow] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n      \"text-muted-foreground hover:text-foreground\",\n      \"data-active:bg-card data-active:text-foreground data-active:[box-shadow:var(--shadow-s)]\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsTrigger.displayName = \"TabsTrigger\"\n\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    className={cn(\n      \"mt-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for terminal.\n *\n * Fields are recessed cells in the CRT glass: a cyan-tinted inset surface with a\n * faint inner darkening, a hairline cyan rim, and a monospace caret. Focus lights\n * the rim and emits a cyan ring (the cell going \"active\" on the screen).\n */\n\nexport const formFieldBase =\n  \"w-full rounded-sm px-3 font-mono text-sm \" +\n  \"bg-input text-foreground caret-primary \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground/70 \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/40 \" +\n  \"focus-visible:outline-none focus-visible:border-ring \" +\n  \"focus-visible:ring-2 focus-visible:ring-ring/40 \" +\n  \"focus-visible:[box-shadow:var(--shadow-inset),0_0_0.625rem_oklch(0.80_0.15_205_/_0.18)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.05)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), inset 0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.05)"
+    }
+  }
+}

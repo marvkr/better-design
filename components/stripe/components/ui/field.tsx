@@ -63,11 +63,18 @@ const Field = React.forwardRef<HTMLDivElement, FieldProps>(
         <div
           className={cn(
             hasError && [
-              "[&_input]:border-destructive",
-              "[&_input]:focus-visible:border-destructive",
-              "[&_input]:focus-visible:shadow-[0_0_0_3px_hsl(var(--destructive)/0.12)]",
-              "[&_textarea]:border-destructive",
-              "[&_select]:border-destructive",
+              "[&_input]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_input:hover]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_input]:focus-visible:[box-shadow:var(--shadow-destructive-focus)]",
+              "[&_textarea]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_textarea:hover]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_textarea]:focus-visible:[box-shadow:var(--shadow-destructive-focus)]",
+              "[&_select]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_select:hover]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_select]:focus-visible:[box-shadow:var(--shadow-destructive-focus)]",
+              "[&_[role=combobox]]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_[role=combobox]:hover]:[box-shadow:var(--shadow-destructive-control)]",
+              "[&_[role=combobox]:focus-visible]:[box-shadow:var(--shadow-destructive-focus)]",
             ]
           )}
         >

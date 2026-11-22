@@ -1,0 +1,21 @@
+{
+  "name": "data-range-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { format } from \"date-fns\";\nimport type { DateRange } from \"react-day-picker\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { Calendar } from \"./calendar\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\n/** Writes a range as \"4 Oct to 12 Oct 2026\", or one date while only the start is set. */\nfunction rangeLabel(range: DateRange | undefined) {\n  if (!range?.from) return undefined;\n  if (!range.to) return format(range.from, \"d MMM yyyy\");\n  return `${format(range.from, \"d MMM\")} to ${format(range.to, \"d MMM yyyy\")}`;\n}\n\n/**\n * Playful console DataRangePicker: a white field that opens two months side\n * by side in the white panel. Both ends of the range become orange keys and\n * the days between them sit on the orange wash band.\n */\nexport function DataRangePicker() {\n  const [range, setRange] = React.useState<DateRange>();\n  const label = rangeLabel(range);\n\n  return (\n    <Popover>\n      <PopoverTrigger\n        data-slot=\"data-range-picker\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"w-72 items-center gap-2 text-start data-[popup-open]:border-ring\",\n          !label && \"text-muted-foreground\",\n        )}\n      >\n        <Icon\n          icon=\"ph:calendar-blank-duotone\"\n          aria-hidden=\"true\"\n          className=\"size-4 shrink-0 text-muted-foreground\"\n        />\n        <span className=\"truncate\">{label ?? \"Pick a date range\"}</span>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          mode=\"range\"\n          selected={range}\n          onSelect={setRange}\n          defaultMonth={range?.from}\n          numberOfMonths={2}\n          autoFocus\n        />\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "react-day-picker@^9.7.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json",
+    "https://better-design.com/registry/playful-console/calendar-base.json",
+    "https://better-design.com/registry/playful-console/popover-base.json"
+  ]
+}

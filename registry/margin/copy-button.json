@@ -1,0 +1,26 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Button, type ButtonProps } from \"./button\";\n\n/**\n * Margin CopyButton: a ruled toolbar tab that copies a value. The icon\n * turns to an oxblood tick for two seconds after a copy.\n */\nexport interface CopyButtonProps extends Omit<ButtonProps, \"children\"> {\n  value: string;\n  copiedLabel?: string;\n  label?: string;\n}\n\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  (\n    { value, copiedLabel = \"Copied\", label = \"Copy\", size = \"icon\", variant = \"secondary\", ...props },\n    ref,\n  ) => {\n    const [copied, setCopied] = React.useState(false);\n    const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);\n\n    React.useEffect(\n      () => () => {\n        if (timer.current) clearTimeout(timer.current);\n      },\n      [],\n    );\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(value);\n        setCopied(true);\n        if (timer.current) clearTimeout(timer.current);\n        timer.current = setTimeout(() => setCopied(false), 2000);\n      } catch {\n        // Copy is best effort; the button stays as it was.\n      }\n    };\n\n    const iconOnly = size === \"icon\" || size === \"icon-sm\" || size === \"icon-lg\";\n\n    return (\n      <Button\n        ref={ref}\n        size={size}\n        variant={variant}\n        onClick={copy}\n        aria-label={copied ? copiedLabel : label}\n        data-slot=\"copy-button\"\n        {...props}\n      >\n        <Icon\n          icon={copied ? \"solar:check-circle-linear\" : \"solar:copy-linear\"}\n          className={cn(\"size-4\", copied && \"text-(--primary-text)\")}\n          aria-hidden\n        />\n        {!iconOnly && <span>{copied ? copiedLabel : label}</span>}\n        <span className=\"sr-only\" aria-live=\"polite\">\n          {copied ? copiedLabel : \"\"}\n        </span>\n      </Button>\n    );\n  },\n);\nCopyButton.displayName = \"CopyButton\";\n\nexport { CopyButton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)"
+    }
+  }
+}

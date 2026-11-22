@@ -1,0 +1,23 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[];\n  intervalMs?: number;\n}\n\nconst DEFAULT_WORDS = [\"Thinking\", \"Reading\", \"Working it out\", \"Writing\"];\n\n/**\n * Firefly ThinkingIndicator: three warm grey dots that breathe in turn,\n * beside a muted word that changes every couple of seconds.\n *\n * It stays quiet on purpose: no colour and no glow, because waiting is not\n * an action. Each new word rises into place as the old one leaves. A\n * screen reader hears the first word once, not every change, and with\n * reduced motion on the dots hold still.\n */\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 1800,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0);\n  const reduceMotion = useReducedMotion();\n  const count = words.length;\n\n  React.useEffect(() => {\n    if (count < 2) return;\n    const timer = setInterval(\n      () => setIndex((current) => (current + 1) % count),\n      intervalMs,\n    );\n    return () => clearInterval(timer);\n  }, [count, intervalMs]);\n\n  const word = words[index % Math.max(count, 1)] ?? \"\";\n\n  return (\n    <div\n      role=\"status\"\n      data-slot=\"thinking-indicator\"\n      className={cn(\n        \"inline-flex items-center gap-2 text-sm text-muted-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <span className=\"sr-only\">{words[0] ?? \"Thinking\"}</span>\n      <span aria-hidden=\"true\" className=\"flex items-center gap-1\">\n        {[0, 1, 2].map((dot) => (\n          <motion.span\n            key={dot}\n            className=\"size-1.5 rounded-full bg-(--control)\"\n            animate={\n              reduceMotion\n                ? { opacity: 0.7 }\n                : { opacity: [0.35, 1, 0.35], scale: [0.8, 1, 0.8] }\n            }\n            transition={\n              reduceMotion\n                ? { duration: 0 }\n                : {\n                    duration: 1.2,\n                    repeat: Infinity,\n                    ease: \"easeInOut\",\n                    delay: dot * 0.16,\n                  }\n            }\n          />\n        ))}\n      </span>\n      <span\n        aria-hidden=\"true\"\n        className=\"relative inline-flex h-5 items-center overflow-hidden\"\n      >\n        <AnimatePresence mode=\"wait\" initial={false}>\n          <motion.span\n            key={word}\n            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}\n            animate={{ opacity: 1, y: 0 }}\n            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}\n            transition={{ duration: 0.15, ease: \"easeOut\" }}\n            className=\"whitespace-nowrap\"\n          >\n            {word}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  );\n}\n\nexport { ThinkingIndicator };\nexport type { ThinkingIndicatorProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "control": "oklch(0.607 0.012 89.8)"
+    },
+    "dark": {
+      "control": "oklch(0.626 0.012 95.3)"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Inset Dark Toggle — the signature primitive.\n *\n * Off state: dim white label, sits inside the recessed track.\n * On state:  raised pill with top→bottom gradient, hairline border,\n *            inset top-edge highlight + dual outer drop shadows. Label\n *            picks up a 1px text-shadow that drops it into the pill.\n */\n\nconst toggleVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-1.5\",\n    \"rounded-[0.5625rem] text-sm font-medium leading-none tracking-[-0.01em]\",\n    \"transition-[color,background,box-shadow] duration-fast\",\n    \"cursor-pointer select-none\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"text-[oklch(1_0_0/0.55)] hover:text-[oklch(1_0_0/0.8)]\",\n    \"data-pressed:text-foreground\",\n    \"data-pressed:[background:var(--pill-gradient)]\",\n    \"data-pressed:[box-shadow:var(--shadow-pill)]\",\n    \"data-pressed:[text-shadow:var(--text-shadow-pressed)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline:\n          \"border border-border bg-transparent \" +\n          \"data-pressed:border-transparent\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst sizeClasses = {\n  default: \"h-[2.125rem] px-[0.8125rem]\",\n  sm: \"h-[1.75rem] px-2.5 text-xs\",\n  lg: \"h-[2.5rem] px-4\",\n}\n\ninterface ToggleProps\n  extends Omit<TogglePrimitive.Props, \"className\">,\n    VariantProps<typeof toggleVariants> {\n  size?: keyof typeof sizeClasses\n  className?: string\n}\n\nconst Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(\n  ({ className, variant, size = \"default\", ...props }, ref) => (\n    <TogglePrimitive\n      ref={ref}\n      className={cn(toggleVariants({ variant }), sizeClasses[size], className)}\n      {...props}\n    />\n  )\n)\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants, sizeClasses as toggleSizeClasses }\nexport type { ToggleProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pill": "0 0 0 0.0313rem oklch(1 0 0 / 0.08), inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.75rem oklch(0 0 0 / 0.25)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.27 0 0) 0%, oklch(0.21 0 0) 100%)",
+      "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "shadow-pill": "0 0 0 0.0313rem oklch(1 0 0 / 0.08), inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.25rem 0.75rem oklch(0 0 0 / 0.25)",
+      "pill-gradient": "linear-gradient(180deg, oklch(0.27 0 0) 0%, oklch(0.21 0 0) 100%)",
+      "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

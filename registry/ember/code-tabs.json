@@ -1,0 +1,31 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, AnimatePresence } from \"motion/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass CodeTabs: dark glass code panel; the active tab carries a\n// glowing amber underline.\n\ninterface CodeTab {\n  label: string\n  lang: string\n  code: string\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[]\n  defaultTab?: number\n  className?: string\n}\n\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(defaultTab)\n  const [direction, setDirection] = React.useState(0)\n  const uid = React.useId()\n\n  const handleTabChange = (index: number) => {\n    setDirection(index > activeIndex ? 1 : -1)\n    setActiveIndex(index)\n  }\n\n  const active = tabs[activeIndex] ?? tabs[0]\n  if (!active) return null\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-xl\",\n        \"backdrop-blur-[var(--ag-blur)] bg-[var(--ag-well)]\",\n        \"border border-[color:var(--ag-border)]\",\n        \"shadow-[var(--shadow-glass)]\",\n        className\n      )}\n    >\n      {/* Tab bar: glass strip with amber active underline */}\n      <div className=\"relative flex border-b border-[color:var(--ag-border)] bg-[var(--ag-fill)]\">\n        {tabs.map((tab, i) => (\n          <button\n            key={tab.label}\n            onClick={() => handleTabChange(i)}\n            className={cn(\n              \"relative px-4 py-2.5 text-xs font-semibold transition-colors duration-base\",\n              i === activeIndex\n                ? \"text-foreground\"\n                : \"text-muted-foreground hover:text-foreground\"\n            )}\n          >\n            {i === activeIndex && (\n              <motion.div\n                layoutId={`code-tab-indicator-${uid}`}\n                className=\"absolute bottom-0 left-0 right-0 h-[0.125rem] bg-primary shadow-[0_0_0.625rem_oklch(0.69_0.195_42/0.6)]\"\n                transition={{ type: \"spring\", stiffness: 500, damping: 35 }}\n              />\n            )}\n            {tab.label}\n          </button>\n        ))}\n      </div>\n\n      {/* Code body */}\n      <div className=\"relative overflow-hidden\">\n        <AnimatePresence mode=\"popLayout\" initial={false} custom={direction}>\n          <motion.div\n            key={activeIndex}\n            custom={direction}\n            initial={{ opacity: 0, x: direction * 20 }}\n            animate={{ opacity: 1, x: 0 }}\n            exit={{ opacity: 0, x: direction * -20 }}\n            transition={{ duration: 0.2, ease: \"easeInOut\" }}\n          >\n            <pre className=\"m-0 overflow-x-auto bg-transparent p-4 text-xs leading-relaxed text-foreground/85\">\n              <code>{active.code}</code>\n            </pre>\n          </motion.div>\n        </AnimatePresence>\n      </div>\n    </div>\n  )\n}\n\nexport { CodeTabs }\nexport type { CodeTabsProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)"
+    }
+  }
+}

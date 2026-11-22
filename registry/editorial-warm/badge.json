@@ -1,0 +1,23 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n// Editorial Warm Badge — mono label on a small glass pill. Uses --glass-* tokens.\n\nconst badgeVariants = cva(\n  [\n    \"inline-flex items-center justify-center rounded-full\",\n    \"font-mono uppercase tracking-[0.06em] transition-colors duration-base\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"text-foreground/70 shadow-[var(--shadow-glass)] bg-[color:oklch(0.89_0.008_80)]\",\n        primary:\n          \"bg-primary text-primary-foreground hover:bg-primary/95\",\n        outline:\n          \"border bg-transparent text-foreground/70 border-[color:oklch(0.891_0.013_80)]\",\n        muted:\n          \"shadow-[var(--shadow-glass)] bg-[color:oklch(0.89_0.01_80)] text-[color:oklch(0.265_0.012_55)]\",\n      },\n      size: {\n        sm:      \"h-4 px-2 text-[0.5625rem]\",\n        default: \"h-5 px-2.5 text-[0.625rem]\",\n        lg:      \"h-6 px-3 text-[0.6875rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span className={cn(badgeVariants({ variant, size, className }))} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-glass": "inset 0 0.0938rem 0 oklch(1 0 0 / 0.55), inset 0 -0.0938rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.04), 0 0.125rem 0.375rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-glass": "inset 0 0.0938rem 0 oklch(1 0 0 / 0.55), inset 0 -0.0938rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.04), 0 0.125rem 0.375rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

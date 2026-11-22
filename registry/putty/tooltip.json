@@ -1,0 +1,25 @@
+{
+  "name": "tooltip",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst TooltipProvider = TooltipPrimitive.Provider\n\nconst Tooltip = TooltipPrimitive.Root\n\nconst TooltipTrigger = TooltipPrimitive.Trigger\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 4, ...props }, ref) => (\n  <TooltipPrimitive.Content\n    ref={ref}\n    sideOffset={sideOffset}\n    className={cn(\n      \"origin-(--radix-tooltip-content-transform-origin) z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground [box-shadow:var(--shadow-overlay)] animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n      className\n    )}\n    {...props}\n  />\n))\nTooltipContent.displayName = TooltipPrimitive.Content.displayName\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tooltip@^1.2.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    },
+    "dark": {
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    }
+  }
+}

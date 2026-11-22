@@ -1,0 +1,33 @@
+{
+  "name": "input-copy-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\ninterface InputCopyProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"value\" | \"onChange\" | \"readOnly\"\n> {\n  value: string;\n  label?: React.ReactNode;\n  /** Milliseconds before the copied tick turns back into the copy icon. Default 1800. */\n  copiedTimeoutMs?: number;\n}\n\n/**\n * Firefly InputCopy: a read-only warm field holding a key or a link in mono\n * type, with a round ghost copy button set inside its end. A press copies\n * the value and swaps the icon for a green tick for a moment; focusing the\n * field selects the whole value for a manual copy.\n */\nfunction InputCopy({\n  value,\n  label,\n  copiedTimeoutMs = 1800,\n  className,\n  id: idProp,\n  ...props\n}: InputCopyProps) {\n  const generatedId = React.useId();\n  const id = idProp ?? generatedId;\n  const [copied, setCopied] = React.useState(false);\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value);\n      setCopied(true);\n    } catch {\n      // The clipboard can be blocked; the field stays selectable for a manual copy.\n    }\n  }, [value]);\n\n  React.useEffect(() => {\n    if (!copied) return;\n    const timer = setTimeout(() => setCopied(false), copiedTimeoutMs);\n    return () => clearTimeout(timer);\n  }, [copied, copiedTimeoutMs]);\n\n  return (\n    <div data-slot=\"input-copy\" className={cn(\"flex flex-col gap-2\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-sm font-medium text-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(event) => event.currentTarget.select()}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"pe-11 font-mono text-xs tabular-nums\",\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          disabled={props.disabled}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute end-1 inline-flex size-8 items-center justify-center rounded-full text-(--foreground-secondary)\",\n            \"transition-colors duration-fast ease-out\",\n            \"hover:bg-secondary hover:text-foreground active:bg-(--surface-3)\",\n            \"focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-ring\",\n            \"disabled:pointer-events-none disabled:text-(--foreground-disabled)\",\n          )}\n        >\n          <Icon\n            icon={copied ? \"carbon:checkmark\" : \"carbon:copy\"}\n            aria-hidden=\"true\"\n            className={cn(\"size-4\", copied && \"text-(--success-text)\")}\n          />\n        </button>\n        <span aria-live=\"polite\" className=\"sr-only\">\n          {copied ? \"Copied to clipboard\" : \"\"}\n        </span>\n      </div>\n    </div>\n  );\n}\n\nexport { InputCopy };\nexport type { InputCopyProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-3": "oklch(0.919 0.007 88.6)",
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "success-text": "oklch(0.481 0.118 151.5)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "surface-3": "oklch(0.315 0.009 106.9)",
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "success-text": "oklch(0.839 0.154 153.8)"
+    }
+  }
+}

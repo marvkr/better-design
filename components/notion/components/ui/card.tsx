@@ -14,9 +14,9 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-[10px] bg-card text-card-foreground",
-      "shadow-[rgba(25,25,25,0.027)_0px_4px_12px_0px,rgba(25,25,25,0.02)_0px_1px_2px_0px,rgba(42,28,0,0.07)_0px_0px_0px_1px]",
-      "transition-shadow duration-100",
+      "rounded-[0.625rem] bg-card text-card-foreground",
+      "shadow-[oklch(0.2134_0_0/0.027)_0rem_0.25rem_0.75rem_0rem,oklch(0.2134_0_0/0.02)_0rem_0.0625rem_0.125rem_0rem,oklch(0.2378_0.0489_82.4502/0.07)_0rem_0rem_0rem_0.0625rem]",
+      "transition-shadow duration-fast",
       className
     )}
     {...props}

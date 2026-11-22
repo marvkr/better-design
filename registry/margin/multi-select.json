@@ -1,0 +1,30 @@
+{
+  "name": "multi-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandSeparator,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\n/**\n * Margin MultiSelect: the grey filled field showing each pick as a soft-oxblood\n * tag chip. The list opens in the shared paper panel, and a picked row's box\n * fills with the primary oxblood and a white tick.\n */\nexport interface MultiSelectOption {\n  value: string;\n  label: string;\n}\n\nexport interface MultiSelectProps {\n  options: MultiSelectOption[];\n  value: string[];\n  onValueChange: (value: string[]) => void;\n  placeholder?: string;\n  searchPlaceholder?: string;\n  emptyMessage?: string;\n  className?: string;\n  disabled?: boolean;\n  maxVisibleBadges?: number;\n}\n\nconst MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(\n  (\n    {\n      options,\n      value,\n      onValueChange,\n      placeholder = \"Select options\",\n      searchPlaceholder = \"Search\",\n      emptyMessage = \"No results found.\",\n      className,\n      disabled,\n      maxVisibleBadges = 3,\n    },\n    ref,\n  ) => {\n    const [open, setOpen] = React.useState(false);\n\n    const toggle = (v: string) => {\n      if (value.includes(v)) onValueChange(value.filter((x) => x !== v));\n      else onValueChange([...value, v]);\n    };\n\n    const selectedLabels = value.flatMap((v) => {\n      const label = options.find((o) => o.value === v)?.label;\n      return label === undefined ? [] : [label];\n    });\n\n    return (\n      <Popover open={open} onOpenChange={setOpen}>\n        <PopoverTrigger asChild>\n          <button\n            ref={ref}\n            type=\"button\"\n            role=\"combobox\"\n            aria-expanded={open}\n            disabled={disabled}\n            data-slot=\"multi-select\"\n            className={cn(\n              formFieldBase,\n              \"flex min-h-7.5 cursor-pointer items-center justify-between gap-2 py-1 pl-1 pr-2.5 text-left\",\n              className,\n            )}\n          >\n            <span className=\"flex flex-wrap items-center gap-1\">\n              {selectedLabels.length === 0 && (\n                <span className=\"pl-1.5 text-muted-foreground\">{placeholder}</span>\n              )}\n              {selectedLabels.slice(0, maxVisibleBadges).map((label) => (\n                <span\n                  key={label}\n                  className=\"inline-flex h-5.5 items-center rounded-md bg-(--mark) px-1.5 text-xs font-medium text-(--mark-foreground)\"\n                >\n                  {label}\n                </span>\n              ))}\n              {selectedLabels.length > maxVisibleBadges && (\n                <span className=\"px-1 text-xs text-muted-foreground\">\n                  +{selectedLabels.length - maxVisibleBadges} more\n                </span>\n              )}\n            </span>\n            <Icon icon=\"solar:alt-arrow-down-linear\" className=\"size-3.5 shrink-0 text-muted-foreground\" aria-hidden />\n          </button>\n        </PopoverTrigger>\n        <PopoverContent className=\"w-(--radix-popover-trigger-width) p-0\">\n          <Command>\n            <CommandInput placeholder={searchPlaceholder} />\n            <CommandList>\n              <CommandEmpty>{emptyMessage}</CommandEmpty>\n              <CommandGroup>\n                {options.map((option) => {\n                  const isSelected = value.includes(option.value);\n                  return (\n                    <CommandItem key={option.value} onSelect={() => toggle(option.value)}>\n                      <span\n                        aria-hidden\n                        className={cn(\n                          \"flex size-4 shrink-0 items-center justify-center rounded-sm\",\n                          isSelected\n                            ? \"bg-primary text-primary-foreground shadow-xs\"\n                            : \"bg-card shadow-sm\",\n                        )}\n                      >\n                        {isSelected && <Icon icon=\"solar:unread-linear\" className=\"size-3 text-primary-foreground\" />}\n                      </span>\n                      {option.label}\n                    </CommandItem>\n                  );\n                })}\n              </CommandGroup>\n              {value.length > 0 && (\n                <>\n                  <CommandSeparator />\n                  <CommandGroup>\n                    <CommandItem\n                      onSelect={() => onValueChange([])}\n                      className=\"justify-center text-center text-muted-foreground\"\n                    >\n                      Clear selection\n                    </CommandItem>\n                  </CommandGroup>\n                </>\n              )}\n            </CommandList>\n          </Command>\n        </PopoverContent>\n      </Popover>\n    );\n  },\n);\nMultiSelect.displayName = \"MultiSelect\";\n\nexport { MultiSelect };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json",
+    "https://better-design.com/registry/margin/command.json",
+    "https://better-design.com/registry/margin/popover.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mark": "oklch(0.895 0.04 28)",
+      "mark-foreground": "oklch(0.38 0.12 25)"
+    },
+    "dark": {
+      "mark": "oklch(0.32 0.05 25)",
+      "mark-foreground": "oklch(0.88 0.06 30)"
+    }
+  }
+}

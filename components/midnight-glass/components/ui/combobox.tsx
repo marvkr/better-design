@@ -53,18 +53,20 @@ export function ComboboxDemo() {
           role="combobox"
           aria-expanded={open}
           className={cn(
-            "w-[200px] justify-between",
+            "w-[12.5rem] justify-between pr-3",
             "rounded-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05]",
-            "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
+            "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
             "text-white/90 placeholder:text-white/40",
-            "transition duration-300",
+            "transition duration-slow",
             "hover:bg-white/[0.07] hover:border-white/[0.12]",
-            "focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)] focus-visible:border-primary/50"
+            "focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)] focus-visible:border-primary/50"
           )}
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+          <span className="min-w-0 truncate">
+            {value
+              ? frameworks.find((framework) => framework.value === value)?.label
+              : "Select framework..."}
+          </span>
           <Icon
             icon="tabler:chevrons-up-down"
             className="ml-2 h-4 w-4 shrink-0 opacity-50"
@@ -73,9 +75,9 @@ export function ComboboxDemo() {
       </PopoverTrigger>
       <PopoverContent
         className={cn(
-          "w-[200px] p-0 rounded-xl",
+          "w-[12.5rem] p-0 rounded-xl",
           "border border-white/[0.08] backdrop-blur-2xl bg-white/[0.07]",
-          "shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_6px_rgba(255,255,255,0.05)]"
+          "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.375rem_oklch(1_0_0/0.05)]"
         )}
       >
         <Command className="bg-transparent">

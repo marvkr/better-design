@@ -1,0 +1,20 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Timeline — a hairline rail with a square 5px-radius ink node per\n * entry, seated on the rail with a bezel-coloured punch-out. The node is ink\n * with the thumb shadow, never accent: an entry that already happened is a\n * fact, not live state. Times are metadata, so they run mono.\n */\n\nexport interface TimelineItem {\n  title: string;\n  description?: string;\n  time?: string;\n}\n\nexport interface TimelineProps extends React.HTMLAttributes<HTMLOListElement> {\n  items: TimelineItem[];\n}\n\nconst Timeline = React.forwardRef<HTMLOListElement, TimelineProps>(\n  ({ className, items, ...props }, ref) => (\n    <ol\n      ref={ref}\n      className={cn(\"relative space-y-6 border-l border-border pl-6\", className)}\n      {...props}\n    >\n      {items.map((item) => (\n        <li key={item.title} className=\"relative\">\n          <span className=\"absolute -left-[1.9375rem] top-0.5 size-[0.8125rem] rounded-[0.3125rem] bg-primary shadow-[0_0_0_0.1875rem_var(--background),var(--shadow-thumb)]\" />\n          <div className=\"space-y-0.5\">\n            <p className=\"text-[0.8125rem] font-medium tracking-[-0.01em] text-foreground\">\n              {item.title}\n            </p>\n            {item.description ? (\n              <p className=\"text-[0.7813rem] leading-relaxed text-muted-foreground\">\n                {item.description}\n              </p>\n            ) : null}\n            {item.time ? (\n              <p className=\"font-mono text-[0.6563rem] tabular-nums text-muted-foreground\">\n                {item.time}\n              </p>\n            ) : null}\n          </div>\n        </li>\n      ))}\n    </ol>\n  ),\n);\nTimeline.displayName = \"Timeline\";\n\nexport { Timeline };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    },
+    "dark": {
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
+    }
+  }
+}

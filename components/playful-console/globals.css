@@ -1,0 +1,415 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Playful console: a friendly, slightly retro system for developer tools and
+  product analytics. A warm off-white page, white cards with a thin olive
+  hairline, and chunky bordered buttons that sit on an offset base and press
+  down into it. One saturated orange carries the primary action; blue, purple,
+  green and red appear as bold marker highlights, callouts and chart series.
+  Figtree for every text role, Source Code Pro for code.
+*/
+
+:root {
+  /* ─── Ground: warm off-white page, white cards, deep ink ─── */
+  --background: oklch(0.95 0.008 114.2);
+  --foreground: oklch(0.21 0.032 264.7);
+
+  --card: oklch(0.993 0.007 106.5);
+  --card-foreground: oklch(0.21 0.032 264.7);
+
+  --popover: oklch(0.993 0.007 106.5);
+  --popover-foreground: oklch(0.21 0.032 264.7);
+
+  /* ─── Primary: the one orange action and its pressed base ─── */
+  --primary: oklch(0.756 0.151 70.8);
+  --primary-foreground: oklch(0.168 0.01 100);
+  --primary-hover: oklch(0.782 0.152 72);
+  --primary-active: oklch(0.725 0.15 70.6);
+  --primary-base: oklch(0.673 0.144 70.5);    /* the offset slab the button presses into */
+  --primary-rim: oklch(0.617 0.124 74);       /* the thin edge around face and slab */
+  --primary-text: oklch(0.56 0.13 62);        /* orange as text on the cream page: 4.6:1 */
+  --primary-wash: oklch(0.9 0.08 78);         /* selected chips, marker highlight */
+
+  --secondary: oklch(0.924 0.01 119.6);
+  --secondary-foreground: oklch(0.21 0.032 264.7);
+
+  --muted: oklch(0.924 0.01 119.6);
+  --muted-foreground: oklch(0.509 0.014 117.1);
+
+  --accent: oklch(0.924 0.01 119.6);          /* hover and highlighted rows */
+  --accent-foreground: oklch(0.21 0.032 264.7);
+
+  --destructive: oklch(0.577 0.177 27.7);
+  --destructive-foreground: oklch(1 0 0);
+  --destructive-base: oklch(0.48 0.16 27.5);
+
+  --success: oklch(0.574 0.107 162.9);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.756 0.151 70.8);
+  --warning-foreground: oklch(0.168 0.01 100);
+
+  --border: oklch(0.806 0.014 115.9);         /* the olive hairline */
+  --input: oklch(0.924 0.01 119.6);           /* a quiet cream well; field edges use --line-strong */
+  --line-soft: oklch(0.898 0.018 117.3);      /* rows inside a card */
+  --line-strong: oklch(0.69 0.016 114);       /* field and outline-button edges */
+  --ring: oklch(0.623 0.188 259.8);           /* bold blue focus ring */
+  --radius: 0.375rem;                         /* the card corner */
+
+  /* ─── Ink ladder and surfaces ─── */
+  --surface-2: oklch(0.924 0.01 119.6);
+  --surface-3: oklch(0.898 0.018 117.3);
+  --field: oklch(1 0 0);
+  --foreground-secondary: oklch(0.373 0.031 259.7);
+  --foreground-disabled: oklch(0.689 0.014 111.4);
+  --control: oklch(0.533 0.017 115.3);
+  --ink: oklch(0.26 0.015 118.8);
+  --ink-foreground: oklch(1 0 0);
+  --thumb: oklch(1 0 0);
+  --scrim: oklch(0.26 0.015 118.8 / 0.45);
+
+  /* ─── Bold highlights: marker washes and callout tints ─── */
+  --highlight-blue: oklch(0.623 0.188 259.8 / 0.2);
+  --highlight-orange: oklch(0.756 0.151 70.8 / 0.35);
+  --info: oklch(0.609 0.162 253.1);
+  --info-tint: oklch(0.93 0.022 243.8);
+  --info-text: oklch(0.488 0.217 264.4);
+  --note: oklch(0.584 0.255 318.3);
+  --note-tint: oklch(0.901 0.034 315.2);
+  --note-text: oklch(0.5 0.156 308.1);
+  --success-tint: oklch(0.927 0.028 155.3);
+  --success-text: oklch(0.47 0.1 162);
+  --warning-tint: oklch(0.93 0.06 80);
+  --warning-text: oklch(0.52 0.12 62);
+  --destructive-tint: oklch(0.903 0.037 24);
+  --destructive-text: oklch(0.5 0.17 27.5);
+  --link: oklch(0.54 0.108 233.4);
+
+  /* ─── Code: a light paper panel with a hairline, coloured tokens ─── */
+  --code: oklch(0.993 0.007 106.5);
+  --code-foreground: oklch(0.26 0.015 118.8);
+  --code-inline: oklch(0.924 0.01 119.6);
+  --syntax-keyword: oklch(0.5 0.156 308.1);
+  --syntax-string: oklch(0.5 0.1 162);
+  --syntax-fn: oklch(0.488 0.217 264.4);
+  --syntax-number: oklch(0.56 0.13 62);
+  --syntax-comment: oklch(0.6 0.014 115);
+
+  --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ─── Depth: flat cards; the offset slab is the signature ─── */
+  --shadow-xs: 0 0.0625rem 0.0625rem oklch(0.26 0.015 118.8 / 0.06);
+  --shadow-sm: 0 0.0625rem 0.125rem oklch(0.26 0.015 118.8 / 0.08);
+  --shadow-md: 0 0.5rem 1.25rem -0.375rem oklch(0.26 0.015 118.8 / 0.2), 0 0.125rem 0.25rem oklch(0.26 0.015 118.8 / 0.06);
+  --shadow-lg: 0 0.625rem 1rem -0.25rem oklch(0.26 0.015 118.8 / 0.16), 0 0.25rem 0.375rem -0.25rem oklch(0.26 0.015 118.8 / 0.1);
+  --shadow-card: none;
+  --shadow-menu: var(--shadow-md);
+  --shadow-overlay: 0 1.25rem 2.5rem -0.75rem oklch(0.26 0.015 118.8 / 0.3), 0 0.25rem 0.75rem oklch(0.26 0.015 118.8 / 0.08);
+  --shadow-thumb: 0 0.125rem 0 0 var(--line-strong);
+  /* A retro hard shadow for the odd raised panel, such as a dragged card. */
+  --shadow-offset: 0.25rem 0.25rem 0 0 oklch(0.26 0.015 118.8 / 0.9);
+
+  /* The press: a slab below the face, inset by the rim, edged by the rim.
+     Rest sits 0.25rem up, hover lifts to 0.375rem, press drops to 0.125rem. */
+  --shadow-press-primary: 0 0.25rem 0 -0.09375rem var(--primary-base), 0 0.25rem 0 0 var(--primary-rim);
+  --shadow-press-primary-hover: 0 0.375rem 0 -0.09375rem var(--primary-base), 0 0.375rem 0 0 var(--primary-rim);
+  --shadow-press-primary-active: 0 0.125rem 0 -0.09375rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim);
+  /* The white face sits on the orange slab. */
+  --shadow-press-secondary: 0 0.25rem 0 -0.09375rem var(--primary), 0 0.25rem 0 0 var(--primary-rim);
+  --shadow-press-secondary-hover: 0 0.375rem 0 -0.09375rem var(--primary), 0 0.375rem 0 0 var(--primary-rim);
+  --shadow-press-secondary-active: 0 0.125rem 0 -0.09375rem var(--primary), 0 0.125rem 0 0 var(--primary-rim);
+  --shadow-press-outline: 0 0.25rem 0 -0.09375rem var(--secondary), 0 0.25rem 0 0 var(--line-strong);
+  --shadow-press-outline-hover: 0 0.375rem 0 -0.09375rem var(--secondary), 0 0.375rem 0 0 var(--line-strong);
+  --shadow-press-outline-active: 0 0.125rem 0 -0.09375rem var(--secondary), 0 0.125rem 0 0 var(--line-strong);
+  --shadow-press-destructive: 0 0.25rem 0 -0.09375rem var(--destructive-base), 0 0.25rem 0 0 var(--destructive-base);
+  --shadow-press-destructive-hover: 0 0.375rem 0 -0.09375rem var(--destructive-base), 0 0.375rem 0 0 var(--destructive-base);
+  --shadow-press-destructive-active: 0 0.125rem 0 -0.09375rem var(--destructive-base), 0 0.125rem 0 0 var(--destructive-base);
+  /* Small controls (checkbox, radio, switch, slider thumb) wear a shorter slab. */
+  --shadow-control: 0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim);
+  --shadow-control-off: 0 0.125rem 0 0 var(--line-strong);
+
+  /* ─── Charts: orange first, then the bold highlight colours ─── */
+  --chart-1: oklch(0.756 0.151 70.8);
+  --chart-2: oklch(0.609 0.162 253.1);
+  --chart-3: oklch(0.584 0.255 318.3);
+  --chart-4: oklch(0.574 0.107 162.9);
+  --chart-5: oklch(0.577 0.177 27.7);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+.dark {
+  --background: oklch(0.2 0.008 114);
+  --foreground: oklch(0.95 0.008 114.2);
+  --card: oklch(0.245 0.01 114);
+  --card-foreground: oklch(0.95 0.008 114.2);
+  --popover: oklch(0.265 0.011 114);
+  --popover-foreground: oklch(0.95 0.008 114.2);
+  --primary: oklch(0.79 0.15 72);
+  --primary-foreground: oklch(0.168 0.01 100);
+  --primary-hover: oklch(0.82 0.145 74);
+  --primary-active: oklch(0.75 0.15 71);
+  --primary-base: oklch(0.6 0.13 68);
+  --primary-rim: oklch(0.52 0.11 70);
+  --primary-text: oklch(0.82 0.14 74);
+  --primary-wash: oklch(0.36 0.07 70);
+  --secondary: oklch(0.3 0.012 114);
+  --secondary-foreground: oklch(0.95 0.008 114.2);
+  --muted: oklch(0.3 0.012 114);
+  --muted-foreground: oklch(0.72 0.014 114);
+  --accent: oklch(0.3 0.012 114);
+  --accent-foreground: oklch(0.95 0.008 114.2);
+  --destructive: oklch(0.65 0.18 27);
+  --destructive-foreground: oklch(0.168 0.01 100);
+  --destructive-base: oklch(0.5 0.15 27);
+  --success: oklch(0.72 0.12 160);
+  --success-foreground: oklch(0.168 0.01 100);
+  --warning: oklch(0.79 0.15 72);
+  --warning-foreground: oklch(0.168 0.01 100);
+  --border: oklch(0.36 0.012 114);
+  --input: oklch(0.3 0.012 114);
+  --line-soft: oklch(0.31 0.012 114);
+  --line-strong: oklch(0.48 0.014 114);
+  --ring: oklch(0.7 0.15 258);
+  --surface-2: oklch(0.3 0.012 114);
+  --surface-3: oklch(0.34 0.012 114);
+  --field: oklch(0.225 0.009 114);
+  --foreground-secondary: oklch(0.84 0.01 114);
+  --foreground-disabled: oklch(0.5 0.012 114);
+  --control: oklch(0.62 0.014 114);
+  --ink: oklch(0.95 0.008 114.2);
+  --ink-foreground: oklch(0.2 0.008 114);
+  --thumb: oklch(0.95 0.008 114.2);
+  --scrim: oklch(0 0 0 / 0.6);
+  --highlight-blue: oklch(0.7 0.15 258 / 0.3);
+  --highlight-orange: oklch(0.79 0.15 72 / 0.32);
+  --info: oklch(0.7 0.15 258);
+  --info-tint: oklch(0.28 0.05 255);
+  --info-text: oklch(0.8 0.11 255);
+  --note: oklch(0.7 0.2 318);
+  --note-tint: oklch(0.29 0.06 315);
+  --note-text: oklch(0.82 0.11 315);
+  --success-tint: oklch(0.27 0.04 160);
+  --success-text: oklch(0.8 0.11 160);
+  --warning-tint: oklch(0.3 0.05 75);
+  --warning-text: oklch(0.84 0.13 76);
+  --destructive-tint: oklch(0.28 0.06 25);
+  --destructive-text: oklch(0.8 0.11 25);
+  --link: oklch(0.76 0.11 233);
+  --code: oklch(0.225 0.009 114);
+  --code-foreground: oklch(0.92 0.008 114);
+  --code-inline: oklch(0.3 0.012 114);
+  --syntax-keyword: oklch(0.78 0.14 315);
+  --syntax-string: oklch(0.8 0.12 160);
+  --syntax-fn: oklch(0.78 0.12 255);
+  --syntax-number: oklch(0.82 0.14 74);
+  --syntax-comment: oklch(0.6 0.014 114);
+  --shadow-xs: 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4);
+  --shadow-md: 0 0.5rem 1.25rem -0.375rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(0.36 0.012 114);
+  --shadow-lg: 0 0.625rem 1rem -0.25rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(0.36 0.012 114);
+  --shadow-menu: var(--shadow-md);
+  --shadow-overlay: 0 1.25rem 2.5rem -0.75rem oklch(0 0 0 / 0.7), 0 0 0 0.0625rem oklch(0.36 0.012 114);
+  --shadow-offset: 0.25rem 0.25rem 0 0 oklch(0 0 0 / 0.6);
+  --chart-1: oklch(0.79 0.15 72);
+  --chart-2: oklch(0.7 0.15 258);
+  --chart-3: oklch(0.7 0.2 318);
+  --chart-4: oklch(0.72 0.12 160);
+  --chart-5: oklch(0.65 0.18 27);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Every corner derives from --radius. Buttons take their own 0.5rem. */
+  --radius-sm: calc(var(--radius) - 0.25rem);   /* 0.125rem inline code, tiny chips */
+  --radius-md: calc(var(--radius) - 0.125rem);  /* 0.25rem  fields, checkboxes, menu rows */
+  --radius-lg: var(--radius);                   /* 0.375rem cards, menus, popovers */
+  --radius-xl: calc(var(--radius) + 0.25rem);   /* 0.625rem dialogs, sheets */
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  :is(h1, h2, h3) {
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+  }
+
+  mark {
+    background-color: var(--highlight-orange);
+    color: inherit;
+    border-radius: 0.125rem;
+    padding: 0 0.125rem;
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Orange is a fill built to sit behind ink, so text in the primary colour
+     takes the deeper orange that reads on the cream page and white cards.
+     Declared after Tailwind's utilities, so it wins over text-primary. */
+  .text-primary {
+    color: var(--primary-text);
+  }
+
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
+}

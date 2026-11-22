@@ -1,0 +1,36 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ProgressPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <ProgressPrimitive.Root ref={ref} className={cn(\"w-full\", className)} {...props}>\n    <ProgressPrimitive.Track className=\"relative h-1.5 w-full overflow-hidden rounded-full bg-secondary [box-shadow:var(--shadow-track-inset)]\">\n      <ProgressPrimitive.Indicator className=\"h-full [background-image:var(--fill-primary)] transition-all duration-slow ease-out\" />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

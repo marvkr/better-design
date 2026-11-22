@@ -1,0 +1,28 @@
+{
+  "name": "number-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass NumberInput: recessed well with glass stepper buttons.\n\ninterface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number\n  onChange?: (value: number) => void\n  min?: number\n  max?: number\n  step?: number\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  (\n    { className, value, onChange, min, max, step = 1, disabled, ...props },\n    ref\n  ) => {\n    const [internal, setInternal] = React.useState<number>(value ?? 0)\n    const current = value ?? internal\n\n    const clamp = (n: number) => {\n      let next = n\n      if (min !== undefined) next = Math.max(min, next)\n      if (max !== undefined) next = Math.min(max, next)\n      return next\n    }\n\n    const update = (n: number) => {\n      const next = clamp(n)\n      setInternal(next)\n      onChange?.(next)\n    }\n\n    return (\n      <div\n        className={cn(\n          \"flex h-9 w-full items-stretch overflow-hidden rounded-lg\",\n          formFieldBase,\n          \"p-0\",\n          className\n        )}\n      >\n        <input\n          ref={ref}\n          type=\"number\"\n          inputMode=\"numeric\"\n          className=\"w-full flex-1 bg-transparent px-3 py-2 text-sm outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\"\n          value={current}\n          min={min}\n          max={max}\n          step={step}\n          disabled={disabled}\n          onChange={(e) => update(Number(e.target.value))}\n          {...props}\n        />\n        <div className=\"flex flex-col border-l border-[color:var(--ag-border)]\">\n          <button\n            type=\"button\"\n            tabIndex={-1}\n            aria-label=\"Increment\"\n            disabled={disabled || (max !== undefined && current >= max)}\n            onClick={() => update(current + step)}\n            className=\"flex flex-1 items-center justify-center px-2 text-muted-foreground transition-colors hover:bg-[var(--ag-fill)] hover:text-foreground disabled:pointer-events-none disabled:opacity-40\"\n          >\n            <Icon icon=\"tabler:chevron-up\" className=\"h-3 w-3\" />\n          </button>\n          <button\n            type=\"button\"\n            tabIndex={-1}\n            aria-label=\"Decrement\"\n            disabled={disabled || (min !== undefined && current <= min)}\n            onClick={() => update(current - step)}\n            className=\"flex flex-1 items-center justify-center border-t border-[color:var(--ag-border)] px-2 text-muted-foreground transition-colors hover:bg-[var(--ag-fill)] hover:text-foreground disabled:pointer-events-none disabled:opacity-40\"\n          >\n            <Icon icon=\"tabler:chevron-down\" className=\"h-3 w-3\" />\n          </button>\n        </div>\n      </div>\n    )\n  }\n)\nNumberInput.displayName = \"NumberInput\"\n\nexport { NumberInput }\nexport type { NumberInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

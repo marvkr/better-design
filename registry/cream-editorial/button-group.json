@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Cream editorial ButtonGroup: buttons set side by side as one block. Only\n * the outer ends keep the 0.5rem corner; the inner edges go square and\n * overlap by a hairline, so outlined buttons share one rule between them.\n * A focused button rises above its neighbours so its ring is never cut off.\n */\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"inline-flex w-fit items-stretch *:rounded-none *:focus-visible:z-10\",\n        orientation === \"horizontal\"\n          ? \"*:first:rounded-s-md *:last:rounded-e-md [&>*+*]:-ms-px\"\n          : \"flex-col *:first:rounded-t-md *:last:rounded-b-md [&>*+*]:-mt-px\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

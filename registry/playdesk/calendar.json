@@ -1,0 +1,32 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { DayPicker } from \"react-day-picker\";\nimport { ChevronLeft, ChevronRight } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Calendar — a white grid inside a window. The selected day takes the\n * primary Button's blue gradient so it reads as the same material.\n */\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>;\n\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"relative flex flex-col gap-4 sm:flex-row\",\n        month: \"flex flex-col gap-4\",\n        month_caption: \"flex h-8 items-center justify-center\",\n        caption_label: \"text-sm font-medium text-foreground\",\n        nav: \"absolute inset-x-0 top-0 flex h-8 items-center justify-between\",\n        button_previous:\n          \"inline-flex size-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.05] hover:text-foreground\",\n        button_next:\n          \"inline-flex size-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.05] hover:text-foreground\",\n        month_grid: \"w-full border-collapse\",\n        weekdays: \"flex\",\n        weekday:\n          \"w-9 text-[0.6875rem] font-bold tracking-[0.08em] text-muted-foreground\",\n        week: \"mt-1 flex w-full\",\n        day: \"relative size-9 p-0 text-center text-sm\",\n        day_button:\n          \"inline-flex size-9 items-center justify-center rounded-full font-normal transition-colors hover:bg-foreground/[0.05] focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n        selected:\n          \"[&_button]:[background-image:var(--fill-primary)] [&_button]:text-primary-foreground [&_button]:[box-shadow:var(--shadow-primary)]\",\n        today: \"[&_button]:bg-accent [&_button]:text-accent-foreground\",\n        outside: \"text-muted-foreground opacity-40\",\n        disabled: \"text-muted-foreground opacity-40\",\n        range_middle: \"[&_button]:bg-accent [&_button]:text-accent-foreground\",\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, ...rest }) =>\n          orientation === \"left\" ? (\n            <ChevronLeft className=\"size-4\" {...rest} />\n          ) : (\n            <ChevronRight className=\"size-4\" {...rest} />\n          ),\n      }}\n      {...props}\n    />\n  );\n}\nCalendar.displayName = \"Calendar\";\n\nexport { Calendar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)"
+    }
+  }
+}

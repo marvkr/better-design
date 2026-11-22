@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 
 // Apple Rating: star rating component
 
-interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {
+interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number
   max?: number
   onChange?: (value: number) => void

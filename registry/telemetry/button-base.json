@@ -1,0 +1,30 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Button: raised signal control.\n// default/primary: solid signal-green plate, near-black uppercase label,\n// bright rim + inner top highlight + outer green glow (glow IS the elevation).\n// destructive: alarm red with the same plate material in red.\n// outline/secondary/ghost: dark console surfaces that energize toward green.\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-xs font-semibold uppercase tracking-wider leading-none\",\n    \"rounded-sm transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:translate-y-px\",\n    \"select-none\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-control)] \" +\n          \"hover:[box-shadow:var(--shadow-control-hover)] hover:brightness-105\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-control)] \" +\n          \"hover:[box-shadow:var(--shadow-control-hover)] hover:brightness-105\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-control-destructive)] \" +\n          \"hover:brightness-110\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:border-ring/50 hover:text-primary \" +\n          \"hover:[box-shadow:0_0_0.625rem_oklch(0.78_0.21_148/0.15)]\",\n        secondary:\n          \"bg-secondary text-secondary-foreground border border-border \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.04)] \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-foreground\",\n        link:\n          \"text-primary underline-offset-4 hover:underline \" +\n          \"normal-case tracking-normal text-sm\",\n      },\n      size: {\n        sm: \"h-7 px-2.5 gap-1.5\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-5 text-sm\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-7 w-7\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      )\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-control": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.4), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.35), 0 0 0.75rem oklch(0.78 0.21 148 / 0.3)",
+      "shadow-control-hover": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.55), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.45), 0 0 1.125rem oklch(0.78 0.21 148 / 0.45)",
+      "shadow-control-destructive": "inset 0 0 0 0.0625rem oklch(0.78 0.16 27 / 0.45), inset 0 0.0625rem 0 oklch(0.85 0.1 27 / 0.3), 0 0 0.75rem oklch(0.6 0.23 27 / 0.35)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {
+      "shadow-control": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.4), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.35), 0 0 0.75rem oklch(0.78 0.21 148 / 0.3)",
+      "shadow-control-hover": "inset 0 0 0 0.0625rem oklch(0.9 0.16 148 / 0.55), inset 0 0.0625rem 0 oklch(0.97 0.08 148 / 0.45), 0 0 1.125rem oklch(0.78 0.21 148 / 0.45)",
+      "shadow-control-destructive": "inset 0 0 0 0.0625rem oklch(0.78 0.16 27 / 0.45), inset 0 0.0625rem 0 oklch(0.85 0.1 27 / 0.3), 0 0 0.75rem oklch(0.6 0.23 27 / 0.35)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  }
+}

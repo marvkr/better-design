@@ -13,7 +13,7 @@ const MenubarSub = MenubarPrimitive.Sub
 const MenubarRadioGroup = MenubarPrimitive.RadioGroup
 
 const contentStyles =
-  "z-50 min-w-[12rem] overflow-hidden p-1 " +
+  "origin-(--radix-menubar-content-transform-origin) z-50 min-w-[12rem] overflow-hidden p-1 " +
   "rounded-lg border border-border " +
   "bg-popover text-popover-foreground " +
   "[box-shadow:var(--shadow-l)] " +
@@ -21,7 +21,7 @@ const contentStyles =
 
 const itemStyles =
   "relative flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none " +
-  "transition-[background-color,color] duration-150 " +
+  "transition-[background-color,color] duration-fast " +
   "focus:bg-accent focus:text-accent-foreground " +
   "data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
 
@@ -50,7 +50,7 @@ const MenubarTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       "flex cursor-default select-none items-center rounded-md px-3 py-1.5 text-sm font-medium outline-none",
-      "transition-[background-color,color] duration-150",
+      "transition-[background-color,color] duration-fast",
       "focus:bg-accent focus:text-accent-foreground",
       "data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
       className

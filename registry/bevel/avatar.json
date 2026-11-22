@@ -1,0 +1,27 @@
+{
+  "name": "avatar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Avatar.\n *\n * A 40px circle with the 1px ring from the shadow stack instead of a border,\n * so a face sits on the card without a hard outline around it. The fallback is\n * an inner surface, which is what an empty slot looks like everywhere else in\n * the system.\n */\n\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex size-10 shrink-0 overflow-hidden rounded-full\",\n      \"[box-shadow:var(--shadow-ring)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = AvatarPrimitive.Root.displayName\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = AvatarPrimitive.Image.displayName\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full\",\n      \"bg-[var(--inner)] text-[var(--strong)]\",\n      \"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem]\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = AvatarPrimitive.Fallback.displayName\n\nexport { Avatar, AvatarImage, AvatarFallback }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-avatar@^1.1.10"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.07)"
+    }
+  }
+}

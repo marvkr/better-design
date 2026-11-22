@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
-import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const Drawer = ({
@@ -45,7 +44,7 @@ const DrawerContent = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
-        "rounded-t-[10px] border border-border bg-card",
+        "rounded-t-[0.625rem] border border-border bg-card",
         className
       )}
       {...props}

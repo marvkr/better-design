@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Spinner: cyan arc on a faint track.\n\ninterface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"md\" | \"lg\" | \"xl\";\n}\n\nconst sizeMap = {\n  sm: \"h-4 w-4 border-2\",\n  md: \"h-5 w-5 border-2\",\n  lg: \"h-6 w-6 border-[0.1563rem]\",\n  xl: \"h-8 w-8 border-[0.1875rem]\",\n};\n\nfunction Spinner({ size = \"md\", className, ...props }: SpinnerProps) {\n  return (\n    <div role=\"status\" aria-label=\"Loading\" className={cn(\"inline-flex\", className)} {...props}>\n      <span\n        className={cn(\n          \"animate-spin rounded-full\",\n          \"border-border/60 border-t-primary\",\n          sizeMap[size]\n        )}\n      />\n      <span className=\"sr-only\">Loading</span>\n    </div>\n  );\n}\n\nexport { Spinner };\nexport type { SpinnerProps };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

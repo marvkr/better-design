@@ -27,10 +27,10 @@ const dotVariants = cva(
     variants: {
       variant: {
         default: "bg-muted-foreground",
-        success: "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.4)]",
-        warning: "bg-orange-400 shadow-[0_0_6px_rgba(251,146,60,0.4)]",
-        destructive: "bg-destructive shadow-[0_0_6px_rgba(239,68,68,0.4)]",
-        info: "bg-primary shadow-[0_0_6px_rgba(255,255,255,0.4)]",
+        success: "bg-emerald-400 shadow-[0_0_0.375rem_oklch(0.7729_0.1535_163.2231/0.4)]",
+        warning: "bg-orange-400 shadow-[0_0_0.375rem_oklch(0.7576_0.159_55.9344/0.4)]",
+        destructive: "bg-destructive shadow-[0_0_0.375rem_oklch(0.6368_0.2078_25.3313/0.4)]",
+        info: "bg-primary shadow-[0_0_0.375rem_oklch(1_0_0/0.4)]",
       },
     },
     defaultVariants: {

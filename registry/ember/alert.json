@@ -1,0 +1,27 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Alert: glass slab with a tinted rim per intent.\n\nconst alertVariants = cva(\n  \"relative w-full rounded-xl px-4 py-3 text-sm backdrop-blur-[var(--ag-blur)] \" +\n    \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.06)] \" +\n    \"[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-0.1875rem] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:h-4 [&>svg]:w-4\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-[var(--ag-fill)] border border-[color:var(--ag-border)] text-foreground [&>svg]:text-primary\",\n        destructive:\n          \"bg-destructive/10 border border-[color:oklch(0.6_0.21_27/0.35)] text-[oklch(0.78_0.13_27)] [&>svg]:text-[oklch(0.7_0.18_27)]\",\n        success:\n          \"bg-[oklch(0.72_0.15_155/0.08)] border border-[color:oklch(0.72_0.15_155/0.35)] text-[oklch(0.8_0.12_155)] [&>svg]:text-[oklch(0.72_0.15_155)]\",\n        warning:\n          \"bg-[oklch(0.78_0.14_80/0.08)] border border-[color:oklch(0.78_0.14_80/0.35)] text-[oklch(0.85_0.1_82)] [&>svg]:text-[oklch(0.78_0.14_80)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n))\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 font-bold leading-none tracking-[-0.01em]\", className)}\n    {...props}\n  />\n))\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"text-sm opacity-90 [&_p]:leading-relaxed\", className)}\n    {...props}\n  />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "input-copy-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\ninterface InputCopyProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"value\" | \"onChange\" | \"readOnly\"\n> {\n  value: string;\n  label?: React.ReactNode;\n  /** Milliseconds before the copied tick turns back into the copy icon. Default 1800. */\n  copiedTimeoutMs?: number;\n}\n\n/**\n * Airy docs InputCopy: a read-only box holding an API key or an endpoint in\n * Geist Mono on the pale tray, with a small copy button in its end. A press\n * copies the value and swaps the icon for a green tick for a moment;\n * focusing the box selects the whole value for a manual copy.\n */\nfunction InputCopy({\n  value,\n  label,\n  copiedTimeoutMs = 1800,\n  className,\n  id: idProp,\n  ...props\n}: InputCopyProps) {\n  const generatedId = React.useId();\n  const id = idProp ?? generatedId;\n  const [copied, setCopied] = React.useState(false);\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value);\n      setCopied(true);\n    } catch {\n      // The clipboard can be blocked; the box stays selectable for a manual copy.\n    }\n  }, [value]);\n\n  React.useEffect(() => {\n    if (!copied) return;\n    const timer = setTimeout(() => setCopied(false), copiedTimeoutMs);\n    return () => clearTimeout(timer);\n  }, [copied, copiedTimeoutMs]);\n\n  return (\n    <div data-slot=\"input-copy\" className={cn(\"flex flex-col gap-1.5\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-sm font-medium text-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(event) => event.currentTarget.select()}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"border-border bg-secondary pe-10 font-mono text-[0.8125rem] tabular-nums\",\n          )}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          disabled={props.disabled}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute end-1.5 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground\",\n            \"transition-colors duration-fast ease-out\",\n            \"hover:bg-background hover:text-foreground\",\n            \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n            \"disabled:pointer-events-none disabled:text-(--foreground-disabled)\",\n          )}\n        >\n          <Icon\n            icon={copied ? \"feather:check\" : \"feather:copy\"}\n            aria-hidden=\"true\"\n            className={cn(\"size-3.5\", copied && \"text-(--primary-text)\")}\n          />\n        </button>\n        <span aria-live=\"polite\" className=\"sr-only\">\n          {copied ? \"Copied to clipboard\" : \"\"}\n        </span>\n      </div>\n    </div>\n  );\n}\n\nexport { InputCopy };\nexport type { InputCopyProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

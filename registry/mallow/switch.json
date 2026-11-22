@@ -1,0 +1,28 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing, optionTrack } from \"./_shared\";\n\n/**\n * Mallow Switch: off, the track is the lilac option track with a 3:1 edge.\n * On, the track takes the primary Button's violet finish. The knob is white\n * with a soft shadow in both states.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full p-0.5\",\n      optionTrack,\n      \"inset-ring-1 inset-ring-foreground/50 data-[state=checked]:inset-ring-transparent\",\n      controlChecked,\n      \"transition-[box-shadow,background-color] duration-base ease-(--ease-out)\",\n      focusRing,\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-6 rounded-full\",\n        \"bg-card shadow-(--shadow-thumb)\",\n        \"transition-transform duration-base ease-(--ease-out)\",\n        \"data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.1), 0 0.0625rem 0.25rem 0 oklch(0.32 0.08 290 / 0.2)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.1), 0 0.0625rem 0.25rem 0 oklch(0.32 0.08 290 / 0.2)"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Card, CardContent } from \"./card\";\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string | number;\n  change?: {\n    value: string | number;\n    trend: \"up\" | \"down\" | \"neutral\";\n  };\n  icon?: React.ReactNode;\n  description?: string;\n}\n\nconst trendTone = {\n  up: \"text-(--success-text)\",\n  down: \"text-(--destructive-text)\",\n  neutral: \"text-muted-foreground\",\n} as const;\n\nconst trendIcon = {\n  up: \"ph:trend-up\",\n  down: \"ph:trend-down\",\n  neutral: null,\n} as const;\n\n/** Read before the value, so a screen reader hears the direction too. */\nconst trendSpoken = {\n  up: \"Up \",\n  down: \"Down \",\n  neutral: \"No change \",\n} as const;\n\n/**\n * Cream editorial StatCard: one figure set like a headline on an oat card.\n *\n * The label is a small sans caption; the value is a large serif number at\n * medium weight on tabular digits. An optional icon sits in an oat square\n * at the top right. The change reads as coloured text with a trend line,\n * followed by a muted note, the way a report states a result.\n */\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  const arrow = change ? trendIcon[change.trend] : null;\n\n  return (\n    <Card className={className} {...props}>\n      <CardContent className=\"flex flex-col gap-4 p-6\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"flex min-w-0 flex-col gap-1.5\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"font-serif text-4xl font-medium leading-none tracking-tight tabular-nums text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <span\n              aria-hidden=\"true\"\n              className=\"flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-(--foreground-secondary) [&_svg]:size-4.5\"\n            >\n              {icon}\n            </span>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"flex flex-wrap items-center gap-x-2 gap-y-1 text-sm\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex items-center gap-1 font-medium tabular-nums\",\n                  trendTone[change.trend],\n                )}\n              >\n                {arrow && (\n                  <Icon icon={arrow} className=\"size-4\" aria-hidden=\"true\" />\n                )}\n                <span className=\"sr-only\">{trendSpoken[change.trend]}</span>\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-muted-foreground\">{description}</span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { StatCard };\nexport type { StatCardProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.359 0.005 106.7)",
+      "success-text": "oklch(0.44 0.08 160)",
+      "destructive-text": "oklch(0.48 0.16 26)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.853 0.014 97.5)",
+      "success-text": "oklch(0.8 0.08 160)",
+      "destructive-text": "oklch(0.78 0.13 26)"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\nfunction Switch({ className, ...props }: SwitchPrimitive.Root.Props) {\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full bg-muted p-0.5 transition-[background-color,box-shadow] focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)] data-disabled:cursor-not-allowed data-disabled:opacity-50 data-checked:bg-primary data-checked:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        render={\n          <motion.span\n            layout\n            transition={springInteraction}\n            className=\"pointer-events-none block h-5 w-5 rounded-full bg-background [box-shadow:var(--shadow-thumb)] data-checked:translate-x-5 data-unchecked:translate-x-0\"\n          />\n        }\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/motion.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.0625rem 0.1875rem oklch(0.2651 0.0621 251.37 / 0.2)"
+    },
+    "dark": {
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.0625rem 0.1875rem oklch(0.2651 0.0621 251.37 / 0.2)"
+    }
+  }
+}

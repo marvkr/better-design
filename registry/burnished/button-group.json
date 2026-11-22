@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished ButtonGroup: bevelled buttons joined into one pill. The inner\n * ends go square and the outer ends keep the full round, and each button\n * overlaps its neighbour by one hairline so the rims read as a single seam.\n */\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"inline-flex isolate *:rounded-none *:focus-visible:z-10\",\n        orientation === \"horizontal\"\n          ? \"flex-row [&>*:first-child]:rounded-l-full [&>*:last-child]:rounded-r-full [&>*:not(:first-child)]:-ml-[0.0625rem]\"\n          : \"flex-col [&>*:first-child]:rounded-t-3xl [&>*:last-child]:rounded-b-3xl [&>*:not(:first-child)]:-mt-[0.0625rem]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -86,6 +86,17 @@ const Carousel = React.forwardRef<
       >
         <div
           ref={ref}
+          onKeyDownCapture={(e) => {
+            const prevKey = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp"
+            const nextKey = orientation === "horizontal" ? "ArrowRight" : "ArrowDown"
+            if (e.key === prevKey) {
+              e.preventDefault()
+              scrollPrev()
+            } else if (e.key === nextKey) {
+              e.preventDefault()
+              scrollNext()
+            }
+          }}
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
@@ -105,7 +116,7 @@ const CarouselContent = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel()
   return (
-    <div ref={carouselRef} className="overflow-hidden rounded-[10px]">
+    <div ref={carouselRef} className="overflow-hidden rounded-[0.625rem]">
       <div
         ref={ref}
         className={cn(

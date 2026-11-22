@@ -1,0 +1,14 @@
+{
+  "name": "tooltip",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Tooltip — the dark hint bar from the bottom of the desk, shrunk to\n * a caption. Dark on purpose: it is transient, so it should not read as a\n * window.\n */\n\nconst TooltipProvider = TooltipPrimitive.Provider;\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 6, ...props }, ref) => (\n  <TooltipPrimitive.Content\n    ref={ref}\n    sideOffset={sideOffset}\n    className={cn(\n      \"origin-(--radix-tooltip-content-transform-origin) z-50 overflow-hidden rounded-lg px-2.5 py-1.5\",\n      \"bg-foreground/90 text-xs font-medium text-background backdrop-blur-md\",\n      \"[box-shadow:0_0.625rem_1.75rem_oklch(0_0_0_/_0.35)]\",\n      \"data-[state=delayed-open]:animate-in data-[state=closed]:animate-out\",\n      \"data-[state=closed]:fade-out-0 data-[state=delayed-open]:fade-in-0\",\n      \"data-[state=closed]:zoom-out-95 data-[state=delayed-open]:zoom-in-95\",\n      className,\n    )}\n    {...props}\n  />\n));\nTooltipContent.displayName = TooltipPrimitive.Content.displayName;\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tooltip@^1.2.7"
+  ]
+}

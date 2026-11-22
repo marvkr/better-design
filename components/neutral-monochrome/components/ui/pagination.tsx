@@ -1,7 +1,6 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "./button"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -45,10 +44,10 @@ const PaginationLink = ({
   <a
     aria-current={isActive ? "page" : undefined}
     className={cn(
-      "inline-flex h-9 min-w-[36px] items-center justify-center rounded-[10px] px-3 text-sm font-medium transition-colors cursor-pointer",
+      "inline-flex h-9 min-w-[2.25rem] items-center justify-center rounded-[0.625rem] px-3 text-sm font-medium transition-colors cursor-pointer",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       isActive
-        ? "bg-primary text-primary-foreground shadow-[0_1px_3px_0_hsl(239_84%_67%/0.3)]"
+        ? "bg-primary text-primary-foreground shadow-[0_0.0625rem_0.1875rem_0_oklch(0.5875_0.2039_277.3624/0.3)]"
         : "bg-secondary text-muted-foreground hover:bg-accent hover:text-foreground",
       className
     )}

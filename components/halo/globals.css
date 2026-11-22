@@ -1,0 +1,250 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Halo — dark translucency. Near-black #1c1c1e canvas,
+     translucent white-veil panels, bright-blue actions, warm amber signature accent. */
+  --background: oklch(0.18 0.004 286);
+  --foreground: oklch(0.97 0 0);
+
+  --card: oklch(1 0 0 / 0.06);
+  --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.24 0.004 286 / 0.9);
+  --popover-foreground: oklch(0.97 0 0);
+
+  /* Bright system blue (#007aff) */
+  --primary: oklch(0.62 0.2 256);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(1 0 0 / 0.08);
+  --secondary-foreground: oklch(0.85 0 0);
+
+  --muted: oklch(1 0 0 / 0.05);
+  --muted-foreground: oklch(0.66 0.005 286);
+
+  --accent: oklch(1 0 0 / 0.08);
+  --accent-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Warm amber signature accent (#ff7a18) — handwritten flourish color. */
+  --signature: oklch(0.72 0.19 52);
+
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.06);
+  --ring: oklch(0.62 0.2 256);
+
+  /* Glow and shadow inks. Components mix these at the strength they need,
+     so each theme retunes every glow and shadow in one place. The halo is
+     white light on the dark canvas; the shade is plain black. */
+  --halo: oklch(1 0 0);
+  --shade: oklch(0 0 0);
+  /* Radius scale lives in :root (not only @theme) so the showcase, which
+     injects :root vars at runtime, renders Halo's radii instead of the
+     host app's. Controls map onto these steps, never arbitrary px values. */
+  --radius: 0.875rem;
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.25rem;
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Halo light: frosted white panels over a cool pale-grey ground. The blue
+   raised controls and the amber accent stay the same. The veils turn to a
+   faint ink, the halo glow turns cool blue-grey so it shows on a light
+   ground, and shadows carry a faint cool tint at about 20% of the dark strength.
+   Add `.light` or `data-theme="light"` to <html> to use it. */
+.light,
+[data-theme="light"] {
+  --background: oklch(0.955 0.004 286);
+  --foreground: oklch(0.2 0.004 286);
+
+  --card: oklch(1 0 0 / 0.72);
+  --card-foreground: oklch(0.18 0.004 286);
+
+  --popover: oklch(0.995 0.002 286 / 0.9);
+  --popover-foreground: oklch(0.2 0.004 286);
+
+  --primary: oklch(0.62 0.2 256);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.2 0.004 286 / 0.06);
+  --secondary-foreground: oklch(0.32 0.004 286);
+
+  --muted: oklch(0.2 0.004 286 / 0.04);
+  --muted-foreground: oklch(0.5 0.006 286);
+
+  --accent: oklch(0.2 0.004 286 / 0.06);
+  --accent-foreground: oklch(0.18 0.004 286);
+
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --signature: oklch(0.68 0.19 50);
+
+  --border: oklch(0.2 0.004 286 / 0.1);
+  --input: oklch(0.2 0.004 286 / 0.05);
+  --ring: oklch(0.62 0.2 256);
+
+  --halo: oklch(0.55 0.08 256);
+  --shade: oklch(0.4 0.025 264 / 0.2);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-signature: var(--signature);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      ui-sans-serif,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

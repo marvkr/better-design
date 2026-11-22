@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Mallow Spinner: a thin ring of faint white with one bright arc turning\n * around it. Under reduced motion the arc stops turning and the ring fades\n * slowly instead.\n */\ninterface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst sizes = {\n  sm: \"size-3.5 border-2\",\n  default: \"size-4 border-2\",\n  lg: \"size-6 border-3\",\n};\n\nconst Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <span\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\"inline-flex items-center justify-center text-foreground\", className)}\n      {...props}\n    >\n      <span\n        aria-hidden=\"true\"\n        className={cn(\n          \"block rounded-full border-current/15 border-t-current\",\n          \"animate-spin motion-reduce:animate-pulse\",\n          sizes[size],\n        )}\n      />\n    </span>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

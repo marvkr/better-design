@@ -1,0 +1,22 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Skeleton.\n *\n * A placeholder is the inner surface at the row radius, pulsing slowly. It\n * carries the inset shadow rather than a raised one, because loading content\n * sits in the card, not on top of it.\n */\n\nconst Skeleton = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"animate-pulse rounded-[0.75rem] bg-[var(--inner)]\",\n      \"[box-shadow:var(--shadow-inset)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nSkeleton.displayName = \"Skeleton\"\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

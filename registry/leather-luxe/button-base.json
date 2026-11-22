@@ -1,0 +1,38 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Leather Luxe Button. The default variant is the hero: a cognac leather\n// pill with a glass sheen along the top edge, a stitched dashed seam just\n// inside the rim, and a deep warm drop shadow. Secondary actions are raised\n// charcoal pills with a hairline highlight, like the wallet's utility chips.\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-full text-sm font-medium select-none\",\n    \"transition-[filter,transform,box-shadow,background-color,border-color] duration-base ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"[background-image:var(--gradient-leather)] text-primary-foreground \" +\n          \"border border-[oklch(0.68_0.115_58/0.55)] \" +\n          \"[box-shadow:var(--shadow-leather)] \" +\n          \"after:pointer-events-none after:absolute after:inset-1 after:rounded-full \" +\n          \"after:border after:border-dashed after:border-[oklch(0.98_0.02_80/0.28)] \" +\n          \"hover:brightness-110 active:brightness-95 active:translate-y-px \" +\n          \"active:[box-shadow:var(--shadow-leather-sm)]\",\n        secondary:\n          \"[background-image:var(--gradient-raised)] text-secondary-foreground \" +\n          \"border border-highlight \" +\n          \"[box-shadow:var(--shadow-raised)] \" +\n          \"hover:brightness-125 active:brightness-95 active:translate-y-px \" +\n          \"active:[box-shadow:var(--shadow-raised-sm)]\",\n        destructive:\n          \"[background-image:linear-gradient(180deg,oklch(0.58_0.17_30),oklch(0.46_0.15_26))] \" +\n          \"text-destructive-foreground border border-[oklch(0.62_0.16_30/0.5)] \" +\n          \"[box-shadow:var(--shadow-leather-sm)] \" +\n          \"hover:brightness-110 active:brightness-95 active:translate-y-px\",\n        outline:\n          \"bg-transparent text-foreground border border-highlight \" +\n          \"hover:bg-accent hover:[box-shadow:var(--shadow-raised-sm)] \" +\n          \"active:bg-accent/70\",\n        ghost:\n          \"bg-transparent text-muted-foreground border border-transparent \" +\n          \"hover:bg-accent hover:text-foreground active:bg-accent/70\",\n        link:\n          \"bg-transparent text-primary underline-offset-4 hover:underline \" +\n          \"h-auto px-0\",\n      },\n      size: {\n        default: \"h-10 px-5 py-2\",\n        sm: \"h-8 px-3.5 text-xs\",\n        lg: \"h-12 px-7 text-base\",\n        icon: \"h-10 w-10 px-0\",\n        \"icon-sm\": \"h-8 w-8 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-leather": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.125rem 0.1875rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.3)",
+      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-leather": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.125rem 0.1875rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.3)",
+      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

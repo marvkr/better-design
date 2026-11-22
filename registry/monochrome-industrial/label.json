@@ -9,9 +9,15 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-label"
+    "@radix-ui/react-label@^2.1.7"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "label": "0.6875rem"
+    },
+    "dark": {
+      "label": "0.6875rem"
+    }
+  }
 }

@@ -40,9 +40,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     return (
       <div
         className={cn(
-          "flex h-10 w-full overflow-hidden rounded-[10px] border border-border bg-background",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-          "transition duration-200 focus-within:border-foreground focus-within:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
+          "flex h-10 w-full overflow-hidden rounded-[0.625rem] border border-border bg-background",
+          "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
+          "transition duration-base focus-within:border-foreground focus-within:shadow-[0_0_0_0.1875rem_oklch(0_0_0/0.06)]",
           disabled && "opacity-70 cursor-not-allowed",
           className
         )}

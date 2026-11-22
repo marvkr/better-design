@@ -1,0 +1,32 @@
+{
+  "name": "checkbox-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { primaryFinish, swapSpring, optionTrack } from \"./_shared\";\n\n/**\n * Mallow CheckboxGroup: options on one lilac option track. A chosen row\n * takes the light violet tint inside a violet ring, and its box takes the\n * solid violet primary finish while the tick draws in. The tick appears at once under\n * reduced motion.\n *\n * Usage:\n *   <CheckboxGroup\n *     value={selected}\n *     onValueChange={setSelected}\n *     options={[\n *       { value: \"email\", label: \"Email\" },\n *       { value: \"sms\", label: \"Text message\" },\n *     ]}\n *   />\n */\ninterface CheckboxGroupOption {\n  value: string;\n  label: React.ReactNode;\n  description?: React.ReactNode;\n  disabled?: boolean;\n}\n\ninterface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: CheckboxGroupOption[];\n  value: string[];\n  onValueChange: (value: string[]) => void;\n  orientation?: \"vertical\" | \"horizontal\";\n  name?: string;\n}\n\nfunction CheckboxGroup({\n  options,\n  value,\n  onValueChange,\n  orientation = \"vertical\",\n  name,\n  className,\n  ...props\n}: CheckboxGroupProps) {\n  const reduceMotion = useReducedMotion() ?? false;\n\n  const toggle = (v: string) => {\n    if (value.includes(v)) onValueChange(value.filter((x) => x !== v));\n    else onValueChange([...value, v]);\n  };\n\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"checkbox-group\"\n      className={cn(\n        \"relative inline-flex gap-1 rounded-2xl p-1\",\n        optionTrack,\n        orientation === \"vertical\" ? \"flex-col\" : \"flex-row\",\n        className,\n      )}\n      {...props}\n    >\n      {options.map((opt) => {\n        const selected = value.includes(opt.value);\n        return (\n          <label\n            key={opt.value}\n            data-checked={selected || undefined}\n            className={cn(\n              \"relative flex cursor-pointer items-start gap-3 rounded-xl px-4 py-3 text-sm\",\n              \"transition-[background-color,box-shadow] duration-fast ease-(--ease-out)\",\n              \"has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring\",\n              selected ? \"bg-(--option-face) shadow-(--option-edge)\" : \"hover:bg-(--tag)\",\n              opt.disabled && \"cursor-not-allowed opacity-50\",\n            )}\n          >\n            <input\n              type=\"checkbox\"\n              name={name}\n              value={opt.value}\n              checked={selected}\n              disabled={opt.disabled}\n              onChange={() => toggle(opt.value)}\n              className=\"peer sr-only\"\n            />\n            <span\n              aria-hidden=\"true\"\n              className={cn(\n                \"relative mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-sm\",\n                selected ? primaryFinish : \"border-2 border-foreground/50\",\n              )}\n            >\n              <AnimatePresence initial={false}>\n                {selected && (\n                  <motion.svg\n                    key=\"check\"\n                    viewBox=\"0 0 12 12\"\n                    fill=\"none\"\n                    stroke=\"currentColor\"\n                    strokeWidth={2}\n                    strokeLinecap=\"round\"\n                    strokeLinejoin=\"round\"\n                    className=\"size-3\"\n                    initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}\n                    animate={{ pathLength: 1, opacity: 1 }}\n                    exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { pathLength: 0, opacity: 0 }}\n                    transition={reduceMotion ? { duration: 0 } : swapSpring}\n                  >\n                    <motion.path d=\"M2.5 6.5 L5 9 L9.5 3.5\" />\n                  </motion.svg>\n                )}\n              </AnimatePresence>\n            </span>\n            <span className=\"flex flex-col gap-0.5\">\n              <span className=\"font-medium text-foreground\">{opt.label}</span>\n              {opt.description && (\n                <span className=\"text-sm text-muted-foreground\">{opt.description}</span>\n              )}\n            </span>\n          </label>\n        );\n      })}\n    </div>\n  );\n}\n\nexport { CheckboxGroup };\nexport type { CheckboxGroupProps, CheckboxGroupOption };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "tag": "oklch(0.9 0.032 292)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "tag": "oklch(0.9 0.032 292)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

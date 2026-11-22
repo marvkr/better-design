@@ -1,0 +1,26 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  quietFinish,\n  controlFocusRing,\n  pressScale,\n  primaryFinish,\n  primaryFinishHover,\n} from \"./_shared\";\n\n/**\n * Mallow IconButton: a rounded square sized for one icon. Default is the\n * quiet white action, primary the violet fill, outline a hairline and\n * destructive a red fill. Every press scales it a little toward the page.\n * Give it an `aria-label`.\n */\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex shrink-0 cursor-pointer select-none items-center justify-center rounded-lg\",\n    pressScale,\n    controlFocusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: quietFinish,\n        primary: cn(primaryFinish, primaryFinishHover),\n        ghost: \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        outline: \"bg-transparent text-foreground inset-ring-1 inset-ring-input hover:bg-accent\",\n        destructive: \"bg-(image:--danger-face) text-destructive-foreground shadow-xs\",\n      },\n      size: {\n        sm: \"size-9 [&_svg]:size-4\",\n        default: \"size-10 [&_svg]:size-4\",\n        lg: \"size-12 [&_svg]:size-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, type = \"button\", ...props }, ref) => (\n    <button\n      ref={ref}\n      type={type}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    },
+    "dark": {
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    }
+  }
+}

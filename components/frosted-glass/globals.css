@@ -1,0 +1,248 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.18 0.04 280);
+  --foreground: oklch(0.98 0.005 280);
+
+  --card: oklch(1 0 0 / 0.07);
+  --card-foreground: oklch(0.98 0.005 280);
+
+  --popover: oklch(1 0 0 / 0.06);
+  --popover-foreground: oklch(0.98 0.005 280);
+
+  /* Primary is a luminous violet accent : used for focus rings, selection, and
+     the chart ramp. The glass primitives themselves stay translucent-white, so
+     primary never paints a solid surface (it tints light passing through). */
+  --primary: oklch(0.8 0.13 285);
+  --primary-foreground: oklch(0.18 0.04 285);
+
+  --secondary: oklch(1 0 0 / 0.08);
+  --secondary-foreground: oklch(0.74 0.015 280);
+
+  --muted: oklch(1 0 0 / 0.05);
+  --muted-foreground: oklch(0.72 0.02 280);
+
+  --accent: oklch(1 0 0 / 0.1);
+  --accent-foreground: oklch(0.98 0.005 280);
+
+  --destructive: oklch(0.62 0.21 18);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(1 0 0 / 0.14);
+  --input: oklch(1 0 0 / 0.07);
+  --ring: oklch(0.8 0.13 285 / 0.6);
+  --radius: 1.75rem;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     Frosted Glass material.
+     A heavy backdrop blur+saturate (picks up backdrop chroma) plus the optical
+     edge work baked into one layered shadow stack reused by every primitive: */
+       1. specular top rim  (edge-highlight ~ 0.25, light from 45 deg top-left)
+       2. chromatic cyan fringe  (chroma ~ 0.20, top-left)
+       3. chromatic magenta fringe  (bottom-right)
+       4. inner glow  (legibility / body fill)
+       5. crisp hairline rim
+       6. depth drop shadow  (depth ~ 10)
+       7. soft outer color glow  (glow ~ 0.10)
+     Editable from this one place so the whole DS shifts together. */
+  --fg-fill: oklch(1 0 0 / 0.08);
+  --fg-fill-hover: oklch(1 0 0 / 0.14);
+  --fg-border: oklch(1 0 0 / 0.14);
+  --fg-blur: 1.125rem;
+  --fg-glow: oklch(0.8 0.13 285 / 0.18);
+  --fg-shadow:
+    inset 0 0.0938rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.55),
+    inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.45),
+    inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.4),
+    inset 0 0 0.875rem 0 oklch(1 0 0 / 0.06),
+    0 0 0 0.0313rem oklch(1 0 0 / 0.18),
+    0 0.625rem 1.75rem -0.5rem oklch(0 0 0 / 0.55),
+    0 0 1.375rem -0.125rem var(--fg-glow);
+  --fg-shadow-hover:
+    inset 0 0.125rem 0.0313rem -0.0313rem oklch(1 0 0 / 0.7),
+    inset 0.0625rem 0.0625rem 0.0938rem -0.0625rem oklch(0.92 0.13 200 / 0.55),
+    inset -0.0625rem -0.0625rem 0.0938rem -0.0625rem oklch(0.82 0.18 350 / 0.5),
+    inset 0 0 1rem 0 oklch(1 0 0 / 0.1),
+    0 0 0 0.0313rem oklch(1 0 0 / 0.28),
+    0 0.875rem 2.125rem -0.5rem oklch(0 0 0 / 0.6),
+    0 0 1.875rem -0.125rem var(--fg-glow);
+
+  /* Overlay surface tokens : every floating slot (popover/dropdown/dialog/etc.)
+     shares one frosted look, editable from here. Slightly more opaque than the
+     base fill so menus stay legible when stacked over busy backdrops. */
+  --overlay-fill: oklch(0.22 0.04 280 / 0.72);
+  --overlay-border: oklch(1 0 0 / 0.16);
+  --overlay-rim: oklch(1 0 0 / 0.4);
+  --overlay-foreground: oklch(0.96 0.005 280);
+  --overlay-blur: 1.25rem;
+  --overlay-saturate: 1.6;
+  --shadow-overlay:
+    inset 0 0.0625rem 0 0 var(--overlay-rim),
+    0 1.125rem 2.5rem -0.625rem oklch(0 0 0 / 0.7);
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (soft profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 180ms;
+  --transition-duration-base: 240ms;
+  --transition-duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family:
+      var(--font-geist-sans),
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling:
+     smoother writing, easier-to-scan forms. */
+  textarea {
+    /* Fallback for browsers without field-sizing (e.g. Firefox): keep the
+       textarea user-resizable so it can still be grown manually. */
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

@@ -1,0 +1,26 @@
+{
+  "name": "native-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Control Room NativeSelect: native <select> in the recessed instrument\n// well material with a console chevron.\n\ninterface NativeSelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            \"flex h-9 cursor-pointer appearance-none items-center py-1.5 pr-9\",\n            \"focus:outline-none\",\n            \"[&>option]:bg-popover [&>option]:text-foreground\",\n            error && [\n              \"border-destructive/60\",\n              \"focus-visible:border-destructive\",\n              \"focus-visible:[box-shadow:var(--shadow-inset),0_0_0_0.0625rem_oklch(0.6_0.23_27/0.5),0_0_0.625rem_oklch(0.6_0.23_27/0.25)]\",\n            ],\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <Icon icon=\"tabler:chevron-down\" className=\"size-4\" />\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/telemetry/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(0.27 0.004 160)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "tabs-subtle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs-subtle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, AnimatePresence, type HTMLMotionProps } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\n\n// Hyperline TabsSubtle: underline tabs like the billing portal header\n// (Subscriptions / Credits / Invoices). Cyan indicator slides between tabs.\n\ninterface TabsSubtleContextValue {\n  value: string;\n  onValueChange: (value: string) => void;\n  layoutId: string;\n}\n\nconst TabsSubtleContext = React.createContext<TabsSubtleContextValue | null>(null);\n\nfunction useTabsSubtle() {\n  const context = React.useContext(TabsSubtleContext);\n  if (!context) throw new Error(\"TabsSubtle components must be used within <TabsSubtle>\");\n  return context;\n}\n\ninterface TabsSubtleProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n  onValueChange: (value: string) => void;\n  children: React.ReactNode;\n}\n\nfunction TabsSubtle({ value, onValueChange, className, children, ...props }: TabsSubtleProps) {\n  const layoutId = React.useId();\n  return (\n    <TabsSubtleContext.Provider value={{ value, onValueChange, layoutId }}>\n      <div role=\"tablist\" className={cn(\"w-full\", className)} {...props}>\n        {children}\n      </div>\n    </TabsSubtleContext.Provider>\n  );\n}\n\ninterface TabsSubtleItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n  icon?: React.ReactNode;\n}\n\nfunction TabsSubtleItem({ value, icon, className, children, ...props }: TabsSubtleItemProps) {\n  const context = useTabsSubtle();\n  const isActive = context.value === value;\n\n  return (\n    <button\n      type=\"button\"\n      role=\"tab\"\n      aria-selected={isActive}\n      onClick={() => context.onValueChange(value)}\n      className={cn(\n        \"relative inline-flex items-center gap-2 px-3 pb-2.5 pt-1 text-sm font-medium\",\n        \"transition-colors duration-fast ease-out\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 rounded-md\",\n        isActive ? \"text-foreground\" : \"text-muted-foreground hover:text-foreground\",\n        className\n      )}\n      {...props}\n    >\n      {icon}\n      {children}\n      {isActive && (\n        <motion.span\n          layoutId={context.layoutId}\n          className=\"absolute inset-x-1 -bottom-px h-0.5 rounded-full bg-primary shadow-[0_0_0.5rem_oklch(0.79_0.125_200/0.6)]\"\n          transition={{ type: \"spring\", bounce: 0.2, duration: 0.4 }}\n        />\n      )}\n    </button>\n  );\n}\n\ninterface TabsSubtlePanelProps extends HTMLMotionProps<\"div\"> {\n  value: string;\n  activeValue: string;\n  children: React.ReactNode;\n}\n\nfunction TabsSubtlePanel({ value, activeValue, children, className, ...props }: TabsSubtlePanelProps) {\n  return (\n    <AnimatePresence mode=\"wait\" initial={false}>\n      {value === activeValue && (\n        <motion.div\n          key={value}\n          role=\"tabpanel\"\n          initial={{ opacity: 0, y: 4 }}\n          animate={{ opacity: 1, y: 0 }}\n          exit={{ opacity: 0, y: -4 }}\n          transition={{ duration: 0.15, ease: \"easeOut\" }}\n          className={cn(\"pt-4\", className)}\n          {...props}\n        >\n          {children}\n        </motion.div>\n      )}\n    </AnimatePresence>\n  );\n}\n\nexport { TabsSubtle, TabsSubtleItem, TabsSubtlePanel };\nexport type { TabsSubtleProps, TabsSubtleItemProps, TabsSubtlePanelProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

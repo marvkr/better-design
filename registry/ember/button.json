@@ -1,0 +1,35 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { glassHover, primaryMaterial, primaryMaterialHover } from \"./_shared\";\n\n// Amber Glass Button\n// Hero (default): amber gradient pill glowing through the dark glass.\n// Secondary: translucent glass chip with hairline rim (Filter / Sort treatment).\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-semibold tracking-[-0.01em]\",\n    \"rounded-lg transition-all duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-40\",\n    \"active:translate-y-px active:brightness-95\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Hero: the amber material. Shared token with every filled control.\n        default: cn(primaryMaterial, primaryMaterialHover),\n        // Alias kept in sync with the hero treatment.\n        primary: cn(primaryMaterial, primaryMaterialHover),\n        // Translucent glass chip with sheen.\n        secondary: cn(\n          \"backdrop-blur-[var(--ag-blur)] bg-[var(--ag-fill)] text-foreground\",\n          \"border border-[color:var(--ag-border)]\",\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.06)]\",\n          glassHover\n        ),\n        // Hairline outline on bare canvas.\n        outline:\n          \"border border-[color:var(--ag-border-strong)] bg-transparent text-foreground \" +\n          \"hover:bg-[var(--ag-fill)] hover:border-[color:var(--ag-border-strong)]\",\n        // Understated, lights up on hover.\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-[var(--ag-fill)] hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.18),0_0_0_0.0625rem_oklch(0.6_0.21_27/0.5),0_0.125rem_0.5rem_oklch(0_0_0/0.35)] \" +\n          \"hover:brightness-110\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6 text-sm\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8 rounded-md\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

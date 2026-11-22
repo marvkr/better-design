@@ -1,0 +1,23 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\n/*\n * Interior CodeBlock — code sits in a well: an 11px-radius slot cut into the\n * panel, tinted and inset-shadowed, never a dark inverted panel. The filename\n * strip is metadata, so it runs mono at 10.5px.\n */\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n}\n\nconst CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(\n  ({ className, code, language, filename, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"overflow-hidden rounded-[0.6875rem] bg-secondary text-foreground\",\n        \"shadow-[var(--shadow-well)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center gap-2 border-b border-border px-3.5 py-2\">\n        <span className=\"font-mono text-[0.6563rem] tabular-nums text-muted-foreground\">\n          {filename ?? language ?? \"code\"}\n        </span>\n        <CopyButton\n          value={code}\n          className=\"ml-auto text-muted-foreground hover:bg-card hover:text-foreground\"\n        />\n      </div>\n      <pre className=\"overflow-x-auto p-4\">\n        <code className=\"font-mono text-[0.7813rem] leading-relaxed\">{code}</code>\n      </pre>\n    </div>\n  ),\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/copy-button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

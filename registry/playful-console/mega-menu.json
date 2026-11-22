@@ -1,0 +1,14 @@
+{
+  "name": "mega-menu",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { menuItemBase, popoverSurface } from \"./_shared\";\n\n/**\n * Playful console MegaMenu: a wide white card under the site navigation.\n *\n * The card wears the olive hairline and a soft drop. Each group becomes its\n * own equal column from sm up, headed by a small uppercase eyebrow. Links are\n * bold rows that take a cream wash under the pointer or keyboard focus.\n */\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"mega-menu\"\n    className={cn(\n      popoverSurface,\n      \"absolute start-0 top-full z-50 mt-2 grid w-full gap-6 p-5 sm:auto-cols-fr sm:grid-flow-col\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenu.displayName = \"MegaMenu\";\n\n/** One column of links. */\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"mega-menu-group\"\n    className={cn(\"flex min-w-0 flex-col gap-0.5\", className)}\n    {...props}\n  />\n));\nMegaMenuGroup.displayName = \"MegaMenuGroup\";\n\n/** The uppercase eyebrow over a column. */\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"mega-menu-group-title\"\n    className={cn(\n      \"px-2.5 pb-1.5 text-xs font-bold uppercase text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\";\n\n/** One link row inside a column. */\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    data-slot=\"mega-menu-item\"\n    className={cn(\n      menuItemBase,\n      \"text-foreground hover:bg-accent hover:text-accent-foreground\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-primary\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenuItem.displayName = \"MegaMenuItem\";\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ]
+}

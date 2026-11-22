@@ -1,0 +1,26 @@
+{
+  "name": "checkbox-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Checkbox } from \"./checkbox\"\n\n/*\n * Bevel CheckboxGroup.\n *\n * A contiguous run of choices reads as one card, not a stack of boxes. The\n * group is a borderless card and each option is a row inside it at the row\n * padding of 14px by 10px. One pixel of the track token separates the rows, so\n * two selected neighbours merge into a single tinted shape. The box itself is\n * the system Checkbox, so a checked option carries the same gradient and rim\n * as the primary Button.\n *\n * Usage:\n *   <CheckboxGroup\n *     value={selected}\n *     onValueChange={setSelected}\n *     options={[\n *       { value: \"a\", label: \"Morning\" },\n *       { value: \"b\", label: \"Afternoon\" },\n *     ]}\n *   />\n */\n\n/** One choice in a `CheckboxGroup`. */\nexport interface CheckboxGroupOption {\n  value: string\n  label: React.ReactNode\n  description?: React.ReactNode\n  disabled?: boolean\n}\n\n/** Props for `CheckboxGroup`; `value` holds every checked option value. */\nexport interface CheckboxGroupProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: CheckboxGroupOption[]\n  value: string[]\n  onValueChange: (value: string[]) => void\n  orientation?: \"vertical\" | \"horizontal\"\n  name?: string\n}\n\nfunction CheckboxGroup({\n  options,\n  value,\n  onValueChange,\n  orientation = \"vertical\",\n  name,\n  className,\n  ...props\n}: CheckboxGroupProps) {\n  const groupId = React.useId()\n\n  const isSelected = React.useCallback(\n    (optionValue: string) => value.includes(optionValue),\n    [value],\n  )\n\n  const toggle = (optionValue: string) => {\n    if (isSelected(optionValue)) {\n      onValueChange(value.filter((entry) => entry !== optionValue))\n    } else {\n      onValueChange([...value, optionValue])\n    }\n  }\n\n  return (\n    <div\n      role=\"group\"\n      className={cn(\n        \"inline-flex overflow-hidden rounded-[0.875rem] bg-card text-card-foreground\",\n        \"[box-shadow:var(--shadow-card)]\",\n        orientation === \"vertical\" ?\n          \"flex-col divide-y divide-[var(--track)]\"\n        : \"flex-row divide-x divide-[var(--track)]\",\n        className,\n      )}\n      {...props}\n    >\n      {options.map((option) => {\n        const selected = isSelected(option.value)\n        const itemId = `${groupId}-${option.value}`\n\n        return (\n          <label\n            key={option.value}\n            htmlFor={itemId}\n            className={cn(\n              \"relative flex cursor-pointer items-start gap-3 px-3.5 py-2.5\",\n              \"transition-colors duration-fast ease-out\",\n              selected ? \"bg-accent\" : \"hover:bg-muted\",\n              option.disabled && \"cursor-not-allowed opacity-50\",\n            )}\n          >\n            <Checkbox\n              id={itemId}\n              name={name}\n              value={option.value}\n              checked={selected}\n              disabled={option.disabled}\n              onCheckedChange={() => toggle(option.value)}\n              className=\"mt-px\"\n            />\n            <span className=\"flex flex-col gap-0.5\">\n              <span className=\"text-[0.9063rem] leading-[1.125rem] font-medium tracking-[0.0188rem] text-foreground\">\n                {option.label}\n              </span>\n              {option.description && (\n                <span className=\"text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\">\n                  {option.description}\n                </span>\n              )}\n            </span>\n          </label>\n        )\n      })}\n    </div>\n  )\n}\nCheckboxGroup.displayName = \"CheckboxGroup\"\n\nexport { CheckboxGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/checkbox.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-card": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-card": "var(--shadow-md)"
+    }
+  }
+}

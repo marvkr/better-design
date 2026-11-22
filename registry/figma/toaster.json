@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "https://www.better-design.com/registry/figma/toast.json",
-    "https://www.better-design.com/registry/figma/use-toast.json"
+    "https://better-design.com/registry/figma/toast.json",
+    "https://better-design.com/registry/figma/use-toast.json"
   ]
 }

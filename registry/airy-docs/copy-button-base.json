@@ -1,0 +1,26 @@
+{
+  "name": "copy-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Button, type ButtonProps } from \"./button\";\n\nexport interface CopyButtonProps extends Omit<ButtonProps, \"children\"> {\n  value: string;\n  copiedLabel?: string;\n  label?: string;\n}\n\nconst ICON_ONLY_SIZES = new Set([\"icon\", \"icon-sm\", \"icon-lg\"]);\nconst COPIED_MS = 2000;\n\n/**\n * Airy docs CopyButton: the quiet copy action on every code sample.\n *\n * A ghost pill by default, so it never competes with the page's green\n * action. After a copy the icon becomes a green check for two seconds and\n * a screen reader hears the copied label. Icon sizes show the icon alone;\n * the other sizes add the label beside it.\n */\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  (\n    {\n      value,\n      copiedLabel = \"Copied\",\n      label = \"Copy\",\n      variant = \"ghost\",\n      size = \"icon\",\n      onClick,\n      className,\n      ...props\n    },\n    ref,\n  ) => {\n    const [copied, setCopied] = React.useState(false);\n    const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);\n\n    React.useEffect(\n      () => () => {\n        if (timer.current) clearTimeout(timer.current);\n      },\n      [],\n    );\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(value);\n      } catch {\n        // The clipboard can refuse (no permission, insecure page). Stay in\n        // the resting state so the button never claims a copy that failed.\n        return;\n      }\n      setCopied(true);\n      if (timer.current) clearTimeout(timer.current);\n      timer.current = setTimeout(() => setCopied(false), COPIED_MS);\n    };\n\n    const iconOnly = ICON_ONLY_SIZES.has(size ?? \"icon\");\n    const currentLabel = copied ? copiedLabel : label;\n\n    return (\n      <>\n        <Button\n          ref={ref}\n          data-slot=\"copy-button\"\n          data-copied={copied ? \"\" : undefined}\n          variant={variant}\n          size={size}\n          aria-label={iconOnly ? currentLabel : undefined}\n          className={cn(!iconOnly && \"gap-1.5\", className)}\n          onClick={(event) => {\n            onClick?.(event);\n            if (!event.defaultPrevented) void copy();\n          }}\n          {...props}\n        >\n          <Icon\n            icon={copied ? \"feather:check\" : \"feather:copy\"}\n            className={cn(\"size-3.5\", copied && \"text-(--primary-text)\")}\n            aria-hidden=\"true\"\n          />\n          {!iconOnly && <span>{currentLabel}</span>}\n        </Button>\n        {/* Outside the button, so the button's own name is never doubled. */}\n        <span className=\"sr-only\" aria-live=\"polite\">\n          {copied ? copiedLabel : \"\"}\n        </span>\n      </>\n    );\n  },\n);\nCopyButton.displayName = \"CopyButton\";\n\nexport { CopyButton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)"
+    }
+  }
+}

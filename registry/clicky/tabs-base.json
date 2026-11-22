@@ -1,0 +1,14 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Clicky Tabs — subtle underline for active state, clean and flat\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(\n      \"inline-flex h-9 items-center justify-start gap-1\",\n      \"border-b border-border\",\n      \"text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsList.displayName = \"TabsList\"\n\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    className={cn(\n      \"relative inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 text-sm font-medium\",\n      \"transition-all duration-fast\",\n      \"active:scale-[0.98]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      \"aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n      \"text-muted-foreground hover:text-foreground\",\n      \"data-active:text-foreground\",\n      \"after:absolute after:left-0 after:right-0 after:-bottom-px after:h-px after:bg-transparent\",\n      \"data-active:after:bg-foreground\",\n      \"after:transition-colors after:duration-fast\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsTrigger.displayName = \"TabsTrigger\"\n\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    className={cn(\n      \"mt-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

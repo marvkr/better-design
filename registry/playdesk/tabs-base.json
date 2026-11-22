@@ -1,0 +1,28 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Playdesk Tabs: the desk's segmented control. A recessed pill track holds the\n * segments; the active one lifts out as a white cap with its own shadow.\n */\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.List.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(\n      \"inline-flex items-center gap-0.5 rounded-full bg-secondary p-1 [box-shadow:var(--shadow-rim)]\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsList.displayName = \"TabsList\"\n\nconst TabsTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TabsPrimitive.Tab.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Tab\n    ref={ref}\n    className={cn(\n      \"inline-flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 py-1.5\",\n      \"text-sm font-medium text-muted-foreground\",\n      \"transition-[background-color,color,box-shadow] duration-fast ease-out\",\n      \"hover:text-foreground\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      \"data-disabled:pointer-events-none data-disabled:opacity-50\",\n      \"data-selected:bg-card data-selected:text-foreground\",\n      \"data-selected:[box-shadow:var(--shadow-md)]\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsTrigger.displayName = \"TabsTrigger\"\n\nconst TabsContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<TabsPrimitive.Panel.Props>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Panel\n    ref={ref}\n    className={cn(\n      \"mt-4 focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      className\n    )}\n    {...props}\n  />\n))\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

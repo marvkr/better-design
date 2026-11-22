@@ -1,0 +1,28 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Toggle: glass chip that lights amber when pressed.\n\nconst toggleVariants = cva(\n  \"inline-flex items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-all duration-fast ease-out \" +\n    \"hover:bg-[var(--ag-fill)] hover:text-foreground \" +\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 \" +\n    \"disabled:pointer-events-none disabled:opacity-50 \" +\n    \"data-pressed:bg-primary/15 data-pressed:text-primary data-pressed:shadow-[inset_0_0_0.625rem_oklch(0.69_0.195_42/0.12),inset_0_0_0_0.0625rem_oklch(0.69_0.195_42/0.3)]\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent text-muted-foreground\",\n        outline:\n          \"border border-[color:var(--ag-border-strong)] bg-transparent text-muted-foreground\",\n      },\n      size: {\n        default: \"h-9 px-3\",\n        sm: \"h-8 px-2.5\",\n        lg: \"h-10 px-4\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  TogglePrimitive.Props & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Switch({ className, ...props }: SwitchPrimitive.Root.Props) {\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-[0.125rem] border-2 border-border\",\n        \"bg-card [box-shadow:var(--shadow-xs)]\",\n        \"transition-[background-color,box-shadow,transform] duration-fast\",\n        \"hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:var(--shadow-sm)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        className={cn(\n          \"pointer-events-none block h-4 w-4 rounded-[0.0625rem] border-2 border-border bg-foreground\",\n          \"ring-0 transition-transform duration-fast\",\n          \"data-checked:translate-x-5 data-checked:bg-primary-foreground\",\n          \"data-unchecked:translate-x-0.5\"\n        )}\n      />\n    </SwitchPrimitive.Root>\n  )\n}\nSwitch.displayName = \"Switch\"\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    },
+    "dark": {
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    }
+  }
+}

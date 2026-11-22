@@ -1,0 +1,28 @@
+{
+  "name": "hover-card-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { PreviewCard as PreviewCardPrimitive } from \"@base-ui/react/preview-card\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\nconst HoverCard = PreviewCardPrimitive.Root\nconst HoverCardTrigger = PreviewCardPrimitive.Trigger\n\nconst HoverCardContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<PreviewCardPrimitive.Popup.Props> &\n    Pick<PreviewCardPrimitive.Positioner.Props, \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\">\n>(({ className, align = \"center\", alignOffset, side, sideOffset = 8, ...props }, ref) => (\n  <PreviewCardPrimitive.Portal>\n    <PreviewCardPrimitive.Positioner\n      align={align}\n      alignOffset={alignOffset}\n      side={side}\n      sideOffset={sideOffset}\n      className=\"isolate z-50\"\n    >\n      <PreviewCardPrimitive.Popup\n        ref={ref}\n        className={cn(\n          \"origin-(--transform-origin) z-50 w-64 rounded-lg p-4 outline-none\",\n          \"bg-popover text-popover-foreground\",\n          \"[box-shadow:var(--shadow-rim),var(--shadow-float)]\",\n          \"transition-[opacity,transform,scale] duration-fast\",\n          \"data-starting-style:opacity-0 data-starting-style:scale-95\",\n          \"data-ending-style:opacity-0 data-ending-style:scale-95\",\n          className\n        )}\n        {...props}\n      />\n    </PreviewCardPrimitive.Positioner>\n  </PreviewCardPrimitive.Portal>\n))\nHoverCardContent.displayName = \"HoverCardContent\"\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Empty: compact zero-state block.\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode;\n  title: string;\n  description?: string;\n  action?: React.ReactNode;\n}\n\nfunction Empty({ icon, title, description, action, className, ...props }: EmptyProps) {\n  return (\n    <div\n      className={cn(\"flex flex-col items-center justify-center gap-2 py-10 text-center\", className)}\n      {...props}\n    >\n      {icon && (\n        <span className=\"flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-muted-foreground shadow-[var(--hl-shadow-raise)] [&_svg]:size-5\">\n          {icon}\n        </span>\n      )}\n      <div className=\"text-sm font-medium text-foreground\">{title}</div>\n      {description && <div className=\"max-w-xs text-xs text-muted-foreground\">{description}</div>}\n      {action && <div className=\"mt-2\">{action}</div>}\n    </div>\n  );\n}\n\nexport { Empty };\nexport type { EmptyProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)"
+    }
+  }
+}

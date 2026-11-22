@@ -1,0 +1,43 @@
+{
+  "name": "toast",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toast.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ToastPrimitives from \"@radix-ui/react-toast\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { pressOutline } from \"./_shared\";\n\n/** Provides the toast queue to its children. */\nconst ToastProvider = ToastPrimitives.Provider;\n\n/** Where toasts stack: the top on a phone, the bottom right from `sm` up. */\nconst ToastViewport = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Viewport>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Viewport\n    ref={ref}\n    data-slot=\"toast-viewport\"\n    className={cn(\n      \"fixed inset-x-0 top-0 z-100 flex max-h-screen w-full flex-col-reverse gap-2.5 p-4 outline-none\",\n      \"sm:inset-x-auto sm:top-auto sm:end-0 sm:bottom-0 sm:max-w-sm sm:flex-col\",\n      className,\n    )}\n    {...props}\n  />\n));\nToastViewport.displayName = ToastPrimitives.Viewport.displayName;\n\n/**\n * Playful console Toast: a white card that pops in from the edge.\n *\n * The default toast is the menu panel: white, the olive hairline, the card\n * corner and a soft drop. Success and danger swap the white for their tint,\n * their edge and their deeper text. It fades and slides in over 150ms,\n * follows a swipe, and leaves to the right.\n */\nconst toastVariants = cva(\n  [\n    \"group pointer-events-auto relative flex w-full items-start justify-between gap-3 overflow-hidden rounded-lg border p-4 pe-11\",\n    \"shadow-(--shadow-menu)\",\n    \"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2 sm:data-[state=open]:slide-in-from-bottom-2\",\n    \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-right-full\",\n    \"duration-fast ease-out\",\n    \"data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[swipe=move]:transition-none\",\n    \"data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-transform\",\n    \"data-[swipe=end]:translate-x-(--radix-toast-swipe-end-x) data-[swipe=end]:animate-out\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-popover text-popover-foreground\",\n        success:\n          \"border-(--success)/40 bg-(--success-tint) text-(--success-text) [&_[data-slot=toast-description]]:text-current\",\n        destructive:\n          \"border-(--destructive)/40 bg-(--destructive-tint) text-(--destructive-text) [&_[data-slot=toast-description]]:text-current\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\n/** One toast: a white card, or a success or danger band. */\nconst Toast = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Root>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &\n    VariantProps<typeof toastVariants>\n>(({ className, variant, ...props }, ref) => (\n  <ToastPrimitives.Root\n    ref={ref}\n    data-slot=\"toast\"\n    data-variant={variant ?? \"default\"}\n    className={cn(toastVariants({ variant }), className)}\n    {...props}\n  />\n));\nToast.displayName = ToastPrimitives.Root.displayName;\n\n/** A small white key for the one thing a toast lets you do. */\nconst ToastAction = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Action>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Action\n    ref={ref}\n    data-slot=\"toast-action\"\n    className={cn(\n      \"inline-flex h-8 shrink-0 items-center justify-center rounded-[0.5rem] px-3 text-[0.8125rem] font-bold\",\n      pressOutline,\n      \"focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring\",\n      \"disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-(--foreground-disabled) disabled:shadow-none\",\n      className,\n    )}\n    {...props}\n  />\n));\nToastAction.displayName = ToastPrimitives.Action.displayName;\n\n/** The close control in the top corner. */\nconst ToastClose = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Close>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Close\n    ref={ref}\n    data-slot=\"toast-close\"\n    aria-label=\"Close\"\n    className={cn(\n      \"absolute end-2 top-2 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground\",\n      \"transition-colors duration-fast ease-out hover:bg-secondary hover:text-foreground\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      \"group-data-[variant=destructive]:text-current group-data-[variant=destructive]:hover:bg-current/10\",\n      \"group-data-[variant=success]:text-current group-data-[variant=success]:hover:bg-current/10\",\n      className,\n    )}\n    {...props}\n  >\n    <Icon icon=\"ph:x-bold\" className=\"size-3.5\" aria-hidden=\"true\" />\n  </ToastPrimitives.Close>\n));\nToastClose.displayName = ToastPrimitives.Close.displayName;\n\n/** The bold headline of a toast. */\nconst ToastTitle = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Title>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Title\n    ref={ref}\n    data-slot=\"toast-title\"\n    className={cn(\"text-sm font-bold leading-snug\", className)}\n    {...props}\n  />\n));\nToastTitle.displayName = ToastPrimitives.Title.displayName;\n\n/** The supporting sentence under the title. */\nconst ToastDescription = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Description>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Description\n    ref={ref}\n    data-slot=\"toast-description\"\n    className={cn(\"text-sm text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nToastDescription.displayName = ToastPrimitives.Description.displayName;\n\n/** Props a Toast accepts. */\ntype ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;\n/** An action element passed to `toast({ action })`. */\ntype ToastActionElement = React.ReactElement<typeof ToastAction>;\n\nexport {\n  type ToastProps,\n  type ToastActionElement,\n  ToastProvider,\n  ToastViewport,\n  Toast,\n  ToastTitle,\n  ToastDescription,\n  ToastClose,\n  ToastAction,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toast",
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.574 0.107 162.9)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "success-tint": "oklch(0.927 0.028 155.3)",
+      "success-text": "oklch(0.47 0.1 162)",
+      "destructive-tint": "oklch(0.903 0.037 24)",
+      "destructive-text": "oklch(0.5 0.17 27.5)",
+      "shadow-menu": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.72 0.12 160)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "success-tint": "oklch(0.27 0.04 160)",
+      "success-text": "oklch(0.8 0.11 160)",
+      "destructive-tint": "oklch(0.28 0.06 25)",
+      "destructive-text": "oklch(0.8 0.11 25)",
+      "shadow-menu": "var(--shadow-md)"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel EmptyState.\n *\n * The ready-made empty state: one glyph, a title, a line of copy and an\n * action. The whole block is a well rather than a card, so it sits on the\n * inner token with the inset shadow at the 20px card radius. A dashed border\n * would say the same thing with a line this system does not draw, so the\n * pressed surface says it instead.\n */\n\n/** Props for `EmptyState`; `icon` takes any Solar glyph name. */\nexport interface EmptyStateProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: string\n  title: React.ReactNode\n  description?: React.ReactNode\n  action?: React.ReactNode\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  (\n    { className, icon = \"solar:inbox-linear\", title, description, action, ...props },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-[1.25rem] p-8 text-center\",\n        \"bg-[var(--inner)] text-[var(--inner-foreground)]\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex size-12 items-center justify-center rounded-full bg-card text-muted-foreground [box-shadow:var(--shadow-sm)]\">\n        <Icon icon={icon} className=\"size-[1.375rem]\" />\n      </div>\n      <div className=\"max-w-md space-y-1\">\n        <div className=\"text-[1rem] leading-[1.375rem] font-semibold tracking-[-0.025rem] text-foreground\">\n          {title}\n        </div>\n        {description && (\n          <div className=\"text-[0.9063rem] leading-[1.3125rem] tracking-[0.0188rem] text-muted-foreground\">\n            {description}\n          </div>\n        )}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  ),\n)\nEmptyState.displayName = \"EmptyState\"\n\nexport { EmptyState }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "inner-foreground": "oklch(0.1593 0.0111 267.98)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "inner-foreground": "oklch(0.9666 0.0027 264.5)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "accordion-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Playful console Accordion: the Base UI root, styled through its items. */\nconst Accordion = AccordionPrimitive.Root;\n\n/** One row of the accordion, with an olive hairline under it and none under the last. */\nconst AccordionItem = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AccordionPrimitive.Item.Props>\n>(({ className, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    data-slot=\"accordion-item\"\n    className={cn(\"border-b border-border last:border-b-0\", className)}\n    {...props}\n  />\n));\nAccordionItem.displayName = \"AccordionItem\";\n\n/**\n * The question in bold ink. A small square key at the end holds a caret\n * that turns over as the answer opens.\n */\nconst AccordionTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<AccordionPrimitive.Trigger.Props>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header data-slot=\"accordion-header\" className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      data-slot=\"accordion-trigger\"\n      className={cn(\n        \"group/trigger flex flex-1 items-center justify-between gap-3 rounded-md py-3.5 text-start\",\n        \"text-[0.9375rem] font-bold text-foreground transition-colors duration-fast hover:text-(--primary-text)\",\n        \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:text-(--foreground-disabled)\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <span\n        aria-hidden=\"true\"\n        className=\"flex size-6 shrink-0 items-center justify-center rounded-md border border-(--line-strong) bg-card text-(--foreground-secondary) shadow-(--shadow-control-off)\"\n      >\n        <Icon\n          icon=\"ph:caret-down-bold\"\n          className=\"size-3.5 transition-transform duration-fast ease-out group-data-[panel-open]/trigger:rotate-180\"\n        />\n      </span>\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n));\nAccordionTrigger.displayName = \"AccordionTrigger\";\n\n/** The answer in secondary ink. The panel grows to its measured height and folds back. */\nconst AccordionContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AccordionPrimitive.Panel.Props>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Panel\n    ref={ref}\n    data-slot=\"accordion-content\"\n    className={cn(\n      \"h-(--accordion-panel-height) overflow-hidden text-sm leading-relaxed text-(--foreground-secondary)\",\n      \"transition-[height] duration-fast ease-out\",\n      \"data-[starting-style]:h-0 data-[ending-style]:h-0\",\n    )}\n    {...props}\n  >\n    <div className={cn(\"pb-4\", className)}>{children}</div>\n  </AccordionPrimitive.Panel>\n));\nAccordionContent.displayName = \"AccordionContent\";\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.56 0.13 62)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "shadow-control-off": "0 0.125rem 0 0 var(--line-strong)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.82 0.14 74)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)"
+    }
+  }
+}

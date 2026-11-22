@@ -1,0 +1,17 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { selectedOption } from \"./_shared\";\n\n/**\n * Mallow Timeline: an event log strung on a hairline, each event hanging from\n * a small violet-tinted tile with its icon, then the title, a tabular time and the\n * body.\n */\nconst Timeline = React.forwardRef<HTMLOListElement, React.HTMLAttributes<HTMLOListElement>>(\n  ({ className, ...props }, ref) => (\n    <ol ref={ref} data-slot=\"timeline\" className={cn(\"relative flex flex-col gap-6\", className)} {...props} />\n  ),\n);\nTimeline.displayName = \"Timeline\";\n\nexport interface TimelineItemProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, \"title\"> {\n  icon?: string;\n  title?: React.ReactNode;\n  timestamp?: React.ReactNode;\n  isLast?: boolean;\n}\n\nconst TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(\n  ({ className, icon, title, timestamp, isLast, children, ...props }, ref) => (\n    <li ref={ref} data-slot=\"timeline-item\" className={cn(\"relative flex gap-4\", className)} {...props}>\n      <div className=\"relative flex flex-col items-center\">\n        <div className={cn(selectedOption, \"flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground\")}>\n          <Icon icon={icon ?? \"iconoir:circle\"} aria-hidden=\"true\" className=\"size-4\" />\n        </div>\n        {!isLast && <div aria-hidden=\"true\" className=\"-mb-6 mt-2 flex-1 border-s border-border\" />}\n      </div>\n      <div className=\"min-w-0 flex-1 pb-2 pt-1\">\n        {(title || timestamp) && (\n          <div className=\"flex items-baseline justify-between gap-3\">\n            {title && <div className=\"text-sm font-medium text-foreground\">{title}</div>}\n            {timestamp && <time className=\"shrink-0 text-sm tabular-nums text-muted-foreground\">{timestamp}</time>}\n          </div>\n        )}\n        {children && <div className=\"mt-1 text-sm leading-relaxed text-muted-foreground\">{children}</div>}\n      </div>\n    </li>\n  ),\n);\nTimelineItem.displayName = \"TimelineItem\";\n\nexport { Timeline, TimelineItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs Spinner: a thin open arc turning in the colour of the text\n * around it. Inside a button it takes the button's ink; on a page, give it\n * the green with `text-(--primary-text)`.\n */\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\n        \"inline-flex shrink-0\",\n        size === \"sm\" && \"size-3.5\",\n        size === \"default\" && \"size-4\",\n        size === \"lg\" && \"size-6\",\n        className,\n      )}\n      {...props}\n    >\n      <svg\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        aria-hidden=\"true\"\n        className=\"size-full animate-spin\"\n      >\n        <circle cx=\"12\" cy=\"12\" r=\"9\" stroke=\"currentColor\" strokeWidth=\"2\" opacity=\"0.18\" />\n        <path\n          d=\"M21 12a9 9 0 0 0-9-9\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2\"\n          strokeLinecap=\"round\"\n        />\n      </svg>\n    </div>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)"
+    }
+  }
+}

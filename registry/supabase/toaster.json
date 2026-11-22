@@ -9,7 +9,7 @@
     }
   ],
   "registryDependencies": [
-    "https://www.better-design.com/registry/supabase/toast.json",
-    "https://www.better-design.com/registry/supabase/use-toast.json"
+    "https://better-design.com/registry/supabase/toast.json",
+    "https://better-design.com/registry/supabase/use-toast.json"
   ]
 }

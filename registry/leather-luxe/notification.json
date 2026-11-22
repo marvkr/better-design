@@ -1,0 +1,28 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { X } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Notification: a raised card slip; status variants tint the\n// surface mint, amber, saddle red or cognac.\n\nconst notificationVariants = cva(\n  [\n    \"relative flex w-full items-start gap-3 rounded-lg border p-4\",\n    \"[box-shadow:var(--shadow-card)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"border-highlight bg-card text-card-foreground\",\n        success:\n          \"border-[oklch(0.85_0.12_162/0.25)] bg-[oklch(0.85_0.12_162/0.08)] text-mint\",\n        warning:\n          \"border-[oklch(0.78_0.14_75/0.25)] bg-[oklch(0.78_0.14_75/0.08)] text-[oklch(0.82_0.12_75)]\",\n        destructive:\n          \"border-[oklch(0.6_0.16_28/0.3)] bg-[oklch(0.52_0.16_28/0.1)] text-[oklch(0.76_0.12_30)]\",\n        info: \"border-[oklch(0.62_0.115_55/0.3)] bg-[oklch(0.55_0.115_52/0.1)] text-[oklch(0.74_0.1_58)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface NotificationProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  onClose?: () => void\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant, onClose, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className=\"flex-1\">{children}</div>\n      {onClose && (\n        <button\n          type=\"button\"\n          onClick={onClose}\n          aria-label=\"Dismiss notification\"\n          className=\"shrink-0 rounded-full p-0.5 opacity-60 transition-opacity hover:opacity-100\"\n        >\n          <X className=\"h-4 w-4\" />\n        </button>\n      )}\n    </div>\n  )\n)\nNotification.displayName = \"Notification\"\n\nconst NotificationTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    className={cn(\"mb-1 font-medium leading-none tracking-tight\", className)}\n    {...props}\n  />\n))\nNotificationTitle.displayName = \"NotificationTitle\"\n\nconst NotificationDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p ref={ref} className={cn(\"text-sm opacity-80\", className)} {...props} />\n))\nNotificationDescription.displayName = \"NotificationDescription\"\n\nexport { Notification, NotificationTitle, NotificationDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mint": "oklch(0.85 0.12 162)",
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "shadow-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0 0 0 / 0.25)"
+    },
+    "dark": {
+      "mint": "oklch(0.85 0.12 162)",
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "shadow-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem oklch(0 0 0 / 0.25)"
+    }
+  }
+}

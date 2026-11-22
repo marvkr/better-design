@@ -1,0 +1,32 @@
+{
+  "name": "multi-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Neon Vault MultiSelect: a recessed track that fills with magenta-tinted\n// chips; the menu floats as a vault panel and checks light magenta. The trigger\n// consumes the shared formFieldBase surface so it matches Input and the other\n// field triggers.\n\ninterface MultiSelectOption {\n  label: string\n  value: string\n}\n\ninterface MultiSelectProps {\n  options: MultiSelectOption[]\n  value?: string[]\n  onChange?: (value: string[]) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction MultiSelect({\n  options,\n  value = [],\n  onChange,\n  placeholder = \"Select options...\",\n  disabled,\n  className,\n}: MultiSelectProps) {\n  const [open, setOpen] = React.useState(false)\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const handleClickOutside = (e: MouseEvent) => {\n      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {\n        setOpen(false)\n      }\n    }\n    document.addEventListener(\"mousedown\", handleClickOutside)\n    return () => document.removeEventListener(\"mousedown\", handleClickOutside)\n  }, [])\n\n  const toggle = (optionValue: string) => {\n    if (value.includes(optionValue)) {\n      onChange?.(value.filter((v) => v !== optionValue))\n    } else {\n      onChange?.([...value, optionValue])\n    }\n  }\n\n  const selectedLabels = options\n    .filter((o) => value.includes(o.value))\n    .map((o) => o.label)\n\n  return (\n    <div ref={ref} className={cn(\"relative w-full\", className)}>\n      <button\n        type=\"button\"\n        onClick={() => !disabled && setOpen(!open)}\n        disabled={disabled}\n        className={cn(\n          formFieldBase,\n          \"flex min-h-9 flex-wrap items-center gap-1.5 rounded-2xl py-2 text-left\",\n          open && \"border-ring/60 ring-2 ring-ring/40\"\n        )}\n      >\n        <div className=\"flex flex-1 flex-wrap gap-1\">\n          {selectedLabels.length > 0 ? (\n            selectedLabels.map((label) => (\n              <span\n                key={label}\n                className=\"inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary-bright\"\n              >\n                {label}\n                <Icon\n                  icon=\"ph:x\"\n                  className=\"h-3 w-3 cursor-pointer hover:text-primary-bright/60\"\n                  onClick={(e) => {\n                    e.stopPropagation()\n                    const opt = options.find((o) => o.label === label)\n                    if (opt) toggle(opt.value)\n                  }}\n                />\n              </span>\n            ))\n          ) : (\n            <span className=\"text-muted-foreground\">{placeholder}</span>\n          )}\n        </div>\n        <Icon\n          icon=\"ph:caret-down\"\n          className={cn(\n            \"h-4 w-4 shrink-0 text-muted-foreground transition-transform\",\n            open && \"rotate-180\"\n          )}\n        />\n      </button>\n\n      {open && (\n        <div className=\"absolute z-50 mt-1.5 w-full rounded-xl border border-border bg-popover p-1.5 [box-shadow:var(--shadow-popover)]\">\n          {options.map((option) => (\n            <button\n              key={option.value}\n              type=\"button\"\n              onClick={() => toggle(option.value)}\n              className=\"flex w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors hover:bg-accent\"\n            >\n              <div\n                className={cn(\n                  \"flex h-4 w-4 items-center justify-center rounded-xs border border-border bg-input transition-all\",\n                  value.includes(option.value) &&\n                    \"border-transparent bg-primary [background-image:var(--gradient-primary)] [box-shadow:var(--shadow-button)]\"\n                )}\n              >\n                {value.includes(option.value) && (\n                  <Icon icon=\"ph:check-bold\" className=\"h-2.5 w-2.5 text-primary-foreground\" />\n                )}\n              </div>\n              <span className={value.includes(option.value) ? \"text-foreground\" : \"text-muted-foreground\"}>\n                {option.label}\n              </span>\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { MultiSelect }\nexport type { MultiSelectProps, MultiSelectOption }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/neon-vault/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.5), 0 1.25rem 3rem oklch(0 0 0 / 0.45)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.5), 0 1.25rem 3rem oklch(0 0 0 / 0.45)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    }
+  }
+}

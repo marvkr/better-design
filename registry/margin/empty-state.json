@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Margin EmptyState: a quiet grey canvas where content will go, the way an\n * empty list column looks. A small white tile holds the icon, a short title\n * and a muted line follow, then one action.\n */\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon = \"solar:notebook-bold\", title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-state\"\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 rounded-xl bg-muted px-6 py-10 text-center\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex size-10 items-center justify-center rounded-lg bg-card text-muted-foreground shadow-sm\">\n        <Icon icon={icon} className=\"size-5\" aria-hidden=\"true\" />\n      </div>\n      <div className=\"flex max-w-sm flex-col gap-1\">\n        <div className=\"text-sm font-semibold text-foreground\">{title}</div>\n        {description && <div className=\"text-sm leading-normal text-muted-foreground\">{description}</div>}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  ),\n);\nEmptyState.displayName = \"EmptyState\";\n\nexport { EmptyState };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ]
+}

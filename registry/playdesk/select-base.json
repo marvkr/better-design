@@ -1,0 +1,33 @@
+{
+  "name": "select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Select as SelectPrimitive } from \"@base-ui/react/select\"\nimport { Check, ChevronDown, ChevronUp } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Playdesk Select: a recessed field like the Input, opening onto a floating\n * window panel.\n */\n\nconst Select = SelectPrimitive.Root\nconst SelectGroup = SelectPrimitive.Group\nconst SelectValue = SelectPrimitive.Value\n\nconst SelectTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<SelectPrimitive.Trigger.Props>\n>(({ className, children, ...props }, ref) => (\n  <SelectPrimitive.Trigger\n    ref={ref}\n    className={cn(\n      \"flex h-10 w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-3.5\",\n      \"border border-border bg-input text-sm text-foreground\",\n      \"[box-shadow:var(--shadow-inset)]\",\n      \"transition-[box-shadow,border-color] duration-fast ease-out\",\n      \"hover:border-foreground/20\",\n      \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-[0.1875rem] focus-visible:ring-ring/25\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      className\n    )}\n    {...props}\n  >\n    {children}\n    <SelectPrimitive.Icon>\n      <ChevronDown className=\"size-4 shrink-0 text-muted-foreground\" />\n    </SelectPrimitive.Icon>\n  </SelectPrimitive.Trigger>\n))\nSelectTrigger.displayName = \"SelectTrigger\"\n\nconst SelectScrollUpButton = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SelectPrimitive.ScrollUpArrow.Props>\n>(({ className, ...props }, ref) => (\n  <SelectPrimitive.ScrollUpArrow\n    ref={ref}\n    className={cn(\"flex items-center justify-center py-1 text-muted-foreground\", className)}\n    {...props}\n  >\n    <ChevronUp className=\"size-4\" />\n  </SelectPrimitive.ScrollUpArrow>\n))\nSelectScrollUpButton.displayName = \"SelectScrollUpButton\"\n\nconst SelectScrollDownButton = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SelectPrimitive.ScrollDownArrow.Props>\n>(({ className, ...props }, ref) => (\n  <SelectPrimitive.ScrollDownArrow\n    ref={ref}\n    className={cn(\"flex items-center justify-center py-1 text-muted-foreground\", className)}\n    {...props}\n  >\n    <ChevronDown className=\"size-4\" />\n  </SelectPrimitive.ScrollDownArrow>\n))\nSelectScrollDownButton.displayName = \"SelectScrollDownButton\"\n\nconst SelectContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SelectPrimitive.Popup.Props> &\n    Pick<SelectPrimitive.Positioner.Props, \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\">\n>(({ className, children, align, alignOffset, side, sideOffset = 6, ...props }, ref) => (\n  <SelectPrimitive.Portal>\n    <SelectPrimitive.Positioner\n      align={align}\n      alignOffset={alignOffset}\n      side={side}\n      sideOffset={sideOffset}\n      className=\"isolate z-50\"\n    >\n      <SelectPrimitive.Popup\n        ref={ref}\n        className={cn(\n          \"origin-(--transform-origin) relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-lg p-1\",\n          \"bg-popover text-popover-foreground\",\n          \"[box-shadow:var(--shadow-rim),var(--shadow-float)]\",\n          \"transition-[opacity,transform,scale] duration-fast\",\n          \"data-starting-style:opacity-0 data-starting-style:scale-95\",\n          \"data-ending-style:opacity-0 data-ending-style:scale-95\",\n          className\n        )}\n        {...props}\n      >\n        <SelectScrollUpButton />\n        <SelectPrimitive.List>{children}</SelectPrimitive.List>\n        <SelectScrollDownButton />\n      </SelectPrimitive.Popup>\n    </SelectPrimitive.Positioner>\n  </SelectPrimitive.Portal>\n))\nSelectContent.displayName = \"SelectContent\"\n\nconst SelectLabel = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SelectPrimitive.GroupLabel.Props>\n>(({ className, ...props }, ref) => (\n  <SelectPrimitive.GroupLabel\n    ref={ref}\n    className={cn(\n      \"px-2.5 py-1.5 text-[0.6875rem] font-bold tracking-[0.08em] text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nSelectLabel.displayName = \"SelectLabel\"\n\nconst SelectItem = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SelectPrimitive.Item.Props>\n>(({ className, children, ...props }, ref) => (\n  <SelectPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"relative flex w-full cursor-default select-none items-center rounded-md py-1.5 pl-8 pr-2.5\",\n      \"text-sm text-foreground outline-none transition-colors duration-fast\",\n      \"data-highlighted:bg-accent data-highlighted:text-accent-foreground\",\n      \"data-disabled:pointer-events-none data-disabled:opacity-50\",\n      className\n    )}\n    {...props}\n  >\n    <span className=\"absolute left-2.5 flex size-3.5 items-center justify-center\">\n      <SelectPrimitive.ItemIndicator>\n        <Check className=\"size-3.5 text-primary\" strokeWidth={3} />\n      </SelectPrimitive.ItemIndicator>\n    </span>\n    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>\n  </SelectPrimitive.Item>\n))\nSelectItem.displayName = \"SelectItem\"\n\nconst SelectSeparator = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<SelectPrimitive.Separator.Props>\n>(({ className, ...props }, ref) => (\n  <SelectPrimitive.Separator ref={ref} className={cn(\"-mx-1 my-1 h-px bg-border\", className)} {...props} />\n))\nSelectSeparator.displayName = \"SelectSeparator\"\n\nexport {\n  Select,\n  SelectGroup,\n  SelectValue,\n  SelectTrigger,\n  SelectContent,\n  SelectLabel,\n  SelectItem,\n  SelectSeparator,\n  SelectScrollUpButton,\n  SelectScrollDownButton,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

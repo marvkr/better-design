@@ -1,0 +1,32 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, primaryFill } from \"./_shared\";\n\n/**\n * Airy docs IconButton: a single glyph in the same materials as the Button.\n *\n * Round by default, like every Airy docs pill; the square shape keeps a\n * corner that grows with the button. The default is a hairline circle on\n * white, like the copy and theme buttons in a docs header. `primary` is the\n * flat green, and ghost is the quiet choice for toolbars and code headers.\n */\nconst iconButtonVariants = cva(\n  [\n    \"relative inline-flex shrink-0 select-none items-center justify-center\",\n    \"transition-[background-color,color,border-color] duration-fast ease-out\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:border-transparent disabled:bg-muted disabled:text-(--foreground-disabled)\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:border-transparent data-[disabled]:bg-muted data-[disabled]:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border border-border bg-background text-(--foreground-secondary) hover:bg-secondary hover:text-foreground\",\n        primary: primaryFill,\n        secondary:\n          \"bg-secondary text-secondary-foreground hover:bg-muted\",\n        ghost: \"bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        outline:\n          \"border border-(--line-strong) bg-background text-foreground hover:bg-secondary\",\n      },\n      size: {\n        xs: \"size-7 rounded-sm [&_svg]:size-3.5\",\n        sm: \"size-8 rounded-md [&_svg]:size-4\",\n        default: \"size-9 rounded-md [&_svg]:size-4\",\n        lg: \"size-11 rounded-lg [&_svg]:size-5\",\n        xl: \"size-12 rounded-xl [&_svg]:size-5\",\n      },\n      corners: {\n        square: \"\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      corners: \"circle\",\n    },\n  },\n);\n\n/** Props for the IconButton. Give it an `aria-label`, since the glyph carries no text. */\nexport interface IconButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => (\n    <ButtonPrimitive\n      ref={ref}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, corners, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

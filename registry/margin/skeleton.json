@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Margin Skeleton: a flat block in the field grey that pulses softly while\n * the real content loads, and holds still when motion is reduced.\n */\nconst Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"skeleton\"\n      aria-hidden=\"true\"\n      className={cn(\"animate-pulse rounded-md bg-(--field) motion-reduce:animate-none\", className)}\n      {...props}\n    />\n  ),\n);\nSkeleton.displayName = \"Skeleton\";\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(0.99 0.008 85)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.014 260)"
+    }
+  }
+}

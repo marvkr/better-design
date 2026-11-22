@@ -1,0 +1,23 @@
+{
+  "name": "mega-menu",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/mega-menu.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { menuItemBase, popoverSurface } from \"./_shared\";\n\n/**\n * Cream editorial MegaMenu: a wide paper shelf under the site navigation.\n *\n * The shelf is the lightest paper with a warm hairline ring and a soft\n * shadow. From sm up each group becomes an equal column, headed by a small\n * caption in sentence case. Links are quiet rows that take an oat wash\n * under the pointer or keyboard focus.\n */\nconst MegaMenu = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"mega-menu\"\n    className={cn(\n      popoverSurface,\n      \"absolute start-0 top-full z-50 mt-2 grid w-full gap-6 p-5 sm:auto-cols-fr sm:grid-flow-col\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenu.displayName = \"MegaMenu\";\n\nconst MegaMenuGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"mega-menu-group\"\n    className={cn(\"flex min-w-0 flex-col gap-0.5\", className)}\n    {...props}\n  />\n));\nMegaMenuGroup.displayName = \"MegaMenuGroup\";\n\nconst MegaMenuGroupTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"mega-menu-group-title\"\n    className={cn(\n      \"px-2.5 pb-1.5 text-xs font-medium text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenuGroupTitle.displayName = \"MegaMenuGroupTitle\";\n\nconst MegaMenuItem = React.forwardRef<\n  HTMLAnchorElement,\n  React.AnchorHTMLAttributes<HTMLAnchorElement>\n>(({ className, ...props }, ref) => (\n  <a\n    ref={ref}\n    data-slot=\"mega-menu-item\"\n    className={cn(\n      menuItemBase,\n      \"text-(--foreground-secondary) hover:bg-accent hover:text-accent-foreground\",\n      \"focus-visible:ring-3 focus-visible:ring-ring\",\n      \"[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nMegaMenuItem.displayName = \"MegaMenuItem\";\n\nexport { MegaMenu, MegaMenuGroup, MegaMenuGroupTitle, MegaMenuItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.359 0.005 106.7)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.853 0.014 97.5)"
+    }
+  }
+}

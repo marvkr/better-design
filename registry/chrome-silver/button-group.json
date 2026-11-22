@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * ButtonGroup — container that fuses adjacent chrome chips into one milled bar.\n * Inner buttons drop their radii on the shared seam; the outer ends keep theirs\n * so the group reads as a single beveled rail. Overlap a hairline so the rims\n * butt together cleanly.\n */\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      className={cn(\n        \"inline-flex\",\n        orientation === \"horizontal\"\n          ? \"flex-row *:rounded-none [&>*:first-child]:rounded-l-lg [&>*:last-child]:rounded-r-lg [&>*:not(:first-child)]:-ml-px\"\n          : \"flex-col *:rounded-none [&>*:first-child]:rounded-t-lg [&>*:last-child]:rounded-b-lg [&>*:not(:first-child)]:-mt-px\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\nexport { ButtonGroup }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

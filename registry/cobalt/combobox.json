@@ -1,0 +1,19 @@
+{
+  "name": "combobox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Check, ChevronsUpDown } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n} from \"./command\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n/*\n * Combobox demo — recessed well trigger (the shared form-field surface) plus\n * the carved command palette.\n */\n\nconst frameworks = [\n  { value: \"next.js\", label: \"Next.js\" },\n  { value: \"sveltekit\", label: \"SvelteKit\" },\n  { value: \"nuxt.js\", label: \"Nuxt.js\" },\n  { value: \"remix\", label: \"Remix\" },\n  { value: \"astro\", label: \"Astro\" },\n]\n\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false)\n  const [value, setValue] = React.useState(\"\")\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          role=\"combobox\"\n          aria-expanded={open}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"w-50 items-center justify-between gap-2 font-normal cursor-pointer\",\n            !value && \"text-muted-foreground\"\n          )}\n        >\n          {value\n            ? frameworks.find((framework) => framework.value === value)?.label\n            : \"Select framework...\"}\n          <ChevronsUpDown className=\"h-4 w-4 shrink-0 text-muted-foreground opacity-70\" />\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-50 p-0\">\n        <Command>\n          <CommandInput placeholder=\"Search framework...\" />\n          <CommandEmpty>No framework found.</CommandEmpty>\n          <CommandGroup>\n            {frameworks.map((framework) => (\n              <CommandItem\n                key={framework.value}\n                value={framework.value}\n                onSelect={(currentValue) => {\n                  setValue(currentValue === value ? \"\" : currentValue)\n                  setOpen(false)\n                }}\n              >\n                <Check\n                  className={cn(\n                    \"mr-2 h-4 w-4 text-primary\",\n                    value === framework.value ? \"opacity-100\" : \"opacity-0\"\n                  )}\n                />\n                {framework.label}\n              </CommandItem>\n            ))}\n          </CommandGroup>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cobalt/command.json",
+    "https://better-design.com/registry/cobalt/popover.json",
+    "https://better-design.com/registry/cobalt/_shared.json"
+  ]
+}

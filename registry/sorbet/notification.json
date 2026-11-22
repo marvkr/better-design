@@ -1,0 +1,27 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { amieGrainStyle } from \"./_shared\"\n\n/*\n * Notification — inline notification/banner with icon, title, description, and dismiss.\n * More prominent than Alert, typically used at the top of a page.\n */\n\nconst notificationVariants = cva(\n  \"relative flex gap-3 rounded-xl p-4 border \" +\n    \"bg-popover text-popover-foreground \" +\n    \"[box-shadow:var(--shadow-l)] \" +\n    \"transition-[background-color,box-shadow] duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border\",\n        info: \"border-primary/30\",\n        success: \"border-[oklch(0.5_0.15_145)]/30\",\n        warning: \"border-[oklch(0.55_0.18_55)]/30\",\n        destructive: \"border-destructive/30\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst iconMap = {\n  default: { icon: \"ph:bell\", color: \"text-muted-foreground\" },\n  info: { icon: \"ph:info\", color: \"text-primary\" },\n  success: { icon: \"ph:check-circle\", color: \"text-[oklch(0.78_0.15_145)]\" },\n  warning: { icon: \"ph:warning\", color: \"text-[oklch(0.82_0.14_80)]\" },\n  destructive: { icon: \"ph:warning-circle\", color: \"text-destructive\" },\n} as const\n\nexport interface NotificationProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">,\n    VariantProps<typeof notificationVariants> {\n  title?: React.ReactNode\n  description?: React.ReactNode\n  icon?: React.ReactNode\n  onDismiss?: () => void\n  actions?: React.ReactNode\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    { className, variant = \"default\", title, description, icon, onDismiss, actions, children, style, ...props },\n    ref\n  ) => {\n    const meta = iconMap[variant ?? \"default\"]\n    return (\n      <div\n        ref={ref}\n        style={{ ...amieGrainStyle, ...style }}\n        className={cn(notificationVariants({ variant }), className)}\n        {...props}\n      >\n        <div className={cn(\"mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center\", meta.color)}>\n          {icon ?? <Icon icon={meta.icon} className=\"h-5 w-5\" />}\n        </div>\n        <div className=\"flex-1 min-w-0\">\n          {title && <div className=\"text-sm font-semibold leading-none\">{title}</div>}\n          {description && (\n            <div className={cn(\"text-sm text-muted-foreground leading-relaxed\", title && \"mt-1\")}>\n              {description}\n            </div>\n          )}\n          {children}\n          {actions && <div className=\"mt-3 flex items-center gap-2\">{actions}</div>}\n        </div>\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            className={cn(\n              \"shrink-0 rounded-lg p-1 text-muted-foreground\",\n              \"transition-[background-color,color] duration-fast\",\n              \"hover:bg-accent hover:text-foreground\",\n              \"focus:outline-none focus:ring-2 focus:ring-ring/40\"\n            )}\n            aria-label=\"Dismiss\"\n          >\n            <Icon icon=\"ph:x\" className=\"h-4 w-4\" />\n          </button>\n        )}\n      </div>\n    )\n  }\n)\nNotification.displayName = \"Notification\"\n\nexport { Notification }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/sorbet/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "var(--shadow-lg)"
+    },
+    "dark": {
+      "shadow-l": "var(--shadow-lg)"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for the Base UI flavour of Paddock.\n *\n * These mirror `../components/_shared.ts` value for value, so a Base UI part\n * and its Radix twin wear the same bordered surface, grey well and teal fill. Base UI\n * marks state with bare attributes (data-checked, data-unchecked,\n * data-highlighted, data-pressed, data-disabled, data-popup-open), so the\n * state selectors here read those instead of data-state. The file is copied\n * rather than imported because the registry ships this folder on its own.\n *\n * Form fields MUST import `formFieldBase`. Do NOT copy-paste these strings\n * into a component.\n */\n\n/** The focus ring every interactive part shares: a teal outline, set off the edge. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\n/**\n * The teal fill: the primary's face, with a 1px highlight on its top edge. Checkbox, switch, radio and slider use\n * the same fill and shadow on their checked parts, so they read as one\n * material with the primary Button.\n */\nexport const primaryFace = \"bg-primary text-primary-foreground shadow-(--primary-face)\";\n\n/** The teal fill, a step lighter, for hover. */\nexport const primaryFaceHover = \"hover:bg-primary/88\";\n\n/** The edge of a small checked control: the teal fill, edge to edge. */\nexport const primaryEdge = \"border border-transparent bg-primary shadow-(--primary-face)\";\n\n/**\n * The raised surface: the secondary button, the search field and every\n * neutral control. White with a 1px cool border; hover firms the border.\n */\nexport const raisedSurface =\n  \"bg-card text-foreground shadow-(--card-ring) \" +\n  \"transition-[box-shadow,background-color] duration-fast ease-out \" +\n  \"hover:bg-(--card-hover) hover:shadow-(--card-lift)\";\n\n/** The quiet chip: tags and quiet fills. Flat cool grey, darker on hover. */\nexport const quietChip =\n  \"bg-secondary text-secondary-foreground shadow-(--plate-ring) \" +\n  \"transition-colors duration-fast ease-out hover:bg-(--track)\";\n\n/** The card: white with a 1px cool border, flat. */\nexport const cardSlab = \"bg-card text-card-foreground shadow-(--shadow-card)\";\n\n/** The window: dialogs and sheets, white with a soft drop over the scrim. */\nexport const overlaySlab = \"bg-card text-card-foreground shadow-(--shadow-overlay)\";\n\n/** The plate: a surface nested inside a card or column, a flat cool grey. */\nexport const surfacePlate = \"bg-muted text-card-foreground shadow-(--plate-ring)\";\n\n/** The well: the segmented control's track and other recessed areas. */\nexport const wellInset = \"bg-(--track) shadow-(--track-inset)\";\n\n/** The press every control shares: a small scale toward the page. */\nexport const pressScale =\n  \"transition-[transform,background-color,box-shadow] duration-fast ease-out active:scale-97 motion-reduce:active:scale-100\";\n\n/**\n * Base styles shared by every form-field surface: the patient search field.\n * A white rounded rectangle with a 1px slate border at 3:1. Hover firms the\n * border and focus adds the teal outline. The transparent border is there so an invalid\n * field can turn it red. Base UI marks a disabled field with data-disabled as\n * well as the native state.\n */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-md border border-transparent bg-(--field) px-3 text-sm text-foreground \" +\n  \"shadow-(--control-ring) placeholder:text-muted-foreground \" +\n  \"transition-[box-shadow,border-color] duration-fast ease-out \" +\n  \"hover:shadow-(--control-lift) \" +\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50 \" +\n  \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\";\n\n/** Height + vertical padding for single-line form fields (2rem, the patient search field). */\nexport const formFieldSingleLine = \"flex h-8 py-1.5\";\n\n/** Vertical padding, min-height and a softer corner for multi-line form fields. */\nexport const formFieldMultiLine = \"flex min-h-20 rounded-md px-3 py-2 leading-normal\";\n\n/** A field whose popup is open keeps the firm ring, so it reads as active. */\nexport const fieldOpen = \"data-[popup-open]:shadow-(--control-lift)\";\n\n/**\n * The floating panel shared by every menu, popover, select and tooltip: a\n * white panel with a 1px cool border and a faint drop, like the filter menu.\n */\nexport const popoverSurface =\n  \"rounded-lg bg-popover p-1.5 text-popover-foreground shadow-(--shadow-menu) outline-none\";\n\n/** Popups grow a little from their anchor and fade, and leave the same way. */\nexport const popupMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale] duration-fast ease-out \" +\n  \"data-[starting-style]:scale-95 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-95 data-[ending-style]:opacity-0\";\n\n/** A highlighted row inside a floating panel. */\nexport const menuItemBase =\n  \"relative flex min-h-8 cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\";\n\n/**\n * A checked small control (checkbox box, radio, switch track). Base UI marks\n * it with data-checked.\n */\nexport const controlChecked =\n  \"data-[checked]:bg-primary data-[checked]:text-primary-foreground data-[checked]:shadow-(--primary-face)\";\n\n/**\n * A pressed Base UI toggle or segment: it sits in the grey well as a white\n * rounded rectangle, like the active Day, List or Timeline segment.\n */\nexport const pressedSegment =\n  \"data-[pressed]:bg-card data-[pressed]:font-medium data-[pressed]:text-foreground data-[pressed]:shadow-(--segment-lift)\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "card-hover": "oklch(0.99 0.003 220)",
+      "track": "oklch(0.945 0.008 230)",
+      "field": "oklch(1 0 0)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.42 0.085 198), 0 0.0625rem 0.125rem oklch(0.3 0.05 210 / 0.14)",
+      "card-ring": "0 0 0 0.0625rem oklch(0.915 0.008 230)",
+      "card-lift": "0 0 0 0.0625rem oklch(0.85 0.012 230)",
+      "plate-ring": "0 0 0 0.0625rem oklch(0.93 0.008 230)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.62 0.02 245)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.5 0.02 245)",
+      "track-inset": "inset 0 0 0 0.0625rem oklch(0.91 0.008 230)",
+      "menu-lift": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 0.25rem 0.75rem -0.125rem oklch(0.3 0.03 240 / 0.1)",
+      "segment-lift": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 0.0625rem 0.0625rem oklch(0.3 0.03 240 / 0.06)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "shadow-card": "var(--card-ring)",
+      "shadow-menu": "var(--menu-lift)",
+      "shadow-overlay": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 1rem 2.5rem -0.75rem oklch(0.24 0.02 245 / 0.22)"
+    },
+    "dark": {
+      "card-hover": "oklch(0.25 0.012 240)",
+      "track": "oklch(0.155 0.012 240)",
+      "field": "oklch(0.22 0.012 240)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.66 0.1 190), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "card-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.09)",
+      "card-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.16)",
+      "plate-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.06)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.56 0.012 240)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.66 0.012 240)",
+      "track-inset": "inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)",
+      "menu-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.25rem 0.75rem -0.125rem oklch(0 0 0 / 0.45)",
+      "segment-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.3)",
+      "shadow-overlay": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 1rem 2.5rem -0.75rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

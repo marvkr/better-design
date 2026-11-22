@@ -1,0 +1,26 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\";\n\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\";\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, copperRimChecked, focusRing, wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Burnished RadioGroup: a column of choices with 0.75rem between them. */\nfunction RadioGroup({\n  className,\n  ...props\n}: WithClassName<RadioGroupPrimitive.Props>) {\n  return (\n    <RadioGroupPrimitive\n      data-slot=\"radio-group\"\n      className={cn(\"grid gap-3\", className)}\n      {...props}\n    />\n  );\n}\nRadioGroup.displayName = \"RadioGroup\";\n\n/**\n * Burnished RadioGroupItem: a 1.25rem circle pressed into a recessed well.\n * Chosen, it rises as the primary's cream bevel inside a copper rim and\n * shows a dark centre dot.\n */\nfunction RadioGroupItem({\n  className,\n  ...props\n}: WithClassName<RadioPrimitive.Root.Props>) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square size-5 shrink-0 rounded-full border-2 border-transparent\",\n        wellInset,\n        \"transition-[box-shadow,background-image] duration-fast ease-(--ease-out)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        controlChecked,\n        copperRimChecked,\n        className,\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator\n        data-slot=\"radio-group-indicator\"\n        className=\"size-full flex items-center justify-center\"\n      >\n        <span className=\"block size-2 rounded-full bg-primary-foreground\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  );\n}\nRadioGroupItem.displayName = \"RadioGroupItem\";\n\nexport { RadioGroup, RadioGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

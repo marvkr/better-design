@@ -1,0 +1,26 @@
+{
+  "name": "number-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, formFieldBase, formFieldSingleLine, pressScale, softPanel } from \"./_shared\";\n\n/**\n * Mallow NumberInput: the white form field with two small violet-tinted steppers stacked\n * at its trailing edge. Figures stay tabular so the value never shifts.\n */\nexport interface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number;\n  onValueChange?: (value: number) => void;\n  step?: number;\n  min?: number;\n  max?: number;\n}\n\nconst stepper = cn(\n  softPanel,\n  \"flex h-4.5 w-7 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground hover:shadow-(--option-edge-hover)\",\n  pressScale,\n  focusRing,\n  \"disabled:pointer-events-none disabled:opacity-40\",\n);\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  ({ className, value = 0, onValueChange, step = 1, min, max, disabled, ...props }, ref) => {\n    const clamp = (n: number) => {\n      let next = n;\n      if (min !== undefined) next = Math.max(next, min);\n      if (max !== undefined) next = Math.min(next, max);\n      return next;\n    };\n\n    const increment = () => onValueChange?.(clamp(value + step));\n    const decrement = () => onValueChange?.(clamp(value - step));\n\n    return (\n      <div data-slot=\"number-input\" className=\"relative\">\n        <input\n          ref={ref}\n          type=\"number\"\n          inputMode=\"decimal\"\n          value={value}\n          step={step}\n          min={min}\n          max={max}\n          disabled={disabled}\n          onChange={(e) => {\n            const parsed = parseFloat(e.target.value);\n            if (!Number.isNaN(parsed)) onValueChange?.(clamp(parsed));\n          }}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"appearance-none pe-12 tabular-nums [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\",\n            className,\n          )}\n          {...props}\n        />\n        <div className=\"absolute end-2 top-1/2 flex -translate-y-1/2 flex-col gap-1\">\n          <button\n            type=\"button\"\n            onClick={increment}\n            disabled={disabled || (max !== undefined && value >= max)}\n            className={stepper}\n            aria-label=\"Increment\"\n            tabIndex={-1}\n          >\n            <Icon icon=\"iconoir:nav-arrow-up\" className=\"size-3\" />\n          </button>\n          <button\n            type=\"button\"\n            onClick={decrement}\n            disabled={disabled || (min !== undefined && value <= min)}\n            className={stepper}\n            aria-label=\"Decrement\"\n            tabIndex={-1}\n          >\n            <Icon icon=\"iconoir:nav-arrow-down\" className=\"size-3\" />\n          </button>\n        </div>\n      </div>\n    );\n  },\n);\nNumberInput.displayName = \"NumberInput\";\n\nexport { NumberInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)"
+    },
+    "dark": {
+      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)"
+    }
+  }
+}

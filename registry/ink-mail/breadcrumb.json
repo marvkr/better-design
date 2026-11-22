@@ -1,0 +1,24 @@
+{
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Breadcrumb: a quiet trail in the muted ink with small carets\n * between the steps. Links brighten to off-white under the pointer, and the\n * page you are on reads in full ink at medium weight.\n */\nconst Breadcrumb = React.forwardRef<\n  HTMLElement,\n  React.ComponentPropsWithoutRef<\"nav\"> & { separator?: React.ReactNode }\n>(({ separator: _separator, ...props }, ref) => (\n  <nav ref={ref} aria-label=\"Breadcrumb\" data-slot=\"breadcrumb\" {...props} />\n));\nBreadcrumb.displayName = \"Breadcrumb\";\n\n/** The ordered trail; wraps onto a second line when space runs out. */\nconst BreadcrumbList = React.forwardRef<\n  HTMLOListElement,\n  React.ComponentPropsWithoutRef<\"ol\">\n>(({ className, ...props }, ref) => (\n  <ol\n    ref={ref}\n    data-slot=\"breadcrumb-list\"\n    className={cn(\n      \"flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nBreadcrumbList.displayName = \"BreadcrumbList\";\n\n/** One step in the trail. */\nconst BreadcrumbItem = React.forwardRef<\n  HTMLLIElement,\n  React.ComponentPropsWithoutRef<\"li\">\n>(({ className, ...props }, ref) => (\n  <li\n    ref={ref}\n    data-slot=\"breadcrumb-item\"\n    className={cn(\"inline-flex items-center gap-1.5\", className)}\n    {...props}\n  />\n));\nBreadcrumbItem.displayName = \"BreadcrumbItem\";\n\n/** A step you can go back to. Pass `asChild` to render your router's link. */\nconst BreadcrumbLink = React.forwardRef<\n  HTMLAnchorElement,\n  React.ComponentPropsWithoutRef<\"a\"> & { asChild?: boolean }\n>(({ asChild, className, ...props }, ref) => {\n  const Comp = asChild ? Slot : \"a\";\n  return (\n    <Comp\n      ref={ref}\n      data-slot=\"breadcrumb-link\"\n      className={cn(\n        \"rounded-sm transition-colors duration-fast ease-out hover:text-foreground\",\n        \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n        className,\n      )}\n      {...props}\n    />\n  );\n});\nBreadcrumbLink.displayName = \"BreadcrumbLink\";\n\n/** The page you are on: full ink, not a link. */\nconst BreadcrumbPage = React.forwardRef<\n  HTMLSpanElement,\n  React.ComponentPropsWithoutRef<\"span\">\n>(({ className, ...props }, ref) => (\n  <span\n    ref={ref}\n    role=\"link\"\n    aria-disabled=\"true\"\n    aria-current=\"page\"\n    data-slot=\"breadcrumb-page\"\n    className={cn(\"font-medium text-foreground\", className)}\n    {...props}\n  />\n));\nBreadcrumbPage.displayName = \"BreadcrumbPage\";\n\n/** The caret between two steps. Pass children to draw your own mark. */\nconst BreadcrumbSeparator = ({\n  children,\n  className,\n  ...props\n}: React.ComponentProps<\"li\">) => (\n  <li\n    role=\"presentation\"\n    aria-hidden=\"true\"\n    data-slot=\"breadcrumb-separator\"\n    className={cn(\"text-(--control) [&>svg]:size-3.5\", className)}\n    {...props}\n  >\n    {children ?? <Icon icon=\"ph:caret-right\" />}\n  </li>\n);\nBreadcrumbSeparator.displayName = \"BreadcrumbSeparator\";\n\n/** Stands in for the steps folded out of a long trail. */\nconst BreadcrumbEllipsis = ({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) => (\n  <span\n    role=\"presentation\"\n    aria-hidden=\"true\"\n    data-slot=\"breadcrumb-ellipsis\"\n    className={cn(\"flex size-8 items-center justify-center\", className)}\n    {...props}\n  >\n    <Icon icon=\"ph:dots-three\" className=\"size-4\" />\n    <span className=\"sr-only\">More</span>\n  </span>\n);\nBreadcrumbEllipsis.displayName = \"BreadcrumbEllipsis\";\n\nexport {\n  Breadcrumb,\n  BreadcrumbList,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n  BreadcrumbEllipsis,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "link": "oklch(0.688 0.169 251.4)",
+      "control": "oklch(0.52 0.006 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

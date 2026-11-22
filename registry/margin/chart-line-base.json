@@ -1,0 +1,18 @@
+{
+  "name": "chart-line-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-line.tsx",
+      "content": "\"use client\";\n\nimport { CartesianGrid, Line, LineChart, XAxis } from \"recharts\";\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { month: \"May\", open: 38, done: 24 },\n  { month: \"June\", open: 44, done: 31 },\n  { month: \"July\", open: 41, done: 36 },\n  { month: \"August\", open: 29, done: 33 },\n  { month: \"September\", open: 35, done: 40 },\n  { month: \"October\", open: 27, done: 46 },\n];\n\nconst chartConfig = {\n  open: { label: \"Open tasks\", color: \"var(--chart-1)\" },\n  done: { label: \"Done\", color: \"var(--chart-3)\" },\n};\n\n/** A two-series line chart on a paper card: open tasks against finished ones. */\nexport function ChartLineDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Tasks over time</CardTitle>\n        <CardDescription>May to October</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <LineChart accessibilityLayer data={chartData} margin={{ left: 8, right: 8, top: 8 }}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value: string) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />\n            <Line dataKey=\"open\" type=\"monotone\" stroke=\"var(--chart-1)\" strokeWidth={1.75} dot={false} />\n            <Line dataKey=\"done\" type=\"monotone\" stroke=\"var(--chart-3)\" strokeWidth={1.75} dot={false} />\n          </LineChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1 text-sm\">\n        <div className=\"font-medium leading-snug\">Finished tasks passed open ones in August</div>\n        <div className=\"leading-snug text-muted-foreground\">Counted at the end of each month</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/card-base.json",
+    "https://better-design.com/registry/margin/chart.json"
+  ]
+}

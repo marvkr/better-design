@@ -1,0 +1,28 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI splits Radix's checked=\"indeterminate\" into a separate boolean\n// prop; the wrapper keeps the Radix-shaped `checked` API and maps it.\ntype CheckboxProps = Omit<\n  CheckboxPrimitive.Root.Props,\n  \"className\" | \"checked\"\n> & {\n  className?: string\n  checked?: boolean | \"indeterminate\"\n}\n\nconst Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(\n  ({ className, checked, ...props }, ref) => {\n    const isIndeterminate = checked === \"indeterminate\"\n    return (\n      <CheckboxPrimitive.Root\n        data-slot=\"checkbox\"\n        ref={ref}\n        className={cn(\n          \"peer h-[1.125rem] w-[1.125rem] shrink-0 rounded-sm\",\n          \"bg-input border border-border [box-shadow:var(--shadow-well)]\",\n          \"transition-[background,box-shadow,border-color] duration-fast\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          // Filled state reuses the primary Button accent material, scaled down.\n          \"data-checked:border-transparent data-checked:[background:var(--accent-fill)] data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-accent)]\",\n          \"data-indeterminate:border-transparent data-indeterminate:[background:var(--accent-fill)] data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-accent)]\",\n          className\n        )}\n        checked={isIndeterminate ? false : checked}\n        indeterminate={isIndeterminate}\n        nativeButton\n        render={<button type=\"button\" />}\n        {...props}\n      >\n        <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n          {isIndeterminate ? (\n            <Icon icon=\"tabler:minus\" className=\"h-3 w-3\" />\n          ) : (\n            <Icon icon=\"tabler:check\" className=\"h-3 w-3\" />\n          )}\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n    )\n  }\n)\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
+    }
+  }
+}

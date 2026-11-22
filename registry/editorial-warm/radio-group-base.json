@@ -1,0 +1,31 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\nimport { AnimatePresence, motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\nfunction RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {\n  return (\n    <RadioGroupPrimitive data-slot=\"radio-group\" className={cn(\"grid gap-2\", className)} {...props} />\n  )\n}\nRadioGroup.displayName = \"RadioGroup\"\n\nfunction RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square h-4 w-4 rounded-full border border-border text-foreground/90 ring-offset-background [backdrop-filter:var(--glass-blur)] [-webkit-backdrop-filter:var(--glass-blur)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50 data-checked:border-transparent data-checked:bg-[var(--glass-strong)] data-checked:shadow-[inset_0_0.0938rem_0_oklch(1_0_0_/_0.75),inset_0_-0.0938rem_0_oklch(1_0_0_/_0.25),0_0.0625rem_0.125rem_oklch(0_0_0_/_0.06),0_0.25rem_0.625rem_oklch(0_0_0_/_0.08)]\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator\n        data-slot=\"radio-group-indicator\"\n        keepMounted\n        className=\"size-full relative flex items-center justify-center\"\n        render={(indicatorProps, state) => (\n          <span {...indicatorProps}>\n            <AnimatePresence initial={false}>\n              {state.checked && (\n                <motion.div\n                  key=\"dot\"\n                  className=\"absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current\"\n                  initial={{ scale: 0.5, opacity: 0 }}\n                  animate={{ scale: 1, opacity: 1 }}\n                  exit={{ scale: 0.5, opacity: 0 }}\n                  transition={springInteraction}\n                />\n              )}\n            </AnimatePresence>\n          </span>\n        )}\n      />\n    </RadioPrimitive.Root>\n  )\n}\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/motion.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glass-strong": "oklch(1 0 0 / 0.65)",
+      "glass-blur": "blur(1.75rem) saturate(160%)"
+    },
+    "dark": {
+      "glass-strong": "oklch(1 0 0 / 0.65)",
+      "glass-blur": "blur(1.75rem) saturate(160%)"
+    }
+  }
+}

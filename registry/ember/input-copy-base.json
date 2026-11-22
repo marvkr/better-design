@@ -1,0 +1,28 @@
+{
+  "name": "input-copy-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass InputCopy: read-only well with a copy affordance.\n\ninterface InputCopyProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\" | \"readOnly\"> {\n  value: string\n  label?: React.ReactNode\n  /** ms before the copied state resets. Default 1800. */\n  copiedTimeoutMs?: number\n}\n\nconst InputCopy = React.forwardRef<HTMLInputElement, InputCopyProps>(\n  ({ className, value, label, copiedTimeoutMs = 1800, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false)\n\n    const handleCopy = async () => {\n      try {\n        await navigator.clipboard.writeText(value)\n        setCopied(true)\n        setTimeout(() => setCopied(false), copiedTimeoutMs)\n      } catch {\n        // Clipboard unavailable; leave state unchanged.\n      }\n    }\n\n    return (\n      <div className={cn(\"flex w-full flex-col gap-1.5\", className)}>\n        {label && (\n          <span className=\"text-sm font-semibold leading-none tracking-[-0.01em]\">{label}</span>\n        )}\n        <div\n          className={cn(\n            \"flex h-9 w-full items-stretch overflow-hidden rounded-lg\",\n            formFieldBase,\n            \"p-0\"\n          )}\n        >\n          <input\n            ref={ref}\n            readOnly\n            value={value}\n            className=\"w-full flex-1 bg-transparent px-3 py-2 font-mono text-xs outline-none\"\n            {...props}\n          />\n          <button\n            type=\"button\"\n            onClick={handleCopy}\n            aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n            className=\"flex items-center gap-1.5 border-l border-[color:var(--ag-border)] px-3 text-xs font-semibold text-muted-foreground transition-colors hover:bg-[var(--ag-fill)] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n          >\n            <Icon\n              icon={copied ? \"tabler:check\" : \"tabler:copy\"}\n              className={cn(\"h-3.5 w-3.5\", copied && \"text-primary\")}\n            />\n            {copied ? \"Copied\" : \"Copy\"}\n          </button>\n        </div>\n      </div>\n    )\n  }\n)\nInputCopy.displayName = \"InputCopy\"\n\nexport { InputCopy }\nexport type { InputCopyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

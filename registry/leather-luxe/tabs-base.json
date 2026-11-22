@@ -1,0 +1,31 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Leather Luxe Tabs: a recessed track holds the triggers; the active tab\n// rises out of the well as a charcoal pill with a top sheen.\n\nconst Tabs = TabsPrimitive.Root\n\nfunction TabsList({ className, ...props }: TabsPrimitive.List.Props) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-10 items-center justify-center gap-1 rounded-full p-1\",\n        \"border border-border bg-well [box-shadow:var(--shadow-well)]\",\n        \"text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsList.displayName = \"TabsList\"\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      className={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-full px-3.5 py-1 text-sm font-medium\",\n        \"transition-[background,box-shadow,color] duration-base\",\n        \"hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n        \"data-active:[background-image:var(--gradient-raised)]\",\n        \"data-active:text-foreground\",\n        \"data-active:border data-active:border-highlight\",\n        \"data-active:[box-shadow:var(--shadow-raised-sm)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsTrigger.displayName = \"TabsTrigger\"\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      className={cn(\n        \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:rounded-sm\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nTabsContent.displayName = \"TabsContent\"\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "well": "oklch(0.14 0.005 65)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    },
+    "dark": {
+      "highlight": "oklch(1 0 0 / 0.1)",
+      "well": "oklch(0.14 0.005 65)",
+      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
+      "shadow-raised-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    }
+  }
+}

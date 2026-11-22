@@ -1,0 +1,30 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\nexport interface PhoneInputProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\"\n> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\n/**\n * Bold retail PhoneInput: one checkout field split by a grey rule. The\n * country code sits at the start behind a phone icon and the number fills\n * the rest. The whole shell takes the black edge and grey halo while either\n * part has focus.\n */\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode = \"+1\", onCountryCodeChange, disabled, ...props }, ref) => (\n    <div\n      data-slot=\"phone-input\"\n      className={cn(\n        formFieldBase,\n        \"flex h-12 items-stretch overflow-hidden px-0\",\n        \"focus-within:border-foreground focus-within:ring-4 focus-within:ring-(--halo)\",\n        \"has-[[aria-invalid=true]]:border-destructive\",\n        \"has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-secondary has-[:disabled]:text-(--foreground-disabled) has-[:disabled]:hover:border-(--line-strong)\",\n        className,\n      )}\n    >\n      <div className=\"flex shrink-0 items-center gap-2 border-e border-(--line-strong) ps-4 pe-3 text-muted-foreground\">\n        <Icon icon=\"mingcute:phone-line\" className=\"size-4\" aria-hidden=\"true\" />\n        <input\n          type=\"tel\"\n          value={countryCode}\n          onChange={(event) => onCountryCodeChange?.(event.target.value)}\n          disabled={disabled}\n          aria-label=\"Country code\"\n          className=\"w-10 bg-transparent text-base tabular-nums text-foreground outline-none disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\"\n        />\n      </div>\n      <input\n        ref={ref}\n        type=\"tel\"\n        autoComplete=\"tel-national\"\n        disabled={disabled}\n        className=\"min-w-0 flex-1 bg-transparent px-4 text-base tabular-nums text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled)\"\n        {...props}\n      />\n    </div>\n  ),\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bold-retail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.62 0.003 286.3)",
+      "halo": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.32)",
+      "halo": "oklch(1 0 0 / 0.16)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

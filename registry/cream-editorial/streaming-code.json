@@ -1,0 +1,38 @@
+{
+  "name": "streaming-code",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/streaming-code.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// StreamingCode: code an agent is writing arrives line by line on the dark\n// warm code panel, with token colours, line numbers and a copy action.\n//\n// Usage:\n//   <StreamingCode />\n//   <StreamingCode filename=\"app.ts\" language=\"TypeScript\" lines={...} raw=\"...\" />\n\nconst LINE_MS = 240\nconst HOLD_MS = 3200\n\ntype CodeToken = { t: string; c?: \"kw\" | \"str\" | \"num\" | \"fn\" | \"dim\" }\n\nconst DEFAULT_LINES: CodeToken[][] = [\n  [{ t: \"export async function \", c: \"kw\" }, { t: \"draftReply\", c: \"fn\" }, { t: \"(thread) {\", c: \"dim\" }],\n  [{ t: \"  const \", c: \"kw\" }, { t: \"notes = \" }, { t: \"await \", c: \"kw\" }, { t: \"readNotes\", c: \"fn\" }, { t: \"(\", c: \"dim\" }, { t: \"\\\"chapter-3\\\"\", c: \"str\" }, { t: \");\", c: \"dim\" }],\n  [{ t: \"  const \", c: \"kw\" }, { t: \"outline = \" }, { t: \"await \", c: \"kw\" }, { t: \"writer.\" }, { t: \"plan\", c: \"fn\" }, { t: \"({ notes });\", c: \"dim\" }],\n  [{ t: \"  await \", c: \"kw\" }, { t: \"thread.\" }, { t: \"append\", c: \"fn\" }, { t: \"(outline, { tone: \", c: \"dim\" }, { t: \"\\\"warm\\\"\", c: \"str\" }, { t: \" });\", c: \"dim\" }],\n  [{ t: \"  return \", c: \"kw\" }, { t: \"outline.words;\" }],\n  [{ t: \"}\", c: \"dim\" }],\n]\n\nconst DEFAULT_RAW = `export async function draftReply(thread) {\n  const notes = await readNotes(\"chapter-3\");\n  const outline = await writer.plan({ notes });\n  await thread.append(outline, { tone: \"warm\" });\n  return outline.words;\n}`\n\n/** Syntax colours on the dark code panel, one class per token kind. */\nconst TOKEN_CLASS = {\n  kw: \"text-(--syntax-keyword)\",\n  str: \"text-(--syntax-string)\",\n  num: \"text-(--syntax-keyword)\",\n  fn: \"text-(--syntax-fn)\",\n  dim: \"text-(--syntax-comment)\",\n} as const satisfies Record<NonNullable<CodeToken[\"c\"]>, string>\n\ninterface StreamingCodeProps extends React.HTMLAttributes<HTMLDivElement> {\n  filename?: string\n  language?: string\n  lines?: CodeToken[][]\n  /** Plain-text form used by the copy button. */\n  raw?: string\n  /** Alternative to lines/raw: plain code split on newlines, no token colors. */\n  code?: string\n}\n\nfunction StreamingCode({\n  filename = \"reply.ts\",\n  language = \"TypeScript\",\n  lines,\n  raw,\n  code,\n  className,\n  ...props\n}: StreamingCodeProps) {\n  const tokenLines = React.useMemo<CodeToken[][]>(() => {\n    if (lines) return lines\n    if (code) return code.split(\"\\n\").map((text) => [{ t: text || \" \" }])\n    return DEFAULT_LINES\n  }, [lines, code])\n  const rawText = raw ?? code ?? DEFAULT_RAW\n\n  const [count, setCount] = React.useState(0)\n  const [copied, setCopied] = React.useState(false)\n  const done = count >= tokenLines.length\n\n  React.useEffect(() => {\n    const t = setTimeout(\n      () => setCount((c) => (c >= tokenLines.length ? 0 : c + 1)),\n      count === 0 ? 400 : done ? HOLD_MS : LINE_MS,\n    )\n    return () => clearTimeout(t)\n  }, [count, done, tokenLines.length])\n\n  const copy = React.useCallback(() => {\n    navigator.clipboard\n      .writeText(rawText)\n      .then(() => {\n        setCopied(true)\n        setTimeout(() => setCopied(false), 1500)\n      })\n      .catch(() => {\n        // Clipboard may be unavailable. The code remains selectable.\n      })\n  }, [rawText])\n\n  return (\n    <div\n      data-slot=\"streaming-code\"\n      className={cn(\n        \"w-full max-w-[26rem] overflow-hidden rounded-xl bg-(--code) text-(--code-foreground)\",\n        className,\n      )}\n      {...props}\n    >\n      {/* header: file name, language and copy */}\n      <div className=\"flex items-center justify-between gap-3 bg-(--code-header) px-4 py-2 text-xs text-(--code-muted)\">\n        <span className=\"flex min-w-0 items-baseline gap-2\">\n          <span className=\"truncate font-mono text-(--code-foreground)\">{filename}</span>\n          <span>{language}</span>\n        </span>\n        <button\n          aria-label=\"Copy code\"\n          type=\"button\"\n          onClick={copy}\n          className={cn(\n            \"inline-flex h-6 items-center gap-1 rounded-sm px-1.5 text-xs font-medium\",\n            \"transition-colors duration-fast ease-out\",\n            \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n            copied\n              ? \"text-(--syntax-string)\"\n              : \"text-(--code-muted) hover:bg-(--code-foreground)/10 hover:text-(--code-foreground)\",\n          )}\n        >\n          <Icon icon={copied ? \"ph:check\" : \"ph:copy\"} className=\"size-3.5\" aria-hidden=\"true\" />\n          {copied ? \"Copied\" : \"Copy\"}\n        </button>\n      </div>\n\n      {/* body */}\n      <pre className=\"min-h-[9.5rem] overflow-x-auto px-4 py-4 font-mono text-[0.8125rem] leading-relaxed\">\n        {tokenLines.slice(0, count).map((line, i) => (\n          <div\n            key={i}\n            className=\"flex animate-in fade-in slide-in-from-bottom-1 duration-base ease-out motion-reduce:animate-none\"\n          >\n            <span className=\"w-6 shrink-0 select-none text-right text-(--code-muted)/60 tabular-nums\">\n              {i + 1}\n            </span>\n            <span className=\"whitespace-pre pl-3\">\n              {line.map((tok, j) => (\n                <span key={j} className={tok.c ? TOKEN_CLASS[tok.c] : \"text-(--code-foreground)\"}>\n                  {tok.t}\n                </span>\n              ))}\n              {i === count - 1 && !done && (\n                <span\n                  aria-hidden=\"true\"\n                  className=\"ml-0.5 inline-block h-3.5 w-0.5 translate-y-0.5 bg-primary motion-safe:animate-pulse\"\n                />\n              )}\n            </span>\n          </div>\n        ))}\n      </pre>\n    </div>\n  )\n}\n\nexport { StreamingCode }\nexport type { CodeToken }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "code": "oklch(0.214 0.002 67.7)",
+      "code-foreground": "oklch(0.948 0.011 95.2)",
+      "code-header": "oklch(0.257 0.006 78.2)",
+      "code-muted": "oklch(0.696 0.011 87.5)",
+      "syntax-keyword": "oklch(0.74 0.12 39)",
+      "syntax-string": "oklch(0.8 0.08 160)",
+      "syntax-fn": "oklch(0.8 0.08 249)",
+      "syntax-comment": "oklch(0.62 0.01 90)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "code": "oklch(0.155 0.002 67.7)",
+      "code-foreground": "oklch(0.948 0.011 95.2)",
+      "code-header": "oklch(0.214 0.002 67.7)",
+      "code-muted": "oklch(0.696 0.011 87.5)",
+      "syntax-keyword": "oklch(0.76 0.12 39)",
+      "syntax-string": "oklch(0.8 0.08 160)",
+      "syntax-fn": "oklch(0.8 0.08 249)",
+      "syntax-comment": "oklch(0.62 0.01 90)"
+    }
+  }
+}

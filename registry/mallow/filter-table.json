@@ -1,0 +1,33 @@
+{
+  "name": "filter-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/filter-table.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { focusRing, pressScale, selectedOption, optionTrack } from \"./_shared\"\n\n// FilterTable: status filters over a table of pages. Rows that a filter hides\n// fold shut, so the list reflows instead of jumping.\n//\n// Usage:\n//   <FilterTable />\n\ntype Status = \"todo\" | \"progress\" | \"done\"\n\nconst DEFAULT_FILTERS: { key: \"all\" | Status; label: string; dot?: string; count: number }[] = [\n  { key: \"all\", label: \"All\", count: 5 },\n  { key: \"todo\", label: \"Draft\", dot: \"var(--muted-foreground)\", count: 2 },\n  { key: \"progress\", label: \"In review\", dot: \"var(--info)\", count: 2 },\n  { key: \"done\", label: \"Published\", dot: \"var(--success)\", count: 1 },\n]\n\nconst DEFAULT_ROWS: { task: string; date: string; status: Status; owner: string }[] = [\n  { task: \"Sign in\", date: \"Dec 03\", status: \"todo\", owner: \"reference\" },\n  { task: \"Request limits\", date: \"Sep 22\", status: \"progress\", owner: \"guides\" },\n  { task: \"Event hooks\", date: \"Jan 02\", status: \"todo\", owner: \"reference\" },\n  { task: \"Paging\", date: \"Nov 08\", status: \"progress\", owner: \"guides\" },\n  { task: \"First steps\", date: \"Apr 14\", status: \"done\", owner: \"start\" },\n]\n\n/** Every status sits on the same quiet chip; only its text takes a hue. */\nconst PILLS: { [status in Status]: { label: string; className: string } } = {\n  todo: { label: \"Draft\", className: \"text-muted-foreground\" },\n  progress: { label: \"In review\", className: \"text-info-text\" },\n  done: { label: \"Published\", className: \"text-success-text\" },\n}\n\nconst COLUMNS = \"grid-cols-12 [&>*:nth-child(1)]:col-span-4 [&>*:nth-child(2)]:col-span-2 [&>*:nth-child(3)]:col-span-3 [&>*:nth-child(4)]:col-span-3\"\n\ninterface FilterTableProps extends React.HTMLAttributes<HTMLDivElement> {\n  rows?: typeof DEFAULT_ROWS\n  filters?: typeof DEFAULT_FILTERS\n}\n\n/**\n * Mallow FilterTable: filters on a lilac option track where the chosen one\n * takes the violet tint inside a violet ring, over a track of rows that fold\n * shut when a filter hides them.\n */\nfunction FilterTable({ rows = DEFAULT_ROWS, filters = DEFAULT_FILTERS, className, ...props }: FilterTableProps) {\n  const [filter, setFilter] = React.useState<\"all\" | Status>(\"all\")\n\n  return (\n    <div className={cn(\"w-full max-w-md\", className)} {...props}>\n      <div\n        role=\"group\"\n        aria-label=\"Filter by status\"\n        className={cn(optionTrack, \"mb-3 flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-full p-1\")}\n      >\n        {filters.map((f) => {\n          const active = filter === f.key\n          return (\n            <button\n              key={f.key}\n              type=\"button\"\n              aria-pressed={active}\n              onClick={() => setFilter(f.key)}\n              className={cn(\n                focusRing,\n                pressScale,\n                \"flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-sm\",\n                active ? cn(selectedOption, \"font-medium\") : \"text-muted-foreground hover:text-foreground\",\n              )}\n            >\n              {f.dot && <span aria-hidden=\"true\" className=\"size-1.5 rounded-full\" style={{ background: f.dot }} />}\n              {f.label}\n              <span className=\"text-xs tabular-nums text-muted-foreground\">{f.count}</span>\n            </button>\n          )\n        })}\n      </div>\n\n      <div\n        aria-label=\"Scrollable page table\"\n        className={cn(optionTrack, focusRing, \"overflow-x-auto rounded-2xl p-1\")}\n        role=\"region\"\n        tabIndex={0}\n      >\n        <div className=\"min-w-md\" role=\"table\" aria-label=\"Pages\">\n          <div role=\"row\" className={cn(\"grid px-3.5 py-2.5 text-sm text-muted-foreground\", COLUMNS)}>\n            <span role=\"columnheader\">Page</span>\n            <span role=\"columnheader\">Updated</span>\n            <span role=\"columnheader\">Status</span>\n            <span role=\"columnheader\">Section</span>\n          </div>\n          {rows.map((row) => {\n            const shown = filter === \"all\" || row.status === filter\n            const pill = PILLS[row.status]\n            return (\n              <div\n                key={row.task}\n                aria-hidden={!shown}\n                className=\"grid transition-[grid-template-rows,opacity] duration-slow ease-(--ease-out) motion-reduce:transition-none\"\n                style={{ gridTemplateRows: shown ? \"1fr\" : \"0fr\", opacity: shown ? 1 : 0 }}\n              >\n                <div className=\"overflow-hidden\">\n                  <div\n                    role=\"row\"\n                    className={cn(\n                      \"grid items-center rounded-xl px-3.5 py-2.5 text-sm transition-colors duration-fast hover:bg-accent/40\",\n                      COLUMNS,\n                    )}\n                  >\n                    <span role=\"cell\" className=\"truncate font-medium text-foreground\">{row.task}</span>\n                    <span role=\"cell\" className=\"tabular-nums text-muted-foreground\">{row.date}</span>\n                    <span role=\"cell\">\n                      <span className={cn(\"inline-flex h-6 items-center rounded-full bg-(--tag) px-2.5 text-xs\", pill.className)}>\n                        {pill.label}\n                      </span>\n                    </span>\n                    <span role=\"cell\" className=\"truncate font-mono text-xs text-muted-foreground\">{row.owner}</span>\n                  </div>\n                </div>\n              </div>\n            )\n          })}\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport { FilterTable }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.56 0.14 155)",
+      "info": "oklch(0.55 0.14 250)",
+      "tag": "oklch(0.9 0.032 292)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "info-text": "oklch(0.44 0.13 250)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.56 0.14 155)",
+      "info": "oklch(0.55 0.14 250)",
+      "tag": "oklch(0.9 0.032 292)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "info-text": "oklch(0.44 0.13 250)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

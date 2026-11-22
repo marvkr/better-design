@@ -9,9 +9,11 @@
     }
   ],
   "dependencies": [
-    "@iconify/react"
+    "@iconify/react@^6.0.2"
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/lumen-dark/button.json",
+    "https://better-design.com/registry/lumen-dark/command.json",
+    "https://better-design.com/registry/lumen-dark/popover.json"
   ]
 }

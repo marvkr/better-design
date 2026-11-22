@@ -1,0 +1,23 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Notification — a floating panel for something that arrived rather\n * than something you opened. Unread is live state, so its mark is the accent:\n * a small 2px-radius square, never a pulsing dot. Time runs mono, because it\n * is metadata.\n */\n\nexport interface NotificationProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  title: string;\n  description?: string;\n  time?: string;\n  unread?: boolean;\n  onDismiss?: () => void;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    { className, title, description, time, unread, onDismiss, ...props },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"relative flex gap-3 rounded-[0.6875rem] bg-card p-4\",\n        \"shadow-[var(--shadow-float-popover)]\",\n        className,\n      )}\n      {...props}\n    >\n      {unread ? (\n        <span\n          aria-label=\"Unread\"\n          className=\"mt-[0.375rem] size-[0.4375rem] shrink-0 rounded-[0.125rem] bg-ring\"\n        />\n      ) : null}\n      <div className=\"min-w-0 flex-1 space-y-0.5\">\n        <p className=\"text-[0.8125rem] font-medium leading-snug tracking-[-0.01em] text-foreground\">\n          {title}\n        </p>\n        {description ? (\n          <p className=\"text-[0.7813rem] leading-relaxed text-muted-foreground\">\n            {description}\n          </p>\n        ) : null}\n        {time ? (\n          <p className=\"pt-1 font-mono text-[0.6563rem] tabular-nums text-muted-foreground\">\n            {time}\n          </p>\n        ) : null}\n      </div>\n      {onDismiss ? (\n        <button\n          type=\"button\"\n          onClick={onDismiss}\n          aria-label=\"Dismiss\"\n          className={cn(\n            \"inline-flex size-6 shrink-0 items-center justify-center rounded-[0.375rem] text-muted-foreground\",\n            \"transition-[background-color,color] duration-fast\",\n            \"hover:bg-secondary hover:text-foreground\",\n            \"focus-visible:outline-none focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n          )}\n        >\n          <X className=\"size-3.5\" strokeWidth={1.5} />\n        </button>\n      ) : null}\n    </div>\n  ),\n);\nNotification.displayName = \"Notification\";\n\nexport { Notification };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
+    },
+    "dark": {
+      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
+    }
+  }
+}

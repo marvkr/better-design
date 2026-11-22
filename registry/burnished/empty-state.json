@@ -1,0 +1,28 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { wellInset } from \"./_shared\";\n\n/**\n * Burnished EmptyState: a recessed well where content will go, with a round\n * graphite bevel holding the icon. The hollow says \"nothing here yet\"\n * without a dashed border.\n */\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ className, icon = \"ph:package\", title, description, action, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-state\"\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-2xl px-6 py-10 text-center\",\n        wellInset,\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex size-12 items-center justify-center rounded-full bg-(image:--fill-raised) text-muted-foreground shadow-(--bevel-raised)\">\n        <Icon icon={icon} className=\"size-5\" />\n      </div>\n      <div className=\"max-w-md space-y-1.5\">\n        <div className=\"text-base font-semibold text-foreground\">{title}</div>\n        {description && (\n          <div className=\"text-sm leading-relaxed text-muted-foreground\">{description}</div>\n        )}\n      </div>\n      {action && <div className=\"pt-1\">{action}</div>}\n    </div>\n  ),\n);\nEmptyState.displayName = \"EmptyState\";\n\nexport { EmptyState };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Tag Input: a recessed multi-tag track sunk into the vault\n// surface, like the DS's multi-line fields. Tags are magenta-washed pills;\n// focus lights the magenta ring.\n\ninterface TagInputProps\n  extends Omit<\n    React.InputHTMLAttributes<HTMLInputElement>,\n    \"value\" | \"onChange\"\n  > {\n  value?: string[]\n  onChange?: (tags: string[]) => void\n  placeholder?: string\n  maxTags?: number\n}\n\nfunction TagInput({\n  value = [],\n  onChange,\n  placeholder = \"Add tag...\",\n  maxTags,\n  className,\n  disabled,\n  ...props\n}: TagInputProps) {\n  const [input, setInput] = React.useState(\"\")\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  const addTag = (tag: string) => {\n    const trimmed = tag.trim()\n    if (\n      trimmed &&\n      !value.includes(trimmed) &&\n      (!maxTags || value.length < maxTags)\n    ) {\n      onChange?.([...value, trimmed])\n      setInput(\"\")\n    }\n  }\n\n  const removeTag = (tagToRemove: string) => {\n    onChange?.(value.filter((t) => t !== tagToRemove))\n  }\n\n  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === \"Enter\" || e.key === \",\") {\n      e.preventDefault()\n      addTag(input)\n    } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n      removeTag(value[value.length - 1])\n    }\n  }\n\n  return (\n    <div\n      className={cn(\n        \"flex min-h-10 w-full flex-wrap gap-1.5 rounded-xl border border-border bg-input px-3 py-2\",\n        \"[box-shadow:var(--shadow-inset)]\",\n        \"transition-[color,box-shadow,border-color] duration-fast\",\n        \"hover:border-ring/35 focus-within:border-ring/60 focus-within:ring-2 focus-within:ring-ring/40\",\n        \"cursor-text\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        className\n      )}\n      onClick={() => inputRef.current?.focus()}\n    >\n      {value.map((tag) => (\n        <span\n          key={tag}\n          className=\"inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary-bright\"\n        >\n          {tag}\n          {!disabled && (\n            <button\n              type=\"button\"\n              onClick={(e) => {\n                e.stopPropagation()\n                removeTag(tag)\n              }}\n              className=\"text-primary-bright/60 hover:text-primary-bright\"\n            >\n              <Icon icon=\"ph:x\" className=\"h-3 w-3\" />\n            </button>\n          )}\n        </span>\n      ))}\n      <input\n        ref={inputRef}\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        onKeyDown={handleKeyDown}\n        onBlur={() => addTag(input)}\n        placeholder={value.length === 0 ? placeholder : undefined}\n        disabled={disabled || (maxTags !== undefined && value.length >= maxTags)}\n        className=\"min-w-[7.5rem] flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        {...props}\n      />\n    </div>\n  )\n}\n\nexport { TagInput }\nexport type { TagInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

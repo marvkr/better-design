@@ -18,7 +18,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       className={cn(
         "rounded-xl bg-card text-card-foreground border border-white/5",
         "[box-shadow:var(--shadow-sm)]",
-        "transition-[background-color,box-shadow,border-color] duration-200",
+        "transition-[background-color,box-shadow,border-color] duration-base",
         interactive && "cursor-pointer hover:bg-accent/40 hover:border-white/10 hover:[box-shadow:var(--shadow-md)]",
         className
       )}

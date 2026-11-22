@@ -1,0 +1,24 @@
+{
+  "name": "tag-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, quietChip } from \"./_shared\";\n\n/**\n * Paddock TagInput: a white field that collects quiet cool grey tag chips.\n * Enter or a comma adds a tag; Backspace on an empty input removes the last\n * one.\n */\nexport interface TagInputProps {\n  value: string[];\n  onValueChange: (tags: string[]) => void;\n  placeholder?: string;\n  className?: string;\n  disabled?: boolean;\n  maxTags?: number;\n}\n\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  ({ value, onValueChange, placeholder = \"Add a tag\", className, disabled, maxTags }, ref) => {\n    const [input, setInput] = React.useState(\"\");\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim();\n      if (!trimmed || value.includes(trimmed)) return;\n      if (maxTags && value.length >= maxTags) return;\n      onValueChange([...value, trimmed]);\n      setInput(\"\");\n    };\n\n    const removeTag = (tag: string) => {\n      onValueChange(value.filter((t) => t !== tag));\n    };\n\n    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n      if (e.key === \"Enter\" || e.key === \",\") {\n        e.preventDefault();\n        addTag(input);\n      } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n        removeTag(value[value.length - 1]);\n      }\n    };\n\n    return (\n      <div\n        data-slot=\"tag-input\"\n        className={cn(\n          formFieldBase,\n          \"flex min-h-10 flex-wrap items-center gap-1 rounded-2xl px-1.5 py-1.5\",\n          \"focus-within:ring-2 focus-within:ring-ring\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className,\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            className={cn(\"inline-flex h-6.5 items-center gap-0.5 rounded-sm pl-2.5 pr-0.5 text-[0.8125rem] font-medium\", quietChip)}\n          >\n            {tag}\n            <button\n              type=\"button\"\n              onClick={() => removeTag(tag)}\n              className={cn(\n                \"flex size-5 items-center justify-center rounded-sm text-muted-foreground\",\n                \"transition-colors duration-fast ease-out hover:bg-card hover:text-foreground\",\n                \"outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n              )}\n              aria-label={`Remove ${tag}`}\n              disabled={disabled}\n            >\n              <Icon icon=\"mingcute:close-line\" aria-hidden className=\"size-3\" />\n            </button>\n          </span>\n        ))}\n        <input\n          ref={ref}\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyDown={onKeyDown}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          disabled={disabled}\n          className=\"min-w-20 flex-1 bg-transparent px-2 text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        />\n      </div>\n    );\n  },\n);\nTagInput.displayName = \"TagInput\";\n\nexport { TagInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {}
+  }
+}

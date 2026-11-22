@@ -1,0 +1,25 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail StatusIndicator: a delivery-status dot beside a plain label.\n *\n * The label stays in body ink at full contrast, and the dot alone carries\n * the state: grey for idle, green for delivered, yellow for queued, red for\n * bounced or failed, blue for opened. Each variant sets the dot colour on\n * the wrapper, so the exported variants style any custom marker too.\n */\nconst statusIndicatorVariants = cva(\n  \"inline-flex items-center gap-2 text-sm text-(--foreground-secondary)\",\n  {\n    variants: {\n      variant: {\n        default: \"[--status-dot:var(--control)]\",\n        success: \"[--status-dot:var(--success)]\",\n        warning: \"[--status-dot:var(--warning)]\",\n        destructive: \"[--status-dot:var(--destructive)]\",\n        info: \"[--status-dot:var(--info)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface StatusIndicatorProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof statusIndicatorVariants> {}\n\nconst StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(\n  ({ className, variant, children, ...props }, ref) => (\n    <span\n      ref={ref}\n      data-slot=\"status-indicator\"\n      data-variant={variant ?? \"default\"}\n      className={cn(statusIndicatorVariants({ variant }), className)}\n      {...props}\n    >\n      <span\n        aria-hidden=\"true\"\n        className=\"size-1.5 shrink-0 rounded-full bg-(--status-dot)\"\n      />\n      {children}\n    </span>\n  ),\n);\nStatusIndicator.displayName = \"StatusIndicator\";\n\nexport { StatusIndicator, statusIndicatorVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.88 0.212 155.8)",
+      "warning": "oklch(0.854 0.157 84.1)",
+      "info": "oklch(0.688 0.169 251.4)",
+      "foreground-secondary": "oklch(0.88 0.002 264)",
+      "control": "oklch(0.52 0.006 240)"
+    },
+    "dark": {}
+  }
+}

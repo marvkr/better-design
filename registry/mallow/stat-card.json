@@ -1,0 +1,31 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { selectedOption } from \"./_shared\";\nimport { Card, CardContent } from \"./card\";\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string | number;\n  change?: {\n    value: string | number;\n    trend: \"up\" | \"down\" | \"neutral\";\n  };\n  icon?: React.ReactNode;\n  description?: string;\n}\n\n/** Change chips share one lilac fill; the text colour and the arrow say which way it went. */\nconst trendTone = {\n  up: \"bg-(--tag) text-success-text\",\n  down: \"bg-(--tag) text-destructive-text\",\n  neutral: \"bg-(--tag) text-muted-foreground\",\n} as const;\n\nconst trendIcon = {\n  up: \"iconoir:arrow-up-right\",\n  down: \"iconoir:arrow-down-right\",\n  neutral: null,\n} as const;\n\n/** Read before the value, so a screen reader hears the direction too. */\nconst trendSpoken = {\n  up: \"Up \",\n  down: \"Down \",\n  neutral: \"No change \",\n} as const;\n\n/**\n * Mallow StatCard: one large figure in medium weight on tabular digits, a\n * muted label above it, an optional icon on a small violet-tinted tile, and the\n * change as a quiet chip below.\n */\nfunction StatCard({ label, value, change, icon, description, className, ...props }: StatCardProps) {\n  const arrow = change ? trendIcon[change.trend] : null;\n\n  return (\n    <Card className={cn(\"py-0\", className)} {...props}>\n      <CardContent className=\"flex flex-col gap-4 p-6\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"flex min-w-0 flex-col gap-1\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"text-4xl font-medium tracking-tight tabular-nums text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <span\n              aria-hidden=\"true\"\n              className={cn(\n                selectedOption,\n                \"flex size-10 shrink-0 items-center justify-center rounded-md [&_svg]:size-5\",\n              )}\n            >\n              {icon}\n            </span>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"flex flex-wrap items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex h-7 items-center gap-1 rounded-full px-2.5 text-sm tabular-nums\",\n                  trendTone[change.trend],\n                )}\n              >\n                {arrow && <Icon icon={arrow} className=\"size-3.5\" aria-hidden=\"true\" />}\n                <span className=\"sr-only\">{trendSpoken[change.trend]}</span>\n                {change.value}\n              </span>\n            )}\n            {description && <span className=\"text-sm text-muted-foreground\">{description}</span>}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { StatCard };\nexport type { StatCardProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json",
+    "https://better-design.com/registry/mallow/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tag": "oklch(0.9 0.032 292)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "destructive-text": "oklch(0.47 0.18 22)"
+    },
+    "dark": {
+      "tag": "oklch(0.9 0.032 292)",
+      "success-text": "oklch(0.42 0.11 155)",
+      "destructive-text": "oklch(0.47 0.18 22)"
+    }
+  }
+}

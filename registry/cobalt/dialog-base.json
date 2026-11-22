@@ -1,0 +1,24 @@
+{
+  "name": "dialog-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\"\nimport { X } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Dialog — a floating carved panel over a deep scrim, with the shared\n * --shadow-pop elevation (top inset highlight + stacked dark drops).\n */\n\nconst Dialog = DialogPrimitive.Root\nconst DialogTrigger = DialogPrimitive.Trigger\nconst DialogPortal = DialogPrimitive.Portal\nconst DialogClose = DialogPrimitive.Close\n\nconst DialogOverlay = React.forwardRef<\n  HTMLDivElement,\n  Omit<DialogPrimitive.Backdrop.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Backdrop\n    ref={ref}\n    className={cn(\n      \"fixed inset-0 z-50 bg-[oklch(0.08_0.008_255_/_0.7)] backdrop-blur-sm\",\n      \"transition-opacity duration-base data-starting-style:opacity-0 data-ending-style:opacity-0\",\n      className\n    )}\n    {...props}\n  />\n))\nDialogOverlay.displayName = \"DialogOverlay\"\n\nconst DialogContent = React.forwardRef<\n  HTMLDivElement,\n  Omit<DialogPrimitive.Popup.Props, \"className\"> & { className?: string }\n>(({ className, children, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Popup\n      ref={ref}\n      className={cn(\n        \"fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 p-6\",\n        \"rounded-xl border border-border bg-popover text-popover-foreground\",\n        \"[box-shadow:var(--shadow-pop)]\",\n        \"transition-[opacity,transform] duration-base data-starting-style:opacity-0 data-starting-style:scale-95 data-ending-style:opacity-0 data-ending-style:scale-95\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      <DialogPrimitive.Close\n        className={cn(\n          \"absolute right-4 top-4 rounded-sm p-1 text-muted-foreground\",\n          \"transition-colors hover:bg-accent hover:text-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50\",\n          \"disabled:pointer-events-none\"\n        )}\n      >\n        <X className=\"h-4 w-4\" />\n        <span className=\"sr-only\">Close</span>\n      </DialogPrimitive.Close>\n    </DialogPrimitive.Popup>\n  </DialogPortal>\n))\nDialogContent.displayName = \"DialogContent\"\n\nconst DialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"flex flex-col gap-1.5 text-center sm:text-left\", className)}\n    {...props}\n  />\n)\nDialogHeader.displayName = \"DialogHeader\"\n\nconst DialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-2\", className)}\n    {...props}\n  />\n)\nDialogFooter.displayName = \"DialogFooter\"\n\nconst DialogTitle = React.forwardRef<\n  HTMLHeadingElement,\n  Omit<DialogPrimitive.Title.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    className={cn(\"text-lg font-semibold leading-none tracking-tight text-foreground\", className)}\n    {...props}\n  />\n))\nDialogTitle.displayName = \"DialogTitle\"\n\nconst DialogDescription = React.forwardRef<\n  HTMLParagraphElement,\n  Omit<DialogPrimitive.Description.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nDialogDescription.displayName = \"DialogDescription\"\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogTrigger,\n  DialogClose,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4), 0 1rem 2.5rem oklch(0 0 0 / 0.55)"
+    },
+    "dark": {
+      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4), 0 1rem 2.5rem oklch(0 0 0 / 0.55)"
+    }
+  }
+}

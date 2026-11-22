@@ -1,0 +1,26 @@
+{
+  "name": "pagination",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/pagination.tsx",
+      "content": "import * as React from \"react\";\nimport type { VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\n/**\n * Ink mail Pagination: a row of ghost buttons for paging through a log of\n * sent messages. The page you are on takes the white wash with full ink, the\n * others brighten under the pointer, and Previous and Next carry their\n * labels beside the carets. Page numbers keep tabular figures so the row\n * does not shift as you move through it.\n */\nconst Pagination = ({ className, ...props }: React.ComponentProps<\"nav\">) => (\n  <nav\n    role=\"navigation\"\n    aria-label=\"Pagination\"\n    data-slot=\"pagination\"\n    className={cn(\"mx-auto flex w-full justify-center\", className)}\n    {...props}\n  />\n);\nPagination.displayName = \"Pagination\";\n\n/** The list of page links. */\nconst PaginationContent = React.forwardRef<\n  HTMLUListElement,\n  React.ComponentProps<\"ul\">\n>(({ className, ...props }, ref) => (\n  <ul\n    ref={ref}\n    data-slot=\"pagination-content\"\n    className={cn(\"flex flex-row items-center gap-1\", className)}\n    {...props}\n  />\n));\nPaginationContent.displayName = \"PaginationContent\";\n\n/** One slot in the row. */\nconst PaginationItem = React.forwardRef<\n  HTMLLIElement,\n  React.ComponentProps<\"li\">\n>(({ className, ...props }, ref) => (\n  <li ref={ref} data-slot=\"pagination-item\" className={className} {...props} />\n));\nPaginationItem.displayName = \"PaginationItem\";\n\ntype PaginationLinkProps = {\n  isActive?: boolean;\n} & Pick<VariantProps<typeof buttonVariants>, \"size\"> &\n  React.ComponentProps<\"a\">;\n\n/** A page link: the white wash when it is the current page, ghost otherwise. */\nconst PaginationLink = ({\n  className,\n  isActive,\n  size = \"icon\",\n  ...props\n}: PaginationLinkProps) => (\n  <a\n    aria-current={isActive ? \"page\" : undefined}\n    data-slot=\"pagination-link\"\n    data-active={isActive || undefined}\n    className={cn(\n      buttonVariants({ variant: \"ghost\", size }),\n      \"cursor-pointer rounded-lg font-medium tabular-nums\",\n      isActive && \"bg-(--wash) text-foreground hover:bg-(--wash)\",\n      className,\n    )}\n    {...props}\n  />\n);\nPaginationLink.displayName = \"PaginationLink\";\n\n/** Steps back one page. */\nconst PaginationPrevious = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) => (\n  <PaginationLink\n    aria-label=\"Go to previous page\"\n    size=\"default\"\n    className={cn(\"gap-1 ps-2.5\", className)}\n    {...props}\n  >\n    <Icon icon=\"ph:caret-left\" aria-hidden=\"true\" className=\"size-4 rtl:rotate-180\" />\n    <span>Previous</span>\n  </PaginationLink>\n);\nPaginationPrevious.displayName = \"PaginationPrevious\";\n\n/** Steps forward one page. */\nconst PaginationNext = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) => (\n  <PaginationLink\n    aria-label=\"Go to next page\"\n    size=\"default\"\n    className={cn(\"gap-1 pe-2.5\", className)}\n    {...props}\n  >\n    <span>Next</span>\n    <Icon icon=\"ph:caret-right\" aria-hidden=\"true\" className=\"size-4 rtl:rotate-180\" />\n  </PaginationLink>\n);\nPaginationNext.displayName = \"PaginationNext\";\n\n/** Stands in for the pages skipped between two links. */\nconst PaginationEllipsis = ({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) => (\n  <span\n    aria-hidden=\"true\"\n    data-slot=\"pagination-ellipsis\"\n    className={cn(\n      \"flex size-10 items-center justify-center text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  >\n    <Icon icon=\"ph:dots-three\" className=\"size-4\" />\n    <span className=\"sr-only\">More pages</span>\n  </span>\n);\nPaginationEllipsis.displayName = \"PaginationEllipsis\";\n\nexport {\n  Pagination,\n  PaginationContent,\n  PaginationLink,\n  PaginationItem,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "wash": "oklch(1 0 0 / 0.1)",
+      "link": "oklch(0.688 0.169 251.4)"
+    },
+    "dark": {}
+  }
+}

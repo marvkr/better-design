@@ -1,0 +1,29 @@
+{
+  "name": "progress",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Progress: recessed well track with the glowing amber fill.\n\nconst Progress = React.forwardRef<\n  React.ElementRef<typeof ProgressPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full\",\n      \"bg-[var(--ag-well)] border border-[color:var(--ag-border)] shadow-[var(--shadow-well)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Indicator\n      className={cn(\n        \"h-full w-full flex-1 rounded-full transition-all\",\n        \"bg-[image:var(--ag-primary-grad)]\",\n        \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.32),0_0_0.625rem_oklch(0.69_0.195_42/0.4)]\"\n      )}\n      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}\n    />\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = ProgressPrimitive.Root.displayName\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-progress@^1.1.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))"
+    },
+    "dark": {
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))"
+    }
+  }
+}

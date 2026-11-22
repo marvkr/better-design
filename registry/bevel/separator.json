@@ -1,0 +1,23 @@
+{
+  "name": "separator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Separator — one pixel of the track token. A divider is never a\n * border color here, so a run of rows reads as one card rather than a stack\n * of boxes.\n */\n\nconst Separator = React.forwardRef<\n  React.ElementRef<typeof SeparatorPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>\n>(\n  (\n    { className, orientation = \"horizontal\", decorative = true, ...props },\n    ref,\n  ) => (\n    <SeparatorPrimitive.Root\n      ref={ref}\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-[var(--track)]\",\n        orientation === \"horizontal\" ? \"h-px w-full\" : \"h-full w-px\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nSeparator.displayName = SeparatorPrimitive.Root.displayName\n\nexport { Separator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-separator@^1.1.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)"
+    }
+  }
+}

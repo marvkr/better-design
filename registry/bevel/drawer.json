@@ -1,0 +1,25 @@
+{
+  "name": "drawer",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Drawer as DrawerPrimitive } from \"vaul\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Drawer: the bottom sheet a thumb drags. The panel takes the 20px\n * card radius on its top corners only, carries no border, and opens with a\n * grabber in the track color so the drag target is obvious before anyone\n * touches it.\n */\n\n/** Props for `Drawer`; `shouldScaleBackground` shrinks the page behind the panel. */\nconst Drawer = ({\n  shouldScaleBackground = true,\n  ...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (\n  <DrawerPrimitive.Root\n    shouldScaleBackground={shouldScaleBackground}\n    {...props}\n  />\n)\nDrawer.displayName = \"Drawer\"\n\nconst DrawerTrigger = DrawerPrimitive.Trigger\nconst DrawerPortal = DrawerPrimitive.Portal\nconst DrawerClose = DrawerPrimitive.Close\n\nconst DrawerOverlay = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Overlay\n    ref={ref}\n    className={cn(\n      \"fixed inset-0 z-50 bg-[oklch(0.1593_0.0111_267.98_/_0.42)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nDrawerOverlay.displayName = \"DrawerOverlay\"\n\nconst DrawerContent = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <DrawerPortal>\n    <DrawerOverlay />\n    <DrawerPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col\",\n        \"rounded-t-[1.25rem] bg-card text-card-foreground\",\n        \"[box-shadow:var(--shadow-card)]\",\n        className,\n      )}\n      {...props}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"mx-auto mt-2.5 h-1 w-9 shrink-0 rounded-full bg-[var(--track)]\"\n      />\n      {children}\n    </DrawerPrimitive.Content>\n  </DrawerPortal>\n))\nDrawerContent.displayName = \"DrawerContent\"\n\n/** The title and description block under the drawer grabber. */\nconst DrawerHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"grid gap-1.5 p-[1.125rem] text-left\", className)}\n    {...props}\n  />\n)\nDrawerHeader.displayName = \"DrawerHeader\"\n\n/** The action stack at the foot of a drawer, full width for a thumb. */\nconst DrawerFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\"mt-auto flex flex-col gap-2.5 p-[1.125rem]\", className)}\n    {...props}\n  />\n)\nDrawerFooter.displayName = \"DrawerFooter\"\n\nconst DrawerTitle = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Title\n    ref={ref}\n    className={cn(\n      \"text-[1.1875rem] leading-6 font-semibold tracking-[-0.0375rem] text-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nDrawerTitle.displayName = \"DrawerTitle\"\n\nconst DrawerDescription = React.forwardRef<\n  React.ElementRef<typeof DrawerPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <DrawerPrimitive.Description\n    ref={ref}\n    className={cn(\n      \"text-[0.9063rem] leading-[1.25rem] tracking-[0.0188rem] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nDrawerDescription.displayName = \"DrawerDescription\"\n\nexport {\n  Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "vaul@^1.1.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-card": "var(--shadow-md)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-card": "var(--shadow-md)"
+    }
+  }
+}

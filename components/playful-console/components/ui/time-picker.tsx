@@ -1,0 +1,69 @@
+"use client";
+
+import * as React from "react";
+import { Icon } from "@iconify/react";
+
+import { cn } from "@/lib/utils";
+import { formFieldBase, formFieldSingleLine } from "./_shared";
+
+/** Props for TimePicker: every input prop except `type`, which is always "time". */
+export interface TimePickerProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {}
+
+/**
+ * Playful console TimePicker: the white well holding a native time input in
+ * mono figures. The browser's own clock glyph is hidden and a duotone clock
+ * sits at the start instead; pressing it opens the browser's time list.
+ */
+const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
+  ({ className, disabled, ...props }, ref) => {
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // SAFETY: inputRef is attached to the input this component always renders,
+    // so it is set by the time a parent can reach the handle.
+    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+
+    const openPicker = () => {
+      const input = inputRef.current;
+      if (!input || disabled) return;
+      input.focus();
+      try {
+        input.showPicker?.();
+      } catch {
+        // Some browsers refuse showPicker outside a direct press; typing still works.
+      }
+    };
+
+    return (
+      <div data-slot="time-picker" className="relative">
+        <button
+          type="button"
+          onClick={openPicker}
+          disabled={disabled}
+          tabIndex={-1}
+          aria-label="Choose a time"
+          className="absolute start-1 top-1/2 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors duration-fast ease-out hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:text-(--foreground-disabled)"
+        >
+          <Icon icon="ph:clock-duotone" className="size-4" aria-hidden="true" />
+        </button>
+        <input
+          ref={inputRef}
+          type="time"
+          disabled={disabled}
+          className={cn(
+            formFieldBase,
+            formFieldSingleLine,
+            "ps-9 font-mono tabular-nums [&::-webkit-calendar-picker-indicator]:hidden",
+            className,
+          )}
+          {...props}
+        />
+      </div>
+    );
+  },
+);
+TimePicker.displayName = "TimePicker";
+
+export { TimePicker };

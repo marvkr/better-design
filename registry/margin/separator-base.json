@@ -1,0 +1,14 @@
+{
+  "name": "separator-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Margin Separator: the one hairline that splits panels, across or upright. */\nconst Separator = React.forwardRef<\n  HTMLDivElement,\n  Omit<SeparatorPrimitive.Props, \"className\"> & {\n    className?: string;\n    /** Accepted for Radix callers; the Base UI separator always carries role=\"separator\". */\n    decorative?: boolean;\n  }\n>(({ className, orientation = \"horizontal\", decorative: _decorative, ...props }, ref) => (\n  <SeparatorPrimitive\n    ref={ref}\n    data-slot=\"separator\"\n    orientation={orientation}\n    className={cn(\n      \"shrink-0 bg-border\",\n      \"data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full\",\n      \"data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px\",\n      className,\n    )}\n    {...props}\n  />\n));\nSeparator.displayName = \"Separator\";\n\nexport { Separator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

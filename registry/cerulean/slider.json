@@ -1,0 +1,29 @@
+{
+  "name": "slider",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SliderPrimitive from \"@radix-ui/react-slider\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Slider = React.forwardRef<\n  React.ElementRef<typeof SliderPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SliderPrimitive.Root\n    ref={ref}\n    className={cn(\"relative flex w-full touch-none select-none items-center\", className)}\n    {...props}\n  >\n    <SliderPrimitive.Track\n      className={cn(\n        \"relative h-1.5 w-full grow overflow-hidden rounded-full border border-border\",\n        \"bg-input [box-shadow:var(--shadow-well)]\"\n      )}\n    >\n      {/* Range fill reuses the primary Button accent material. */}\n      <SliderPrimitive.Range className=\"absolute h-full [background:var(--accent-fill)] [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.2)]\" />\n    </SliderPrimitive.Track>\n    <SliderPrimitive.Thumb\n      className={cn(\n        \"block h-4 w-4 rounded-full\",\n        \"[background:var(--accent-fill)] [box-shadow:var(--shadow-accent)]\",\n        \"transition-[box-shadow] duration-fast\",\n        \"hover:[box-shadow:var(--shadow-accent-hover)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:pointer-events-none disabled:opacity-50\"\n      )}\n    />\n  </SliderPrimitive.Root>\n))\nSlider.displayName = SliderPrimitive.Root.displayName\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slider@^1.3.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)",
+      "shadow-accent-hover": "0 0 0 0.0313rem oklch(0.82 0.13 233 / 0.85), inset 0 0.0625rem 0 oklch(1 0 0 / 0.24), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.7 0.122 233 / 0.38)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)",
+      "shadow-accent-hover": "0 0 0 0.0313rem oklch(0.82 0.13 233 / 0.85), inset 0 0.0625rem 0 oklch(1 0 0 / 0.24), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.7 0.122 233 / 0.38)"
+    }
+  }
+}

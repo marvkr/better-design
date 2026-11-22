@@ -1,0 +1,11 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Field: bare form-field wrapper with console captions and\n// alarm-red error text.\n\nconst Field = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} className={cn(\"space-y-2\", className)} {...props} />\n))\nField.displayName = \"Field\"\n\nconst FieldDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-xs text-muted-foreground\", className)}\n    {...props}\n  />\n))\nFieldDescription.displayName = \"FieldDescription\"\n\nconst FieldError = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-xs font-semibold text-destructive\", className)}\n    {...props}\n  />\n))\nFieldError.displayName = \"FieldError\"\n\nexport { Field, FieldDescription, FieldError }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

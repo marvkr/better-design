@@ -1,0 +1,26 @@
+{
+  "name": "comparison-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/comparison-table.tsx",
+      "content": "// Ported from the public AIcss React source.\n// Source: https://www.aicss.dev/components/comparison-table\n\"use client\"\n\nimport styles from \"./comparison-table.module.css\";\n\ntype Feature = { label: string; values: boolean[] };\n\nconst PLANS = [\"Personal\", \"Enterprise\"];\nconst FEATURES: Feature[] = [\n  { label: \"Unlimited projects\", values: [true, true] },\n  { label: \"All components\", values: [true, true] },\n  { label: \"Team-wide usage\", values: [false, true] },\n  { label: \"Priority support\", values: [false, true] },\n];\n\nexport function ComparisonTable({\n  plans = PLANS,\n  features = FEATURES,\n}: {\n  plans?: string[];\n  features?: Feature[];\n}) {\n  return (\n    <div className={styles.tbl}>\n      <div className={styles.tblHead}>\n        <div className={styles.tblCell}>Feature</div>\n        {plans.map((p) => (\n          <div key={p} className={styles.tblCell}>{p}</div>\n        ))}\n      </div>\n      <div className={styles.tblBody}>\n        {features.map((f) => (\n          <div key={f.label} className={styles.tblRow}>\n            <div className={styles.tblCell}>\n              <span className={styles.tblCellText}>{f.label}</span>\n            </div>\n            {f.values.map((v, i) => (\n              <div key={i} className={styles.tblCell}>\n                {v ? <span className={styles.yes}>✓</span> : <span className={styles.no} aria-label=\"No\">–</span>}\n              </div>\n            ))}\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "components/ui/comparison-table.module.css",
+      "content": "/* Ported from https://www.aicss.dev/components/comparison-table */\n.tbl { width: 100%; display: flex; flex-direction: column; border: 0.0625rem solid var(--border); border-radius: 0.75rem; overflow: hidden; background: var(--muted); font-size: 0.8125rem; }\n.tblHead { display: flex; color: var(--muted-foreground); font-weight: 500; }\n.tblHead .tblCell { padding-top: 0.4375rem; padding-bottom: 0.4375rem; }\n.tblBody { display: flex; flex-direction: column; background: var(--card); border: 0.0625rem solid var(--border); border-radius: 0.75rem 0.75rem 0 0; margin: 0 -0.0625rem -0.0625rem; }\n.tblRow { display: flex; }\n.tblRow:not(:last-child) { border-bottom: 0.0625rem solid var(--border); }\n.tblCell { flex: 1 1 0; min-width: 0; padding: 0.5625rem 0.75rem; display: flex; align-items: center; color: var(--foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }\n.tblCell:not(:last-child) { border-right: 0.0625rem solid var(--border); }\n/* text-overflow:ellipsis has no effect on a flex container's raw text, so the\n   label lives in this shrinkable child instead. */\n.tblCellText { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.yes { color: oklch(0.6247 0.137 159.8934); }\n.no { color: var(--muted-foreground); }\n",
+      "type": "registry:file",
+      "target": "components/ui/comparison-table.module.css"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "label": "0.6875rem"
+    },
+    "dark": {
+      "label": "0.6875rem"
+    }
+  }
+}

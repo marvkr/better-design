@@ -1,0 +1,23 @@
+{
+  "name": "checkbox-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Checkbox } from \"./checkbox\";\n\ninterface CheckboxGroupOption {\n  value: string;\n  label: React.ReactNode;\n  description?: React.ReactNode;\n  disabled?: boolean;\n}\n\ninterface CheckboxGroupProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"onChange\"\n> {\n  options: CheckboxGroupOption[];\n  value: string[];\n  onValueChange: (value: string[]) => void;\n  orientation?: \"vertical\" | \"horizontal\";\n  name?: string;\n}\n\n/**\n * Airy docs CheckboxGroup: a list of options set like a docs parameter list.\n * Each label sits in medium ink with an optional muted line under it, and the\n * whole row is the click target.\n */\nfunction CheckboxGroup({\n  options,\n  value,\n  onValueChange,\n  orientation = \"vertical\",\n  name,\n  className,\n  ...props\n}: CheckboxGroupProps) {\n  const groupId = React.useId();\n\n  const toggle = (optionValue: string, checked: boolean) => {\n    onValueChange(\n      checked\n        ? [...value, optionValue]\n        : value.filter((v) => v !== optionValue),\n    );\n  };\n\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"checkbox-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"flex\",\n        orientation === \"vertical\" ? \"flex-col gap-3.5\" : \"flex-row flex-wrap gap-x-6 gap-y-3\",\n        className,\n      )}\n      {...props}\n    >\n      {options.map((option) => {\n        const id = `${groupId}-${option.value}`;\n        return (\n          <label\n            key={option.value}\n            htmlFor={id}\n            data-slot=\"checkbox-group-item\"\n            data-disabled={option.disabled || undefined}\n            className=\"group flex cursor-pointer items-start gap-2.5 data-[disabled]:cursor-not-allowed\"\n          >\n            <Checkbox\n              id={id}\n              name={name}\n              value={option.value}\n              checked={value.includes(option.value)}\n              disabled={option.disabled}\n              onCheckedChange={(next) => toggle(option.value, next === true)}\n              className=\"mt-0.5\"\n            />\n            <span className=\"flex flex-col gap-0.5\">\n              <span className=\"text-sm font-medium leading-5 text-foreground group-data-[disabled]:text-(--foreground-disabled)\">\n                {option.label}\n              </span>\n              {option.description && (\n                <span className=\"text-sm leading-5 text-muted-foreground group-data-[disabled]:text-(--foreground-disabled)\">\n                  {option.description}\n                </span>\n              )}\n            </span>\n          </label>\n        );\n      })}\n    </div>\n  );\n}\n\nexport { CheckboxGroup };\nexport type { CheckboxGroupProps, CheckboxGroupOption };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/checkbox.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.72 0.004 160)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

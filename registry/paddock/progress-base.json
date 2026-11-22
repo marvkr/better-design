@@ -1,0 +1,27 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cn } from \"@/lib/utils\";\nimport { wellInset } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Paddock Progress: a thin recessed grey track with a solid teal bar. Leave `value`\n * unset for an unknown amount, and a short bar pulses.\n */\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<WithClassName<ProgressPrimitive.Root.Props>, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"];\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    data-slot=\"progress\"\n    value={value ?? null}\n    className={cn(\"relative h-1 w-full overflow-hidden rounded-xs\", wellInset, className)}\n    {...props}\n  >\n    <ProgressPrimitive.Track data-slot=\"progress-track\" className=\"size-full\">\n      <ProgressPrimitive.Indicator\n        data-slot=\"progress-indicator\"\n        className={cn(\n          \"h-full rounded-xs bg-primary transition-[width] duration-slow ease-out\",\n          \"data-[indeterminate]:w-1/4 data-[indeterminate]:animate-pulse\",\n        )}\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n));\nProgress.displayName = \"Progress\";\n\nexport { Progress };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.945 0.008 230)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "track": "oklch(0.155 0.012 240)"
+    }
+  }
+}

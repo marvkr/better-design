@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "utils"
+    "lucide-react@>=0.518.0 <1"
   ]
 }

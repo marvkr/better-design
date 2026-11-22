@@ -1,0 +1,23 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nimport { CodeBlock } from \"./code-block\"\n\n// Ops Sharp Code Tabs: a panel with a hairline tab strip. The active tab reads\n// as a white card connecting down into the code panel; inactive tabs sit on the\n// muted strip. The body renders through the slate CodeBlock.\n\ninterface CodeTab {\n  label: string\n  lang: string\n  code: string\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[]\n  defaultTab?: number\n  className?: string\n}\n\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(defaultTab)\n\n  const active = tabs[activeIndex]\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-lg border border-border bg-card [box-shadow:var(--shadow-s)]\",\n        className\n      )}\n    >\n      {/* Tab strip */}\n      <div className=\"flex border-b border-border bg-secondary\">\n        {tabs.map((tab, i) => (\n          <button\n            key={tab.label}\n            onClick={() => setActiveIndex(i)}\n            className={cn(\n              \"relative px-4 py-2.5 font-mono text-xs font-medium transition-colors\",\n              i === activeIndex\n                ? \"bg-card text-foreground\"\n                : \"text-muted-foreground hover:text-foreground\"\n            )}\n          >\n            {i === activeIndex && (\n              <span className=\"absolute inset-x-0 bottom-0 h-px bg-card\" />\n            )}\n            {tab.label}\n          </button>\n        ))}\n      </div>\n\n      {/* Code content */}\n      <CodeBlock\n        code={active.code}\n        language={active.lang}\n        className=\"rounded-none border-0 [box-shadow:none]\"\n      />\n    </div>\n  )\n}\n\nexport { CodeTabs }\nexport type { CodeTabsProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/slate/code-block.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)"
+    }
+  }
+}

@@ -9,6 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/tv-style/_shared.json"
   ]
 }

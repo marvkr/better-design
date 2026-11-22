@@ -29,7 +29,7 @@ function StatCard({
   return (
     <div
       className={cn(
-        "rounded-[10px] border border-border/40 bg-card p-5 space-y-3",
+        "rounded-[0.625rem] border border-border/40 bg-card p-5 space-y-3",
         className
       )}
       {...props}

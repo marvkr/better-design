@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Energetic InputGroup: light marketplace, rounded-[14px], NO shadows, NO extra borders
+// Energetic InputGroup: light marketplace, rounded-[0.875rem], NO shadows, NO extra borders
 // Addons: bg-secondary (#f0f0f0) flat, slight tonal separation
 // Focus: ring-1 ring-ring (charcoal ring) only
 
@@ -32,9 +32,9 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
         ref={ref}
         className={cn(
           "flex w-full items-stretch overflow-hidden",
-          "rounded-[14px] bg-background",
+          "rounded-[0.875rem] bg-background",
           "ring-1 ring-inset ring-border",
-          "transition-colors duration-150",
+          "transition-colors duration-fast",
           "focus-within:ring-2 focus-within:ring-ring",
           error && "ring-destructive focus-within:ring-destructive",
           disabled && "cursor-not-allowed opacity-50 bg-secondary",

@@ -1,0 +1,35 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Badge: a small bold pill.\n *\n * The default badge is the orange key in miniature: orange fill behind the\n * orange rim. Status badges pair a bold tint with its own darker text, the\n * way a marker highlight sits behind a word, so every label passes contrast.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-full border font-bold [&_svg]:size-3 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"border-(--primary-rim) bg-primary text-primary-foreground\",\n        primary: \"border-(--primary-rim) bg-(--primary-wash) text-foreground\",\n        secondary: \"border-transparent text-secondary-foreground bg-[color:oklch(0.879_0.01_119.6)] dark:bg-[color:oklch(0.534_0.01_119.6)] dark:text-[color:oklch(0.96_0.008_114.2)]\",\n        outline: \"border-(--line-strong) bg-card text-foreground\",\n        success: \"border-transparent text-(--success-text) bg-[color:oklch(0.877_0.028_155.3)] dark:text-[color:oklch(0.465_0.105_160)]\",\n        warning: \"border-transparent bg-[color:oklch(0.88_0.06_80)] text-[color:oklch(0.48_0.11_62)]\",\n        destructive:\n          \"border-transparent text-(--destructive-text) bg-[color:oklch(0.883_0.037_24)] dark:text-[color:oklch(0.485_0.11_25)]\",\n        solid: \"border-transparent bg-(--ink) text-(--ink-foreground)\",\n      },\n      size: {\n        sm: \"h-5 px-2 text-[0.6875rem]\",\n        default: \"h-6 px-2.5 text-xs\",\n        lg: \"h-7 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Props for Badge: any span attribute plus tone and size. */\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\n/** A short status or category label. */\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "ink": "oklch(0.26 0.015 118.8)",
+      "ink-foreground": "oklch(1 0 0)",
+      "success-text": "oklch(0.47 0.1 162)",
+      "destructive-text": "oklch(0.5 0.17 27.5)"
+    },
+    "dark": {
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "ink": "oklch(0.95 0.008 114.2)",
+      "ink-foreground": "oklch(0.2 0.008 114)",
+      "success-text": "oklch(0.8 0.11 160)",
+      "destructive-text": "oklch(0.8 0.11 25)"
+    }
+  }
+}

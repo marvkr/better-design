@@ -1,0 +1,32 @@
+{
+  "name": "inline-edit-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Neon Vault InlineEdit: click-to-edit text that swaps into a recessed pill\n// track with magenta confirm and graphite cancel pucks.\n\ninterface InlineEditProps {\n  value: string\n  onConfirm: (value: string) => void\n  onCancel?: () => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n  inputClassName?: string\n  renderValue?: (value: string) => React.ReactNode\n}\n\nfunction InlineEdit({\n  value,\n  onConfirm,\n  onCancel,\n  placeholder = \"Click to edit\",\n  disabled,\n  className,\n  inputClassName,\n  renderValue,\n}: InlineEditProps) {\n  const [editing, setEditing] = React.useState(false)\n  const [draft, setDraft] = React.useState(value)\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  React.useEffect(() => {\n    if (editing) inputRef.current?.focus()\n  }, [editing])\n\n  const handleEdit = () => {\n    if (disabled) return\n    setDraft(value)\n    setEditing(true)\n  }\n\n  const handleConfirm = () => {\n    onConfirm(draft)\n    setEditing(false)\n  }\n\n  const handleCancel = () => {\n    setDraft(value)\n    setEditing(false)\n    onCancel?.()\n  }\n\n  const handleKeyDown = (e: React.KeyboardEvent) => {\n    if (e.key === \"Enter\") handleConfirm()\n    if (e.key === \"Escape\") handleCancel()\n  }\n\n  if (editing) {\n    return (\n      <div className={cn(\"flex items-center gap-1.5\", className)}>\n        <input\n          ref={inputRef}\n          value={draft}\n          onChange={(e) => setDraft(e.target.value)}\n          onKeyDown={handleKeyDown}\n          placeholder={placeholder}\n          className={cn(\n            formFieldBase,\n            \"h-8 min-w-0 flex-1 rounded-full px-2.5 py-1 text-sm\",\n            inputClassName\n          )}\n        />\n        <button\n          type=\"button\"\n          onClick={handleConfirm}\n          className=\"flex h-7 w-7 items-center justify-center rounded-full bg-primary [background-image:var(--gradient-primary)] text-primary-foreground [box-shadow:var(--shadow-button)] transition hover:brightness-110\"\n        >\n          <Icon icon=\"ph:check-bold\" className=\"h-3.5 w-3.5\" />\n          <span className=\"sr-only\">Confirm</span>\n        </button>\n        <button\n          type=\"button\"\n          onClick={handleCancel}\n          className=\"flex h-7 w-7 items-center justify-center rounded-full border border-border bg-secondary text-muted-foreground [box-shadow:var(--shadow-raised)] transition-colors hover:bg-accent hover:text-foreground\"\n        >\n          <Icon icon=\"ph:x\" className=\"h-3.5 w-3.5\" />\n          <span className=\"sr-only\">Cancel</span>\n        </button>\n      </div>\n    )\n  }\n\n  return (\n    <button\n      type=\"button\"\n      onClick={handleEdit}\n      disabled={disabled}\n      className={cn(\n        \"group flex items-center gap-1.5 rounded-md px-1 py-0.5 text-sm\",\n        \"transition-colors hover:bg-secondary\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        !value && \"text-muted-foreground\",\n        className\n      )}\n    >\n      <span className=\"min-w-0 truncate\">\n        {renderValue ? renderValue(value) : value || placeholder}\n      </span>\n      {!disabled && (\n        <Icon icon=\"ph:pencil-simple\" className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100\" />\n      )}\n    </button>\n  )\n}\n\nexport { InlineEdit }\nexport type { InlineEditProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/neon-vault/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+    }
+  }
+}

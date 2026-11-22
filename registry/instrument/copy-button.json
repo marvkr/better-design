@@ -1,0 +1,27 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, Copy } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark CopyButton: a small raised key; the success check lights in\n// the ok-green instrument hue.\n\ninterface CopyButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n  timeout?: number;\n}\n\nfunction CopyButton({\n  value,\n  timeout = 2000,\n  className,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = React.useState(false);\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(value);\n    setCopied(true);\n    setTimeout(() => setCopied(false), timeout);\n  };\n\n  return (\n    <button\n      onClick={handleCopy}\n      className={cn(\n        \"inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground shadow-[var(--shadow-raised)]\",\n        \"transition-all hover:bg-accent hover:text-accent-foreground active:shadow-[var(--shadow-well)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? (\n        <Check className=\"h-3.5 w-3.5 text-[var(--gauge-ok)]\" />\n      ) : (\n        <Copy className=\"h-3.5 w-3.5\" />\n      )}\n      <span className=\"sr-only\">{copied ? \"Copied\" : \"Copy to clipboard\"}</span>\n    </button>\n  );\n}\n\nexport { CopyButton };\nexport type { CopyButtonProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-ok": "oklch(0.74 0.12 152)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)"
+    },
+    "dark": {
+      "gauge-ok": "oklch(0.74 0.12 152)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)"
+    }
+  }
+}

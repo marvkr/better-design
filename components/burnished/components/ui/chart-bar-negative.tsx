@@ -1,0 +1,85 @@
+"use client"
+
+import { Icon } from "@iconify/react"
+import { Bar, BarChart, CartesianGrid, Cell, LabelList } from "recharts"
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./card"
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "./chart"
+
+export const description = "A bar chart with negative values"
+
+const chartData = [
+  { month: "January", visitors: 186 },
+  { month: "February", visitors: 205 },
+  { month: "March", visitors: -207 },
+  { month: "April", visitors: 173 },
+  { month: "May", visitors: -209 },
+  { month: "June", visitors: 214 },
+]
+
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+} satisfies ChartConfig
+
+/**
+ * Burnished bar chart with negative values: gains rise in glow, losses drop
+ * in ember, and each bar keeps a soft rounded cap like a worn copper bar.
+ */
+export function ChartBarNegative() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Bar Chart - Negative</CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel hideIndicator />}
+            />
+            <Bar dataKey="visitors" radius={6}>
+              <LabelList
+                position="top"
+                dataKey="month"
+                fillOpacity={1}
+                className="fill-muted-foreground"
+              />
+              {chartData.map((item) => (
+                <Cell
+                  key={item.month}
+                  fill={item.visitors > 0 ? "var(--chart-1)" : "var(--chart-2)"}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-semibold">
+          Trending up by 5.2% this month{" "}
+          <Icon icon="ph:trend-up" aria-hidden="true" className="size-4 text-primary-text" />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  )
+}

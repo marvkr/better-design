@@ -1,0 +1,25 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n/*\n * Bevel InputGroup.\n *\n * One field well holding an input and its addons. The container carries the\n * pressed surface and the focus ring, so a prefix, a text box and a trailing\n * button read as a single control. An addon is parted from the input by one\n * pixel of the track token, never a border.\n */\n\n/** Props for `InputGroup`, the well that holds an input and its addons. */\nexport interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"items-stretch overflow-hidden px-0 py-0\",\n        \"focus-within:[box-shadow:var(--shadow-inset),0_0_0_0.125rem_var(--ring)]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nInputGroup.displayName = \"InputGroup\"\n\n/** Props for `InputGroupAddon`; `side` picks which edge carries the divider. */\nexport interface InputGroupAddonProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  side?: \"left\" | \"right\"\n}\n\nconst InputGroupAddon = React.forwardRef<HTMLDivElement, InputGroupAddonProps>(\n  ({ className, side = \"left\", ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex shrink-0 items-center gap-1.5 px-3.5\",\n        \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-muted-foreground\",\n        \"[&_svg]:size-4 [&_svg]:shrink-0\",\n        side === \"left\" ?\n          \"[box-shadow:0.0625rem_0_0_0_var(--track)]\"\n        : \"[box-shadow:-0.0625rem_0_0_0_var(--track)]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nInputGroupAddon.displayName = \"InputGroupAddon\"\n\nconst InputGroupInput = React.forwardRef<\n  HTMLInputElement,\n  React.InputHTMLAttributes<HTMLInputElement>\n>(({ className, ...props }, ref) => (\n  <input\n    ref={ref}\n    className={cn(\n      \"min-w-0 flex-1 bg-transparent px-3.5 outline-none\",\n      \"text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem] text-foreground\",\n      \"placeholder:text-muted-foreground\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n))\nInputGroupInput.displayName = \"InputGroupInput\"\n\nexport { InputGroup, InputGroupAddon, InputGroupInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

@@ -147,7 +147,7 @@ const FlipBoard = React.forwardRef<HTMLDivElement, FlipBoardProps>(
       <div
         ref={ref}
         className={cn(
-          "relative inline-block rounded-[8px] p-4",
+          "relative inline-block rounded-[0.5rem] p-4",
           className
         )}
         style={{

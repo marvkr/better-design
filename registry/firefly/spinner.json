@@ -1,0 +1,20 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Spinner: a faint ring with one quarter drawn solid, turning in\n * the colour of the text around it. Inside a button it takes the button's\n * ink; on its own, give it the olive accent with `text-(--accent-line)`.\n */\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\n        \"inline-flex shrink-0\",\n        size === \"sm\" && \"size-4\",\n        size === \"default\" && \"size-5\",\n        size === \"lg\" && \"size-8\",\n        className,\n      )}\n      {...props}\n    >\n      <svg\n        viewBox=\"0 0 16 16\"\n        fill=\"none\"\n        aria-hidden=\"true\"\n        className=\"size-full animate-spin\"\n      >\n        <circle\n          cx=\"8\"\n          cy=\"8\"\n          r=\"6.5\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1.75\"\n          opacity=\"0.25\"\n        />\n        <path\n          d=\"M8 1.5A6.5 6.5 0 0 1 14.5 8\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1.75\"\n          strokeLinecap=\"round\"\n        />\n      </svg>\n    </div>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "accent-line": "oklch(0.594 0.135 115.4)"
+    },
+    "dark": {
+      "accent-line": "oklch(0.841 0.161 114)"
+    }
+  }
+}

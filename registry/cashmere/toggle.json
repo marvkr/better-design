@@ -1,0 +1,28 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium\",\n    \"transition-[background-color,color,box-shadow] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"hover:bg-accent hover:text-accent-foreground\",\n    \"data-[state=on]:bg-accent data-[state=on]:text-accent-foreground data-[state=on]:[box-shadow:var(--shadow-inset)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline:\n          \"border border-border bg-transparent [box-shadow:var(--shadow-s)] hover:[box-shadow:var(--shadow-m)] data-[state=on]:[box-shadow:var(--shadow-inset)]\",\n      },\n      size: {\n        default: \"h-9 px-3\",\n        sm: \"h-8 px-2\",\n        lg: \"h-10 px-4\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = TogglePrimitive.Root.displayName\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-m": "var(--shadow-md)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-m": "var(--shadow-md)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)"
+    }
+  }
+}

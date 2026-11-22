@@ -1,0 +1,23 @@
+{
+  "name": "native-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n// Clay Product NativeSelect: native <select> styled to match the design system.\n// Closed trigger surface consumes the shared formFieldBase (recessed clay well),\n// so it reads as the same scooped-out field as Input/Textarea.\n\ninterface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"appearance-none cursor-pointer pr-9\",\n            \"[&>option]:bg-card [&>option]:text-foreground\",\n            error && [\n              \"border-destructive\",\n              \"focus-visible:border-destructive focus-visible:[box-shadow:var(--shadow-clay-inset),0_0_0_0.1875rem_color-mix(in_oklch,var(--destructive)_28%,transparent)]\",\n            ],\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"m6 9 6 6 6-6\" />\n          </svg>\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/putty/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
+    },
+    "dark": {
+      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
+    }
+  }
+}

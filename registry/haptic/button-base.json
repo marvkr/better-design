@@ -1,0 +1,35 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useHaptics } from \"./haptics-provider\"\n\n/*\n * Haptic Button: elevated steel plate with a three-layer shadow.\n * Depth principle applied:\n *   - Inset top-edge highlight (light from above)\n *   - Contact shadow (sharp, close)\n *   - Ambient shadow (soft, diffused)\n * Hover grows all three layers proportionally + background lightens.\n * Active flattens the shadow to simulate the button being pressed down.\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-md cursor-pointer select-none\",\n    \"transition-[background-color,box-shadow,transform] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px active:[box-shadow:var(--shadow-s)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-secondary text-secondary-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:bg-accent hover:text-foreground hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover),0_0.375rem_1rem_color-mix(in_oklch,var(--primary)_20%,transparent)]\",\n        secondary:\n          \"bg-muted text-muted-foreground \" +\n          \"[box-shadow:var(--shadow-s)] \" +\n          \"hover:bg-accent hover:text-accent-foreground hover:[box-shadow:var(--shadow-m)]\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-accent hover:border-ring/30\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-accent hover:text-accent-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:brightness-105 hover:[box-shadow:var(--shadow-button-hover)]\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4\",\n        lg: \"h-10 px-6\",\n        icon: \"h-9 w-9\",\n        \"icon-sm\": \"h-8 w-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, onClick, type, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      )\n    }\n\n    const { tap, trigger } = useHaptics()\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        type={type ?? \"button\"}\n        {...props}\n        onClick={(e) => {\n          if (variant === \"destructive\") trigger(\"heavy\")\n          else tap()\n          onClick?.(e)\n        }}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/haptic/haptics-provider-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.25rem oklch(0 0 0 / 0.22)",
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.2), 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0 0 0.0625rem oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.22), 0 0 0 0.0625rem oklch(1 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5)"
+    },
+    "dark": {
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.25rem oklch(0 0 0 / 0.22)",
+      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.2), 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.18), 0 0 0 0.0625rem oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.22), 0 0 0 0.0625rem oklch(1 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5)"
+    }
+  }
+}

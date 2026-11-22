@@ -9,9 +9,6 @@
     }
   ],
   "dependencies": [
-    "vaul"
-  ],
-  "registryDependencies": [
-    "utils"
+    "vaul@^1.1.2"
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "name": "tooltip",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Tooltip: the ink chip in reverse. Off-white with black text and a\n * 0.5rem corner, no arrow and no shadow, so on the black page it reads as a\n * label rather than a panel. It fades in from 97% scale in 150ms.\n */\nconst TooltipProvider = TooltipPrimitive.Provider;\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 6, ...props }, ref) => (\n  <TooltipPrimitive.Content\n    ref={ref}\n    sideOffset={sideOffset}\n    data-slot=\"tooltip-content\"\n    className={cn(\n      \"z-50 max-w-64 rounded-md bg-primary px-2 py-1 text-xs font-medium text-balance text-primary-foreground\",\n      \"origin-(--radix-tooltip-content-transform-origin) duration-fast ease-out\",\n      \"animate-in fade-in-0 zoom-in-97\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-97\",\n      className,\n    )}\n    {...props}\n  />\n));\nTooltipContent.displayName = TooltipPrimitive.Content.displayName;\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tooltip@^1.2.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

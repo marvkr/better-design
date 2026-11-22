@@ -1,0 +1,28 @@
+{
+  "name": "accordion-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, sheetSurface } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Margin Accordion: a stack of rows on one white sheet, split by hairlines. */\nconst Accordion = React.forwardRef<HTMLDivElement, WithClassName<AccordionPrimitive.Root.Props>>(\n  ({ className, ...props }, ref) => (\n    <AccordionPrimitive.Root\n      ref={ref}\n      data-slot=\"accordion\"\n      className={cn(\"w-full rounded-xl px-4\", sheetSurface, className)}\n      {...props}\n    />\n  ),\n);\nAccordion.displayName = \"Accordion\";\n\n/** Margin AccordionItem: one row, split from the next by a hairline. */\nconst AccordionItem = React.forwardRef<HTMLDivElement, WithClassName<AccordionPrimitive.Item.Props>>(\n  ({ className, ...props }, ref) => (\n    <AccordionPrimitive.Item\n      ref={ref}\n      data-slot=\"accordion-item\"\n      className={cn(\"border-b border-border last:border-b-0\", className)}\n      {...props}\n    />\n  ),\n);\nAccordionItem.displayName = \"AccordionItem\";\n\n/** Margin AccordionTrigger: the question in medium weight, with a caret that turns as it opens. */\nconst AccordionTrigger = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<AccordionPrimitive.Trigger.Props>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header data-slot=\"accordion-header\" className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      data-slot=\"accordion-trigger\"\n      className={cn(\n        \"group/trigger flex flex-1 items-center justify-between gap-3 rounded-md py-3 text-start\",\n        \"text-sm font-medium text-foreground transition-colors duration-fast hover:text-(--primary-text)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <Icon\n        icon=\"solar:alt-arrow-down-linear\"\n        aria-hidden=\"true\"\n        className=\"size-4 shrink-0 text-muted-foreground transition-transform duration-base ease-(--ease-out) group-data-[panel-open]/trigger:rotate-180\"\n      />\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n));\nAccordionTrigger.displayName = \"AccordionTrigger\";\n\n/** Margin AccordionContent: the answer in muted grey, growing to its measured height. */\nconst AccordionContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<AccordionPrimitive.Panel.Props>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Panel\n    ref={ref}\n    data-slot=\"accordion-content\"\n    className={cn(\n      \"h-(--accordion-panel-height) overflow-hidden text-sm leading-relaxed text-muted-foreground\",\n      \"transition-[height] duration-base ease-(--ease-out)\",\n      \"data-[starting-style]:h-0 data-[ending-style]:h-0\",\n    )}\n    {...props}\n  >\n    <div className={cn(\"pb-3\", className)}>{children}</div>\n  </AccordionPrimitive.Panel>\n));\nAccordionContent.displayName = \"AccordionContent\";\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)"
+    }
+  }
+}

@@ -12,7 +12,7 @@
  *
  * Principles:
  *  - Flat dark surfaces (no heavy shadows) — tiles are recessed, not raised
- *  - Tiny 3px radius — mirrors the real flip-tile's near-square geometry
+ *  - Tiny 0.1875rem radius — mirrors the real flip-tile's near-square geometry
  *  - Amber primary (#FFCC00) — the strongest hue in the scramble set
  *  - Inset top-edge "seam" highlights via box-shadow tokens
  *  - Uppercase, bold, letter-spaced display text for headings
@@ -48,7 +48,7 @@
   --border: oklch(1 0 0 / 0.08);               /* Subtle white 8% — tile gap */
   --input: oklch(0.17 0 0);                    /* Recessed input well */
   --ring: oklch(0.87 0.17 95);                 /* Amber ring matches primary */
-  --radius: 0.1875rem;                          /* 3px — tile radius from flipoff */
+  --radius: 0.1875rem;                          /* 0.1875rem — tile radius from flipoff */
 
   /* ─── Flipboard scramble palette (accent hues for charts/badges) ─── */
   --tv-cyan: oklch(0.78 0.16 220);             /* #00AAFF */
@@ -66,44 +66,75 @@
    * (light from above is implied by the bright foreground on dark surfaces).
    */
   --shadow-xs:
-    inset 0 1px 0 rgba(255, 255, 255, 0.02),
-    0 1px 1px rgba(0, 0, 0, 0.5);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.02),
+    0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5);
 
   --shadow-sm:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
-    0 1px 2px rgba(0, 0, 0, 0.5);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.03),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.5);
 
   --shadow-md:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 2px 4px rgba(0, 0, 0, 0.55);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.04),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.55);
 
   --shadow-lg:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 4px 8px rgba(0, 0, 0, 0.6);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.05),
+    0 0.25rem 0.5rem oklch(0 0 0 / 0.6);
 
   --shadow-xl:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 8px 16px rgba(0, 0, 0, 0.65);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.06),
+    0 0.5rem 1rem oklch(0 0 0 / 0.65);
 
   --shadow-inset:
-    inset 0 1px 2px rgba(0, 0, 0, 0.55),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+    inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55),
+    inset 0 -0.0625rem 0 oklch(1 0 0 / 0.02);
 
   /* Amber-glow variant — primary button bloom, borrowed from flipoff's accent bar */
   --shadow-primary:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 0 0 1px rgba(255, 204, 0, 0.28),
-    0 2px 4px rgba(0, 0, 0, 0.55),
-    0 4px 14px rgba(255, 204, 0, 0.22);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.35),
+    0 0 0 0.0625rem oklch(0.8652 0.1768 90.38 / 0.28),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.55),
+    0 0.25rem 0.875rem oklch(0.8652 0.1768 90.38 / 0.22);
 
   /* Button-specific shadows (pressed vs resting) */
   --shadow-button:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 1px 2px rgba(0, 0, 0, 0.55);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.06),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.55);
 
   --shadow-button-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 2px 4px rgba(0, 0, 0, 0.6);
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.08),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.6);
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (crisp profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 120ms;
+  --transition-duration-base: 160ms;
+  --transition-duration-slow: 220ms;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
 }
 
 @theme inline {
@@ -128,8 +159,8 @@
   --color-ring: var(--ring);
   --radius-sm: var(--radius);
   --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 1px);
-  --radius-xl: calc(var(--radius) + 3px);
+  --radius-lg: calc(var(--radius) + 0.0625rem);
+  --radius-xl: calc(var(--radius) + 0.1875rem);
 
   --shadow-s: var(--shadow-sm);
   --shadow-m: var(--shadow-md);
@@ -138,6 +169,12 @@
   --shadow-button: var(--shadow-button);
   --shadow-button-hover: var(--shadow-button-hover);
   --shadow-primary: var(--shadow-primary);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
 }
 
 @layer base {
@@ -148,4 +185,83 @@
     @apply bg-background text-foreground antialiased;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling:
+     smoother writing, easier-to-scan forms. */
+  textarea {
+    /* Fallback for browsers without field-sizing (e.g. Firefox): keep the
+       textarea user-resizable so it can still be grown manually. */
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
 }

@@ -1,0 +1,25 @@
+{
+  "name": "native-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\ninterface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            \"flex h-9 appearance-none items-center pl-3 pr-9 py-2\",\n            \"cursor-pointer\",\n            \"[&>option]:bg-background [&>option]:text-foreground\",\n            error && [\n              \"[box-shadow:var(--shadow-destructive-control)]\",\n              \"hover:[box-shadow:var(--shadow-destructive-control)]\",\n              \"focus-visible:[box-shadow:var(--shadow-destructive-focus)]\",\n            ],\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        {/* Custom chevron icon */}\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"m6 9 6 6 6-6\" />\n          </svg>\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/stripe/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-destructive-control": "0 0 0 0.0625rem var(--destructive), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-destructive-focus": "0 0 0 0.0625rem var(--destructive), 0 0 0 0.1875rem oklch(0.5903 0.2299 19.34 / 0.14), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
+    },
+    "dark": {
+      "shadow-destructive-control": "0 0 0 0.0625rem var(--destructive), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-destructive-focus": "0 0 0 0.0625rem var(--destructive), 0 0 0 0.1875rem oklch(0.5903 0.2299 19.34 / 0.14), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
+    }
+  }
+}

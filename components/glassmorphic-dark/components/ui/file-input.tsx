@@ -58,8 +58,8 @@ function FileInput({
         className={cn(
           "flex flex-col items-center justify-center gap-3 p-8",
           "rounded-2xl border border-dashed border-white/10 backdrop-blur-xl bg-white/[0.04]",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.06)]",
-          "transition duration-200 cursor-pointer",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06)]",
+          "transition duration-base cursor-pointer",
           isDragging && "border-primary bg-primary/[0.08]",
           !isDragging && "hover:bg-white/[0.06] hover:border-white/[0.15]",
           disabled && "opacity-50 cursor-not-allowed"
@@ -97,7 +97,7 @@ function FileInput({
           {files.map((file, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 rounded-full border border-white/10 backdrop-blur-xl bg-white/[0.06] px-3 py-2 shadow-[inset_0_0_6px_rgba(255,255,255,0.06)]"
+              className="flex items-center gap-3 rounded-full border border-white/10 backdrop-blur-xl bg-white/[0.06] px-3 py-2 shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.06)]"
             >
               <Icon icon="tabler:file-text" className="h-4 w-4 shrink-0 text-white/40" />
               <div className="flex-1 min-w-0">

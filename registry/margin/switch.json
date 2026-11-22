@@ -1,0 +1,27 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing, slotWell } from \"./_shared\";\n\n/**\n * Margin Switch: the small settings switch from a sidebar footer. Off, the\n * track is a grey slot behind a firmer hairline; on, it takes the primary\n * Button's oxblood face and edge. The white knob slides across with a short\n * ease and a soft shadow under it.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer inline-flex h-4.5 w-7.5 shrink-0 cursor-pointer items-center rounded-full p-0.5\",\n      slotWell,\n      controlChecked,\n      \"transition duration-base ease-(--ease-out)\",\n      focusRing,\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-3.5 rounded-full bg-primary-foreground shadow-(--shadow-thumb)\",\n        \"transition-transform duration-base ease-(--ease-out)\",\n        \"data-[state=checked]:translate-x-3 data-[state=unchecked]:translate-x-0\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.56 0.02 80), 0 0.0625rem 0.125rem oklch(0.24 0.02 260 / 0.12)"
+    },
+    "dark": {
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

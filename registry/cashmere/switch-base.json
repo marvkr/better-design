@@ -1,0 +1,27 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Cashmere Switch: a soft recessed track; the checked track becomes the\n * flat near-black fill (--shadow-primary), matching the primary Button. The thumb\n * is a small white knob with a soft float.\n */\n\n// Base UI className can be a state function; the wrapper feeds it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst Switch = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<SwitchPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-color,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:bg-primary data-checked:border-primary data-checked:[box-shadow:var(--shadow-primary)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-4 w-4 rounded-full bg-card\",\n        \"[box-shadow:var(--shadow-s)]\",\n        \"ring-0 transition-transform duration-fast\",\n        \"data-checked:translate-x-4\",\n        \"data-unchecked:translate-x-0.5\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = \"Switch\"\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)",
+      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.04), inset 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.03)",
+      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
+    }
+  }
+}

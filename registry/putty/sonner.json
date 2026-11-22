@@ -1,0 +1,25 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\n// Clay Product Sonner: clean minimal toast notifications\n// Uses bg-background, rounded-[var(--radius-lg)], ring-1 border\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:rounded-[var(--radius-lg)] group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:[box-shadow:var(--shadow-overlay)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-lg\",\n          error: \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success: \"group-[.toaster]:text-emerald-700 group-[.toaster]:border-emerald-200\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    },
+    "dark": {
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    }
+  }
+}

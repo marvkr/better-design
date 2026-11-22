@@ -1,0 +1,27 @@
+{
+  "name": "tabs-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Tabs: recessed strip; the active tab raises on a soft layered\n// shadow like the billing portal's segment switcher.\n\nconst Tabs = TabsPrimitive.Root;\n\nfunction TabsList({ className, ...props }: TabsPrimitive.List.Props) {\n  return (\n    <TabsPrimitive.List\n      className={cn(\n        \"inline-flex h-9 items-center justify-center gap-1 rounded-lg p-1\",\n        \"border border-border/60 bg-input/60 shadow-[var(--hl-shadow-inset)]\",\n        \"text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\nTabsList.displayName = \"TabsList\";\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      className={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium\",\n        \"transition-all duration-fast ease-out\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50\",\n        \"data-active:bg-secondary data-active:text-foreground\",\n        \"data-active:shadow-[var(--hl-shadow-raise)]\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\nTabsTrigger.displayName = \"TabsTrigger\";\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      className={cn(\n        \"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

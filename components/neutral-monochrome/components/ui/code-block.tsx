@@ -22,7 +22,7 @@ function CodeBlock({
   return (
     <div
       className={cn(
-        "group relative rounded-[10px] border border-border/40 bg-card overflow-hidden",
+        "group relative rounded-[0.625rem] border border-border/40 bg-card overflow-hidden",
         className
       )}
       {...props}

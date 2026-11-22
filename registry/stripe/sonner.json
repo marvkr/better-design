@@ -4,11 +4,22 @@
   "files": [
     {
       "path": "components/ui/sonner.tsx",
-      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\n// Stripe Sonner: clean minimal toast notifications\n// Uses bg-background, rounded-[12px], ring-1 border\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:rounded-[12px] group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:shadow-[0_4px_16px_0_rgb(0_0_0/0.08)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-lg\",\n          error: \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success: \"group-[.toaster]:text-emerald-700 group-[.toaster]:border-emerald-200\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\n// Stripe Sonner: clean minimal toast notifications\n// Uses bg-background, rounded-[0.75rem], ring-1 border\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:rounded-lg group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:[box-shadow:var(--shadow-popover)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-lg\",\n          error: \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success: \"group-[.toaster]:text-success-foreground\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "sonner"
-  ]
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success-foreground": "oklch(0.345 0.102 155)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)"
+    },
+    "dark": {
+      "success-foreground": "oklch(0.345 0.102 155)",
+      "shadow-popover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)"
+    }
+  }
 }

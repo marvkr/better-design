@@ -37,7 +37,7 @@ const TimelineDot = React.forwardRef<
     )}
     {...props}
   >
-    <div className="h-2.5 w-2.5 rounded-full bg-primary/70 shadow-[0_0_8px_oklch(0.65_0.19_250/0.4)]" />
+    <div className="h-2.5 w-2.5 rounded-full bg-primary/70 shadow-[0_0_0.5rem_oklch(0.65_0.19_250/0.4)]" />
   </div>
 ))
 TimelineDot.displayName = "TimelineDot"
@@ -49,7 +49,7 @@ const TimelineLine = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "absolute -left-[25px] top-5 h-[calc(100%+24px)] w-px bg-white/10",
+      "absolute -left-[1.5625rem] top-5 h-[calc(100%+1.5rem)] w-px bg-white/10",
       className
     )}
     {...props}

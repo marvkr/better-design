@@ -1,0 +1,28 @@
+{
+  "name": "input-copy-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\nimport { Input } from \"./input\";\n\n/** Props for a read-only field with a copy button at its end. */\ninterface InputCopyProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\" | \"readOnly\"> {\n  value: string;\n  label?: React.ReactNode;\n  /** Milliseconds before the copied state resets. Default 1800. */\n  copiedTimeoutMs?: number;\n}\n\n/**\n * Margin InputCopy: a read-only paper field in monospace with a small white\n * pill inside its end that copies the value. After a copy the icon turns to\n * an oxblood tick for a moment.\n */\nfunction InputCopy({ value, label, copiedTimeoutMs = 1800, className, id: idProp, ...props }: InputCopyProps) {\n  const generatedId = React.useId();\n  const id = idProp ?? generatedId;\n  const [copied, setCopied] = React.useState(false);\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value);\n      setCopied(true);\n    } catch {\n      // The clipboard can be unavailable; the field stays selectable for a manual copy.\n    }\n  }, [value]);\n\n  React.useEffect(() => {\n    if (!copied) return;\n    const t = setTimeout(() => setCopied(false), copiedTimeoutMs);\n    return () => clearTimeout(t);\n  }, [copied, copiedTimeoutMs]);\n\n  return (\n    <div data-slot=\"input-copy\" className={cn(\"flex flex-col gap-1.5\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-sm font-medium text-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <Input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(e) => e.currentTarget.select()}\n          className=\"pe-10 font-mono text-xs\"\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute end-1 flex size-5.5 items-center justify-center rounded-md bg-card text-muted-foreground shadow-sm\",\n            \"transition duration-fast ease-(--ease-out) hover:text-foreground active:scale-95 motion-reduce:active:scale-100\",\n            focusRing,\n          )}\n        >\n          <Icon\n            key={copied ? \"check\" : \"copy\"}\n            icon={copied ? \"solar:check-circle-linear\" : \"solar:copy-linear\"}\n            className={cn(\"size-3.5 animate-in fade-in zoom-in-75 duration-fast\", copied && \"text-(--primary-text)\")}\n            aria-hidden\n          />\n        </button>\n        <span className=\"sr-only\" aria-live=\"polite\">\n          {copied ? \"Copied\" : \"\"}\n        </span>\n      </div>\n    </div>\n  );\n}\n\nexport { InputCopy };\nexport type { InputCopyProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json",
+    "https://better-design.com/registry/margin/input-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)"
+    }
+  }
+}

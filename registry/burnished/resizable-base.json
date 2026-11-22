@@ -1,0 +1,27 @@
+{
+  "name": "resizable-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ResizablePrimitive from \"react-resizable-panels\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { raisedBevel } from \"./_shared\";\n\n/**\n * Burnished Resizable: panels split by a hairline that warms to the glow\n * while dragged or focused. The optional grip is a small graphite bevel pill.\n */\nconst ResizablePanelGroup = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (\n  <ResizablePrimitive.PanelGroup\n    data-slot=\"resizable-panel-group\"\n    className={cn(\"flex size-full data-[panel-group-direction=vertical]:flex-col\", className)}\n    {...props}\n  />\n);\n\nconst ResizablePanel = ResizablePrimitive.Panel;\n\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {\n  withHandle?: boolean;\n}) => (\n  <ResizablePrimitive.PanelResizeHandle\n    data-slot=\"resizable-handle\"\n    className={cn(\n      \"relative flex w-[0.0625rem] items-center justify-center bg-border outline-none\",\n      \"after:absolute after:inset-y-0 after:left-1/2 after:w-2 after:-translate-x-1/2\",\n      \"transition-colors duration-fast\",\n      \"data-[resize-handle-state=drag]:bg-glow focus-visible:bg-glow\",\n      \"data-[panel-group-direction=vertical]:h-[0.0625rem] data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-2 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0\",\n      \"[&[data-panel-group-direction=vertical]>div]:rotate-90\",\n      className,\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div className={cn(raisedBevel, \"z-10 flex h-6 w-3.5 items-center justify-center rounded-full\")}>\n        <Icon icon=\"ph:dots-six-vertical\" className=\"size-3 text-muted-foreground\" />\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n);\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels@^3.0.3",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glow": "oklch(0.798 0.084 66.7)"
+    },
+    "dark": {
+      "glow": "oklch(0.798 0.084 66.7)"
+    }
+  }
+}

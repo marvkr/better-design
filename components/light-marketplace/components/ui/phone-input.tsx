@@ -67,7 +67,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
 
     React.useEffect(() => {
       const handler = (e: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        if (containerRef.current && !(e.target instanceof Node && containerRef.current.contains(e.target))) {
           setOpen(false)
         }
       }
@@ -99,7 +99,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
           <span className="text-sm text-muted-foreground">{selectedCountry.dial}</span>
           <ChevronDown
             className={cn(
-              "h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform duration-150",
+              "h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform duration-fast",
               open && "rotate-180"
             )}
           />
@@ -128,8 +128,8 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
             role="listbox"
             aria-label="Country codes"
             className={cn(
-              "absolute left-0 top-full z-50 mt-1 w-64 rounded-[14px]",
-              "border border-border bg-background shadow-md py-1",
+              "absolute left-0 top-full z-50 mt-1 w-64 rounded-[0.875rem]",
+              "bg-background shadow-md py-1",
               "max-h-60 overflow-y-auto",
             )}
           >

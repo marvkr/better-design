@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { formFieldBase } from "./_shared"
 import { ChevronDown } from "lucide-react"
 
 // Stripe Phone Input: phone number input with country code selector
@@ -50,7 +51,7 @@ function PhoneInput({
 
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) setOpen(false)
     }
     document.addEventListener("mousedown", handler)
     return () => document.removeEventListener("mousedown", handler)
@@ -62,17 +63,23 @@ function PhoneInput({
   }
 
   return (
-    <div ref={ref} className={cn("relative flex", className)}>
+    <div
+      ref={ref}
+      className={cn(
+        formFieldBase,
+        "relative flex focus-within:[box-shadow:var(--shadow-focus)]",
+        className
+      )}
+    >
       {/* Country selector */}
       <button
         type="button"
         disabled={disabled}
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "flex h-10 items-center gap-1.5 rounded-l-[10px] border border-r-0 border-border bg-secondary px-3",
+          "flex h-9 items-center gap-1.5 rounded-l-md border-r border-border bg-secondary px-3",
           "text-sm font-medium text-foreground transition-colors hover:bg-secondary/80",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+          "focus-visible:outline-none",
           disabled && "cursor-not-allowed opacity-60"
         )}
       >
@@ -88,17 +95,16 @@ function PhoneInput({
         placeholder={placeholder}
         disabled={disabled}
         className={cn(
-          "h-10 flex-1 rounded-r-[10px] border border-border bg-background px-3 text-sm",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)] placeholder:text-muted-foreground",
-          "focus-visible:border-foreground focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-          "transition-shadow duration-200",
+          "h-9 flex-1 rounded-r-md bg-input px-3 text-sm placeholder:text-muted-foreground",
+          "focus-visible:outline-none",
+          "transition-shadow duration-base",
           disabled && "cursor-not-allowed opacity-60"
         )}
       />
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute left-0 top-11 z-50 w-56 rounded-[12px] border border-border bg-background p-1.5 shadow-[0_4px_16px_0_rgb(0_0_0/0.08),0_0_0_1px_rgb(0_0_0/0.04)]">
+        <div className="absolute left-0 top-10 z-50 w-56 rounded-lg bg-popover p-1.5 [box-shadow:var(--shadow-popover)]">
           {COUNTRIES.map((c) => (
             <button
               key={c.code}

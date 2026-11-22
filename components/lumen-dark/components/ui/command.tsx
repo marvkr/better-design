@@ -23,7 +23,9 @@ const Command = React.forwardRef<
 ))
 Command.displayName = CommandPrimitive.displayName
 
-type CommandDialogProps = React.ComponentProps<typeof Dialog>
+type CommandDialogProps = Omit<React.ComponentProps<typeof Dialog>, "children"> & {
+  children?: React.ReactNode
+}
 
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => (
   <Dialog {...props}>
@@ -59,7 +61,7 @@ const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden p-1", className)}
+    className={cn("max-h-[18.75rem] overflow-y-auto overflow-x-hidden p-1", className)}
     {...props}
   />
 ))
@@ -113,7 +115,7 @@ const CommandItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none",
-      "transition-[background-color,color] duration-150",
+      "transition-[background-color,color] duration-fast",
       "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground",
       "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       className

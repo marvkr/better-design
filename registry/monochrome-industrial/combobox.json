@@ -9,9 +9,11 @@
     }
   ],
   "dependencies": [
-    "@iconify/react"
+    "@iconify/react@^6.0.2"
   ],
   "registryDependencies": [
-    "utils"
+    "https://better-design.com/registry/monochrome-industrial/button.json",
+    "https://better-design.com/registry/monochrome-industrial/command.json",
+    "https://better-design.com/registry/monochrome-industrial/popover.json"
   ]
 }

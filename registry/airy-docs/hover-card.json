@@ -1,0 +1,17 @@
+{
+  "name": "hover-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popoverSurface } from \"./_shared\";\n\n/**\n * Airy docs HoverCard: a link preview, the way a docs page previews a\n * referenced page or API object. It is the popover's white panel, opening\n * beside its trigger while the pointer rests on it.\n */\nconst HoverCard = HoverCardPrimitive.Root;\nconst HoverCardTrigger = HoverCardPrimitive.Trigger;\n\nconst HoverCardContent = React.forwardRef<\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 6, ...props }, ref) => (\n  <HoverCardPrimitive.Content\n    ref={ref}\n    align={align}\n    sideOffset={sideOffset}\n    data-slot=\"hover-card-content\"\n    className={cn(\n      popoverSurface,\n      \"z-50 flex w-72 flex-col gap-2 p-4 text-sm outline-none\",\n      \"origin-(--radix-hover-card-content-transform-origin)\",\n      \"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-98 data-[state=open]:duration-fast\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:duration-fast\",\n      className,\n    )}\n    {...props}\n  />\n));\nHoverCardContent.displayName = HoverCardPrimitive.Content.displayName;\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-hover-card@^1.1.14"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared.json"
+  ]
+}

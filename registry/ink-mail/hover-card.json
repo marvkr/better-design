@@ -1,0 +1,24 @@
+{
+  "name": "hover-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popoverSurface } from \"./_shared\";\n\n/**\n * Ink mail HoverCard: a preview that appears while the pointer rests on a\n * link, such as a sender address or an API key name. It is the same elevated\n * panel as the menus, edged by a translucent white ring, fading and scaling\n * in beside its trigger over 150ms.\n */\nconst HoverCard = HoverCardPrimitive.Root;\nconst HoverCardTrigger = HoverCardPrimitive.Trigger;\n\nconst HoverCardContent = React.forwardRef<\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 8, ...props }, ref) => (\n  <HoverCardPrimitive.Content\n    ref={ref}\n    align={align}\n    sideOffset={sideOffset}\n    data-slot=\"hover-card-content\"\n    className={cn(\n      popoverSurface,\n      \"z-50 flex w-72 flex-col gap-3 p-4 text-sm outline-none\",\n      \"origin-(--radix-hover-card-content-transform-origin) duration-fast ease-out\",\n      \"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n      className,\n    )}\n    {...props}\n  />\n));\nHoverCardContent.displayName = HoverCardPrimitive.Content.displayName;\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-hover-card@^1.1.14"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

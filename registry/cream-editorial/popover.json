@@ -1,0 +1,24 @@
+{
+  "name": "popover",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popoverSurface } from \"./_shared\";\n\n/**\n * Cream editorial Popover: the lightest paper with a 0.75rem corner, edged\n * by a warm hairline ring folded into a soft shadow. It fades in from the\n * side of its trigger without growing, and stacks its content with a\n * steady gap.\n */\nconst Popover = PopoverPrimitive.Root;\n\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\nconst PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 8, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      data-slot=\"popover-content\"\n      className={cn(\n        popoverSurface,\n        \"z-50 flex w-72 flex-col gap-3 p-4 text-sm outline-none\",\n        \"origin-(--radix-popover-content-transform-origin)\",\n        \"data-[state=open]:animate-in data-[state=open]:fade-in-0 duration-base data-[state=open]:ease-out\",\n        \"data-[side=bottom]:slide-in-from-top-1 data-[side=top]:slide-in-from-bottom-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1\",\n        \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0\",\n        \"motion-reduce:animate-none\",\n        className,\n      )}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = PopoverPrimitive.Content.displayName;\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-popover@^1.1.14"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "skeleton-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { optionTrack } from \"./_shared\";\n\n/**\n * Mallow Skeleton: a lilac block where content will land, fading slowly in\n * and out while it loads. It holds still under reduced motion.\n */\nconst Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"skeleton\"\n      aria-hidden=\"true\"\n      className={cn(\"animate-pulse rounded-md motion-reduce:animate-none\", optionTrack, className)}\n      {...props}\n    />\n  ),\n);\nSkeleton.displayName = \"Skeleton\";\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ]
+}

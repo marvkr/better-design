@@ -1,0 +1,284 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Cobalt Inset — a carved dark analytics dashboard.
+ *
+ * Authored from three screenshots of a dark finance/time-tracking dashboard:
+ *   - A blue-black canvas; panels read as CARVED INTO it: a 0.0625rem top inset
+ *     highlight plus a soft outer drop shadow on every surface (the defining
+ *     inset + outer combination).
+ *   - Recessed wells for inputs, tracks, and the search field: darker than
+ *     the canvas, sunk with stacked inset shadows and a faint bottom lip.
+ *   - A cobalt-blue active material: vertical blue gradient with a white top
+ *     highlight, a cyan 0.0625rem rim, and a blue-tinted outer bloom. Buttons,
+ *     checked controls, and slider fills all share this one material.
+ *   - Medium radii (0.625rem controls, 0.75rem panels), a neutral grotesque face,
+ *     quiet 0.0625rem borders at 8 percent white.
+ * Every shadow is oklch() only, alpha after the slash.
+ */
+
+:root {
+  /* ─── Surfaces: carved panels on a blue-black canvas ─── */
+  --background: oklch(0.16 0.008 255);
+  --foreground: oklch(0.94 0.008 250);
+
+  --card: oklch(0.195 0.01 255);            /* carved panel face */
+  --card-foreground: oklch(0.94 0.008 250);
+
+  --popover: oklch(0.215 0.012 255);        /* floating panel, one step lighter */
+  --popover-foreground: oklch(0.94 0.008 250);
+
+  /* ─── Primary: the cobalt active material ─── */
+  --primary: oklch(0.585 0.185 255);
+  --primary-foreground: oklch(0.98 0.01 250);
+
+  --secondary: oklch(0.245 0.012 255);      /* raised bezel face */
+  --secondary-foreground: oklch(0.92 0.008 250);
+
+  --muted: oklch(0.225 0.01 255);
+  --muted-foreground: oklch(0.64 0.015 250);
+
+  --accent: oklch(0.27 0.02 255);           /* hover wash */
+  --accent-foreground: oklch(0.96 0.008 250);
+
+  --destructive: oklch(0.55 0.19 25);       /* the negative red bars */
+  --destructive-foreground: oklch(0.98 0.01 20);
+
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(0.135 0.008 255);          /* recessed well, darker than canvas */
+  --ring: oklch(0.66 0.15 245);             /* cyan-leaning focus ring */
+  --radius: 0.625rem;                       /* 0.625rem controls, 0.75rem panels via lg */
+
+  /*
+   * ─── Material gradients ───
+   * --cobalt is the active fill; --bezel the raised dark control face;
+   * --well the recessed track interior.
+   */
+  --cobalt: linear-gradient(
+    to bottom,
+    oklch(0.64 0.17 250),
+    oklch(0.54 0.19 258)
+  );
+  --cobalt-hover: linear-gradient(
+    to bottom,
+    oklch(0.67 0.17 250),
+    oklch(0.57 0.19 258)
+  );
+  --bezel: linear-gradient(to bottom, oklch(0.27 0.012 255), oklch(0.22 0.012 255));
+  --well: linear-gradient(to bottom, oklch(0.125 0.008 255), oklch(0.15 0.008 255));
+
+  /*
+   * ─── Shadow recipes: the inset + outer signature ───
+   * Panels: 0.0625rem top inset highlight + soft outer drop.
+   * Wells: stacked dark insets + a faint bottom lip.
+   * Cobalt: white top highlight + cyan rim + blue outer bloom.
+   */
+  --shadow-panel:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.05),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.625rem 1.75rem oklch(0 0 0 / 0.36);
+
+  --shadow-raised:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.08),
+    inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.1875rem 0.5rem oklch(0 0 0 / 0.3);
+
+  --shadow-raised-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.1),
+    inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.3),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.45),
+    0 0.375rem 1rem oklch(0 0 0 / 0.35);
+
+  /* Recessed wells: inputs, tracks, the search field. */
+  --shadow-inset:
+    inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.5),
+    inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55),
+    0 0.0625rem 0 oklch(1 0 0 / 0.04);
+
+  /* The cobalt material: top highlight, cyan rim, blue bloom. */
+  --shadow-primary:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.28),
+    inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45),
+    inset 0 0 0 0.0625rem oklch(0.75 0.12 235 / 0.3),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.4),
+    0 0.25rem 0.875rem oklch(0.55 0.18 255 / 0.4);
+
+  --shadow-primary-hover:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.32),
+    inset 0 -0.0625rem 0.125rem oklch(0.3 0.1 260 / 0.45),
+    inset 0 0 0 0.0625rem oklch(0.78 0.12 235 / 0.35),
+    0 0.125rem 0.25rem oklch(0 0 0 / 0.45),
+    0 0.375rem 1.25rem oklch(0.55 0.18 255 / 0.5);
+
+  /* Floating surfaces: popovers, menus, tooltips, dialogs. */
+  --shadow-pop:
+    inset 0 0.0625rem 0 oklch(1 0 0 / 0.06),
+    0 0.25rem 0.75rem oklch(0 0 0 / 0.4),
+    0 1rem 2.5rem oklch(0 0 0 / 0.55);
+
+  /* Pressed state: the lift flattens into the surface. */
+  --shadow-press:
+    inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4),
+    0 0.0625rem 0.125rem oklch(0 0 0 / 0.3);
+
+  /* ─── Chart palette: cobalt to cyan to ice over deep navy ─── */
+  --chart-1: oklch(0.62 0.18 252);
+  --chart-2: oklch(0.75 0.13 215);
+  --chart-3: oklch(0.85 0.04 240);
+  --chart-4: oklch(0.5 0.1 260);
+  --chart-5: oklch(0.38 0.06 260);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.125rem);
+  --radius-xl: calc(var(--radius) + 0.375rem);
+
+  --shadow-panel: var(--shadow-panel);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-raised-hover: var(--shadow-raised-hover);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-primary: var(--shadow-primary);
+  --shadow-primary-hover: var(--shadow-primary-hover);
+  --shadow-pop: var(--shadow-pop);
+  --shadow-press: var(--shadow-press);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Geist", "Geist Sans", "Inter", -apple-system,
+      BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
+}

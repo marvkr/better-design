@@ -1,0 +1,18 @@
+{
+  "name": "chart-area-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-area.tsx",
+      "content": "\"use client\";\n\nimport { Area, AreaChart, CartesianGrid, XAxis } from \"recharts\";\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { month: \"May\", edits: 142 },\n  { month: \"June\", edits: 198 },\n  { month: \"July\", edits: 176 },\n  { month: \"August\", edits: 121 },\n  { month: \"September\", edits: 234 },\n  { month: \"October\", edits: 268 },\n];\n\nconst chartConfig = {\n  edits: { label: \"Edits\", color: \"var(--chart-1)\" },\n};\n\n/** An area chart on a paper card: notebook edits over six months, in the action oxblood. */\nexport function ChartAreaDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Edits per month</CardTitle>\n        <CardDescription>Every change saved across your notebooks</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <AreaChart accessibilityLayer data={chartData} margin={{ left: 8, right: 8, top: 8 }}>\n            <defs>\n              <linearGradient id=\"margin-area-fill\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n                <stop offset=\"0%\" stopColor=\"var(--chart-1)\" stopOpacity={0.22} />\n                <stop offset=\"100%\" stopColor=\"var(--chart-1)\" stopOpacity={0.02} />\n              </linearGradient>\n            </defs>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"month\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n              tickFormatter={(value: string) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator=\"line\" />} />\n            <Area\n              dataKey=\"edits\"\n              type=\"monotone\"\n              fill=\"url(#margin-area-fill)\"\n              stroke=\"var(--chart-1)\"\n              strokeWidth={1.75}\n            />\n          </AreaChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1 text-sm\">\n        <div className=\"font-medium leading-snug\">Up 14% on September</div>\n        <div className=\"leading-snug text-muted-foreground\">May to October</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/card-base.json",
+    "https://better-design.com/registry/margin/chart.json"
+  ]
+}

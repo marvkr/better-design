@@ -1,0 +1,30 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Button } from \"@/components/ui/button\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n} from \"@/components/ui/command\";\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\";\n\nconst frameworks = [\n  {\n    value: \"next.js\",\n    label: \"Next.js\",\n  },\n  {\n    value: \"sveltekit\",\n    label: \"SvelteKit\",\n  },\n  {\n    value: \"nuxt.js\",\n    label: \"Nuxt.js\",\n  },\n  {\n    value: \"remix\",\n    label: \"Remix\",\n  },\n  {\n    value: \"astro\",\n    label: \"Astro\",\n  },\n];\n\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        render={\n          <Button\n            variant=\"outline\"\n            role=\"combobox\"\n            aria-expanded={open}\n            className={cn(\n              \"w-[12.5rem] justify-between\",\n              \"rounded-full border border-border backdrop-blur-xl bg-foreground/[0.06]\",\n              \"shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n              \"text-foreground/90 placeholder:text-foreground/40\",\n              \"transition duration-base\",\n              \"hover:bg-foreground/[0.08] hover:border-foreground/[0.15]\",\n              \"focus-visible:shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent),0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_20%,transparent)] focus-visible:border-primary/50\"\n            )}\n          />\n        }\n      >\n        {value\n          ? frameworks.find((framework) => framework.value === value)?.label\n          : \"Select framework...\"}\n        <Icon\n          icon=\"tabler:chevrons-up-down\"\n          className=\"ml-2 h-4 w-4 shrink-0 opacity-50\"\n        />\n      </PopoverTrigger>\n      <PopoverContent\n        className={cn(\n          \"w-[12.5rem] p-0 rounded-xl\",\n          \"border border-border backdrop-blur-3xl backdrop-saturate-200 bg-popover supports-[backdrop-filter]:bg-popover/50\",\n          \"shadow-[0_0.5rem_2rem_color-mix(in_oklch,var(--shade)_40%,transparent),inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\"\n        )}\n      >\n        <Command className=\"bg-transparent\">\n          <CommandInput\n            placeholder=\"Search framework...\"\n            className=\"text-foreground/90 placeholder:text-foreground/40\"\n          />\n          <CommandEmpty className=\"text-foreground/50\">\n            No framework found.\n          </CommandEmpty>\n          <CommandGroup>\n            {frameworks.map((framework) => (\n              <CommandItem\n                key={framework.value}\n                value={framework.value}\n                onSelect={(currentValue) => {\n                  setValue(currentValue === value ? \"\" : currentValue);\n                  setOpen(false);\n                }}\n                className=\"text-foreground/80 hover:bg-foreground/[0.08] aria-selected:bg-foreground/[0.1]\"\n              >\n                <Icon\n                  icon=\"tabler:check\"\n                  className={cn(\n                    \"mr-2 h-4 w-4\",\n                    value === framework.value ? \"opacity-100\" : \"opacity-0\"\n                  )}\n                />\n                {framework.label}\n              </CommandItem>\n            ))}\n          </CommandGroup>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/halo/button-base.json",
+    "https://better-design.com/registry/halo/command-base.json",
+    "https://better-design.com/registry/halo/popover-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    }
+  }
+}

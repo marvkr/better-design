@@ -16,13 +16,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-8 w-full rounded-md bg-input px-3 py-1.5 text-[14px] tracking-[-0.006em] text-foreground",
+          "flex h-8 w-full rounded-md bg-input px-3 py-1.5 text-[0.875rem] tracking-[-0.006em] text-foreground",
           "border border-border",
           "placeholder:text-muted-foreground",
-          "transition-[border-color,box-shadow] duration-150 ease-out",
-          "hover:border-[rgba(255,255,255,0.3)]",
-          "focus-visible:outline-none focus-visible:border-[#888]",
-          "focus-visible:shadow-[0_0_0_3px_rgba(255,255,255,0.05)]",
+          "transition-[border-color,box-shadow] duration-fast ease-out",
+          "hover:border-[oklch(1_0_0/0.3)]",
+          "focus-visible:outline-none focus-visible:border-[oklch(0.6268_0_0)]",
+          "focus-visible:shadow-[0_0_0_0.1875rem_oklch(1_0_0/0.05)]",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
           "disabled:cursor-not-allowed disabled:opacity-50",
           className

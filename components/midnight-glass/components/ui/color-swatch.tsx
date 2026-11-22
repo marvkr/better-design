@@ -31,7 +31,7 @@ function ColorSwatch({
           "rounded-full",
           sizeClasses[size],
           "ring-2 ring-white/[0.08] ring-offset-2 ring-offset-transparent",
-          "shadow-[0_0_12px_rgba(255,255,255,0.05),inset_0_0_4px_rgba(255,255,255,0.1)]",
+          "shadow-[0_0_0.75rem_oklch(1_0_0/0.05),inset_0_0_0.25rem_oklch(1_0_0/0.1)]",
           "backdrop-blur-sm"
         )}
         style={{ backgroundColor: color }}
@@ -43,7 +43,7 @@ function ColorSwatch({
             <span className="text-xs font-medium text-white/80">{label}</span>
           )}
           {showHex && (
-            <span className="font-mono text-[10px] text-white/40">{color}</span>
+            <span className="font-mono text-[0.625rem] text-white/40">{color}</span>
           )}
         </div>
       )}

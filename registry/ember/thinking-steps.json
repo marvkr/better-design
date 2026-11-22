@@ -1,0 +1,32 @@
+{
+  "name": "thinking-steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-steps.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, type HTMLMotionProps } from \"motion/react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\n\n// Amber Glass ThinkingSteps: agent progress rail; completed nodes carry the\n// amber material, the active node pulses.\n\ntype StepStatus = \"complete\" | \"active\" | \"pending\"\n\ninterface ThinkingStepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  children: React.ReactNode\n}\n\nfunction ThinkingSteps({ className, children, ...props }: ThinkingStepsProps) {\n  return (\n    <div className={cn(\"flex flex-col\", className)} {...props}>\n      {children}\n    </div>\n  )\n}\n\ninterface ThinkingStepProps extends HTMLMotionProps<\"div\"> {\n  status?: StepStatus\n  title: string\n  description?: React.ReactNode\n  /** When false, hides the vertical connector below this step. */\n  showConnector?: boolean\n}\n\nfunction ThinkingStep({\n  status = \"pending\",\n  title,\n  description,\n  showConnector = true,\n  className,\n  ...props\n}: ThinkingStepProps) {\n  return (\n    <motion.div\n      initial={{ opacity: 0, y: 6 }}\n      animate={{ opacity: 1, y: 0 }}\n      transition={{ duration: 0.25, ease: \"easeOut\" }}\n      className={cn(\"flex gap-3\", className)}\n      {...props}\n    >\n      <div className=\"flex flex-col items-center\">\n        <span\n          className={cn(\n            \"flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-bold transition-all\",\n            status === \"complete\" &&\n              \"bg-[image:var(--ag-primary-grad)] text-primary-foreground shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.32),0_0_0.5rem_oklch(0.69_0.195_42/0.35)]\",\n            status === \"active\" &&\n              \"border border-[color:oklch(0.69_0.195_42/0.5)] bg-[var(--ag-fill-hover)] text-primary shadow-[0_0_0.625rem_oklch(0.69_0.195_42/0.25)]\",\n            status === \"pending\" &&\n              \"border border-[color:var(--ag-border)] bg-[var(--ag-well)] text-muted-foreground\"\n          )}\n        >\n          {status === \"complete\" ? (\n            <Icon icon=\"tabler:check\" className=\"h-3 w-3\" />\n          ) : status === \"active\" ? (\n            <span className=\"h-1.5 w-1.5 animate-pulse rounded-full bg-primary\" />\n          ) : (\n            <span className=\"h-1 w-1 rounded-full bg-muted-foreground/50\" />\n          )}\n        </span>\n        {showConnector && (\n          <span\n            className={cn(\n              \"w-px flex-1 min-h-4\",\n              status === \"complete\"\n                ? \"bg-[oklch(0.69_0.195_42/0.5)]\"\n                : \"bg-[var(--ag-border)]\"\n            )}\n          />\n        )}\n      </div>\n      <div className={cn(\"flex flex-col gap-0.5\", showConnector && \"pb-4\")}>\n        <span\n          className={cn(\n            \"text-sm font-semibold tracking-[-0.01em]\",\n            status === \"pending\" ? \"text-muted-foreground\" : \"text-foreground\"\n          )}\n        >\n          {title}\n        </span>\n        {description && (\n          <span className=\"text-xs text-muted-foreground\">{description}</span>\n        )}\n      </div>\n    </motion.div>\n  )\n}\n\ninterface ThinkingStepSourcesProps extends React.HTMLAttributes<HTMLDivElement> {\n  children: React.ReactNode\n}\n\nfunction ThinkingStepSources({ className, children, ...props }: ThinkingStepSourcesProps) {\n  return (\n    <div\n      className={cn(\n        \"mt-1.5 flex flex-wrap items-center gap-1.5 [&>*]:rounded-full [&>*]:bg-[var(--ag-fill)] [&>*]:border [&>*]:border-[color:var(--ag-border)] [&>*]:px-2 [&>*]:py-0.5 [&>*]:text-[0.6875rem] [&>*]:font-medium [&>*]:text-muted-foreground\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  )\n}\n\nexport { ThinkingSteps, ThinkingStep, ThinkingStepSources }\nexport type { ThinkingStepsProps, ThinkingStepProps, StepStatus }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))"
+    },
+    "dark": {
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
+      "ag-primary-grad": "linear-gradient(to bottom, oklch(0.67 0.18 46), oklch(0.58 0.19 38))"
+    }
+  }
+}

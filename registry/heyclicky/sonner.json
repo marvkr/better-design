@@ -1,0 +1,31 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:rounded-xl group-[.toaster]:shadow-[var(--shadow-window)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-[image:var(--gradient-primary)] group-[.toast]:text-primary-foreground group-[.toast]:rounded-full group-[.toast]:shadow-[var(--shadow-control)]\",\n          cancelButton:\n            \"group-[.toast]:bg-[image:var(--gradient-silver)] group-[.toast]:text-secondary-foreground group-[.toast]:rounded-full group-[.toast]:shadow-[var(--shadow-button)]\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
+      "gradient-silver": "linear-gradient( 180deg, oklch(0.952 0 0) 0%, oklch(0.894 0 0) 100% )",
+      "shadow-window": "var(--shadow-xl)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
+      "shadow-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28)"
+    },
+    "dark": {
+      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
+      "gradient-silver": "linear-gradient( 180deg, oklch(0.952 0 0) 0%, oklch(0.894 0 0) 100% )",
+      "shadow-window": "var(--shadow-xl)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
+      "shadow-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28)"
+    }
+  }
+}

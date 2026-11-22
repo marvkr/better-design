@@ -1,0 +1,22 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field styles for graphite.\n *\n * Fields are recessed wells: a dark top inset shadow presses them into the\n * card surface, the way the segmented nav track does. Buttons feel raised\n * (gradient + outer shadow); fields feel pressed in. On focus the well keeps\n * its depth and gains a soft white ring instead of a hue.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-lg px-3 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border-0 \" +\n  \"placeholder:text-muted-foreground/70 \" +\n  \"transition-[color,box-shadow] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:[box-shadow:var(--shadow-inset-deep)] \" +\n  \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-inset),0_0_0_0.125rem_oklch(1_0_0_/_0.2)] \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\"\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "shadow-inset-deep": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
+      "shadow-inset-deep": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\";\n\n/*\n * Interior AvatarGroup — overlapping square tiles, each separated by a 2px\n * card ring so the stack stays legible on a panel; a hairline in the card\n * colour is a compartment edge, the one place a ring is honest. The overflow\n * count is metadata, so it runs mono with tabular figures.\n */\n\nexport interface AvatarGroupItem {\n  src?: string;\n  alt?: string;\n  fallback: string;\n}\n\nexport interface AvatarGroupProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  items: AvatarGroupItem[];\n  max?: number;\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ className, items, max = 4, ...props }, ref) => {\n    const shown = items.slice(0, max);\n    const overflow = items.length - shown.length;\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"flex items-center -space-x-2\", className)}\n        {...props}\n      >\n        {shown.map((item, index) => (\n          <Avatar\n            key={`${item.fallback}-${index}`}\n            className=\"ring-2 ring-card\"\n          >\n            {item.src ? <AvatarImage src={item.src} alt={item.alt} /> : null}\n            <AvatarFallback>{item.fallback}</AvatarFallback>\n          </Avatar>\n        ))}\n        {overflow > 0 ? (\n          <span\n            className={cn(\n              \"flex size-9 items-center justify-center rounded-[0.625rem]\",\n              \"bg-secondary font-mono text-[0.6563rem] font-medium tabular-nums text-muted-foreground\",\n              \"shadow-[var(--shadow-well)] ring-2 ring-card\",\n            )}\n          >\n            +{overflow}\n          </span>\n        ) : null}\n      </div>\n    );\n  },\n);\nAvatarGroup.displayName = \"AvatarGroup\";\n\nexport { AvatarGroup };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/avatar.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
+    }
+  }
+}

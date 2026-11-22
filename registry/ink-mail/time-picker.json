@@ -1,0 +1,25 @@
+{
+  "name": "time-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/time-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface TimePickerProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\"\n> {}\n\n/**\n * Ink mail TimePicker: the dark field well holding a native time input in\n * tabular figures. The browser's own clock glyph is hidden; a muted clock sits\n * at the start of the field and opens the browser's time list when pressed.\n */\nconst TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(\n  ({ className, disabled, ...props }, ref) => {\n    const inputRef = React.useRef<HTMLInputElement>(null);\n\n    // SAFETY: inputRef is attached to the input this component always renders,\n    // so it is set by the time a parent can reach the handle.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);\n\n    const openPicker = () => {\n      const input = inputRef.current;\n      if (!input || disabled) return;\n      input.focus();\n      try {\n        input.showPicker?.();\n      } catch {\n        // Some browsers refuse showPicker outside a direct press; typing still works.\n      }\n    };\n\n    return (\n      <div data-slot=\"time-picker\" className=\"relative\">\n        <button\n          type=\"button\"\n          onClick={openPicker}\n          disabled={disabled}\n          tabIndex={-1}\n          aria-label=\"Choose a time\"\n          className=\"absolute start-1 top-1/2 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors duration-fast ease-out hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:text-(--foreground-disabled)\"\n        >\n          <Icon icon=\"ph:clock\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n        <input\n          ref={inputRef}\n          type=\"time\"\n          disabled={disabled}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"ps-10 tabular-nums [&::-webkit-calendar-picker-indicator]:hidden\",\n            className,\n          )}\n          {...props}\n        />\n      </div>\n    );\n  },\n);\nTimePicker.displayName = \"TimePicker\";\n\nexport { TimePicker };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

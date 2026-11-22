@@ -20,9 +20,9 @@ const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      "aspect-square h-[18px] w-[18px] shrink-0 rounded-full",
+      "aspect-square h-[1.125rem] w-[1.125rem] shrink-0 rounded-full",
       "bg-card [box-shadow:var(--shadow-inset)]",
-      "transition-[background,box-shadow] duration-150",
+      "transition-[background,box-shadow] duration-fast",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
       "disabled:cursor-not-allowed disabled:opacity-50",
       "data-[state=checked]:[background:var(--pill-gradient)] data-[state=checked]:[box-shadow:var(--shadow-pill)]",
@@ -31,7 +31,7 @@ const RadioGroupItem = React.forwardRef<
     {...props}
   >
     <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-      <span className="h-2 w-2 rounded-full bg-foreground [box-shadow:0_0_0_0.5px_rgba(0,0,0,0.25)]" />
+      <span className="h-2 w-2 rounded-full bg-foreground [box-shadow:0_0_0_0.03125rem_oklch(0_0_0/0.25)]" />
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ))

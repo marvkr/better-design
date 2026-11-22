@@ -48,7 +48,7 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
  onMouseLeave={() => !readOnly && setHover(null)}
  onClick={() => !readOnly && onRatingChange?.(starValue)}
  className={cn(
- "rounded-none p-0.5 transition-[color,transform] duration-150",
+ "rounded-none p-0.5 transition-[color,transform] duration-fast",
  !readOnly && "cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
  readOnly && "cursor-default"
  )}

@@ -1,0 +1,30 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Kanban Glass Button.\n// default / primary ARE the DS's signature control material: a solid indigo pill\n// (the board's accent) with a thin top specular highlight and a soft lift, so it\n// reads like a card that wants to be dragged. The filled controls\n// (checkbox / switch / radio / slider) mirror this exact material, scaled down.\n// `secondary` is the dark-slate CTA seen on the board (\"Add New Task\").\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-[var(--radius-md)] transition-[background,box-shadow,transform] duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Signature indigo pill — specular top rim + soft lift\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[var(--shadow-primary-inset)] \" +\n          \"hover:bg-[color-mix(in_oklch,var(--primary)_88%,oklch(0_0_none)_12%)]\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[var(--shadow-primary-inset)] \" +\n          \"hover:bg-[color-mix(in_oklch,var(--primary)_88%,oklch(0_0_none)_12%)]\",\n        // Dark-slate CTA pill (the board's \"Add New Task\" button)\n        secondary:\n          \"bg-[oklch(0.30_0.018_262)] text-[oklch(0.99_0.003_250)] \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.12),var(--shadow-sm)] \" +\n          \"hover:bg-[oklch(0.26_0.018_262)]\",\n        // Outline — white card on the board, hairline border\n        outline:\n          \"border border-border bg-card text-foreground \" +\n          \"shadow-[var(--shadow-xs)] hover:border-[color:oklch(0_0_0/0.14)] hover:shadow-[var(--shadow-sm)]\",\n        // Ghost — flat, surface hover\n        ghost: \"text-foreground hover:bg-[oklch(0_0_0/0.05)]\",\n        // Destructive — same lift material as primary, rim derived from --destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.28),0_0.125rem_0.3125rem_oklch(0.5_0.18_25/0.30)] \" +\n          \"hover:bg-[color-mix(in_oklch,var(--destructive)_90%,oklch(0_0_none)_10%)]\",\n        // Link — indigo accent\n        link: \"text-primary underline-offset-4 hover:underline rounded-none\",\n      },\n      size: {\n        default: \"h-10 px-5 py-2\",\n        sm: \"h-9 px-4 text-xs\",\n        lg: \"h-12 px-7 text-base\",\n        icon: \"h-10 w-10\",\n        \"icon-sm\": \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow": "0 0.125rem 0.5rem oklch(0.55 0.05 262 / 0.07)",
+      "primary-rim": "color-mix(in oklch, var(--primary) 72%, white 28%)",
+      "shadow-primary-inset": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.30), inset 0 0 0.625rem var(--primary-rim), 0 0.125rem 0.3125rem oklch(0.45 0.16 265 / 0.30)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow": "0 0.125rem 0.5rem oklch(0.55 0.05 262 / 0.07)",
+      "primary-rim": "color-mix(in oklch, var(--primary) 72%, white 28%)",
+      "shadow-primary-inset": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.30), inset 0 0 0.625rem var(--primary-rim), 0 0.125rem 0.3125rem oklch(0.45 0.16 265 / 0.30)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

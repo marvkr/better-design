@@ -1,0 +1,14 @@
+{
+  "name": "textarea-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\";\n\n/**\n * Cream editorial Textarea: the same pale paper field as Input, grown to\n * several lines with relaxed leading for longer prose.\n */\nconst Textarea = React.forwardRef<\n  HTMLTextAreaElement,\n  React.TextareaHTMLAttributes<HTMLTextAreaElement>\n>(({ className, ...props }, ref) => (\n  <textarea\n    ref={ref}\n    data-slot=\"textarea\"\n    className={cn(formFieldBase, formFieldMultiLine, \"leading-relaxed\", className)}\n    {...props}\n  />\n));\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared-base.json"
+  ]
+}

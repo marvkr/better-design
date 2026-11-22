@@ -1,0 +1,24 @@
+{
+  "name": "accordion",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Accordion: hairline-separated rows on the vault surface; the\n// caret rotates and open rows breathe with the standard height animation.\n\nconst Accordion = AccordionPrimitive.Root\n\nfunction AccordionItem({\n  className,\n  ...props\n}: React.ComponentProps<typeof AccordionPrimitive.Item>) {\n  return (\n    <AccordionPrimitive.Item\n      className={cn(\"border-b border-border\", className)}\n      {...props}\n    />\n  )\n}\nAccordionItem.displayName = \"AccordionItem\"\n\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        className={cn(\n          \"flex flex-1 items-center justify-between py-4 text-sm font-medium transition-colors hover:text-primary-bright [&[data-state=open]>svg]:rotate-180\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <Icon\n          icon=\"ph:caret-down\"\n          className=\"h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base\"\n        />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n}\nAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: React.ComponentProps<typeof AccordionPrimitive.Content>) {\n  return (\n    <AccordionPrimitive.Content\n      className=\"overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down\"\n      {...props}\n    >\n      <div className={cn(\"pb-4 pt-0\", className)}>{children}</div>\n    </AccordionPrimitive.Content>\n  )\n}\nAccordionContent.displayName = AccordionPrimitive.Content.displayName\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-accordion@^1.2.11",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)"
+    }
+  }
+}

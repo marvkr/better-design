@@ -16,7 +16,7 @@ const ToastViewport = React.forwardRef<
  <ToastPrimitives.Viewport
  ref={ref}
  className={cn(
- "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+ "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[26.25rem]",
  className
  )}
  {...props}
@@ -66,7 +66,7 @@ const ToastAction = React.forwardRef<
  "inline-flex h-8 shrink-0 items-center justify-center rounded-none px-3",
  "border border-border bg-secondary text-secondary-foreground",
  "",
- "text-sm font-medium transition-[background-color,box-shadow] duration-150",
+ "text-sm font-medium transition-[background-color,box-shadow] duration-fast",
  "hover:bg-accent hover:",
  "focus:outline-none focus:ring-2 focus:ring-ring/40",
  "disabled:pointer-events-none disabled:opacity-50",
@@ -84,7 +84,7 @@ const ToastClose = React.forwardRef<
  <ToastPrimitives.Close
  ref={ref}
  className={cn(
- "absolute right-2 top-2 rounded-none p-1 text-muted-foreground opacity-0 transition-[opacity,color,background-color] duration-150",
+ "absolute right-2 top-2 rounded-none p-1 text-muted-foreground opacity-0 transition-[opacity,color,background-color] duration-fast",
  "hover:bg-accent hover:text-foreground",
  "focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring/40 group-hover:opacity-100",
  className

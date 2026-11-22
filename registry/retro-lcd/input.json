@@ -1,0 +1,11 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Retro LCD Input — a recessed LCD entry field.\n// Slightly darker screen fill with an inset glass shadow so text sits \"in\" the\n// panel; olive border + focus that deepens the trace, no shadow bloom.\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-12 w-full rounded-lg border border-border bg-input px-4 py-3 font-mono text-sm text-foreground\",\n          \"shadow-[inset_0_0.125rem_0.25rem_oklch(0_0_0/0.12)]\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color] duration-fast\",\n          \"hover:border-foreground/40\",\n          \"focus-visible:outline-none focus-visible:border-foreground\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

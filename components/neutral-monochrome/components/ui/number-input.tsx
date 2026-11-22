@@ -53,7 +53,7 @@ function NumberInput({
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-[10px] border border-border bg-secondary overflow-hidden",
+        "inline-flex items-center rounded-[0.625rem] border border-border bg-secondary overflow-hidden",
         disabled && "opacity-50 pointer-events-none",
         className
       )}

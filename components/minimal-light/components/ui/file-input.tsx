@@ -70,7 +70,7 @@ function FileInput({
         className={cn(
           "flex flex-col items-center justify-center gap-3 rounded-xl",
           "border border-dashed border-border bg-card px-6 py-10",
-          "text-center transition-colors duration-200 cursor-pointer",
+          "text-center transition-colors duration-base cursor-pointer",
           dragging && "border-primary/40 bg-primary/5",
           disabled && "cursor-not-allowed opacity-40",
           !disabled && "hover:border-border/80 hover:bg-muted"

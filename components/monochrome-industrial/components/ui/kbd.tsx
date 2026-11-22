@@ -12,8 +12,8 @@ const Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
  <kbd
  ref={ref}
  className={cn(
- "inline-flex h-5 min-w-[20px] items-center justify-center gap-1 rounded-none px-1.5",
- "font-mono text-[10px] font-medium text-muted-foreground",
+ "inline-flex h-5 min-w-[1.25rem] items-center justify-center gap-1 rounded-none px-1.5",
+ "font-mono text-[0.625rem] font-medium text-muted-foreground",
  "bg-card border border-border",
  "",
  className

@@ -1,0 +1,30 @@
+{
+  "name": "inline-edit",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, Pencil, X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n// Hyperline InlineEdit: click-to-edit value with confirm and cancel actions.\n\ninterface InlineEditProps {\n  value: string;\n  onConfirm: (value: string) => void;\n  onCancel?: () => void;\n  placeholder?: string;\n  disabled?: boolean;\n  className?: string;\n  inputClassName?: string;\n  renderValue?: (value: string) => React.ReactNode;\n}\n\nfunction InlineEdit({\n  value,\n  onConfirm,\n  onCancel,\n  placeholder = \"Enter value\",\n  disabled,\n  className,\n  inputClassName,\n  renderValue,\n}: InlineEditProps) {\n  const [editing, setEditing] = React.useState(false);\n  const [draft, setDraft] = React.useState(value);\n  const inputRef = React.useRef<HTMLInputElement>(null);\n\n  React.useEffect(() => {\n    if (editing) inputRef.current?.focus();\n  }, [editing]);\n\n  const confirm = () => {\n    onConfirm(draft);\n    setEditing(false);\n  };\n\n  const cancel = () => {\n    setDraft(value);\n    onCancel?.();\n    setEditing(false);\n  };\n\n  if (!editing) {\n    return (\n      <button\n        type=\"button\"\n        disabled={disabled}\n        onClick={() => {\n          setDraft(value);\n          setEditing(true);\n        }}\n        className={cn(\n          \"group inline-flex items-center gap-2 rounded-md px-2 py-1 text-sm text-foreground\",\n          \"transition-colors hover:bg-accent/60\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n          disabled && \"pointer-events-none opacity-50\",\n          className\n        )}\n      >\n        {renderValue ? renderValue(value) : value || <span className=\"text-muted-foreground\">{placeholder}</span>}\n        <Pencil className=\"h-3 w-3 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100\" />\n      </button>\n    );\n  }\n\n  return (\n    <div className={cn(\"inline-flex items-center gap-1.5\", className)}>\n      <input\n        ref={inputRef}\n        value={draft}\n        placeholder={placeholder}\n        onChange={(e) => setDraft(e.target.value)}\n        onKeyDown={(e) => {\n          if (e.key === \"Enter\") confirm();\n          if (e.key === \"Escape\") cancel();\n        }}\n        className={cn(formFieldBase, \"h-8 rounded-md px-2 text-sm\", inputClassName)}\n      />\n      <button\n        type=\"button\"\n        onClick={confirm}\n        aria-label=\"Confirm\"\n        className=\"flex h-7 w-7 items-center justify-center rounded-md bg-[image:var(--hl-primary-gradient)] text-primary-foreground shadow-[var(--hl-shadow-primary-sm)] transition-all hover:brightness-105\"\n      >\n        <Check className=\"h-3.5 w-3.5\" />\n      </button>\n      <button\n        type=\"button\"\n        onClick={cancel}\n        aria-label=\"Cancel\"\n        className=\"flex h-7 w-7 items-center justify-center rounded-md border border-border/70 bg-secondary text-muted-foreground shadow-[var(--hl-shadow-raise)] transition-colors hover:text-foreground\"\n      >\n        <X className=\"h-3.5 w-3.5\" />\n      </button>\n    </div>\n  );\n}\n\nexport { InlineEdit };\nexport type { InlineEditProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/hyperline/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)",
+      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
+      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)"
+    }
+  }
+}

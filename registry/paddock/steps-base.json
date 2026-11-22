@@ -1,0 +1,27 @@
+{
+  "name": "steps-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { primaryFace, raisedSurface, wellInset } from \"./_shared\";\n\n/** One step: a title, an optional description and an optional icon name. */\nexport interface Step {\n  title: string;\n  description?: string;\n  icon?: string;\n}\n\n/** Props for a numbered row or column of steps. */\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  currentStep: number;\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\n/**\n * Paddock Steps: round markers joined by a thin grey track. A finished step\n * is the teal fill with a check, the current step is a raised white circle\n * with a teal ring, and the steps ahead sit in a flat grey well. The track\n * turns teal as the reader moves forward.\n */\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, steps, currentStep, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"steps\"\n      data-orientation={orientation}\n      className={cn(\"flex\", orientation === \"horizontal\" ? \"flex-row items-start\" : \"flex-col\", className)}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep;\n        const isCurrent = index === currentStep;\n        const isLast = index === steps.length - 1;\n\n        return (\n          <div\n            key={index}\n            data-state={isCompleted ? \"complete\" : isCurrent ? \"current\" : \"upcoming\"}\n            aria-current={isCurrent ? \"step\" : undefined}\n            className={cn(\"flex gap-3\", orientation === \"horizontal\" ? \"flex-1 flex-col items-start\" : \"flex-row\")}\n          >\n            <div\n              className={cn(\"flex w-full items-start gap-3\", orientation === \"horizontal\" ? \"flex-row\" : \"flex-col\")}\n            >\n              <div className=\"flex flex-col items-center self-stretch\">\n                <div\n                  className={cn(\n                    \"flex size-7 shrink-0 items-center justify-center rounded-full\",\n                    \"transition-[background-color,box-shadow,color] duration-base ease-out\",\n                    isCompleted && primaryFace,\n                    isCurrent && cn(raisedSurface, \"text-foreground ring-2 ring-primary\"),\n                    !isCompleted && !isCurrent && cn(wellInset, \"text-muted-foreground\"),\n                  )}\n                >\n                  {isCompleted ? (\n                    <Icon icon=\"mingcute:check-line\" aria-hidden=\"true\" className=\"size-3.5\" />\n                  ) : step.icon ? (\n                    <Icon icon={step.icon} aria-hidden=\"true\" className=\"size-3.5\" />\n                  ) : (\n                    <span className=\"text-xs font-semibold tabular-nums\">{index + 1}</span>\n                  )}\n                </div>\n                {orientation === \"vertical\" && !isLast && (\n                  <div\n                    aria-hidden=\"true\"\n                    className={cn(\"my-1.5 min-h-5 w-0.5 flex-1 rounded-xs\", isCompleted ? \"bg-primary\" : \"bg-(--track)\")}\n                  />\n                )}\n              </div>\n              <div className={cn(\"min-w-0 flex-1 pt-1\", orientation === \"vertical\" && \"pb-5\")}>\n                <div\n                  className={cn(\n                    \"text-sm font-medium\",\n                    isCurrent || isCompleted ? \"text-foreground\" : \"text-muted-foreground\",\n                  )}\n                >\n                  {step.title}\n                </div>\n                {step.description && (\n                  <div className=\"mt-0.5 text-[0.8125rem] text-muted-foreground\">{step.description}</div>\n                )}\n              </div>\n            </div>\n            {orientation === \"horizontal\" && !isLast && (\n              <div aria-hidden=\"true\" className=\"hidden w-full pr-3 sm:block\">\n                <div className={cn(\"h-1 w-full rounded-xs\", isCompleted ? \"bg-primary\" : \"bg-(--track)\")} />\n              </div>\n            )}\n          </div>\n        );\n      })}\n    </div>\n  ),\n);\nSteps.displayName = \"Steps\";\n\nexport { Steps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.945 0.008 230)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "track": "oklch(0.155 0.012 240)"
+    }
+  }
+}

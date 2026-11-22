@@ -10,28 +10,28 @@ import { cn } from "@/lib/utils"
 //          Misc/Post-mortem=pink, RFC=green, Data=purple
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-[4px] font-normal transition-colors focus:outline-none",
+  "inline-flex items-center justify-center rounded-[0.25rem] font-normal transition-colors focus:outline-none",
   {
     variants: {
       variant: {
         // gray — Engineering: rgba(42,28,0,0.07) bg
-        default: "bg-[rgba(42,28,0,0.07)] text-foreground",
+        default: "text-foreground bg-[color:oklch(0.238_0.049_82.5/0.11)]",
         // yellow — Product: rgba(209,156,0,0.28) bg
-        secondary: "bg-[rgba(209,156,0,0.28)] text-[rgb(101,81,33)]",
+        secondary: "bg-[oklch(0.7233_0.1484_84.11/0.28)] text-[oklch(0.445_0.0705_86.4861)]",
         // pink — Misc / Post-mortem
-        destructive: "bg-[rgba(212,76,81,0.15)] text-[rgb(147,55,82)]",
+        destructive: "bg-[oklch(0.6032_0.1712_21.7649/0.15)] text-[oklch(0.4733_0.1261_5.08)]",
         // outline kept for composability
         outline: "border border-border text-foreground bg-transparent",
         // Named Notion palette variants
-        orange: "bg-[rgba(196,88,0,0.2)] text-[rgb(106,66,34)]",
-        green: "bg-[rgba(42,176,125,0.2)] text-[rgb(42,83,60)]",
-        purple: "bg-[rgba(92,0,163,0.14)] text-[rgb(85,59,105)]",
-        blue: "bg-[color-mix(in_oklch,var(--primary)_15%,transparent)] text-[rgb(24,82,161)]",
-        pink: "bg-[rgba(212,76,81,0.15)] text-[rgb(147,55,82)]",
+        orange: "bg-[oklch(0.5868_0.1586_48.496/0.2)] text-[oklch(0.4188_0.0721_57.6729)]",
+        green: "bg-[oklch(0.6747_0.1357_162.2691/0.2)] text-[oklch(0.405_0.0609_157.5864)]",
+        purple: "bg-[oklch(0.3953_0.2109_300.0738/0.14)] text-[oklch(0.4018_0.0809_309.1777)]",
+        blue: "bg-[color-mix(in_oklch,var(--primary)_15%,transparent)] text-[oklch(0.4485_0.1411_257.7056)]",
+        pink: "bg-[oklch(0.6032_0.1712_21.7649/0.15)] text-[oklch(0.4733_0.1261_5.08)]",
       },
       size: {
-        sm: "h-[18px] gap-1 px-1.5 text-[11px]",
-        default: "h-5 gap-1 px-1.5 text-[13px]",
+        sm: "h-[1.125rem] gap-1 px-1.5 text-[0.6875rem]",
+        default: "h-5 gap-1 px-1.5 text-[0.8125rem]",
         lg: "h-6 gap-1.5 px-2 text-sm",
       },
     },

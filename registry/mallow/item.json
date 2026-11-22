@@ -1,0 +1,26 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, pressScale, selectedOption, optionTrack } from \"./_shared\";\n\n/**\n * Mallow Item: a row that lies flat on its surface; a hovered row tints and\n * a selected row takes the light violet tint inside a violet ring.\n */\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  asChild?: boolean;\n  interactive?: boolean;\n  selected?: boolean;\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"div\";\n    return (\n      <Comp\n        ref={ref}\n        data-slot=\"item\"\n        data-selected={selected ? \"\" : undefined}\n        className={cn(\n          \"flex items-center gap-3 rounded-xl px-3.5 py-3 text-foreground\",\n          \"transition-[background-color,box-shadow] duration-base ease-(--ease-out)\",\n          interactive && [\"cursor-pointer\", pressScale, focusRing, !selected && \"hover:bg-accent\"],\n          selected && selectedOption,\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\nItem.displayName = \"Item\";\n\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-icon\"\n      className={cn(\n        optionTrack,\n        \"flex size-9 shrink-0 items-center justify-center rounded-md text-muted-foreground [&_svg]:size-4.5\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemIcon.displayName = \"ItemIcon\";\n\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} data-slot=\"item-content\" className={cn(\"min-w-0 flex-1\", className)} {...props} />\n  ),\n);\nItemContent.displayName = \"ItemContent\";\n\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-title\"\n      className={cn(\"truncate text-sm font-medium text-foreground tabular-nums\", className)}\n      {...props}\n    />\n  ),\n);\nItemTitle.displayName = \"ItemTitle\";\n\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-description\"\n      className={cn(\"truncate text-sm text-muted-foreground tabular-nums\", className)}\n      {...props}\n    />\n  ),\n);\nItemDescription.displayName = \"ItemDescription\";\n\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} data-slot=\"item-actions\" className={cn(\"flex shrink-0 items-center gap-1\", className)} {...props} />\n  ),\n);\nItemActions.displayName = \"ItemActions\";\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\";\nimport { type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { toggleVariants } from \"./toggle\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\nconst ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({});\n\n/**\n * Margin ToggleGroup: a segmented control in the paper field, the same track\n * as the Tabs. The pressed item is the paper tab; the group passes its\n * variant and size to every item.\n */\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  children,\n  ...props\n}: WithClassName<ToggleGroupPrimitive.Props<string>> & VariantProps<typeof toggleVariants>) {\n  return (\n    <ToggleGroupPrimitive\n      data-slot=\"toggle-group\"\n      className={cn(\n        \"inline-flex flex-wrap items-center gap-0.5 rounded-lg bg-(--field) p-0.5 shadow-(--field-shade)\",\n        \"data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch\",\n        className,\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive>\n  );\n}\nToggleGroup.displayName = \"ToggleGroup\";\n\n/** One item inside a ToggleGroup; it takes the group's variant and size when the group sets them. */\nfunction ToggleGroupItem({\n  className,\n  variant,\n  size,\n  ...props\n}: WithClassName<TogglePrimitive.Props<string>> & VariantProps<typeof toggleVariants>) {\n  const context = React.useContext(ToggleGroupContext);\n\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle-group-item\"\n      className={cn(\n        toggleVariants({ variant: context.variant ?? variant, size: context.size ?? size }),\n        // Inside the group the track is shared, so an outline item drops its own ring.\n        \"rounded-md not-data-[pressed]:ring-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nToggleGroupItem.displayName = \"ToggleGroupItem\";\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/toggle-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(0.99 0.008 85)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.014 260)",
+      "field-shade": "inset 0 0 0 0 oklch(0 0 0 / 0)"
+    }
+  }
+}

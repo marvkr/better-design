@@ -33,7 +33,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
       className={cn(
         "rounded-xl overflow-hidden",
         "backdrop-blur-xl bg-white/[0.05] border border-white/[0.08]",
-        "shadow-[inset_0_0_8px_rgba(255,255,255,0.07)]",
+        "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.07)]",
         className
       )}
     >
@@ -44,7 +44,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             key={tab.label}
             onClick={() => handleTabChange(i)}
             className={cn(
-              "relative px-4 py-2.5 text-xs font-medium transition-colors duration-300",
+              "relative px-4 py-2.5 text-xs font-medium transition-colors duration-slow",
               i === activeIndex
                 ? "text-white"
                 : "text-white/40 hover:text-white/70"
@@ -53,7 +53,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             {i === activeIndex && (
               <motion.div
                 layoutId={`code-tab-indicator-${uid}`}
-                className="absolute bottom-0 left-0 right-0 h-[2px] bg-[rgba(255,255,255)] shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                className="absolute bottom-0 left-0 right-0 h-[0.125rem] bg-[oklch(1_0_0)] shadow-[0_0_0.5rem_oklch(1_0_0/0.5)]"
                 transition={{ type: "spring", stiffness: 500, damping: 35 }}
               />
             )}

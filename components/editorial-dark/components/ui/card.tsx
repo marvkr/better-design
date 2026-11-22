@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils"
 
 // Library of Minds Card — glassmorphism media card
 // Source: libraryofminds.com
-// bg-amber-50/12 backdrop-blur-[20px] rounded-[28px]
+// bg-amber-50/12 backdrop-blur-[1.25rem] rounded-[1.75rem]
 // Inset highlight shadow: top white glow + bottom subtle shadow
-// Media inset: m-2 mb-0 rounded-[20px] aspect-video
+// Media inset: m-2 mb-0 rounded-[1.25rem] aspect-video
 // Hover: scale-[1.01] + bg-amber-50/18
 
 const Card = React.forwardRef<
@@ -16,11 +16,11 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "cursor-default bg-amber-50/[0.12] backdrop-blur-[20px]",
-      "rounded-[28px] overflow-hidden",
-      "transition-all duration-200",
-      "shadow-[0_1px_0.908px_0_rgba(255,255,255,0.15)_inset,0_-1px_0.908px_0_rgba(255,255,255,0.05)_inset]",
-      "hover:scale-[1.01] hover:bg-amber-50/[0.18]",
+      "cursor-default bg-amber-50/12 backdrop-blur-[1.25rem]",
+      "rounded-[1.75rem] overflow-hidden",
+      "transition-all duration-base",
+      "shadow-[0_0.0625rem_0.0568rem_0_oklch(1_0_0/0.15)_inset,0_-0.0625rem_0.0568rem_0_oklch(1_0_0/0.05)_inset]",
+      "hover:scale-[1.01] hover:bg-amber-50/18",
       "text-card-foreground",
       className
     )}
@@ -37,7 +37,7 @@ const CardMedia = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "relative aspect-video bg-black m-2 mb-0 rounded-[20px] overflow-hidden",
+      "relative aspect-video bg-black m-2 mb-0 rounded-[1.25rem] overflow-hidden",
       className
     )}
     {...props}

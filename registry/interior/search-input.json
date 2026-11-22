@@ -1,0 +1,17 @@
+{
+  "name": "search-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Search, X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/*\n * Interior SearchInput — the recessed field at the search radius (9px, per\n * the nested scale; never a pill). The clear action is a 6px chip button and\n * its X stays at full opacity.\n */\n\nexport interface SearchInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  onClear?: () => void;\n}\n\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, onClear, value, ...props }, ref) => (\n    <div className=\"relative\">\n      <Search\n        aria-hidden\n        strokeWidth={1.5}\n        className=\"pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground\"\n      />\n      <input\n        ref={ref}\n        type=\"search\"\n        value={value}\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"rounded-[0.5625rem] pl-9 pr-10\",\n          \"[&::-webkit-search-cancel-button]:appearance-none\",\n          className,\n        )}\n        {...props}\n      />\n      {onClear && value ? (\n        <button\n          type=\"button\"\n          onClick={onClear}\n          aria-label=\"Clear search\"\n          className={cn(\n            \"absolute right-1.5 top-1/2 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-[0.375rem]\",\n            \"text-muted-foreground\",\n            \"transition-[background-color,color,box-shadow] duration-fast\",\n            \"hover:bg-secondary hover:text-foreground\",\n            \"focus-visible:outline-none focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n          )}\n        >\n          <X className=\"size-3.5\" strokeWidth={1.5} />\n        </button>\n      ) : null}\n    </div>\n  ),\n);\nSearchInput.displayName = \"SearchInput\";\n\nexport { SearchInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared.json"
+  ]
+}

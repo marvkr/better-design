@@ -18,7 +18,7 @@ const Card = React.forwardRef<
     ref={ref}
     className={cn(
       "rounded-lg border border-border bg-card text-card-foreground",
-      "shadow-[0_1px_3px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.03),inset_0_1px_0_rgba(255,255,255,0.03)]",
+      "shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.4),0_0_0_0.0625rem_oklch(1_0_0/0.03),inset_0_0.0625rem_0_oklch(1_0_0/0.03)]",
       className
     )}
     {...props}
@@ -36,7 +36,7 @@ const CardPoster = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "group cursor-pointer transition-opacity duration-200",
+      "group cursor-pointer transition-opacity duration-base",
       "hover:opacity-90",
       className
     )}

@@ -1,0 +1,19 @@
+{
+  "name": "combobox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, ChevronsUpDown } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\nimport { formFieldBase } from \"./_shared\";\n\n// Hyperline Combobox: recessed field trigger with the command palette surface.\n\nconst plans = [\n  { value: \"b2c-plan\", label: \"B2C Plan\" },\n  { value: \"b2b-plan\", label: \"B2B Plan\" },\n  { value: \"usage-based\", label: \"Usage based\" },\n  { value: \"enterprise\", label: \"Enterprise\" },\n  { value: \"legacy\", label: \"Legacy\" },\n];\n\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false);\n  const [value, setValue] = React.useState(\"\");\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        render={\n          <button\n            type=\"button\"\n            role=\"combobox\"\n            aria-expanded={open}\n            className={cn(\n              formFieldBase,\n              \"flex h-9 w-[13.75rem] items-center justify-between rounded-lg px-3 py-1 text-sm font-normal\",\n              !value && \"text-muted-foreground\"\n            )}\n          />\n        }\n      >\n        {value ? plans.find((plan) => plan.value === value)?.label : \"Select plan\"}\n        <ChevronsUpDown className=\"ml-2 h-4 w-4 shrink-0 text-muted-foreground\" />\n      </PopoverTrigger>\n      <PopoverContent className=\"w-[13.75rem] p-0\">\n        <Command>\n          <CommandInput placeholder=\"Search plans\" />\n          <CommandList>\n            <CommandEmpty>No plan found.</CommandEmpty>\n            <CommandGroup>\n              {plans.map((plan) => (\n                <CommandItem\n                  key={plan.value}\n                  value={plan.value}\n                  onSelect={(currentValue: string) => {\n                    setValue(currentValue === value ? \"\" : currentValue);\n                    setOpen(false);\n                  }}\n                >\n                  <Check\n                    className={cn(\n                      \"mr-2 h-4 w-4 text-primary\",\n                      value === plan.value ? \"opacity-100\" : \"opacity-0\"\n                    )}\n                  />\n                  {plan.label}\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/hyperline/command-base.json",
+    "https://better-design.com/registry/hyperline/popover-base.json",
+    "https://better-design.com/registry/hyperline/_shared-base.json"
+  ]
+}

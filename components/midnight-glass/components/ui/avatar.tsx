@@ -14,7 +14,7 @@ const Avatar = React.forwardRef<
     className={cn(
       "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
       "ring-2 ring-white/10",
-      "shadow-[0_0_12px_rgba(0,0,0,0.4)]",
+      "shadow-[0_0_0.75rem_oklch(0_0_0/0.4)]",
       className
     )}
     {...props}

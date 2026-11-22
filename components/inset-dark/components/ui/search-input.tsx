@@ -41,7 +41,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             onClick={onClear}
             className={cn(
               "absolute right-2 top-1/2 -translate-y-1/2 rounded p-1",
-              "text-muted-foreground transition-colors duration-150",
+              "text-muted-foreground transition-colors duration-fast",
               "hover:text-foreground hover:bg-accent",
               "focus:outline-none focus:ring-2 focus:ring-ring/40"
             )}

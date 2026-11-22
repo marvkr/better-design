@@ -1,0 +1,25 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Switch({ className, ...props }: SwitchPrimitive.Root.Props) {\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full\",\n        \"backdrop-blur-xl bg-foreground/[0.1]\",\n        \"border border-border\",\n        \"shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_8%,transparent)]\",\n        \"transition-all duration-base\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-checked:bg-gradient-to-t data-checked:from-primary data-checked:to-primary/85 data-checked:border-primary-foreground/20\",\n        \"data-checked:shadow-[0_0.125rem_0.25rem_-0.0625rem_color-mix(in_oklch,var(--shade)_30%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.22)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        className={cn(\n          \"pointer-events-none block h-5 w-5 rounded-full\",\n          \"bg-primary-foreground shadow-[0_0.0625rem_0.1875rem_color-mix(in_oklch,var(--shade)_30%,transparent)]\",\n          \"transition-transform duration-base\",\n          \"data-checked:translate-x-5 data-unchecked:translate-x-0.5\"\n        )}\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    }
+  }
+}

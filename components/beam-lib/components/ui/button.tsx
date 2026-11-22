@@ -18,7 +18,7 @@ const buttonVariants = cva(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap relative",
     "text-sm font-medium leading-none",
     "rounded-full cursor-pointer select-none",
-    "transition-[background-color,box-shadow,transform] duration-150",
+    "transition-[background-color,box-shadow,transform] duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:translate-y-px",
@@ -55,6 +55,7 @@ const buttonVariants = cva(
         default: "h-9 px-4",
         lg: "h-10 px-6",
         icon: "h-9 w-9",
+        "icon-sm": "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -79,6 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const showBeam = beam ?? beamVariants.has(variant ?? "default")
     const button = (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

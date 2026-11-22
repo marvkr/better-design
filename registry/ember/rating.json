@@ -1,0 +1,14 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Rating: amber stars with a soft glow on the filled run.\n\ninterface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number\n  max?: number\n  onChange?: (value: number) => void\n  readonly?: boolean\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm: \"h-3.5 w-3.5\",\n  md: \"h-4.5 w-4.5\",\n  lg: \"h-6 w-6\",\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  ({ className, value = 0, max = 5, onChange, readonly, size = \"md\", ...props }, ref) => {\n    const [hovered, setHovered] = React.useState<number | null>(null)\n    const display = hovered ?? value\n\n    return (\n      <div\n        ref={ref}\n        role=\"radiogroup\"\n        aria-label=\"Rating\"\n        className={cn(\"inline-flex items-center gap-1\", className)}\n        onMouseLeave={() => setHovered(null)}\n        {...props}\n      >\n        {Array.from({ length: max }, (_, i) => {\n          const filled = i < display\n          return (\n            <button\n              key={i}\n              type=\"button\"\n              role=\"radio\"\n              aria-checked={value === i + 1}\n              aria-label={`${i + 1} of ${max}`}\n              disabled={readonly}\n              onClick={() => onChange?.(i + 1)}\n              onMouseEnter={() => !readonly && setHovered(i + 1)}\n              className={cn(\n                \"rounded-sm transition-transform duration-fast\",\n                !readonly && \"cursor-pointer hover:scale-110\",\n                readonly && \"cursor-default\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n              )}\n            >\n              <Icon\n                icon={filled ? \"tabler:star-filled\" : \"tabler:star\"}\n                className={cn(\n                  sizeClasses[size],\n                  filled\n                    ? \"text-primary drop-shadow-[0_0_0.375rem_oklch(0.69_0.195_42/0.5)]\"\n                    : \"text-muted-foreground/50\"\n                )}\n              />\n            </button>\n          )\n        })}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\nexport type { RatingProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ]
+}

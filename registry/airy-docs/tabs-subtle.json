@@ -1,0 +1,32 @@
+{
+  "name": "tabs-subtle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs-subtle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport {\n  AnimatePresence,\n  motion,\n  useReducedMotion,\n  type HTMLMotionProps,\n} from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\ninterface TabsSubtleContextValue {\n  value: string;\n  onValueChange: (value: string) => void;\n  layoutId: string;\n}\n\nconst TabsSubtleContext = React.createContext<TabsSubtleContextValue | null>(\n  null,\n);\n\nfunction useTabsSubtle() {\n  const context = React.useContext(TabsSubtleContext);\n  if (!context) {\n    throw new Error(\"TabsSubtle parts must be used inside <TabsSubtle>\");\n  }\n  return context;\n}\n\n/** Maps a navigation key to the index the selection moves to. */\nfunction nextTabIndex(key: string, current: number, count: number) {\n  if (key === \"ArrowRight\" || key === \"ArrowDown\") return (current + 1) % count;\n  if (key === \"ArrowLeft\" || key === \"ArrowUp\") return (current - 1 + count) % count;\n  if (key === \"Home\") return 0;\n  if (key === \"End\") return count - 1;\n  return null;\n}\n\ninterface TabsSubtleProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n  onValueChange: (value: string) => void;\n  children: React.ReactNode;\n}\n\n/**\n * Airy docs TabsSubtle: the language switcher above a code sample. Options\n * sit in the pale tray with a 0.5rem corner; the chosen one takes the green\n * wash with green ink, which slides across in 150ms. Arrow keys,\n * Home and End move the selection.\n */\nfunction TabsSubtle({\n  value,\n  onValueChange,\n  className,\n  children,\n  onKeyDown,\n  ...props\n}: TabsSubtleProps) {\n  const layoutId = React.useId();\n\n  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {\n    onKeyDown?.(event);\n    if (event.defaultPrevented) return;\n    const tabs = Array.from(\n      event.currentTarget.querySelectorAll<HTMLButtonElement>(\n        '[role=\"tab\"]:not(:disabled)',\n      ),\n    );\n    const current = tabs.findIndex((tab) => tab === document.activeElement);\n    if (current === -1) return;\n    const next = nextTabIndex(event.key, current, tabs.length);\n    if (next === null) return;\n    event.preventDefault();\n    tabs[next].focus();\n    tabs[next].click();\n  }\n\n  return (\n    <TabsSubtleContext.Provider value={{ value, onValueChange, layoutId }}>\n      <div\n        role=\"tablist\"\n        data-slot=\"tabs-subtle\"\n        className={cn(\n          \"inline-flex items-center gap-0.5 rounded-lg border border-border bg-secondary p-0.5\",\n          className,\n        )}\n        onKeyDown={handleKeyDown}\n        {...props}\n      >\n        {children}\n      </div>\n    </TabsSubtleContext.Provider>\n  );\n}\n\ninterface TabsSubtleItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n  icon?: React.ReactNode;\n}\n\n/** One option. The green wash slides under whichever option is chosen. */\nfunction TabsSubtleItem({\n  value,\n  icon,\n  className,\n  children,\n  ...props\n}: TabsSubtleItemProps) {\n  const context = useTabsSubtle();\n  const reduceMotion = useReducedMotion();\n  const isActive = context.value === value;\n\n  return (\n    <button\n      type=\"button\"\n      role=\"tab\"\n      aria-selected={isActive}\n      tabIndex={isActive ? 0 : -1}\n      data-slot=\"tabs-subtle-item\"\n      data-state={isActive ? \"active\" : \"inactive\"}\n      onClick={() => context.onValueChange(value)}\n      className={cn(\n        \"relative isolate inline-flex h-7 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-2.5\",\n        \"text-xs font-medium transition-colors duration-fast ease-out\",\n        \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n        \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\",\n        \"[&_svg]:size-3.5 [&_svg]:shrink-0\",\n        isActive\n          ? \"text-(--primary-text)\"\n          : \"text-muted-foreground hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      {isActive && (\n        <motion.span\n          aria-hidden=\"true\"\n          layoutId={context.layoutId}\n          className=\"absolute inset-0 -z-10 rounded-md bg-(--primary-wash) ring-1 ring-(--primary-line)\"\n          transition={{ duration: reduceMotion ? 0 : 0.15, ease: \"easeOut\" }}\n        />\n      )}\n      {icon}\n      {children}\n    </button>\n  );\n}\n\ninterface TabsSubtlePanelProps extends HTMLMotionProps<\"div\"> {\n  value: string;\n  activeValue: string;\n  children: React.ReactNode;\n}\n\n/** The content for one option; fades in as the selection changes. */\nfunction TabsSubtlePanel({\n  value,\n  activeValue,\n  children,\n  className,\n  ...props\n}: TabsSubtlePanelProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <AnimatePresence mode=\"wait\" initial={false}>\n      {value === activeValue && (\n        <motion.div\n          key={value}\n          role=\"tabpanel\"\n          data-slot=\"tabs-subtle-panel\"\n          initial={{ opacity: 0 }}\n          animate={{ opacity: 1 }}\n          exit={{ opacity: 0 }}\n          transition={{ duration: reduceMotion ? 0 : 0.15, ease: \"easeOut\" }}\n          className={cn(\"pt-3 text-sm text-(--foreground-secondary)\", className)}\n          {...props}\n        >\n          {children}\n        </motion.div>\n      )}\n    </AnimatePresence>\n  );\n}\n\nexport { TabsSubtle, TabsSubtleItem, TabsSubtlePanel };\nexport type { TabsSubtleProps, TabsSubtleItemProps, TabsSubtlePanelProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "primary-wash": "oklch(0.476 0.11 154.3 / 0.08)",
+      "primary-line": "oklch(0.476 0.11 154.3 / 0.32)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "primary-wash": "oklch(0.705 0.169 153.6 / 0.12)",
+      "primary-line": "oklch(0.705 0.169 153.6 / 0.4)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

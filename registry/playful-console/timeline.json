@@ -1,0 +1,26 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Timeline: a vertical event log, like a changelog.\n *\n * Each event hangs from a small white tile with an olive edge holding a\n * duotone icon, and a dashed olive line runs down to the next tile. The\n * title reads bold in ink with its time in mono at the end of the row, and\n * the body sits under it in the secondary ink. The last event drops its\n * line on its own, so `isLast` is optional.\n */\nconst Timeline = React.forwardRef<\n  HTMLOListElement,\n  React.HTMLAttributes<HTMLOListElement>\n>(({ className, ...props }, ref) => (\n  <ol\n    ref={ref}\n    data-slot=\"timeline\"\n    className={cn(\"relative flex flex-col\", className)}\n    {...props}\n  />\n));\nTimeline.displayName = \"Timeline\";\n\n/** Props for one event in the Timeline. */\nexport interface TimelineItemProps extends Omit<\n  React.LiHTMLAttributes<HTMLLIElement>,\n  \"title\"\n> {\n  /** An Iconify name, such as \"ph:file-text-duotone\". Defaults to a small dot. */\n  icon?: string;\n  title?: React.ReactNode;\n  timestamp?: React.ReactNode;\n  isLast?: boolean;\n}\n\n/** One event: its tile, its connecting line, its title, time and body. */\nconst TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(\n  ({ className, icon, title, timestamp, isLast, children, ...props }, ref) => (\n    <li\n      ref={ref}\n      data-slot=\"timeline-item\"\n      className={cn(\"group/timeline-item relative flex gap-3\", className)}\n      {...props}\n    >\n      <div className=\"flex flex-col items-center\">\n        <span className=\"flex size-8 shrink-0 items-center justify-center rounded-md border-[0.09375rem] border-(--line-strong) bg-card text-primary shadow-(--shadow-control-off)\">\n          <Icon\n            icon={icon ?? \"ph:dot-outline-fill\"}\n            className=\"size-4\"\n            aria-hidden=\"true\"\n          />\n        </span>\n        <span\n          aria-hidden=\"true\"\n          data-slot=\"timeline-connector\"\n          className={cn(\n            \"my-1.5 w-0 flex-1 border-l-[0.125rem] border-dashed border-(--line-strong) group-last/timeline-item:hidden\",\n            isLast && \"hidden\",\n          )}\n        />\n      </div>\n      <div\n        className={cn(\n          \"min-w-0 flex-1 pt-1 pb-6 group-last/timeline-item:pb-0\",\n          isLast && \"pb-0\",\n        )}\n      >\n        {(title || timestamp) && (\n          <div className=\"flex items-baseline justify-between gap-3\">\n            {title && (\n              <div className=\"min-w-0 text-sm font-bold text-foreground\">\n                {title}\n              </div>\n            )}\n            {timestamp && (\n              <div className=\"shrink-0 font-mono text-xs tabular-nums text-muted-foreground\">\n                {timestamp}\n              </div>\n            )}\n          </div>\n        )}\n        {children && (\n          <div className=\"mt-1 text-sm leading-relaxed text-(--foreground-secondary)\">\n            {children}\n          </div>\n        )}\n      </div>\n    </li>\n  ),\n);\nTimelineItem.displayName = \"TimelineItem\";\n\nexport { Timeline, TimelineItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "shadow-control-off": "0 0.125rem 0 0 var(--line-strong)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)"
+    }
+  }
+}

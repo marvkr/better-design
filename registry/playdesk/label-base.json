@@ -1,0 +1,11 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI ships no Label primitive; a plain label carries the same semantics.\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.LabelHTMLAttributes<HTMLLabelElement>\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    className={cn(\n      \"text-sm font-medium leading-none text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n      className\n    )}\n    {...props}\n  />\n))\nLabel.displayName = \"Label\"\n\nexport { Label }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

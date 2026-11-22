@@ -1,0 +1,25 @@
+{
+  "name": "cursor",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/cursor.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface CursorProps extends React.HTMLAttributes<HTMLSpanElement> {\n  text: string;\n  speed?: number;\n  loop?: boolean;\n  pauseMs?: number;\n  /** Name shown in an ink chip beside a pointer, like a collaborator's cursor. */\n  label?: string;\n  /** Fill for the pointer arrow; the caret and the chip stay in ink. */\n  color?: string;\n  /** Wait before the first letter, in milliseconds. */\n  delay?: number;\n}\n\n/**\n * Firefly Cursor: text that types itself out behind a soft ink caret.\n *\n * The caret is a thin rounded ink bar that fades in and out rather than\n * snapping. Give it a label and a small pointer arrow appears under the\n * text with the name in a near-black pill, the way a collaborator shows up\n * on a shared canvas. With reduced motion on, the full text shows at once.\n */\nconst Cursor = React.forwardRef<HTMLSpanElement, CursorProps>(\n  (\n    {\n      className,\n      text,\n      speed = 60,\n      loop = false,\n      pauseMs = 1500,\n      label,\n      color,\n      delay = 0,\n      ...props\n    },\n    ref,\n  ) => {\n    const [display, setDisplay] = React.useState(\"\");\n    const reduceMotion = useReducedMotion();\n\n    React.useEffect(() => {\n      if (reduceMotion) {\n        setDisplay(text);\n        return;\n      }\n\n      let timer: ReturnType<typeof setTimeout>;\n      let shown = 0;\n      let deleting = false;\n      setDisplay(\"\");\n\n      const tick = () => {\n        if (!deleting) {\n          if (shown < text.length) {\n            shown += 1;\n            setDisplay(text.slice(0, shown));\n            timer = setTimeout(tick, speed);\n            return;\n          }\n          if (!loop) return;\n          deleting = true;\n          timer = setTimeout(tick, pauseMs);\n          return;\n        }\n        if (shown > 0) {\n          shown -= 1;\n          setDisplay(text.slice(0, shown));\n          timer = setTimeout(tick, speed / 2);\n          return;\n        }\n        deleting = false;\n        timer = setTimeout(tick, speed * 4);\n      };\n\n      timer = setTimeout(tick, delay);\n      return () => clearTimeout(timer);\n    }, [text, speed, loop, pauseMs, delay, reduceMotion]);\n\n    return (\n      <span\n        ref={ref}\n        data-slot=\"cursor\"\n        className={cn(\"inline-flex flex-col items-start gap-1\", className)}\n        {...props}\n      >\n        <span className=\"sr-only\">{text}</span>\n        <span\n          aria-hidden=\"true\"\n          className=\"inline-flex min-h-6 items-baseline text-sm text-foreground\"\n        >\n          <span className=\"whitespace-pre-wrap\">{display}</span>\n          <motion.span\n            animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 0.15, 1] }}\n            transition={\n              reduceMotion\n                ? { duration: 0 }\n                : { duration: 1.1, repeat: Infinity, ease: \"easeInOut\" }\n            }\n            className=\"ms-0.5 inline-block h-4 w-0.5 translate-y-0.5 rounded-full bg-(--ink)\"\n          />\n        </span>\n        {label && (\n          <span aria-hidden=\"true\" className=\"inline-flex items-start\">\n            <svg\n              viewBox=\"0 0 16 16\"\n              className={cn(\n                \"size-4 shrink-0 fill-(--ink) stroke-background\",\n                color && \"stroke-(--ink)\",\n              )}\n              style={color ? { fill: color } : undefined}\n              /* A lit fill such as the accent needs a firmer ink edge to read on white. */\n              strokeWidth={color ? 1.75 : 1.25}\n              strokeLinejoin=\"round\"\n            >\n              <path d=\"M2.5 1.5 13 8.2 8.3 9.1 5.9 13.6Z\" />\n            </svg>\n            <span className=\"mt-3 whitespace-nowrap rounded-full bg-(--ink) px-2 py-0.5 text-xs font-medium text-(--ink-foreground)\">\n              {label}\n            </span>\n          </span>\n        )}\n      </span>\n    );\n  },\n);\nCursor.displayName = \"Cursor\";\n\nexport { Cursor };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ink": "oklch(0.168 0.004 106.8)",
+      "ink-foreground": "oklch(1 0 0)"
+    },
+    "dark": {
+      "ink": "oklch(0.964 0.007 97.4)",
+      "ink-foreground": "oklch(0.168 0.004 106.8)"
+    }
+  }
+}

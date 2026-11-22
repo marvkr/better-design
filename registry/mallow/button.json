@@ -1,0 +1,29 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { quietFinish, controlFocusRing, pressScale, primaryFinish, primaryFinishHover } from \"./_shared\";\n\n/**\n * Mallow Button: a rounded rectangle with a 0.625rem corner, 3rem tall by default.\n *\n * The default is solid violet with white text, a faint shade along its bottom\n * edge and a small soft drop. Secondary is the quiet white action: a white\n * face, a hairline and a small drop. Focus draws a card-coloured gap and a\n * violet ring around the button.\n */\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex max-w-full shrink-0 select-none items-center justify-center whitespace-nowrap\",\n    \"rounded-lg font-semibold\",\n    pressScale,\n    controlFocusRing,\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: `${primaryFinish} ${primaryFinishHover}`,\n        primary: `${primaryFinish} ${primaryFinishHover}`,\n        lit: `${primaryFinish} ${primaryFinishHover}`,\n        solid: `${primaryFinish} ${primaryFinishHover}`,\n        secondary: quietFinish,\n        outline: \"bg-transparent text-foreground inset-ring-1 inset-ring-input hover:bg-accent\",\n        ghost: \"bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground\",\n        destructive: \"bg-(image:--danger-face) text-destructive-foreground shadow-xs\",\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline decoration-current/30 underline-offset-4 hover:decoration-current\",\n      },\n      size: {\n        sm: \"h-9 gap-2 px-4 text-sm [&_svg:not([class*='size-'])]:size-4\",\n        default: \"h-12 gap-2.5 px-5 text-base [&_svg:not([class*='size-'])]:size-5\",\n        lg: \"h-14 gap-2.5 px-6 text-lg [&_svg:not([class*='size-'])]:size-5\",\n        icon: \"size-12 px-0 [&_svg:not([class*='size-'])]:size-5\",\n        \"icon-sm\": \"size-9 px-0 [&_svg:not([class*='size-'])]:size-4\",\n        \"icon-lg\": \"size-14 px-0 [&_svg:not([class*='size-'])]:size-6\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        data-slot=\"button\"\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.48 0.2 288)",
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    },
+    "dark": {
+      "primary-text": "oklch(0.48 0.2 288)",
+      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
+    }
+  }
+}

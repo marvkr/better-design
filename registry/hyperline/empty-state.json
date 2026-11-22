@@ -1,0 +1,20 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline EmptyState: card-framed zero state with a dashed inner well.\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode;\n  title: string;\n  description?: string;\n  action?: React.ReactNode;\n}\n\nfunction EmptyState({ icon, title, description, action, className, ...props }: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 rounded-xl p-10 text-center\",\n        \"border border-dashed border-border bg-card/50\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <span className=\"flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-muted-foreground shadow-[var(--hl-shadow-raise)] [&_svg]:size-6\">\n          {icon}\n        </span>\n      )}\n      <div className=\"text-base font-semibold text-foreground\">{title}</div>\n      {description && (\n        <div className=\"max-w-sm text-sm text-muted-foreground\">{description}</div>\n      )}\n      {action && <div className=\"mt-1\">{action}</div>}\n    </div>\n  );\n}\n\nexport { EmptyState };\nexport type { EmptyStateProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)"
+    },
+    "dark": {
+      "hl-shadow-raise": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.1875rem 0.5rem -0.125rem oklch(0.05 0.02 300 / 0.4)"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Amber Glass Badge: small glass chip (assignee pill / count badge treatment).\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"backdrop-blur-[var(--ag-blur)] bg-[var(--ag-fill)] text-foreground \" +\n          \"border border-[color:var(--ag-border)] \" +\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.06)]\",\n        primary:\n          \"bg-primary/15 border border-[color:oklch(0.69_0.195_42/0.3)] shadow-[inset_0_0_0.5rem_oklch(0.69_0.195_42/0.12)] text-[color:oklch(0.875_0.069_40)]\",\n        secondary:\n          \"bg-secondary text-secondary-foreground border border-transparent\",\n        outline:\n          \"border border-[color:var(--ag-border-strong)] bg-transparent text-foreground\",\n        destructive:\n          \"bg-destructive/15 border border-[color:oklch(0.6_0.21_27/0.3)] text-[color:oklch(0.875_0.067_27)]\",\n        success:\n          \"bg-[oklch(0.72_0.15_155/0.14)] border border-[color:oklch(0.72_0.15_155/0.3)] text-[color:oklch(0.875_0.14_155)]\",\n        warning:\n          \"bg-[oklch(0.78_0.14_80/0.14)] border border-[color:oklch(0.78_0.14_80/0.3)] text-[color:oklch(0.875_0.12_82)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)"
+    },
+    "dark": {
+      "ag-blur": "0.875rem",
+      "ag-fill": "oklch(1 0 0 / 0.05)",
+      "ag-border": "oklch(1 0 0 / 0.09)",
+      "ag-border-strong": "oklch(1 0 0 / 0.16)"
+    }
+  }
+}

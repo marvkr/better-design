@@ -16,9 +16,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        "relative rounded-[3px] bg-card text-card-foreground",
+        "relative rounded-[0.1875rem] bg-card text-card-foreground",
         "[box-shadow:var(--shadow-s)]",
-        "transition-[background-color,box-shadow] duration-200",
+        "transition-[background-color,box-shadow] duration-base",
         // Mechanical seam — a 1px dark line at 50% height on every tile surface
         "before:pointer-events-none before:absolute before:inset-x-0 before:top-1/2 before:h-px before:bg-black/30",
         interactive && "cursor-pointer hover:bg-accent/40 hover:[box-shadow:var(--shadow-m)]",

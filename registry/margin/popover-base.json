@@ -1,0 +1,17 @@
+{
+  "name": "popover-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Popover as PopoverPrimitive } from \"@base-ui/react/popover\";\n\nimport { cn } from \"@/lib/utils\";\nimport { popoverMotion, popoverSurface } from \"./_shared\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Margin Popover root: owns the open state of one floating panel. */\nconst Popover = PopoverPrimitive.Root;\n\n/** The control the popover opens from. */\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\n/**\n * Margin popover panel: a white panel with a hairline and a soft drop, 18rem\n * wide, growing from its trigger.\n */\nconst PopoverContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<PopoverPrimitive.Popup.Props> &\n    Pick<PopoverPrimitive.Positioner.Props, \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\">\n>(({ className, align = \"center\", alignOffset, side, sideOffset = 6, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Positioner\n      align={align}\n      alignOffset={alignOffset}\n      side={side}\n      sideOffset={sideOffset}\n      className=\"isolate z-50 outline-none\"\n    >\n      <PopoverPrimitive.Popup\n        ref={ref}\n        data-slot=\"popover-content\"\n        className={cn(\n          popoverSurface,\n          popoverMotion,\n          \"flex w-72 max-w-(--available-width) flex-col gap-3 p-3 text-sm\",\n          className,\n        )}\n        {...props}\n      />\n    </PopoverPrimitive.Positioner>\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = \"PopoverContent\";\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ]
+}

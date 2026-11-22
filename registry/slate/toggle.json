@@ -1,0 +1,24 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Ops Sharp Toggle - a precise toolbar toggle. Off it is an understated ghost\n * tile; when pressed (data-[state=on]) it becomes the same solid graphite\n * material as the primary Button (bg-primary + --shadow-primary), so the active\n * state reads as one material with the filled controls.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center rounded-md text-sm font-medium\",\n    \"transition-[background-color,box-shadow,border-color,color] duration-fast\",\n    \"hover:bg-secondary hover:text-foreground\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:[box-shadow:var(--shadow-primary)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent text-muted-foreground\",\n        outline:\n          \"border border-border bg-transparent text-foreground hover:border-ring/30\",\n      },\n      size: {\n        default: \"h-9 px-3\",\n        sm: \"h-8 px-2.5\",\n        lg: \"h-10 px-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\n\nToggle.displayName = TogglePrimitive.Root.displayName;\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

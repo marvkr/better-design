@@ -1,0 +1,26 @@
+{
+  "name": "sidebar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sidebar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\ninterface SidebarProps extends React.HTMLAttributes<HTMLElement> {\n  collapsible?: boolean;\n}\n\n/**\n * Cream editorial Sidebar: an oat column beside the cream page, set off by\n * a warm hairline at its inner edge.\n *\n * Items are quiet rows in secondary ink that take an oat wash under the\n * pointer. The current item sits on the deeper oat tab in full ink at\n * medium weight, the way a category tab reads, so \"you are here\" never\n * shouts.\n */\nconst Sidebar = React.forwardRef<HTMLElement, SidebarProps>(\n  ({ className, collapsible, ...props }, ref) => (\n    <aside\n      ref={ref}\n      data-slot=\"sidebar\"\n      data-collapsible={collapsible ? \"\" : undefined}\n      className={cn(\n        \"flex h-full w-64 flex-col border-e border-border bg-card text-card-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nSidebar.displayName = \"Sidebar\";\n\nconst SidebarHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-header\"\n    className={cn(\"flex min-h-14 items-center gap-2 px-4 pt-3 pb-1\", className)}\n    {...props}\n  />\n));\nSidebarHeader.displayName = \"SidebarHeader\";\n\nconst SidebarContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-content\"\n    className={cn(\"flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-3 py-2\", className)}\n    {...props}\n  />\n));\nSidebarContent.displayName = \"SidebarContent\";\n\nconst SidebarFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-footer\"\n    className={cn(\"mt-auto border-t border-border px-3 py-3\", className)}\n    {...props}\n  />\n));\nSidebarFooter.displayName = \"SidebarFooter\";\n\nconst SidebarGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-group\"\n    className={cn(\"flex flex-col gap-0.5\", className)}\n    {...props}\n  />\n));\nSidebarGroup.displayName = \"SidebarGroup\";\n\nconst SidebarGroupLabel = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"sidebar-group-label\"\n    className={cn(\n      \"px-2.5 pt-1 pb-1.5 text-xs font-medium text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nSidebarGroupLabel.displayName = \"SidebarGroupLabel\";\n\ninterface SidebarItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  active?: boolean;\n  icon?: React.ReactNode;\n}\n\nconst SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>(\n  ({ className, active, icon, children, ...props }, ref) => (\n    <button\n      ref={ref}\n      type=\"button\"\n      data-slot=\"sidebar-item\"\n      data-active={active ? \"\" : undefined}\n      aria-current={active ? \"page\" : undefined}\n      className={cn(\n        \"group/sidebar-item flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-start text-sm\",\n        \"text-(--foreground-secondary) transition-[background-color,color] duration-fast ease-out\",\n        \"hover:bg-secondary hover:text-foreground\",\n        focusRing,\n        \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled) disabled:hover:bg-transparent\",\n        active && \"bg-muted font-medium text-foreground hover:bg-muted\",\n        className,\n      )}\n      {...props}\n    >\n      {icon && (\n        <span\n          aria-hidden=\"true\"\n          className={cn(\n            \"flex size-4 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-4\",\n            \"group-hover/sidebar-item:text-foreground\",\n            active && \"text-foreground\",\n          )}\n        >\n          {icon}\n        </span>\n      )}\n      <span className=\"min-w-0 flex-1 truncate\">{children}</span>\n    </button>\n  ),\n);\nSidebarItem.displayName = \"SidebarItem\";\n\nexport {\n  Sidebar,\n  SidebarHeader,\n  SidebarContent,\n  SidebarFooter,\n  SidebarGroup,\n  SidebarGroupLabel,\n  SidebarItem,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.359 0.005 106.7)",
+      "foreground-disabled": "oklch(0.75 0.013 96.5)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.853 0.014 97.5)",
+      "foreground-disabled": "oklch(0.478 0.006 95.2)"
+    }
+  }
+}

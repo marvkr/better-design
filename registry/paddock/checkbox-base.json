@@ -1,0 +1,34 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Paddock Checkbox: an empty box is a small white tile with a 1px cool border.\n * Checked or mixed, it fills with the primary Button's teal, so a ticked box\n * and the button read as one material. Base UI owns the checked state, so a\n * controlled parent passes `checked` straight through.\n */\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer relative grid size-4.5 shrink-0 place-items-center rounded-xs border border-transparent\",\n        \"bg-(--field) text-primary-foreground shadow-(--control-ring)\",\n        controlChecked,\n        \"data-[indeterminate]:bg-primary data-[indeterminate]:shadow-(--primary-face)\",\n        \"transition-[box-shadow,background-color] duration-fast ease-out\",\n        \"data-[unchecked]:hover:shadow-(--control-lift)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className=\"size-full flex items-center justify-center text-current\"\n      >\n        <Icon\n          icon={indeterminate ? \"mingcute:minimize-line\" : \"mingcute:check-line\"}\n          className=\"size-3\"\n          aria-hidden=\"true\"\n        />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(1 0 0)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.42 0.085 198), 0 0.0625rem 0.125rem oklch(0.3 0.05 210 / 0.14)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.62 0.02 245)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.5 0.02 245)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.012 240)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.66 0.1 190), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.56 0.012 240)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.66 0.012 240)"
+    }
+  }
+}

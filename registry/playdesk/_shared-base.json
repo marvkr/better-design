@@ -1,0 +1,26 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field recipe for the Playdesk Base UI variant.\n *\n * Same material as the Radix variant: raised controls carry a gloss over a\n * vertical gradient (the --fill-* tokens), fields are recessed white wells.\n * Only the primitive library underneath differs.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-lg px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast ease-out \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-foreground/20 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-[0.1875rem] focus-visible:ring-ring/25 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-10 py-2\"\nexport const formFieldMultiLine = \"flex min-h-[5.5rem] py-2.5 resize-y\"\n\n/* Floating surface: window rim plus the wide desk float. */\nexport const floatingSurface =\n  \"bg-popover text-popover-foreground rounded-lg [box-shadow:var(--shadow-rim),var(--shadow-float)]\"\n\n/* Base UI passes a state object to className; the wrappers feed cn(), so the\n * prop is narrowed to a plain string throughout this variant. */\nexport type WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "chart-radial-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-radial.tsx",
+      "content": "\"use client\";\n\nimport { RadialBar, RadialBarChart } from \"recharts\";\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { notebook: \"other\", pages: 38, fill: \"var(--chart-5)\" },\n  { notebook: \"travel\", pages: 64, fill: \"var(--chart-4)\" },\n  { notebook: \"reading\", pages: 92, fill: \"var(--chart-3)\" },\n  { notebook: \"personal\", pages: 131, fill: \"var(--chart-2)\" },\n  { notebook: \"work\", pages: 186, fill: \"var(--chart-1)\" },\n];\n\nconst chartConfig = {\n  pages: { label: \"Pages\" },\n  work: { label: \"Work\", color: \"var(--chart-1)\" },\n  personal: { label: \"Personal\", color: \"var(--chart-2)\" },\n  reading: { label: \"Reading\", color: \"var(--chart-3)\" },\n  travel: { label: \"Travel\", color: \"var(--chart-4)\" },\n  other: { label: \"Other\", color: \"var(--chart-5)\" },\n};\n\n/** A radial bar chart on a paper card: pages per notebook, each ring on a grey track. */\nexport function ChartRadialDefault() {\n  return (\n    <Card className=\"flex flex-col\">\n      <CardHeader className=\"items-center pb-0 text-center\">\n        <CardTitle>Pages by notebook</CardTitle>\n        <CardDescription>All notebooks you own</CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex-1 pb-0\">\n        <ChartContainer config={chartConfig} className=\"mx-auto aspect-square max-h-64\">\n          <RadialBarChart data={chartData} innerRadius={30} outerRadius={110} barSize={10}>\n            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel nameKey=\"notebook\" />} />\n            <RadialBar dataKey=\"pages\" background cornerRadius={5} />\n          </RadialBarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col gap-1 text-sm\">\n        <div className=\"font-medium leading-snug\">Work holds the most pages</div>\n        <div className=\"leading-snug text-muted-foreground\">511 pages across 5 notebooks</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/card-base.json",
+    "https://better-design.com/registry/margin/chart.json"
+  ]
+}

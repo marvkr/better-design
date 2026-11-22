@@ -1,0 +1,39 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Compact mono labels for issues, values, and specimen metadata. */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-mono text-[0.6875rem] font-medium tracking-tight \" +\n    \"transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"text-secondary-foreground bg-[color:oklch(0.925_0_190.3)]\",\n        primary: \"text-primary-foreground bg-[color:oklch(0.575_0.159_47)]\",\n        secondary: \"bg-[color:oklch(0.925_0.001_90)] text-[color:oklch(0.51_0_175.6)]\",\n        outline: \"bg-transparent text-foreground ring-1 ring-inset ring-border\",\n        orange: \"bg-pop-orange text-pop-orange-foreground\",\n        blue: \"bg-pop-blue text-pop-blue-foreground\",\n        green: \"bg-pop-green text-pop-green-foreground\",\n        yellow: \"text-pop-yellow-foreground bg-[color:oklch(0.925_0.07_95.1)]\",\n        purple: \"bg-pop-purple text-pop-purple-foreground\",\n        success: \"bg-pop-green text-pop-green-foreground\",\n        warning: \"text-pop-yellow-foreground bg-[color:oklch(0.925_0.07_95.1)]\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "pop-blue": "oklch(0.93 0.05 232.661)",
+      "pop-blue-foreground": "oklch(0.46 0.13 237.323)",
+      "pop-green": "oklch(0.93 0.06 163.223)",
+      "pop-green-foreground": "oklch(0.43 0.105 163.223)",
+      "pop-orange": "oklch(0.94 0.055 47.604)",
+      "pop-orange-foreground": "oklch(0.52 0.17 38.2)",
+      "pop-yellow-foreground": "oklch(0.5 0.11 84.429)",
+      "pop-purple": "oklch(0.94 0.05 293.541)",
+      "pop-purple-foreground": "oklch(0.49 0.15 293.541)"
+    },
+    "dark": {
+      "pop-blue": "oklch(0.93 0.05 232.661)",
+      "pop-blue-foreground": "oklch(0.46 0.13 237.323)",
+      "pop-green": "oklch(0.93 0.06 163.223)",
+      "pop-green-foreground": "oklch(0.43 0.105 163.223)",
+      "pop-orange": "oklch(0.94 0.055 47.604)",
+      "pop-orange-foreground": "oklch(0.52 0.17 38.2)",
+      "pop-yellow-foreground": "oklch(0.5 0.11 84.429)",
+      "pop-purple": "oklch(0.94 0.05 293.541)",
+      "pop-purple-foreground": "oklch(0.49 0.15 293.541)"
+    }
+  }
+}

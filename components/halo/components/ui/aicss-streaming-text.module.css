@@ -1,0 +1,10 @@
+/* Ported from https://www.aicss.dev/components/streaming-text */
+.prose { font-size: 0.875rem; line-height: 1.1875rem; color: var(--foreground); }
+.caret { display: inline-block; width: 0.5rem; height: 1.05em; margin-left: 0.125rem; background: var(--foreground); vertical-align: text-bottom; animation: caret-blink 1s step-end infinite; }
+/* solid while streaming, blink only once idle (matches the live component) */
+.caretSteady { animation: none; opacity: 1; }
+@keyframes caret-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+ .caret,
+.caretSteady { animation: none !important; transition-duration: 0.01ms !important; } }

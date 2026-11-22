@@ -1,0 +1,27 @@
+{
+  "name": "toggle-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants, toggleSizeClasses } from \"./toggle\"\n\n/*\n * The container is a shallow recessed track on the near-black surface;\n * items are the same chip primitives as <Toggle>, lighting up with the\n * cool accent material when active.\n */\n\ntype Size = keyof typeof toggleSizeClasses\n\nconst ToggleGroupContext = React.createContext<{\n  variant: VariantProps<typeof toggleVariants>[\"variant\"]\n  size: Size\n}>({\n  variant: \"default\",\n  size: \"default\",\n})\n\ninterface ToggleGroupRootProps\n  extends Omit<ToggleGroupPrimitive.Props, \"className\">,\n    VariantProps<typeof toggleVariants> {\n  className?: string\n  size?: Size\n}\n\nconst ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupRootProps>(\n  ({ className, variant, size = \"default\", children, ...props }, ref) => (\n    <ToggleGroupPrimitive\n      ref={ref}\n      className={cn(\n        \"inline-flex items-center p-1 rounded-lg bg-card border border-border\",\n        \"[box-shadow:var(--shadow-well)]\",\n        className\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider value={{ variant, size }}>\n        {children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive>\n  )\n)\nToggleGroup.displayName = \"ToggleGroup\"\n\ninterface ToggleGroupItemProps\n  extends Omit<TogglePrimitive.Props, \"className\">,\n    VariantProps<typeof toggleVariants> {\n  className?: string\n  size?: Size\n}\n\nconst ToggleGroupItem = React.forwardRef<\n  HTMLButtonElement,\n  ToggleGroupItemProps\n>(({ className, children, variant, size, ...props }, ref) => {\n  const ctx = React.useContext(ToggleGroupContext)\n  const resolvedSize = size ?? ctx.size\n  return (\n    <TogglePrimitive\n      ref={ref}\n      className={cn(\n        toggleVariants({ variant: variant ?? ctx.variant }),\n        toggleSizeClasses[resolvedSize],\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </TogglePrimitive>\n  )\n})\nToggleGroupItem.displayName = \"ToggleGroupItem\"\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cerulean/toggle-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)"
+    }
+  }
+}

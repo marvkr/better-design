@@ -1,0 +1,34 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, primaryFill } from \"./_shared\";\n\n/**\n * Airy docs Button: a flat pill.\n *\n * Every button is a full pill with medium Inter at 0.875rem. The primary is\n * the deep docs green; the secondary is a hairline outline on white, the way\n * a docs header pairs \"Get started\" with \"Talk to us\". Nothing shines and\n * nothing casts a shadow: the page stays flat and the green does the work.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-full font-medium\",\n    \"transition-[background-color,color,border-color] duration-fast ease-out\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:border-transparent disabled:bg-muted disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: primaryFill,\n        primary: primaryFill,\n        // Ink pill, for a strong action that is not the page's green one.\n        solid: \"bg-foreground text-background hover:bg-foreground/85\",\n        secondary: \"bg-secondary text-secondary-foreground hover:bg-muted\",\n        outline:\n          \"border border-(--line-strong) bg-background text-foreground hover:bg-secondary\",\n        ghost: \"bg-transparent text-(--foreground-secondary) hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3.5 text-sm\",\n        default: \"h-9 px-4 text-sm\",\n        lg: \"h-11 px-5 text-base\",\n        icon: \"size-9 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-11 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        data-slot=\"button\"\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

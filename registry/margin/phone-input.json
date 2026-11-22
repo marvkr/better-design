@@ -1,0 +1,17 @@
+{
+  "name": "phone-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/phone-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\n/**\n * Margin PhoneInput: one grey filled field split by a hairline into a\n * country code and the number. The whole field turns white with the oxblood\n * halo while either part has focus.\n */\nexport interface PhoneInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  countryCode?: string;\n  onCountryCodeChange?: (code: string) => void;\n}\n\nconst PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(\n  ({ className, countryCode = \"+1\", onCountryCodeChange, ...props }, ref) => (\n    <div\n      data-slot=\"phone-input\"\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"items-stretch gap-0 px-0 py-0\",\n        \"focus-within:border-primary/45 focus-within:bg-card focus-within:ring-3 focus-within:ring-ring\",\n        \"has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-1 border-r border-border pl-2.5 pr-1.5 text-muted-foreground\">\n        <Icon icon=\"solar:phone-linear\" aria-hidden className=\"size-3.5\" />\n        <input\n          type=\"tel\"\n          value={countryCode}\n          onChange={(e) => onCountryCodeChange?.(e.target.value)}\n          className=\"w-10 bg-transparent text-sm tabular-nums text-foreground outline-none\"\n          aria-label=\"Country code\"\n        />\n      </div>\n      <input\n        ref={ref}\n        type=\"tel\"\n        className=\"min-w-0 flex-1 bg-transparent px-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        {...props}\n      />\n    </div>\n  ),\n);\nPhoneInput.displayName = \"PhoneInput\";\n\nexport { PhoneInput };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ]
+}

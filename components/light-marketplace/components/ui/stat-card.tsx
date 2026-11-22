@@ -31,7 +31,7 @@ const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-[14px] border border-border bg-card shadow-sm p-6",
+          "rounded-[0.875rem] border border-border bg-card shadow-sm p-6",
           className
         )}
         {...props}

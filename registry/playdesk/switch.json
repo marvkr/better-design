@@ -1,0 +1,35 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitives from \"@radix-ui/react-switch\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Switch — the track is a recessed slot when off and the primary\n * Button's blue gradient when on. The thumb is a white pill with its own float,\n * so it reads as a cap sitting in the groove.\n */\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitives.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitives.Root\n    ref={ref}\n    className={cn(\n      \"peer inline-flex h-6 w-11 shrink-0 items-center rounded-full\",\n      \"transition-[box-shadow,background-color] duration-base ease-out\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=unchecked]:bg-secondary data-[state=unchecked]:[box-shadow:var(--shadow-track-inset)]\",\n      \"data-[state=checked]:[background-image:var(--fill-primary)]\",\n      \"data-[state=checked]:[box-shadow:var(--shadow-primary)]\",\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitives.Thumb\n      className={cn(\n        \"pointer-events-none block size-5 rounded-full bg-card\",\n        \"[box-shadow:0_0.0625rem_0.1875rem_oklch(0_0_0_/_0.25)]\",\n        \"transition-transform duration-base ease-out\",\n        \"data-[state=checked]:translate-x-[1.375rem] data-[state=unchecked]:translate-x-0.5\",\n      )}\n    />\n  </SwitchPrimitives.Root>\n));\nSwitch.displayName = SwitchPrimitives.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

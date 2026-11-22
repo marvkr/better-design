@@ -1,0 +1,38 @@
+{
+  "name": "sonner-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\nimport { Icon } from \"@iconify/react\";\n\nimport { pressOutline, pressPrimary } from \"./_shared\";\n\nconst focusRing =\n  \"focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring\";\n\n/**\n * Playful console Toaster for sonner: white cards with duotone status icons.\n *\n * Sonner's own look is switched off and every part is styled here, so the\n * toast is the same panel as a menu: white, the olive hairline, the card\n * corner and a soft drop. The status icon takes the bold highlight colour\n * for its tone. The action is a small orange key and cancel a white key,\n * so both press like every other button.\n */\nconst Toaster = ({ ...props }: ToasterProps) => (\n  <SonnerPrimitive\n    icons={{\n      success: <Icon icon=\"ph:check-circle-duotone\" aria-hidden=\"true\" />,\n      info: <Icon icon=\"ph:info-duotone\" aria-hidden=\"true\" />,\n      warning: <Icon icon=\"ph:warning-duotone\" aria-hidden=\"true\" />,\n      error: <Icon icon=\"ph:warning-circle-duotone\" aria-hidden=\"true\" />,\n      loading: (\n        <Icon icon=\"ph:circle-notch-bold\" className=\"animate-spin\" aria-hidden=\"true\" />\n      ),\n      close: <Icon icon=\"ph:x-bold\" aria-hidden=\"true\" />,\n    }}\n    toastOptions={{\n      unstyled: true,\n      classNames: {\n        toast:\n          \"flex w-(--width) items-start gap-3 rounded-lg border border-border bg-popover p-4 text-sm text-popover-foreground shadow-(--shadow-menu)\",\n        content: \"flex min-w-0 flex-1 flex-col gap-0.5\",\n        title: \"font-bold leading-snug\",\n        description: \"text-(--foreground-secondary)\",\n        icon: \"mt-0.5 flex size-4.5 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-4.5\",\n        actionButton: `inline-flex h-8 shrink-0 items-center rounded-[0.5rem] px-3 text-[0.8125rem] font-bold ${pressPrimary} ${focusRing}`,\n        cancelButton: `inline-flex h-8 shrink-0 items-center rounded-[0.5rem] px-3 text-[0.8125rem] font-bold ${pressOutline} ${focusRing}`,\n        closeButton: `absolute -end-2 -top-2 inline-flex size-6 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors duration-fast ease-out hover:text-foreground [&_svg]:size-3 ${focusRing}`,\n        success: \"[&_[data-icon]]:text-(--success-text)\",\n        error: \"[&_[data-icon]]:text-(--destructive-text)\",\n        warning: \"[&_[data-icon]]:text-(--warning-text)\",\n        info: \"[&_[data-icon]]:text-(--info-text)\",\n      },\n    }}\n    {...props}\n  />\n);\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "info-text": "oklch(0.488 0.217 264.4)",
+      "success-text": "oklch(0.47 0.1 162)",
+      "warning-text": "oklch(0.52 0.12 62)",
+      "destructive-text": "oklch(0.5 0.17 27.5)",
+      "shadow-menu": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "info-text": "oklch(0.8 0.11 255)",
+      "success-text": "oklch(0.8 0.11 160)",
+      "warning-text": "oklch(0.84 0.13 76)",
+      "destructive-text": "oklch(0.8 0.11 25)",
+      "shadow-menu": "var(--shadow-md)"
+    }
+  }
+}

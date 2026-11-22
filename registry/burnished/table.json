@@ -1,0 +1,25 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { cardSlab } from \"./_shared\";\n\n/**\n * Burnished Table: rows laid on an umber slab. The header and footer sit on\n * the flatter plate finish, rows part on hairlines, and a row lifts to the\n * accent tone under a fine pointer.\n */\nconst Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      data-slot=\"table-container\"\n      className={cn(\"relative w-full overflow-auto rounded-2xl\", cardSlab)}\n    >\n      <table\n        ref={ref}\n        data-slot=\"table\"\n        className={cn(\"w-full caption-bottom text-sm\", className)}\n        {...props}\n      />\n    </div>\n  ),\n);\nTable.displayName = \"Table\";\n\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead\n    ref={ref}\n    data-slot=\"table-header\"\n    className={cn(\"bg-(image:--fill-surface) [&_tr]:border-b [&_tr]:border-border\", className)}\n    {...props}\n  />\n));\nTableHeader.displayName = \"TableHeader\";\n\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    data-slot=\"table-body\"\n    className={cn(\"[&_tr:last-child]:border-0\", className)}\n    {...props}\n  />\n));\nTableBody.displayName = \"TableBody\";\n\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    data-slot=\"table-footer\"\n    className={cn(\n      \"border-t border-border bg-(image:--fill-surface) font-semibold [&>tr]:last:border-b-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableFooter.displayName = \"TableFooter\";\n\nconst TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(\n  ({ className, ...props }, ref) => (\n    <tr\n      ref={ref}\n      data-slot=\"table-row\"\n      className={cn(\n        \"border-b border-border transition-colors duration-fast ease-(--ease-out)\",\n        \"[@media(hover:hover)_and_(pointer:fine)]:hover:bg-accent/50 data-[state=selected]:bg-accent\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nTableRow.displayName = \"TableRow\";\n\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    data-slot=\"table-head\"\n    className={cn(\n      \"h-11 px-4 text-left align-middle text-xs font-semibold text-muted-foreground\",\n      \"[&:has([role=checkbox])]:pr-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHead.displayName = \"TableHead\";\n\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    data-slot=\"table-cell\"\n    className={cn(\"px-4 py-3 align-middle [&:has([role=checkbox])]:pr-0\", className)}\n    {...props}\n  />\n));\nTableCell.displayName = \"TableCell\";\n\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    data-slot=\"table-caption\"\n    className={cn(\"py-4 text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nTableCaption.displayName = \"TableCaption\";\n\nexport { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-surface": "linear-gradient(180deg, oklch(0.227 0.004 84.6), oklch(0.201 0.004 84.6))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-surface": "linear-gradient(180deg, oklch(0.227 0.004 84.6), oklch(0.201 0.004 84.6))",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

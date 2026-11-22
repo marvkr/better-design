@@ -1,0 +1,23 @@
+{
+  "name": "radio-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\"\n\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {\n  return (\n    <RadioGroupPrimitive data-slot=\"radio-group\" className={cn(\"grid gap-2\", className)} {...props} />\n  )\n}\nRadioGroup.displayName = \"RadioGroup\"\n\nfunction RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"inline-flex items-center justify-center aspect-square h-5 w-5 shrink-0 rounded-[0.125rem] border-2 border-border\",\n        \"bg-card [box-shadow:var(--shadow-xs)]\",\n        \"transition-[background-color,box-shadow,transform] duration-fast\",\n        \"hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:var(--shadow-sm)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"size-full flex items-center justify-center\">\n        <span className=\"h-2.5 w-2.5 rounded-[0.0625rem] bg-primary-foreground\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  )\n}\nRadioGroupItem.displayName = \"RadioGroupItem\"\n\nexport { RadioGroup, RadioGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    },
+    "dark": {
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    }
+  }
+}

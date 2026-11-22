@@ -1,0 +1,27 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { optionTrack } from \"./_shared\";\n\n/**\n * Mallow Table: rows on a lilac option track. The header is muted text with\n * no fill, rows part on faint hairlines, and a selected row takes the light\n * violet tint inside a violet ring.\n */\nconst Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      data-slot=\"table-container\"\n      className={cn(\"relative w-full overflow-auto rounded-2xl p-1\", optionTrack)}\n    >\n      <table\n        ref={ref}\n        data-slot=\"table\"\n        className={cn(\"w-full caption-bottom border-separate border-spacing-0 text-sm tabular-nums\", className)}\n        {...props}\n      />\n    </div>\n  ),\n);\nTable.displayName = \"Table\";\n\n/** The header group: muted labels over the first row. */\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead ref={ref} data-slot=\"table-header\" className={cn(className)} {...props} />\n));\nTableHeader.displayName = \"TableHeader\";\n\n/** The body group: the last row drops its hairline. */\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    data-slot=\"table-body\"\n    className={cn(\"[&_tr:last-child>td]:border-0\", className)}\n    {...props}\n  />\n));\nTableBody.displayName = \"TableBody\";\n\n/** The footer group: a totals row in medium weight above a hairline. */\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    data-slot=\"table-footer\"\n    className={cn(\"font-medium [&_td]:border-t [&_td]:border-border\", className)}\n    {...props}\n  />\n));\nTableFooter.displayName = \"TableFooter\";\n\n/**\n * A row. Hover tints it one step up; `data-state=\"selected\"` gives it the\n * violet tint and ring, with rounded ends on its first and last cells.\n */\nconst TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(\n  ({ className, ...props }, ref) => (\n    <tr\n      ref={ref}\n      data-slot=\"table-row\"\n      className={cn(\n        \"transition-colors duration-fast ease-(--ease-out)\",\n        \"[&>td]:border-b [&>td]:border-border\",\n        \"[&>*:first-child]:rounded-l-xl [&>*:last-child]:rounded-r-xl\",\n        \"hover:bg-accent/40\",\n        \"data-[state=selected]:bg-(--option-face) data-[state=selected]:shadow-(--option-edge) data-[state=selected]:[&>td]:border-transparent\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nTableRow.displayName = \"TableRow\";\n\n/** A header cell: small muted text, no fill. */\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    data-slot=\"table-head\"\n    className={cn(\n      \"h-10 px-4 text-left align-middle text-sm font-normal text-muted-foreground\",\n      \"[&:has([role=checkbox])]:pr-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nTableHead.displayName = \"TableHead\";\n\n/** A body cell with room for a full figure. */\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    data-slot=\"table-cell\"\n    className={cn(\"px-4 py-3 align-middle text-foreground [&:has([role=checkbox])]:pr-0\", className)}\n    {...props}\n  />\n));\nTableCell.displayName = \"TableCell\";\n\n/** A caption under the table in muted text. */\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    data-slot=\"table-caption\"\n    className={cn(\"py-3 text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n));\nTableCaption.displayName = \"TableCaption\";\n\nexport { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

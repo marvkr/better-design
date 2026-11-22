@@ -1,0 +1,42 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Notification.\n *\n * A banner that sits at the top of a screen, so it is a card lifted one step:\n * 20px radius, no border, var(--shadow-lg). The variant is carried by a\n * tinted glyph chip on the left, one of the pop tokens at the 12px chip\n * radius, which is how this system marks state without a colored rule or a\n * colored surface. The dismiss control is a round icon button, so it matches\n * every other row action.\n */\n\n/* The surface is the same for every variant, because the chip carries state. */\nconst notificationSurface = [\n  \"relative flex gap-3 rounded-[1.25rem] p-[1.125rem]\",\n  \"bg-card text-card-foreground\",\n  \"[box-shadow:var(--shadow-lg)]\",\n  \"transition-[box-shadow] duration-fast ease-out\",\n].join(\" \")\n\n/* The chip carries the whole variant: a pop tint behind a Solar glyph. */\nconst iconMap = {\n  default: {\n    icon: \"solar:bell-linear\",\n    chip: \"bg-[var(--inner)] text-[var(--strong)]\",\n  },\n  info: {\n    icon: \"solar:info-circle-linear\",\n    chip: \"bg-[var(--pop-blue)] text-[var(--pop-blue-foreground)]\",\n  },\n  success: {\n    icon: \"solar:check-circle-linear\",\n    chip: \"bg-[var(--pop-green)] text-[var(--pop-green-foreground)]\",\n  },\n  warning: {\n    icon: \"solar:danger-triangle-linear\",\n    chip: \"bg-[var(--pop-yellow)] text-[var(--pop-yellow-foreground)]\",\n  },\n  destructive: {\n    icon: \"solar:danger-circle-linear\",\n    chip: \"bg-[var(--pop-orange)] text-[var(--pop-orange-foreground)]\",\n  },\n} as const\n\n/** The state a notification reports, shown as the tint of its glyph chip. */\nexport type NotificationVariant = keyof typeof iconMap\n\n/** Props for `Notification`. Pass `onDismiss` to show the close control. */\nexport interface NotificationProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  variant?: NotificationVariant\n  title?: React.ReactNode\n  description?: React.ReactNode\n  /** Replaces the variant's glyph, keeping the tinted chip around it. */\n  icon?: React.ReactNode\n  onDismiss?: () => void\n  actions?: React.ReactNode\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    {\n      className,\n      variant = \"default\",\n      title,\n      description,\n      icon,\n      onDismiss,\n      actions,\n      children,\n      ...props\n    },\n    ref,\n  ) => {\n    const meta = iconMap[variant]\n\n    return (\n      <div ref={ref} className={cn(notificationSurface, className)} {...props}>\n        <div\n          className={cn(\n            \"flex size-9 shrink-0 items-center justify-center rounded-[0.75rem]\",\n            meta.chip,\n          )}\n        >\n          {icon ?? <Icon icon={meta.icon} className=\"size-[1.1875rem]\" />}\n        </div>\n        <div className=\"min-w-0 flex-1\">\n          {title && (\n            <div className=\"text-[0.9063rem] leading-[1.125rem] font-semibold tracking-[-0.0125rem] text-foreground\">\n              {title}\n            </div>\n          )}\n          {description && (\n            <div\n              className={cn(\n                \"text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\",\n                title && \"mt-1\",\n              )}\n            >\n              {description}\n            </div>\n          )}\n          {children}\n          {actions && (\n            <div className=\"mt-3 flex items-center gap-2\">{actions}</div>\n          )}\n        </div>\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={onDismiss}\n            aria-label=\"Dismiss\"\n            className={cn(\n              \"flex size-[1.875rem] shrink-0 items-center justify-center rounded-full\",\n              \"text-muted-foreground\",\n              \"transition-[background-color,color] duration-fast ease-out\",\n              \"hover:bg-muted hover:text-foreground\",\n              \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n            )}\n          >\n            <Icon icon=\"solar:close-circle-linear\" className=\"size-4\" />\n          </button>\n        )}\n      </div>\n    )\n  },\n)\nNotification.displayName = \"Notification\"\n\nexport { Notification }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "pop-blue": "oklch(0.9426 0.0308 264.5)",
+      "pop-blue-foreground": "oklch(0.4416 0.1683 264)",
+      "pop-green": "oklch(0.9426 0.0455 158)",
+      "pop-green-foreground": "oklch(0.4319 0.1055 158)",
+      "pop-orange": "oklch(0.9506 0.045 62)",
+      "pop-orange-foreground": "oklch(0.5111 0.135 52)",
+      "pop-yellow": "oklch(0.9613 0.0641 95)",
+      "pop-yellow-foreground": "oklch(0.4913 0.1074 84)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "pop-blue": "oklch(0.3113 0.0709 264.5)",
+      "pop-blue-foreground": "oklch(0.8306 0.0902 265)",
+      "pop-green": "oklch(0.3113 0.0629 158)",
+      "pop-green-foreground": "oklch(0.8306 0.1024 160)",
+      "pop-orange": "oklch(0.3213 0.0688 62)",
+      "pop-orange-foreground": "oklch(0.8506 0.1024 70)",
+      "pop-yellow": "oklch(0.3313 0.0654 95)",
+      "pop-yellow-foreground": "oklch(0.8706 0.1154 95)"
+    }
+  }
+}

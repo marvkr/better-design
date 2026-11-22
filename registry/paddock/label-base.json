@@ -1,0 +1,11 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Paddock Label: medium Figtree at 0.875rem in the main text colour, set above the white\n * field. A disabled control dims its label too.\n *\n * Base UI has no label primitive, so this is a native label that watches\n * both the native disabled state and Base UI's data-disabled.\n */\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.ComponentPropsWithoutRef<\"label\">\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    data-slot=\"label\"\n    className={cn(\n      \"flex select-none items-center gap-2 text-sm font-medium leading-none text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n      \"peer-data-[disabled]:cursor-not-allowed peer-data-[disabled]:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

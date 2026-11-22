@@ -1,17 +1,15 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Stripe Status Indicator: presence/status dot with optional label
-
 type StatusType = "online" | "offline" | "busy" | "away" | "idle"
 
-const statusConfig: Record<StatusType, { label: string; className: string }> = {
-  online: { label: "Online", className: "bg-emerald-500" },
+const statusConfig = {
+  online: { label: "Online", className: "bg-success" },
   offline: { label: "Offline", className: "bg-muted-foreground/40" },
   busy: { label: "Busy", className: "bg-destructive" },
-  away: { label: "Away", className: "bg-orange-400" },
-  idle: { label: "Idle", className: "bg-yellow-400" },
-}
+  away: { label: "Away", className: "bg-warning" },
+  idle: { label: "Idle", className: "bg-warning/70" },
+} satisfies Record<StatusType, { label: string; className: string }>
 
 interface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   status: StatusType

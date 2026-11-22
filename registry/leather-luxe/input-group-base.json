@@ -1,0 +1,23 @@
+{
+  "name": "input-group-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Leather Luxe InputGroup: a single recessed well with seamed prefix and\n// suffix compartments, like card slots in a wallet.\n\ninterface InputGroupProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"prefix\"> {\n  prefix?: React.ReactNode\n  suffix?: React.ReactNode\n  size?: \"default\" | \"sm\"\n  disabled?: boolean\n  error?: boolean\n}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  (\n    {\n      prefix,\n      suffix,\n      size = \"default\",\n      disabled,\n      error,\n      className,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          formFieldBase,\n          \"flex items-stretch overflow-hidden p-0\",\n          \"focus-within:border-primary/60 focus-within:[box-shadow:var(--shadow-well),0_0_0_0.1875rem_oklch(0.55_0.115_52/0.25)]\",\n          error &&\n            \"border-destructive focus-within:border-destructive focus-within:[box-shadow:var(--shadow-well),0_0_0_0.1875rem_oklch(0.52_0.16_28/0.25)]\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        {/* Prefix compartment */}\n        {prefix && (\n          <div\n            className={cn(\n              \"flex shrink-0 select-none items-center justify-center border-r border-border px-3\",\n              \"text-sm text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              size === \"default\" ? \"h-10\" : \"h-9\"\n            )}\n          >\n            {prefix}\n          </div>\n        )}\n\n        {/* Field child */}\n        <div\n          className={cn(\n            \"flex-1 [&_input]:border-0 [&_input]:shadow-none [&_input]:rounded-none\",\n            \"[&_input]:focus-visible:ring-0 [&_input]:focus-visible:shadow-none [&_input]:focus-visible:border-0\",\n            \"[&_input]:h-full [&_input]:w-full [&_input]:bg-transparent\",\n            \"[&_input]:text-foreground [&_input]:placeholder:text-muted-foreground/70\",\n            disabled && \"[&_input]:cursor-not-allowed\"\n          )}\n        >\n          {children}\n        </div>\n\n        {/* Suffix compartment */}\n        {suffix && (\n          <div\n            className={cn(\n              \"flex shrink-0 select-none items-center justify-center border-l border-border px-3\",\n              \"text-sm text-muted-foreground\",\n              \"[&>svg]:h-4 [&>svg]:w-4\",\n              size === \"default\" ? \"h-10\" : \"h-9\"\n            )}\n          >\n            {suffix}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nInputGroup.displayName = \"InputGroup\"\n\nexport { InputGroup }\nexport type { InputGroupProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/leather-luxe/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    }
+  }
+}

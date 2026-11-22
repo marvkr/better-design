@@ -1,0 +1,17 @@
+{
+  "name": "input-copy",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n// Neon Vault InputCopy: read-only recessed track with a copy chip, made for\n// wallet addresses and API keys. Confirms in the mint chart hue.\n//\n// Usage:\n//   <InputCopy value=\"0xBF3aE6D7...\" />\n//   <InputCopy label=\"Wallet address\" value={address} />\n\ninterface InputCopyProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\" | \"readOnly\"> {\n  value: string\n  label?: React.ReactNode\n  /** ms before the copied state resets. Default 1800. */\n  copiedTimeoutMs?: number\n}\n\nfunction InputCopy({\n  value,\n  label,\n  copiedTimeoutMs = 1800,\n  className,\n  id: idProp,\n  ...props\n}: InputCopyProps) {\n  const generatedId = React.useId()\n  const id = idProp ?? generatedId\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value)\n      setCopied(true)\n    } catch {\n      // Clipboard may be unavailable (insecure context, permissions).\n      // Fail silently: the input remains selectable for manual copy.\n    }\n  }, [value])\n\n  React.useEffect(() => {\n    if (!copied) return\n    const t = setTimeout(() => setCopied(false), copiedTimeoutMs)\n    return () => clearTimeout(t)\n  }, [copied, copiedTimeoutMs])\n\n  return (\n    <div className={cn(\"flex flex-col gap-1.5\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-[0.75rem] font-medium text-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(e) => e.currentTarget.select()}\n          className={cn(formFieldBase, formFieldSingleLine, \"pr-10 text-[0.8125rem]\")}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute right-1.5 flex h-7 w-7 items-center justify-center rounded-full\",\n            \"text-muted-foreground transition-colors\",\n            \"hover:bg-accent hover:text-foreground\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n          )}\n        >\n          {copied ? (\n            <Icon icon=\"ph:check-bold\" className=\"h-3.5 w-3.5 text-chart-5\" aria-hidden />\n          ) : (\n            <Icon icon=\"ph:copy\" className=\"h-3.5 w-3.5\" aria-hidden />\n          )}\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport { InputCopy }\nexport type { InputCopyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/neon-vault/_shared.json"
+  ]
+}

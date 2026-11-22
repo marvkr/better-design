@@ -14,7 +14,7 @@ const Steps = React.forwardRef<HTMLDivElement, StepsProps>(
         className={cn("flex items-center gap-2", className)}
         {...props}
       >
-        {steps.map((child, index) => (
+        {steps.map((_child, index) => (
           <React.Fragment key={index}>
             {index > 0 && (
               <div
@@ -26,11 +26,11 @@ const Steps = React.forwardRef<HTMLDivElement, StepsProps>(
             )}
             <div
               className={cn(
-                "flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-all duration-300",
+                "flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium transition-all duration-slow",
                 index < currentStep &&
-                  "bg-primary/80 text-white shadow-[0_0_12px_rgba(255,255,255,0.3)]",
+                  "bg-primary/80 text-white shadow-[0_0_0.75rem_oklch(1_0_0/0.3)]",
                 index === currentStep &&
-                  "backdrop-blur-xl bg-white/[0.1] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.15),0_0_12px_rgba(255,255,255,0.2)]",
+                  "backdrop-blur-xl bg-white/[0.1] text-white shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.15),0_0_0.75rem_oklch(1_0_0/0.2)]",
                 index > currentStep &&
                   "bg-white/[0.03] text-muted-foreground"
               )}

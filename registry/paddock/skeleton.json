@@ -1,0 +1,11 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Paddock Skeleton: a flat well-grey placeholder in the shape of the content\n * it stands in for, pulsing gently while the page loads.\n */\nconst Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"skeleton\"\n      aria-hidden=\"true\"\n      className={cn(\"animate-pulse rounded-md bg-muted motion-reduce:animate-none\", className)}\n      {...props}\n    />\n  ),\n);\nSkeleton.displayName = \"Skeleton\";\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

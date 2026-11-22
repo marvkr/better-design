@@ -1,0 +1,28 @@
+{
+  "name": "tag-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Amber Glass TagInput: recessed well that collects glass chips.\n\ninterface TagInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\"> {\n  value?: string[]\n  onChange?: (tags: string[]) => void\n  placeholder?: string\n  maxTags?: number\n}\n\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  ({ className, value, onChange, placeholder = \"Add tag...\", maxTags, disabled, ...props }, ref) => {\n    const [internal, setInternal] = React.useState<string[]>(value ?? [])\n    const [draft, setDraft] = React.useState(\"\")\n    const tags = value ?? internal\n\n    const commit = (next: string[]) => {\n      setInternal(next)\n      onChange?.(next)\n    }\n\n    const addTag = () => {\n      const tag = draft.trim()\n      if (!tag || tags.includes(tag)) return\n      if (maxTags && tags.length >= maxTags) return\n      commit([...tags, tag])\n      setDraft(\"\")\n    }\n\n    const removeTag = (tag: string) => {\n      commit(tags.filter((t) => t !== tag))\n    }\n\n    return (\n      <div\n        className={cn(\n          \"flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-lg px-2 py-1.5\",\n          formFieldBase,\n          \"focus-within:border-[color:oklch(0.69_0.195_42/0.55)] focus-within:ring-2 focus-within:ring-ring/35\",\n          disabled && \"pointer-events-none opacity-50\",\n          className\n        )}\n      >\n        {tags.map((tag) => (\n          <span\n            key={tag}\n            className=\"inline-flex items-center gap-1 rounded-full bg-[var(--ag-fill-hover)] border border-[color:var(--ag-border)] px-2 py-0.5 text-xs font-semibold\"\n          >\n            {tag}\n            <button\n              type=\"button\"\n              aria-label={`Remove ${tag}`}\n              onClick={() => removeTag(tag)}\n              className=\"rounded-full text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/60\"\n            >\n              <Icon icon=\"tabler:x\" className=\"h-3 w-3\" />\n            </button>\n          </span>\n        ))}\n        <input\n          ref={ref}\n          className=\"min-w-[5rem] flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground\"\n          value={draft}\n          placeholder={placeholder}\n          disabled={disabled}\n          onChange={(e) => setDraft(e.target.value)}\n          onKeyDown={(e) => {\n            if (e.key === \"Enter\" || e.key === \",\") {\n              e.preventDefault()\n              addTag()\n            } else if (e.key === \"Backspace\" && !draft && tags.length > 0) {\n              removeTag(tags[tags.length - 1])\n            }\n          }}\n          {...props}\n        />\n      </div>\n    )\n  }\n)\nTagInput.displayName = \"TagInput\"\n\nexport { TagInput }\nexport type { TagInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    },
+    "dark": {
+      "ag-fill-hover": "oklch(1 0 0 / 0.08)",
+      "ag-border": "oklch(1 0 0 / 0.09)"
+    }
+  }
+}

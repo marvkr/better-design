@@ -1,0 +1,25 @@
+{
+  "name": "popover-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Popover as PopoverPrimitive } from \"@base-ui/react/popover\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Popover = PopoverPrimitive.Root\n\nconst PopoverTrigger = PopoverPrimitive.Trigger\n\nconst PopoverContent = React.forwardRef<\n  HTMLDivElement,\n  PopoverPrimitive.Popup.Props &\n    Pick<\n      PopoverPrimitive.Positioner.Props,\n      \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n    >\n>(\n  (\n    { className, align = \"center\", alignOffset, side, sideOffset = 4, ...props },\n    ref\n  ) => (\n    <PopoverPrimitive.Portal>\n      <PopoverPrimitive.Positioner\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n        className=\"isolate z-50\"\n      >\n        <PopoverPrimitive.Popup\n          ref={ref}\n          className={cn(\n            \"origin-(--transform-origin) z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground [box-shadow:var(--shadow-overlay)] outline-none transition-[transform,translate,scale,opacity] duration-base data-starting-style:opacity-0 data-starting-style:scale-95 data-ending-style:opacity-0 data-ending-style:scale-95 data-[side=bottom]:data-starting-style:-translate-y-2 data-[side=left]:data-starting-style:translate-x-2 data-[side=right]:data-starting-style:-translate-x-2 data-[side=top]:data-starting-style:translate-y-2\",\n            className\n          )}\n          {...props}\n        />\n      </PopoverPrimitive.Positioner>\n    </PopoverPrimitive.Portal>\n  )\n)\nPopoverContent.displayName = \"PopoverContent\"\n\nexport { Popover, PopoverTrigger, PopoverContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    },
+    "dark": {
+      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
+      "shadow-overlay": "var(--shadow-clay-lg)"
+    }
+  }
+}

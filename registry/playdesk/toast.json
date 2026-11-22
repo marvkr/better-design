@@ -1,0 +1,29 @@
+{
+  "name": "toast",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toast.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ToastPrimitives from \"@radix-ui/react-toast\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/* Playdesk Toast — a small window that slides onto the desk and leaves again. */\n\nconst ToastProvider = ToastPrimitives.Provider;\n\nconst ToastViewport = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Viewport>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Viewport\n    ref={ref}\n    className={cn(\n      \"fixed bottom-0 right-0 z-[100] flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:max-w-sm\",\n      className,\n    )}\n    {...props}\n  />\n));\nToastViewport.displayName = ToastPrimitives.Viewport.displayName;\n\nconst toastVariants = cva(\n  [\n    \"group pointer-events-auto relative flex w-full items-center justify-between gap-3\",\n    \"overflow-hidden rounded-xl p-4\",\n    \"transition-all\",\n    \"data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)]\",\n    \"data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none\",\n    \"data-[state=open]:animate-in data-[state=closed]:animate-out\",\n    \"data-[state=closed]:fade-out-80 data-[state=open]:slide-in-from-bottom-full\",\n    \"data-[state=closed]:slide-out-to-right-full\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-card text-card-foreground [box-shadow:var(--shadow-window)]\",\n        destructive:\n          \"bg-destructive text-destructive-foreground [box-shadow:var(--shadow-float)]\",\n      },\n    },\n    defaultVariants: { variant: \"default\" },\n  },\n);\n\nconst Toast = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Root>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &\n    VariantProps<typeof toastVariants>\n>(({ className, variant, ...props }, ref) => (\n  <ToastPrimitives.Root\n    ref={ref}\n    className={cn(toastVariants({ variant }), className)}\n    {...props}\n  />\n));\nToast.displayName = ToastPrimitives.Root.displayName;\n\nconst ToastAction = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Action>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Action\n    ref={ref}\n    className={cn(\n      \"inline-flex h-8 shrink-0 items-center justify-center rounded-full px-3.5\",\n      \"bg-secondary text-xs font-medium text-secondary-foreground\",\n      \"transition-colors hover:bg-muted\",\n      \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n      className,\n    )}\n    {...props}\n  />\n));\nToastAction.displayName = ToastPrimitives.Action.displayName;\n\nconst ToastClose = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Close>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Close\n    ref={ref}\n    toast-close=\"\"\n    className={cn(\n      \"absolute right-2 top-2 inline-flex size-6 items-center justify-center rounded-full\",\n      \"text-muted-foreground opacity-0 transition-opacity\",\n      \"hover:bg-foreground/[0.06] hover:text-foreground group-hover:opacity-100\",\n      className,\n    )}\n    {...props}\n  >\n    <X className=\"size-3.5\" />\n  </ToastPrimitives.Close>\n));\nToastClose.displayName = ToastPrimitives.Close.displayName;\n\nconst ToastTitle = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Title>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Title\n    ref={ref}\n    className={cn(\"text-sm font-semibold\", className)}\n    {...props}\n  />\n));\nToastTitle.displayName = ToastPrimitives.Title.displayName;\n\nconst ToastDescription = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitives.Description>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitives.Description\n    ref={ref}\n    className={cn(\"text-sm opacity-90\", className)}\n    {...props}\n  />\n));\nToastDescription.displayName = ToastPrimitives.Description.displayName;\n\ntype ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;\ntype ToastActionElement = React.ReactElement<typeof ToastAction>;\n\nexport {\n  type ToastProps,\n  type ToastActionElement,\n  ToastProvider,\n  ToastViewport,\n  Toast,\n  ToastTitle,\n  ToastDescription,\n  ToastClose,\n  ToastAction,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toast",
+    "class-variance-authority@>=0.7.1 <1",
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    }
+  }
+}

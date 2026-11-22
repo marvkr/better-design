@@ -1,0 +1,23 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Velour Glass Badge - quiet velvet chip. Soft fills, hairline inset ring,\n * no heavy shadow; status hues stay dim like the reference's \"optimistic\"\n * mint label.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-xs font-medium \" +\n    \"ring-1 ring-inset transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"text-secondary-foreground [background-image:var(--velour-raised)] ring-border \" +\n          \"[box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.06)]\",\n        primary: \"bg-primary/15 text-primary ring-primary/25\",\n        secondary: \"bg-muted text-muted-foreground ring-border\",\n        outline: \"bg-transparent text-foreground ring-border\",\n        success:\n          \"bg-[oklch(0.45_0.09_165)]/20 ring-[oklch(0.55_0.1_165)]/30 text-[color:oklch(0.875_0.11_165)]\",\n        warning:\n          \"bg-[oklch(0.5_0.1_80)]/20 ring-[oklch(0.6_0.11_80)]/30 text-[color:oklch(0.875_0.1_85)]\",\n        destructive: \"bg-destructive/15 ring-destructive/30 text-[color:oklch(0.875_0.066_22)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )"
+    },
+    "dark": {
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )"
+    }
+  }
+}

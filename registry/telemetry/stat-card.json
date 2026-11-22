@@ -1,0 +1,11 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room StatCard: gauge tile from the system health matrix.\n// Panel plate with an uppercase caption and a huge glowing mono value,\n// like the 97% DRILLING readout.\n\nconst StatCard = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"rounded-md p-5\",\n      \"bg-card border border-border\",\n      \"shadow-[0_0_0_0.0625rem_oklch(0_0_0/0.4),0_0_1rem_oklch(0.78_0.21_148/0.04)]\",\n      className\n    )}\n    {...props}\n  />\n))\nStatCard.displayName = \"StatCard\"\n\nconst StatCardLabel = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\n      \"text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground\",\n      className\n    )}\n    {...props}\n  />\n))\nStatCardLabel.displayName = \"StatCardLabel\"\n\nconst StatCardValue = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\n      \"text-3xl font-bold tracking-tight text-primary\",\n      \"[text-shadow:0_0_1rem_oklch(0.78_0.21_148/0.35)]\",\n      className\n    )}\n    {...props}\n  />\n))\nStatCardValue.displayName = \"StatCardValue\"\n\nconst StatCardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"mt-1 text-xs text-muted-foreground\", className)}\n    {...props}\n  />\n))\nStatCardDescription.displayName = \"StatCardDescription\"\n\nexport { StatCard, StatCardLabel, StatCardValue, StatCardDescription }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

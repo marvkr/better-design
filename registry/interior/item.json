@@ -1,0 +1,20 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Item — one row in a list: leading hardware, a stacked label, a\n * trailing slot. ItemList is a panel lifted out of the bezel, its rows\n * separated by hairline compartment edges; the lift shadow carries the\n * elevation, never a border.\n */\n\nexport interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  leading?: React.ReactNode;\n  title: string;\n  description?: string;\n  trailing?: React.ReactNode;\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, leading, title, description, trailing, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex items-center gap-3 px-4 py-3 transition-colors duration-fast\",\n        \"hover:bg-secondary/60\",\n        className,\n      )}\n      {...props}\n    >\n      {leading ? <div className=\"shrink-0\">{leading}</div> : null}\n      <div className=\"min-w-0 flex-1\">\n        <p className=\"truncate text-[0.8125rem] font-medium leading-[1.4] text-foreground\">\n          {title}\n        </p>\n        {description ? (\n          <p className=\"truncate text-[0.7813rem] text-muted-foreground\">\n            {description}\n          </p>\n        ) : null}\n      </div>\n      {trailing ? <div className=\"shrink-0\">{trailing}</div> : null}\n    </div>\n  ),\n);\nItem.displayName = \"Item\";\n\nexport interface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ItemList = React.forwardRef<HTMLDivElement, ItemListProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"overflow-hidden rounded-[0.875rem] bg-card shadow-[var(--shadow-lift)]\",\n        \"divide-y divide-border\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemList.displayName = \"ItemList\";\n\nexport { Item, ItemList };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.06), 0 0.25rem 0.625rem -0.5rem oklch(0.2161 0.0061 56.04 / 0.45)"
+    },
+    "dark": {
+      "shadow-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.06), 0 0.25rem 0.625rem -0.5rem oklch(0.2161 0.0061 56.04 / 0.45)"
+    }
+  }
+}

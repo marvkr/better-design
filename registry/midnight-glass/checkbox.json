@@ -4,15 +4,12 @@
   "files": [
     {
       "path": "components/ui/checkbox.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-5 w-5 shrink-0 rounded-md\",\n      \"backdrop-blur-xl bg-white/[0.05]\",\n      \"border border-white/[0.15]\",\n      \"shadow-[inset_0_0_4px_rgba(255,255,255,0.05)]\",\n      \"transition-all duration-200\",\n      \"hover:border-white/[0.25] hover:bg-white/[0.08]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:bg-primary/80 data-[state=checked]:border-primary/50 data-[state=checked]:text-primary-foreground\",\n      \"data-[state=checked]:shadow-[inset_0_0_6px_rgba(255,255,255,0.2),0_0_8px_rgba(255,255,255,0.2)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      className={cn(\"flex items-center justify-center text-current\")}\n    >\n      <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-5 w-5 shrink-0 rounded-md\",\n      \"backdrop-blur-xl bg-white/[0.05]\",\n      \"border border-white/[0.15]\",\n      \"shadow-[inset_0_0_0.25rem_oklch(1_0_0/0.05)]\",\n      \"transition-all duration-base\",\n      \"hover:border-white/[0.25] hover:bg-white/[0.08]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:backdrop-blur-xl data-[state=checked]:bg-white/[0.15] data-[state=checked]:border-white/[0.25] data-[state=checked]:text-white\",\n      \"data-[state=checked]:shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.2),0_0_1rem_oklch(1_0_0/0.08)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      className={cn(\"flex items-center justify-center text-current\")}\n    >\n      <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@radix-ui/react-checkbox",
-    "@iconify/react"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@radix-ui/react-checkbox@^1.3.2",
+    "@iconify/react@^6.0.2"
   ]
 }

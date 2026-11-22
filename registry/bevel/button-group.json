@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel ButtonGroup.\n *\n * Joins a run of Buttons from ./button into one segmented control, and takes\n * its radius from that button so the two agree. The outer corners keep\n * the 12px button radius and the inner ones go square, so the group reads as\n * a single control rather than a row of separate buttons. Each button keeps\n * its own ring, so the pair overlaps by one pixel and the seam stays a single\n * hairline. A focused or hovered button is raised above its neighbours so its\n * ring is never clipped.\n */\n\n/** Props for `ButtonGroup`; `orientation` picks which corners stay round. */\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      className={cn(\n        \"inline-flex *:relative [&>*:focus-visible]:z-10 [&>*:hover]:z-10\",\n        orientation === \"horizontal\" ?\n          \"flex-row *:rounded-none [&>*:first-child]:rounded-l-[0.75rem] [&>*:last-child]:rounded-r-[0.75rem] [&>*:not(:first-child)]:-ml-px\"\n        : \"flex-col *:rounded-none [&>*:first-child]:rounded-t-[0.75rem] [&>*:last-child]:rounded-b-[0.75rem] [&>*:not(:first-child)]:-mt-px\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\nexport { ButtonGroup }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

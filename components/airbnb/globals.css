@@ -4,58 +4,121 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Airbnb — extracted from airbnb.com production (2026-04) */
+  /* Airbnb: measured on airbnb.com, 13 November 2026 */
 
-  --background: #FFFFFF;
-  --foreground: #222222;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.252 0 0); /* hof */
 
-  --card: #FFFFFF;
-  --card-foreground: #222222;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.252 0 0);
 
-  --popover: #FFFFFF;
-  --popover-foreground: #222222;
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.252 0 0);
 
-  /* Rausch — Airbnb's brand coral */
-  --primary: #FF385C;
-  --primary-foreground: #FFFFFF;
+  /* The brand button's gradient midpoint. White text reads on it at 4.57:1. */
+  --primary: oklch(0.5937 0.2256 10);
+  --primary-foreground: oklch(1 0 0);
 
-  --secondary: #222222;
-  --secondary-foreground: #FFFFFF;
+  /* Rausch, the logo colour. Too light for white text, so it marks, never fills. */
+  --rausch: oklch(0.6579 0.2309 17.1);
 
-  --muted: #F7F7F7;
-  --muted-foreground: #6A6A6A;
-
-  --accent: #F7F7F7;
-  --accent-foreground: #222222;
-
-  --destructive: #C13515;
-  --destructive-foreground: #FFFFFF;
-
-  --border: #DDDDDD;
-  --input: #F7F7F7;
-  --ring: #222222;
-
-  --radius: 0.75rem;
-
-  /* Airbnb radial gradient — used on CTA buttons, hero accents */
-  --rausch-gradient: radial-gradient(
+  /* The brand fill: linear at rest, radial on hover. */
+  --primary-gradient: linear-gradient(
+    to right,
+    oklch(0.5962 0.2257 16.6) 0%,
+    oklch(0.5937 0.2256 10) 50%,
+    oklch(0.5668 0.2266 4.4) 100%
+  );
+  /* The site starts this at Rausch, which leaves the label at 3.5:1.
+     Starting one stop darker keeps the label above 4.5:1. */
+  --primary-gradient-hover: radial-gradient(
     circle at center,
-    #FF385C 0%,
-    #E61E4D 27.5%,
-    #E31C5F 40%,
-    #D70466 57.5%,
-    #BD1E59 75%,
-    #BD1E59 100%
+    oklch(0.5962 0.2257 16.6) 0%,
+    oklch(0.5962 0.2257 16.6) 27.5%,
+    oklch(0.5937 0.2256 10) 40%,
+    oklch(0.5668 0.2266 4.4) 57.5%,
+    oklch(0.5248 0.1934 6) 75%,
+    oklch(0.5248 0.1934 6) 100%
   );
 
-  /* Shadows — Airbnb uses very subtle shadows, border-based elevation */
-  --shadow-2xs: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-xs:  0 1px 2px rgba(0,0,0,0.06);
-  --shadow-sm:  0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
-  --shadow:     0 2px 4px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-md:  0 2px 8px rgba(0,0,0,0.08), 0 6px 20px rgba(0,0,0,0.06);
-  --shadow-lg:  0 6px 20px rgba(0,0,0,0.2);
-  --shadow-xl:  0 6px 20px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.04);
+  /* The grey button fill, and its hover. */
+  --secondary: oklch(0.9612 0 0);
+  --secondary-foreground: oklch(0.252 0 0);
+  --secondary-hover: oklch(0.9401 0 0);
+
+  /* Hover of the dark button. */
+  --inverse-hover: oklch(0.3677 0 0);
+
+  --muted: oklch(0.9761 0 0); /* faint */
+  --muted-foreground: oklch(0.5313 0 0);
+
+  --accent: oklch(0.9761 0 0);
+  --accent-foreground: oklch(0.252 0 0);
+
+  --destructive: oklch(0.5392 0.1816 33.7); /* arches */
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Status pairs: a solid fill for white text, and a tint with its own text. */
+  --success: oklch(0.5222 0.1595 145.8);
+  --success-tint: oklch(0.8926 0.0510 153.1);
+  --success-tint-foreground: oklch(0.4226 0.1291 145.8);
+  --warning: oklch(0.5564 0.1645 43.1);
+  --warning-tint: oklch(0.9043 0.0549 61.7);
+  --warning-tint-foreground: oklch(0.4499 0.1342 42.6);
+  --destructive-tint: oklch(0.9029 0.0504 27.2);
+  --destructive-tint-foreground: oklch(0.4582 0.1755 29);
+
+  --border: oklch(0.8975 0 0); /* deco */
+  /* The line around a text field, darker than a divider. */
+  --input: oklch(0.6401 0 0);
+  --ring: oklch(0.252 0 0);
+
+  /* Fields, large buttons and panels. Small buttons take the sm step. */
+  --radius: 0.75rem;
+  /* Dialogs and sheets. */
+  --radius-dialog: 2rem;
+
+  /* Shadows: the site's elevation scale. Each step from sm up carries a
+     hairline outline at 2%, so a raised surface needs no border of its own. */
+  --shadow-2xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.04);
+  --shadow-xs:  0 0.0625rem 0.125rem oklch(0 0 0 / 0.08), 0 0.25rem 0.75rem oklch(0 0 0 / 0.05);
+  --shadow-sm:  0 0 0 0.0625rem oklch(0 0 0 / 0.02), 0 0.125rem 0.375rem oklch(0 0 0 / 0.04), 0 0.25rem 0.5rem oklch(0 0 0 / 0.1);
+  --shadow:     0 0 0 0.0625rem oklch(0 0 0 / 0.04), 0 0.375rem 1rem oklch(0 0 0 / 0.12);
+  --shadow-md:  0 0 0 0.0625rem oklch(0 0 0 / 0.02), 0 0.5rem 1.5rem oklch(0 0 0 / 0.1);
+  --shadow-lg:  0 0 0 0.0625rem oklch(0 0 0 / 0.02), 0 0.25rem 0.5rem oklch(0 0 0 / 0.08), 0 0.75rem 1.875rem oklch(0 0 0 / 0.18);
+  --shadow-xl:  0 0 0 0.0625rem oklch(0 0 0 / 0.02), 0 0.375rem 0.5rem oklch(0 0 0 / 0.08), 0 1rem 3.5rem oklch(0 0 0 / 0.18);
+  --shadow-2xl: 0 0.5rem 1.75rem oklch(0 0 0 / 0.28);
+
+  /* ─── Chart palette: tonal ramp of the DS primary (one hue, five shades) ─── */
+  --chart-1: var(--primary);
+  --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.92) h);
+  --chart-3: oklch(from var(--primary) calc(l - 0.18) calc(c * 0.84) h);
+  --chart-4: oklch(from var(--primary) calc(l - 0.27) calc(c * 0.76) h);
+  --chart-5: oklch(from var(--primary) calc(l - 0.36) calc(c * 0.68) h);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
 }
 
 @theme inline {
@@ -78,10 +141,27 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --color-rausch: var(--rausch);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-inverse-hover: var(--inverse-hover);
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-success-tint-foreground: var(--success-tint-foreground);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-tint-foreground: var(--warning-tint-foreground);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-tint-foreground: var(--destructive-tint-foreground);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
 }
 
 @layer base {
@@ -94,4 +174,83 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Let textareas grow with their content instead of nested scrolling:
+     smoother writing, easier-to-scan forms. */
+  textarea {
+    /* Fallback for browsers without field-sizing (e.g. Firefox): keep the
+       textarea user-resizable so it can still be grown manually. */
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
 }

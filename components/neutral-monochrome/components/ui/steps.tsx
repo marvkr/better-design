@@ -56,7 +56,7 @@ function Steps({
               {/* Circle */}
               <div
                 className={cn(
-                  "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium transition-all duration-200",
+                  "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium transition-all duration-base",
                   isCompleted && "bg-primary text-primary-foreground",
                   isActive && "bg-primary text-primary-foreground ring-4 ring-primary/20",
                   isUpcoming && "bg-secondary text-muted-foreground border border-border"
@@ -73,7 +73,7 @@ function Steps({
               {!isLast && (
                 <div
                   className={cn(
-                    "transition-all duration-200",
+                    "transition-all duration-base",
                     orientation === "horizontal"
                       ? "h-px flex-1 mx-2"
                       : "w-px flex-1 my-2 mx-auto",

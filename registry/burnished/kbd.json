@@ -1,0 +1,22 @@
+{
+  "name": "kbd",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Kbd: a tiny graphite key. It carries the raised bevel at small\n * scale, lit along the top edge with a soft drop beneath, so a shortcut\n * looks like a key you could press.\n */\nconst Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(\n  ({ className, ...props }, ref) => (\n    <kbd\n      ref={ref}\n      data-slot=\"kbd\"\n      className={cn(\n        \"inline-flex h-5.5 min-w-5.5 select-none items-center justify-center gap-1 rounded-sm px-1.5\",\n        \"font-mono text-[0.6875rem] font-medium text-muted-foreground\",\n        \"bg-(image:--fill-raised) shadow-(--bevel-raised)\",\n        \"[&_svg]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nKbd.displayName = \"Kbd\";\n\nexport { Kbd };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
+    }
+  }
+}

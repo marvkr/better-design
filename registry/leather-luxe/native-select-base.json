@@ -1,0 +1,26 @@
+{
+  "name": "native-select-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Leather Luxe NativeSelect: a native <select> in the recessed well.\n\ninterface NativeSelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\"> {\n  error?: boolean\n}\n\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, error, children, ...props }, ref) => {\n    return (\n      <div className=\"relative w-full\">\n        <select\n          ref={ref}\n          className={cn(\n            formFieldBase,\n            \"flex h-10 appearance-none items-center py-2 pr-9 cursor-pointer\",\n            \"[&>option]:bg-card [&>option]:text-foreground\",\n            error &&\n              \"border-destructive focus-visible:border-destructive focus-visible:[box-shadow:var(--shadow-well),0_0_0_0.1875rem_oklch(0.52_0.16_28/0.25)]\",\n            className\n          )}\n          {...props}\n        >\n          {children}\n        </select>\n\n        <div\n          className=\"pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground\"\n          aria-hidden=\"true\"\n        >\n          <ChevronDown className=\"h-4 w-4\" />\n        </div>\n      </div>\n    )\n  }\n)\nNativeSelect.displayName = \"NativeSelect\"\n\nexport { NativeSelect }\nexport type { NativeSelectProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/leather-luxe/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
+    }
+  }
+}

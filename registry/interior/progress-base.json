@@ -1,0 +1,28 @@
+{
+  "name": "progress-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { WithClassName } from \"./_shared\"\n\n/*\n * Interior Progress — a 4px-radius track cut into the panel as a well, and a\n * 2px-radius accent fill. Live progress is the system responding to you right\n * now, which is exactly what the accent is for. The fill glides; it never\n * springs past the number it is reporting.\n */\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ProgressPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <ProgressPrimitive.Root ref={ref} className={cn(\"w-full\", className)} {...props}>\n    <ProgressPrimitive.Track className=\"relative h-[0.375rem] w-full overflow-hidden rounded-[0.25rem] bg-secondary shadow-[var(--shadow-well)]\">\n      <ProgressPrimitive.Indicator className=\"h-full rounded-[0.125rem] bg-ring transition-all duration-slow ease-out\" />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/interior/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

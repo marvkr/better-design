@@ -144,9 +144,9 @@ const Code = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
     <code
       ref={ref}
       className={cn(
-        "block w-full rounded-[10px] border border-border bg-secondary px-4 py-3",
+        "block w-full rounded-[0.625rem] border border-border bg-secondary px-4 py-3",
         "font-mono text-sm text-foreground leading-relaxed",
-        "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+        "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
         "overflow-x-auto",
         className
       )}

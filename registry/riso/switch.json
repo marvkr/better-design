@@ -1,0 +1,23 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitives from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Retro-Playful Switch — checked track is a poster-blue slab matching the\n// primary Button (same fill + chunky ink border-2 + hard offset). The thumb is a\n// paper knob with its own ink border, like a cut-out sticker.\n\nfunction Switch({\n  className,\n  ...props\n}: React.ComponentProps<typeof SwitchPrimitives.Root>) {\n  return (\n    <SwitchPrimitives.Root\n      className={cn(\n        \"peer inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full border-2 border-border transition-all\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-[state=unchecked]:bg-secondary\",\n        \"data-[state=checked]:bg-primary data-[state=checked]:shadow-[var(--shadow-hard-sm)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitives.Thumb\n        className={cn(\n          \"pointer-events-none block h-5 w-5 rounded-full border-2 border-border bg-card ring-0 transition-transform\",\n          \"data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0.5\"\n        )}\n      />\n    </SwitchPrimitives.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
+    },
+    "dark": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
+    }
+  }
+}

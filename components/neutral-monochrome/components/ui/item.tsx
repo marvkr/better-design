@@ -39,7 +39,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           "text-left",
           interactive && [
             "cursor-pointer rounded-lg",
-            "transition-colors duration-150",
+            "transition-colors duration-fast",
             "hover:bg-secondary",
             "focus-visible:outline-none focus-visible:bg-secondary focus-visible:ring-1 focus-visible:ring-ring",
             "active:scale-[0.98]",

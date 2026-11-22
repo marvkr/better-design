@@ -1,0 +1,23 @@
+{
+  "name": "code-block",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\n// Talentboard CodeBlock: a light recessed code surface with optional filename\n// chrome and line numbers, tinted just off the card so it reads as inset.\n\ninterface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string;\n  language?: string;\n  showLineNumbers?: boolean;\n  filename?: string;\n}\n\nfunction CodeBlock({\n  code,\n  language = \"tsx\",\n  showLineNumbers = false,\n  filename,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const lines = code.split(\"\\n\");\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-xl\",\n        \"bg-secondary border border-border\",\n        \"shadow-[var(--tb-shadow-inset)]\",\n        className\n      )}\n      {...props}\n    >\n      {filename && (\n        <div className=\"flex items-center justify-between border-b border-border/60 px-4 py-2\">\n          <span className=\"font-mono text-xs text-muted-foreground\">{filename}</span>\n          <CopyButton value={code} />\n        </div>\n      )}\n      <div className=\"relative\">\n        {!filename && (\n          <div className=\"absolute right-2 top-2 z-10\">\n            <CopyButton value={code} />\n          </div>\n        )}\n        <pre className=\"overflow-x-auto p-4 text-xs leading-relaxed text-foreground/90\">\n          <code className=\"font-mono\" data-lang={language}>\n            {showLineNumbers\n              ? lines.map((line, i) => (\n                  <span key={i} className=\"block\">\n                    <span className=\"mr-4 inline-block w-6 select-none text-right text-muted-foreground/50\">\n                      {i + 1}\n                    </span>\n                    {line}\n                  </span>\n                ))\n              : code}\n          </code>\n        </pre>\n      </div>\n    </div>\n  );\n}\n\nexport { CodeBlock };\nexport type { CodeBlockProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/marigold/copy-button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)"
+    },
+    "dark": {
+      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)"
+    }
+  }
+}

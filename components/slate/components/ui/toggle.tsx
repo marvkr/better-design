@@ -1,0 +1,58 @@
+"use client";
+
+import * as React from "react";
+import * as TogglePrimitive from "@radix-ui/react-toggle";
+import { cva, type VariantProps } from "class-variance-authority";
+
+import { cn } from "@/lib/utils";
+
+/*
+ * Ops Sharp Toggle - a precise toolbar toggle. Off it is an understated ghost
+ * tile; when pressed (data-[state=on]) it becomes the same solid graphite
+ * material as the primary Button (bg-primary + --shadow-primary), so the active
+ * state reads as one material with the filled controls.
+ */
+const toggleVariants = cva(
+  [
+    "inline-flex items-center justify-center rounded-md text-sm font-medium",
+    "transition-[background-color,box-shadow,border-color,color] duration-fast",
+    "hover:bg-secondary hover:text-foreground",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background",
+    "disabled:pointer-events-none disabled:opacity-50",
+    "data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:[box-shadow:var(--shadow-primary)]",
+  ].join(" "),
+  {
+    variants: {
+      variant: {
+        default: "bg-transparent text-muted-foreground",
+        outline:
+          "border border-border bg-transparent text-foreground hover:border-ring/30",
+      },
+      size: {
+        default: "h-9 px-3",
+        sm: "h-8 px-2.5",
+        lg: "h-10 px-5",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+
+const Toggle = React.forwardRef<
+  React.ElementRef<typeof TogglePrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
+    VariantProps<typeof toggleVariants>
+>(({ className, variant, size, ...props }, ref) => (
+  <TogglePrimitive.Root
+    ref={ref}
+    className={cn(toggleVariants({ variant, size, className }))}
+    {...props}
+  />
+));
+
+Toggle.displayName = TogglePrimitive.Root.displayName;
+
+export { Toggle, toggleVariants };

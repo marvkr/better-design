@@ -1,0 +1,30 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { activeWash, focusRing } from \"./_shared\";\n\n/**\n * Cream editorial Toggle: a sans label that stays pressed. Pressed, it takes\n * the oat block in full ink, the way a category filter reads; terracotta\n * stays with the one primary action. The default toggle is bare and warms\n * under the pointer; the outline toggle sits on cream behind a firmer line.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-md border font-medium text-muted-foreground\",\n    \"transition-[background-color,border-color,color] duration-fast ease-out\",\n    \"hover:text-foreground\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n    activeWash,\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"border-transparent bg-transparent hover:bg-secondary\",\n        outline:\n          \"border-(--line-strong) bg-background hover:bg-secondary disabled:border-border\",\n      },\n      size: {\n        sm: \"h-8 px-2.5 text-xs\",\n        default: \"h-9 px-3 text-sm\",\n        lg: \"h-10 px-4 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = TogglePrimitive.Root.displayName;\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-toggle@^1.1.9",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "foreground-disabled": "oklch(0.75 0.013 96.5)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "foreground-disabled": "oklch(0.478 0.006 95.2)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as Sonner } from \"sonner\"\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>\n\n// Pulseboard Sonner: clean minimal toast notifications\n// Uses bg-background, rounded-xl, ring-1 border\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:rounded-xl group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:[box-shadow:var(--shadow-pop)]\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:rounded-lg\",\n          cancelButton:\n            \"group-[.toast]:bg-secondary group-[.toast]:text-muted-foreground group-[.toast]:rounded-lg\",\n          error: \"group-[.toaster]:text-destructive group-[.toaster]:border-destructive/30\",\n          success: \"group-[.toaster]:text-[oklch(0.78_0.14_165)] group-[.toaster]:border-[oklch(0.72_0.15_165/0.4)]\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pop": "0 0 0 0.0625rem oklch(0 0 0 / 0.4), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0.25rem 0.625rem -0.25rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-pop": "0 0 0 0.0625rem oklch(0 0 0 / 0.4), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0.25rem 0.625rem -0.25rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

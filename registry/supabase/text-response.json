@@ -1,0 +1,28 @@
+{
+  "name": "text-response",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/text-response.tsx",
+      "content": "// Ported from the public AIcss React source.\n// Source: https://www.aicss.dev/components/text-response\n\"use client\"\n\nimport styles from \"./text-response.module.css\";\nimport { useState, type ReactNode } from \"react\";\n\n/** Where a model's answer stands. Anything but \"complete\" says so on screen. */\nexport type AiResponseStatus = \"complete\" | \"streaming\" | \"stopped\" | \"failed\" | \"refused\";\n\n/** What a refusal tells the person: the topic it will not cover, and what they can do instead. */\nexport interface AiRefusal {\n  topic: string;\n  alternative: string;\n}\n\nexport function TextResponse({\n  children,\n  status = \"complete\",\n  label = \"AI-generated\",\n  refusal,\n  onRetry,\n  onFeedback,\n}: {\n  children?: ReactNode;\n  status?: AiResponseStatus;\n  /** The visible marker that a model wrote this. Keep it on every answer. */\n  label?: string;\n  refusal?: AiRefusal;\n  onRetry?: () => void;\n  /** Where a rating goes. Without it no rating buttons show, because a rating must reach someone. */\n  onFeedback?: (rating: \"helpful\" | \"not-helpful\") => void;\n}) {\n  const [rated, setRated] = useState<\"helpful\" | \"not-helpful\" | null>(null);\n\n  const rate = (rating: \"helpful\" | \"not-helpful\") => {\n    setRated(rating);\n    onFeedback?.(rating);\n  };\n\n  return (\n    <div className={styles.response} data-status={status} aria-busy={status === \"streaming\" || undefined}>\n      <p className={styles.aiLabel}>{label}</p>\n      {status === \"refused\" ? (\n        <div className={styles.notice}>\n          <p>I can&apos;t help with {refusal?.topic ?? \"this request\"}.</p>\n          {refusal?.alternative && <p className={styles.noticeHint}>{refusal.alternative}</p>}\n        </div>\n      ) : (\n        <div className={styles.prose}>{children}</div>\n      )}\n      {status === \"stopped\" && (\n        <p className={styles.notice} role=\"status\">\n          Stopped. The answer above is incomplete.\n        </p>\n      )}\n      {status === \"failed\" && (\n        <div className={styles.notice} role=\"alert\">\n          <p>The answer failed before it finished. Nothing above was changed.</p>\n          {onRetry && (\n            <button type=\"button\" className={styles.action} onClick={onRetry}>\n              Try again\n            </button>\n          )}\n        </div>\n      )}\n      {status === \"complete\" && onFeedback && (\n        <div className={styles.feedback} role=\"group\" aria-label=\"Rate this answer\">\n          {rated ? (\n            <p role=\"status\" className={styles.noticeHint}>\n              Thanks. Your rating was sent.\n            </p>\n          ) : (\n            <>\n              <button type=\"button\" className={styles.action} onClick={() => rate(\"helpful\")}>\n                Helpful\n              </button>\n              <button type=\"button\" className={styles.action} onClick={() => rate(\"not-helpful\")}>\n                Not helpful\n              </button>\n            </>\n          )}\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "components/ui/text-response.module.css",
+      "content": "/* Ported from https://www.aicss.dev/components/text-response */\n.prose { font-size: 0.875rem; line-height: 1.1875rem; color: var(--foreground); }\n.prose p { margin-bottom: 0.625rem; }\n.prose p:last-child { margin-bottom: 0; }\n.prose code { font-family: ui-monospace, monospace; font-size: 0.78125rem; color: inherit; background: var(--muted); padding: 0.1875rem 0.3125rem 0.0625rem; border-radius: 0.3125rem; }\n/* Answer states, the AI label and the rating bar. [BD-1055] */\n.response { display: flex; flex-direction: column; gap: 0.5rem; }\n.aiLabel { align-self: flex-start; margin: 0; padding: 0.125rem 0.5rem; border-radius: 999rem; font-size: 0.75rem; line-height: 1rem; font-weight: 500; color: var(--ai-label-foreground); background: var(--ai-label); }\n.notice { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0; padding: 0.5rem 0.75rem; border: 0.0625rem solid var(--border); border-radius: 0.5rem; font-size: 0.875rem; line-height: 1.25rem; color: var(--foreground); }\n.notice p { margin: 0; }\n.response[data-status=\"failed\"] .notice { border-color: var(--destructive); }\n.noticeHint { margin: 0; font-size: 0.875rem; line-height: 1.25rem; color: var(--muted-foreground); }\n.feedback { display: flex; flex-wrap: wrap; gap: 0.5rem; }\n.action { min-height: 2rem; padding: 0 0.75rem; border: 0.0625rem solid var(--border); border-radius: 0.5rem; background: transparent; font: inherit; font-size: 0.8125rem; color: var(--foreground); cursor: pointer; }\n@media (hover: hover) and (pointer: fine) { .action:hover { background: var(--muted); } }\n.action:focus-visible { outline: 0.125rem solid var(--ring); outline-offset: 0.125rem; }\n",
+      "type": "registry:file",
+      "target": "components/ui/text-response.module.css"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ai-label": "var(--muted)",
+      "ai-label-foreground": "var(--foreground)"
+    },
+    "dark": {
+      "ai-label": "var(--muted)",
+      "ai-label-foreground": "var(--foreground)"
+    }
+  }
+}

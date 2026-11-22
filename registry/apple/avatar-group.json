@@ -9,7 +9,6 @@
     }
   ],
   "registryDependencies": [
-    "https://www.better-design.com/registry/apple/avatar.json",
-    "utils"
+    "https://better-design.com/registry/apple/avatar.json"
   ]
 }

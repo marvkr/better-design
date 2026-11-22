@@ -18,7 +18,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       className={cn(
         "flex h-full flex-col",
         "backdrop-blur-xl bg-white/[0.05] border-r border-white/[0.08]",
-        "transition-[width] duration-300",
+        "transition-[width] duration-slow",
         collapsed ? "w-16" : "w-60",
         className
       )}
@@ -75,9 +75,9 @@ const SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>(
     <button
       ref={ref}
       className={cn(
-        "flex w-full items-center gap-2.5 rounded-full px-3 py-2 text-sm font-medium transition-all duration-300",
+        "flex w-full items-center gap-2.5 rounded-full px-3 py-2 text-sm font-medium transition-all duration-slow",
         active
-          ? "bg-white/[0.09] text-foreground shadow-[inset_0_0_8px_rgba(255,255,255,0.1)]"
+          ? "bg-white/[0.09] text-foreground shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.1)]"
           : "text-muted-foreground hover:bg-white/[0.05] hover:text-foreground",
         collapsed && "justify-center px-2",
         className

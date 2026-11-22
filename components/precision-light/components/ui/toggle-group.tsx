@@ -27,12 +27,12 @@ function ToggleGroup({
 }: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &
   VariantProps<typeof toggleVariants>) {
   const uid = React.useId()
-  const isSingle = (props as { type?: string }).type === "single"
+  const isSingle = props.type === "single"
 
   return (
     <ToggleGroupPrimitive.Root
       className={cn(
-        "flex items-center gap-1 rounded-[10px] border border-border bg-secondary p-1",
+        "flex items-center gap-1 rounded-[0.625rem] border border-border bg-secondary p-1",
         className
       )}
       {...props}

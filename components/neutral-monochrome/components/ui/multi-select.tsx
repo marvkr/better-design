@@ -54,7 +54,7 @@ function MultiSelect({
   // Close on outside click
   React.useEffect(() => {
     function onOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (containerRef.current && !(e.target instanceof Node && containerRef.current.contains(e.target))) {
         setOpen(false)
       }
     }
@@ -75,7 +75,7 @@ function MultiSelect({
         disabled={disabled}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex min-h-10 w-full items-center justify-between rounded-[10px] border border-border bg-card px-3 py-2 text-sm",
+          "flex min-h-10 w-full items-center justify-between rounded-[0.625rem] border border-border bg-card px-3 py-2 text-sm",
           "ring-offset-background transition-colors text-left",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           open && "ring-1 ring-ring",
@@ -106,7 +106,7 @@ function MultiSelect({
         </div>
         <ChevronDown
           className={cn(
-            "ml-2 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150",
+            "ml-2 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-fast",
             open && "rotate-180"
           )}
         />
@@ -118,7 +118,7 @@ function MultiSelect({
           role="listbox"
           aria-multiselectable="true"
           className={cn(
-            "absolute z-50 mt-1 w-full rounded-[10px] border border-border bg-card shadow-lg",
+            "absolute z-50 mt-1 w-full rounded-[0.625rem] border border-border bg-card shadow-lg",
             "max-h-60 overflow-y-auto py-1"
           )}
         >

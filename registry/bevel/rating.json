@@ -1,0 +1,24 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Rating.\n *\n * A row of stars in the one accent. A filled star is the solid glyph in the\n * primary blue and an empty one is the outline in the track tone, so the score\n * reads at a glance without a second colour entering the screen. Hovering\n * previews the value it would set. Pass `readOnly` to show a score you cannot\n * change: the buttons then stop responding and lose their hover.\n */\n\n/** Props for `Rating`; omit `onRatingChange` and pass `readOnly` to display. */\nexport interface RatingProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number\n  max?: number\n  onRatingChange?: (value: number) => void\n  readOnly?: boolean\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst starSize = {\n  sm: \"size-[1.0625rem]\",\n  default: \"size-[1.25rem]\",\n  lg: \"size-[1.5rem]\",\n} as const\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  (\n    {\n      className,\n      value = 0,\n      max = 5,\n      onRatingChange,\n      readOnly,\n      size = \"default\",\n      ...props\n    },\n    ref,\n  ) => {\n    const [hover, setHover] = React.useState<number | null>(null)\n\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        aria-label={`Rating: ${value} out of ${max}`}\n        className={cn(\"inline-flex items-center gap-1\", className)}\n        {...props}\n      >\n        {Array.from({ length: max }).map((_, index) => {\n          const starValue = index + 1\n          const active = (hover ?? value) >= starValue\n\n          return (\n            <button\n              key={starValue}\n              type=\"button\"\n              disabled={readOnly}\n              onMouseEnter={() => !readOnly && setHover(starValue)}\n              onMouseLeave={() => !readOnly && setHover(null)}\n              onClick={() => !readOnly && onRatingChange?.(starValue)}\n              aria-label={`${starValue} star${starValue > 1 ? \"s\" : \"\"}`}\n              className={cn(\n                \"rounded-[0.5rem] p-0.5 transition-transform duration-fast ease-out\",\n                !readOnly &&\n                  \"cursor-pointer hover:scale-110 active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                readOnly && \"cursor-default\",\n              )}\n            >\n              <Icon\n                icon={active ? \"solar:star-bold-duotone\" : \"solar:star-linear\"}\n                className={cn(\n                  starSize[size],\n                  active ? \"text-primary\" : \"text-[var(--track)]\",\n                )}\n              />\n            </button>\n          )\n        })}\n      </div>\n    )\n  },\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)"
+    }
+  }
+}

@@ -87,7 +87,7 @@ const SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>(
       type="button"
       className={cn(
         "flex items-center gap-2.5 w-full rounded-md px-2 py-1.5 text-sm text-left",
-        "transition-[background-color,color,box-shadow] duration-150",
+        "transition-[background-color,color,box-shadow] duration-fast",
         "text-muted-foreground hover:bg-accent hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
         active &&

@@ -1,0 +1,14 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, Copy } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface CopyButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n}\n\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  ({ className, value, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false);\n\n    const handleCopy = async () => {\n      await navigator.clipboard.writeText(value);\n      setCopied(true);\n      setTimeout(() => setCopied(false), 1800);\n    };\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        onClick={handleCopy}\n        aria-label={copied ? \"Copied\" : \"Copy\"}\n        className={cn(\n          \"inline-flex size-8 items-center justify-center rounded-full\",\n          \"text-muted-foreground transition-colors duration-fast\",\n          \"hover:bg-foreground/[0.05] hover:text-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-[0.1875rem] focus-visible:ring-ring/35\",\n          className,\n        )}\n        {...props}\n      >\n        {copied ? (\n          <Check className=\"size-3.5 text-primary\" strokeWidth={3} />\n        ) : (\n          <Copy className=\"size-3.5\" />\n        )}\n      </button>\n    );\n  },\n);\nCopyButton.displayName = \"CopyButton\";\n\nexport { CopyButton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ]
+}

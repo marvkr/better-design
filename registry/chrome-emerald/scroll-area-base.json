@@ -1,0 +1,25 @@
+{
+  "name": "scroll-area-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nconst ScrollArea = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Root.Props>\n>(({ className, children, ...props }, ref) => (\n  <ScrollAreaPrimitive.Root\n    data-slot=\"scroll-area\"\n    ref={ref}\n    className={cn(\"relative overflow-hidden\", className)}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Viewport data-slot=\"scroll-area-viewport\" className=\"h-full w-full rounded-[inherit]\">\n      <ScrollAreaPrimitive.Content>{children}</ScrollAreaPrimitive.Content>\n    </ScrollAreaPrimitive.Viewport>\n    <ScrollBar />\n    <ScrollAreaPrimitive.Corner data-slot=\"scroll-area-corner\" />\n  </ScrollAreaPrimitive.Root>\n))\nScrollArea.displayName = \"ScrollArea\"\n\nconst ScrollBar = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<ScrollAreaPrimitive.Scrollbar.Props>\n>(({ className, orientation = \"vertical\", ...props }, ref) => (\n  <ScrollAreaPrimitive.Scrollbar\n    data-slot=\"scroll-area-scrollbar\"\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"flex touch-none select-none transition-colors\",\n      orientation === \"vertical\" &&\n        \"h-full w-2.5 border-l border-l-transparent p-[0.0625rem]\",\n      orientation === \"horizontal\" &&\n        \"h-2.5 flex-col border-t border-t-transparent p-[0.0625rem]\",\n      className\n    )}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Thumb\n      data-slot=\"scroll-area-thumb\"\n      className={cn(\n        \"relative flex-1 rounded-full\",\n        \"[background:var(--knob-off)] [box-shadow:var(--shadow-knob)]\",\n        \"hover:brightness-125\"\n      )}\n    />\n  </ScrollAreaPrimitive.Scrollbar>\n))\nScrollBar.displayName = \"ScrollBar\"\n\nexport { ScrollArea, ScrollBar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "knob-off": "linear-gradient(to bottom, oklch(0.657 0.043 163.3), oklch(0.55 0.044 164.4))",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    },
+    "dark": {
+      "knob-off": "linear-gradient(to bottom, oklch(0.657 0.043 163.3), oklch(0.55 0.044 164.4))",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "streaming-code",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/streaming-code.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\n\n// StreamingCode: agent-written code streams in line by line, with token\n// colours, line numbers and a copy action, framed as an Airy docs sample.\n//\n// Usage:\n//   <StreamingCode />\n//   <StreamingCode filename=\"app.ts\" language=\"TypeScript\" lines={...} raw=\"...\" />\n\nconst LINE_MS = 240\nconst HOLD_MS = 3200\n\ntype CodeToken = { t: string; c?: \"kw\" | \"str\" | \"num\" | \"fn\" | \"dim\" }\n\nconst DEFAULT_LINES: CodeToken[][] = [\n  [{ t: \"import \", c: \"kw\" }, { t: \"{ Client } \" }, { t: \"from \", c: \"kw\" }, { t: \"\\\"@acme/sdk\\\"\", c: \"str\" }, { t: \";\", c: \"dim\" }],\n  [{ t: \"\" }],\n  [{ t: \"const \", c: \"kw\" }, { t: \"client = \" }, { t: \"new \", c: \"kw\" }, { t: \"Client\", c: \"fn\" }, { t: \"({ apiKey });\", c: \"dim\" }],\n  [{ t: \"const \", c: \"kw\" }, { t: \"page = \" }, { t: \"await \", c: \"kw\" }, { t: \"client.pages.\" }, { t: \"get\", c: \"fn\" }, { t: \"(\", c: \"dim\" }, { t: \"\\\"quickstart\\\"\", c: \"str\" }, { t: \");\", c: \"dim\" }],\n  [{ t: \"console.\" }, { t: \"log\", c: \"fn\" }, { t: \"(page.title, page.version ?? \", c: \"dim\" }, { t: \"2\", c: \"num\" }, { t: \");\", c: \"dim\" }],\n]\n\nconst DEFAULT_RAW = `import { Client } from \"@acme/sdk\";\n\nconst client = new Client({ apiKey });\nconst page = await client.pages.get(\"quickstart\");\nconsole.log(page.title, page.version ?? 2);`\n\nconst TONE: Record<NonNullable<CodeToken[\"c\"]>, string> = {\n  kw: \"text-(--syntax-keyword)\",\n  str: \"text-(--syntax-string)\",\n  num: \"text-(--syntax-fn)\",\n  fn: \"text-(--syntax-fn)\",\n  dim: \"text-(--syntax-comment)\",\n}\n\ninterface StreamingCodeProps extends React.HTMLAttributes<HTMLDivElement> {\n  filename?: string\n  language?: string\n  lines?: CodeToken[][]\n  /** Plain-text form used by the copy button. */\n  raw?: string\n  /** Alternative to lines/raw: plain code split on newlines, no token colours. */\n  code?: string\n}\n\nfunction StreamingCode({\n  filename = \"quickstart.ts\",\n  language = \"TypeScript\",\n  lines,\n  raw,\n  code,\n  className,\n  ...props\n}: StreamingCodeProps) {\n  const tokenLines = React.useMemo<CodeToken[][]>(() => {\n    if (lines) return lines\n    if (code) return code.split(\"\\n\").map((text) => [{ t: text || \" \" }])\n    return DEFAULT_LINES\n  }, [lines, code])\n  const rawText = raw ?? code ?? DEFAULT_RAW\n\n  const [count, setCount] = React.useState(0)\n  const [copied, setCopied] = React.useState(false)\n  const done = count >= tokenLines.length\n\n  React.useEffect(() => {\n    const t = setTimeout(\n      () => setCount((c) => (c >= tokenLines.length ? 0 : c + 1)),\n      count === 0 ? 400 : done ? HOLD_MS : LINE_MS,\n    )\n    return () => clearTimeout(t)\n  }, [count, done, tokenLines.length])\n\n  const copy = React.useCallback(() => {\n    navigator.clipboard\n      .writeText(rawText)\n      .then(() => {\n        setCopied(true)\n        setTimeout(() => setCopied(false), 1500)\n      })\n      .catch(() => {\n        // The clipboard may be unavailable. The code stays selectable.\n      })\n  }, [rawText])\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-[23.75rem] overflow-hidden rounded-xl border border-border bg-secondary p-0.5\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex h-8 items-center justify-between ps-2.5 pe-1\">\n        <span className=\"flex items-baseline gap-2\">\n          <span className=\"font-mono text-xs font-medium text-foreground\">{filename}</span>\n          <span className=\"text-xs text-muted-foreground\">{language}</span>\n        </span>\n        <button\n          aria-label=\"Copy code\"\n          type=\"button\"\n          onClick={copy}\n          className={cn(\n            \"flex h-6 items-center gap-1 rounded-full px-2 text-xs font-medium outline-none transition-colors duration-fast hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring\",\n            copied ? \"text-(--primary-text)\" : \"text-muted-foreground hover:text-foreground\",\n          )}\n        >\n          <Icon icon={copied ? \"feather:check\" : \"feather:copy\"} className=\"size-3\" aria-hidden=\"true\" />\n          {copied ? \"Copied\" : \"Copy\"}\n        </button>\n      </div>\n\n      <pre className=\"min-h-[8.5rem] rounded-lg bg-(--code) px-3 py-2.5 font-mono text-xs leading-[1.7] text-(--code-foreground)\">\n        {tokenLines.slice(0, count).map((line, i) => (\n          <div key={i} className=\"flex animate-in fade-in slide-in-from-bottom-1 duration-base\">\n            <span className=\"w-5 shrink-0 select-none text-right text-muted-foreground/70\">\n              {i + 1}\n            </span>\n            <span className=\"whitespace-pre pl-3\">\n              {line.map((tok, j) => (\n                <span key={j} className={tok.c ? TONE[tok.c] : undefined}>\n                  {tok.t}\n                </span>\n              ))}\n              {i === count - 1 && !done && (\n                <span className=\"ml-0.5 inline-block h-3 w-0.5 translate-y-0.5 bg-primary\" />\n              )}\n            </span>\n          </div>\n        ))}\n      </pre>\n    </div>\n  )\n}\n\nexport { StreamingCode }\nexport type { CodeToken }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.476 0.11 154.3)",
+      "code": "oklch(1 0 0)",
+      "code-foreground": "oklch(0.214 0.006 156.7)",
+      "syntax-keyword": "oklch(0.52 0.19 330)",
+      "syntax-string": "oklch(0.476 0.11 154.3)",
+      "syntax-fn": "oklch(0.5 0.15 259)",
+      "syntax-comment": "oklch(0.552 0.005 157.1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.705 0.169 153.6)",
+      "code": "oklch(0.18 0.006 190)",
+      "code-foreground": "oklch(0.92 0.004 160)",
+      "syntax-keyword": "oklch(0.75 0.15 330)",
+      "syntax-string": "oklch(0.78 0.15 153.6)",
+      "syntax-fn": "oklch(0.76 0.12 259)",
+      "syntax-comment": "oklch(0.6 0.005 160)"
+    }
+  }
+}

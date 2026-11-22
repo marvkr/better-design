@@ -4,7 +4,7 @@ import * as React from "react"
 import { Icon } from "@iconify/react"
 import { cn } from "@/lib/utils"
 
-export interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number
   max?: number
   onChange?: (value: number) => void
@@ -27,7 +27,7 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
             type="button"
             disabled={readonly}
             className={cn(
-              "transition-all duration-200",
+              "transition-all duration-base",
               !readonly && "cursor-pointer hover:scale-110",
               "disabled:cursor-default"
             )}
@@ -40,7 +40,7 @@ const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
               className={cn(
                 "h-5 w-5",
                 i < (hovered >= 0 ? hovered + 1 : value)
-                  ? "text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.4)]"
+                  ? "text-amber-400 drop-shadow-[0_0_0.25rem_oklch(0.8369_0.1644_84.4286/0.4)]"
                   : "text-white/20"
               )}
             />

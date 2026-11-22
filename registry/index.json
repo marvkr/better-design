@@ -1,114 +1,218 @@
 {
   "name": "design-systems",
-  "baseUrl": "https://www.better-design.com/registry",
+  "baseUrl": "https://better-design.com/registry",
   "styles": [
+    {
+      "name": "airbnb",
+      "label": "Airbnb"
+    },
+    {
+      "name": "airy-docs",
+      "label": "Airy docs"
+    },
     {
       "name": "apple",
       "label": "Apple"
+    },
+    {
+      "name": "atelier",
+      "label": "Atelier"
     },
     {
       "name": "beam-lib",
       "label": "Beam Lib"
     },
     {
-      "name": "monochrome-industrial",
-      "label": "Monochrome Industrial"
+      "name": "bevel",
+      "label": "Bevel"
     },
     {
-      "name": "vibrant-dark",
-      "label": "Vibrant Dark"
+      "name": "bold-retail",
+      "label": "Bold retail"
+    },
+    {
+      "name": "brutalism",
+      "label": "Brutalism"
+    },
+    {
+      "name": "burnished",
+      "label": "Burnished"
+    },
+    {
+      "name": "carbon",
+      "label": "Carbon"
+    },
+    {
+      "name": "cashmere",
+      "label": "Cashmere"
+    },
+    {
+      "name": "cerulean",
+      "label": "Cerulean"
+    },
+    {
+      "name": "chrome-azure",
+      "label": "Chrome Azure"
+    },
+    {
+      "name": "chrome-bronze",
+      "label": "Chrome Bronze"
+    },
+    {
+      "name": "chrome-crimson",
+      "label": "Chrome Crimson"
+    },
+    {
+      "name": "chrome-emerald",
+      "label": "Chrome Emerald"
+    },
+    {
+      "name": "chrome-gold",
+      "label": "Chrome Gold"
+    },
+    {
+      "name": "chrome-silver",
+      "label": "Chrome Silver"
     },
     {
       "name": "cinematic-dark",
-      "label": "Cinematic Dark"
+      "label": "Cinema"
     },
     {
-      "name": "vercel",
-      "label": "Vercel"
+      "name": "clicky",
+      "label": "Clicky"
     },
     {
-      "name": "precision-light",
-      "label": "Precision Light"
+      "name": "cobalt",
+      "label": "Cobalt"
     },
     {
-      "name": "airbnb",
-      "label": "Airbnb Design System"
-    },
-    {
-      "name": "inset-dark",
-      "label": "Inset Dark"
-    },
-    {
-      "name": "minimal-light",
-      "label": "Minimal Light"
-    },
-    {
-      "name": "tv-style",
-      "label": "Tv Style"
-    },
-    {
-      "name": "linear",
-      "label": "Linear Design System"
+      "name": "cornflower",
+      "label": "Cornflower"
     },
     {
       "name": "corporate-fintech",
-      "label": "Column Design System"
+      "label": "Column"
     },
     {
-      "name": "neutral-monochrome",
-      "label": "Neutral Monochrome"
+      "name": "cream-editorial",
+      "label": "Cream editorial"
     },
     {
-      "name": "linear-quality",
-      "label": "Linear Quality"
-    },
-    {
-      "name": "notion",
-      "label": "Notion"
-    },
-    {
-      "name": "supabase",
-      "label": "Supabase Design System"
+      "name": "dark-orange",
+      "label": "Sharp Dark"
     },
     {
       "name": "editorial-dark",
       "label": "Editorial Dark"
     },
     {
-      "name": "tactile-minimal",
-      "label": "Tactile Minimal"
+      "name": "editorial-warm",
+      "label": "Editorial Warm"
+    },
+    {
+      "name": "ember",
+      "label": "Ember"
+    },
+    {
+      "name": "evergreen",
+      "label": "Evergreen"
     },
     {
       "name": "figma",
       "label": "Figma"
     },
     {
+      "name": "firefly",
+      "label": "Firefly"
+    },
+    {
+      "name": "folio",
+      "label": "Folio"
+    },
+    {
+      "name": "frosted-glass",
+      "label": "Frosted Glass"
+    },
+    {
       "name": "glassmorphic-dark",
       "label": "Glassmorphic Dark"
     },
     {
-      "name": "dark-orange",
-      "label": "Dark Orange"
+      "name": "graphite",
+      "label": "Graphite"
     },
     {
-      "name": "midnight-glass",
-      "label": "Midnight Glass"
+      "name": "halo",
+      "label": "Halo"
+    },
+    {
+      "name": "haptic",
+      "label": "Haptic"
+    },
+    {
+      "name": "heyclicky",
+      "label": "Heyclicky"
+    },
+    {
+      "name": "hyperline",
+      "label": "Nocturne"
+    },
+    {
+      "name": "ink-mail",
+      "label": "Ink mail"
+    },
+    {
+      "name": "inset-dark",
+      "label": "Inset Dark"
+    },
+    {
+      "name": "instrument",
+      "label": "Instrument"
+    },
+    {
+      "name": "interior",
+      "label": "Interior"
+    },
+    {
+      "name": "lane",
+      "label": "Lane"
+    },
+    {
+      "name": "leather-luxe",
+      "label": "Leather Luxe"
+    },
+    {
+      "name": "light-marketplace",
+      "label": "Energetic"
+    },
+    {
+      "name": "linear",
+      "label": "Linear"
+    },
+    {
+      "name": "linear-quality",
+      "label": "Linear Quality"
     },
     {
       "name": "lumen-dark",
       "label": "Lumen Dark"
     },
     {
-      "name": "beam-custom",
-      "label": "Beam Custom"
+      "name": "mallow",
+      "label": "Mallow"
     },
     {
-      "name": "light-marketplace",
-      "label": "Light Marketplace"
+      "name": "margin",
+      "label": "Margin"
     },
     {
-      "name": "stripe",
-      "label": "Stripe"
+      "name": "marigold",
+      "label": "Marigold"
+    },
+    {
+      "name": "metal-fx-chromatic",
+      "label": "Metal FX Chromatic"
     },
     {
       "name": "metal-fx-gold",
@@ -119,8 +223,172 @@
       "label": "Metal FX Silver"
     },
     {
-      "name": "metal-fx-chromatic",
-      "label": "Metal FX Chromatic"
+      "name": "midnight-glass",
+      "label": "Midnight Glass"
+    },
+    {
+      "name": "minimal-light",
+      "label": "Luxe"
+    },
+    {
+      "name": "monochrome-industrial",
+      "label": "Monochrome Industrial"
+    },
+    {
+      "name": "neon",
+      "label": "Neon"
+    },
+    {
+      "name": "neon-vault",
+      "label": "Synth"
+    },
+    {
+      "name": "neutral-monochrome",
+      "label": "Neutral Monochrome"
+    },
+    {
+      "name": "notion",
+      "label": "Notion"
+    },
+    {
+      "name": "paddock",
+      "label": "Paddock"
+    },
+    {
+      "name": "pebble",
+      "label": "Pebble"
+    },
+    {
+      "name": "pillow-light",
+      "label": "Pillow Light"
+    },
+    {
+      "name": "platine",
+      "label": "Platine"
+    },
+    {
+      "name": "playdesk",
+      "label": "Playdesk"
+    },
+    {
+      "name": "playful-console",
+      "label": "Playful console"
+    },
+    {
+      "name": "precision",
+      "label": "Precision"
+    },
+    {
+      "name": "precision-light",
+      "label": "Sharp Light"
+    },
+    {
+      "name": "pulse",
+      "label": "Pulse"
+    },
+    {
+      "name": "putty",
+      "label": "Putty"
+    },
+    {
+      "name": "retro-lcd",
+      "label": "Retro LCD"
+    },
+    {
+      "name": "riso",
+      "label": "Riso"
+    },
+    {
+      "name": "romanesque",
+      "label": "Romanesque"
+    },
+    {
+      "name": "sienna",
+      "label": "Sienna"
+    },
+    {
+      "name": "skeuo-next",
+      "label": "Skeuo Next"
+    },
+    {
+      "name": "slate",
+      "label": "Slate"
+    },
+    {
+      "name": "sonic-airy",
+      "label": "Sonic Airy"
+    },
+    {
+      "name": "sonic-bright",
+      "label": "Sonic Bright"
+    },
+    {
+      "name": "sonic-glassy",
+      "label": "Sonic Glassy"
+    },
+    {
+      "name": "sonic-lofi",
+      "label": "Sonic Lofi"
+    },
+    {
+      "name": "sonic-metallic",
+      "label": "Sonic Metallic"
+    },
+    {
+      "name": "sonic-organic",
+      "label": "Sonic Organic"
+    },
+    {
+      "name": "sonic-punchy",
+      "label": "Sonic Punchy"
+    },
+    {
+      "name": "sonic-retro",
+      "label": "Sonic Retro"
+    },
+    {
+      "name": "sonic-warm",
+      "label": "Sonic Warm"
+    },
+    {
+      "name": "sorbet",
+      "label": "Sorbet"
+    },
+    {
+      "name": "squircle",
+      "label": "Squircle"
+    },
+    {
+      "name": "stripe",
+      "label": "Stripe"
+    },
+    {
+      "name": "supabase",
+      "label": "Supabase"
+    },
+    {
+      "name": "telemetry",
+      "label": "Telemetry"
+    },
+    {
+      "name": "terminal",
+      "label": "Terminal"
+    },
+    {
+      "name": "tv-style",
+      "label": "TV Style"
+    },
+    {
+      "name": "velour",
+      "label": "Velour"
+    },
+    {
+      "name": "vercel",
+      "label": "Vercel"
+    },
+    {
+      "name": "voltage",
+      "label": "Voltage"
     }
   ]
 }

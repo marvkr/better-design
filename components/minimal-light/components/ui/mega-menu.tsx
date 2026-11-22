@@ -265,7 +265,7 @@ const panelStyle: React.CSSProperties = {
   transformOrigin: "top center",
   overflow: "hidden",
   willChange: "transform, opacity",
-  boxShadow: "0 12px 40px rgba(0, 0, 0, 0.35)",
+  boxShadow: "0 12px 40px oklch(0 0 0 / 0.12)",
 }
 
 const gridStyle: React.CSSProperties = {

@@ -1,0 +1,22 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for form-field components in riso.\n *\n * Any component that renders a bordered text input surface (Input, Textarea,\n * PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP) MUST import\n * these constants instead of re-declaring classes. This guarantees identical\n * background, chunky ink border, focus ring, hover, disabled, and transition\n * behavior across every form field in the design system.\n *\n * Do NOT copy-paste these classes into individual components — always import.\n */\n\n/** Base styles shared by every form-field surface (Input, Textarea, etc.).\n *  Chunky 2px ink border + a subtle hard offset that deepens on focus —\n *  the retro poster material applied to data entry. */\nexport const formFieldBase =\n  \"w-full rounded-md px-3 text-sm font-medium \" +\n  \"bg-card text-foreground \" +\n  \"border-2 border-border \" +\n  \"shadow-[var(--shadow-hard-sm)] \" +\n  \"placeholder:text-muted-foreground placeholder:font-normal \" +\n  \"transition-all duration-fast \" +\n  \"hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--shadow-hard)] \" +\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0\";\n\n/** Height + vertical padding for single-line form fields (h-10) */\nexport const formFieldSingleLine = \"flex h-10 py-2\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-[5.25rem] py-2 resize-y\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)",
+      "shadow-hard": "0.25rem 0.25rem 0 0 var(--foreground)"
+    },
+    "dark": {
+      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)",
+      "shadow-hard": "0.25rem 0.25rem 0 0 var(--foreground)"
+    }
+  }
+}

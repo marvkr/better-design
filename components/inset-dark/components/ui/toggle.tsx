@@ -18,12 +18,12 @@ import { cn } from "@/lib/utils"
 const toggleVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-1.5",
-    "rounded-[9px] text-sm font-medium leading-none tracking-[-0.01em]",
-    "transition-[color,background,box-shadow] duration-180",
+    "rounded-[0.5625rem] text-sm font-medium leading-none tracking-[-0.01em]",
+    "transition-[color,background,box-shadow] duration-fast",
     "cursor-pointer select-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
     "disabled:pointer-events-none disabled:opacity-50",
-    "text-[rgba(255,255,255,0.55)] hover:text-[rgba(255,255,255,0.8)]",
+    "text-[oklch(1_0_0/0.55)] hover:text-[oklch(1_0_0/0.8)]",
     "data-[state=on]:text-foreground",
     "data-[state=on]:[background:var(--pill-gradient)]",
     "data-[state=on]:[box-shadow:var(--shadow-pill)]",
@@ -45,9 +45,9 @@ const toggleVariants = cva(
 )
 
 const sizeClasses = {
-  default: "h-[34px] px-[13px]",
-  sm: "h-[28px] px-2.5 text-xs",
-  lg: "h-[40px] px-4",
+  default: "h-[2.125rem] px-[0.8125rem]",
+  sm: "h-[1.75rem] px-2.5 text-xs",
+  lg: "h-[2.5rem] px-4",
 }
 
 interface ToggleProps

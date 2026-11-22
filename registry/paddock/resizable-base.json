@@ -1,0 +1,18 @@
+{
+  "name": "resizable-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as ResizablePrimitive from \"react-resizable-panels\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { raisedSurface } from \"./_shared\";\n\n/**\n * Paddock Resizable: panels split by the cool 1px border. While dragged or\n * focused the border darkens; the optional grip is a small raised white\n * tile with a 1px border.\n */\nconst ResizablePanelGroup = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (\n  <ResizablePrimitive.PanelGroup\n    data-slot=\"resizable-panel-group\"\n    className={cn(\"flex size-full data-[panel-group-direction=vertical]:flex-col\", className)}\n    {...props}\n  />\n);\n\n/** One panel inside the group. */\nconst ResizablePanel = ResizablePrimitive.Panel;\n\n/** The divider between two panels, with an optional grip tile. */\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {\n  withHandle?: boolean;\n}) => (\n  <ResizablePrimitive.PanelResizeHandle\n    data-slot=\"resizable-handle\"\n    className={cn(\n      \"relative flex w-0.25 items-center justify-center bg-border outline-none\",\n      \"after:absolute after:inset-y-0 after:left-1/2 after:w-2 after:-translate-x-1/2\",\n      \"transition-colors duration-fast\",\n      \"data-[resize-handle-state=drag]:bg-foreground focus-visible:bg-ring\",\n      \"data-[panel-group-direction=vertical]:h-0.25 data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-2 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0\",\n      \"[&[data-panel-group-direction=vertical]>div]:rotate-90\",\n      className,\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div className={cn(raisedSurface, \"z-10 flex h-6 w-3.5 items-center justify-center rounded-sm\")}>\n        <Icon icon=\"mingcute:dots-line\" className=\"size-3 rotate-90 text-muted-foreground\" />\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n);\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels@^3.0.3",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared-base.json"
+  ]
+}

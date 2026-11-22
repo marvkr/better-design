@@ -40,8 +40,8 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           "group flex w-full items-center gap-3 px-4 py-3",
           "text-left",
           interactive && [
-            "cursor-pointer rounded-[10px]",
-            "transition-colors duration-150",
+            "cursor-pointer rounded-[0.625rem]",
+            "transition-colors duration-fast",
             "hover:bg-secondary/60",
             "focus-visible:outline-none focus-visible:bg-secondary/80",
             "active:bg-secondary",
@@ -56,7 +56,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(
           <div
             className={cn(
               "flex h-9 w-9 shrink-0 items-center justify-center",
-              "rounded-[10px] bg-secondary text-muted-foreground",
+              "rounded-[0.625rem] bg-secondary text-muted-foreground",
               "[&>svg]:h-4 [&>svg]:w-4"
             )}
           >

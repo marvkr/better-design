@@ -1,0 +1,36 @@
+{
+  "name": "filter-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/filter-table.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\ntype Status = \"todo\" | \"progress\" | \"done\";\n\nconst DEFAULT_FILTERS: { key: \"all\" | Status; label: string; dot?: string; count: number }[] = [\n  { key: \"all\", label: \"All\", count: 5 },\n  { key: \"todo\", label: \"Draft\", dot: \"bg-warning\", count: 2 },\n  { key: \"progress\", label: \"In review\", dot: \"bg-info\", count: 2 },\n  { key: \"done\", label: \"Shared\", dot: \"bg-success\", count: 1 },\n];\n\nconst DEFAULT_ROWS: { task: string; date: string; status: Status; owner: string }[] = [\n  { task: \"Weekly planning\", date: \"Nov 04\", status: \"todo\", owner: \"team\" },\n  { task: \"Launch checklist\", date: \"Oct 21\", status: \"progress\", owner: \"projects\" },\n  { task: \"Reading list\", date: \"Nov 12\", status: \"todo\", owner: \"personal\" },\n  { task: \"Research summary\", date: \"Oct 30\", status: \"progress\", owner: \"projects\" },\n  { task: \"Onboarding notes\", date: \"Sep 18\", status: \"done\", owner: \"team\" },\n];\n\n/** Each status keeps one hue: a light tint behind text deep in that hue. */\nconst PILLS: { [status in Status]: { label: string; className: string } } = {\n  todo: { label: \"Draft\", className: \"bg-warning/15 text-warning-text\" },\n  progress: { label: \"In review\", className: \"bg-info/12 text-info-text\" },\n  done: { label: \"Shared\", className: \"bg-success/12 text-success-text\" },\n};\n\nconst COLUMNS = \"grid-cols-[1.4fr_0.6fr_0.9fr_0.8fr]\";\n\ninterface FilterTableProps extends React.HTMLAttributes<HTMLDivElement> {\n  rows?: typeof DEFAULT_ROWS;\n  filters?: typeof DEFAULT_FILTERS;\n}\n\n/**\n * Margin FilterTable: status filters in a paper field track, the chosen one a\n * paper tab, above a white sheet whose rows fold shut when filtered out.\n */\nfunction FilterTable({ rows = DEFAULT_ROWS, filters = DEFAULT_FILTERS, className, ...props }: FilterTableProps) {\n  const [filter, setFilter] = React.useState<\"all\" | Status>(\"all\");\n\n  return (\n    <div className={cn(\"w-full max-w-md\", className)} {...props}>\n      <div className=\"mb-3 flex w-fit max-w-full items-center gap-0.5 overflow-x-auto rounded-lg bg-(--field) p-0.5\">\n        {filters.map((f) => {\n          const active = filter === f.key;\n          return (\n            <button\n              key={f.key}\n              type=\"button\"\n              aria-pressed={active}\n              onClick={() => setFilter(f.key)}\n              className={cn(\n                focusRing,\n                \"flex h-7 shrink-0 items-center gap-1.5 rounded-md px-2.5 text-sm transition duration-fast ease-(--ease-out)\",\n                active\n                  ? \"bg-card font-medium text-foreground shadow-sm\"\n                  : \"text-muted-foreground pointer-fine:hover:text-foreground\",\n              )}\n            >\n              {f.dot && <span aria-hidden=\"true\" className={cn(\"size-1.5 rounded-full\", f.dot)} />}\n              {f.label}\n              <span className=\"text-xs tabular-nums text-muted-foreground\">{f.count}</span>\n            </button>\n          );\n        })}\n      </div>\n\n      <div\n        aria-label=\"Scrollable notes table\"\n        className={cn(focusRing, \"overflow-x-auto rounded-xl border border-border bg-card text-card-foreground\")}\n        role=\"region\"\n        tabIndex={0}\n      >\n        <div className=\"min-w-md\">\n          <div className={cn(\"grid h-8 items-center border-b border-border bg-muted px-3 text-xs font-medium text-muted-foreground\", COLUMNS)}>\n            <span>Note</span>\n            <span>Edited</span>\n            <span>Status</span>\n            <span>Notebook</span>\n          </div>\n          {rows.map((row) => {\n            const shown = filter === \"all\" || row.status === filter;\n            const pill = PILLS[row.status];\n            return (\n              <div\n                key={row.task}\n                aria-hidden={!shown}\n                className={cn(\n                  \"grid transition-all duration-slow ease-(--ease-out)\",\n                  shown ? \"grid-rows-[1fr] opacity-100\" : \"grid-rows-[0fr] opacity-0\",\n                )}\n              >\n                <div className=\"overflow-hidden\">\n                  <div\n                    className={cn(\n                      \"grid h-10 items-center border-b border-border px-3 text-sm transition-colors duration-fast pointer-fine:hover:bg-accent/60\",\n                      COLUMNS,\n                    )}\n                  >\n                    <span className=\"truncate font-medium text-foreground\">{row.task}</span>\n                    <span className=\"text-xs tabular-nums text-muted-foreground\">{row.date}</span>\n                    <span>\n                      <span className={cn(\"inline-flex h-5 items-center rounded-sm px-1.5 text-xs font-medium\", pill.className)}>\n                        {pill.label}\n                      </span>\n                    </span>\n                    <span className=\"truncate text-xs text-muted-foreground\">{row.owner}</span>\n                  </div>\n                </div>\n              </div>\n            );\n          })}\n        </div>\n      </div>\n    </div>\n  );\n}\n\nexport { FilterTable };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5 0.09 115)",
+      "warning": "oklch(0.74 0.13 75)",
+      "info": "oklch(0.5 0.05 245)",
+      "success-text": "oklch(0.4 0.08 115)",
+      "warning-text": "oklch(0.4 0.09 70)",
+      "info-text": "oklch(0.4 0.05 245)",
+      "field": "oklch(0.99 0.008 85)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "success": "oklch(0.7 0.14 115)",
+      "warning": "oklch(0.8 0.12 78)",
+      "info": "oklch(0.7 0.05 245)",
+      "success-text": "oklch(0.86 0.09 115)",
+      "warning-text": "oklch(0.87 0.1 80)",
+      "info-text": "oklch(0.86 0.04 245)",
+      "field": "oklch(0.22 0.014 260)"
+    }
+  }
+}

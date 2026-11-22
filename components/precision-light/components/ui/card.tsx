@@ -11,7 +11,7 @@ const Card = React.forwardRef<
     className={cn(
       // Sharp Light card: browser-extracted white surface button shadow pattern
       // Doubling radii (1→3→6→12→24→48px) at 4% opacity + 10% 1px outer ring + inset bottom highlight
-      "rounded-[10px] bg-card text-card-foreground shadow-[0_1px_1px_0.5px_rgba(51,51,51,0.04),0_3px_3px_-1.5px_rgba(51,51,51,0.02),0_6px_6px_-3px_rgba(51,51,51,0.04),0_12px_12px_-6px_rgba(51,51,51,0.04),0_24px_24px_-12px_rgba(51,51,51,0.04),0_48px_48px_-24px_rgba(51,51,51,0.04),0_0_0_1px_rgba(51,51,51,0.1),inset_0_-1px_1px_-0.5px_rgba(51,51,51,0.06)]",
+      "rounded-[0.625rem] bg-card text-card-foreground shadow-[0_0.0625rem_0.0625rem_0.0313rem_oklch(0.3211_0_0/0.04),0_0.1875rem_0.1875rem_-0.0938rem_oklch(0.3211_0_0/0.02),0_0.375rem_0.375rem_-0.1875rem_oklch(0.3211_0_0/0.04),0_0.75rem_0.75rem_-0.375rem_oklch(0.3211_0_0/0.04),0_1.5rem_1.5rem_-0.75rem_oklch(0.3211_0_0/0.04),0_3rem_3rem_-1.5rem_oklch(0.3211_0_0/0.04),0_0_0_0.0625rem_oklch(0.3211_0_0/0.1),inset_0_-0.0625rem_0.0625rem_-0.0313rem_oklch(0.3211_0_0/0.06)]",
       className
     )}
     {...props}

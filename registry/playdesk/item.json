@@ -1,0 +1,24 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Item — one row in a desk list: leading hardware, a stacked label,\n * and a trailing slot. ItemList wraps rows in a window with hairline rules.\n */\n\nexport interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  leading?: React.ReactNode;\n  title: string;\n  description?: string;\n  trailing?: React.ReactNode;\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, leading, title, description, trailing, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex items-center gap-3 px-4 py-3 transition-colors duration-fast\",\n        \"hover:bg-foreground/[0.03]\",\n        className,\n      )}\n      {...props}\n    >\n      {leading ? <div className=\"shrink-0\">{leading}</div> : null}\n      <div className=\"min-w-0 flex-1\">\n        <p className=\"truncate text-sm font-medium text-foreground\">{title}</p>\n        {description ? (\n          <p className=\"truncate text-xs text-muted-foreground\">{description}</p>\n        ) : null}\n      </div>\n      {trailing ? <div className=\"shrink-0\">{trailing}</div> : null}\n    </div>\n  ),\n);\nItem.displayName = \"Item\";\n\nexport interface ItemListProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst ItemList = React.forwardRef<HTMLDivElement, ItemListProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"overflow-hidden rounded-xl bg-card [box-shadow:var(--shadow-window)]\",\n        \"divide-y divide-border\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemList.displayName = \"ItemList\";\n\nexport { Item, ItemList };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    }
+  }
+}

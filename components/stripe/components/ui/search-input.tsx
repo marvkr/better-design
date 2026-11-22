@@ -1,8 +1,7 @@
 import * as React from "react"
 import { Search, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-
-// Stripe Search Input: input with search icon and optional clear button
+import { searchFieldBase } from "./_shared"
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void
@@ -17,13 +16,8 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           ref={ref}
           value={value}
           className={cn(
-            "flex h-10 w-full rounded-[10px] border border-border bg-background pl-9 pr-3 py-2 text-sm",
-            "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-            "placeholder:text-muted-foreground",
-            "transition duration-200 ease-out",
-            "hover:border-foreground/30",
-            "focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-            "disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70",
+            searchFieldBase,
+            "flex h-9 pl-9 pr-3 py-2",
             onClear && value ? "pr-9" : "",
             className
           )}

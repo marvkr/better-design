@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Pulseboard Badge: rounded-full, h-4/h-5/h-6, px-2, text-xs.\n// Status hues read as solid chips on the dark board; *-light are tinted on dark.\n// Variants: default, primary (violet), destructive (red), success (teal), warning (amber).\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-foreground border border-border\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"bg-primary/18 text-[color:oklch(0.875_0.067_293)]\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive/20 text-[color:oklch(0.875_0.066_24)]\",\n        success:\n          \"bg-[oklch(0.72_0.15_165)] text-[oklch(0.16_0.02_165)]\",\n        \"success-light\":\n          \"bg-[oklch(0.72_0.15_165/0.15)] text-[color:oklch(0.875_0.14_165)]\",\n        warning:\n          \"bg-[oklch(0.78_0.16_75)] text-[oklch(0.18_0.03_75)]\",\n        \"warning-light\":\n          \"bg-[oklch(0.78_0.16_75/0.15)] text-[color:oklch(0.875_0.106_75)]\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        // Pulseboard: sm=h-4 (16px), md=h-5 (20px), lg=h-6 (24px)\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

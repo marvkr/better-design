@@ -1,0 +1,23 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Timeline — vertical event log. Each item has an icon marker, title, timestamp, body.\n *\n * Graphite treatment: each marker is a small raised tile (calm, never glowy),\n * the connecting rail is a hairline border, and the body text steps down the\n * grey ramp from soft white title to dim muted body.\n */\n\nconst Timeline = React.forwardRef<HTMLOListElement, React.HTMLAttributes<HTMLOListElement>>(\n  ({ className, ...props }, ref) => (\n    <ol ref={ref} className={cn(\"relative flex flex-col gap-6\", className)} {...props} />\n  )\n)\nTimeline.displayName = \"Timeline\"\n\nexport interface TimelineItemProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, \"title\"> {\n  icon?: string\n  title?: React.ReactNode\n  timestamp?: React.ReactNode\n  isLast?: boolean\n}\n\nconst TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(\n  ({ className, icon, title, timestamp, isLast, children, ...props }, ref) => (\n    <li ref={ref} className={cn(\"relative flex gap-4\", className)} {...props}>\n      <div className=\"relative flex flex-col items-center\">\n        <div\n          className={cn(\n            \"flex h-8 w-8 shrink-0 items-center justify-center rounded-full\",\n            \"bg-card border border-border text-muted-foreground\",\n            \"[box-shadow:var(--shadow-tile)]\"\n          )}\n        >\n          <Icon icon={icon ?? \"tabler:point-filled\"} className=\"h-3.5 w-3.5\" />\n        </div>\n        {!isLast && <div className=\"mt-1 w-px flex-1 bg-border\" />}\n      </div>\n      <div className=\"min-w-0 flex-1 pb-4\">\n        {(title || timestamp) && (\n          <div className=\"flex items-baseline justify-between gap-2\">\n            {title && <div className=\"text-sm font-medium text-foreground\">{title}</div>}\n            {timestamp && (\n              <div className=\"shrink-0 text-xs text-muted-foreground\">{timestamp}</div>\n            )}\n          </div>\n        )}\n        {children && (\n          <div className=\"mt-1 text-sm leading-relaxed text-muted-foreground\">{children}</div>\n        )}\n      </div>\n    </li>\n  )\n)\nTimelineItem.displayName = \"TimelineItem\"\n\nexport { Timeline, TimelineItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)"
+    },
+    "dark": {
+      "shadow-tile": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.18)"
+    }
+  }
+}

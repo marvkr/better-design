@@ -1,0 +1,33 @@
+{
+  "name": "notification",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/notification.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Notification: a tinted panel edged by the strong hairline on all\n * four sides.\n *\n * The default sits on the card step. Info (opened), success (delivered),\n * warning (queued) and destructive (bounced) each pair a faint status tint\n * with their own lighter text, so the words pass contrast on the black page.\n * Colour carries status only, and never runs as a stripe down one side.\n */\nconst notificationVariants = cva(\n  \"relative flex w-full items-start gap-3 rounded-lg border border-(--line-strong) px-4 py-3 text-sm\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-card text-foreground\",\n        info: \"bg-(--info-tint) text-(--info-text) [&_[data-slot=notification-description]]:text-current\",\n        success:\n          \"bg-(--success-tint) text-(--success-text) [&_[data-slot=notification-description]]:text-current\",\n        warning:\n          \"bg-(--warning-tint) text-(--warning-text) [&_[data-slot=notification-description]]:text-current\",\n        destructive:\n          \"bg-(--destructive-tint) text-(--destructive-text) [&_[data-slot=notification-description]]:text-current\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nexport interface NotificationProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof notificationVariants> {\n  onClose?: () => void;\n}\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  ({ className, variant, onClose, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      role={variant === \"destructive\" ? \"alert\" : \"status\"}\n      data-slot=\"notification\"\n      data-variant={variant ?? \"default\"}\n      className={cn(notificationVariants({ variant }), className)}\n      {...props}\n    >\n      <div className=\"min-w-0 flex-1\">{children}</div>\n      {onClose && (\n        <button\n          type=\"button\"\n          onClick={onClose}\n          aria-label=\"Dismiss\"\n          className={cn(\n            \"-me-1.5 -mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-md text-current\",\n            \"outline-none transition-colors duration-fast ease-out hover:bg-(--wash)\",\n            \"focus-visible:ring-3 focus-visible:ring-ring\",\n          )}\n        >\n          <Icon icon=\"ph:x\" className=\"size-4\" aria-hidden=\"true\" />\n        </button>\n      )}\n    </div>\n  ),\n);\nNotification.displayName = \"Notification\";\n\nconst NotificationTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h4\n    ref={ref}\n    data-slot=\"notification-title\"\n    className={cn(\"text-sm font-medium leading-snug\", className)}\n    {...props}\n  />\n));\nNotificationTitle.displayName = \"NotificationTitle\";\n\nconst NotificationDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"notification-description\"\n    className={cn(\n      \"mt-0.5 text-sm text-(--foreground-secondary) first:mt-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nNotificationDescription.displayName = \"NotificationDescription\";\n\nexport { Notification, NotificationTitle, NotificationDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "wash": "oklch(1 0 0 / 0.1)",
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-secondary": "oklch(0.88 0.002 264)",
+      "success-tint": "oklch(0.88 0.212 155.8 / 0.12)",
+      "success-text": "oklch(0.88 0.19 155.8)",
+      "warning-tint": "oklch(0.854 0.157 84.1 / 0.12)",
+      "warning-text": "oklch(0.87 0.14 84.1)",
+      "info-tint": "oklch(0.688 0.169 251.4 / 0.14)",
+      "info-text": "oklch(0.78 0.13 251.4)",
+      "destructive-tint": "oklch(0.641 0.245 20.6 / 0.14)",
+      "destructive-text": "oklch(0.74 0.18 20.6)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

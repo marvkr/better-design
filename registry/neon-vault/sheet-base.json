@@ -1,0 +1,27 @@
+{
+  "name": "sheet-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sheet.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Dialog as SheetPrimitive } from \"@base-ui/react/dialog\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Sheet: a vault drawer sliding in on the card surface with the\n// layered DS popover shadow over a dimmed, blurred canvas.\n\nconst Sheet = SheetPrimitive.Root\n\nconst SheetTrigger = SheetPrimitive.Trigger\n\nconst SheetClose = SheetPrimitive.Close\n\nconst SheetPortal = SheetPrimitive.Portal\n\nconst SheetOverlay = React.forwardRef<\n  HTMLDivElement,\n  Omit<SheetPrimitive.Backdrop.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <SheetPrimitive.Backdrop\n    className={cn(\n      \"fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-opacity duration-base data-starting-style:opacity-0 data-ending-style:opacity-0\",\n      className\n    )}\n    {...props}\n    ref={ref}\n  />\n))\nSheetOverlay.displayName = \"SheetOverlay\"\n\nconst sheetVariants = cva(\n  \"fixed z-50 gap-4 bg-card p-6 text-card-foreground [box-shadow:var(--shadow-popover)] transition ease-in-out duration-base\",\n  {\n    variants: {\n      side: {\n        top: \"inset-x-2 top-2 sm:inset-x-3 sm:top-3 rounded-2xl border border-border data-starting-style:-translate-y-[calc(100%+1rem)] data-ending-style:-translate-y-[calc(100%+1rem)]\",\n        bottom:\n          \"inset-x-2 bottom-2 sm:inset-x-3 sm:bottom-3 rounded-2xl border border-border data-starting-style:translate-y-[calc(100%+1rem)] data-ending-style:translate-y-[calc(100%+1rem)]\",\n        left: \"inset-y-2 left-2 sm:inset-y-3 sm:left-3 h-auto w-3/4 rounded-2xl border border-border data-starting-style:-translate-x-[calc(100%+1rem)] data-ending-style:-translate-x-[calc(100%+1rem)] sm:max-w-sm\",\n        right:\n          \"inset-y-2 right-2 sm:inset-y-3 sm:right-3 h-auto w-3/4 rounded-2xl border border-border data-starting-style:translate-x-[calc(100%+1rem)] data-ending-style:translate-x-[calc(100%+1rem)] sm:max-w-sm\",\n      },\n    },\n    defaultVariants: {\n      side: \"right\",\n    },\n  }\n)\n\ninterface SheetContentProps\n  extends Omit<SheetPrimitive.Popup.Props, \"className\">,\n    VariantProps<typeof sheetVariants> {\n  className?: string\n}\n\nconst SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(\n  ({ side = \"right\", className, children, ...props }, ref) => (\n    <SheetPortal>\n      <SheetOverlay />\n      <SheetPrimitive.Popup\n        ref={ref}\n        className={cn(sheetVariants({ side }), className)}\n        {...props}\n      >\n        {children}\n        <SheetPrimitive.Close className=\"absolute right-4 top-4 rounded-full p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 disabled:pointer-events-none\">\n          <Icon icon=\"ph:x\" className=\"h-4 w-4\" />\n          <span className=\"sr-only\">Close</span>\n        </SheetPrimitive.Close>\n      </SheetPrimitive.Popup>\n    </SheetPortal>\n  )\n)\nSheetContent.displayName = \"SheetContent\"\n\nconst SheetHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\n      \"flex flex-col space-y-2 text-center sm:text-left\",\n      className\n    )}\n    {...props}\n  />\n)\nSheetHeader.displayName = \"SheetHeader\"\n\nconst SheetFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    className={cn(\n      \"flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2\",\n      className\n    )}\n    {...props}\n  />\n)\nSheetFooter.displayName = \"SheetFooter\"\n\nconst SheetTitle = React.forwardRef<\n  HTMLHeadingElement,\n  Omit<SheetPrimitive.Title.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <SheetPrimitive.Title\n    ref={ref}\n    className={cn(\"text-lg font-semibold text-foreground\", className)}\n    {...props}\n  />\n))\nSheetTitle.displayName = \"SheetTitle\"\n\nconst SheetDescription = React.forwardRef<\n  HTMLParagraphElement,\n  Omit<SheetPrimitive.Description.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <SheetPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nSheetDescription.displayName = \"SheetDescription\"\n\nexport {\n  Sheet,\n  SheetPortal,\n  SheetOverlay,\n  SheetTrigger,\n  SheetClose,\n  SheetContent,\n  SheetHeader,\n  SheetFooter,\n  SheetTitle,\n  SheetDescription,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.5), 0 1.25rem 3rem oklch(0 0 0 / 0.45)",
+      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
+    },
+    "dark": {
+      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.5), 0 1.25rem 3rem oklch(0 0 0 / 0.45)",
+      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
+    }
+  }
+}

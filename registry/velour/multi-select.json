@@ -1,0 +1,38 @@
+{
+  "name": "multi-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n/*\n * Recessed-well trigger with raised velvet chips; the open list is the\n * shared velvet popover panel (--shadow-l). Checked boxes wear champagne.\n */\n\ninterface MultiSelectOption {\n  label: string\n  value: string\n}\n\ninterface MultiSelectProps {\n  options: MultiSelectOption[]\n  value?: string[]\n  onChange?: (value: string[]) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction MultiSelect({\n  options,\n  value = [],\n  onChange,\n  placeholder = \"Select options...\",\n  disabled,\n  className,\n}: MultiSelectProps) {\n  const [open, setOpen] = React.useState(false)\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const handleClickOutside = (e: MouseEvent) => {\n      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {\n        setOpen(false)\n      }\n    }\n    document.addEventListener(\"mousedown\", handleClickOutside)\n    return () => document.removeEventListener(\"mousedown\", handleClickOutside)\n  }, [])\n\n  const toggle = (optionValue: string) => {\n    if (value.includes(optionValue)) {\n      onChange?.(value.filter((v) => v !== optionValue))\n    } else {\n      onChange?.([...value, optionValue])\n    }\n  }\n\n  const selectedOptions = options.filter((o) => value.includes(o.value))\n\n  return (\n    <div ref={ref} className={cn(\"relative w-full\", className)}>\n      <button\n        type=\"button\"\n        onClick={() => !disabled && setOpen(!open)}\n        disabled={disabled}\n        className={cn(\n          formFieldBase,\n          \"flex min-h-9 flex-wrap items-center gap-1.5 rounded-lg py-1.5 text-left\",\n          open && \"border-ring/60 ring-2 ring-ring/25\"\n        )}\n      >\n        <div className=\"flex flex-1 flex-wrap gap-1\">\n          {selectedOptions.length > 0 ? (\n            selectedOptions.map((opt) => (\n              <span\n                key={opt.value}\n                className=\"inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium text-secondary-foreground [background-image:var(--velour-raised)] [box-shadow:var(--shadow-s)]\"\n              >\n                {opt.label}\n                <Icon\n                  icon=\"tabler:x\"\n                  className=\"h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground\"\n                  onClick={(e: React.MouseEvent) => {\n                    e.stopPropagation()\n                    toggle(opt.value)\n                  }}\n                />\n              </span>\n            ))\n          ) : (\n            <span className=\"text-muted-foreground/80\">{placeholder}</span>\n          )}\n        </div>\n        <Icon\n          icon=\"tabler:chevron-down\"\n          className={cn(\n            \"h-4 w-4 shrink-0 text-muted-foreground transition-transform\",\n            open && \"rotate-180\"\n          )}\n        />\n      </button>\n\n      {open && (\n        <div className=\"absolute z-50 mt-1 w-full rounded-lg p-1.5 bg-popover [background-image:var(--velour)] [box-shadow:var(--shadow-l)]\">\n          {options.map((option) => (\n            <button\n              key={option.value}\n              type=\"button\"\n              onClick={() => toggle(option.value)}\n              className=\"flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors duration-fast hover:bg-accent\"\n            >\n              <div\n                className={cn(\n                  \"flex h-4 w-4 items-center justify-center rounded-sm border transition-[background-color,box-shadow,border-color]\",\n                  value.includes(option.value)\n                    ? \"border-transparent [background-image:var(--champagne)] [box-shadow:var(--shadow-primary)]\"\n                    : \"border-border bg-input [box-shadow:var(--shadow-inset)]\"\n                )}\n              >\n                {value.includes(option.value) && (\n                  <Icon icon=\"tabler:check\" className=\"h-3 w-3 text-primary-foreground\" />\n                )}\n              </div>\n              <span className={value.includes(option.value) ? \"text-foreground\" : \"text-muted-foreground\"}>\n                {option.label}\n              </span>\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { MultiSelect }\nexport type { MultiSelectProps, MultiSelectOption }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/velour/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "champagne": "linear-gradient( to bottom, oklch(0.95 0.03 95), oklch(0.875 0.045 88) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.05), 0 1rem 3rem oklch(0 0 0 / 0.55), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4)",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.125rem 0.25rem oklch(0.75 0.06 85 / 0.55), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.125rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {
+      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
+      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
+      "champagne": "linear-gradient( to bottom, oklch(0.95 0.03 95), oklch(0.875 0.045 88) )",
+      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
+      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.05), 0 1rem 3rem oklch(0 0 0 / 0.55), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4)",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.125rem 0.25rem oklch(0.75 0.06 85 / 0.55), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

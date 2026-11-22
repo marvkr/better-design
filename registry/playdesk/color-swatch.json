@@ -1,0 +1,20 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk ColorSwatch — a rounded chip with the window rim so a pale colour\n * still has an edge against a white panel.\n */\n\nexport interface ColorSwatchProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  color: string;\n  name?: string;\n  value?: string;\n}\n\nconst ColorSwatch = React.forwardRef<HTMLDivElement, ColorSwatchProps>(\n  ({ className, color, name, value, ...props }, ref) => (\n    <div ref={ref} className={cn(\"space-y-1.5\", className)} {...props}>\n      <div\n        className=\"h-14 w-full rounded-lg [box-shadow:var(--shadow-rim)]\"\n        style={{ backgroundColor: color }}\n      />\n      {name ? (\n        <p className=\"text-xs font-medium text-foreground\">{name}</p>\n      ) : null}\n      {value ? (\n        <p className=\"font-mono text-[0.6875rem] text-muted-foreground\">{value}</p>\n      ) : null}\n    </div>\n  ),\n);\nColorSwatch.displayName = \"ColorSwatch\";\n\nexport interface ColorPaletteProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  colors: ColorSwatchProps[];\n}\n\nconst ColorPalette = React.forwardRef<HTMLDivElement, ColorPaletteProps>(\n  ({ className, colors, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"grid grid-cols-2 gap-3 sm:grid-cols-4\", className)}\n      {...props}\n    >\n      {colors.map((swatch) => (\n        <ColorSwatch key={swatch.color} {...swatch} />\n      ))}\n    </div>\n  ),\n);\nColorPalette.displayName = \"ColorPalette\";\n\nexport { ColorSwatch, ColorPalette };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

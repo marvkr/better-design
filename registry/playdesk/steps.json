@@ -1,0 +1,35 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Check } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Playdesk Steps — completed markers take the primary Button's blue gradient,\n * the current one gets the focus halo, and the rest stay recessed wells.\n */\n\nexport interface Step {\n  title: string;\n  description?: string;\n}\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLOListElement> {\n  steps: Step[];\n  current?: number;\n}\n\nconst Steps = React.forwardRef<HTMLOListElement, StepsProps>(\n  ({ className, steps, current = 0, ...props }, ref) => (\n    <ol ref={ref} className={cn(\"space-y-4\", className)} {...props}>\n      {steps.map((step, index) => {\n        const done = index < current;\n        const active = index === current;\n\n        return (\n          <li key={step.title} className=\"flex gap-3\">\n            <span\n              className={cn(\n                \"mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold\",\n                done &&\n                  \"[background-image:var(--fill-primary)] text-primary-foreground [box-shadow:var(--shadow-primary)]\",\n                active &&\n                  \"bg-card text-foreground [box-shadow:var(--shadow-rim)] ring-[0.1875rem] ring-ring/25\",\n                !done &&\n                  !active &&\n                  \"bg-secondary text-muted-foreground [box-shadow:var(--shadow-track-inset)]\",\n              )}\n            >\n              {done ? <Check className=\"size-3.5\" strokeWidth={3} /> : index + 1}\n            </span>\n            <div className=\"space-y-0.5 pb-1\">\n              <p\n                className={cn(\n                  \"text-sm font-medium\",\n                  active ? \"text-foreground\" : \"text-muted-foreground\",\n                )}\n              >\n                {step.title}\n              </p>\n              {step.description ? (\n                <p className=\"text-xs leading-relaxed text-muted-foreground\">\n                  {step.description}\n                </p>\n              ) : null}\n            </div>\n          </li>\n        );\n      })}\n    </ol>\n  ),\n);\nSteps.displayName = \"Steps\";\n\nexport { Steps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.684 0.1713 252.21)",
+      "primary-to": "oklch(0.5914 0.224 258.99)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
+      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
+      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)"
+    }
+  }
+}

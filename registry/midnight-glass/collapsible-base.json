@@ -1,0 +1,23 @@
+{
+  "name": "collapsible-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Collapsible = CollapsiblePrimitive.Root\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: WithClassName<CollapsiblePrimitive.Trigger.Props>) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      className={cn(\n        \"flex w-full items-center justify-between rounded-xl px-4 py-3\",\n        \"backdrop-blur-md bg-white/[0.05] border border-white/[0.08]\",\n        \"text-sm font-medium text-white/90\",\n        \"transition-all duration-slow\",\n        \"hover:bg-white/[0.09] hover:shadow-[0_0_0.75rem_oklch(1_0_0/0.05)]\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(1_0_0)]/40\",\n        \"[&[data-panel-open]]:rounded-b-none [&[data-panel-open]]:border-b-white/[0.03]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nCollapsibleTrigger.displayName = \"CollapsibleTrigger\"\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: WithClassName<CollapsiblePrimitive.Panel.Props>) {\n  return (\n    <CollapsiblePrimitive.Panel\n      className={cn(\n        \"overflow-hidden rounded-b-xl\",\n        \"backdrop-blur-md bg-white/[0.03] border border-t-0 border-white/[0.08]\",\n        \"transition-[height] duration-slow ease-out\",\n        \"h-[var(--collapsible-panel-height)] data-starting-style:h-0 data-ending-style:h-0\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\nCollapsibleContent.displayName = \"CollapsibleContent\"\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

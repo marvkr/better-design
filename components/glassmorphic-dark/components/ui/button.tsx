@@ -13,7 +13,7 @@ const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-medium",
-    "rounded-full transition-all duration-200 ease-out",
+    "rounded-full transition-all duration-base ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
     "active:brightness-90 active:scale-[0.98]",
@@ -24,15 +24,15 @@ const buttonVariants = cva(
       variant: {
         default:
           "backdrop-blur-xl bg-white/10 text-white " +
-          "shadow-[inset_0_0_8px_rgba(255,255,255,0.15)] " +
-          "hover:brightness-125 hover:shadow-[inset_0_0_12px_rgba(255,255,255,0.2)]",
+          "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.15)] " +
+          "hover:brightness-125 hover:shadow-[inset_0_0_0.75rem_oklch(1_0_0/0.2)]",
         primary:
           "backdrop-blur-xl bg-primary/80 text-primary-foreground " +
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_0_16px_oklch(0.65_0.19_250/0.2)] " +
-          "hover:brightness-110 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_0_24px_oklch(0.65_0.19_250/0.3)]",
+          "shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.15),0_0_1rem_oklch(0.65_0.19_250/0.2)] " +
+          "hover:brightness-110 hover:shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.2),0_0_1.5rem_oklch(0.65_0.19_250/0.3)]",
         secondary:
           "backdrop-blur-xl bg-white/[0.06] text-secondary-foreground " +
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.08)] " +
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.08)] " +
           "hover:bg-white/[0.1] hover:text-foreground",
         outline:
           "bg-transparent text-foreground " +
@@ -43,7 +43,7 @@ const buttonVariants = cva(
           "hover:bg-white/[0.06] hover:text-foreground",
         destructive:
           "backdrop-blur-xl bg-destructive/80 text-destructive-foreground " +
-          "shadow-[inset_0_0_8px_rgba(255,100,100,0.15)] " +
+          "shadow-[inset_0_0_0.5rem_oklch(0.7017_0.1895_23.3274/0.15)] " +
           "hover:brightness-110",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -52,6 +52,7 @@ const buttonVariants = cva(
         default: "h-10 px-4",
         lg: "h-11 px-6 text-sm",
         icon: "h-10 w-10",
+        "icon-sm": "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -72,6 +73,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

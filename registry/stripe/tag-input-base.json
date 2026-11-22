@@ -1,0 +1,26 @@
+{
+  "name": "tag-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { X } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n// Stripe Tag Input: input for adding/removing tags\n\ninterface TagInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\"> {\n  value?: string[]\n  onChange?: (tags: string[]) => void\n  placeholder?: string\n  maxTags?: number\n}\n\nfunction TagInput({\n  value = [],\n  onChange,\n  placeholder = \"Add tag...\",\n  maxTags,\n  className,\n  disabled,\n  ...props\n}: TagInputProps) {\n  const [input, setInput] = React.useState(\"\")\n  const inputRef = React.useRef<HTMLInputElement>(null)\n\n  const addTag = (tag: string) => {\n    const trimmed = tag.trim()\n    if (trimmed && !value.includes(trimmed) && (!maxTags || value.length < maxTags)) {\n      onChange?.([...value, trimmed])\n      setInput(\"\")\n    }\n  }\n\n  const removeTag = (tagToRemove: string) => {\n    onChange?.(value.filter((t) => t !== tagToRemove))\n  }\n\n  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === \"Enter\" || e.key === \",\") {\n      e.preventDefault()\n      addTag(input)\n    } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n      removeTag(value[value.length - 1])\n    }\n  }\n\n  return (\n    <div\n      className={cn(\n        formFieldBase,\n        \"flex min-h-9 flex-wrap gap-1.5 px-3 py-2 focus-within:[box-shadow:var(--shadow-focus)]\",\n        \"cursor-text\",\n        disabled && \"opacity-70 cursor-not-allowed\",\n        className\n      )}\n      onClick={() => inputRef.current?.focus()}\n    >\n      {value.map((tag) => (\n        <span\n          key={tag}\n          className=\"inline-flex items-center gap-1 rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary\"\n        >\n          {tag}\n          {!disabled && (\n            <button\n              type=\"button\"\n              onClick={(e) => { e.stopPropagation(); removeTag(tag) }}\n              className=\"text-primary/60 hover:text-primary\"\n            >\n              <X className=\"h-3 w-3\" />\n            </button>\n          )}\n        </span>\n      ))}\n      <input\n        ref={inputRef}\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        onKeyDown={handleKeyDown}\n        onBlur={() => addTag(input)}\n        placeholder={value.length === 0 ? placeholder : undefined}\n        disabled={disabled || (maxTags !== undefined && value.length >= maxTags)}\n        className=\"flex-1 min-w-[7.5rem] bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed\"\n        {...props}\n      />\n    </div>\n  )\n}\n\nexport { TagInput }\nexport type { TagInputProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/stripe/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
+    },
+    "dark": {
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
+    }
+  }
+}

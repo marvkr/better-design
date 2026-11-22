@@ -1,0 +1,30 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior IconButton — the Button's materials at a single-glyph footprint.\n * An icon button lives inside a panel, so it sits one step down the radius\n * scale at 7px. Same press, same focus shapes: outside inverted line on ink,\n * inset accent on the quiet variants.\n */\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center shrink-0 rounded-[0.4375rem]\",\n    \"transition-[background-color,border-color,box-shadow,color,transform] duration-fast\",\n    \"focus-visible:outline-none\",\n    \"active:translate-y-px\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: [\n          \"bg-primary text-primary-foreground\",\n          \"shadow-[var(--shadow-thumb)]\",\n          \"hover:bg-primary/90\",\n          \"focus-visible:shadow-[var(--shadow-thumb),0_0_0_0.0938rem_var(--ring-inverted)]\",\n        ].join(\" \"),\n        secondary: [\n          \"bg-card text-foreground\",\n          \"shadow-[var(--shadow-cap)]\",\n          \"hover:bg-secondary\",\n          \"focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring),var(--shadow-focus-lift)]\",\n        ].join(\" \"),\n        outline: [\n          \"border border-border bg-transparent text-foreground\",\n          \"hover:bg-secondary hover:border-foreground/30\",\n          \"focus-visible:border-ring focus-visible:shadow-[var(--shadow-focus-lift)]\",\n        ].join(\" \"),\n        ghost: [\n          \"text-muted-foreground\",\n          \"hover:bg-secondary hover:text-foreground\",\n          \"focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n        ].join(\" \"),\n      },\n      size: {\n        default: \"size-10 [&_svg]:size-4\",\n        sm: \"size-8 rounded-[0.375rem] [&_svg]:size-3.5\",\n        lg: \"size-12 rounded-[0.5rem] [&_svg]:size-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"secondary\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface IconButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean;\n  \"aria-label\": string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        className={cn(iconButtonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)",
+      "shadow-focus-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.08), 0 0.625rem 1.25rem -0.875rem oklch(0.5832 0.227 268.34 / 0.6)"
+    },
+    "dark": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)",
+      "shadow-focus-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.08), 0 0.625rem 1.25rem -0.875rem oklch(0.5832 0.227 268.34 / 0.6)"
+    }
+  }
+}

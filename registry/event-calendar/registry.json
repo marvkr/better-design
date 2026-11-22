@@ -1,0 +1,108 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-design-event-calendar",
+  "homepage": "https://better-design.com/design-systems",
+  "items": [
+    {
+      "name": "event-calendar",
+      "type": "registry:ui",
+      "title": "Event calendar",
+      "description": "A calendar with month, week, day, agenda and resource views, drag to move and resize, recurrence and time zones.",
+      "dependencies": [
+        "@date-fns/tz@^1.5.0",
+        "@radix-ui/react-slot@^1.2.3",
+        "date-fns@^4.1.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/event-calendar-agenda-view.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-dnd-surface.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-dnd.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-event.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-glyphs.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-guards.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-i18n.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-lib.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-month-view-cell.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-month-view.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-nav.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-recurrence.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-resource-view.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-root-hooks.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-root-settings.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-root-store.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-root-view-config.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-time-grid-column.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-time-grid.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar-types.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/event-calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

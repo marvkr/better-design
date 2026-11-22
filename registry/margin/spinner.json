@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Margin Spinner: a thin ring in the current text colour with one darker arc\n * turning around it. It holds still when motion is reduced.\n */\ninterface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst sizes = {\n  sm: \"size-3.5\",\n  default: \"size-4\",\n  lg: \"size-6\",\n};\n\nconst Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <span\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\"inline-flex items-center justify-center text-muted-foreground\", className)}\n      {...props}\n    >\n      <svg\n        aria-hidden\n        viewBox=\"0 0 16 16\"\n        fill=\"none\"\n        className={cn(\n          \"block motion-safe:animate-spin\",\n          sizes[size],\n        )}\n      >\n        <circle cx=\"8\" cy=\"8\" r=\"6.5\" stroke=\"currentColor\" strokeOpacity=\"0.2\" strokeWidth=\"1.5\" />\n        <path d=\"M8 1.5a6.5 6.5 0 0 1 6.5 6.5\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" />\n      </svg>\n    </span>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

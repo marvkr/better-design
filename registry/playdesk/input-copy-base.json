@@ -1,0 +1,15 @@
+{
+  "name": "input-copy-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { CopyButton } from \"./copy-button\";\n\nexport interface InputCopyProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\"> {\n  value: string;\n}\n\nconst InputCopy = React.forwardRef<HTMLInputElement, InputCopyProps>(\n  ({ className, value, ...props }, ref) => (\n    <div\n      className={cn(\n        formFieldBase,\n        formFieldSingleLine,\n        \"items-center gap-1 py-0 pl-3.5 pr-1\",\n        \"focus-within:border-ring focus-within:ring-[0.1875rem] focus-within:ring-ring/25\",\n        className,\n      )}\n    >\n      <input\n        ref={ref}\n        readOnly\n        value={value}\n        className=\"min-w-0 flex-1 bg-transparent font-mono text-sm text-foreground outline-none\"\n        {...props}\n      />\n      <CopyButton value={value} />\n    </div>\n  ),\n);\nInputCopy.displayName = \"InputCopy\";\n\nexport { InputCopy };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/_shared-base.json",
+    "https://better-design.com/registry/playdesk/copy-button.json"
+  ]
+}

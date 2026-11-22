@@ -69,14 +69,14 @@ function Cursor({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
-            className="rounded-none border border-[var(--mono-border-visible)] bg-card px-3 py-2 font-[family-name:var(--font-mono)] text-[13px] text-foreground"
+            className="rounded-none border border-[var(--mono-border-visible)] bg-card px-3 py-2 font-[family-name:var(--font-mono)] text-[0.8125rem] text-foreground"
             style={{ minHeight: "36px" }}
           >
             <span>{displayedText}</span>
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-              className="inline-block w-[2px] h-[14px] ml-[1px] align-middle"
+              className="inline-block w-[0.125rem] h-[0.875rem] ml-[0.0625rem] align-middle"
               style={{ backgroundColor: color }}
             />
           </motion.div>
@@ -94,7 +94,7 @@ function Cursor({
             className="h-2 w-2 rounded-none"
             style={{ backgroundColor: color }}
           />
-          <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
+          <span className="font-[family-name:var(--font-mono)] text-[0.625rem] uppercase tracking-[0.1em] text-muted-foreground">
             {label}
           </span>
         </motion.div>

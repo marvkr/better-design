@@ -50,7 +50,7 @@ function PhoneInput({
 
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) setOpen(false)
     }
     document.addEventListener("mousedown", handler)
     return () => document.removeEventListener("mousedown", handler)
@@ -69,10 +69,10 @@ function PhoneInput({
         disabled={disabled}
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "flex h-10 items-center gap-1.5 rounded-l-[10px] border border-r-0 border-border bg-secondary px-3",
+          "flex h-10 items-center gap-1.5 rounded-l-lg border border-r-0 border-input bg-secondary px-3",
           "text-sm font-medium text-foreground transition-colors hover:bg-secondary/80",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
+          "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)]",
           disabled && "cursor-not-allowed opacity-60"
         )}
       >
@@ -88,17 +88,17 @@ function PhoneInput({
         placeholder={placeholder}
         disabled={disabled}
         className={cn(
-          "h-10 flex-1 rounded-r-[10px] border border-border bg-background px-3 text-sm",
-          "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)] placeholder:text-muted-foreground",
-          "focus-visible:border-foreground focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-          "transition-shadow duration-200",
+          "h-10 flex-1 rounded-r-lg border border-input bg-background px-3 text-sm",
+          "shadow-[0_0.0625rem_0.125rem_0_oklch(0_0_0/0.04)] placeholder:text-muted-foreground",
+          "focus-visible:border-foreground focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]",
+          "transition-shadow duration-base",
           disabled && "cursor-not-allowed opacity-60"
         )}
       />
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute left-0 top-11 z-50 w-56 rounded-[12px] border border-border bg-background p-1.5 shadow-[0_4px_16px_0_rgb(0_0_0/0.08),0_0_0_1px_rgb(0_0_0/0.04)]">
+        <div className="absolute left-0 top-11 z-50 w-56 rounded-[0.75rem] border border-border bg-background p-1.5 shadow-[0_0.25rem_1rem_0_oklch(0_0_0/0.08),0_0_0_0.0625rem_oklch(0_0_0/0.04)]">
           {COUNTRIES.map((c) => (
             <button
               key={c.code}

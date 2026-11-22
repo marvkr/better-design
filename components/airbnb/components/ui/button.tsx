@@ -4,53 +4,55 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Button — extracted from airbnb.com (2026-04)
-// Primary: solid #FF385C, radial gradient on hover
-// Secondary: #222 solid
-// Outline: white bg, 1px #222 border
-// Rounded: 8px default, pill for search CTA
-// No drop-shadow on buttons — flat with border or solid fill
+// Airbnb Button, measured on airbnb.com (13 November 2026)
+// Default: brand gradient, linear at rest and radial on hover, weight 500
+// Secondary: grey fill with a dark label
+// Outline: white with a 1px dark line
+// Inverse: dark fill, the site's banner and confirm button
+// Ghost: clear until hover, a pill like the header links
+// Radius: 12px at 48px height and above, 8px below, and a pill size for the booking button
+// No shadow on any button
 
 const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "text-sm font-semibold",
-    "rounded-lg transition-all duration-150 ease-out",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    "text-base font-medium",
+    "rounded-lg transition-[background-color,border-color,color,scale] duration-fast ease-in-out",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
-    "active:scale-[0.98]",
+    "active:scale-[0.96]",
   ].join(" "),
   {
     variants: {
       variant: {
-        // Rausch solid — radial gradient on hover
         default:
-          "bg-primary text-primary-foreground " +
-          "hover:bg-primary/90",
-        // Dark — #222 solid
+          "bg-primary bg-(image:--primary-gradient) text-primary-foreground " +
+          "hover:bg-(image:--primary-gradient-hover)",
         secondary:
           "bg-secondary text-secondary-foreground " +
-          "hover:bg-[#000000]",
-        // Outline — white bg, thin dark border
+          "hover:bg-secondary-hover",
         outline:
           "border border-foreground bg-background text-foreground " +
           "hover:bg-muted",
-        // Subtle outline — light border
+        inverse:
+          "bg-foreground text-background " +
+          "hover:bg-inverse-hover",
         ghost:
-          "border border-border bg-background text-foreground " +
+          "rounded-full bg-transparent text-foreground " +
           "hover:bg-muted",
-        // Destructive
         destructive:
           "bg-destructive text-destructive-foreground " +
           "hover:bg-destructive/90",
-        // Link
-        link: "text-foreground underline-offset-4 underline hover:text-foreground/80",
+        link: "text-foreground underline underline-offset-2 hover:text-foreground/80",
       },
       size: {
-        default: "h-12 px-6 py-3",
-        sm: "h-9 px-4 text-xs rounded-lg",
-        lg: "h-14 px-8 text-base rounded-xl",
-        icon: "h-10 w-10 rounded-full",
+        default: "h-12 px-6",
+        sm: "h-8 px-3 text-xs rounded-sm",
+        md: "h-10 px-4 text-sm rounded-sm",
+        pill: "h-12 px-6 rounded-full",
+        lg: "h-14 px-8",
+        icon: "h-10 w-10 rounded-full text-sm",
+        "icon-sm": "h-8 w-8 rounded-full text-xs",
       },
     },
     defaultVariants: {
@@ -72,6 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

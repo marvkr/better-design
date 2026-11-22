@@ -1,0 +1,30 @@
+{
+  "name": "tabs-subtle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs-subtle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, AnimatePresence, type HTMLMotionProps } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\n\n/**\n * Burnished TabsSubtle: plain text tabs with a thin warm bar under the\n * selected one. The bar is the lit copper gradient and slides between tabs\n * on a soft spring, so the selection reads without a raised object.\n *\n * Usage:\n *   <TabsSubtle value={tab} onValueChange={setTab}>\n *     <TabsSubtleItem value=\"a\">First</TabsSubtleItem>\n *     <TabsSubtleItem value=\"b\">Second</TabsSubtleItem>\n *   </TabsSubtle>\n */\ninterface TabsSubtleContextValue {\n  value: string;\n  onValueChange: (value: string) => void;\n  layoutId: string;\n}\n\nconst TabsSubtleContext = React.createContext<TabsSubtleContextValue | null>(null);\n\nfunction useTabsSubtle() {\n  const ctx = React.useContext(TabsSubtleContext);\n  if (!ctx) {\n    throw new Error(\"TabsSubtleItem must be used inside <TabsSubtle>\");\n  }\n  return ctx;\n}\n\ninterface TabsSubtleProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n  onValueChange: (value: string) => void;\n  children: React.ReactNode;\n}\n\nfunction TabsSubtle({ value, onValueChange, children, className, ...props }: TabsSubtleProps) {\n  const layoutId = React.useId();\n\n  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n    if (event.key !== \"ArrowRight\" && event.key !== \"ArrowLeft\") return;\n    const tabs = Array.from(\n      event.currentTarget.querySelectorAll<HTMLButtonElement>('[role=\"tab\"]:not([disabled])'),\n    );\n    const index = tabs.findIndex((tab) => tab === document.activeElement);\n    if (index === -1) return;\n    event.preventDefault();\n    const step = event.key === \"ArrowRight\" ? 1 : -1;\n    const next = tabs[(index + step + tabs.length) % tabs.length];\n    next.focus();\n    next.click();\n  };\n\n  return (\n    <TabsSubtleContext.Provider value={{ value, onValueChange, layoutId }}>\n      <div\n        role=\"tablist\"\n        data-slot=\"tabs-subtle\"\n        onKeyDown={handleKeyDown}\n        className={cn(\n          \"relative inline-flex select-none items-center gap-1 shadow-[inset_0_-0.0625rem_0_var(--border)]\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    </TabsSubtleContext.Provider>\n  );\n}\n\ninterface TabsSubtleItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n  icon?: React.ReactNode;\n}\n\nfunction TabsSubtleItem({ value, icon, className, children, ...props }: TabsSubtleItemProps) {\n  const { value: selected, onValueChange, layoutId } = useTabsSubtle();\n  const isSelected = selected === value;\n\n  return (\n    <button\n      type=\"button\"\n      role=\"tab\"\n      aria-selected={isSelected}\n      tabIndex={isSelected ? 0 : -1}\n      data-slot=\"tabs-subtle-item\"\n      data-state={isSelected ? \"active\" : \"inactive\"}\n      onClick={() => onValueChange(value)}\n      className={cn(\n        \"relative z-10 inline-flex items-center gap-2 rounded-md px-3 pb-2.5 pt-2 text-sm font-semibold\",\n        \"text-muted-foreground transition-colors duration-fast ease-(--ease-out)\",\n        \"[@media(hover:hover)_and_(pointer:fine)]:hover:text-foreground\",\n        focusRing,\n        isSelected && \"text-foreground\",\n        \"[&_svg]:size-4 [&_svg]:shrink-0\",\n        className,\n      )}\n      {...props}\n    >\n      {isSelected && (\n        <motion.span\n          layoutId={layoutId}\n          aria-hidden\n          className=\"absolute inset-x-2 -bottom-[0.0625rem] h-0.5 rounded-full bg-(image:--fill-lit) shadow-(--bevel-glow)\"\n          transition={{ type: \"spring\", duration: 0.4, bounce: 0.12 }}\n        />\n      )}\n      {icon && <span className=\"shrink-0\">{icon}</span>}\n      <span>{children}</span>\n    </button>\n  );\n}\n\ninterface TabsSubtlePanelProps extends HTMLMotionProps<\"div\"> {\n  value: string;\n  activeValue: string;\n  children: React.ReactNode;\n}\n\nfunction TabsSubtlePanel({ value, activeValue, children, className, ...props }: TabsSubtlePanelProps) {\n  const isSelected = value === activeValue;\n  return (\n    <AnimatePresence mode=\"wait\" initial={false}>\n      {isSelected && (\n        <motion.div\n          key={value}\n          role=\"tabpanel\"\n          data-slot=\"tabs-subtle-panel\"\n          initial={{ opacity: 0, y: 4 }}\n          animate={{ opacity: 1, y: 0 }}\n          exit={{ opacity: 0, y: -4 }}\n          transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}\n          className={cn(\"outline-none\", className)}\n          {...props}\n        >\n          {children}\n        </motion.div>\n      )}\n    </AnimatePresence>\n  );\n}\n\nexport { TabsSubtle, TabsSubtleItem, TabsSubtlePanel };\nexport type { TabsSubtleProps, TabsSubtleItemProps, TabsSubtlePanelProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-lit": "linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2))",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-lit": "linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2))",
+      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "input-copy",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion } from \"motion/react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, formFieldBase, formFieldSingleLine, pressScale, quietChip } from \"./_shared\";\n\n/**\n * Props for a read-only field with a copy button inside its right edge.\n *\n * Usage:\n *   <InputCopy value=\"pk_desk_7f3a9c\" />\n *   <InputCopy label=\"Invite link\" value={inviteUrl} />\n */\ninterface InputCopyProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\" | \"readOnly\"> {\n  value: string;\n  label?: React.ReactNode;\n  /** Milliseconds before the copied state resets. Default 1800. */\n  copiedTimeoutMs?: number;\n}\n\n/**\n * Paddock InputCopy: the white rounded field, read only, with a small\n * grey copy chip inside its right edge that turns to a green check on copy.\n */\nfunction InputCopy({\n  value,\n  label,\n  copiedTimeoutMs = 1800,\n  className,\n  id: idProp,\n  ...props\n}: InputCopyProps) {\n  const generatedId = React.useId();\n  const id = idProp ?? generatedId;\n  const [copied, setCopied] = React.useState(false);\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value);\n      setCopied(true);\n    } catch {\n      // The clipboard can be unavailable. The field stays selectable, so the\n      // value can still be copied by hand.\n    }\n  }, [value]);\n\n  React.useEffect(() => {\n    if (!copied) return;\n    const t = setTimeout(() => setCopied(false), copiedTimeoutMs);\n    return () => clearTimeout(t);\n  }, [copied, copiedTimeoutMs]);\n\n  return (\n    <div data-slot=\"input-copy\" className={cn(\"flex flex-col gap-1.5\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-[0.8125rem] font-medium text-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(e) => e.currentTarget.select()}\n          className={cn(formFieldBase, formFieldSingleLine, \"pr-12 font-mono text-[0.8125rem]\")}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute right-1.5 flex size-7 items-center justify-center rounded-md\",\n            quietChip,\n            pressScale,\n            focusRing,\n          )}\n        >\n          <AnimatePresence mode=\"wait\" initial={false}>\n            <motion.span\n              key={copied ? \"check\" : \"copy\"}\n              className=\"flex\"\n              initial={{ opacity: 0, scale: 0.7 }}\n              animate={{ opacity: 1, scale: 1 }}\n              exit={{ opacity: 0, scale: 0.7 }}\n              transition={{ duration: 0.15, ease: [0.165, 0.84, 0.44, 1] }}\n            >\n              <Icon\n                icon={copied ? \"mingcute:check-line\" : \"mingcute:copy-2-line\"}\n                aria-hidden=\"true\"\n                className={cn(\"size-3.5\", copied && \"text-success-text\")}\n              />\n            </motion.span>\n          </AnimatePresence>\n        </button>\n        <span className=\"sr-only\" aria-live=\"polite\">\n          {copied ? \"Copied\" : \"\"}\n        </span>\n      </div>\n    </div>\n  );\n}\n\nexport { InputCopy };\nexport type { InputCopyProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/paddock/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success-text": "oklch(0.44 0.1 160)"
+    },
+    "dark": {
+      "success-text": "oklch(0.87 0.1 160)"
+    }
+  }
+}

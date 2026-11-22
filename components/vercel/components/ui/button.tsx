@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "text-[14px] font-medium tracking-[-0.006em]",
-    "rounded-md transition-all duration-200 ease-out",
+    "text-[0.875rem] font-medium tracking-[-0.006em]",
+    "rounded-md transition-all duration-base ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
   ].join(" "),
@@ -26,8 +26,8 @@ const buttonVariants = cva(
           "hover:bg-primary/90",
         secondary:
           "bg-transparent text-foreground " +
-          "border border-[rgba(255,255,255,0.15)] " +
-          "hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.3)]",
+          "border border-[oklch(1_0_0/0.15)] " +
+          "hover:bg-[oklch(1_0_0/0.05)] hover:border-[oklch(1_0_0/0.3)]",
         outline:
           "border border-border bg-transparent text-foreground " +
           "hover:bg-secondary",
@@ -40,10 +40,11 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        sm:      "h-6 px-2 text-[12px] rounded-[5px]",
+        sm:      "h-6 px-2 text-[0.75rem] rounded-[0.3125rem]",
         default: "h-8 px-3",
-        lg:      "h-10 px-4 text-[14px] rounded-lg",
+        lg:      "h-10 px-4 text-[0.875rem] rounded-lg",
         icon:    "h-8 w-8",
+        "icon-sm": "h-6 w-6 rounded-[0.3125rem]",
       },
     },
     defaultVariants: {
@@ -64,6 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

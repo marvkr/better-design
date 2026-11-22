@@ -8,7 +8,9 @@ import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { springInteraction } from "@/lib/motion"
 
-const Select = SelectPrimitive.Root
+function Select({ modal: _modal, ...props }: React.ComponentProps<typeof SelectPrimitive.Root> & { modal?: boolean }) {
+  return <SelectPrimitive.Root {...props} />
+}
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -17,17 +19,19 @@ const SelectValue = SelectPrimitive.Value
 function SelectTrigger({
   className,
   children,
+  size = "default",
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger>) {
+}: React.ComponentProps<typeof SelectPrimitive.Trigger> & { size?: "default" | "sm" }) {
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "flex h-9 w-full items-center justify-between rounded-md border border-border bg-secondary px-3 py-2 text-sm",
-        "shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)]",
+        "flex w-full items-center justify-between rounded-md border border-border bg-secondary px-3 py-2 text-sm",
+        size === "sm" ? "h-8" : "h-9",
+        "shadow-[inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.2)]",
         "placeholder:text-muted-foreground",
-        "transition-[border-color,box-shadow] duration-150",
+        "transition-[border-color,box-shadow] duration-fast",
         "hover:border-border/80",
-        "focus:outline-none focus:border-primary/60 focus:shadow-[inset_0_1px_2px_rgba(0,0,0,0.1),0_0_0_3px_color-mix(in_oklch,var(--primary)_30%,transparent)]",
+        "focus:outline-none focus:border-primary/60 focus:shadow-[inset_0_0.0625rem_0.125rem_oklch(0_0_0/0.1),0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_30%,transparent)]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
@@ -46,14 +50,15 @@ function SelectContent({
   className,
   children,
   position = "popper",
+  alignItemWithTrigger: _alignItemWithTrigger,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+}: React.ComponentProps<typeof SelectPrimitive.Content> & { alignItemWithTrigger?: boolean }) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         className={cn(
           "relative z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-popover text-popover-foreground",
-          "shadow-[0_4px_6px_-1px_rgba(0,0,0,0.4),0_8px_24px_-4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.04)]",
+          "shadow-[0_0.25rem_0.375rem_-0.0625rem_oklch(0_0_0/0.4),0_0.5rem_1.5rem_-0.25rem_oklch(0_0_0/0.5),0_0_0_0.0625rem_oklch(1_0_0/0.04)]",
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
           className
@@ -99,8 +104,9 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName
 function SelectItem({
   className,
   children,
+  label: _label,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+}: React.ComponentProps<typeof SelectPrimitive.Item> & { label?: React.ReactNode }) {
   return (
     <SelectPrimitive.Item
       className={cn(

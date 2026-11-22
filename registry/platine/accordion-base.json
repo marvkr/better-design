@@ -1,0 +1,24 @@
+{
+  "name": "accordion-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "\"use client\"\n\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Accordion = AccordionPrimitive.Root\n\n// Base UI className can be a state function; the wrappers feed it to cn(), so\n// narrow it to a plain string (same treatment as the other ported files).\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string }\n\nfunction AccordionItem({\n  className,\n  ...props\n}: WithClassName<AccordionPrimitive.Item.Props>) {\n  return (\n    <AccordionPrimitive.Item\n      className={cn(\"border-b border-border last:border-b-0\", className)}\n      {...props}\n    />\n  )\n}\nAccordionItem.displayName = \"AccordionItem\"\n\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: WithClassName<AccordionPrimitive.Trigger.Props>) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        className={cn(\n          \"flex flex-1 items-center justify-between py-4 text-sm font-medium text-foreground\",\n          \"transition-colors duration-fast\",\n          \"hover:text-primary\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-sm\",\n          \"[&[data-panel-open]>svg]:rotate-180\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <Icon\n          icon=\"ph:caret-down\"\n          className=\"h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base\"\n        />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n}\nAccordionTrigger.displayName = \"AccordionTrigger\"\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: WithClassName<AccordionPrimitive.Panel.Props>) {\n  return (\n    <AccordionPrimitive.Panel\n      className=\"overflow-hidden text-sm text-muted-foreground h-[var(--accordion-panel-height)] transition-[height] duration-base ease-out data-[starting-style]:h-0 data-[ending-style]:h-0\"\n      {...props}\n    >\n      <div className={cn(\"pb-4 pt-0 leading-relaxed\", className)}>{children}</div>\n    </AccordionPrimitive.Panel>\n  )\n}\nAccordionContent.displayName = \"AccordionContent\"\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

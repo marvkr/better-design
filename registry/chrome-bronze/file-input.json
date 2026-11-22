@@ -1,0 +1,24 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string\n  helperText?: string\n}\n\nconst UploadIcon = (props: React.SVGProps<SVGSVGElement>) => (\n  <svg\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth={1.75}\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n    aria-hidden=\"true\"\n    {...props}\n  >\n    <path d=\"M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2\" />\n    <path d=\"M12 15V3\" />\n    <path d=\"M7 8l5-5 5 5\" />\n  </svg>\n)\n\nconst FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(\n  ({ className, label = \"Choose file or drop here\", helperText, ...props }, ref) => {\n    const [fileName, setFileName] = React.useState<string | null>(null)\n    const inputRef = React.useRef<HTMLInputElement>(null)\n\n    // SAFETY: the handle is read only after mount, when the element this\n    // component renders is attached, so the ref is non-null.\n    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)\n\n    return (\n      <div className=\"w-full\">\n        <label\n          className={cn(\n            \"group flex flex-col items-center justify-center gap-2 w-full py-6 px-4\",\n            \"rounded-xl border border-dashed border-white/10\",\n            \"bg-card text-card-foreground cursor-pointer\",\n            \"transition-[background-color,box-shadow,border-color] duration-fast\",\n            \"[box-shadow:var(--shadow-inset)]\",\n            \"hover:border-ring/60 hover:bg-accent\",\n            className\n          )}\n        >\n          {/* Raised azure knob holding the upload glyph. */}\n          <span className=\"flex h-10 w-10 items-center justify-center rounded-full [background:var(--knob-on)] text-primary-foreground [box-shadow:var(--shadow-knob)]\">\n            <UploadIcon className=\"h-5 w-5\" />\n          </span>\n          <span className=\"text-sm font-medium text-foreground\">\n            {fileName ?? label}\n          </span>\n          {helperText && (\n            <span className=\"text-xs text-muted-foreground\">{helperText}</span>\n          )}\n          <input\n            ref={inputRef}\n            type=\"file\"\n            className=\"sr-only\"\n            onChange={(e) => {\n              const file = e.target.files?.[0]\n              setFileName(file?.name ?? null)\n              props.onChange?.(e)\n            }}\n            {...props}\n          />\n        </label>\n      </div>\n    )\n  }\n)\nFileInput.displayName = \"FileInput\"\n\nexport { FileInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "knob-on": "linear-gradient(to bottom, oklch(0.905 0.091 80.8), oklch(0.853 0.107 85.9), oklch(0.804 0.107 85.7))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    },
+    "dark": {
+      "knob-on": "linear-gradient(to bottom, oklch(0.905 0.091 80.8), oklch(0.853 0.107 85.9), oklch(0.804 0.107 85.7))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
+    }
+  }
+}

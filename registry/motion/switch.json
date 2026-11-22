@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Turn a setting on or off. The thumb stretches as you press.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/motion/switch.tsx",
+      "target": "components/motion/switch.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion, type Transition } from \"motion/react\";\nimport { type ComponentPropsWithoutRef, useState } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for a switch. Pass `checked` to control it, or `defaultChecked` to let it hold its own state. */\nexport type SwitchProps = Omit<ComponentPropsWithoutRef<\"button\">, \"onChange\" | \"children\"> & {\n  checked?: boolean;\n  defaultChecked?: boolean;\n  onCheckedChange?: (checked: boolean) => void;\n};\n\n// Critically damped, like every state change the system confirms.\nconst SPRING: Transition = { type: \"spring\", stiffness: 600, damping: 49, mass: 1 };\nconst INSTANT: Transition = { duration: 0 };\n// The thumb is 20px wide in a 44px track with 2px padding on each side.\nconst TRAVEL = 20;\nconst STRETCH = 1.2;\n\n/**\n * Turns one setting on or off. The thumb stretches toward its destination\n * while pressed, then springs across when released.\n */\nexport function Switch({\n  checked,\n  defaultChecked = false,\n  onCheckedChange,\n  className,\n  disabled,\n  onClick,\n  onPointerDown,\n  onPointerUp,\n  onPointerLeave,\n  onPointerCancel,\n  ...buttonProps\n}: SwitchProps) {\n  const [ownChecked, setOwnChecked] = useState(defaultChecked);\n  const [pressed, setPressed] = useState(false);\n  const on = checked ?? ownChecked;\n  const reduceMotion = useReducedMotion();\n\n  const toggle = () => {\n    if (checked === undefined) setOwnChecked(!on);\n    onCheckedChange?.(!on);\n  };\n\n  return (\n    <button\n      {...buttonProps}\n      type=\"button\"\n      role=\"switch\"\n      aria-checked={on}\n      disabled={disabled}\n      onClick={(event) => {\n        onClick?.(event);\n        if (!event.defaultPrevented) toggle();\n      }}\n      onPointerDown={(event) => {\n        onPointerDown?.(event);\n        setPressed(true);\n      }}\n      onPointerUp={(event) => {\n        onPointerUp?.(event);\n        setPressed(false);\n      }}\n      onPointerLeave={(event) => {\n        onPointerLeave?.(event);\n        setPressed(false);\n      }}\n      onPointerCancel={(event) => {\n        onPointerCancel?.(event);\n        setPressed(false);\n      }}\n      className={cn(\n        // The track is 24px tall; the pseudo-element grows the hit area to 44px.\n        \"relative inline-flex h-6 w-11 shrink-0 cursor-pointer touch-manipulation items-center rounded-full p-0.5 outline-none\",\n        \"before:absolute before:-inset-y-2.5 before:inset-x-0\",\n        \"motion-safe:transition-colors motion-safe:duration-200\",\n        \"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        on ? \"bg-primary\" : \"bg-muted-foreground/40\",\n        className,\n      )}\n    >\n      <motion.span\n        aria-hidden=\"true\"\n        initial={false}\n        animate={{ x: on ? TRAVEL : 0, scaleX: pressed && !reduceMotion ? STRETCH : 1 }}\n        transition={reduceMotion ? INSTANT : SPRING}\n        // The stretch grows toward the side the thumb will travel to, so the\n        // press reads as the start of the move rather than a swell in place.\n        className={cn(\"block size-5 rounded-full bg-background shadow-sm\", on ? \"origin-right\" : \"origin-left\")}\n      />\n    </button>\n  );\n}\n"
+    }
+  ],
+  "docs": "Ask the Better Design MCP for get-ui-principle({ topic: \"switch\" }) before changing its motion."
+}

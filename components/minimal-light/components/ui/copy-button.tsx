@@ -18,6 +18,7 @@ function CopyButton({
   onCopied,
   timeout = 2000,
   className,
+  onClick,
   ...props
 }: CopyButtonProps) {
   const [copied, setCopied] = React.useState(false)
@@ -36,12 +37,12 @@ function CopyButton({
   return (
     <button
       type="button"
-      onClick={handleCopy}
+      onClick={(e) => { onClick?.(e); handleCopy(); }}
       aria-label={copied ? "Copied" : "Copy to clipboard"}
       className={cn(
         "inline-flex h-8 w-8 items-center justify-center rounded-lg",
         "bg-secondary border border-border text-muted-foreground",
-        "transition-all duration-200 hover:bg-accent hover:text-foreground",
+        "transition-all duration-base hover:bg-accent hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         "active:scale-[0.96]",
         className

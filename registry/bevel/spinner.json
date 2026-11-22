@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Spinner.\n *\n * One Solar glyph turning at three sizes, tinted with the accent so a pending\n * action matches the button that started it. The wrapper reports `status` to a\n * screen reader, because the animation alone says nothing.\n */\n\n/** Props for `Spinner`; `size` steps 14px, 16px and 22px. */\ninterface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  size?: \"sm\" | \"default\" | \"lg\"\n}\n\nconst sizes = {\n  sm: \"size-[0.875rem]\",\n  default: \"size-4\",\n  lg: \"size-[1.375rem]\",\n} as const\n\nconst Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <span\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      className={cn(\"inline-flex items-center justify-center\", className)}\n      {...props}\n    >\n      <Icon\n        icon=\"solar:refresh-linear\"\n        className={cn(\"animate-spin text-primary\", sizes[size])}\n      />\n    </span>\n  ),\n)\nSpinner.displayName = \"Spinner\"\n\nexport { Spinner }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ]
+}

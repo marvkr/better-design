@@ -1,0 +1,11 @@
+{
+  "name": "aspect-ratio-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n// Base UI has no AspectRatio primitive, so this is a plain box with CSS\n// aspect-ratio. It keeps position: relative and full width, so a filled\n// image or video placed absolutely inside still covers it.\n\n/** Props for the AspectRatio box; `ratio` is width over height. */\nexport interface AspectRatioProps extends React.ComponentPropsWithoutRef<\"div\"> {\n  ratio?: number;\n}\n\n/** Margin AspectRatio: an unstyled box that holds its shape. */\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  ({ ratio = 1, style, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"aspect-ratio\"\n      style={{ position: \"relative\", width: \"100%\", aspectRatio: String(ratio), ...style }}\n      {...props}\n    />\n  ),\n);\nAspectRatio.displayName = \"AspectRatio\";\n\nexport { AspectRatio };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

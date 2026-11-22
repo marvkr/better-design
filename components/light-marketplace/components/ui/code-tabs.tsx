@@ -51,7 +51,7 @@ function CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {
             {i === activeIndex && (
               <motion.div
                 layoutId={`code-tab-indicator-${uid}`}
-                className="absolute bottom-0 left-0 right-0 h-[3px] rounded-full bg-primary"
+                className="absolute bottom-0 left-0 right-0 h-[0.1875rem] rounded-full bg-primary"
                 transition={{ type: "spring", stiffness: 500, damping: 35 }}
               />
             )}

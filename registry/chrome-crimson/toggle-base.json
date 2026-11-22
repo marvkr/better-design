@@ -1,0 +1,30 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Chrome Azure Toggle — pressed state sinks into a recessed steel channel with\n * an azure-tinted glow; outline variant is a raised metal chip until pressed.\n */\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium\",\n    \"transition-[background,color,box-shadow] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"hover:bg-accent hover:text-accent-foreground\",\n    \"data-pressed:bg-primary/15 data-pressed:text-foreground data-pressed:[box-shadow:var(--shadow-inset)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline:\n          \"border border-white/10 [background:var(--surface-silver)] [box-shadow:var(--shadow-button)] hover:[box-shadow:var(--shadow-button-hover)] data-pressed:[background:transparent] data-pressed:[box-shadow:var(--shadow-inset)]\",\n      },\n      size: {\n        default: \"h-9 px-3\",\n        sm: \"h-8 px-2\",\n        lg: \"h-10 px-4\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  TogglePrimitive.Props & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-silver": "linear-gradient(to bottom, oklch(0.625 0.058 18.8), oklch(0.52 0.064 19.4))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.26), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "surface-silver": "linear-gradient(to bottom, oklch(0.625 0.058 18.8), oklch(0.52 0.064 19.4))",
+      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.26), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

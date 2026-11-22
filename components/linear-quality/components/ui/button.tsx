@@ -11,7 +11,7 @@ const buttonVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "text-sm font-medium",
-    "rounded-md transition-all duration-150 ease-out",
+    "rounded-md transition-all duration-fast ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
     "disabled:pointer-events-none disabled:opacity-40",
     "active:scale-[0.98] active:brightness-95",
@@ -22,14 +22,14 @@ const buttonVariants = cva(
         // Purple primary — precise multi-layer ring + drop shadow
         default:
           "bg-primary text-primary-foreground " +
-          "shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_55%,transparent),0_1px_3px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)] " +
-          "hover:bg-primary/90 hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_70%,transparent),0_2px_6px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15)]",
+          "shadow-[0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_55%,transparent),0_0.0625rem_0.1875rem_oklch(0_0_0/0.5),inset_0_0.0625rem_0_oklch(1_0_0/0.12)] " +
+          "hover:bg-primary/90 hover:shadow-[0_0_0_0.0625rem_color-mix(in_oklch,var(--primary)_70%,transparent),0_0.125rem_0.375rem_oklch(0_0_0/0.5),inset_0_0.0625rem_0_oklch(1_0_0/0.15)]",
         // Secondary: very dark panel, border
         secondary:
           "bg-secondary text-secondary-foreground " +
           "border border-border " +
-          "shadow-[0_1px_2px_rgba(0,0,0,0.25)] " +
-          "hover:bg-accent hover:border-border/60 hover:shadow-[0_1px_4px_rgba(0,0,0,0.35)]",
+          "shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.25)] " +
+          "hover:bg-accent hover:border-border/60 hover:shadow-[0_0.0625rem_0.25rem_oklch(0_0_0/0.35)]",
         // Outline: transparent with full border
         outline:
           "border border-border bg-transparent text-foreground " +
@@ -41,7 +41,7 @@ const buttonVariants = cva(
         // Destructive
         destructive:
           "bg-destructive text-destructive-foreground " +
-          "shadow-[0_0_0_1px_rgba(239,68,68,0.4),0_1px_3px_rgba(0,0,0,0.3)] " +
+          "shadow-[0_0_0_0.0625rem_oklch(0.6368_0.2078_25.3313/0.4),0_0.0625rem_0.1875rem_oklch(0_0_0/0.3)] " +
           "hover:bg-destructive/90",
         // Link
         link: "text-primary underline-offset-4 hover:underline",
@@ -51,6 +51,7 @@ const buttonVariants = cva(
         default: "h-9 px-4",
         lg:      "h-10 px-6 text-sm",
         icon:    "h-9 w-9",
+        "icon-sm": "h-8 w-8 rounded-md",
       },
     },
     defaultVariants: {
@@ -71,6 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

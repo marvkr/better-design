@@ -1,0 +1,25 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Margin Avatar: a 2rem round photo, or initials in oxblood on the soft oxblood\n * tint. Resize it with a size class; the initials follow the circle.\n */\nconst Avatar = React.forwardRef<HTMLSpanElement, WithClassName<AvatarPrimitive.Root.Props>>(\n  ({ className, ...props }, ref) => (\n    <AvatarPrimitive.Root\n      ref={ref}\n      data-slot=\"avatar\"\n      className={cn(\n        \"@container relative flex size-8 shrink-0 select-none overflow-hidden rounded-full bg-(--mark)\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nAvatar.displayName = \"Avatar\";\n\n/** The photo, cropped to fill the circle. */\nconst AvatarImage = React.forwardRef<HTMLImageElement, WithClassName<AvatarPrimitive.Image.Props>>(\n  ({ className, ...props }, ref) => (\n    <AvatarPrimitive.Image\n      ref={ref}\n      data-slot=\"avatar-image\"\n      className={cn(\"aspect-square size-full object-cover\", className)}\n      {...props}\n    />\n  ),\n);\nAvatarImage.displayName = \"AvatarImage\";\n\n/** Initials on the oxblood tint, shown while the photo loads or when it fails. */\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    data-slot=\"avatar-fallback\"\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full text-xs font-medium text-(--mark-foreground)\",\n      \"@min-[3rem]:text-base\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = \"AvatarFallback\";\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "mark": "oklch(0.895 0.04 28)",
+      "mark-foreground": "oklch(0.38 0.12 25)"
+    },
+    "dark": {
+      "mark": "oklch(0.32 0.05 25)",
+      "mark-foreground": "oklch(0.88 0.06 30)"
+    }
+  }
+}

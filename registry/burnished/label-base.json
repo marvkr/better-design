@@ -1,0 +1,11 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Label: semibold Inter Tight at 0.875rem with the system's open\n * tracking, in full ink above the bevelled field. A disabled control dims\n * its label too.\n *\n * Base UI has no label primitive, so this is a native label. Base UI marks\n * a disabled control with data-disabled, so the label watches that as well\n * as the native disabled state.\n */\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.ComponentPropsWithoutRef<\"label\">\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    data-slot=\"label\"\n    className={cn(\n      \"flex select-none items-center gap-2 text-sm font-semibold leading-none tracking-[0.016em] text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n      \"peer-data-[disabled]:cursor-not-allowed peer-data-[disabled]:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

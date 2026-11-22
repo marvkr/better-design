@@ -1,0 +1,31 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, AnimatePresence } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark CodeTabs.\n// The frame is a level-1 panel; the code surface is a recessed well one level\n// below it (nested depth, the DS trait). The active tab carries the gold\n// accent hairline along its bottom edge, like a gauge needle mark.\n\ninterface CodeTab {\n  label: string;\n  lang: string;\n  code: string;\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[];\n  defaultTab?: number;\n  className?: string;\n}\n\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(defaultTab);\n  const [direction, setDirection] = React.useState(0);\n  const uid = React.useId();\n\n  const handleTabChange = (index: number) => {\n    setDirection(index > activeIndex ? 1 : -1);\n    setActiveIndex(index);\n  };\n\n  const active = tabs[activeIndex];\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-xl border border-border bg-card\",\n        \"shadow-[var(--shadow-panel)]\",\n        className\n      )}\n    >\n      {/* Tab bar: panel chrome */}\n      <div className=\"relative flex border-b border-border/70\">\n        {tabs.map((tab, i) => (\n          <button\n            key={tab.label}\n            onClick={() => handleTabChange(i)}\n            className={cn(\n              \"relative px-4 py-2.5 text-xs font-medium transition-colors\",\n              i === activeIndex\n                ? \"text-foreground\"\n                : \"text-muted-foreground hover:text-foreground/80\"\n            )}\n          >\n            {i === activeIndex && (\n              <motion.div\n                layoutId={`code-tab-indicator-${uid}`}\n                className=\"absolute inset-x-2 bottom-0 h-px bg-[var(--gauge-line)] shadow-[0_0_0.375rem_var(--gauge-line-soft)]\"\n                transition={{ type: \"spring\", stiffness: 500, damping: 35 }}\n              />\n            )}\n            {tab.label}\n          </button>\n        ))}\n      </div>\n\n      {/* Code content: recessed well inside the panel */}\n      <div className=\"relative m-3 overflow-hidden rounded-lg border border-[var(--gauge-well-border)] bg-input shadow-[var(--shadow-well)]\">\n        <AnimatePresence mode=\"popLayout\" initial={false} custom={direction}>\n          <motion.div\n            key={activeIndex}\n            custom={direction}\n            initial={{ opacity: 0, x: direction * 16 }}\n            animate={{ opacity: 1, x: 0 }}\n            exit={{ opacity: 0, x: direction * -16 }}\n            transition={{ duration: 0.18, ease: \"easeInOut\" }}\n          >\n            <pre className=\"m-0 overflow-x-auto bg-transparent p-4 font-mono text-xs leading-relaxed text-foreground\">\n              <code>{active.code}</code>\n            </pre>\n          </motion.div>\n        </AnimatePresence>\n      </div>\n    </div>\n  );\n}\n\nexport { CodeTabs };\nexport type { CodeTabsProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "gauge-line": "oklch(0.8 0.115 85 / 0.6)",
+      "gauge-line-soft": "oklch(0.8 0.115 85 / 0.25)",
+      "shadow-panel": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0 0 0.0625rem oklch(0 0 0 / 0.25), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.375rem 1.25rem -0.375rem oklch(0 0 0 / 0.5)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    },
+    "dark": {
+      "gauge-well-border": "oklch(0.268 0.016 285)",
+      "gauge-line": "oklch(0.8 0.115 85 / 0.6)",
+      "gauge-line-soft": "oklch(0.8 0.115 85 / 0.25)",
+      "shadow-panel": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), 0 0 0 0.0625rem oklch(0 0 0 / 0.25), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.375rem 1.25rem -0.375rem oklch(0 0 0 / 0.5)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)"
+    }
+  }
+}

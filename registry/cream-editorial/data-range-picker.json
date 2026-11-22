@@ -1,0 +1,21 @@
+{
+  "name": "data-range-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport type { DateRange } from \"react-day-picker\";\nimport { format } from \"date-fns\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\nimport { Calendar } from \"./calendar\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\n/** Writes a range as \"4 Oct to 12 Oct 2026\", or one date while only the start is set. */\nfunction describeRange(range: DateRange | undefined): string | null {\n  if (!range?.from) return null;\n  if (!range.to) return format(range.from, \"d MMM yyyy\");\n  return `${format(range.from, \"d MMM\")} to ${format(range.to, \"d MMM yyyy\")}`;\n}\n\n/**\n * Cream editorial DataRangePicker: a pale paper field with a calendar icon\n * that opens two months side by side on the lightest paper panel. The field\n * edge turns terracotta while the panel is open; the calendar marks the\n * range ends in terracotta and the days between on its pale wash.\n */\nexport function DataRangePicker() {\n  const [range, setRange] = React.useState<DateRange | undefined>();\n  const label = describeRange(range);\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          data-slot=\"data-range-picker\"\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"w-72 cursor-pointer items-center gap-2 text-start data-[state=open]:border-primary\",\n            !label && \"text-muted-foreground\",\n          )}\n        >\n          <Icon\n            icon=\"ph:calendar-blank\"\n            aria-hidden=\"true\"\n            className=\"size-4 shrink-0 text-muted-foreground\"\n          />\n          <span className=\"truncate\">{label ?? \"Pick a date range\"}</span>\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          mode=\"range\"\n          numberOfMonths={2}\n          selected={range}\n          onSelect={setRange}\n          defaultMonth={range?.from}\n          autoFocus\n        />\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0",
+    "date-fns@^4.1.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json",
+    "https://better-design.com/registry/cream-editorial/calendar.json",
+    "https://better-design.com/registry/cream-editorial/popover.json"
+  ]
+}

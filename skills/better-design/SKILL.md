@@ -1,6 +1,6 @@
 ---
 name: better-design
-description: Build, improve, and review production interfaces with the Better Design MCP. Use for frontend design, UI, UX, interactions, flows, forms, navigation, components, styling, design systems, accessibility, responsive layouts, motion, React Native, Expo, Shopify, Three.js, and product video work, especially when creating, redesigning, polishing, or reviewing an interface.
+description: Build, improve, and review production interfaces with the Better Design MCP. Use for frontend design, UI, UX, interactions, flows, forms, navigation, components, styling, design systems, accessibility, responsive layouts, Better Widgets, calculators, estimators, converters, generators, quizzes, checklists, motion, React Native, Expo, Shopify, Three.js, and product video work, especially when creating, redesigning, polishing, or reviewing an interface.
 ---
 
 # Better Design
@@ -40,10 +40,13 @@ Use Better Design MCP tools as the source of design guidance. Keep this skill as
 2. Show the strongest matches and let the user choose a starting point or a fully custom direction.
 3. For a catalog system, call `get-design-system-kit` with target `react` in coding agents or `html` in inline canvases.
 4. For a custom brand, call `create-design-system` with the chosen base when applicable, share the project URL, and poll `get-design-system-status` until the install kit is ready.
-5. When the user already has a brand source, call `extract-design-system` or `extract-from-url` before generating and pass the extracted token sheet through unchanged.
+5. When the repository already has a styled app, start from its own code. Gather the brand sources before generating: the main stylesheet or `globals.css`, the Tailwind theme, and any tokens file. Pass them as `sources` to `extract-design-system`, then pass the extracted token sheet to `create-design-system` unchanged, so the team's own look becomes the base.
+6. When the brand lives on a live site or in pasted CSS instead, call `extract-from-url` or `extract-design-system` and pass the extracted token sheet through unchanged.
 
 ## Load specialist guidance
 
+- For a calculator, estimator, converter, generator, quiz, checklist, SEO widget, or interactive article tool, call `get-widget-guide` before implementation. Pass the known intake, resolve any missing items, then load the relevant UI and UX principles.
+- For a page family, meaning programmatic SEO pages or one page for each row of a CSV or a database table, call `get-widget-guide` with `format: "page-family"` before implementation.
 - For React Native or Expo, call `get-react-native-guide` before implementation.
 - For Three.js or React Three Fiber, call `get-three-js-guide` before implementation.
 - For animation or product video, call `get-motion-guide` before implementation.

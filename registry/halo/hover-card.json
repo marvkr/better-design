@@ -1,0 +1,25 @@
+{
+  "name": "hover-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst HoverCard = HoverCardPrimitive.Root\nconst HoverCardTrigger = HoverCardPrimitive.Trigger\n\nconst HoverCardContent = React.forwardRef<\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 4, ...props }, ref) => (\n  <HoverCardPrimitive.Content\n    ref={ref}\n    align={align}\n    sideOffset={sideOffset}\n    className={cn(\n      \"origin-(--radix-hover-card-content-transform-origin) z-50 w-64 p-4\",\n      \"rounded-xl border border-border\",\n      \"backdrop-blur-3xl backdrop-saturate-200 bg-popover supports-[backdrop-filter]:bg-popover/50\",\n      \"text-popover-foreground\",\n      \"shadow-[0_0.5rem_2rem_color-mix(in_oklch,var(--shade)_50%,transparent),inset_0_0_0.5rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n      \"outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n      className\n    )}\n    {...props}\n  />\n))\nHoverCardContent.displayName = HoverCardPrimitive.Content.displayName\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-hover-card@^1.1.14"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    },
+    "dark": {
+      "halo": "oklch(1 0 0)",
+      "shade": "oklch(0 0 0)"
+    }
+  }
+}

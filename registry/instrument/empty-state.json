@@ -1,0 +1,22 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark EmptyState: an unpopulated equipment bay. Dashed outline over\n// the recessed well surface, with the icon on a raised plate.\n\ninterface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode;\n  title: string;\n  description?: string;\n  action?: React.ReactNode;\n}\n\nfunction EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  className,\n  ...props\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border bg-input/60 p-10 text-center shadow-[var(--shadow-well)]\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <div className=\"flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-secondary text-muted-foreground shadow-[var(--shadow-raised)]\">\n          {icon}\n        </div>\n      )}\n      <div className=\"flex flex-col gap-1\">\n        <p className=\"text-sm font-medium text-foreground\">{title}</p>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {action && <div>{action}</div>}\n    </div>\n  );\n}\n\nexport { EmptyState };\nexport type { EmptyStateProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)"
+    },
+    "dark": {
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)"
+    }
+  }
+}

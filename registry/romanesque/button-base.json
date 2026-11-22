@@ -1,0 +1,36 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Delphi Button: extracted from delphi.ai\n// Primary: tangerine pill with glassy inset highlights\n// Secondary: white pill on cream with soft pillow shadow\n// Ghost: borderless, soft hover\n// Default radius: rounded-full (pill); icon size = 48x48 circle\n\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium\",\n    \"rounded-full transition-[background,box-shadow,transform] duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.98]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // Primary pill with glassy inset (hover = primary darkened)\n        default:\n          \"bg-primary text-primary-foreground \" +\n          \"shadow-[var(--shadow-tangerine-inset)] \" +\n          \"hover:bg-[color-mix(in_oklch,var(--primary)_82%,oklch(0_0_none)_18%)]\",\n        // White pill on cream: pillow shadow\n        secondary:\n          \"bg-card text-foreground \" +\n          \"shadow-[var(--shadow-pillow)] \" +\n          \"hover:bg-[oklch(0.99_0.003_55)]\",\n        // Outline: translucent, thin border\n        outline:\n          \"border border-border bg-card/60 text-foreground backdrop-blur \" +\n          \"hover:bg-card\",\n        // Ghost: flat, surface hover\n        ghost:\n          \"text-foreground \" +\n          \"hover:bg-[oklch(0_0_0_/_0.05)]\",\n        // Destructive: same glassy inset as primary, rim derived from --destructive\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"shadow-[var(--shadow-destructive-inset)] \" +\n          \"hover:bg-[color-mix(in_oklch,var(--destructive)_90%,oklch(0_0_none)_10%)]\",\n        // Link: blue secondary brand\n        link: \"text-[oklch(0.6_0.18_250)] underline-offset-4 hover:underline hover:text-[oklch(0.52_0.18_250)] rounded-none\",\n      },\n      size: {\n        default: \"h-11 px-6 py-2.5\",\n        sm: \"h-9 px-4 text-xs\",\n        lg: \"h-14 px-8 text-base\",\n        icon: \"h-12 w-12 rounded-full\",\n        \"icon-sm\": \"h-9 w-9 rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    // Callers written against the Radix API pass the element to become as a\n    // child: <Button asChild><Link>…</Link></Button>. Base UI has no asChild,\n    // it composes through `render`. Without this the prop reaches the DOM and\n    // the anchor nests inside the button instead of replacing it, which stacks\n    // the icon above the label and puts a link inside a button.\n    if (asChild && React.isValidElement(props.children)) {\n      const { children, ...rest } = props\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          className={cn(buttonVariants({ variant, size, className }))}\n          {...rest}\n          // After the spread, so an explicit asChild child wins over a stray\n          // render prop rather than being silently replaced by it.\n          // SAFETY: this branch runs only when `asChild` is set, and the caller then\n          // owns passing a single element for the slot to clone.\n          render={children as React.ReactElement}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow": "0 0.0625rem 0.5rem oklch(0 0 0 / 0.035)",
+      "shadow-pillow": "oklch(0 0 0 / 0.04) 0rem 0.375rem 0.875rem 0rem, oklch(0 0 0 / 0.025) 0rem 0.125rem 0.375rem 0rem, oklch(1 0 0) 0rem -0.0938rem 0.0938rem 0rem inset, oklch(1 0 0) 0rem 0.0938rem 0.0938rem 0rem inset",
+      "primary-rim": "color-mix(in oklch, var(--primary) 70%, white 30%)",
+      "destructive-rim": "color-mix(in oklch, var(--destructive) 70%, white 30%)",
+      "shadow-tangerine-inset": "inset 0 0.125rem 0 oklch(1 0 0 / 0.40), inset 0 -0.125rem 0.125rem oklch(0 0 0 / 0.20), inset 0 0 0.875rem var(--primary-rim), 0 0.125rem 0.25rem oklch(0 0 0 / 0.14)",
+      "shadow-destructive-inset": "inset 0 0.125rem 0 oklch(1 0 0 / 0.40), inset 0 -0.125rem 0.125rem oklch(0 0 0 / 0.20), inset 0 0 0.875rem var(--destructive-rim), 0 0.125rem 0.25rem oklch(0 0 0 / 0.14)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "shadow": "0 0.0625rem 0.5rem oklch(0 0 0 / 0.035)",
+      "shadow-pillow": "oklch(0 0 0 / 0.04) 0rem 0.375rem 0.875rem 0rem, oklch(0 0 0 / 0.025) 0rem 0.125rem 0.375rem 0rem, oklch(1 0 0) 0rem -0.0938rem 0.0938rem 0rem inset, oklch(1 0 0) 0rem 0.0938rem 0.0938rem 0rem inset",
+      "primary-rim": "color-mix(in oklch, var(--primary) 70%, white 30%)",
+      "destructive-rim": "color-mix(in oklch, var(--destructive) 70%, white 30%)",
+      "shadow-tangerine-inset": "inset 0 0.125rem 0 oklch(1 0 0 / 0.40), inset 0 -0.125rem 0.125rem oklch(0 0 0 / 0.20), inset 0 0 0.875rem var(--primary-rim), 0 0.125rem 0.25rem oklch(0 0 0 / 0.14)",
+      "shadow-destructive-inset": "inset 0 0.125rem 0 oklch(1 0 0 / 0.40), inset 0 -0.125rem 0.125rem oklch(0 0 0 / 0.20), inset 0 0 0.875rem var(--destructive-rim), 0 0.125rem 0.25rem oklch(0 0 0 / 0.14)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

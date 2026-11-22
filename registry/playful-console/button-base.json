@@ -1,0 +1,37 @@
+{
+  "name": "button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { pressDestructive, pressOutline, pressPrimary, pressSecondary } from \"./_shared\";\n\n/**\n * Playful console Button on a Base UI button: a chunky key that presses.\n *\n * Every solid button is a bordered face on an offset slab. It lifts under\n * the pointer and drops into the slab when pressed. The default is the\n * orange key; secondary is a white key on the orange slab; outline is a\n * white key on a cream slab. Ghost and link stay flat. A disabled button\n * loses its slab and rests on cream, whether it is a native button or a\n * link rendered through `render`.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-[0.5rem] font-bold\",\n    \"focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring\",\n    \"disabled:pointer-events-none disabled:translate-y-0 disabled:border-(--line-strong) disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:shadow-none\",\n    \"data-[disabled]:pointer-events-none data-[disabled]:translate-y-0 data-[disabled]:border-(--line-strong) data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled) data-[disabled]:shadow-none\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        // The orange key: the one action a screen exists to offer.\n        default: pressPrimary,\n        primary: pressPrimary,\n        secondary: pressSecondary,\n        outline: pressOutline,\n        // Deep ink, flat: a strong action that should not compete with orange.\n        solid:\n          \"bg-(--ink) text-(--ink-foreground) transition-colors duration-fast hover:bg-(--foreground-secondary)\",\n        ghost:\n          \"bg-transparent text-foreground transition-colors duration-fast hover:bg-secondary\",\n        destructive: pressDestructive,\n        link: \"h-auto rounded-sm px-0 font-semibold text-(--link) underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-[0.8125rem]\",\n        default: \"h-10 px-5 text-[0.9375rem]\",\n        lg: \"h-12 px-6 text-base\",\n        icon: \"size-10 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-12 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Props for the Base UI Button. `asChild` turns a single child element into the button. */\nexport interface ButtonProps\n  extends\n    Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  /**\n   * Renders the single child element as the button, for callers written\n   * against the Radix API (`<Button asChild><a href=\"…\" /></Button>`).\n   * Base UI composes through `render`, so the child becomes that element.\n   */\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, children, ...props }, ref) => {\n    const classes = cn(buttonVariants({ variant, size, className }));\n\n    if (asChild && React.isValidElement(children)) {\n      return (\n        <ButtonPrimitive\n          ref={ref}\n          data-slot=\"button\"\n          className={classes}\n          nativeButton={false}\n          {...props}\n          render={children}\n        />\n      );\n    }\n\n    return (\n      <ButtonPrimitive ref={ref} data-slot=\"button\" className={classes} {...props}>\n        {children}\n      </ButtonPrimitive>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "ink": "oklch(0.26 0.015 118.8)",
+      "ink-foreground": "oklch(1 0 0)",
+      "link": "oklch(0.54 0.108 233.4)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "ink": "oklch(0.95 0.008 114.2)",
+      "ink-foreground": "oklch(0.2 0.008 114)",
+      "link": "oklch(0.76 0.11 233)"
+    }
+  }
+}

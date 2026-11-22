@@ -19,7 +19,7 @@ const DialogOverlay = React.forwardRef<
  ref={ref}
  className={cn(
  "fixed inset-0 z-50 bg-black/70 backdrop-blur-sm",
- "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+ "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-base",
  className
  )}
  {...props}
@@ -40,7 +40,7 @@ const DialogContent = React.forwardRef<
  "rounded-none border border-border",
  "bg-popover text-popover-foreground",
  "",
- "duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+ "duration-base data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
  className
  )}
  {...props}
@@ -49,7 +49,7 @@ const DialogContent = React.forwardRef<
  <DialogPrimitive.Close
  className={cn(
  "absolute right-4 top-4 rounded-none p-1 text-muted-foreground",
- "transition-[background-color,color,box-shadow] duration-150",
+ "transition-[background-color,color,box-shadow] duration-fast",
  "hover:bg-accent hover:text-foreground",
  "focus:outline-none focus:ring-2 focus:ring-ring/50",
  "disabled:pointer-events-none"

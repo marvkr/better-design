@@ -1,0 +1,19 @@
+{
+  "name": "date-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport { CalendarIcon } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"@/components/ui/popover\"\nimport { formFieldBase } from \"./_shared\"\n\n// Precision Date Picker: calendar popover triggered by a neutral field button.\n\ninterface DatePickerProps {\n  value?: Date\n  onChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: DatePickerProps) {\n  const formatted = value\n    ? value.toLocaleDateString(\"en-US\", { year: \"numeric\", month: \"long\", day: \"numeric\" })\n    : null\n\n  return (\n    <Popover>\n      <PopoverTrigger\n        render={\n          <button\n            type=\"button\"\n            disabled={disabled}\n            className={cn(\n              formFieldBase,\n              \"flex h-9 items-center justify-start py-1.5 text-left font-normal\",\n              !value && \"text-muted-foreground\",\n              className\n            )}\n          />\n        }\n      >\n        <CalendarIcon className=\"mr-2 h-4 w-4 shrink-0\" />\n        {formatted ?? placeholder}\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          mode=\"single\"\n          selected={value}\n          onSelect={onChange}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/precision/calendar-base.json",
+    "https://better-design.com/registry/precision/popover-base.json",
+    "https://better-design.com/registry/precision/_shared-base.json"
+  ]
+}

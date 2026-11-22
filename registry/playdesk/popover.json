@@ -1,0 +1,25 @@
+{
+  "name": "popover",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst Popover = PopoverPrimitive.Root;\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\nconst PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 8, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(\n        \"origin-(--radix-popover-content-transform-origin) z-50 w-72 rounded-lg bg-popover p-4 text-popover-foreground outline-none\",\n        \"[box-shadow:var(--shadow-rim),var(--shadow-float)]\",\n        \"data-[state=open]:animate-in data-[state=closed]:animate-out duration-base\",\n        \"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n        \"data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n        \"data-[side=bottom]:slide-in-from-top-1 data-[side=top]:slide-in-from-bottom-1\",\n        \"data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1\",\n        className,\n      )}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = PopoverPrimitive.Content.displayName;\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-popover@^1.1.14"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

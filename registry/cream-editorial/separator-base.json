@@ -1,0 +1,14 @@
+{
+  "name": "separator-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Cream editorial Separator: a warm hairline on the paper, across or upright.\n * It is the same rule that sits under table rows and around cards.\n */\nconst Separator = React.forwardRef<\n  HTMLDivElement,\n  Omit<SeparatorPrimitive.Props, \"className\"> & {\n    className?: string;\n    /**\n     * Accepted so callers written for the Radix wrapper still compile. It has\n     * no effect: the Base UI separator always carries role=\"separator\".\n     */\n    decorative?: boolean;\n  }\n>(\n  (\n    { className, orientation = \"horizontal\", decorative: _decorative, ...props },\n    ref,\n  ) => (\n    <SeparatorPrimitive\n      ref={ref}\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-border\",\n        \"data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full\",\n        \"data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nSeparator.displayName = \"Separator\";\n\nexport { Separator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ]
+}

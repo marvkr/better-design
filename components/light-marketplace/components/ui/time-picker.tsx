@@ -71,7 +71,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
       <div
         ref={ref}
         className={cn(
-          "inline-flex items-center gap-1 rounded-[14px] border border-border bg-background px-3 py-2",
+          "inline-flex items-center gap-1 rounded-[0.875rem] border border-border bg-background px-3 py-2",
           disabled && "opacity-50 pointer-events-none",
           className
         )}

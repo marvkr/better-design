@@ -9,9 +9,15 @@
     }
   ],
   "dependencies": [
-    "vaul"
+    "vaul@^1.1.2"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "var(--shadow-lg)"
+    },
+    "dark": {
+      "shadow-l": "var(--shadow-lg)"
+    }
+  }
 }

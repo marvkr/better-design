@@ -1,0 +1,31 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { OTPInput, OTPInputContext } from \"input-otp\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/**\n * Playful console InputOTP: one white well per digit, set large in mono\n * figures like a console readout. The slot waiting for the next digit takes\n * the blue focus edge and ring, and a thin caret blinks inside it.\n */\nconst InputOTP = React.forwardRef<\n  React.ComponentRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    data-slot=\"input-otp\"\n    containerClassName={cn(\n      \"group/otp flex items-center gap-2.5 has-[:disabled]:cursor-not-allowed\",\n      containerClassName,\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n));\nInputOTP.displayName = \"InputOTP\";\n\n/** A run of slots that belong together, such as the first three digits. */\nconst InputOTPGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"input-otp-group\"\n    className={cn(\"flex items-center gap-1.5\", className)}\n    {...props}\n  />\n));\nInputOTPGroup.displayName = \"InputOTPGroup\";\n\n/** One digit's well. It reads its character and caret from the OTP input. */\nconst InputOTPSlot = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext);\n  const slot = inputOTPContext.slots[index];\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"input-otp-slot\"\n      data-active={slot?.isActive || undefined}\n      className={cn(\n        formFieldBase,\n        \"relative flex h-11 w-10 items-center justify-center px-0\",\n        \"font-mono text-lg font-semibold tabular-nums\",\n        \"data-[active]:z-10 data-[active]:border-ring data-[active]:ring-3 data-[active]:ring-(--highlight-blue)\",\n        \"group-has-[:disabled]/otp:bg-secondary group-has-[:disabled]/otp:text-(--foreground-disabled) group-has-[:disabled]/otp:hover:border-(--line-strong)\",\n        className,\n      )}\n      {...props}\n    >\n      {slot?.char}\n      {slot?.hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-5 w-0.5 animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      )}\n    </div>\n  );\n});\nInputOTPSlot.displayName = \"InputOTPSlot\";\n\n/** A short dash between two groups of slots. */\nconst InputOTPSeparator = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"separator\"\n    data-slot=\"input-otp-separator\"\n    className={cn(\"flex items-center text-muted-foreground\", className)}\n    {...props}\n  >\n    <Icon icon=\"ph:minus-bold\" className=\"size-4\" aria-hidden=\"true\" />\n  </div>\n));\nInputOTPSeparator.displayName = \"InputOTPSeparator\";\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "highlight-blue": "oklch(0.623 0.188 259.8 / 0.2)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "highlight-blue": "oklch(0.7 0.15 258 / 0.3)"
+    }
+  }
+}

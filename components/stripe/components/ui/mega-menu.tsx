@@ -258,14 +258,13 @@ const panelStyle: React.CSSProperties = {
   left: 0,
   right: 0,
   zIndex: 50,
-  backgroundColor: "var(--card)",
-  border: "1px solid var(--border)",
-  borderRadius: 12,
+  backgroundColor: "var(--popover)",
+  borderRadius: 8,
   padding: 24,
   transformOrigin: "top center",
   overflow: "hidden",
   willChange: "transform, opacity",
-  boxShadow: "0 12px 40px rgba(0, 0, 0, 0.35)",
+  boxShadow: "var(--shadow-popover)",
 }
 
 const gridStyle: React.CSSProperties = {

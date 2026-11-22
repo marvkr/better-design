@@ -50,7 +50,7 @@ function DatePicker({
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-auto p-0 rounded-[10px] border-border bg-card"
+        className="w-auto p-0 rounded-[0.625rem] border-border bg-card"
         align="start"
       >
         <Calendar

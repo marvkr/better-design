@@ -1,0 +1,28 @@
+{
+  "name": "switch-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Ink mail Switch: a 2.25rem by 1.25rem track. Off, it is a quiet well behind\n * a translucent edge with a grey knob. On, the track fills with the off-white\n * primary ink and the knob turns black and slides across.\n */\nfunction Switch({ className, ...props }: WithClassName<SwitchPrimitive.Root.Props>) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(\n        \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-(--line-strong) bg-input p-px\",\n        \"transition-[background-color,border-color] duration-fast ease-out\",\n        \"hover:data-[unchecked]:border-(--control)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed\",\n        controlChecked,\n        className,\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block size-4 rounded-full bg-muted-foreground shadow-(--shadow-thumb)\",\n          \"transition-[translate,background-color] duration-fast ease-out\",\n          \"data-[checked]:translate-x-4 data-[checked]:bg-primary-foreground data-[unchecked]:translate-x-0\",\n          \"data-[disabled]:bg-(--foreground-disabled) data-[disabled]:shadow-none\",\n        )}\n      />\n    </SwitchPrimitive.Root>\n  );\n}\nSwitch.displayName = \"Switch\";\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "control": "oklch(0.52 0.006 240)",
+      "shadow-thumb": "0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

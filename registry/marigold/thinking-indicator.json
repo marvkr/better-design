@@ -1,0 +1,14 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, AnimatePresence } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism\n\n// Talentboard ThinkingIndicator: cycling status words with a soft orange shimmer.\n\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[];\n  intervalMs?: number;\n}\n\nfunction ThinkingIndicator({\n  words = [\"Thinking\", \"Reasoning\", \"Computing\", \"Analyzing\"],\n  intervalMs = 1800,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0);\n\n  React.useEffect(() => {\n    const interval = setInterval(() => {\n      setIndex((prev) => (prev + 1) % words.length);\n    }, intervalMs);\n    return () => clearInterval(interval);\n  }, [words.length, intervalMs]);\n\n  return (\n    <div className={cn(\"inline-flex items-center gap-2\", className)} {...props}>\n      <span className=\"relative flex h-2 w-2\">\n        <span className=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-50\" />\n        <span className=\"relative inline-flex h-2 w-2 rounded-full bg-primary\" />\n      </span>\n      <span className=\"relative inline-flex h-5 items-center overflow-hidden text-sm text-muted-foreground\">\n        <AnimatePresence mode=\"wait\" initial={false}>\n          <motion.span\n            key={words[index]}\n            initial={{ y: 12, opacity: 0 }}\n            animate={{ y: 0, opacity: 1 }}\n            exit={{ y: -12, opacity: 0 }}\n            transition={{ duration: 0.2, ease: \"easeOut\" }}\n          >\n            {words[index]}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  );\n}\n\nexport { ThinkingIndicator };\nexport type { ThinkingIndicatorProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ]
+}

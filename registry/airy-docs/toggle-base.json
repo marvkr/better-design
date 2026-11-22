@@ -1,0 +1,32 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { activeWash, focusRing } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Airy docs Toggle: a pill that holds its state. Off, it is grey text that\n * gains a pale tray on hover, or a hairline chip. Pressed, it takes the\n * faint green wash with green ink, the mark of a selected item.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-transparent\",\n    \"font-medium text-(--foreground-secondary)\",\n    \"transition-[background-color,border-color,color] duration-fast ease-out\",\n    focusRing,\n    \"data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-(--foreground-disabled)\",\n    activeWash,\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent hover:not-data-[pressed]:bg-secondary hover:not-data-[pressed]:text-foreground\",\n        outline:\n          \"border-(--line-strong) bg-background hover:not-data-[pressed]:bg-secondary data-[disabled]:border-border\",\n      },\n      size: {\n        sm: \"h-7 px-2.5 text-xs\",\n        default: \"h-8 px-3 text-sm\",\n        lg: \"h-10 px-4 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TogglePrimitive.Props> & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = \"Toggle\";\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.65 0.004 160)",
+      "foreground-secondary": "oklch(0.373 0.003 164.9)",
+      "foreground-disabled": "oklch(0.72 0.004 160)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.36)",
+      "foreground-secondary": "oklch(0.82 0.004 160)",
+      "foreground-disabled": "oklch(0.48 0.005 170)"
+    }
+  }
+}

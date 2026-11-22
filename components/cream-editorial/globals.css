@@ -1,0 +1,411 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Cream editorial: a warm reading room for AI products, assistants and
+  writing tools. The page is cream paper, the ink is warm near-black, the
+  headings are a serif set at book weight and the interface speaks in a
+  clean sans. One terracotta marks the action you came to take. Depth comes
+  from tone, not shadow: oat cards on cream, and a dark warm panel for code.
+*/
+
+:root {
+  /* ─── Ground: cream paper, warm ink ─── */
+  --background: oklch(0.982 0.005 95.1);
+  --foreground: oklch(0.191 0.002 106.6);
+
+  --card: oklch(0.966 0.009 100);                /* oat card, one tone under the page */
+  --card-foreground: oklch(0.191 0.002 106.6);
+
+  --popover: oklch(0.993 0.003 95);              /* menus float as the lightest paper */
+  --popover-foreground: oklch(0.191 0.002 106.6);
+
+  /* ─── Primary: terracotta, deep enough for white type ─── */
+  --primary: oklch(0.57 0.135 39);
+  --primary-foreground: oklch(1 0 0);
+  --primary-hover: oklch(0.53 0.13 39);
+  --primary-active: oklch(0.49 0.12 39);
+  --primary-text: oklch(0.55 0.135 39);          /* terracotta as text on cream: 4.8:1 */
+  --primary-wash: oklch(0.57 0.135 39 / 0.1);
+  --primary-line: oklch(0.57 0.135 39 / 0.35);
+  --clay: oklch(0.672 0.131 38.8);               /* the lighter brand clay, for large marks and charts */
+
+  --secondary: oklch(0.948 0.011 95.2);          /* oat: quiet buttons, segmented trays, chips */
+  --secondary-foreground: oklch(0.191 0.002 106.6);
+
+  --muted: oklch(0.924 0.014 97.5);              /* tracks and wells */
+  --muted-foreground: oklch(0.478 0.006 95.2);
+
+  --accent: oklch(0.948 0.011 95.2);             /* hover rows */
+  --accent-foreground: oklch(0.191 0.002 106.6);
+
+  --destructive: oklch(0.53 0.17 26);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.52 0.09 160);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.772 0.121 67.4);
+  --warning-foreground: oklch(0.191 0.002 106.6);
+  --info: oklch(0.52 0.09 249);
+  --info-foreground: oklch(1 0 0);
+
+  --border: oklch(0.191 0.002 106.6 / 0.1);      /* the hairline: warm ink at one tenth */
+  --input: oklch(0.924 0.014 97.5);              /* a quiet oat well where a part fills with it */
+  --line-strong: oklch(0.853 0.014 97.5);        /* field edges and outline buttons */
+  --ring: oklch(0.57 0.135 39 / 0.4);
+  --radius: 0.625rem;
+  /* Radius by size, stepped from --radius the way the catalog derives it:
+     checkboxes and chips, buttons and fields, menus, cards, dialogs. */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+
+  /* ─── Ink ladder ─── */
+  --foreground-secondary: oklch(0.359 0.005 106.7);
+  --foreground-disabled: oklch(0.75 0.013 96.5);
+  --control: oklch(0.75 0.013 96.5);             /* unchecked box edges */
+  --field: oklch(0.993 0.003 95);
+  --thumb: oklch(1 0 0);
+  --scrim: oklch(0.191 0.002 106.6 / 0.4);
+
+  /* ─── Code: the dark warm product panel ─── */
+  --code: oklch(0.214 0.002 67.7);
+  --code-foreground: oklch(0.948 0.011 95.2);
+  --code-header: oklch(0.257 0.006 78.2);
+  --code-muted: oklch(0.696 0.011 87.5);
+  --code-inline: oklch(0.924 0.014 97.5 / 0.8);
+  --syntax-keyword: oklch(0.74 0.12 39);
+  --syntax-string: oklch(0.8 0.08 160);
+  --syntax-fn: oklch(0.8 0.08 249);
+  --syntax-comment: oklch(0.62 0.01 90);
+
+  /* ─── Callout tints ─── */
+  --success-tint: oklch(0.52 0.09 160 / 0.1);
+  --success-text: oklch(0.44 0.08 160);
+  --warning-tint: oklch(0.772 0.121 67.4 / 0.16);
+  --warning-text: oklch(0.47 0.09 60);
+  --info-tint: oklch(0.52 0.09 249 / 0.1);
+  --info-text: oklch(0.45 0.09 249);
+  --destructive-tint: oklch(0.53 0.17 26 / 0.08);
+  --destructive-text: oklch(0.48 0.16 26);
+
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", Georgia, ui-serif, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ─── Depth: colour blocks first. Shadows are rare and warm. ─── */
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0.191 0.002 106.6 / 0.05);
+  --shadow-sm: 0 0.0625rem 0.1875rem oklch(0.191 0.002 106.6 / 0.08);
+  --shadow-md: 0 0.25rem 0.75rem oklch(0.191 0.002 106.6 / 0.08);
+  --shadow-lg: 0 0.5rem 1.5rem -0.25rem oklch(0.191 0.002 106.6 / 0.1);
+  --shadow-card: none;
+  --shadow-menu: 0 0.5rem 1.5rem -0.375rem oklch(0.191 0.002 106.6 / 0.12), 0 0 0 0.0625rem oklch(0.191 0.002 106.6 / 0.08);
+  --shadow-overlay: 0 1.5rem 3rem -0.75rem oklch(0.191 0.002 106.6 / 0.2), 0 0 0 0.0625rem oklch(0.191 0.002 106.6 / 0.08);
+  --shadow-thumb: 0 0.0625rem 0.1875rem oklch(0.191 0.002 106.6 / 0.18), 0 0 0 0.0625rem oklch(0.191 0.002 106.6 / 0.06);
+
+  --chart-1: oklch(0.672 0.131 38.8);
+  --chart-2: oklch(0.359 0.005 106.7);
+  --chart-3: oklch(0.639 0.065 171.5);
+  --chart-4: oklch(0.772 0.121 67.4);
+  --chart-5: oklch(0.674 0.09 249.3);
+
+  /* --- Motion (soft profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 180ms;
+  --transition-duration-base: 240ms;
+  --transition-duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+.dark {
+  --background: oklch(0.191 0.002 106.6);
+  --foreground: oklch(0.966 0.009 100);
+  --card: oklch(0.236 0.002 67.7);
+  --card-foreground: oklch(0.966 0.009 100);
+  --popover: oklch(0.268 0.004 106.6);
+  --popover-foreground: oklch(0.966 0.009 100);
+  --primary: oklch(0.672 0.131 38.8);
+  --primary-foreground: oklch(0.191 0.002 106.6);
+  --primary-hover: oklch(0.71 0.125 38.8);
+  --primary-active: oklch(0.63 0.13 38.8);
+  --primary-text: oklch(0.72 0.12 38.8);
+  --primary-wash: oklch(0.672 0.131 38.8 / 0.14);
+  --primary-line: oklch(0.672 0.131 38.8 / 0.45);
+  --clay: oklch(0.672 0.131 38.8);
+  --secondary: oklch(0.268 0.004 106.6);
+  --secondary-foreground: oklch(0.966 0.009 100);
+  --muted: oklch(0.308 0.004 106.6);
+  --muted-foreground: oklch(0.75 0.013 96.5);
+  --accent: oklch(0.268 0.004 106.6);
+  --accent-foreground: oklch(0.966 0.009 100);
+  --destructive: oklch(0.66 0.17 26);
+  --destructive-foreground: oklch(0.191 0.002 106.6);
+  --success: oklch(0.72 0.09 160);
+  --success-foreground: oklch(0.191 0.002 106.6);
+  --warning: oklch(0.8 0.12 70);
+  --warning-foreground: oklch(0.191 0.002 106.6);
+  --info: oklch(0.72 0.09 249);
+  --info-foreground: oklch(0.191 0.002 106.6);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.12);
+  --line-strong: oklch(1 0 0 / 0.2);
+  --ring: oklch(0.672 0.131 38.8 / 0.5);
+  --foreground-secondary: oklch(0.853 0.014 97.5);
+  --foreground-disabled: oklch(0.478 0.006 95.2);
+  --control: oklch(0.551 0.009 99);
+  --field: oklch(0.214 0.002 67.7);
+  --thumb: oklch(0.966 0.009 100);
+  --scrim: oklch(0 0 0 / 0.6);
+  --code: oklch(0.155 0.002 67.7);
+  --code-foreground: oklch(0.948 0.011 95.2);
+  --code-header: oklch(0.214 0.002 67.7);
+  --code-muted: oklch(0.696 0.011 87.5);
+  --code-inline: oklch(1 0 0 / 0.08);
+  --syntax-keyword: oklch(0.76 0.12 39);
+  --syntax-string: oklch(0.8 0.08 160);
+  --syntax-fn: oklch(0.8 0.08 249);
+  --syntax-comment: oklch(0.62 0.01 90);
+  --success-tint: oklch(0.72 0.09 160 / 0.14);
+  --success-text: oklch(0.8 0.08 160);
+  --warning-tint: oklch(0.8 0.12 70 / 0.14);
+  --warning-text: oklch(0.85 0.11 75);
+  --info-tint: oklch(0.72 0.09 249 / 0.14);
+  --info-text: oklch(0.8 0.08 249);
+  --destructive-tint: oklch(0.66 0.17 26 / 0.14);
+  --destructive-text: oklch(0.78 0.13 26);
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.35);
+  --shadow-md: 0 0.25rem 0.75rem oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.5);
+  --shadow-card: none;
+  --shadow-menu: 0 0.5rem 1.5rem -0.375rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.1);
+  --shadow-overlay: 0 1.5rem 3rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.1);
+  --shadow-thumb: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.4), 0 0 0 0.0625rem oklch(1 0 0 / 0.1);
+  --chart-1: oklch(0.672 0.131 38.8);
+  --chart-2: oklch(0.853 0.014 97.5);
+  --chart-3: oklch(0.7 0.07 171.5);
+  --chart-4: oklch(0.8 0.12 70);
+  --chart-5: oklch(0.72 0.09 249.3);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-text: var(--primary-text);
+  --color-primary-wash: var(--primary-wash);
+  --color-primary-line: var(--primary-line);
+  --color-clay: var(--clay);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-line-strong: var(--line-strong);
+  --color-ring: var(--ring);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-disabled: var(--foreground-disabled);
+  --color-control: var(--control);
+  --color-field: var(--field);
+  --color-thumb: var(--thumb);
+  --color-scrim: var(--scrim);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-header: var(--code-header);
+  --color-code-muted: var(--code-muted);
+  --color-code-inline: var(--code-inline);
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-fn: var(--syntax-fn);
+  --color-syntax-comment: var(--syntax-comment);
+  --color-success-tint: var(--success-tint);
+  --color-success-text: var(--success-text);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-text: var(--warning-text);
+  --color-info-tint: var(--info-tint);
+  --color-info-text: var(--info-text);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-text: var(--destructive-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);   /* 0.375rem  checkboxes, chips, inline code */
+  --radius-md: var(--radius-md);   /* 0.5rem    buttons, fields, menu rows */
+  --radius-lg: var(--radius-lg);   /* 0.625rem  menus, popovers */
+  --radius-xl: var(--radius-xl);   /* 0.875rem  cards and code blocks */
+  --radius-2xl: var(--radius-2xl); /* 1.125rem  dialogs and sheets */
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  /* Editorial headings: the serif at book weight, a little tight. Never bold. */
+  :is(h1, h2, h3) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  :is(h4, h5, h6) {
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: spacious;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 62);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 10);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 12);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 6);
+}

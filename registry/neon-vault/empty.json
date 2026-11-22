@@ -1,0 +1,20 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Empty: the larger empty vault panel with a dashed rim and a\n// raised icon well.\n\ninterface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  action?: React.ReactNode\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ icon, title, description, action, className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center gap-5 rounded-2xl\",\n          \"border border-dashed border-border\",\n          \"bg-card/40 p-12 text-center\",\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div\n            className={cn(\n              \"flex h-14 w-14 items-center justify-center\",\n              \"rounded-xl border border-border bg-secondary\",\n              \"[box-shadow:var(--shadow-raised)]\",\n              \"text-muted-foreground\"\n            )}\n          >\n            <span className=\"flex h-6 w-6 items-center justify-center [&>svg]:h-6 [&>svg]:w-6\">\n              {icon}\n            </span>\n          </div>\n        )}\n\n        <div className=\"flex max-w-xs flex-col gap-1.5\">\n          <p className=\"text-sm font-semibold leading-snug text-foreground\">{title}</p>\n          {description && (\n            <p className=\"text-sm leading-relaxed text-muted-foreground\">{description}</p>\n          )}\n        </div>\n\n        {action && (\n          <div className=\"flex items-center gap-2\">\n            {action}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nEmpty.displayName = \"Empty\"\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

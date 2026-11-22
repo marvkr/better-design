@@ -1,0 +1,28 @@
+{
+  "name": "multi-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Check, ChevronDown, X } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\nexport interface MultiSelectOption {\n  value: string;\n  label: string;\n}\n\nexport interface MultiSelectProps {\n  options: MultiSelectOption[];\n  value?: string[];\n  onChange?: (value: string[]) => void;\n  placeholder?: string;\n  className?: string;\n}\n\nconst MultiSelect = ({\n  options,\n  value,\n  onChange,\n  placeholder = \"Select options\",\n  className,\n}: MultiSelectProps) => {\n  const [internal, setInternal] = React.useState<string[]>(value ?? []);\n  const selected = value ?? internal;\n\n  const toggle = (next: string) => {\n    const updated = selected.includes(next)\n      ? selected.filter((item) => item !== next)\n      : [...selected, next];\n    setInternal(updated);\n    onChange?.(updated);\n  };\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          className={cn(\n            \"flex min-h-10 w-full items-center gap-1.5 rounded-lg px-2 py-1.5\",\n            \"border border-border bg-input text-left text-sm\",\n            \"[box-shadow:var(--shadow-inset)]\",\n            \"transition-[box-shadow,border-color] duration-fast ease-out\",\n            \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-[0.1875rem] focus-visible:ring-ring/25\",\n            className,\n          )}\n        >\n          <span className=\"flex flex-1 flex-wrap items-center gap-1.5\">\n            {selected.length === 0 ? (\n              <span className=\"px-1.5 text-muted-foreground\">{placeholder}</span>\n            ) : (\n              selected.map((item) => (\n                <span\n                  key={item}\n                  className=\"inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground\"\n                >\n                  {options.find((option) => option.value === item)?.label ?? item}\n                  <X\n                    className=\"size-3 text-muted-foreground\"\n                    onClick={(event) => {\n                      event.stopPropagation();\n                      toggle(item);\n                    }}\n                  />\n                </span>\n              ))\n            )}\n          </span>\n          <ChevronDown className=\"size-4 shrink-0 text-muted-foreground\" />\n        </button>\n      </PopoverTrigger>\n      <PopoverContent align=\"start\" className=\"w-[var(--radix-popover-trigger-width)] p-1\">\n        {options.map((option) => (\n          <button\n            key={option.value}\n            type=\"button\"\n            onClick={() => toggle(option.value)}\n            className=\"flex w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-sm transition-colors hover:bg-accent hover:text-accent-foreground\"\n          >\n            <Check\n              className={cn(\n                \"size-3.5 text-primary\",\n                selected.includes(option.value) ? \"opacity-100\" : \"opacity-0\",\n              )}\n              strokeWidth={3}\n            />\n            {option.label}\n          </button>\n        ))}\n      </PopoverContent>\n    </Popover>\n  );\n};\nMultiSelect.displayName = \"MultiSelect\";\n\nexport { MultiSelect };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/popover.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

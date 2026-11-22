@@ -1,0 +1,22 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Burnished Skeleton: a placeholder pressed into the page as a shallow\n * well, breathing slowly while the real content loads.\n */\nconst Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"skeleton\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"animate-pulse rounded-md bg-(image:--fill-well) shadow-(--bevel-well) motion-reduce:animate-none\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nSkeleton.displayName = \"Skeleton\";\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
+      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
+      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

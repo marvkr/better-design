@@ -1,0 +1,30 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/*\n * Interior Button — a key you could press.\n *\n * The primary action is an ink fill, not a blue one: accent marks interaction\n * and focus, never \"this is the main button\". The secondary is a cap — a\n * bottom lip and a hairline all round. Every variant presses down 1px, keeps\n * its width when its state changes, and draws focus without a ring: filled\n * surfaces get an outside line in the inverted accent (the accent is chosen\n * against the surface it is drawn on, not against the page), light surfaces\n * get an accent border plus a lift.\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap select-none\",\n    \"rounded-[0.5625rem] text-[0.8125rem] font-medium leading-[1.25rem]\",\n    \"transition-[background-color,border-color,box-shadow,transform] duration-fast\",\n    \"focus-visible:outline-none\",\n    \"active:translate-y-px\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: [\n          \"bg-primary text-primary-foreground\",\n          \"shadow-[var(--shadow-thumb)]\",\n          \"hover:bg-primary/90\",\n          \"focus-visible:shadow-[var(--shadow-thumb),0_0_0_0.0938rem_var(--ring-inverted)]\",\n        ].join(\" \"),\n        secondary: [\n          \"bg-card text-foreground\",\n          \"shadow-[var(--shadow-cap)]\",\n          \"hover:bg-secondary\",\n          \"focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring),var(--shadow-focus-lift)]\",\n        ].join(\" \"),\n        outline: [\n          \"border border-border bg-transparent text-foreground\",\n          \"hover:bg-secondary hover:border-foreground/30\",\n          \"focus-visible:border-ring focus-visible:shadow-[var(--shadow-focus-lift)]\",\n        ].join(\" \"),\n        ghost: [\n          \"text-muted-foreground\",\n          \"hover:bg-secondary hover:text-foreground\",\n          \"focus-visible:bg-ring/[0.06] focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n        ].join(\" \"),\n        destructive: [\n          \"bg-destructive text-destructive-foreground\",\n          \"shadow-[var(--shadow-thumb)]\",\n          \"hover:bg-destructive/90\",\n          \"focus-visible:shadow-[var(--shadow-thumb),0_0_0_0.0938rem_var(--ring-inverted)]\",\n        ].join(\" \"),\n        link: \"text-accent-foreground underline-offset-4 hover:underline focus-visible:underline\",\n      },\n      size: {\n        default: \"h-10 px-4\",\n        sm: \"h-8 rounded-[0.5rem] px-3 text-xs\",\n        lg: \"h-11 px-5\",\n        icon: \"h-10 w-10 px-0\",\n        \"icon-sm\": \"h-8 w-8 px-0 rounded-[0.5rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)",
+      "shadow-focus-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.08), 0 0.625rem 1.25rem -0.875rem oklch(0.5832 0.227 268.34 / 0.6)"
+    },
+    "dark": {
+      "ring-inverted": "oklch(0.7666 0.1184 268.16)",
+      "shadow-cap": "0 0.0938rem 0 oklch(0.2161 0.0061 56.04 / 0.09), inset 0 0 0 0.0625rem oklch(0.2161 0.0061 56.04 / 0.11)",
+      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)",
+      "shadow-focus-lift": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.08), 0 0.625rem 1.25rem -0.875rem oklch(0.5832 0.227 268.34 / 0.6)"
+    }
+  }
+}

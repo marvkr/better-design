@@ -1,0 +1,19 @@
+{
+  "name": "date-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n// Amber Glass DatePicker: glass trigger opening the glass calendar.\n\ninterface DatePickerProps {\n  value?: Date\n  onChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: DatePickerProps) {\n  const [internal, setInternal] = React.useState<Date | undefined>(value)\n  const date = value ?? internal\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          disabled={disabled}\n          className={cn(\n            \"flex h-9 w-[15rem] items-center rounded-lg px-3 py-2 text-left text-sm font-medium\",\n            formFieldBase,\n            !date && \"text-muted-foreground\",\n            className\n          )}\n        >\n          <Icon icon=\"tabler:calendar\" className=\"mr-2 h-4 w-4 text-primary\" />\n          {date ? date.toLocaleDateString() : placeholder}\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\">\n        <Calendar\n          mode=\"single\"\n          selected={date}\n          onSelect={(next) => {\n            setInternal(next)\n            onChange?.(next)\n          }}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared.json",
+    "https://better-design.com/registry/ember/calendar.json",
+    "https://better-design.com/registry/ember/popover.json"
+  ]
+}

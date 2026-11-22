@@ -1,0 +1,14 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\n\n/*\n * Bevel Collapsible.\n *\n * A structural primitive with no surface of its own. It stays unstyled on\n * purpose, so the card, row or accordion that wraps it keeps ownership of the\n * shadow and the divider. Anything visible belongs to the caller.\n */\n\nconst Collapsible = CollapsiblePrimitive.Root\nconst CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger\nconst CollapsibleContent = CollapsiblePrimitive.CollapsibleContent\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible@^1.1.11"
+  ]
+}

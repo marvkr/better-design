@@ -33,7 +33,7 @@ function CodeBlock({
   return (
     <div
       className={cn(
-        "relative rounded-[12px] bg-foreground/[0.04] ring-1 ring-border overflow-hidden",
+        "relative rounded-[0.75rem] bg-foreground/[0.04] ring-1 ring-border overflow-hidden",
         className
       )}
       {...props}

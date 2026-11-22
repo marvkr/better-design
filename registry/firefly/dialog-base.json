@@ -1,0 +1,32 @@
+{
+  "name": "dialog-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"@/components/ui/button\";\n\n// Base UI accepts a state function for className; these wrappers merge it with\n// cn(), so they take a plain string.\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Firefly Dialog root: owns the open state of one modal window. */\nconst Dialog = DialogPrimitive.Root;\n\n/** The control that opens the dialog. */\nconst DialogTrigger = DialogPrimitive.Trigger;\n\n/** Moves the dialog to the end of the document body. */\nconst DialogPortal = DialogPrimitive.Portal;\n\n/** Closes the dialog. Use it to wrap a Cancel or Done button. */\nconst DialogClose = DialogPrimitive.Close;\n\n/**\n * Firefly dialog scrim: a half-tone ink veil over the page that fades in\n * over 200ms, so the white window reads as the only thing in front.\n */\nconst DialogOverlay = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<DialogPrimitive.Backdrop.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Backdrop\n    ref={ref}\n    data-slot=\"dialog-overlay\"\n    className={cn(\n      \"fixed inset-0 z-50 bg-(--scrim)\",\n      \"transition-opacity duration-base ease-out\",\n      \"data-[starting-style]:opacity-0 data-[ending-style]:opacity-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nDialogOverlay.displayName = \"DialogOverlay\";\n\n/**\n * Firefly dialog window: a raised white panel with a 1.5rem corner and the\n * far overlay shadow, no border. It grows from 97% as it fades in, and a\n * ghost pill in the top corner closes it.\n */\nconst DialogContent = React.forwardRef<\n  HTMLDivElement,\n  WithClassName<DialogPrimitive.Popup.Props>\n>(({ className, children, ...props }, ref) => (\n  <DialogPortal>\n    <DialogOverlay />\n    <DialogPrimitive.Popup\n      ref={ref}\n      data-slot=\"dialog-content\"\n      className={cn(\n        \"fixed top-1/2 left-1/2 z-50 grid w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4\",\n        \"rounded-2xl bg-popover p-6 text-popover-foreground shadow-(--shadow-overlay) outline-none\",\n        \"transition-[opacity,scale] duration-base ease-out\",\n        \"data-[starting-style]:scale-97 data-[starting-style]:opacity-0\",\n        \"data-[ending-style]:scale-97 data-[ending-style]:opacity-0\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <DialogPrimitive.Close\n        data-slot=\"dialog-close\"\n        className={cn(\n          buttonVariants({ variant: \"ghost\", size: \"icon-sm\" }),\n          \"absolute end-4 top-4 text-muted-foreground hover:text-foreground\",\n        )}\n      >\n        <Icon icon=\"carbon:close\" className=\"size-4\" aria-hidden=\"true\" />\n        <span className=\"sr-only\">Close</span>\n      </DialogPrimitive.Close>\n    </DialogPrimitive.Popup>\n  </DialogPortal>\n));\nDialogContent.displayName = \"DialogContent\";\n\n/** The title block at the top of a dialog. It leaves room for the close pill. */\nconst DialogHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-header\"\n    className={cn(\"flex flex-col gap-1.5 pe-8 text-start\", className)}\n    {...props}\n  />\n);\nDialogHeader.displayName = \"DialogHeader\";\n\n/**\n * The action row at the foot of a dialog. Buttons stack on a phone with the\n * main action on top, and sit in a row at the end from the small breakpoint.\n */\nconst DialogFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"dialog-footer\"\n    className={cn(\n      \"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n      className,\n    )}\n    {...props}\n  />\n);\nDialogFooter.displayName = \"DialogFooter\";\n\n/** The dialog title: large, semibold near-black ink with a tight line. */\nconst DialogTitle = React.forwardRef<\n  HTMLHeadingElement,\n  WithClassName<DialogPrimitive.Title.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Title\n    ref={ref}\n    data-slot=\"dialog-title\"\n    className={cn(\"text-lg font-semibold leading-tight text-foreground\", className)}\n    {...props}\n  />\n));\nDialogTitle.displayName = \"DialogTitle\";\n\n/** The supporting line under the title, in the softer secondary ink. */\nconst DialogDescription = React.forwardRef<\n  HTMLParagraphElement,\n  WithClassName<DialogPrimitive.Description.Props>\n>(({ className, ...props }, ref) => (\n  <DialogPrimitive.Description\n    ref={ref}\n    data-slot=\"dialog-description\"\n    className={cn(\"text-sm text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nDialogDescription.displayName = \"DialogDescription\";\n\nexport {\n  Dialog,\n  DialogPortal,\n  DialogOverlay,\n  DialogClose,\n  DialogTrigger,\n  DialogContent,\n  DialogHeader,\n  DialogFooter,\n  DialogTitle,\n  DialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.404 0.01 99.1)",
+      "scrim": "oklch(0.168 0.004 106.8 / 0.5)",
+      "shadow-overlay": "0 1.5rem 3rem -0.75rem oklch(0.26 0.028 95.8 / 0.24), 0 0.25rem 0.75rem oklch(0.26 0.028 95.8 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.829 0.013 96.5)",
+      "scrim": "oklch(0 0 0 / 0.64)",
+      "shadow-overlay": "0 1.5rem 3rem -0.75rem oklch(0 0 0 / 0.7), 0 0 0 0.0625rem oklch(0.299 0.009 106.9)"
+    }
+  }
+}

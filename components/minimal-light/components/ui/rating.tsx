@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 // Luxe Rating: star rating — white filled stars (monochromatic premium)
 // Empty stars are muted-foreground; hover previews fill; readonly mode supported
 
-export interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number
   onChange?: (value: number) => void
   max?: number
@@ -52,7 +52,7 @@ function Rating({
             onMouseLeave={() => !readonly && setHovered(null)}
             aria-label={`Rate ${i + 1} out of ${max}`}
             className={cn(
-              "transition-transform duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded-sm",
+              "transition-transform duration-fast focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded-sm",
               !readonly && "hover:scale-110 active:scale-95 cursor-pointer",
               readonly && "cursor-default pointer-events-none"
             )}
@@ -62,7 +62,7 @@ function Rating({
               viewBox="0 0 24 24"
               className={cn(
                 sizeMap[size],
-                "transition-colors duration-150",
+                "transition-colors duration-fast",
                 filled
                   ? "fill-primary text-primary"
                   : "fill-none text-muted-foreground/40 stroke-current stroke-2"

@@ -1,0 +1,380 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Ink mail: a near-black developer-tool system for email APIs, transactional
+  email dashboards and developer platforms. A true black page, off-white ink,
+  Inter for the interface, an editorial serif for display headings and Geist
+  Mono for code. Depth comes from translucent white hairlines and one step of
+  surface luminance, never from drop shadows. Off-white is the only solid
+  bright fill: the primary button and the checked controls. Colour appears
+  only as status (delivered, bounced, queued) and as faint atmospheric glows.
+  The system is dark only, so the .dark block repeats the same values.
+*/
+
+:root {
+  /* ─── Ground: true black, off-white ink ─── */
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.955 0.002 264);
+
+  --card: oklch(0.146 0.004 286);                 /* one luminance step above the page */
+  --card-foreground: oklch(0.955 0.002 264);
+
+  --popover: oklch(0.174 0.004 286);              /* the elevated step: menus and popovers */
+  --popover-foreground: oklch(0.955 0.002 264);
+
+  /* ─── Primary: the off-white fill, the brightest pixel on the page ─── */
+  --primary: oklch(0.955 0.002 264);
+  --primary-foreground: oklch(0 0 0);
+  --primary-hover: oklch(0.88 0.004 264);
+  --primary-active: oklch(0.974 0.011 252.1);     /* pressed: a cool blue-white */
+
+  /* ─── Glass: the translucent call to action beside the solid one ─── */
+  --glass: linear-gradient(104deg, oklch(1 0 0 / 0.05) 5%, oklch(0.95 0.01 100 / 0.1) 100%);
+  --glass-hover: linear-gradient(104deg, oklch(1 0 0 / 0.08) 5%, oklch(0.95 0.01 100 / 0.14) 100%);
+  --glass-edge: oklch(1 0 0 / 0.06);
+
+  --secondary: oklch(0.174 0.004 286);            /* quiet buttons, trays, segmented controls */
+  --secondary-foreground: oklch(0.955 0.002 264);
+
+  --muted: oklch(0.205 0.004 286);                /* tracks, wells, skeletons */
+  --muted-foreground: oklch(0.717 0.004 219.5);
+
+  --accent: oklch(0.22 0.004 286);                /* hover rows inside panels */
+  --accent-foreground: oklch(0.955 0.002 264);
+
+  --wash: oklch(1 0 0 / 0.1);                     /* the active sidebar row and selected chip */
+
+  --destructive: oklch(0.641 0.245 20.6);
+  --destructive-foreground: oklch(0 0 0);
+
+  --success: oklch(0.88 0.212 155.8);
+  --success-foreground: oklch(0 0 0);
+  --warning: oklch(0.854 0.157 84.1);
+  --warning-foreground: oklch(0 0 0);
+  --info: oklch(0.688 0.169 251.4);
+  --info-foreground: oklch(0 0 0);
+
+  --link: oklch(0.688 0.169 251.4);
+
+  --border: oklch(0.262 0.006 228);               /* the hairline, measured on the live docs */
+  --input: oklch(0.205 0.004 286);                /* a quiet well where a part fills with it */
+  --line-strong: oklch(1 0 0 / 0.14);             /* field edges and outline buttons */
+  --ring: oklch(1 0 0 / 0.42);
+  --radius: 0.75rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  /* ─── Ink ladder ─── */
+  --foreground-secondary: oklch(0.88 0.002 264);  /* body copy and nav links */
+  --foreground-disabled: oklch(0.407 0.007 240);
+  --control: oklch(0.52 0.006 240);               /* unchecked box edges: 3:1 on the card */
+  --field: oklch(0.146 0.004 286);
+  --scrim: oklch(0 0 0 / 0.72);
+
+  /* ─── Code: a deep, slightly cool well ─── */
+  --code: oklch(0.125 0.01 284.8);
+  --code-foreground: oklch(0.9 0.003 264);
+  --code-inline: oklch(1 0 0 / 0.08);
+  --syntax-keyword: oklch(0.74 0.16 15);
+  --syntax-string: oklch(0.85 0.15 155.8);
+  --syntax-fn: oklch(0.77 0.13 251.4);
+  --syntax-number: oklch(0.8 0.14 60);
+  --syntax-comment: oklch(0.6 0.006 240);
+  --dot-red: oklch(0.641 0.245 20.6);
+  --dot-yellow: oklch(0.854 0.157 84.1);
+  --dot-green: oklch(0.88 0.212 155.8);
+
+  /* ─── Status tints ─── */
+  --success-tint: oklch(0.88 0.212 155.8 / 0.12);
+  --success-text: oklch(0.88 0.19 155.8);
+  --warning-tint: oklch(0.854 0.157 84.1 / 0.12);
+  --warning-text: oklch(0.87 0.14 84.1);
+  --info-tint: oklch(0.688 0.169 251.4 / 0.14);
+  --info-text: oklch(0.78 0.13 251.4);
+  --destructive-tint: oklch(0.641 0.245 20.6 / 0.14);
+  --destructive-text: oklch(0.74 0.18 20.6);
+
+  /* ─── Atmosphere: low-opacity washes for a section top, never a fill ─── */
+  --glow-blue: oklch(0.593 0.223 258.4 / 0.34);
+  --glow-green: oklch(0.881 0.211 155.4 / 0.18);
+  --glow-orange: oklch(0.68 0.214 39.8 / 0.22);
+  --glow-red: oklch(0.641 0.245 20.6 / 0.34);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ─── Depth: hairlines, not shadows. Only floating panels cast one. ─── */
+  --shadow-xs: 0 0 0 0.0625rem oklch(1 0 0 / 0.06);
+  --shadow-sm: 0 0 0 0.0625rem oklch(1 0 0 / 0.08);
+  --shadow-md: 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.5rem 1.5rem -0.5rem oklch(0 0 0 / 0.6);
+  --shadow-lg: 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 1rem 2.5rem -0.75rem oklch(0 0 0 / 0.7);
+  --shadow-card: none;
+  --shadow-menu: 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 1rem 2rem -0.75rem oklch(0 0 0 / 0.8);
+  --shadow-overlay: 0 0 0 0.0625rem oklch(1 0 0 / 0.12), 0 2rem 4rem -1rem oklch(0 0 0 / 0.9);
+  --shadow-thumb: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5);
+
+  /* ─── Charts: an ink ladder, because colour stays for delivery status ─── */
+  --chart-1: oklch(0.955 0.002 264);
+  --chart-2: oklch(0.82 0.004 264);
+  --chart-3: oklch(0.7 0.005 250);
+  --chart-4: oklch(0.6 0.006 240);
+  --chart-5: oklch(0.5 0.006 240);
+
+  /* --- Motion (crisp profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 120ms;
+  --transition-duration-base: 160ms;
+  --transition-duration-slow: 220ms;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+.dark {
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.955 0.002 264);
+  --card: oklch(0.146 0.004 286);
+  --card-foreground: oklch(0.955 0.002 264);
+  --popover: oklch(0.174 0.004 286);
+  --popover-foreground: oklch(0.955 0.002 264);
+  --primary: oklch(0.955 0.002 264);
+  --primary-foreground: oklch(0 0 0);
+  --primary-hover: oklch(0.88 0.004 264);
+  --primary-active: oklch(0.974 0.011 252.1);
+  --secondary: oklch(0.174 0.004 286);
+  --secondary-foreground: oklch(0.955 0.002 264);
+  --muted: oklch(0.205 0.004 286);
+  --muted-foreground: oklch(0.717 0.004 219.5);
+  --accent: oklch(0.22 0.004 286);
+  --accent-foreground: oklch(0.955 0.002 264);
+  --destructive: oklch(0.641 0.245 20.6);
+  --destructive-foreground: oklch(0 0 0);
+  --border: oklch(0.262 0.006 228);
+  --input: oklch(0.205 0.004 286);
+  --ring: oklch(1 0 0 / 0.42);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-wash: var(--wash);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-link: var(--link);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-line-strong: var(--line-strong);
+  --color-ring: var(--ring);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-disabled: var(--foreground-disabled);
+  --color-control: var(--control);
+  --color-field: var(--field);
+  --color-scrim: var(--scrim);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-inline: var(--code-inline);
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-fn: var(--syntax-fn);
+  --color-syntax-number: var(--syntax-number);
+  --color-syntax-comment: var(--syntax-comment);
+  --color-success-tint: var(--success-tint);
+  --color-success-text: var(--success-text);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-text: var(--warning-text);
+  --color-info-tint: var(--info-tint);
+  --color-info-text: var(--info-text);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-text: var(--destructive-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);   /* 0.375rem  chips, inline code, checkboxes */
+  --radius-md: var(--radius-md);   /* 0.5rem    menu rows, tab chips */
+  --radius-lg: var(--radius-lg);   /* 0.75rem   fields, cards, popovers, dialogs, code wells */
+  --radius-xl: var(--radius-xl);   /* 1rem      buttons */
+  --radius-2xl: var(--radius-2xl); /* 1.5rem    large feature panels */
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  /* Display headings: the editorial serif, regular weight, set solid. */
+  :is(h1, h2) {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  /* Interface headings stay in Inter at medium weight. */
+  :is(h3, h4, h5, h6) {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
+}

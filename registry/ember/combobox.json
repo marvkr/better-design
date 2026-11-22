@@ -1,0 +1,19 @@
+{
+  "name": "combobox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/combobox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"./command\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n// Amber Glass Combobox demo: glass trigger + glass command list.\n\nconst frameworks = [\n  { value: \"next.js\", label: \"Next.js\" },\n  { value: \"sveltekit\", label: \"SvelteKit\" },\n  { value: \"nuxt.js\", label: \"Nuxt.js\" },\n  { value: \"remix\", label: \"Remix\" },\n  { value: \"astro\", label: \"Astro\" },\n]\n\nexport function ComboboxDemo() {\n  const [open, setOpen] = React.useState(false)\n  const [value, setValue] = React.useState(\"\")\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger asChild>\n        <button\n          type=\"button\"\n          role=\"combobox\"\n          aria-expanded={open}\n          className={cn(\n            \"flex h-9 w-[13.75rem] items-center justify-between rounded-lg px-3 py-2 text-sm font-medium\",\n            formFieldBase,\n            !value && \"text-muted-foreground\"\n          )}\n        >\n          {value\n            ? frameworks.find((framework) => framework.value === value)?.label\n            : \"Select framework...\"}\n          <Icon icon=\"tabler:selector\" className=\"ml-2 h-4 w-4 shrink-0 text-muted-foreground\" />\n        </button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-[13.75rem] p-0\">\n        <Command>\n          <CommandInput placeholder=\"Search framework...\" />\n          <CommandList>\n            <CommandEmpty>No framework found.</CommandEmpty>\n            <CommandGroup>\n              {frameworks.map((framework) => (\n                <CommandItem\n                  key={framework.value}\n                  value={framework.value}\n                  onSelect={(currentValue) => {\n                    setValue(currentValue === value ? \"\" : currentValue)\n                    setOpen(false)\n                  }}\n                >\n                  <Icon\n                    icon=\"tabler:check\"\n                    className={cn(\n                      \"mr-2 h-4 w-4 text-primary\",\n                      value === framework.value ? \"opacity-100\" : \"opacity-0\"\n                    )}\n                  />\n                  {framework.label}\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ember/_shared.json",
+    "https://better-design.com/registry/ember/command.json",
+    "https://better-design.com/registry/ember/popover.json"
+  ]
+}

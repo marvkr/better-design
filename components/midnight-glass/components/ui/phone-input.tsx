@@ -50,7 +50,7 @@ function PhoneInput({
 
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) setOpen(false)
     }
     document.addEventListener("mousedown", handler)
     return () => document.removeEventListener("mousedown", handler)
@@ -70,10 +70,10 @@ function PhoneInput({
         onClick={() => setOpen((o) => !o)}
         className={cn(
           "flex h-12 items-center gap-1.5 rounded-l-full border border-r-0 border-white/[0.08] backdrop-blur-xl bg-white/[0.07] px-5",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
-          "text-[15px] font-medium text-white/90 transition-colors",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
+          "text-[0.9375rem] font-medium text-white/90 transition-colors",
           "hover:bg-white/[0.1]",
-          "focus-visible:outline-none focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)]",
+          "focus-visible:outline-none focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)]",
           disabled && "cursor-not-allowed opacity-60"
         )}
       >
@@ -89,11 +89,11 @@ function PhoneInput({
         placeholder={placeholder}
         disabled={disabled}
         className={cn(
-          "h-12 flex-1 rounded-r-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05] px-5 text-[15px]",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
+          "h-12 flex-1 rounded-r-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05] px-5 text-[0.9375rem]",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
           "text-white/90 placeholder:text-white/40",
-          "focus-visible:outline-none focus-visible:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)] focus-visible:border-primary/50",
-          "transition duration-300",
+          "focus-visible:outline-none focus-visible:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)] focus-visible:border-primary/50",
+          "transition duration-slow",
           "hover:bg-white/[0.07] hover:border-white/[0.12]",
           disabled && "cursor-not-allowed opacity-60"
         )}
@@ -101,14 +101,14 @@ function PhoneInput({
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute left-0 top-14 z-50 w-56 rounded-xl border border-white/[0.08] backdrop-blur-2xl bg-white/[0.07] p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_6px_rgba(255,255,255,0.05)]">
+        <div className="absolute left-0 top-14 z-50 w-56 rounded-xl border border-white/[0.08] backdrop-blur-2xl bg-white/[0.07] p-1.5 shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.375rem_oklch(1_0_0/0.05)]">
           {COUNTRIES.map((c) => (
             <button
               key={c.code}
               type="button"
               onClick={() => handleSelect(c)}
               className={cn(
-                "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[15px]",
+                "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[0.9375rem]",
                 "transition-colors hover:bg-white/[0.07]",
                 country?.code === c.code
                   ? "text-primary font-medium"

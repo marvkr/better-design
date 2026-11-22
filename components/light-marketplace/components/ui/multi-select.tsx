@@ -59,7 +59,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
 
     React.useEffect(() => {
       const handler = (e: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        if (containerRef.current && !(e.target instanceof Node && containerRef.current.contains(e.target))) {
           setOpen(false)
         }
       }
@@ -80,7 +80,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
             aria-haspopup="listbox"
             aria-expanded={open}
             className={cn(
-              "flex min-h-[44px] w-full items-center justify-between gap-2",
+              "flex min-h-[2.75rem] w-full items-center justify-between gap-2",
               "rounded-xl border border-border bg-background px-3 py-2 text-sm",
               "focus-visible:outline-none focus-visible:border-ring transition-colors",
               "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -110,7 +110,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
             </div>
             <ChevronDown
               className={cn(
-                "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150",
+                "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-fast",
                 open && "rotate-180",
               )}
             />
@@ -122,7 +122,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
               role="listbox"
               aria-multiselectable="true"
               className={cn(
-                "absolute z-50 mt-1.5 w-full rounded-[14px] border border-border",
+                "absolute z-50 mt-1.5 w-full rounded-[0.875rem] border border-border",
                 "bg-background shadow-md py-1 max-h-60 overflow-y-auto",
               )}
             >

@@ -1,0 +1,14 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { softPanel } from \"./_shared\";\n\n/**\n * Mallow Empty: the frameless parts of an empty state, an icon on a small\n * violet-ringed tile with a centred title and description under it.\n */\nconst Empty = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty\"\n      className={cn(\"flex flex-col items-center justify-center gap-3 p-8 text-center\", className)}\n      {...props}\n    />\n  ),\n);\nEmpty.displayName = \"Empty\";\n\nconst EmptyIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-icon\"\n      className={cn(\n        softPanel,\n        \"mb-1 flex size-12 items-center justify-center rounded-md text-muted-foreground [&_svg]:size-5\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nEmptyIcon.displayName = \"EmptyIcon\";\n\nconst EmptyTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-title\"\n      className={cn(\"text-base font-medium text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nEmptyTitle.displayName = \"EmptyTitle\";\n\nconst EmptyDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"empty-description\"\n    className={cn(\"max-w-md text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nEmptyDescription.displayName = \"EmptyDescription\";\n\nconst EmptyActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty-actions\"\n      className={cn(\"flex items-center gap-3 pt-2\", className)}\n      {...props}\n    />\n  ),\n);\nEmptyActions.displayName = \"EmptyActions\";\n\nexport { Empty, EmptyIcon, EmptyTitle, EmptyDescription, EmptyActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ]
+}

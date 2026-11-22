@@ -1,0 +1,23 @@
+{
+  "name": "rating",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/rating.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Rating: signal-strength stars. Filled stars glow in\n// caution amber against the dark console.\n\nexport interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: number\n  max?: number\n  onChange?: (value: number) => void\n  readonly?: boolean\n}\n\nconst Rating = React.forwardRef<HTMLDivElement, RatingProps>(\n  (\n    { className, value = 0, max = 5, onChange, readonly = false, ...props },\n    ref\n  ) => {\n    const [hovered, setHovered] = React.useState(-1)\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"inline-flex items-center gap-0.5\", className)}\n        {...props}\n      >\n        {Array.from({ length: max }, (_, i) => (\n          <button\n            key={i}\n            type=\"button\"\n            disabled={readonly}\n            aria-label={`Rate ${i + 1} ${i === 0 ? \"star\" : \"stars\"}`}\n            aria-pressed={value >= i + 1}\n            className={cn(\n              \"transition-transform duration-fast\",\n              !readonly && \"cursor-pointer hover:scale-110\",\n              \"disabled:cursor-default\"\n            )}\n            onMouseEnter={() => !readonly && setHovered(i)}\n            onMouseLeave={() => !readonly && setHovered(-1)}\n            onClick={() => onChange?.(i + 1)}\n          >\n            <Icon\n              icon={\n                i < (hovered >= 0 ? hovered + 1 : value)\n                  ? \"tabler:star-filled\"\n                  : \"tabler:star\"\n              }\n              className={cn(\n                \"size-5\",\n                i < (hovered >= 0 ? hovered + 1 : value)\n                  ? \"text-(--warning) drop-shadow-[0_0_0.25rem_oklch(0.78_0.16_75/0.5)]\"\n                  : \"text-border\"\n              )}\n            />\n          </button>\n        ))}\n      </div>\n    )\n  }\n)\nRating.displayName = \"Rating\"\n\nexport { Rating }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "warning": "oklch(0.78 0.16 75)"
+    },
+    "dark": {
+      "warning": "oklch(0.78 0.16 75)"
+    }
+  }
+}

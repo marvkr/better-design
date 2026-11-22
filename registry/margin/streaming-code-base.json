@@ -1,0 +1,38 @@
+{
+  "name": "streaming-code-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/streaming-code.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\nimport { cn } from \"@/lib/utils\"\nimport { focusRing } from \"./_shared\"\n\n// StreamingCode: code an agent is writing arrives line by line on a white\n// sheet, with a faint line-number gutter, the editor's clause inks and a\n// copy pill in the bar above.\n//\n// Usage:\n//   <StreamingCode />\n//   <StreamingCode filename=\"report.py\" language=\"Python\" lines={...} raw=\"...\" />\n\nconst LINE_MS = 220\nconst HOLD_MS = 3200\n\ntype CodeToken = { t: string; c?: \"kw\" | \"str\" | \"num\" | \"fn\" | \"dim\" }\n\nconst DEFAULT_LINES: CodeToken[][] = [\n  [{ t: \"# summarise a week of page visits\", c: \"dim\" }],\n  [{ t: \"\" }],\n  [{ t: \"def \", c: \"kw\" }, { t: \"weekly_summary\", c: \"fn\" }, { t: \"(visits):\" }],\n  [{ t: \"    total = \" }, { t: \"sum\", c: \"fn\" }, { t: \"(visits)\" }],\n  [{ t: \"    average = \" }, { t: \"round\", c: \"fn\" }, { t: \"(total / \" }, { t: \"7\", c: \"num\" }, { t: \", \" }, { t: \"1\", c: \"num\" }, { t: \")\" }],\n  [{ t: \"    \", }, { t: \"return \", c: \"kw\" }, { t: \"{\" }, { t: \"\\\"total\\\"\", c: \"str\" }, { t: \": total, \" }, { t: \"\\\"average\\\"\", c: \"str\" }, { t: \": average}\" }],\n]\n\nconst DEFAULT_RAW = `# summarise a week of page visits\n\ndef weekly_summary(visits):\n    total = sum(visits)\n    average = round(total / 7, 1)\n    return {\"total\": total, \"average\": average}`\n\n/** The class each token kind takes from Margin's editor palette. */\nconst TONE: { [tone in NonNullable<CodeToken[\"c\"]>]: string } = {\n  kw: \"text-(--clause-keyword)\",\n  str: \"text-(--clause-string)\",\n  num: \"text-(--clause-number)\",\n  fn: \"text-(--clause-fn)\",\n  dim: \"text-(--clause-comment)\",\n}\n\ninterface StreamingCodeProps extends React.HTMLAttributes<HTMLDivElement> {\n  filename?: string\n  language?: string\n  lines?: CodeToken[][]\n  /** Plain-text form used by the copy button. */\n  raw?: string\n  /** Alternative to lines/raw: plain code split on newlines, no token colours. */\n  code?: string\n}\n\n/**\n * Margin StreamingCode: lines appear one at a time on a white code sheet\n * behind a thin oxblood caret, hold once the block is complete, then replay.\n */\nfunction StreamingCode({\n  filename = \"summary.py\",\n  language = \"Python\",\n  lines,\n  raw,\n  code,\n  className,\n  ...props\n}: StreamingCodeProps) {\n  const tokenLines = React.useMemo<CodeToken[][]>(() => {\n    if (lines) return lines\n    if (code) return code.split(\"\\n\").map((text) => [{ t: text || \" \" }])\n    return DEFAULT_LINES\n  }, [lines, code])\n  const rawText = raw ?? code ?? DEFAULT_RAW\n\n  const [count, setCount] = React.useState(0)\n  const [copied, setCopied] = React.useState(false)\n  const done = count >= tokenLines.length\n\n  React.useEffect(() => {\n    const t = setTimeout(\n      () => setCount((c) => (c >= tokenLines.length ? 0 : c + 1)),\n      count === 0 ? 400 : done ? HOLD_MS : LINE_MS,\n    )\n    return () => clearTimeout(t)\n  }, [count, done, tokenLines.length])\n\n  React.useEffect(() => {\n    if (!copied) return\n    const t = setTimeout(() => setCopied(false), 1600)\n    return () => clearTimeout(t)\n  }, [copied])\n\n  const copy = React.useCallback(() => {\n    navigator.clipboard\n      .writeText(rawText)\n      .then(() => setCopied(true))\n      .catch(() => {\n        // The clipboard may be unavailable. The code stays selectable.\n      })\n  }, [rawText])\n\n  return (\n    <div\n      data-slot=\"streaming-code\"\n      className={cn(\"flex w-full max-w-md flex-col gap-2\", className)}\n      {...props}\n    >\n      <div className=\"flex items-center justify-between gap-2\">\n        <span className=\"inline-flex h-7 min-w-0 items-center gap-2 rounded-lg bg-card px-2.5 text-sm shadow-sm\">\n          <span className=\"truncate text-foreground\">{filename}</span>\n          <span className=\"text-xs text-muted-foreground\">{language}</span>\n        </span>\n        <button\n          aria-label={copied ? \"Copied\" : \"Copy code\"}\n          type=\"button\"\n          onClick={copy}\n          className={cn(\n            focusRing,\n            \"grid size-7 place-items-center rounded-lg bg-card shadow-sm transition-colors duration-fast hover:bg-accent\",\n            copied ? \"text-(--primary-text)\" : \"text-muted-foreground hover:text-foreground\",\n          )}\n        >\n          <Icon\n            icon={copied ? \"solar:check-circle-linear\" : \"solar:copy-linear\"}\n            className=\"size-4\"\n            aria-hidden=\"true\"\n          />\n        </button>\n        <span className=\"sr-only\" aria-live=\"polite\">\n          {copied ? \"Copied\" : \"\"}\n        </span>\n      </div>\n\n      <pre\n        aria-busy={!done}\n        className=\"m-0 min-h-40 overflow-x-auto rounded-xl border border-border bg-card py-3.5 pe-4 font-mono text-xs leading-6 text-foreground\"\n      >\n        {tokenLines.slice(0, count).map((line, i) => (\n          <div key={i} className=\"flex animate-in fade-in slide-in-from-bottom-1 duration-base\">\n            <span\n              aria-hidden=\"true\"\n              className=\"w-9 shrink-0 select-none pe-4 text-right tabular-nums text-(--clause-gutter)\"\n            >\n              {i + 1}\n            </span>\n            <span className=\"whitespace-pre\">\n              {line.map((tok, j) => (\n                <span key={j} className={tok.c ? TONE[tok.c] : undefined}>\n                  {tok.t}\n                </span>\n              ))}\n              {i === count - 1 && !done && (\n                <span\n                  aria-hidden=\"true\"\n                  className=\"ms-0.5 inline-block h-3.5 w-0.5 translate-y-0.5 animate-pulse rounded-full bg-primary motion-reduce:animate-none\"\n                />\n              )}\n            </span>\n          </div>\n        ))}\n      </pre>\n    </div>\n  )\n}\n\nexport { StreamingCode }\nexport type { CodeToken }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.42 0.13 25)",
+      "clause-comment": "oklch(0.55 0.015 85)",
+      "clause-keyword": "oklch(0.42 0.13 25)",
+      "clause-fn": "oklch(0.4 0.05 245)",
+      "clause-string": "oklch(0.42 0.08 115)",
+      "clause-number": "oklch(0.47 0.1 65)",
+      "clause-gutter": "oklch(0.58 0.015 85)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.76 0.1 25)",
+      "clause-comment": "oklch(0.62 0.015 85)",
+      "clause-keyword": "oklch(0.78 0.09 25)",
+      "clause-fn": "oklch(0.8 0.05 245)",
+      "clause-string": "oklch(0.8 0.08 115)",
+      "clause-number": "oklch(0.82 0.1 78)",
+      "clause-gutter": "oklch(0.56 0.015 85)"
+    }
+  }
+}

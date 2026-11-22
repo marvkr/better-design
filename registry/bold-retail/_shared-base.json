@@ -1,0 +1,37 @@
+{
+  "name": "_shared-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared field and surface styles for the Base UI variant of Bold retail.\n *\n * These mirror `../components/_shared.ts`, so a Base UI component and its\n * Radix twin render the same field, the same floating panel and the same\n * black controls. Base UI marks state with bare attributes (data-checked,\n * data-highlighted, data-pressed, data-disabled), so the state selectors\n * differ from the Radix file. Import from here instead of re-declaring the\n * classes, or the two variants drift apart.\n */\n\n/** Base styles shared by every form-field surface (Input, Select trigger, etc.) */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-lg border border-(--line-strong) bg-(--field) px-4 text-base text-foreground \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-(--control) \" +\n  \"focus-visible:border-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-(--halo) \" +\n  \"disabled:cursor-not-allowed disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:placeholder:text-(--foreground-disabled) \" +\n  \"data-[disabled]:cursor-not-allowed data-[disabled]:bg-secondary data-[disabled]:text-(--foreground-disabled)\";\n\n/** Height + vertical padding for single-line form fields (3rem, the button height) */\nexport const formFieldSingleLine = \"flex h-12 py-3\";\n\n/** Vertical padding and min-height for multi-line form fields */\nexport const formFieldMultiLine = \"flex min-h-28 py-3\";\n\n/**\n * The soft grey search pill from the store header: filled, borderless, a\n * 1.5rem corner. Focus turns it white with a black edge and the grey halo.\n */\nexport const searchPill =\n  \"w-full min-w-0 rounded-3xl border border-transparent bg-secondary px-4 text-base text-foreground \" +\n  \"placeholder:text-muted-foreground transition-[background-color,border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:bg-(--secondary-hover) \" +\n  \"focus-visible:border-foreground focus-visible:bg-background focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-(--halo) \" +\n  \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\";\n\n/**\n * The floating panel every Base UI menu opens onto: a white panel with a\n * 1rem corner, edged by the hairline ring inside its soft shadow token.\n */\nexport const popoverSurface =\n  \"rounded-xl bg-popover text-popover-foreground shadow-(--shadow-menu) outline-none\";\n\n/** Popups fade in and settle from their anchor, and leave a little faster. */\nexport const popupMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale,translate] duration-fast ease-out \" +\n  \"data-[starting-style]:scale-98 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-98 data-[ending-style]:opacity-0 data-[ending-style]:duration-fast\";\n\n/** The popover settles at the system's base duration, both ways. */\nexport const popoverMotion =\n  \"origin-(--transform-origin) transition-[opacity,scale,translate] duration-base ease-out \" +\n  \"data-[starting-style]:scale-98 data-[starting-style]:opacity-0 \" +\n  \"data-[ending-style]:scale-98 data-[ending-style]:opacity-0\";\n\n/** A highlighted row inside a floating panel: soft grey fill, 0.5rem corner. */\nexport const menuItemBase =\n  \"relative flex min-h-9 cursor-default select-none items-center gap-2 rounded-md px-3 py-2 text-sm font-medium outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:text-(--foreground-disabled)\";\n\n/** The primary fill: flat black. Hover lifts it to charcoal. */\nexport const primaryFill =\n  \"bg-primary text-primary-foreground hover:bg-(--primary-hover) active:bg-(--primary-active)\";\n\n/** The same flat black on a small checked Base UI control (checkbox, radio, switch). */\nexport const controlChecked =\n  \"data-[checked]:border-primary data-[checked]:bg-primary data-[checked]:text-primary-foreground \" +\n  \"data-[disabled]:data-[checked]:border-(--line-strong) data-[disabled]:data-[checked]:bg-muted \" +\n  \"data-[disabled]:data-[checked]:text-(--foreground-disabled)\";\n\n/** A pressed Base UI toggle or chip: it flips fully to black with white text. */\nexport const activeInvert =\n  \"data-[pressed]:border-primary data-[pressed]:bg-primary data-[pressed]:text-primary-foreground\";\n\n/** The focus ring every interactive element uses: a black ring offset from the part. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-hover": "oklch(0.345 0.003 286.2)",
+      "primary-active": "oklch(0.414 0.003 286.3)",
+      "secondary-hover": "oklch(0.922 0 0)",
+      "line-strong": "oklch(0.62 0.003 286.3)",
+      "halo": "oklch(0.922 0 0)",
+      "foreground-disabled": "oklch(0.7 0.003 286.3)",
+      "control": "oklch(0.546 0.003 286.3)",
+      "field": "oklch(1 0 0)",
+      "shadow-menu": "0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.18), 0 0 0 0.0625rem oklch(0.178 0 0 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-hover": "oklch(0.922 0 0)",
+      "primary-active": "oklch(0.839 0.001 286.4)",
+      "secondary-hover": "oklch(0.31 0 0)",
+      "line-strong": "oklch(1 0 0 / 0.32)",
+      "halo": "oklch(1 0 0 / 0.16)",
+      "foreground-disabled": "oklch(0.45 0.003 286.3)",
+      "control": "oklch(0.7 0.003 286.3)",
+      "field": "oklch(0.178 0 0)",
+      "shadow-menu": "0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.12)"
+    }
+  }
+}

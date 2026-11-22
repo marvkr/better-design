@@ -3,8 +3,7 @@
 import * as React from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
-
-// Stripe Password Input: input with show/hide toggle
+import { formFieldBase } from "./_shared"
 
 export interface PasswordInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {}
@@ -18,13 +17,8 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
         <input
           type={showPassword ? "text" : "password"}
           className={cn(
-            "flex h-10 w-full rounded-[10px] border border-border bg-background px-3 py-2 pr-10 text-sm",
-            "shadow-[0_1px_2px_0_rgb(0_0_0/0.04)]",
-            "placeholder:text-muted-foreground",
-            "transition duration-200 ease-out",
-            "hover:border-foreground/30",
-            "focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[0_0_0_3px_rgb(0_0_0/0.06)]",
-            "disabled:cursor-not-allowed disabled:bg-secondary disabled:opacity-70",
+            formFieldBase,
+            "flex h-9 px-3 py-2 pr-10",
             className
           )}
           ref={ref}

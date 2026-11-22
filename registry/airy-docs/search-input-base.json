@@ -1,0 +1,27 @@
+{
+  "name": "search-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/search-input.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  onClear?: () => void;\n}\n\n/**\n * Airy docs SearchInput: the docs search pill. A pale tray with a full round\n * end and a muted magnifier at its start, so it reads as \"search the docs\"\n * rather than a form field. Once it holds a query and a clear handler is\n * given, a small clear button appears at its end.\n */\nconst SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(\n  ({ className, type = \"search\", value, onClear, ...props }, ref) => {\n    const showClear = Boolean(onClear && value);\n\n    return (\n      <div data-slot=\"search-input\" className=\"relative\">\n        <Icon\n          icon=\"feather:search\"\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute start-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground\"\n        />\n        <input\n          ref={ref}\n          type={type}\n          value={value}\n          className={cn(\n            formFieldBase,\n            formFieldSingleLine,\n            \"h-9 rounded-full border-border bg-secondary ps-10 [&::-webkit-search-cancel-button]:appearance-none\",\n            \"focus-visible:bg-(--field)\",\n            showClear && \"pe-10\",\n            className,\n          )}\n          {...props}\n        />\n        {showClear && (\n          <button\n            type=\"button\"\n            onClick={onClear}\n            aria-label=\"Clear search\"\n            className={cn(\n              \"absolute end-1.5 top-1/2 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground\",\n              \"transition-colors duration-fast ease-out\",\n              \"hover:bg-muted hover:text-foreground\",\n              \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n            )}\n          >\n            <Icon icon=\"feather:x\" className=\"size-3.5\" aria-hidden=\"true\" />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\nSearchInput.displayName = \"SearchInput\";\n\nexport { SearchInput };\nexport type { SearchInputProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/airy-docs/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(1 0 0)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "field": "oklch(0.18 0.006 190)"
+    }
+  }
+}

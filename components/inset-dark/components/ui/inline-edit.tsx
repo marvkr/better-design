@@ -21,6 +21,8 @@ const InlineEdit = React.forwardRef<HTMLInputElement, InlineEditProps>(
     const [draft, setDraft] = React.useState(value)
     const inputRef = React.useRef<HTMLInputElement>(null)
 
+    // SAFETY: the handle is read only after mount, when the element this
+    // component renders is attached, so the ref is non-null.
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
 
     React.useEffect(() => {
@@ -61,7 +63,7 @@ const InlineEdit = React.forwardRef<HTMLInputElement, InlineEditProps>(
         disabled={disabled}
         className={cn(
           "group inline-flex items-center gap-2 rounded-md px-2 py-1 text-sm text-left",
-          "transition-[background-color,box-shadow] duration-150",
+          "transition-[background-color,box-shadow] duration-fast",
           "hover:bg-accent hover:[box-shadow:var(--shadow-s)]",
           "focus:outline-none focus:ring-2 focus:ring-ring/40",
           "disabled:cursor-not-allowed disabled:opacity-50",
@@ -71,7 +73,7 @@ const InlineEdit = React.forwardRef<HTMLInputElement, InlineEditProps>(
         <span className={cn(!value && "text-muted-foreground")}>{value || placeholder}</span>
         <Icon
           icon="tabler:pencil"
-          className="h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+          className="h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity duration-fast group-hover:opacity-100"
         />
       </button>
     )

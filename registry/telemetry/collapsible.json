@@ -1,0 +1,14 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Control Room Collapsible: expandable diagnostics row.\n// Trigger reads as a panel header strip; content as the recessed log body.\n\nconst Collapsible = CollapsiblePrimitive.Root\n\nconst CollapsibleTrigger = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleTrigger>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleTrigger\n    ref={ref}\n    className={cn(\n      \"flex w-full items-center justify-between rounded-sm px-4 py-2.5\",\n      \"bg-card border border-border\",\n      \"text-xs font-semibold uppercase tracking-wider text-foreground\",\n      \"transition-colors duration-fast\",\n      \"hover:border-ring/40 hover:text-primary\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n      \"[&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-b-0\",\n      className\n    )}\n    {...props}\n  />\n))\nCollapsibleTrigger.displayName =\n  CollapsiblePrimitive.CollapsibleTrigger.displayName\n\nconst CollapsibleContent = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleContent>,\n  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleContent>\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleContent\n    ref={ref}\n    className={cn(\n      \"overflow-hidden rounded-b-sm\",\n      \"bg-background border border-t-0 border-border\",\n      \"data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down\",\n      className\n    )}\n    {...props}\n  />\n))\nCollapsibleContent.displayName =\n  CollapsiblePrimitive.CollapsibleContent.displayName\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible@^1.1.11"
+  ]
+}

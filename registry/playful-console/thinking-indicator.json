@@ -1,0 +1,27 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/thinking-indicator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for ThinkingIndicator: the words it cycles through and how fast. */\ninterface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  words?: string[];\n  intervalMs?: number;\n}\n\nconst DEFAULT_WORDS = [\"Thinking\", \"Reading\", \"Working it out\", \"Writing\"];\n\n/** One marker colour per hopping block: orange, then blue, then purple. */\nconst BLOCK_TONES = [\"bg-primary\", \"bg-(--info)\", \"bg-(--note)\"] as const;\n\n/**\n * Playful console ThinkingIndicator: three small marker blocks that hop in\n * turn, beside a bold word that changes every couple of seconds.\n *\n * The blocks borrow the orange, blue and purple highlights so the wait feels\n * friendly rather than grey. Each new word drops into place as the old one\n * leaves. A screen reader hears the first word once, not every change, and\n * with reduced motion on the blocks hold still.\n */\nfunction ThinkingIndicator({\n  words = DEFAULT_WORDS,\n  intervalMs = 1800,\n  className,\n  ...props\n}: ThinkingIndicatorProps) {\n  const [index, setIndex] = React.useState(0);\n  const reduceMotion = useReducedMotion();\n  const count = words.length;\n\n  React.useEffect(() => {\n    if (count < 2) return;\n    const timer = setInterval(\n      () => setIndex((current) => (current + 1) % count),\n      intervalMs,\n    );\n    return () => clearInterval(timer);\n  }, [count, intervalMs]);\n\n  const word = words[index % Math.max(count, 1)] ?? \"\";\n\n  return (\n    <div\n      role=\"status\"\n      data-slot=\"thinking-indicator\"\n      className={cn(\n        \"inline-flex items-center gap-2.5 text-sm font-semibold text-(--foreground-secondary)\",\n        className,\n      )}\n      {...props}\n    >\n      <span className=\"sr-only\">{words[0] ?? \"Thinking\"}</span>\n      <span aria-hidden=\"true\" className=\"flex h-4 items-end gap-1\">\n        {BLOCK_TONES.map((tone, dot) => (\n          <motion.span\n            key={tone}\n            className={cn(\"size-2 rounded-[0.125rem]\", tone)}\n            animate={reduceMotion ? { y: 0 } : { y: [0, -5, 0] }}\n            transition={\n              reduceMotion\n                ? { duration: 0 }\n                : {\n                    duration: 0.9,\n                    repeat: Infinity,\n                    ease: \"easeOut\",\n                    delay: dot * 0.15,\n                  }\n            }\n          />\n        ))}\n      </span>\n      <span\n        aria-hidden=\"true\"\n        className=\"relative inline-flex h-5 items-center overflow-hidden\"\n      >\n        <AnimatePresence mode=\"wait\" initial={false}>\n          <motion.span\n            key={word}\n            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}\n            animate={{ opacity: 1, y: 0 }}\n            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}\n            transition={{ duration: 0.15, ease: \"easeOut\" }}\n            className=\"whitespace-nowrap\"\n          >\n            {word}\n          </motion.span>\n        </AnimatePresence>\n      </span>\n    </div>\n  );\n}\n\nexport { ThinkingIndicator };\nexport type { ThinkingIndicatorProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "info": "oklch(0.609 0.162 253.1)",
+      "note": "oklch(0.584 0.255 318.3)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "info": "oklch(0.7 0.15 258)",
+      "note": "oklch(0.7 0.2 318)"
+    }
+  }
+}

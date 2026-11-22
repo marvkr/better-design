@@ -1,0 +1,28 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded border border-border\",\n        \"bg-input [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background-color,box-shadow,border-color] duration-fast\",\n        \"hover:border-ring/40\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:[background-image:var(--metal)] data-checked:border-transparent data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n        \"data-indeterminate:bg-primary data-indeterminate:[background-image:var(--metal)] data-indeterminate:border-transparent data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        {props.indeterminate ? (\n          <Icon icon=\"ph:minus\" className=\"h-3 w-3\" />\n        ) : (\n          <Icon icon=\"ph:check\" className=\"h-3 w-3\" />\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.8), inset 0 -0.0625rem 0.125rem oklch(1 0 0 / 0.05)",
+      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)"
+    },
+    "dark": {
+      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
+      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.8), inset 0 -0.0625rem 0.125rem oklch(1 0 0 / 0.05)",
+      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+/* Ported from https://www.aicss.dev/components/image-generation */
+.igWrap { display: flex; flex-direction: column; align-items: center; gap: 0.875rem; }
+.igCanvas { position: relative; width: 100%; max-width: 13rem; aspect-ratio: 1 / 1; border-radius: 0.75rem; background: var(--muted); overflow: hidden; }
+.igDots { position: absolute; inset: 0.125rem; background-image: radial-gradient(circle, var(--muted-foreground) 0.04375rem, transparent 0.08125rem); background-size: 0.6875rem 0.6875rem; background-repeat: space; opacity: 0.22; }
+.igGlow { position: absolute; inset: 0.125rem; background-image: radial-gradient(circle, var(--foreground) 0.06875rem, transparent 0.1rem); background-size: 0.6875rem 0.6875rem; background-repeat: space; -webkit-mask-image: radial-gradient(ellipse at center, oklch(0 0 0) 0%, transparent 60%), radial-gradient(ellipse at center, oklch(0 0 0) 0%, transparent 62%); mask-image: radial-gradient(ellipse at center, oklch(0 0 0) 0%, transparent 60%), radial-gradient(ellipse at center, oklch(0 0 0) 0%, transparent 62%); -webkit-mask-repeat: no-repeat, no-repeat; mask-repeat: no-repeat, no-repeat; -webkit-mask-size: 72% 62%, 52% 52%; mask-size: 72% 62%, 52% 52%; -webkit-mask-position: 16% 20%, 30% 32%; mask-position: 16% 20%, 30% 32%; animation: ig-morph 4.2s cubic-bezier(0.35, 1.55, 0.65, 1) infinite, ig-breathe 1.9s cubic-bezier(0.66, 0, 0.34, 1) infinite; }
+@keyframes ig-morph {
+  0% { -webkit-mask-size: 52% 46%, 40% 40%; mask-size: 52% 46%, 40% 40%; -webkit-mask-position: 16% 20%, 30% 32%; mask-position: 16% 20%, 30% 32%; }
+  25% { -webkit-mask-size: 46% 58%, 44% 38%; mask-size: 46% 58%, 44% 38%; -webkit-mask-position: 84% 16%, 66% 30%; mask-position: 84% 16%, 66% 30%; }
+  50% { -webkit-mask-size: 60% 44%, 38% 46%; mask-size: 60% 44%, 38% 46%; -webkit-mask-position: 82% 84%, 62% 68%; mask-position: 82% 84%, 62% 68%; }
+  75% { -webkit-mask-size: 48% 54%, 46% 40%; mask-size: 48% 54%, 46% 40%; -webkit-mask-position: 14% 82%, 34% 66%; mask-position: 14% 82%, 34% 66%; }
+  100% { -webkit-mask-size: 52% 46%, 40% 40%; mask-size: 52% 46%, 40% 40%; -webkit-mask-position: 16% 20%, 30% 32%; mask-position: 16% 20%, 30% 32%; }
+}
+@keyframes ig-breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+.igRes { position: absolute; top: 0.5rem; right: 0.5rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.6875rem; color: var(--muted-foreground); background: color-mix(in oklch, var(--card) 72%, transparent); padding: 0.125rem 0.4375rem; border-radius: 62.4375rem; backdrop-filter: blur(0.25rem); }
+.igMeta { display: flex; flex-direction: column; gap: 0.125rem; align-items: flex-start; text-align: left; width: 100%; max-width: 13rem; }
+.igLabel { background: linear-gradient(90deg, var(--foreground) 0%, var(--foreground) 30%, color-mix(in oklch, var(--foreground) 45%, transparent) 45%, color-mix(in oklch, var(--foreground) 45%, transparent) 55%, var(--foreground) 70%, var(--foreground) 100%); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: ig-shine 2.25s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; font-weight: 550; font-size: 0.875rem; }
+@keyframes ig-shine { 0%, 18% { background-position: 100% 0; } 82%, 100% { background-position: 0% 0; } }
+.igPrompt { color: var(--muted-foreground); font-size: 0.8125rem; }
+@media (prefers-reduced-motion: reduce) {
+  .igGlow { animation: none; opacity: 0.7; }
+  .igLabel { animation: none; -webkit-text-fill-color: var(--foreground); color: var(--foreground); }
+}
+@media (prefers-reduced-motion: reduce) {
+ .igGlow,
+.igLabel { animation: none !important; transition-duration: 0.01ms !important; } }

@@ -1,0 +1,31 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, panelSpring, selectedOption, optionTrack } from \"./_shared\";\n\n/** What a trigger needs from its Tabs to draw the sliding panel. */\ninterface TabsState {\n  value: string | undefined;\n  panelId: string;\n  reduceMotion: boolean;\n}\n\nconst TabsContext = React.createContext<TabsState | null>(null);\n\n/**\n * Mallow Tabs: a segmented control on a lilac option track. The active\n * trigger takes the violet tint and ring, which slides to the next tab on a critically\n * damped spring and never overshoots. Tabs tracks its own value, so it works\n * controlled or not. Under reduced motion the panel moves at once.\n */\nconst Tabs = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>\n>(({ value, defaultValue, onValueChange, ...props }, ref) => {\n  const [uncontrolled, setUncontrolled] = React.useState(defaultValue);\n  const current = value ?? uncontrolled;\n  const panelId = React.useId();\n  const reduceMotion = useReducedMotion() ?? false;\n\n  return (\n    <TabsContext.Provider value={{ value: current, panelId, reduceMotion }}>\n      <TabsPrimitive.Root\n        ref={ref}\n        data-slot=\"tabs\"\n        value={current}\n        onValueChange={(next) => {\n          if (value === undefined) setUncontrolled(next);\n          onValueChange?.(next);\n        }}\n        {...props}\n      />\n    </TabsContext.Provider>\n  );\n});\nTabs.displayName = TabsPrimitive.Root.displayName;\n\nconst TabsList = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    data-slot=\"tabs-list\"\n    className={cn(\n      \"isolate inline-flex h-11 items-center justify-center gap-1 rounded-xl p-1 text-muted-foreground\",\n      optionTrack,\n      className,\n    )}\n    {...props}\n  />\n));\nTabsList.displayName = TabsPrimitive.List.displayName;\n\nconst TabsTrigger = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, children, value, ...props }, ref) => {\n  const tabs = React.useContext(TabsContext);\n  const active = tabs?.value === value;\n\n  return (\n    <TabsPrimitive.Trigger\n      ref={ref}\n      value={value}\n      data-slot=\"tabs-trigger\"\n      className={cn(\n        \"relative inline-flex h-full items-center justify-center whitespace-nowrap rounded-lg px-4 text-sm font-medium\",\n        \"text-muted-foreground transition-colors duration-fast ease-(--ease-out) hover:text-foreground\",\n        \"data-[state=active]:text-foreground\",\n        // Outside a Mallow Tabs there is no shared tint to slide, so the trigger tints itself.\n        !tabs && \"data-[state=active]:bg-(--option-face) data-[state=active]:shadow-(--option-edge)\",\n        focusRing,\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      {active && (\n        <motion.span\n          layoutId={`${tabs?.panelId}-panel`}\n          aria-hidden=\"true\"\n          data-slot=\"tabs-panel\"\n          className={cn(selectedOption, \"absolute inset-0 z-0 rounded-lg\")}\n          transition={tabs?.reduceMotion ? { duration: 0 } : panelSpring}\n        />\n      )}\n      <span className=\"relative z-10 inline-flex items-center gap-2 [&_svg]:size-4 [&_svg]:shrink-0\">\n        {children}\n      </span>\n    </TabsPrimitive.Trigger>\n  );\n});\nTabsTrigger.displayName = TabsPrimitive.Trigger.displayName;\n\nconst TabsContent = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Content\n    ref={ref}\n    data-slot=\"tabs-content\"\n    className={cn(\"mt-4 rounded-lg\", focusRing, className)}\n    {...props}\n  />\n));\nTabsContent.displayName = TabsPrimitive.Content.displayName;\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12",
+    "motion@^12.25.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "option-face": "oklch(0.955 0.035 290)",
+      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

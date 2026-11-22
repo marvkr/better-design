@@ -1,0 +1,11 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Firefly Empty: a warm paper panel with a 1rem corner that holds whatever\n * you place in it, centred. Use it where a list or a result would sit, so\n * the space keeps its shape while there is nothing to show.\n */\nconst Empty = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"empty\"\n    className={cn(\n      \"flex min-h-48 flex-col items-center justify-center gap-3 rounded-xl bg-card p-8 text-center text-sm text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nEmpty.displayName = \"Empty\";\n\nexport { Empty };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

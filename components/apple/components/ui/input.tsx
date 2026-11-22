@@ -17,13 +17,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-[44px] w-full rounded-[10px] bg-input px-4 py-2 text-[17px] leading-[1.47] tracking-[-0.022em] text-foreground",
+          "flex h-[2.75rem] w-full rounded-[0.625rem] bg-input px-4 py-2 text-[1.0625rem] leading-[1.47] tracking-[-0.022em] text-foreground",
           "border border-border",
           "placeholder:text-muted-foreground",
-          "transition-[border-color,box-shadow] duration-300",
-          "hover:border-[rgba(0,0,0,0.2)]",
+          "transition-[border-color,box-shadow] duration-slow",
+          "hover:border-[oklch(0_0_0/0.2)]",
           "focus-visible:outline-none focus-visible:border-primary/60",
-          "focus-visible:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_15%,transparent)]",
+          "focus-visible:shadow-[0_0_0_0.1875rem_color-mix(in_oklch,var(--primary)_15%,transparent)]",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
           "disabled:cursor-not-allowed disabled:opacity-50",
           className

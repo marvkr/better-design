@@ -1,0 +1,23 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Collapsible: a section that folds away under a quiet row.\n * The row reads in Inter medium and brightens from the secondary ink to\n * full ink under the pointer; a caret inside it turns over as the section\n * opens. Pass `asChild` to use your own button as the row, unstyled.\n */\nconst Collapsible = CollapsiblePrimitive.Root;\n\n/** The row that opens and closes the section. */\nfunction CollapsibleTrigger({\n  className,\n  asChild,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Trigger>) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      asChild={asChild}\n      className={cn(\n        !asChild && [\n          \"flex w-full items-center justify-between gap-3 rounded-md py-2 text-start text-sm font-medium text-(--foreground-secondary)\",\n          \"transition-colors duration-fast ease-out hover:text-foreground data-[state=open]:text-foreground\",\n          \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n          \"disabled:cursor-not-allowed disabled:text-(--foreground-disabled)\",\n          \"[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground [&_svg]:transition-transform [&_svg]:duration-fast\",\n          \"[&[data-state=open]_svg]:rotate-180\",\n        ],\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nCollapsibleTrigger.displayName = CollapsiblePrimitive.Trigger.displayName;\n\n/** The section itself: opens and closes on its own height. */\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Content>) {\n  return (\n    <CollapsiblePrimitive.Content\n      data-slot=\"collapsible-content\"\n      className={cn(\n        \"overflow-hidden text-sm text-(--foreground-secondary) data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\nCollapsibleContent.displayName = CollapsiblePrimitive.Content.displayName;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-collapsible@^1.1.11"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.88 0.002 264)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

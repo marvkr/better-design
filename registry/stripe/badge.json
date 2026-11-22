@@ -4,14 +4,30 @@
   "files": [
     {
       "path": "components/ui/badge.tsx",
-      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Stripe Badge — rounded-full pills, 6px radius for rectangular variants\n// Primary: indigo (#635BFF)\n// Status colors match Stripe's semantic palette\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-muted text-foreground border border-border\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"bg-primary/10 text-primary\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive/10 text-destructive\",\n        success: \"bg-emerald-500 text-white\",\n        \"success-light\": \"bg-emerald-50 text-emerald-700\",\n        warning: \"bg-orange-100 text-orange-700\",\n        \"warning-light\": \"bg-orange-50 text-orange-700\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[10px]\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded font-medium transition-colors focus:outline-none\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-muted text-foreground border border-border\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"text-primary bg-primary/14\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive/13 text-[color:oklch(0.535_0.215_19.3)]\",\n        success: \"bg-success text-primary-foreground\",\n        \"success-light\": \"border border-success/20 bg-success-muted text-success-foreground\",\n        warning: \"bg-warning text-[color:oklch(0.31_0.071_62)]\",\n        \"warning-light\": \"border border-warning/20 bg-warning-muted text-warning-foreground\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem]\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority@>=0.7.1 <1"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.545 0.142 155)",
+      "success-foreground": "oklch(0.345 0.102 155)",
+      "success-muted": "oklch(0.955 0.036 155)",
+      "warning": "oklch(0.685 0.143 72)",
+      "warning-foreground": "oklch(0.43 0.105 62)",
+      "warning-muted": "oklch(0.968 0.043 82)"
+    },
+    "dark": {
+      "success": "oklch(0.545 0.142 155)",
+      "success-foreground": "oklch(0.345 0.102 155)",
+      "success-muted": "oklch(0.955 0.036 155)",
+      "warning": "oklch(0.685 0.143 72)",
+      "warning-foreground": "oklch(0.43 0.105 62)",
+      "warning-muted": "oklch(0.968 0.043 82)"
+    }
+  }
 }

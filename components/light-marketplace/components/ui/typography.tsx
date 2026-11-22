@@ -140,7 +140,7 @@ const Code = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
     <code
       ref={ref}
       className={cn(
-        "block w-full rounded-[14px] bg-secondary px-5 py-4",
+        "block w-full rounded-[0.875rem] bg-secondary px-5 py-4",
         "font-mono text-sm text-foreground leading-relaxed overflow-x-auto",
         className
       )}

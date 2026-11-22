@@ -1,0 +1,30 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  currentStep?: number;\n}\n\ntype StepState = \"complete\" | \"current\" | \"upcoming\";\n\nconst discTone = {\n  complete:\n    \"bg-primary bg-(image:--gradient-primary) text-primary-foreground shadow-(--shadow-control)\",\n  current: \"border-2 border-(--ink) bg-background text-foreground\",\n  upcoming: \"border border-(--line-strong) bg-background text-muted-foreground\",\n} satisfies Record<StepState, string>;\n\n/**\n * Firefly Steps: a row of numbered round discs joined by hairlines.\n *\n * A finished step lights up in the primary button's material with a\n * checkmark. The current step is a white disc ringed in ink, and steps\n * still to come are quiet outlined discs in muted text. The line into a\n * reached step turns ink. Each child is a step, and its content shows as\n * the label beside its disc.\n */\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, currentStep = 0, children, ...props }, ref) => {\n    const steps = React.Children.toArray(children);\n\n    return (\n      <div\n        ref={ref}\n        role=\"list\"\n        data-slot=\"steps\"\n        className={cn(\"flex items-center gap-3\", className)}\n        {...props}\n      >\n        {steps.map((child, index) => {\n          const state: StepState =\n            index < currentStep\n              ? \"complete\"\n              : index === currentStep\n                ? \"current\"\n                : \"upcoming\";\n\n          return (\n            <React.Fragment key={index}>\n              {index > 0 && (\n                <div\n                  aria-hidden=\"true\"\n                  data-slot=\"steps-connector\"\n                  className={cn(\n                    \"h-px min-w-6 flex-1 transition-colors duration-fast ease-out\",\n                    index <= currentStep ? \"bg-(--ink)\" : \"bg-border\",\n                  )}\n                />\n              )}\n              <div\n                role=\"listitem\"\n                data-slot=\"steps-item\"\n                data-state={state}\n                aria-current={state === \"current\" ? \"step\" : undefined}\n                className=\"group/step flex shrink-0 items-center gap-2\"\n              >\n                <span\n                  className={cn(\n                    \"flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-medium tabular-nums\",\n                    \"transition-[background-color,border-color,color,box-shadow] duration-fast ease-out\",\n                    discTone[state],\n                  )}\n                >\n                  {state === \"complete\" ? (\n                    <>\n                      <Icon icon=\"carbon:checkmark\" className=\"size-4\" aria-hidden=\"true\" />\n                      <span className=\"sr-only\">Step {index + 1}, done</span>\n                    </>\n                  ) : (\n                    index + 1\n                  )}\n                </span>\n                {child}\n              </div>\n            </React.Fragment>\n          );\n        })}\n      </div>\n    );\n  },\n);\nSteps.displayName = \"Steps\";\n\n/**\n * A single step's label. It reads in ink once reached and in muted text\n * while it is still ahead.\n */\nconst Step = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"step\"\n    className={cn(\n      \"text-sm font-medium text-foreground empty:hidden group-data-[state=upcoming]/step:text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n));\nStep.displayName = \"Step\";\n\nexport { Steps, Step };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "ink": "oklch(0.168 0.004 106.8)",
+      "gradient-primary": "linear-gradient(180deg, oklch(1 0 0 / 0.3) 0%, oklch(1 0 0 / 0) 45%), radial-gradient(110% 90% at 22% 0%, oklch(1 0 0 / 0.24) 0%, oklch(1 0 0 / 0) 60%), radial-gradient(70% 60% at 50% 115%, oklch(1 0 0 / 0.32) 0%, oklch(1 0 0 / 0) 70%), linear-gradient(0deg, oklch(0 0 0 / 0.05) 0%, oklch(0 0 0 / 0) 18%), linear-gradient(180deg, oklch(0.9 0.199 115) 0%, oklch(0.968 0.155 112.5) 100%)",
+      "shadow-control": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0.09375rem 0 oklch(1 0 0 / 0.7), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.18), inset 0 0 0.375rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.548 0.116 114.4 / 0.2)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "ink": "oklch(0.964 0.007 97.4)",
+      "gradient-primary": "linear-gradient(180deg, oklch(1 0 0 / 0.075) 0%, oklch(1 0 0 / 0) 45%), radial-gradient(110% 90% at 22% 0%, oklch(1 0 0 / 0.06) 0%, oklch(1 0 0 / 0) 60%), radial-gradient(70% 60% at 50% 115%, oklch(1 0 0 / 0.08) 0%, oklch(1 0 0 / 0) 70%), linear-gradient(0deg, oklch(0 0 0 / 0.05) 0%, oklch(0 0 0 / 0) 18%), linear-gradient(180deg, oklch(0.814 0.16 113.8) 0%, oklch(0.879 0.136 117) 100%)",
+      "shadow-control": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.175), inset 0 -0.0625rem 0.09375rem 0 oklch(1 0 0 / 0.3), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.045), inset 0 0 0.375rem 0 oklch(1 0 0 / 0.12), 0 0 0 0.0625rem oklch(0 0 0 / 0.2)"
+    }
+  }
+}

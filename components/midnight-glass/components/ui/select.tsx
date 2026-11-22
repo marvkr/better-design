@@ -20,14 +20,14 @@ function SelectTrigger({
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "flex h-12 w-full items-center justify-between rounded-full px-5 py-2 text-[15px]",
+        "flex h-12 w-full items-center justify-between rounded-full px-5 py-2 text-[0.9375rem]",
         "backdrop-blur-xl bg-white/[0.05]",
         "border border-white/[0.12]",
-        "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
+        "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
         "placeholder:text-muted-foreground",
-        "transition-all duration-300",
+        "transition-all duration-slow",
         "hover:bg-white/[0.08] hover:border-white/[0.18]",
-        "focus:outline-none focus:border-primary/50 focus:shadow-[inset_0_0_6px_rgba(255,255,255,0.05),0_0_0_3px_rgba(255,255,255,0.2)]",
+        "focus:outline-none focus:border-primary/50 focus:shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05),0_0_0_0.1875rem_oklch(1_0_0/0.2)]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
@@ -55,7 +55,7 @@ function SelectContent({
           "relative z-50 min-w-[8rem] overflow-hidden rounded-xl",
           "backdrop-blur-2xl bg-white/[0.07] border border-white/10",
           "text-popover-foreground",
-          "shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_0_8px_rgba(255,255,255,0.06)]",
+          "shadow-[0_0.5rem_2rem_oklch(0_0_0/0.6),inset_0_0_0.5rem_oklch(1_0_0/0.06)]",
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
           className

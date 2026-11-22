@@ -1,0 +1,20 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Skeleton: a cream block at the 0.25rem field corner that\n * pulses while the real content loads. Shape it with size classes, and\n * round it fully for avatars and pills.\n */\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      aria-hidden=\"true\"\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-(--surface-3)\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "surface-3": "oklch(0.898 0.018 117.3)"
+    },
+    "dark": {
+      "surface-3": "oklch(0.34 0.012 114)"
+    }
+  }
+}

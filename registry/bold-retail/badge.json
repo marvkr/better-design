@@ -1,0 +1,27 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Badge: a small pill.\n *\n * The default is the black pill, the same ink as the primary button. The\n * outline badge is the white \"Just in\" promo tag on a product tile. Status\n * badges pair a light tint with its own darker text, and red appears only\n * for sale and error states.\n */\nconst badgeVariants = cva(\n  \"inline-flex w-fit shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-full font-medium [&_svg]:size-3 [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground\",\n        primary: \"bg-primary text-primary-foreground\",\n        secondary: \"text-secondary-foreground bg-[color:oklch(0.925_0_191.3)] dark:bg-[color:oklch(0.56_0_181.4)]\",\n        outline: \"border border-border bg-background text-foreground\",\n        success: \"text-(--success-text) bg-[color:oklch(0.518_0.126_155.8/0.15)] dark:bg-[color:oklch(0.518_0.126_155.8/0.2)] dark:text-[color:oklch(0.875_0.15_150)]\",\n        warning: \"text-(--warning-text) bg-[color:oklch(0.72_0.15_70/0.24)] dark:text-[color:oklch(0.875_0.119_80)]\",\n        destructive: \"text-(--destructive-text) bg-[color:oklch(0.545_0.223_28.8/0.12)] dark:bg-[color:oklch(0.545_0.223_28.8/0.27)] dark:text-[color:oklch(0.875_0.066_25)]\",\n        solid: \"bg-foreground text-background\",\n      },\n      size: {\n        sm: \"h-5 px-2 text-xs\",\n        default: \"h-6 px-3 text-xs\",\n        lg: \"h-7 px-3.5 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface BadgeProps\n  extends\n    React.HTMLAttributes<HTMLSpanElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <span\n      data-slot=\"badge\"\n      className={cn(badgeVariants({ variant, size }), className)}\n      {...props}\n    />\n  );\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success-text": "oklch(0.47 0.115 155.8)",
+      "warning-text": "oklch(0.5 0.11 62)",
+      "destructive-text": "oklch(0.5 0.2 28.8)"
+    },
+    "dark": {
+      "success-text": "oklch(0.78 0.15 150)",
+      "warning-text": "oklch(0.84 0.13 80)",
+      "destructive-text": "oklch(0.78 0.14 25)"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Ink mail Alert: a callout edged on all four sides by the strong hairline,\n * never a stripe down one. The default sits on the card step. Each status\n * variant lays its tint under the matching text token, so colour only ever\n * reads as status: delivered green, queued yellow, bounced red, opened blue.\n */\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-lg border border-(--line-strong) px-4 py-3 text-sm\",\n    \"[&>svg]:absolute [&>svg]:start-4 [&>svg]:top-3.5 [&>svg]:size-4\",\n    \"[&>svg~*]:ps-7\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-card text-foreground [&>svg]:text-muted-foreground [&_[data-slot=alert-description]]:text-(--foreground-secondary)\",\n        info: \"bg-(--info-tint) text-(--info-text)\",\n        success: \"bg-(--success-tint) text-(--success-text)\",\n        warning: \"bg-(--warning-tint) text-(--warning-text)\",\n        destructive: \"bg-(--destructive-tint) text-(--destructive-text)\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"alert\"\n    data-slot=\"alert\"\n    className={cn(alertVariants({ variant }), className)}\n    {...props}\n  />\n));\nAlert.displayName = \"Alert\";\n\n/** The one-line headline, set level with the icon. */\nconst AlertTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h5\n    ref={ref}\n    data-slot=\"alert-title\"\n    className={cn(\"mb-0.5 text-sm font-medium leading-5\", className)}\n    {...props}\n  />\n));\nAlertTitle.displayName = \"AlertTitle\";\n\n/** The body: secondary ink on the default, the status text on a tint. */\nconst AlertDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"alert-description\"\n    className={cn(\"text-sm leading-relaxed\", className)}\n    {...props}\n  />\n));\nAlertDescription.displayName = \"AlertDescription\";\n\nexport { Alert, AlertTitle, AlertDescription };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-secondary": "oklch(0.88 0.002 264)",
+      "success-tint": "oklch(0.88 0.212 155.8 / 0.12)",
+      "success-text": "oklch(0.88 0.19 155.8)",
+      "warning-tint": "oklch(0.854 0.157 84.1 / 0.12)",
+      "warning-text": "oklch(0.87 0.14 84.1)",
+      "info-tint": "oklch(0.688 0.169 251.4 / 0.14)",
+      "info-text": "oklch(0.78 0.13 251.4)",
+      "destructive-tint": "oklch(0.641 0.245 20.6 / 0.14)",
+      "destructive-text": "oklch(0.74 0.18 20.6)"
+    },
+    "dark": {}
+  }
+}

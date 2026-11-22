@@ -1,0 +1,26 @@
+{
+  "name": "steps-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { primaryFinish, selectedOption, optionTrack } from \"./_shared\";\n\n/**\n * Mallow Steps: numbered marks joined by a lilac groove; a finished step\n * takes the violet primary finish with a check, the current step takes the\n * violet tint and ring, and steps ahead stay on the lilac track.\n */\nexport interface Step {\n  title: string;\n  description?: string;\n  icon?: string;\n}\n\nexport interface StepsProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  currentStep: number;\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst Steps = React.forwardRef<HTMLDivElement, StepsProps>(\n  ({ className, steps, currentStep, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"steps\"\n      data-orientation={orientation}\n      className={cn(\"flex\", orientation === \"horizontal\" ? \"flex-row items-start\" : \"flex-col\", className)}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const isCompleted = index < currentStep;\n        const isCurrent = index === currentStep;\n        const isLast = index === steps.length - 1;\n\n        return (\n          <div\n            key={index}\n            data-state={isCompleted ? \"complete\" : isCurrent ? \"current\" : \"upcoming\"}\n            aria-current={isCurrent ? \"step\" : undefined}\n            className={cn(\"flex gap-3\", orientation === \"horizontal\" ? \"flex-1 flex-col items-start\" : \"flex-row\")}\n          >\n            <div className={cn(\"flex w-full items-start gap-3\", orientation === \"horizontal\" ? \"flex-row\" : \"flex-col\")}>\n              <div className=\"flex flex-col items-center self-stretch\">\n                <div\n                  className={cn(\n                    \"flex size-8 shrink-0 items-center justify-center rounded-full\",\n                    \"transition-[background-color,box-shadow,color] duration-base ease-(--ease-out)\",\n                    isCompleted && primaryFinish,\n                    isCurrent && cn(selectedOption, \"text-foreground\"),\n                    !isCompleted && !isCurrent && cn(optionTrack, \"text-muted-foreground\"),\n                  )}\n                >\n                  {isCompleted ? (\n                    <Icon icon=\"iconoir:check\" aria-hidden=\"true\" className=\"size-4\" />\n                  ) : step.icon ? (\n                    <Icon icon={step.icon} aria-hidden=\"true\" className=\"size-4\" />\n                  ) : (\n                    <span className=\"text-xs font-medium tabular-nums\">{index + 1}</span>\n                  )}\n                </div>\n                {orientation === \"vertical\" && !isLast && (\n                  <div\n                    className={cn(\n                      \"my-1.5 min-h-6 w-1 flex-1 rounded-full\",\n                      isCompleted ? \"bg-primary\" : optionTrack,\n                    )}\n                  />\n                )}\n              </div>\n              <div className={cn(\"min-w-0 flex-1\", orientation === \"vertical\" && \"pb-6\")}>\n                <div\n                  className={cn(\n                    \"text-sm font-medium leading-snug\",\n                    isCurrent || isCompleted ? \"text-foreground\" : \"text-muted-foreground\",\n                  )}\n                >\n                  {step.title}\n                </div>\n                {step.description && (\n                  <div className=\"mt-0.5 text-sm leading-relaxed text-muted-foreground\">{step.description}</div>\n                )}\n              </div>\n            </div>\n            {orientation === \"horizontal\" && !isLast && (\n              <div className=\"hidden w-full pr-3 sm:block\">\n                <div className={cn(\"h-1 w-full rounded-full\", isCompleted ? \"bg-primary\" : optionTrack)} />\n              </div>\n            )}\n          </div>\n        );\n      })}\n    </div>\n  ),\n);\nSteps.displayName = \"Steps\";\n\nexport { Steps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/mallow/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

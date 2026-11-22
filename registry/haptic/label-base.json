@@ -1,0 +1,11 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Base UI has no Label primitive: native <label>. The peer-disabled classes are\n// preserved from the Radix wrapper.\n\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.ComponentPropsWithoutRef<\"label\">\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    className={cn(\n      \"text-sm font-medium leading-none text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n      className\n    )}\n    {...props}\n  />\n))\nLabel.displayName = \"Label\"\n\nexport { Label }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

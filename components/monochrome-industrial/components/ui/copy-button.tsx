@@ -13,7 +13,7 @@ export interface CopyButtonProps extends Omit<ButtonProps, "children"> {
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
- ({ value, copiedLabel = "Copied", label = "Copy", size = "icon", ...props }, ref) => {
+ ({ value, copiedLabel = "Copied", label = "Copy", size = "icon", onClick, ...props }, ref) => {
  const [copied, setCopied] = React.useState(false)
 
  const copy = async () => {
@@ -30,7 +30,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
  <Button
  ref={ref}
  size={size}
- onClick={copy}
+ onClick={(e) => { onClick?.(e); copy(); }}
  aria-label={copied ? copiedLabel : label}
  {...props}
  >

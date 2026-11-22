@@ -1,0 +1,28 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\";\nimport { Icon } from \"@iconify/react\";\n\n/**\n * Margin Toaster (Sonner): each toast wears the white floating panel every\n * menu shares, with the light popover shadow. The action is the small oxblood\n * button and cancel the ruled toolbar tab. Sonner ships unlayered styles,\n * so these classes carry the important flag.\n */\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <SonnerPrimitive\n      icons={{\n        success: <Icon icon=\"solar:check-circle-linear\" className=\"size-4 text-success\" aria-hidden />,\n        info: <Icon icon=\"solar:info-circle-linear\" className=\"size-4 text-info\" aria-hidden />,\n        warning: <Icon icon=\"solar:danger-triangle-linear\" className=\"size-4 text-warning\" aria-hidden />,\n        error: <Icon icon=\"solar:danger-circle-linear\" className=\"size-4 text-destructive\" aria-hidden />,\n        loading: (\n          <Icon\n            icon=\"solar:refresh-linear\"\n            className=\"size-4 text-muted-foreground motion-safe:animate-spin\"\n            aria-hidden\n          />\n        ),\n      }}\n      toastOptions={{\n        classNames: {\n          toast:\n            \"rounded-xl! border-0! bg-popover! p-3! font-sans text-sm! text-popover-foreground! shadow-md!\",\n          title: \"font-medium!\",\n          description: \"text-muted-foreground!\",\n          actionButton:\n            \"h-7! rounded-lg! bg-primary! px-2.5! font-medium! text-primary-foreground! shadow-xs!\",\n          cancelButton: \"h-7! rounded-lg! bg-card! px-2.5! text-foreground! shadow-sm!\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5",
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.5 0.09 115)",
+      "warning": "oklch(0.74 0.13 75)",
+      "info": "oklch(0.5 0.05 245)"
+    },
+    "dark": {
+      "success": "oklch(0.7 0.14 115)",
+      "warning": "oklch(0.8 0.12 78)",
+      "info": "oklch(0.7 0.05 245)"
+    }
+  }
+}

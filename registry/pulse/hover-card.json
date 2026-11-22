@@ -1,0 +1,23 @@
+{
+  "name": "hover-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst HoverCard = HoverCardPrimitive.Root\n\nconst HoverCardTrigger = HoverCardPrimitive.Trigger\n\nconst HoverCardContent = React.forwardRef<\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 4, ...props }, ref) => (\n  <HoverCardPrimitive.Content\n    ref={ref}\n    align={align}\n    sideOffset={sideOffset}\n    className={cn(\n      // Pulseboard popover: dark surface, hairline border, shared shadow token\n      \"origin-(--radix-hover-card-content-transform-origin) z-50 w-64 rounded-lg border border-border bg-popover p-4 text-popover-foreground [box-shadow:var(--shadow-pop)] outline-none\",\n      \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n      \"data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n      \"data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2\",\n      \"data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n      className\n    )}\n    {...props}\n  />\n))\nHoverCardContent.displayName = HoverCardPrimitive.Content.displayName\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-hover-card@^1.1.14"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-pop": "0 0 0 0.0625rem oklch(0 0 0 / 0.4), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0.25rem 0.625rem -0.25rem oklch(0 0 0 / 0.4)"
+    },
+    "dark": {
+      "shadow-pop": "0 0 0 0.0625rem oklch(0 0 0 / 0.4), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0.25rem 0.625rem -0.25rem oklch(0 0 0 / 0.4)"
+    }
+  }
+}

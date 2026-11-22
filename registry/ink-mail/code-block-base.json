@@ -1,0 +1,26 @@
+{
+  "name": "code-block-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showCopy?: boolean;\n}\n\n/** The three window dots that open every Ink mail code window. */\nfunction WindowDots() {\n  return (\n    <span aria-hidden=\"true\" className=\"flex shrink-0 items-center gap-1.5\">\n      <span className=\"size-2.5 rounded-full bg-(--dot-red)\" />\n      <span className=\"size-2.5 rounded-full bg-(--dot-yellow)\" />\n      <span className=\"size-2.5 rounded-full bg-(--dot-green)\" />\n    </span>\n  );\n}\n\n/**\n * Ink mail CodeBlock: the code window, the signature of the system.\n *\n * A deep, slightly cool well behind a stronger hairline and a 0.75rem\n * corner. The title bar opens with three small window dots, names the file\n * or the language in muted mono type, and holds a ghost copy control at the\n * end. The code below sits in Geist Mono at 0.8125rem with relaxed leading.\n */\nconst CodeBlock = React.forwardRef<HTMLPreElement, CodeBlockProps>(\n  ({ className, code, language, filename, showCopy = true, ...props }, ref) => {\n    const caption = filename ?? language;\n\n    return (\n      <div\n        data-slot=\"code-block\"\n        className=\"overflow-hidden rounded-lg border border-(--line-strong) bg-(--code) text-(--code-foreground)\"\n      >\n        <div\n          data-slot=\"code-block-header\"\n          className=\"flex min-h-10 items-center gap-3 border-b border-border px-4 py-2.5 pe-2\"\n        >\n          <WindowDots />\n          <span className=\"min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground\">\n            {caption}\n          </span>\n          {showCopy && (\n            <CopyButton\n              value={code}\n              size=\"icon-sm\"\n              label=\"Copy code\"\n              className=\"-my-1.5 text-muted-foreground hover:text-foreground\"\n            />\n          )}\n        </div>\n        <pre\n          ref={ref}\n          data-slot=\"code-block-code\"\n          className={cn(\n            \"overflow-x-auto p-5 font-mono text-[0.8125rem] leading-relaxed text-(--code-foreground)\",\n            className,\n          )}\n          {...props}\n        >\n          <code>{code}</code>\n        </pre>\n      </div>\n    );\n  },\n);\nCodeBlock.displayName = \"CodeBlock\";\n\nexport { CodeBlock };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/copy-button-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "code": "oklch(0.125 0.01 284.8)",
+      "code-foreground": "oklch(0.9 0.003 264)",
+      "dot-red": "oklch(0.641 0.245 20.6)",
+      "dot-yellow": "oklch(0.854 0.157 84.1)",
+      "dot-green": "oklch(0.88 0.212 155.8)"
+    },
+    "dark": {}
+  }
+}

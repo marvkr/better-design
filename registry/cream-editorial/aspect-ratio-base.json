@@ -1,0 +1,11 @@
+{
+  "name": "aspect-ratio-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n// Base UI has no AspectRatio primitive, so this is a plain div with the CSS\n// aspect-ratio property. position: relative and width: 100% keep absolutely\n// positioned children (a filled image, for example) inside the frame.\n\n/** Props for AspectRatio. `ratio` is width over height, such as 16 / 9. */\nexport interface AspectRatioProps\n  extends React.ComponentPropsWithoutRef<\"div\"> {\n  ratio?: number;\n}\n\n/** Cream editorial AspectRatio: a frame that holds its shape as its width changes. */\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  ({ ratio = 1, style, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"aspect-ratio\"\n      style={{\n        position: \"relative\",\n        width: \"100%\",\n        aspectRatio: String(ratio),\n        ...style,\n      }}\n      {...props}\n    />\n  ),\n);\nAspectRatio.displayName = \"AspectRatio\";\n\nexport { AspectRatio };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

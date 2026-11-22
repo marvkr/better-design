@@ -1,0 +1,14 @@
+{
+  "name": "label-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Base UI has no Label primitive: native <label>. select-none replaces the\n// old primitive's behavior of preventing text selection on double click.\n\nconst labelVariants = cva(\n  \"text-sm font-medium leading-none select-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n);\n\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.ComponentPropsWithoutRef<\"label\"> & VariantProps<typeof labelVariants>\n>(({ className, ...props }, ref) => (\n  <label ref={ref} className={cn(labelVariants(), className)} {...props} />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

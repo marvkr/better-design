@@ -27,7 +27,7 @@ const CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {
   return (
     <div
       className={cn(
-        "rounded-[3px] overflow-hidden",
+        "rounded-[0.1875rem] overflow-hidden",
         "bg-card border border-border [box-shadow:var(--shadow-s)]",
         className
       )}
@@ -39,8 +39,8 @@ const CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {
             type="button"
             onClick={() => setActive(tab.label)}
             className={cn(
-              "relative px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] rounded-t-[3px]",
-              "transition-[background-color,color] duration-150",
+              "relative px-3 py-1.5 text-[0.6875rem] font-bold uppercase tracking-[0.08em] rounded-t-[0.1875rem]",
+              "transition-[background-color,color] duration-fast",
               active === tab.label
                 ? "bg-card text-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent/40"

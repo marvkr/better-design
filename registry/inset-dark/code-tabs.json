@@ -4,11 +4,22 @@
   "files": [
     {
       "path": "components/ui/code-tabs.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { CodeBlock } from \"./code-block\"\n\nexport interface CodeTabsItem {\n  label: string\n  code: string\n  language?: string\n  filename?: string\n}\n\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[]\n  defaultTab?: string\n  className?: string\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label)\n  const current = tabs.find((t) => t.label === active) ?? tabs[0]\n\n  if (!current) return null\n\n  return (\n    <div\n      className={cn(\n        \"rounded-lg overflow-hidden\",\n        \"bg-card border border-border [box-shadow:var(--shadow-s)]\",\n        className\n      )}\n    >\n      <div className=\"flex items-center gap-0.5 px-2 pt-2 border-b border-border bg-muted/30\">\n        {tabs.map((tab) => (\n          <button\n            key={tab.label}\n            type=\"button\"\n            onClick={() => setActive(tab.label)}\n            className={cn(\n              \"relative px-3 py-1.5 text-xs font-medium rounded-t-md\",\n              \"transition-[background-color,color] duration-150\",\n              active === tab.label\n                ? \"bg-card text-foreground\"\n                : \"text-muted-foreground hover:text-foreground hover:bg-accent/40\"\n            )}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      <CodeBlock\n        code={current.code}\n        language={current.language}\n        filename={current.filename}\n        className=\"rounded-none border-0 [box-shadow:none]\"\n      />\n    </div>\n  )\n}\nCodeTabs.displayName = \"CodeTabs\"\n\nexport { CodeTabs }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface CodeTabsItem {\n  label: string\n  code: string\n  language?: string\n  filename?: string\n}\n\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[]\n  defaultTab?: string\n  className?: string\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label)\n  const [copied, setCopied] = React.useState(false)\n  const current = tabs.find((t) => t.label === active) ?? tabs[0]\n\n  if (!current) return null\n\n  const copy = async () => {\n    try {\n      await navigator.clipboard.writeText(current.code)\n      setCopied(true)\n      setTimeout(() => setCopied(false), 2000)\n    } catch {\n      // best-effort\n    }\n  }\n\n  return (\n    <div\n      className={cn(\n        \"relative group rounded-lg overflow-hidden\",\n        \"bg-card border border-border [box-shadow:var(--shadow-s)]\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-0.5 px-2 pt-2 border-b border-border bg-muted/30\">\n        {tabs.map((tab) => (\n          <button\n            key={tab.label}\n            type=\"button\"\n            onClick={() => setActive(tab.label)}\n            className={cn(\n              \"relative px-3 py-1.5 text-xs font-medium rounded-t-md\",\n              \"transition-[background-color,color] duration-fast\",\n              active === tab.label\n                ? \"bg-card text-foreground\"\n                : \"text-muted-foreground hover:text-foreground hover:bg-accent/40\",\n            )}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      <div className=\"relative\">\n        <pre className=\"overflow-x-auto p-4 text-xs leading-relaxed font-mono text-foreground\">\n          <code>{current.code}</code>\n        </pre>\n        <button\n          type=\"button\"\n          onClick={copy}\n          className={cn(\n            \"absolute top-2 right-2 inline-flex h-7 w-7 items-center justify-center rounded-md\",\n            \"bg-popover text-muted-foreground border border-border\",\n            \"transition-[opacity,background-color,color,box-shadow] duration-fast\",\n            \"opacity-0 group-hover:opacity-100\",\n            \"[box-shadow:var(--shadow-s)]\",\n            \"hover:text-foreground hover:bg-accent hover:[box-shadow:var(--shadow-m)]\",\n            \"focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring/40\",\n          )}\n          aria-label={copied ? \"Copied\" : \"Copy code\"}\n        >\n          <Icon icon={copied ? \"tabler:check\" : \"tabler:copy\"} className=\"h-3.5 w-3.5\" />\n        </button>\n      </div>\n    </div>\n  )\n}\nCodeTabs.displayName = \"CodeTabs\"\n\nexport { CodeTabs }\n",
       "type": "registry:ui"
     }
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-m": "var(--shadow-md)"
+    },
+    "dark": {
+      "shadow-s": "var(--shadow-sm)",
+      "shadow-m": "var(--shadow-md)"
+    }
+  }
 }

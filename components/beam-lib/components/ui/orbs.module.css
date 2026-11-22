@@ -1,0 +1,887 @@
+/* Ported from https://www.aicss.dev/components/orbs */
+/* Orbs — two families of agent activity indicator.
+ *
+ * The geometry is authored at a 28px stage and scaled with --orb-k, so
+ * the hand-tuned dot sizes, pitch and blur radii hold at any size.
+ *
+ * Per-segment easings inside @keyframes are written as literals: an
+ * `animation-timing-function` declaration inside a keyframe block is
+ * read by the animation engine, not resolved against the element, so a
+ * var() there would not resolve. The numbers mirror the three custom
+ * properties below exactly. */
+
+.root {
+  --orb-ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --orb-ease-out: cubic-bezier(0.17, 1, 0.32, 1);
+  --orb-ease-in-out: cubic-bezier(0.66, 0, 0.34, 1);
+
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  color: var(--foreground);
+}
+
+/* The inline pill form — same component, wrapped. */
+.root[data-pill] {
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px 0 5px;
+  border-radius: 999px;
+  background: var(--card);
+  /* A hairline ring rather than a border, so it can't affect layout, plus
+     a tight contact shadow and a wider ambient one. */
+  box-shadow:
+    0 0 0 0.5px oklch(0 0 0 / 0.08),
+    0 1px 2px oklch(0 0 0 / 0.05),
+    0 2px 4px oklch(0 0 0 / 0.02);
+}
+
+.pillLabel {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 425;
+  line-height: 1;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+.glyph {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  contain: strict;
+}
+
+/* --- Lattice: discrete dots on a fixed 3×3 grid ------------------- */
+
+.lattice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  transform-origin: 0 0;
+  /* Three 3px dots on a 6px pitch measure 15px, so the grid is offset to sit
+     centred on the 28px stage. It deliberately does not fill the stage: that
+     is what keeps its visual weight level with the Lens circles. */
+  transform: scale(var(--orb-k, 1)) translate(6.5px, 6.5px);
+  /* Resting ink of an unlit cell — the grid stays legible between beats.
+     --orb-dim is for cells sitting a choreography out entirely. */
+  --orb-rest: 0.14;
+  --orb-dim: 0.07;
+}
+
+.cell {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: var(--orb-rest);
+}
+
+/* One wave shape drives all three sweeps. What separates them is the pair of
+   duration and per-cell stagger: the stagger sets how fast the wavefront
+   travels, the duration how many cells it holds lit at once — which is to
+   say, how wide the band reads. */
+.lattice[data-variant="S1"] .cell {
+  animation: orb-wave 1.7s var(--orb-ease-in-out) infinite both;
+}
+
+.lattice[data-variant="S2"] .cell {
+  animation: orb-wave 1.7s var(--orb-ease-in-out) infinite both;
+}
+
+.lattice[data-variant="S4"] .cell {
+  animation: orb-wave 1.6s var(--orb-ease-in-out) infinite both;
+}
+
+.lattice[data-variant="S3"] .cell {
+  animation: orb-comet 1.7s var(--orb-ease-smooth) infinite both;
+}
+
+/* Interior cells sit out `orbit` and drop back, so the ring reads as a
+   ring and the travelling head has something to stand out against. */
+.lattice[data-variant="S3"] .cell[data-still] {
+  animation: none;
+  opacity: var(--orb-dim);
+}
+
+.lattice[data-variant="S5"] .cell {
+  animation: orb-comet 1.7s var(--orb-ease-smooth) infinite both;
+}
+
+.lattice[data-variant="S5"] .cell[data-still] {
+  animation: none;
+  opacity: var(--orb-dim);
+}
+
+/* Swells and subsides on the same symmetric curve, so there is no flash and
+   no hard edge — the cell rises out of its resting ink and sinks back into
+   it. The long tail after 56% is the gap between beats. */
+@keyframes orb-wave {
+  0% {
+    opacity: var(--orb-rest);
+    transform: scale(1);
+    animation-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+  }
+  28% {
+    opacity: 1;
+    transform: scale(1.18);
+    animation-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+  }
+  56% {
+    opacity: var(--orb-rest);
+    transform: scale(1);
+  }
+  100% {
+    opacity: var(--orb-rest);
+    transform: scale(1);
+  }
+}
+
+/* Starts lit and decays, so staggered ring cells form a head and tail.
+   The decay spans ~3.5 of the 8 ring positions — enough to read as a comet. */
+@keyframes orb-comet {
+  0% {
+    opacity: 1;
+    transform: scale(1.2);
+    /* Linear, so the cells behind the head form an even gradient instead
+       of collapsing to rest within the first two. */
+    animation-timing-function: linear;
+  }
+  45% {
+    opacity: var(--orb-rest);
+    transform: scale(1);
+  }
+  100% {
+    opacity: var(--orb-rest);
+    transform: scale(1);
+  }
+}
+
+/* --- Lens: three circles at depth, blur reads as distance --------- */
+
+.lens {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  transform-origin: 0 0;
+  transform: scale(var(--orb-k, 1));
+}
+
+.shape {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--orb-d, 7px);
+  height: var(--orb-d, 7px);
+  /* Pulled back by its own half-size, so --orb-d is the only knob a variant
+     has to touch to resize the cast and it stays centred on the stage. */
+  margin: calc(var(--orb-d, 7px) / -2) 0 0 calc(var(--orb-d, 7px) / -2);
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* focus — attention travels the cast: each circle pulls into focus in turn.
+   Four circles on the corners of a square, one size for all of them, so the
+   only thing separating them is which one is sharp.
+
+   A second longer than the three-circle version it grew out of: the square
+   has four stations to visit and each one keeps the same unhurried second.
+
+   The delays count down rather than up because a more negative delay seeds a
+   circle further into its cycle: -3s of a 4s cycle runs three quarters ahead,
+   which is what sends focus round the square clockwise. */
+.lens[data-variant="B1"] .shape {
+  --orb-d: 6px;
+  animation: orb-focus 4s var(--orb-ease-smooth) infinite both;
+}
+
+.lens[data-variant="B1"] .shapeA {
+  --orb-ox: -4.5px;
+  --orb-oy: -4.5px;
+  animation-delay: 0s;
+}
+
+.lens[data-variant="B1"] .shapeB {
+  --orb-ox: 4.5px;
+  --orb-oy: -4.5px;
+  animation-delay: -3s;
+}
+
+.lens[data-variant="B1"] .shapeC {
+  --orb-ox: 4.5px;
+  --orb-oy: 4.5px;
+  animation-delay: -2s;
+}
+
+.lens[data-variant="B1"] .shapeD {
+  --orb-ox: -4.5px;
+  --orb-oy: 4.5px;
+  animation-delay: -1s;
+}
+
+/* Opacity gradient around the square: active = 1.0, next neighbour = 0.30,
+   diagonal = 0.10, far = 0.05. Two circles are always clearly visible, the
+   rest are ghost hints. */
+@keyframes orb-focus {
+  0%,
+  100% {
+    opacity: 0.05;
+    filter: blur(2px);
+    transform: translate(var(--orb-ox), var(--orb-oy)) scale(1.12);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  12% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(var(--orb-ox), var(--orb-oy)) scale(1);
+    animation-timing-function: linear;
+  }
+  22% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(var(--orb-ox), var(--orb-oy)) scale(1);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* Next neighbour — one quarter away: clearly visible */
+  38% {
+    opacity: 0.3;
+    filter: blur(1.2px);
+    transform: translate(var(--orb-ox), var(--orb-oy)) scale(1.06);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* Diagonal — half a cycle away: ghost */
+  58% {
+    opacity: 0.1;
+    filter: blur(1.8px);
+    transform: translate(var(--orb-ox), var(--orb-oy)) scale(1.1);
+    animation-timing-function: linear;
+  }
+  /* Far neighbour — three quarters away: barely there */
+  82% {
+    opacity: 0.05;
+    filter: blur(2px);
+    transform: translate(var(--orb-ox), var(--orb-oy)) scale(1.12);
+  }
+}
+
+/* drift — the cast circles the stage on one track, sharp at the front and
+   blurred away at the back, so the orb reads as looking around. Uniform
+   size: the depth cue is doing the work, a size ladder would fight it. */
+.lens[data-variant="B2"] .shape {
+  animation: orb-revolve 3.3s linear infinite both;
+}
+
+/* Evenly spaced around the track, so one is always at the front. */
+.lens[data-variant="B2"] .shapeA {
+  animation-delay: 0s;
+}
+
+.lens[data-variant="B2"] .shapeB {
+  animation-delay: -1.1s;
+}
+
+.lens[data-variant="B2"] .shapeC {
+  animation-delay: -2.2s;
+}
+
+/* rotate() then translateY() walks a circle. Linear all the way: an eased
+   rotation on a circular path reads as a wobble, not as travel. */
+@keyframes orb-revolve {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: rotate(0deg) translateY(6.5px) scale(1);
+  }
+  25% {
+    opacity: 0.55;
+    filter: blur(1.3px);
+    transform: rotate(90deg) translateY(6.5px) scale(0.82);
+  }
+  50% {
+    opacity: 0.28;
+    filter: blur(2.4px);
+    transform: rotate(180deg) translateY(6.5px) scale(0.66);
+  }
+  75% {
+    opacity: 0.55;
+    filter: blur(1.3px);
+    transform: rotate(270deg) translateY(6.5px) scale(0.82);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: rotate(360deg) translateY(6.5px) scale(1);
+  }
+}
+
+/* bloom — shapes emanate from the centre, blurring out as they grow.
+   Linear keeps the total ink even; on a front-loaded curve the shapes
+   jump to their large, blurred end state and the orb alternates between
+   a heavy blot and an empty haze. */
+.lens[data-variant="B3"] .shape {
+  animation: orb-bloom 4.2s linear infinite both;
+}
+
+.lens[data-variant="B3"] .shapeA {
+  animation-delay: 0s;
+}
+
+.lens[data-variant="B3"] .shapeB {
+  animation-delay: -1.4s;
+}
+
+.lens[data-variant="B3"] .shapeC {
+  animation-delay: -2.8s;
+}
+
+/* Each ripple dies at 62% and waits out the rest, so the three overlapping
+   blooms leave gaps. Without the gap the aggregate is a constant haze and
+   the outward motion stops reading at all. Sharp circle appears, holds
+   briefly, then dissolves outward — blur only kicks in once opacity starts
+   dropping, so the circle stays crisp while it's visible and the blur reads
+   as the ripple dissipating. */
+@keyframes orb-bloom {
+  0% {
+    opacity: 0;
+    filter: blur(0);
+    transform: scale(0.35);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  8% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(0.55);
+    animation-timing-function: linear;
+  }
+  24% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(0.72);
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  42% {
+    opacity: 0.1;
+    filter: blur(1.8px);
+    transform: scale(1.5);
+  }
+  62% {
+    opacity: 0;
+    filter: blur(2.8px);
+    transform: scale(2.4);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(2.8px);
+    transform: scale(2.4);
+  }
+}
+
+/* converge — a single circle traces an equilateral triangle (top → bottom-right
+   → bottom-left → top) with handoff-style easing: full size and sharp at each
+   vertex, smaller and slightly blurred in transit.  orbB breathes at the
+   centroid as a subtle depth cue; orbC is hidden. */
+.lens[data-variant="B4"] .shapeA {
+  animation: orb-converge 3.6s linear infinite both;
+}
+.lens[data-variant="B4"] .shapeB {
+  animation: orb-breathe 3.6s ease-in-out infinite both;
+}
+.lens[data-variant="B4"] .shapeC {
+  display: none;
+}
+
+@keyframes orb-converge {
+  0% {
+    transform: translate(0px, -5px) scale(1);
+    filter: blur(0);
+    animation-timing-function: linear;
+  }
+  10% {
+    transform: translate(0px, -5px) scale(1);
+    filter: blur(0);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  22% {
+    transform: translate(2.15px, -1.25px) scale(0.72);
+    filter: blur(0.8px);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  33% {
+    transform: translate(4.3px, 2.5px) scale(1);
+    filter: blur(0);
+    animation-timing-function: linear;
+  }
+  43% {
+    transform: translate(4.3px, 2.5px) scale(1);
+    filter: blur(0);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  55% {
+    transform: translate(0px, 2.5px) scale(0.72);
+    filter: blur(0.8px);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  66% {
+    transform: translate(-4.3px, 2.5px) scale(1);
+    filter: blur(0);
+    animation-timing-function: linear;
+  }
+  77% {
+    transform: translate(-4.3px, 2.5px) scale(1);
+    filter: blur(0);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  88% {
+    transform: translate(-2.15px, -1.25px) scale(0.72);
+    filter: blur(0.8px);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  100% {
+    transform: translate(0px, -5px) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* handoff — the cast crosses the focal plane one after another, always left
+   to right, like work being passed on. The shorthand curve is only a
+   fallback; every segment below sets its own. */
+.lens[data-variant="B5"] .shape {
+  animation: orb-handoff 2.8s linear infinite both;
+}
+
+/* Half a cycle apart, so one is always at the focal plane while the other is
+   invisible at an end and the loop point cannot be seen. */
+.lens[data-variant="B5"] .shapeA {
+  animation-delay: 0s;
+}
+
+.lens[data-variant="B5"] .shapeC {
+  animation-delay: -1.4s;
+}
+
+/* The third holds the centre and breathes — a soft depth cue behind the
+   traffic rather than another traveller. */
+.lens[data-variant="B5"] .shapeB {
+  animation-name: orb-breathe;
+  animation-duration: 3.6s;
+}
+
+/* Enters small from the left, reaches standard size at the focal plane, then
+   shrinks and fades out to the right. At the dwell (centre) the circle is
+   exactly 1× — no pulsing, no bounce, just a clean handoff. */
+@keyframes orb-handoff {
+  0% {
+    opacity: 0;
+    filter: blur(2.4px);
+    transform: translateX(-11px) scale(0.55);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  22% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(-1px) scale(1);
+    animation-timing-function: linear;
+  }
+  37% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0) scale(1);
+    animation-timing-function: linear;
+  }
+  52% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(1px) scale(1);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  70% {
+    opacity: 0;
+    filter: blur(2.4px);
+    transform: translateX(11px) scale(0.55);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(2.4px);
+    transform: translateX(11px) scale(0.55);
+  }
+}
+
+@keyframes orb-breathe {
+  0%,
+  100% {
+    opacity: 0.16;
+    filter: blur(2.4px);
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 0.32;
+    filter: blur(1.6px);
+    transform: scale(0.98);
+  }
+}
+
+/* --- Ring: eight circles on a fixed ring ----------------------------- */
+
+.ring {
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--orb-k, 1));
+  --orb-ring-rest: 0.22;
+}
+
+.ringDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  margin: -1.5px 0 0 -1.5px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translate(var(--orb-rx), var(--orb-ry));
+}
+
+.ring[data-variant="C1"] .ringDot {
+  opacity: var(--orb-ring-rest);
+  animation: orb-ring-chase 1.6s linear infinite both;
+}
+
+@keyframes orb-ring-chase {
+  0%, 11% {
+    opacity: 1;
+  }
+  12.5%, 100% {
+    opacity: var(--orb-ring-rest);
+  }
+}
+
+.ring[data-variant="C2"] .ringDot {
+  animation: orb-ring-pulse 2s ease-in-out infinite both;
+}
+
+@keyframes orb-ring-pulse {
+  0%, 100% {
+    opacity: 0.18;
+    transform: translate(var(--orb-rx), var(--orb-ry)) scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(var(--orb-rx), var(--orb-ry)) scale(1.15);
+  }
+}
+
+.ring[data-variant="C3"] .ringDot {
+  animation: orb-ring-comet 1.8s ease-in-out infinite both;
+}
+
+@keyframes orb-ring-comet {
+  0%, 100% {
+    opacity: 0.08;
+    transform: translate(var(--orb-rx), var(--orb-ry));
+  }
+  12% {
+    opacity: 1;
+    transform: translate(var(--orb-rx), var(--orb-ry));
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  35% {
+    opacity: 0.5;
+    transform: translate(var(--orb-rx), var(--orb-ry));
+  }
+  60% {
+    opacity: 0.12;
+    transform: translate(var(--orb-rx), var(--orb-ry));
+  }
+}
+
+.ring[data-variant="C4"] .ringDot {
+  animation: orb-ring-stagger 1.6s ease-in-out infinite both;
+}
+
+@keyframes orb-ring-stagger {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(var(--orb-rx), var(--orb-ry));
+  }
+  50% {
+    opacity: 0.15;
+    transform: translate(var(--orb-rx), var(--orb-ry));
+  }
+}
+
+.ring[data-variant="C5"] .ringDot {
+  animation: orb-ring-comet 1.8s ease-in-out infinite both;
+}
+
+/* ---- Globe (Helix family) ---- */
+.helix {
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--orb-k, 1));
+}
+
+.helixDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 2px;
+  margin: -1px 0 0 -1px;
+  border-radius: 50%;
+  background: currentColor;
+  will-change: transform, opacity;
+}
+
+.helix[data-variant="G1"] .helixDot {
+  animation: orb-globe-spin 4.5s linear infinite both;
+}
+.helix[data-variant="G2"] .helixDot {
+  animation: orb-globe-spin 3.6s linear infinite both;
+}
+.helix[data-variant="G3"] .helixDot {
+  animation: orb-globe-ringturn 2.8s linear infinite both;
+}
+.helix[data-variant="G4"] .helixDot {
+  animation: orb-globe-ringturn 2.8s linear infinite both;
+}
+.helix[data-variant="G5"] .helixDot {
+  animation: orb-globe-breathe 3.6s linear infinite both;
+}
+
+@keyframes orb-globe-spin {
+  0%, 100% {
+    transform: translate(var(--g0x), var(--g0y));
+    opacity: var(--g0o);
+  }
+  12.5% {
+    transform: translate(var(--g1x), var(--g1y));
+    opacity: var(--g1o);
+  }
+  25% {
+    transform: translate(var(--g2x), var(--g2y));
+    opacity: var(--g2o);
+  }
+  37.5% {
+    transform: translate(var(--g3x), var(--g3y));
+    opacity: var(--g3o);
+  }
+  50% {
+    transform: translate(var(--g4x), var(--g4y));
+    opacity: var(--g4o);
+  }
+  62.5% {
+    transform: translate(var(--g5x), var(--g5y));
+    opacity: var(--g5o);
+  }
+  75% {
+    transform: translate(var(--g6x), var(--g6y));
+    opacity: var(--g6o);
+  }
+  87.5% {
+    transform: translate(var(--g7x), var(--g7y));
+    opacity: var(--g7o);
+  }
+}
+
+@keyframes orb-globe-ringturn {
+  0% { transform: translate(var(--g0x), var(--g0y)); opacity: var(--g0o); }
+  2.5% { transform: translate(var(--g1x), var(--g1y)); opacity: var(--g1o); }
+  5% { transform: translate(var(--g2x), var(--g2y)); opacity: var(--g2o); }
+  7.5%, 10% { transform: translate(var(--g3x), var(--g3y)); opacity: var(--g3o); }
+  12.5% { transform: translate(var(--g4x), var(--g4y)); opacity: var(--g4o); }
+  15% { transform: translate(var(--g5x), var(--g5y)); opacity: var(--g5o); }
+  17.5%, 20% { transform: translate(var(--g6x), var(--g6y)); opacity: var(--g6o); }
+  22.5% { transform: translate(var(--g7x), var(--g7y)); opacity: var(--g7o); }
+  25% { transform: translate(var(--g8x), var(--g8y)); opacity: var(--g8o); }
+  27.5%, 30% { transform: translate(var(--g9x), var(--g9y)); opacity: var(--g9o); }
+  32.5% { transform: translate(var(--g10x), var(--g10y)); opacity: var(--g10o); }
+  35% { transform: translate(var(--g11x), var(--g11y)); opacity: var(--g11o); }
+  37.5%, 40% { transform: translate(var(--g12x), var(--g12y)); opacity: var(--g12o); }
+  42.5% { transform: translate(var(--g13x), var(--g13y)); opacity: var(--g13o); }
+  45% { transform: translate(var(--g14x), var(--g14y)); opacity: var(--g14o); }
+  47.5%, 50% { transform: translate(var(--g15x), var(--g15y)); opacity: var(--g15o); }
+  52.5% { transform: translate(var(--g16x), var(--g16y)); opacity: var(--g16o); }
+  55% { transform: translate(var(--g17x), var(--g17y)); opacity: var(--g17o); }
+  57.5%, 60% { transform: translate(var(--g18x), var(--g18y)); opacity: var(--g18o); }
+  62.5% { transform: translate(var(--g19x), var(--g19y)); opacity: var(--g19o); }
+  65% { transform: translate(var(--g20x), var(--g20y)); opacity: var(--g20o); }
+  67.5%, 70% { transform: translate(var(--g21x), var(--g21y)); opacity: var(--g21o); }
+  72.5% { transform: translate(var(--g22x), var(--g22y)); opacity: var(--g22o); }
+  75% { transform: translate(var(--g23x), var(--g23y)); opacity: var(--g23o); }
+  77.5%, 80% { transform: translate(var(--g24x), var(--g24y)); opacity: var(--g24o); }
+  82.5% { transform: translate(var(--g25x), var(--g25y)); opacity: var(--g25o); }
+  85% { transform: translate(var(--g26x), var(--g26y)); opacity: var(--g26o); }
+  87.5%, 90% { transform: translate(var(--g27x), var(--g27y)); opacity: var(--g27o); }
+  92.5% { transform: translate(var(--g28x), var(--g28y)); opacity: var(--g28o); }
+  95% { transform: translate(var(--g29x), var(--g29y)); opacity: var(--g29o); }
+  97.5%, 100% { transform: translate(var(--g30x), var(--g30y)); opacity: var(--g30o); }
+}
+
+@keyframes orb-globe-breathe {
+  0% {
+    transform: translate(var(--g0x), var(--g0y));
+    opacity: var(--g0o);
+  }
+  19% {
+    transform: translate(var(--g1x), var(--g1y));
+    opacity: var(--g1o);
+  }
+  25% {
+    transform: translate(var(--g2x), var(--g2y));
+    opacity: var(--g2o);
+  }
+  44% {
+    transform: translate(var(--g3x), var(--g3y));
+    opacity: var(--g3o);
+  }
+  50% {
+    transform: translate(var(--g4x), var(--g4y));
+    opacity: var(--g4o);
+  }
+  69% {
+    transform: translate(var(--g5x), var(--g5y));
+    opacity: var(--g5o);
+  }
+  75% {
+    transform: translate(var(--g6x), var(--g6y));
+    opacity: var(--g6o);
+  }
+  94% {
+    transform: translate(var(--g7x), var(--g7y));
+    opacity: var(--g7o);
+  }
+  100% {
+    transform: translate(var(--g8x), var(--g8y));
+    opacity: var(--g8o);
+  }
+}
+
+/* ---- Morph ---- */
+.morph {
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--orb-k, 1));
+}
+
+.morphDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  margin: -1.5px 0 0 -1.5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: orb-morph 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+@keyframes orb-morph {
+  0%, 5%   { transform: translate(var(--m-1)); }
+  25%, 30% { transform: translate(var(--m-2)); }
+  50%, 55% { transform: translate(var(--m-3)); }
+  75%, 80% { transform: translate(var(--m-4)); }
+  100%     { transform: translate(var(--m-1)); }
+}
+
+.morph[data-variant="M2"] {
+  animation: orb-morph-twist 9.6s linear infinite;
+}
+
+.morph[data-variant="M4"] {
+  animation: orb-morph-twist 9.6s linear infinite;
+}
+
+.morph[data-variant="M5"] .morphDot {
+  animation: orb-morph-scatter 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+@keyframes orb-morph-scatter {
+  0%, 12% { transform: translate(var(--m-1)); opacity: 1; }
+  38%, 62% { transform: translate(var(--m-2)); opacity: calc(1 - 0.6 * var(--m-depth, 0)); }
+  88%, 100% { transform: translate(var(--m-1)); opacity: 1; }
+}
+
+@keyframes orb-morph-twist {
+  from { transform: scale(var(--orb-k, 1)) rotate(0deg); }
+  to   { transform: scale(var(--orb-k, 1)) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell,
+  .shape,
+  .ringDot,
+  .helixDot,
+  .morphDot {
+    animation: none !important;
+  }
+  .cell[data-mid] {
+    opacity: 1 !important;
+  }
+  .shape {
+    opacity: 0.3 !important;
+    filter: blur(1.4px) !important;
+    transform: none !important;
+  }
+  .shapeA {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+  }
+  .ringDot {
+    opacity: 0.7 !important;
+  }
+  .ring,
+  .helix,
+  .morph {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .lattice[data-variant="S1"] .cell,
+.lattice[data-variant="S2"] .cell,
+.lattice[data-variant="S4"] .cell,
+.lattice[data-variant="S3"] .cell,
+.lattice[data-variant="S3"] .cell[data-still],
+.lattice[data-variant="S5"] .cell,
+.lattice[data-variant="S5"] .cell[data-still],
+.lens[data-variant="B1"] .shape,
+.lens[data-variant="B2"] .shape,
+.lens[data-variant="B3"] .shape,
+.lens[data-variant="B4"] .shapeA,
+.lens[data-variant="B4"] .shapeB,
+.lens[data-variant="B5"] .shape,
+.ring[data-variant="C1"] .ringDot,
+.ring[data-variant="C2"] .ringDot,
+.ring[data-variant="C3"] .ringDot,
+.ring[data-variant="C4"] .ringDot,
+.ring[data-variant="C5"] .ringDot,
+.helix[data-variant="G1"] .helixDot,
+.helix[data-variant="G2"] .helixDot,
+.helix[data-variant="G3"] .helixDot,
+.helix[data-variant="G4"] .helixDot,
+.helix[data-variant="G5"] .helixDot,
+.morphDot,
+.morph[data-variant="M2"],
+.morph[data-variant="M4"],
+.morph[data-variant="M5"] .morphDot,
+.cell,
+  .shape,
+  .ringDot,
+  .helixDot,
+  .morphDot,
+.ring,
+  .helix,
+  .morph {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

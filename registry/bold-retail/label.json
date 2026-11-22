@@ -1,0 +1,23 @@
+{
+  "name": "label",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as LabelPrimitive from \"@radix-ui/react-label\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Label: medium Inter in near-black ink, small enough to sit\n * over a checkout field without competing with it. A disabled control's\n * label turns to the disabled grey rather than half opacity.\n */\nconst Label = React.forwardRef<\n  React.ElementRef<typeof LabelPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <LabelPrimitive.Root\n    ref={ref}\n    data-slot=\"label\"\n    className={cn(\n      \"flex select-none items-center gap-2 text-sm font-medium leading-snug text-foreground\",\n      \"peer-disabled:cursor-not-allowed peer-disabled:text-(--foreground-disabled)\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = LabelPrimitive.Root.displayName;\n\nexport { Label };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-label@^2.1.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.7 0.003 286.3)"
+    },
+    "dark": {
+      "foreground-disabled": "oklch(0.45 0.003 286.3)"
+    }
+  }
+}

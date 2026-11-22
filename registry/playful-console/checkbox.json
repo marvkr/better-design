@@ -1,0 +1,37 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, controlUnchecked } from \"./_shared\";\n\n/**\n * Playful console Checkbox: a small white key with a firm olive edge and a\n * thin slab under it. Checked, it becomes the orange key in miniature, with\n * the darker rim and slab of the primary button, and a bold ink tick.\n */\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    data-slot=\"checkbox\"\n    className={cn(\n      \"peer inline-flex size-[1.125rem] shrink-0 items-center justify-center rounded-md text-primary-foreground\",\n      controlUnchecked,\n      \"transition-[background-color,border-color,box-shadow] duration-fast ease-out\",\n      \"hover:border-(--control)\",\n      \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring\",\n      \"disabled:cursor-not-allowed disabled:bg-secondary disabled:text-(--foreground-disabled) disabled:shadow-none\",\n      controlChecked,\n      \"data-[state=indeterminate]:border-(--primary-rim) data-[state=indeterminate]:bg-primary data-[state=indeterminate]:shadow-(--shadow-control)\",\n      \"disabled:data-[state=indeterminate]:border-(--line-strong) disabled:data-[state=indeterminate]:bg-secondary disabled:data-[state=indeterminate]:shadow-none\",\n      className,\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      data-slot=\"checkbox-indicator\"\n      className=\"flex items-center justify-center text-current\"\n    >\n      {props.checked === \"indeterminate\" ? (\n        <Icon icon=\"ph:minus-bold\" aria-hidden=\"true\" className=\"size-3\" />\n      ) : (\n        <Icon icon=\"ph:check-bold\" aria-hidden=\"true\" className=\"size-3\" />\n      )}\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n));\nCheckbox.displayName = CheckboxPrimitive.Root.displayName;\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox@^1.3.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "control": "oklch(0.533 0.017 115.3)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)",
+      "control": "oklch(0.62 0.014 114)"
+    }
+  }
+}

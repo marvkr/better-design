@@ -1,0 +1,23 @@
+{
+  "name": "avatar-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Airy docs Avatar: a 2rem round photo edged by a hairline, or initials in\n * grey ink on the pale tray. Resize it with a size class; the initials\n * follow the circle.\n */\nconst Avatar = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Root.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    data-slot=\"avatar\"\n    className={cn(\n      \"@container relative flex size-8 shrink-0 select-none overflow-hidden rounded-full ring-1 ring-border\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatar.displayName = \"Avatar\";\n\n/** The photo, cropped to fill the circle. */\nconst AvatarImage = React.forwardRef<\n  HTMLImageElement,\n  WithClassName<AvatarPrimitive.Image.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    data-slot=\"avatar-image\"\n    className={cn(\"aspect-square size-full object-cover\", className)}\n    {...props}\n  />\n));\nAvatarImage.displayName = \"AvatarImage\";\n\n/** Initials on the pale tray, shown while the photo loads or when it fails. */\nconst AvatarFallback = React.forwardRef<\n  HTMLSpanElement,\n  WithClassName<AvatarPrimitive.Fallback.Props>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    data-slot=\"avatar-fallback\"\n    className={cn(\n      \"flex size-full items-center justify-center rounded-full bg-secondary\",\n      \"text-xs font-medium text-(--foreground-secondary)\",\n      \"@min-[3rem]:text-base\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = \"AvatarFallback\";\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-secondary": "oklch(0.373 0.003 164.9)"
+    },
+    "dark": {
+      "foreground-secondary": "oklch(0.82 0.004 160)"
+    }
+  }
+}

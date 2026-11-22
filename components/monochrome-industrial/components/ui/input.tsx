@@ -16,9 +16,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         type={type}
         className={cn(
           "flex h-10 w-full rounded-none border border-[var(--mono-border-visible)] bg-[var(--mono-surface)] px-3 py-2",
-          "font-[family-name:var(--font-mono)] text-[13px] text-foreground",
-          "placeholder:font-[family-name:var(--font-mono)] placeholder:uppercase placeholder:tracking-[0.08em] placeholder:text-[11px] placeholder:text-muted-foreground",
-          "transition-colors duration-150 ease-out",
+          "font-[family-name:var(--font-mono)] text-[0.8125rem] text-foreground",
+          "placeholder:font-[family-name:var(--font-mono)] placeholder:uppercase placeholder:tracking-[0.08em] placeholder:text-[0.6875rem] placeholder:text-muted-foreground",
+          "transition-colors duration-fast ease-out",
           "hover:border-foreground/60",
           "focus-visible:outline-none focus-visible:border-[var(--mono-accent)]",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",

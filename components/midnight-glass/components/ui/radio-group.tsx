@@ -30,19 +30,19 @@ const RadioGroupItem = React.forwardRef<
         "aspect-square h-5 w-5 rounded-full",
         "backdrop-blur-xl bg-white/[0.05]",
         "border border-white/[0.15]",
-        "shadow-[inset_0_0_4px_rgba(255,255,255,0.05)]",
-        "transition-all duration-200",
+        "shadow-[inset_0_0_0.25rem_oklch(1_0_0/0.05)]",
+        "transition-all duration-base",
         "hover:border-white/[0.25]",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "data-[state=checked]:border-primary/50",
-        "data-[state=checked]:shadow-[0_0_8px_rgba(255,255,255,0.2)]",
+        "data-[state=checked]:bg-white/[0.15] data-[state=checked]:border-white/[0.25]",
+        "data-[state=checked]:shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.2),0_0_1rem_oklch(1_0_0/0.08)]",
         className
       )}
       {...props}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <div className="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
+        <div className="h-2.5 w-2.5 rounded-full bg-white shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.5),0_0_0.375rem_oklch(1_0_0/0.4)]" />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )

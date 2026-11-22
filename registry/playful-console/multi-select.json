@@ -1,0 +1,37 @@
+{
+  "name": "multi-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/multi-select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, controlUnchecked, formFieldBase } from \"./_shared\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandSeparator,\n} from \"./command\";\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\";\n\n/** One choice in the list. */\nexport interface MultiSelectOption {\n  value: string;\n  label: string;\n}\n\n/** Props for MultiSelect. */\nexport interface MultiSelectProps {\n  options: MultiSelectOption[];\n  value: string[];\n  onValueChange: (value: string[]) => void;\n  placeholder?: string;\n  searchPlaceholder?: string;\n  emptyMessage?: string;\n  className?: string;\n  disabled?: boolean;\n  /** How many picks show as chips before the rest collapse into \"+N more\". Defaults to 3. */\n  maxVisibleBadges?: number;\n}\n\n/**\n * Playful console MultiSelect: a white field that collects its picks as\n * orange-washed chips and opens a searchable list on the white menu card.\n * Each row carries a small box that becomes the orange key when picked, and\n * a row at the foot clears every pick at once.\n */\nconst MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(\n  (\n    {\n      options,\n      value,\n      onValueChange,\n      placeholder = \"Select options\",\n      searchPlaceholder = \"Search options\",\n      emptyMessage = \"No matching options\",\n      className,\n      disabled,\n      maxVisibleBadges = 3,\n    },\n    ref,\n  ) => {\n    const [open, setOpen] = React.useState(false);\n\n    const toggle = (optionValue: string) => {\n      onValueChange(\n        value.includes(optionValue)\n          ? value.filter((v) => v !== optionValue)\n          : [...value, optionValue],\n      );\n    };\n\n    const selected = options.filter((option) => value.includes(option.value));\n    const hidden = selected.length - maxVisibleBadges;\n\n    return (\n      <Popover open={open} onOpenChange={setOpen}>\n        <PopoverTrigger asChild>\n          <button\n            ref={ref}\n            type=\"button\"\n            role=\"combobox\"\n            aria-expanded={open}\n            disabled={disabled}\n            data-slot=\"multi-select\"\n            className={cn(\n              formFieldBase,\n              \"group flex h-auto min-h-9 items-center justify-between gap-2 py-1.5 text-start\",\n              \"data-[state=open]:border-ring\",\n              className,\n            )}\n          >\n            <span className=\"flex min-w-0 flex-wrap items-center gap-1\">\n              {selected.length === 0 && (\n                <span className=\"py-0.5 text-muted-foreground\">{placeholder}</span>\n              )}\n              {selected.slice(0, maxVisibleBadges).map((option) => (\n                <span\n                  key={option.value}\n                  data-slot=\"multi-select-chip\"\n                  className=\"inline-flex h-6 max-w-40 items-center rounded-md border border-(--primary-rim) bg-(--primary-wash) px-2 text-xs font-bold text-foreground group-disabled:border-(--line-strong) group-disabled:bg-transparent group-disabled:text-(--foreground-disabled)\"\n                >\n                  <span className=\"truncate\">{option.label}</span>\n                </span>\n              ))}\n              {hidden > 0 && (\n                <span className=\"px-1 text-xs font-semibold text-muted-foreground\">\n                  +{hidden} more\n                </span>\n              )}\n            </span>\n            <Icon\n              icon=\"ph:caret-down-bold\"\n              aria-hidden=\"true\"\n              className=\"size-3.5 shrink-0 text-muted-foreground transition-transform duration-fast ease-out group-data-[state=open]:rotate-180\"\n            />\n          </button>\n        </PopoverTrigger>\n        <PopoverContent\n          align=\"start\"\n          className=\"w-(--radix-popover-trigger-width) min-w-56 overflow-hidden p-0\"\n        >\n          <Command className=\"rounded-none border-0 bg-transparent shadow-none\">\n            <CommandInput placeholder={searchPlaceholder} />\n            <CommandList>\n              <CommandEmpty>{emptyMessage}</CommandEmpty>\n              <CommandGroup>\n                {options.map((option) => {\n                  const isSelected = value.includes(option.value);\n                  return (\n                    <CommandItem\n                      key={option.value}\n                      onSelect={() => toggle(option.value)}\n                    >\n                      <span\n                        aria-hidden=\"true\"\n                        data-state={isSelected ? \"checked\" : \"unchecked\"}\n                        className={cn(\n                          \"flex size-4 shrink-0 items-center justify-center rounded-md text-transparent\",\n                          \"transition-[background-color,border-color,box-shadow] duration-fast ease-out\",\n                          controlUnchecked,\n                          controlChecked,\n                        )}\n                      >\n                        <Icon icon=\"ph:check-bold\" className=\"size-3\" />\n                      </span>\n                      <span className=\"truncate\">{option.label}</span>\n                    </CommandItem>\n                  );\n                })}\n              </CommandGroup>\n              {value.length > 0 && (\n                <>\n                  <CommandSeparator />\n                  <CommandGroup>\n                    <CommandItem\n                      onSelect={() => onValueChange([])}\n                      className=\"justify-center font-semibold text-(--foreground-secondary)\"\n                    >\n                      Clear selection\n                    </CommandItem>\n                  </CommandGroup>\n                </>\n              )}\n            </CommandList>\n          </Command>\n        </PopoverContent>\n      </Popover>\n    );\n  },\n);\nMultiSelect.displayName = \"MultiSelect\";\n\nexport { MultiSelect };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/_shared.json",
+    "https://better-design.com/registry/playful-console/command.json",
+    "https://better-design.com/registry/playful-console/popover.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "primary-wash": "oklch(0.9 0.08 78)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "foreground-disabled": "oklch(0.689 0.014 111.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "primary-wash": "oklch(0.36 0.07 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "foreground-disabled": "oklch(0.5 0.012 114)"
+    }
+  }
+}

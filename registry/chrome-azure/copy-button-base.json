@@ -1,0 +1,14 @@
+{
+  "name": "copy-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button, type ButtonProps } from \"./button\"\n\n/*\n * Chrome Azure Copy Button — a raised metal chip that flips its glyph to an\n * azure check once the value lands on the clipboard.\n */\n\nexport interface CopyButtonProps extends Omit<ButtonProps, \"children\"> {\n  value: string\n  copiedLabel?: string\n  label?: string\n}\n\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  ({ value, copiedLabel = \"Copied\", label = \"Copy\", size = \"icon\", onClick, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false)\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(value)\n        setCopied(true)\n        setTimeout(() => setCopied(false), 2000)\n      } catch {\n        // Silent fail — copy is best-effort\n      }\n    }\n\n    return (\n      <Button\n        ref={ref}\n        size={size}\n        onClick={(e) => { onClick?.(e); copy(); }}\n        aria-label={copied ? copiedLabel : label}\n        {...props}\n      >\n        {copied ? (\n          <svg\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth={2.5}\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n            className=\"h-4 w-4 text-primary\"\n          >\n            <path d=\"M20 6 9 17l-5-5\" />\n          </svg>\n        ) : (\n          <svg\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth={2}\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n            className=\"h-4 w-4\"\n          >\n            <rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" />\n            <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />\n          </svg>\n        )}\n        {size !== \"icon\" && <span className=\"ml-2\">{copied ? copiedLabel : label}</span>}\n      </Button>\n    )\n  }\n)\nCopyButton.displayName = \"CopyButton\"\n\nexport { CopyButton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/chrome-azure/button-base.json"
+  ]
+}

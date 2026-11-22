@@ -61,7 +61,7 @@ const TagInput = React.forwardRef<HTMLDivElement, TagInputProps>(
       <div
         ref={ref}
         className={cn(
-          "flex min-h-[44px] w-full flex-wrap items-center gap-1.5",
+          "flex min-h-[2.75rem] w-full flex-wrap items-center gap-1.5",
           "rounded-xl border border-border bg-background px-3 py-2",
           "focus-within:border-ring transition-colors",
           disabled && "opacity-50 cursor-not-allowed",
@@ -97,7 +97,7 @@ const TagInput = React.forwardRef<HTMLDivElement, TagInputProps>(
             disabled={disabled}
             placeholder={tags.length === 0 ? placeholder : ""}
             className={cn(
-              "min-w-[80px] flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground",
+              "min-w-[5rem] flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground",
               "focus:outline-none",
             )}
           />

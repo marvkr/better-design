@@ -1,0 +1,14 @@
+{
+  "name": "textarea-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldMultiLine } from \"./_shared\"\n\n// Control Room Textarea: multi-line instrument well, same recessed\n// material as Input with the signal-green focus glow.\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(formFieldBase, formFieldMultiLine, className)}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nTextarea.displayName = \"Textarea\"\n\nexport { Textarea }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/telemetry/_shared-base.json"
+  ]
+}

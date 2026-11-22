@@ -1,0 +1,26 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, primaryFill } from \"./_shared\";\n\n/**\n * Ink mail IconButton: a square button for a single icon, on the same 2, 2.5\n * and 3rem heights and the same 1rem corner as Button. The default is the\n * quiet secondary step behind a hairline. Primary is the flat off-white fill,\n * so keep it for the one action a screen exists to offer. Always pass\n * `aria-label`.\n */\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center rounded-xl\",\n    \"transition-[background-color,color,border-color] duration-fast ease-out\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:border-transparent disabled:bg-muted disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"border border-(--line-strong) bg-secondary text-secondary-foreground hover:bg-muted\",\n        primary: primaryFill,\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground disabled:bg-transparent\",\n        outline:\n          \"border border-(--line-strong) bg-background text-foreground hover:bg-secondary\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n      },\n      size: {\n        sm: \"size-8 [&_svg]:size-4\",\n        default: \"size-10 [&_svg]:size-5\",\n        lg: \"size-12 [&_svg]:size-6\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface IconButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string;\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, type = \"button\", ...props }, ref) => (\n    <button\n      ref={ref}\n      type={type}\n      data-slot=\"icon-button\"\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  ),\n);\nIconButton.displayName = \"IconButton\";\n\nexport { IconButton, iconButtonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-disabled": "oklch(0.407 0.007 240)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "number-input-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/number-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ChevronDown, ChevronUp } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n// Talentboard NumberInput: recessed field with raised stepper column.\n\ninterface NumberInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"onChange\"> {\n  value?: number;\n  onChange?: (value: number) => void;\n  min?: number;\n  max?: number;\n  step?: number;\n}\n\nconst NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(\n  ({ className, value, onChange, min, max, step = 1, disabled, ...props }, ref) => {\n    const [internalValue, setInternalValue] = React.useState<number>(value ?? 0);\n    const currentValue = value ?? internalValue;\n\n    const update = (next: number) => {\n      let clamped = next;\n      if (min !== undefined) clamped = Math.max(min, clamped);\n      if (max !== undefined) clamped = Math.min(max, clamped);\n      setInternalValue(clamped);\n      onChange?.(clamped);\n    };\n\n    return (\n      <div className=\"relative\">\n        <input\n          ref={ref}\n          type=\"number\"\n          inputMode=\"numeric\"\n          value={currentValue}\n          min={min}\n          max={max}\n          step={step}\n          disabled={disabled}\n          onChange={(e) => {\n            const parsed = parseFloat(e.target.value);\n            if (!Number.isNaN(parsed)) update(parsed);\n          }}\n          className={cn(\n            formFieldBase,\n            \"flex h-9 rounded-lg px-3 py-1 pr-8 text-sm tabular-nums\",\n            \"[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none\",\n            className\n          )}\n          {...props}\n        />\n        <div className=\"absolute right-1 top-1/2 flex -translate-y-1/2 flex-col\">\n          <button\n            type=\"button\"\n            tabIndex={-1}\n            disabled={disabled}\n            aria-label=\"Increase value\"\n            onClick={() => update(currentValue + step)}\n            className=\"flex h-3.5 w-5 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40\"\n          >\n            <ChevronUp className=\"h-3 w-3\" />\n          </button>\n          <button\n            type=\"button\"\n            tabIndex={-1}\n            disabled={disabled}\n            aria-label=\"Decrease value\"\n            onClick={() => update(currentValue - step)}\n            className=\"flex h-3.5 w-5 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40\"\n          >\n            <ChevronDown className=\"h-3 w-3\" />\n          </button>\n        </div>\n      </div>\n    );\n  }\n);\nNumberInput.displayName = \"NumberInput\";\n\nexport { NumberInput };\nexport type { NumberInputProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/marigold/_shared-base.json"
+  ]
+}

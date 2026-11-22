@@ -1,0 +1,29 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { Card, CardContent } from \"./card\";\n\ninterface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: string;\n  value: string | number;\n  change?: {\n    value: string | number;\n    trend: \"up\" | \"down\" | \"neutral\";\n  };\n  icon?: React.ReactNode;\n  description?: string;\n}\n\nconst trendTone = {\n  up: \"bg-(--success-tint) text-(--success-text)\",\n  down: \"bg-(--destructive-tint) text-(--destructive-text)\",\n  neutral: \"border border-(--line-strong) bg-secondary text-(--foreground-secondary)\",\n} as const;\n\nconst trendIcon = {\n  up: \"ph:trend-up\",\n  down: \"ph:trend-down\",\n  neutral: null,\n} as const;\n\n/** Read before the value, so a screen reader hears the direction too. */\nconst trendSpoken = {\n  up: \"Up \",\n  down: \"Down \",\n  neutral: \"No change \",\n} as const;\n\n/**\n * Ink mail StatCard: one metric on the card step, the way a sending dashboard\n * reports volume or delivery rate.\n *\n * A muted caption sits over a large medium-weight figure on tabular digits.\n * An optional icon rests in a small bordered square at the top right. The\n * change is a status pill: green when it rises, red when it falls, a quiet\n * neutral chip when it holds.\n */\nfunction StatCard({\n  label,\n  value,\n  change,\n  icon,\n  description,\n  className,\n  ...props\n}: StatCardProps) {\n  const arrow = change ? trendIcon[change.trend] : null;\n\n  return (\n    <Card className={className} {...props}>\n      <CardContent className=\"flex flex-col gap-3 p-6\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"flex min-w-0 flex-col gap-1.5\">\n            <span className=\"text-sm text-muted-foreground\">{label}</span>\n            <span className=\"text-3xl font-medium tracking-tight tabular-nums text-foreground\">\n              {value}\n            </span>\n          </div>\n          {icon && (\n            <span\n              aria-hidden=\"true\"\n              className=\"flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-secondary text-(--foreground-secondary) [&_svg]:size-4\"\n            >\n              {icon}\n            </span>\n          )}\n        </div>\n        {(change || description) && (\n          <div className=\"flex flex-wrap items-center gap-2\">\n            {change && (\n              <span\n                className={cn(\n                  \"inline-flex h-6 items-center gap-1 rounded-full px-2 text-xs font-medium tabular-nums\",\n                  trendTone[change.trend],\n                )}\n              >\n                {arrow && (\n                  <Icon icon={arrow} className=\"size-3.5\" aria-hidden=\"true\" />\n                )}\n                <span className=\"sr-only\">{trendSpoken[change.trend]}</span>\n                {change.value}\n              </span>\n            )}\n            {description && (\n              <span className=\"text-sm text-muted-foreground\">\n                {description}\n              </span>\n            )}\n          </div>\n        )}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { StatCard };\nexport type { StatCardProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/card.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(1 0 0 / 0.14)",
+      "foreground-secondary": "oklch(0.88 0.002 264)",
+      "success-tint": "oklch(0.88 0.212 155.8 / 0.12)",
+      "success-text": "oklch(0.88 0.19 155.8)",
+      "destructive-tint": "oklch(0.641 0.245 20.6 / 0.14)",
+      "destructive-text": "oklch(0.74 0.18 20.6)"
+    },
+    "dark": {}
+  }
+}

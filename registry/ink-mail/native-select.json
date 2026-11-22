@@ -1,0 +1,24 @@
+{
+  "name": "native-select",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\";\n\nexport interface NativeSelectProps\n  extends React.SelectHTMLAttributes<HTMLSelectElement> {}\n\n/**\n * Ink mail NativeSelect: the browser's own select, dressed as an Ink mail\n * field.\n *\n * It is the same dark well behind a translucent hairline as every input,\n * with the browser arrow replaced by a muted caret at the end. The list\n * itself stays native, which suits long lists such as regions and phones.\n */\nconst NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  ({ className, children, ...props }, ref) => (\n    <div data-slot=\"native-select-wrapper\" className=\"relative w-full\">\n      <select\n        ref={ref}\n        data-slot=\"native-select\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"peer cursor-pointer appearance-none pe-9 [&>option]:bg-popover [&>option]:text-popover-foreground\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </select>\n      <Icon\n        icon=\"ph:caret-down\"\n        className=\"pointer-events-none absolute end-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground peer-disabled:text-(--foreground-disabled)\"\n        aria-hidden=\"true\"\n      />\n    </div>\n  ),\n);\nNativeSelect.displayName = \"NativeSelect\";\n\nexport { NativeSelect };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/ink-mail/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "foreground-disabled": "oklch(0.407 0.007 240)"
+    },
+    "dark": {}
+  }
+}

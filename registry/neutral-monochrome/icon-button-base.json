@@ -1,0 +1,15 @@
+{
+  "name": "icon-button-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex items-center justify-center shrink-0 transition-all duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:scale-[0.95]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0.0625rem_0.1875rem_0_oklch(0.5875_0.2039_277.3624/0.3)]\",\n        secondary:\n          \"bg-card text-foreground border border-border hover:bg-accent hover:border-border/60\",\n        neutral:\n          \"bg-secondary text-muted-foreground hover:bg-accent hover:text-foreground\",\n        ghost:\n          \"text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        outline:\n          \"border border-primary bg-transparent text-primary hover:bg-primary/10\",\n      },\n      size: {\n        sm:      \"h-8 w-8 [&_svg]:h-3.5 [&_svg]:w-3.5\",\n        default: \"h-10 w-10 [&_svg]:h-4 [&_svg]:w-4\",\n        lg:      \"h-11 w-11 [&_svg]:h-5 [&_svg]:w-5\",\n      },\n      corners: {\n        square: \"rounded-[0.625rem]\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      corners: \"square\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends Omit<ButtonPrimitive.Props, \"className\">,\n    VariantProps<typeof iconButtonVariants> {\n  className?: string\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, ...props }, ref) => {\n    return (\n      <ButtonPrimitive\n        ref={ref}\n        className={cn(iconButtonVariants({ variant, size, corners }), className)}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

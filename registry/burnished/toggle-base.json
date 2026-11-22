@@ -1,0 +1,31 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, pressScale, pressedBevel } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Burnished Toggle: a pill that holds its state. Off, it is muted text, or\n * a pill pressed into a recessed well for the outline variant. Pressed, it\n * rises as a graphite bevel in full ink.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full\",\n    \"font-semibold tracking-[0.016em] text-muted-foreground\",\n    \"transition-[box-shadow,color] duration-base ease-(--ease-out)\",\n    pressScale,\n    focusRing,\n    \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n    pressedBevel,\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent [@media(hover:hover)_and_(pointer:fine)]:hover:not-data-[pressed]:text-foreground\",\n        outline:\n          \"bg-(image:--fill-well) shadow-(--bevel-well) [@media(hover:hover)_and_(pointer:fine)]:hover:not-data-[pressed]:text-foreground\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs\",\n        default: \"h-9 px-4 text-sm\",\n        lg: \"h-11 px-5 text-[0.9375rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Burnished Toggle on Base UI: one pill that stays pressed. */\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TogglePrimitive.Props> & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = \"Toggle\";\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
+      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
+      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+  }
+}

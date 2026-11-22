@@ -1,0 +1,20 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field recipe for Ops Sharp.\n *\n * The reference's inputs are crisp white wells pressed into the panel: a pure\n * white surface, a hairline border, a tight inset shadow for depth, and a\n * graphite focus ring that mirrors the primary ink. Every form field (Input,\n * Textarea, PasswordInput, SearchInput, NumberInput, PhoneInput, InputOTP)\n * imports this one constant so the whole set stays in lockstep.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-md px-3 text-sm \" +\n  \"bg-card text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-ring/30 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\";\n\nexport const formFieldSingleLine = \"flex h-9 py-1.5\";\nexport const formFieldMultiLine = \"flex min-h-[5rem] py-2 resize-y\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)"
+    }
+  }
+}

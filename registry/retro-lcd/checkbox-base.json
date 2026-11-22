@@ -1,0 +1,15 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { motion, useMotionValue, useTransform } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({\n  className,\n  checked,\n  defaultChecked,\n  onCheckedChange,\n  ...props\n}: CheckboxPrimitive.Root.Props) {\n  // Controlled parents own the value: the tick must follow the checked prop,\n  // not an internal mirror that flips even when the parent rejects the change.\n  const isControlled = checked !== undefined\n  const [internalChecked, setInternalChecked] = React.useState(\n    defaultChecked ?? false\n  )\n  const isChecked = isControlled ? !!checked : internalChecked\n  const pathLength = useMotionValue(isChecked ? 1 : 0)\n  const strokeLinecap = useTransform(() =>\n    pathLength.get() === 0 ? \"none\" : \"round\"\n  )\n\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-checked:bg-primary data-checked:text-primary-foreground\",\n        className\n      )}\n      checked={isChecked}\n      onCheckedChange={(value, eventDetails) => {\n        if (!isControlled) setInternalChecked(value)\n        onCheckedChange?.(value, eventDetails)\n      }}\n      nativeButton\n      render={\n        <motion.button\n          className=\"flex items-center justify-center p-0\"\n          whileHover={{ scale: 1.05 }}\n          whileTap={{ scale: 0.95 }}\n        />\n      }\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        keepMounted\n        data-slot=\"checkbox-indicator\"\n        className=\"grid size-full place-items-center text-current\"\n      >\n        <svg\n          viewBox=\"0 0 14 14\"\n          className=\"h-4 w-4\"\n          fill=\"none\"\n          strokeWidth={2}\n          stroke=\"currentColor\"\n          strokeLinejoin=\"round\"\n        >\n          <motion.path\n            d=\"M2 6l4 4 6-6\"\n            animate={{ pathLength: isChecked ? 1 : 0 }}\n            transition={{\n              type: \"spring\",\n              bounce: 0,\n              duration: isChecked ? 0.3 : 0.1,\n            }}\n            style={{ pathLength, strokeLinecap }}\n          />\n        </svg>\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "motion@^12.25.0"
+  ]
+}

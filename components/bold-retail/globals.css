@@ -1,0 +1,408 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Bold retail: a high-contrast system for online stores and product pages.
+  A white page, near-black ink and one soft grey that stages every product
+  photo. Black pill buttons carry every action, a heavy condensed display face
+  carries the big headlines, and Inter carries everything else. Containers are
+  square and flat: no card shadow, no decorative colour. Red appears only on
+  sale prices and errors.
+*/
+
+:root {
+  /* ─── Ground: white page, near-black ink ─── */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.178 0 0);
+
+  --card: oklch(1 0 0);                          /* square, flat, edged by a hairline */
+  --card-foreground: oklch(0.178 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.178 0 0);
+
+  /* ─── Primary: the black pill ─── */
+  --primary: oklch(0.178 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --primary-hover: oklch(0.345 0.003 286.2);     /* charcoal */
+  --primary-active: oklch(0.414 0.003 286.3);
+
+  --secondary: oklch(0.97 0 0);                  /* soft grey: photo stage, search pill, quiet buttons */
+  --secondary-foreground: oklch(0.178 0 0);
+  --secondary-hover: oklch(0.922 0 0);
+
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.546 0.003 286.3);  /* product subtitles, captions: 4.9:1 on white */
+
+  --accent: oklch(0.97 0 0);                     /* hover rows in menus and lists */
+  --accent-foreground: oklch(0.178 0 0);
+
+  /* ─── Signal colours: sale red is the only red ─── */
+  --destructive: oklch(0.545 0.223 28.8);
+  --destructive-foreground: oklch(1 0 0);
+  --sale: oklch(0.545 0.223 28.8);
+  --sale-deep: oklch(0.363 0.144 30.4);
+  --success: oklch(0.518 0.126 155.8);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.72 0.15 70);
+  --warning-foreground: oklch(0.178 0 0);
+  --info: oklch(0.528 0.262 263.8);
+  --info-foreground: oklch(1 0 0);
+
+  --border: oklch(0.839 0.001 286.4);            /* the hairline between rows and columns */
+  --border-soft: oklch(0.922 0 0);               /* card edges and the inset line under tab strips */
+  --input: oklch(0.97 0 0);                      /* a soft grey well where a part fills with it */
+  --line-strong: oklch(0.62 0.003 286.3);        /* field edges and outline buttons: 3:1 on white and on grey */
+  --ring: oklch(0.178 0 0);
+  --halo: oklch(0.922 0 0);                      /* the grey halo around a focused field */
+  --radius: 0.75rem;                             /* fields; cards and tiles stay square */
+
+  /* ─── Ink ladder ─── */
+  --foreground-secondary: oklch(0.345 0.003 286.2);
+  --foreground-disabled: oklch(0.7 0.003 286.3);
+  --control: oklch(0.546 0.003 286.3);           /* unchecked box and radio edges */
+  --field: oklch(1 0 0);
+  --thumb: oklch(1 0 0);
+  --scrim: oklch(0.178 0 0 / 0.5);
+
+  /* ─── Code: a soft grey panel, ink text ─── */
+  --code: oklch(0.97 0 0);
+  --code-foreground: oklch(0.178 0 0);
+  --code-inline: oklch(0.97 0 0);
+  --syntax-keyword: oklch(0.528 0.262 263.8);
+  --syntax-string: oklch(0.518 0.126 155.8);
+  --syntax-fn: oklch(0.507 0.086 211);
+  --syntax-comment: oklch(0.546 0.003 286.3);
+
+  /* ─── Callout tints ─── */
+  --success-tint: oklch(0.518 0.126 155.8 / 0.08);
+  --success-text: oklch(0.47 0.115 155.8);
+  --warning-tint: oklch(0.72 0.15 70 / 0.12);
+  --warning-text: oklch(0.5 0.11 62);
+  --info-tint: oklch(0.528 0.262 263.8 / 0.08);
+  --info-text: oklch(0.47 0.23 264);
+  --destructive-tint: oklch(0.545 0.223 28.8 / 0.08);
+  --destructive-text: oklch(0.5 0.2 28.8);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Anton", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ─── Depth: the page is flat. Only floating panels lift. ─── */
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05);
+  --shadow-sm: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.08);
+  --shadow-md: 0 0.25rem 0.75rem oklch(0 0 0 / 0.08);
+  --shadow-lg: 0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.16);
+  --shadow-card: none;
+  --shadow-line: inset 0 -0.0625rem 0 oklch(0.922 0 0);
+  --shadow-menu: 0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.18), 0 0 0 0.0625rem oklch(0.178 0 0 / 0.08);
+  --shadow-overlay: 0 1.5rem 3rem -1rem oklch(0 0 0 / 0.24), 0 0 0 0.0625rem oklch(0.178 0 0 / 0.06);
+  --shadow-thumb: 0 0.0625rem 0.25rem oklch(0 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.178 0 0 / 0.1);
+
+  --chart-1: oklch(0.178 0 0);
+  --chart-2: oklch(0.546 0.003 286.3);
+  --chart-3: oklch(0.7 0.003 286.3);
+  --chart-4: oklch(0.528 0.262 263.8);
+  --chart-5: oklch(0.507 0.086 211);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+.dark {
+  --background: oklch(0.178 0 0);
+  --foreground: oklch(1 0 0);
+  --card: oklch(0.178 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.23 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(1 0 0);
+  --primary-foreground: oklch(0.178 0 0);
+  --primary-hover: oklch(0.922 0 0);
+  --primary-active: oklch(0.839 0.001 286.4);
+  --secondary: oklch(0.26 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --secondary-hover: oklch(0.31 0 0);
+  --muted: oklch(0.26 0 0);
+  --muted-foreground: oklch(0.7 0.003 286.3);
+  --accent: oklch(0.26 0 0);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.65 0.21 28);
+  --destructive-foreground: oklch(0.178 0 0);
+  --sale: oklch(0.65 0.21 28);
+  --sale-deep: oklch(0.545 0.223 28.8);
+  --success: oklch(0.648 0.17 149.9);
+  --success-foreground: oklch(0.178 0 0);
+  --warning: oklch(0.78 0.14 75);
+  --warning-foreground: oklch(0.178 0 0);
+  --info: oklch(0.68 0.17 262);
+  --info-foreground: oklch(0.178 0 0);
+  --border: oklch(1 0 0 / 0.18);
+  --border-soft: oklch(1 0 0 / 0.1);
+  --input: oklch(0.26 0 0);
+  --line-strong: oklch(1 0 0 / 0.32);
+  --ring: oklch(1 0 0);
+  --halo: oklch(1 0 0 / 0.16);
+  --foreground-secondary: oklch(0.839 0.001 286.4);
+  --foreground-disabled: oklch(0.45 0.003 286.3);
+  --control: oklch(0.7 0.003 286.3);
+  --field: oklch(0.178 0 0);
+  --thumb: oklch(1 0 0);
+  --scrim: oklch(0 0 0 / 0.6);
+  --code: oklch(0.23 0 0);
+  --code-foreground: oklch(0.97 0 0);
+  --code-inline: oklch(1 0 0 / 0.1);
+  --syntax-keyword: oklch(0.75 0.13 262);
+  --syntax-string: oklch(0.75 0.15 150);
+  --syntax-fn: oklch(0.75 0.09 205);
+  --syntax-comment: oklch(0.7 0.003 286.3);
+  --success-tint: oklch(0.648 0.17 149.9 / 0.14);
+  --success-text: oklch(0.78 0.15 150);
+  --warning-tint: oklch(0.78 0.14 75 / 0.14);
+  --warning-text: oklch(0.84 0.13 80);
+  --info-tint: oklch(0.68 0.17 262 / 0.16);
+  --info-text: oklch(0.8 0.11 262);
+  --destructive-tint: oklch(0.65 0.21 28 / 0.16);
+  --destructive-text: oklch(0.78 0.14 25);
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.35);
+  --shadow-md: 0 0.25rem 0.75rem oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.6);
+  --shadow-card: none;
+  --shadow-line: inset 0 -0.0625rem 0 oklch(1 0 0 / 0.1);
+  --shadow-menu: 0 0.75rem 2rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.12);
+  --shadow-overlay: 0 1.5rem 3rem -1rem oklch(0 0 0 / 0.7), 0 0 0 0.0625rem oklch(1 0 0 / 0.1);
+  --shadow-thumb: 0 0.0625rem 0.25rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.12);
+  --chart-1: oklch(1 0 0);
+  --chart-2: oklch(0.7 0.003 286.3);
+  --chart-3: oklch(0.546 0.003 286.3);
+  --chart-4: oklch(0.68 0.17 262);
+  --chart-5: oklch(0.65 0.09 205);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-sale: var(--sale);
+  --color-sale-deep: var(--sale-deep);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-input: var(--input);
+  --color-line-strong: var(--line-strong);
+  --color-ring: var(--ring);
+  --color-halo: var(--halo);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-disabled: var(--foreground-disabled);
+  --color-control: var(--control);
+  --color-field: var(--field);
+  --color-thumb: var(--thumb);
+  --color-scrim: var(--scrim);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-inline: var(--code-inline);
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-fn: var(--syntax-fn);
+  --color-syntax-comment: var(--syntax-comment);
+  --color-success-tint: var(--success-tint);
+  --color-success-text: var(--success-text);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-text: var(--warning-text);
+  --color-info-tint: var(--info-tint);
+  --color-info-text: var(--info-text);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-text: var(--destructive-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  /* Corners by part, stepped from --radius the way the catalog derives them.
+     Containers stay square in the components themselves; these round the
+     small parts, fields and floating panels. rounded-3xl (1.5rem) is the
+     search pill and the dialog corner. */
+  --radius-sm: calc(var(--radius) - 0.25rem);   /* 0.5rem    kbd, inline code */
+  --radius-md: calc(var(--radius) - 0.125rem);  /* 0.625rem  menu rows */
+  --radius-lg: var(--radius);                   /* 0.75rem   text fields */
+  --radius-xl: calc(var(--radius) + 0.25rem);   /* 1rem      menus, popovers, selects */
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-line: var(--shadow-line);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  /* Billboard above, catalog below: the two big tiers set in the heavy
+     condensed face at its single weight, the smaller tiers in Inter medium. */
+  :is(h1, h2) {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0;
+  }
+  :is(h3, h4, h5, h6) {
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: comfortable;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 56);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 6);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 8);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 5);
+}

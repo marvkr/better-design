@@ -58,8 +58,8 @@ function FileInput({
         className={cn(
           "flex flex-col items-center justify-center gap-3 p-8",
           "rounded-2xl border border-dashed border-white/[0.08] backdrop-blur-xl bg-white/[0.03]",
-          "shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]",
-          "transition duration-300 cursor-pointer",
+          "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]",
+          "transition duration-slow cursor-pointer",
           isDragging && "border-primary bg-primary/[0.08]",
           !isDragging && "hover:bg-white/[0.05] hover:border-white/[0.12]",
           disabled && "opacity-50 cursor-not-allowed"
@@ -69,7 +69,7 @@ function FileInput({
           <Icon icon="tabler:upload" className="h-5 w-5 text-white/50" />
         </div>
         <div className="text-center">
-          <p className="text-[15px] font-medium text-white/80">
+          <p className="text-[0.9375rem] font-medium text-white/80">
             Click to upload or drag and drop
           </p>
           {accept && (
@@ -97,11 +97,11 @@ function FileInput({
           {files.map((file, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 rounded-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05] px-5 py-2 shadow-[inset_0_0_6px_rgba(255,255,255,0.05)]"
+              className="flex items-center gap-3 rounded-full border border-white/[0.08] backdrop-blur-xl bg-white/[0.05] px-5 py-2 shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.05)]"
             >
               <Icon icon="tabler:file-text" className="h-4 w-4 shrink-0 text-white/40" />
               <div className="flex-1 min-w-0">
-                <p className="truncate text-[15px] text-white/90">{file.name}</p>
+                <p className="truncate text-[0.9375rem] text-white/90">{file.name}</p>
                 <p className="text-xs text-white/40">
                   {(file.size / 1024).toFixed(1)} KB
                 </p>

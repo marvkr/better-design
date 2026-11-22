@@ -74,8 +74,15 @@ const Carousel = React.forwardRef<
  <div
  ref={ref}
  onKeyDownCapture={(e) => {
- if (e.key === "ArrowLeft") api?.scrollPrev()
- if (e.key === "ArrowRight") api?.scrollNext()
+ const prevKey = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp"
+ const nextKey = orientation === "horizontal" ? "ArrowRight" : "ArrowDown"
+ if (e.key === prevKey) {
+ e.preventDefault()
+ api?.scrollPrev()
+ } else if (e.key === nextKey) {
+ e.preventDefault()
+ api?.scrollNext()
+ }
  }}
  className={cn("relative", className)}
  role="region"
@@ -129,7 +136,7 @@ const navButtonStyles =
  "absolute top-1/2 -translate-y-1/2 inline-flex h-9 w-9 items-center justify-center rounded-full " +
  "bg-popover text-foreground border border-border " +
  " " +
- "transition-[background-color,box-shadow,color,transform] duration-150 " +
+ "transition-[background-color,box-shadow,color,transform] duration-fast " +
  "hover:bg-accent hover: " +
  "active:translate-y-px active: " +
  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 " +

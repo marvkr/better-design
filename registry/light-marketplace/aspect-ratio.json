@@ -9,6 +9,6 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-aspect-ratio"
+    "@radix-ui/react-aspect-ratio@^1.1.7"
   ]
 }

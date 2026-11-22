@@ -1,0 +1,43 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared styles for Paddock components.\n *\n * Paddock has one surface recipe: a flat white fill drawn by one 1px cool\n * border, with no drop at rest. A faint shadow appears only on floating\n * panels. White is the raised surface, a pale cool grey is the recessed well,\n * and deep teal is the action. The constants below are the only place those\n * tokens meet class names, so a component picks a finish here rather than\n * writing its own.\n *\n * Form fields (Input, Textarea, PasswordInput, SearchInput, NumberInput,\n * PhoneInput, InputOTP) MUST import `formFieldBase` instead of re-declaring\n * classes. Do NOT copy-paste these strings into a component.\n */\n\n/** The focus ring every interactive part shares: a teal outline, set off the edge. */\nexport const focusRing =\n  \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\n/**\n * The teal fill: the primary's face, with a 1px highlight on its top edge. Checkbox, switch, radio and slider use\n * the same fill and shadow on their checked parts, so they read as one\n * material with the primary Button.\n */\nexport const primaryFace = \"bg-primary text-primary-foreground shadow-(--primary-face)\";\n\n/** The teal fill, a step lighter, for hover. */\nexport const primaryFaceHover = \"hover:bg-primary/88\";\n\n/** The edge of a small checked control: the teal fill, edge to edge. */\nexport const primaryEdge = \"border border-transparent bg-primary shadow-(--primary-face)\";\n\n/**\n * The raised surface: the secondary button, the search field and every\n * neutral control. White with a 1px cool border; hover firms the border.\n */\nexport const raisedSurface =\n  \"bg-card text-foreground shadow-(--card-ring) \" +\n  \"transition-[box-shadow,background-color] duration-fast ease-out \" +\n  \"hover:bg-(--card-hover) hover:shadow-(--card-lift)\";\n\n/** The quiet chip: tags and quiet fills. Flat cool grey, darker on hover. */\nexport const quietChip =\n  \"bg-secondary text-secondary-foreground shadow-(--plate-ring) \" +\n  \"transition-colors duration-fast ease-out hover:bg-(--track)\";\n\n/** The card: white with a 1px cool border, flat. */\nexport const cardSlab = \"bg-card text-card-foreground shadow-(--shadow-card)\";\n\n/** The plate: a surface nested inside a card or column, a flat cool grey. */\nexport const surfacePlate = \"bg-muted text-card-foreground shadow-(--plate-ring)\";\n\n/** The well: the segmented control's track and other recessed areas. */\nexport const wellInset = \"bg-(--track) shadow-(--track-inset)\";\n\n/** The press every control shares: a small scale toward the page. */\nexport const pressScale =\n  \"transition-[transform,background-color,box-shadow] duration-fast ease-out active:scale-97 motion-reduce:active:scale-100\";\n\n/**\n * Base styles shared by every form-field surface: the patient search field.\n * A white rounded rectangle with a 1px slate border at 3:1. Hover firms the\n * border and focus adds the teal outline. The transparent border is there so an\n * invalid field can turn it red.\n */\nexport const formFieldBase =\n  \"w-full min-w-0 rounded-md border border-transparent bg-(--field) px-3 text-sm text-foreground \" +\n  \"shadow-(--control-ring) placeholder:text-muted-foreground \" +\n  \"transition-[box-shadow,border-color] duration-fast ease-out \" +\n  \"hover:shadow-(--control-lift) \" +\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\";\n\n/** Height + vertical padding for single-line form fields (2rem, the patient search field). */\nexport const formFieldSingleLine = \"flex h-8 py-1.5\";\n\n/** Vertical padding, min-height and a softer corner for multi-line form fields. */\nexport const formFieldMultiLine = \"flex min-h-20 rounded-md px-3 py-2 leading-normal\";\n\n/**\n * The floating panel shared by every menu, popover, select and tooltip: a\n * white panel with a 1px cool border and a faint drop, like the filter menu.\n */\nexport const popoverSurface =\n  \"rounded-lg bg-popover p-1.5 text-popover-foreground shadow-(--shadow-menu)\";\n\n/** A highlighted row inside a floating panel. */\nexport const menuItemBase =\n  \"relative flex min-h-8 cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\";\n\n/**\n * A checked small control (checkbox box, radio, switch track). Radix marks it\n * with data-state=\"checked\"; Base UI with data-checked.\n */\nexport const controlChecked =\n  \"data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:shadow-(--primary-face) \" +\n  \"data-[checked]:bg-primary data-[checked]:text-primary-foreground data-[checked]:shadow-(--primary-face)\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "card-hover": "oklch(0.99 0.003 220)",
+      "track": "oklch(0.945 0.008 230)",
+      "field": "oklch(1 0 0)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0 0 0.0625rem oklch(0.42 0.085 198), 0 0.0625rem 0.125rem oklch(0.3 0.05 210 / 0.14)",
+      "card-ring": "0 0 0 0.0625rem oklch(0.915 0.008 230)",
+      "card-lift": "0 0 0 0.0625rem oklch(0.85 0.012 230)",
+      "plate-ring": "0 0 0 0.0625rem oklch(0.93 0.008 230)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.62 0.02 245)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.5 0.02 245)",
+      "track-inset": "inset 0 0 0 0.0625rem oklch(0.91 0.008 230)",
+      "menu-lift": "0 0 0 0.0625rem oklch(0.9 0.008 230), 0 0.25rem 0.75rem -0.125rem oklch(0.3 0.03 240 / 0.1)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "shadow-card": "var(--card-ring)",
+      "shadow-menu": "var(--menu-lift)"
+    },
+    "dark": {
+      "card-hover": "oklch(0.25 0.012 240)",
+      "track": "oklch(0.155 0.012 240)",
+      "field": "oklch(0.22 0.012 240)",
+      "primary-face": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.66 0.1 190), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3)",
+      "card-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.09)",
+      "card-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.16)",
+      "plate-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.06)",
+      "control-ring": "0 0 0 0.0625rem oklch(0.56 0.012 240)",
+      "control-lift": "0 0 0 0.0625rem oklch(0.66 0.012 240)",
+      "track-inset": "inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)",
+      "menu-lift": "0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.25rem 0.75rem -0.125rem oklch(0 0 0 / 0.45)"
+    }
+  }
+}

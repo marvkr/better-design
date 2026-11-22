@@ -1,0 +1,25 @@
+{
+  "name": "slider-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Slider = React.forwardRef<HTMLDivElement, SliderPrimitive.Root.Props>(\n  ({ className, defaultValue, value, min = 0, max = 100, ...props }, ref) => {\n    const _values = Array.isArray(value)\n      ? value\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : [min, max]\n\n    return (\n      <SliderPrimitive.Root\n        data-slot=\"slider\"\n        ref={ref}\n        thumbAlignment=\"edge\"\n        defaultValue={defaultValue}\n        value={value}\n        min={min}\n        max={max}\n        className={cn(\"relative w-full\", className)}\n        {...props}\n      >\n        <SliderPrimitive.Control className=\"flex w-full touch-none select-none items-center\">\n          <SliderPrimitive.Track\n            data-slot=\"slider-track\"\n            className={cn(\n              \"relative h-3 w-full grow overflow-hidden rounded-[0.125rem] border-2 border-border\",\n              \"bg-card [box-shadow:var(--shadow-xs)]\"\n            )}\n          >\n            <SliderPrimitive.Indicator data-slot=\"slider-range\" className=\"absolute h-full bg-primary\" />\n          </SliderPrimitive.Track>\n          {Array.from({ length: _values.length }, (_, index) => (\n            <SliderPrimitive.Thumb\n              data-slot=\"slider-thumb\" key={index}\n              className={cn(\n                \"block h-5 w-5 rounded-[0.125rem] border-2 border-border bg-primary\",\n                \"[box-shadow:var(--shadow-primary)]\",\n                \"transition-[box-shadow,transform] duration-fast\",\n                \"hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:var(--shadow-button-hover)]\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                \"data-disabled:pointer-events-none data-disabled:opacity-50\"\n              )}\n            />\n          ))}\n        </SliderPrimitive.Control>\n      </SliderPrimitive.Root>\n    )\n  }\n)\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-button-hover": "0.3125rem 0.3125rem 0 oklch(0.115 0.012 255)",
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    },
+    "dark": {
+      "shadow-button-hover": "0.3125rem 0.3125rem 0 oklch(0.115 0.012 255)",
+      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
+    }
+  }
+}

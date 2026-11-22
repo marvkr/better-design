@@ -1,0 +1,22 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared form-field recipe for Playdesk.\n *\n * Playdesk has two materials. Raised controls carry a vertical gradient plus a\n * gloss sheen (the --fill-* tokens in globals.css). Fields are the inverse: a\n * recessed white well with a hairline rim and an inset shadow, lit in sky blue\n * on focus. Every field imports this one constant so that treatment lands in a\n * single place instead of eight.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-lg px-3.5 text-sm \" +\n  \"bg-input text-foreground \" +\n  \"border border-border \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,box-shadow,border-color] duration-fast ease-out \" +\n  \"[box-shadow:var(--shadow-inset)] \" +\n  \"hover:border-foreground/20 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:ring-[0.1875rem] focus-visible:ring-ring/25 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-10 py-2\"\nexport const formFieldMultiLine = \"flex min-h-[5.5rem] py-2.5 resize-y\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.07)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

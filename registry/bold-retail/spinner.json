@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Bold retail Spinner: a turning loader in the colour of the text around\n * it. Inside a black pill it turns white; on the page it turns black.\n */\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"default\" | \"lg\";\n}\n\nconst Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(\n  ({ className, size = \"default\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"status\"\n      aria-label=\"Loading\"\n      data-slot=\"spinner\"\n      className={cn(\n        \"inline-flex shrink-0\",\n        size === \"sm\" && \"size-4\",\n        size === \"default\" && \"size-5\",\n        size === \"lg\" && \"size-8\",\n        className,\n      )}\n      {...props}\n    >\n      <Icon\n        icon=\"mingcute:loading-3-line\"\n        aria-hidden=\"true\"\n        className=\"size-full animate-spin\"\n      />\n    </div>\n  ),\n);\nSpinner.displayName = \"Spinner\";\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@iconify/react@^6.0.2"
+  ]
+}

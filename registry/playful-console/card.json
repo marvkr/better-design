@@ -1,0 +1,29 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Playful console Card: a white card on the cream page.\n *\n * The default card is white behind the thin olive hairline at the 0.375rem\n * card corner, with no shadow, so cards stack flat like index cards on a\n * desk. An outline card stays on the page colour, a raised card takes a\n * retro hard offset shadow for the one panel that should pop, and the\n * highlight card carries the one number a screen is about in the orange.\n */\nconst cardVariants = cva(\n  \"flex flex-col rounded-lg border text-card-foreground\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-card\",\n        outline: \"border-(--line-strong) bg-background\",\n        raised: \"border-(--ink) bg-card shadow-(--shadow-offset)\",\n        highlight:\n          \"border-(--primary-rim) bg-primary text-primary-foreground \" +\n          \"[&_[data-slot=card-description]]:text-primary-foreground\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n\n/** Props for Card: any div attribute plus the surface variant. */\nexport interface CardProps\n  extends\n    React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant }), className)}\n      {...props}\n    />\n  ),\n);\nCard.displayName = \"Card\";\n\n/** The top block of a card: title and description, stacked. */\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-header\"\n    className={cn(\"flex flex-col gap-1.5 p-6\", className)}\n    {...props}\n  />\n));\nCardHeader.displayName = \"CardHeader\";\n\n/** The card's bold title. */\nconst CardTitle = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h3\n    ref={ref}\n    data-slot=\"card-title\"\n    className={cn(\"text-lg font-bold leading-snug tracking-tight\", className)}\n    {...props}\n  />\n));\nCardTitle.displayName = \"CardTitle\";\n\n/** The supporting line under the title, in the muted ink. */\nconst CardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    data-slot=\"card-description\"\n    className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)}\n    {...props}\n  />\n));\nCardDescription.displayName = \"CardDescription\";\n\n/** The card body, aligned with the header padding. */\nconst CardContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-content\"\n    className={cn(\"p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardContent.displayName = \"CardContent\";\n\n/** A row of actions at the bottom of the card. */\nconst CardFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"card-footer\"\n    className={cn(\"flex items-center gap-3 p-6 pt-0\", className)}\n    {...props}\n  />\n));\nCardFooter.displayName = \"CardFooter\";\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  cardVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "ink": "oklch(0.26 0.015 118.8)",
+      "shadow-offset": "0.25rem 0.25rem 0 0 oklch(0.26 0.015 118.8 / 0.9)"
+    },
+    "dark": {
+      "primary-rim": "oklch(0.52 0.11 70)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "ink": "oklch(0.95 0.008 114.2)",
+      "shadow-offset": "0.25rem 0.25rem 0 0 oklch(0 0 0 / 0.6)"
+    }
+  }
+}

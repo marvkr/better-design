@@ -55,7 +55,7 @@ const Cursor = React.forwardRef<HTMLSpanElement, CursorProps>(
           aria-hidden
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[2px] bg-primary"
+          className="ml-0.5 inline-block h-[1em] w-[0.125rem] translate-y-[0.125rem] bg-primary"
         />
       </span>
     )

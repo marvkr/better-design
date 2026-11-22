@@ -1,0 +1,31 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { OTPInput, OTPInputContext } from \"input-otp\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { formFieldBase } from \"./_shared\";\n\n/**\n * Firefly InputOTP: one warm field per digit, 2.75rem by 3rem, with the\n * digit set large in tabular figures. The slot waiting for the next digit\n * takes the olive line and flush outline of a focused field, and a thin\n * caret blinks inside it.\n */\nconst InputOTP = React.forwardRef<\n  React.ComponentRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    data-slot=\"input-otp\"\n    containerClassName={cn(\n      \"group/otp flex items-center gap-3 has-[:disabled]:cursor-not-allowed\",\n      containerClassName,\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n));\nInputOTP.displayName = \"InputOTP\";\n\n/** A run of slots that belong together, such as the first three digits. */\nconst InputOTPGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"input-otp-group\"\n    className={cn(\"flex items-center gap-2\", className)}\n    {...props}\n  />\n));\nInputOTPGroup.displayName = \"InputOTPGroup\";\n\n/** One digit's field. It reads its character and caret from the OTP input. */\nconst InputOTPSlot = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { index: number }\n>(({ index, className, ...props }, ref) => {\n  const inputOTPContext = React.useContext(OTPInputContext);\n  const slot = inputOTPContext.slots[index];\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"input-otp-slot\"\n      data-active={slot?.isActive || undefined}\n      className={cn(\n        formFieldBase,\n        \"relative flex h-12 w-11 items-center justify-center px-0\",\n        \"text-lg font-semibold tabular-nums\",\n        \"data-[active]:z-10 data-[active]:border-(--accent-line) data-[active]:outline-2 data-[active]:outline-offset-0 data-[active]:outline-ring\",\n        \"group-has-[:disabled]/otp:bg-secondary group-has-[:disabled]/otp:text-(--foreground-disabled) group-has-[:disabled]/otp:hover:border-(--line-strong)\",\n        className,\n      )}\n      {...props}\n    >\n      {slot?.char}\n      {slot?.hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-5 w-px animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      )}\n    </div>\n  );\n});\nInputOTPSlot.displayName = \"InputOTPSlot\";\n\n/** A short dash between two groups of slots. */\nconst InputOTPSeparator = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"separator\"\n    data-slot=\"input-otp-separator\"\n    className={cn(\"flex items-center text-muted-foreground\", className)}\n    {...props}\n  >\n    <Icon icon=\"carbon:subtract\" className=\"size-4\" aria-hidden=\"true\" />\n  </div>\n));\nInputOTPSeparator.displayName = \"InputOTPSeparator\";\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/firefly/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.848 0.01 93.6)",
+      "foreground-disabled": "oklch(0.718 0.013 96.5)",
+      "accent-line": "oklch(0.594 0.135 115.4)"
+    },
+    "dark": {
+      "line-strong": "oklch(0.366 0.01 106.9)",
+      "foreground-disabled": "oklch(0.477 0.01 99)",
+      "accent-line": "oklch(0.841 0.161 114)"
+    }
+  }
+}

@@ -3,6 +3,14 @@
 import * as React from "react"
 import { Icon } from "@iconify/react"
 import { cn } from "@/lib/utils"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./table"
 
 // Glassmorphic Data Table: sortable, frosted-glass table
 // Glass surfaces for wrapper and header, white/10 borders, white/[0.04] hover
@@ -23,7 +31,29 @@ interface DataTableProps<T> {
 
 type SortDirection = "asc" | "desc" | null
 
-function DataTable<T extends Record<string, unknown>>({
+// Numeric collation puts "9" before "20" before "100"; a plain string
+// compare puts "100" first.
+const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: "base" })
+
+/** Narrows a cell to a number, so two of them sort by value. */
+function isNumberCell<TCell>(cell: TCell | number): cell is number {
+  return typeof cell === "number"
+}
+
+function compareCells<TCell>(a: TCell, b: TCell) {
+  if (isNumberCell(a) && isNumberCell(b)) return a - b
+  return collator.compare(String(a ?? ""), String(b ?? ""))
+}
+
+function ariaSort(active: boolean, direction: SortDirection) {
+  if (!active || !direction) return undefined
+  return direction === "asc" ? "ascending" : "descending"
+}
+
+/** A row's cell values: primitives the table can sort and print. */
+type DataTableCell = string | number | boolean | null | undefined
+
+function DataTable<T extends Record<string, DataTableCell>>({
   data,
   columns,
   className,
@@ -46,7 +76,7 @@ function DataTable<T extends Record<string, unknown>>({
     return [...data].sort((a, b) => {
       const aVal = a[sortKey]
       const bVal = b[sortKey]
-      const cmp = String(aVal).localeCompare(String(bVal))
+      const cmp = compareCells(aVal, bVal)
       return sortDir === "asc" ? cmp : -cmp
     })
   }, [data, sortKey, sortDir])
@@ -56,26 +86,29 @@ function DataTable<T extends Record<string, unknown>>({
       className={cn(
         "w-full overflow-auto rounded-xl border border-white/10",
         "backdrop-blur-xl bg-white/[0.03]",
-        "shadow-[inset_0_0_8px_rgba(255,255,255,0.06)]",
+        "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.06)]",
         className
       )}
     >
-      <table className="w-full caption-bottom text-sm">
-        <thead>
-          <tr className="border-b border-white/10 backdrop-blur-xl bg-white/[0.05]">
+      <Table>
+        <TableHeader>
+          <TableRow className="border-b border-white/10 backdrop-blur-xl bg-white/[0.05] hover:bg-white/[0.05]">
             {columns.map((col) => (
-              <th
+              <TableHead
                 key={String(col.key)}
                 className={cn(
                   "h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground",
-                  col.sortable && "cursor-pointer select-none hover:text-foreground",
                   col.className
                 )}
-                onClick={() => col.sortable && handleSort(col.key)}
+                aria-sort={ariaSort(sortKey === col.key, sortDir)}
               >
-                <div className="flex items-center gap-1">
-                  {col.header}
-                  {col.sortable && (
+                {col.sortable ? (
+                  <button
+                    type="button"
+                    onClick={() => handleSort(col.key)}
+                    className="inline-flex items-center gap-1 rounded-sm cursor-pointer select-none hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {col.header}
                     <span className="text-muted-foreground/50">
                       {sortKey === col.key && sortDir === "asc" ? (
                         <Icon icon="tabler:chevron-up" className="h-3.5 w-3.5" />
@@ -85,42 +118,44 @@ function DataTable<T extends Record<string, unknown>>({
                         <Icon icon="tabler:selector" className="h-3.5 w-3.5" />
                       )}
                     </span>
-                  )}
-                </div>
-              </th>
+                  </button>
+                ) : (
+                  col.header
+                )}
+              </TableHead>
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {sortedData.map((row, i) => (
-            <tr
+            <TableRow
               key={i}
               className="border-b border-white/[0.07] transition-colors last:border-0 hover:bg-white/[0.04]"
             >
               {columns.map((col) => (
-                <td
+                <TableCell
                   key={String(col.key)}
                   className={cn("px-4 py-3 text-sm text-foreground", col.className)}
                 >
                   {col.render
                     ? col.render(row[col.key], row)
                     : String(row[col.key] ?? "")}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
           {sortedData.length === 0 && (
-            <tr>
-              <td
+            <TableRow className="hover:bg-transparent">
+              <TableCell
                 colSpan={columns.length}
                 className="px-4 py-8 text-center text-sm text-muted-foreground"
               >
                 No data available
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           )}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   )
 }

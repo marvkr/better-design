@@ -10,13 +10,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary/95 border border-background shadow-[inset_0_-2px_color-mix(in_oklch,var(--primary)_50%,transparent)] border-opacity-30 text-primary-foreground drop-shadow-lg hover:bg-primary hover:drop-shadow-xl",
+          "bg-primary/95 border border-background shadow-[inset_0_-0.125rem_color-mix(in_oklch,var(--primary)_50%,transparent)] text-primary-foreground drop-shadow-lg hover:bg-primary hover:drop-shadow-xl",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "border bg-secondary text-secondary-foreground shadow-[0_1px_1px_rgba(0,0,0,0.1)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2)]",
+          "border bg-secondary text-secondary-foreground shadow-[0_0.0625rem_0.0625rem_oklch(0_0_0/0.1)] hover:shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.2)]",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -25,6 +25,7 @@ const buttonVariants = cva(
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        "icon-sm": "h-9 w-9 rounded-md",
       },
     },
     defaultVariants: {
@@ -45,6 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        type={asChild ? undefined : "button"}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

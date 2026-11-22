@@ -1,0 +1,50 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel IconButton — the circular control the spec names: 38px, 42px and\n * 46px, always fully round, never a flat fill. Each variant carries six pixels\n * of inset highlight and a soft drop shadow. Pass `aria-label`, because the\n * glyph is the only content.\n */\n\nconst iconButtonVariants = cva(\n  [\n    \"inline-flex shrink-0 items-center justify-center rounded-full\",\n    \"cursor-pointer select-none\",\n    \"transition-[box-shadow,transform,background-color] duration-fast ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"active:translate-y-px\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-card text-[var(--strong)] [box-shadow:var(--shadow-button)] hover:[box-shadow:var(--shadow-button-hover)]\",\n        primary:\n          \"text-primary-foreground bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)] [box-shadow:var(--shadow-primary)] hover:bg-[linear-gradient(180deg,var(--primary-hover-from)_0%,var(--primary-hover-to)_100%)] hover:[box-shadow:var(--shadow-primary-hover)]\",\n        ghost:\n          \"bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground\",\n        outline:\n          \"bg-transparent text-foreground [box-shadow:var(--shadow-ring)] hover:bg-muted\",\n        destructive:\n          \"text-destructive-foreground bg-[linear-gradient(180deg,var(--destructive-from)_0%,var(--destructive-to)_100%)] [box-shadow:var(--shadow-destructive)] hover:[box-shadow:var(--shadow-destructive-hover)]\",\n      },\n      size: {\n        sm: \"size-[2.375rem] [&>svg]:size-[1.0625rem]\",\n        default: \"size-[2.625rem] [&>svg]:size-[1.1875rem]\",\n        lg: \"size-[2.875rem] [&>svg]:size-[1.3125rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\n/** Props for `IconButton`; `aria-label` is required because there is no text. */\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  \"aria-label\": string\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, ...props }, ref) => (\n    <button\n      ref={ref}\n      type={props.type ?? \"button\"}\n      className={cn(iconButtonVariants({ variant, size, className }))}\n      {...props}\n    />\n  ),\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "primary-hover-from": "oklch(0.625 0.168 264.8)",
+      "primary-hover-to": "oklch(0.54 0.18 263.6)",
+      "destructive-from": "oklch(0.624 0.208 25.9)",
+      "destructive-to": "oklch(0.539 0.216 25.2)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.06)",
+      "shadow-button": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.85), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.28), 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.07), 0 0.0625rem 0.125rem oklch(0.1593 0.0111 267.98 / 0.07), 0 0.375rem 0.875rem -0.625rem oklch(0.1593 0.0111 267.98 / 0.2)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.9), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.1593 0.0111 267.98 / 0.22), 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.08), 0 0.125rem 0.25rem oklch(0.1593 0.0111 267.98 / 0.08), 0 0.625rem 1.25rem -0.75rem oklch(0.1593 0.0111 267.98 / 0.26)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55), 0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.36), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.45), 0 0 0 0.0625rem oklch(0.47 0.172 263.6 / 0.9), 0 0.125rem 0.25rem oklch(0.3 0.14 263 / 0.26), 0 0.75rem 1.5rem -0.75rem oklch(0.3 0.14 263 / 0.46)",
+      "shadow-destructive": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.16 26 / 0.5), 0 0 0 0.0625rem oklch(0.49 0.212 25.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.36 0.16 26 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.36 0.16 26 / 0.4)",
+      "shadow-destructive-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.36), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.16 26 / 0.42), 0 0 0 0.0625rem oklch(0.52 0.21 25.6 / 0.9), 0 0.125rem 0.25rem oklch(0.36 0.16 26 / 0.26), 0 0.75rem 1.5rem -0.75rem oklch(0.36 0.16 26 / 0.46)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)",
+      "primary-hover-from": "oklch(0.7 0.152 265.4)",
+      "primary-hover-to": "oklch(0.618 0.172 264)",
+      "destructive-from": "oklch(0.681 0.19 26.2)",
+      "destructive-to": "oklch(0.606 0.206 25.4)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "shadow-ring": "0 0 0 0.0625rem oklch(1 0 0 / 0.07)",
+      "shadow-button": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.08), inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.375rem 0.875rem -0.625rem oklch(0 0 0 / 0.6)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.1), inset 0 -0.375rem 0.625rem -0.5rem oklch(0 0 0 / 0.42), 0 0 0 0.0625rem oklch(1 0 0 / 0.1), 0 0.125rem 0.25rem oklch(0 0 0 / 0.42), 0 0.625rem 1.25rem -0.75rem oklch(0 0 0 / 0.66)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5), 0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55)",
+      "shadow-primary-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.4), 0 0 0 0.0625rem oklch(0.56 0.168 264.4 / 0.9), 0 0.125rem 0.25rem oklch(0 0 0 / 0.42), 0 0.75rem 1.5rem -0.75rem oklch(0.35 0.15 263 / 0.62)",
+      "shadow-destructive": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.15 26 / 0.5), 0 0 0 0.0625rem oklch(0.56 0.2 25.6 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.4 0.17 26 / 0.55)",
+      "shadow-destructive-hover": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.34 0.15 26 / 0.4), 0 0 0 0.0625rem oklch(0.6 0.196 25.8 / 0.9), 0 0.125rem 0.25rem oklch(0 0 0 / 0.42), 0 0.75rem 1.5rem -0.75rem oklch(0.4 0.17 26 / 0.62)"
+    }
+  }
+}

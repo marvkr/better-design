@@ -9,10 +9,7 @@
     }
   ],
   "dependencies": [
-    "lucide-react",
-    "react-resizable-panels"
-  ],
-  "registryDependencies": [
-    "utils"
+    "lucide-react@>=0.518.0 <1",
+    "react-resizable-panels@^3.0.3"
   ]
 }

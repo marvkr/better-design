@@ -1,0 +1,18 @@
+{
+  "name": "chart-bar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/chart-bar.tsx",
+      "content": "\"use client\";\n\nimport { Bar, BarChart, CartesianGrid, XAxis } from \"recharts\";\n\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"./card\";\nimport { ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart\";\n\nconst chartData = [\n  { day: \"Monday\", notes: 12 },\n  { day: \"Tuesday\", notes: 19 },\n  { day: \"Wednesday\", notes: 15 },\n  { day: \"Thursday\", notes: 22 },\n  { day: \"Friday\", notes: 17 },\n  { day: \"Saturday\", notes: 6 },\n  { day: \"Sunday\", notes: 4 },\n];\n\nconst chartConfig = {\n  notes: { label: \"Notes\", color: \"var(--chart-1)\" },\n};\n\n/** A bar chart on a paper card: notes created each weekday, with softly rounded tops. */\nexport function ChartBarDefault() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Notes this week</CardTitle>\n        <CardDescription>New notes by day</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <ChartContainer config={chartConfig} className=\"aspect-video w-full\">\n          <BarChart accessibilityLayer data={chartData}>\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"day\"\n              tickLine={false}\n              tickMargin={8}\n              axisLine={false}\n              tickFormatter={(value: string) => value.slice(0, 3)}\n            />\n            <ChartTooltip cursor={false} content={<ChartTooltipContent hideIndicator />} />\n            <Bar dataKey=\"notes\" fill=\"var(--chart-1)\" radius={[6, 6, 2, 2]} maxBarSize={36} />\n          </BarChart>\n        </ChartContainer>\n      </CardContent>\n      <CardFooter className=\"flex-col items-start gap-1 text-sm\">\n        <div className=\"font-medium leading-snug\">Thursday was the busiest day</div>\n        <div className=\"leading-snug text-muted-foreground\">95 notes in seven days</div>\n      </CardFooter>\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "recharts@^2.15.3"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/card.json",
+    "https://better-design.com/registry/margin/chart.json"
+  ]
+}

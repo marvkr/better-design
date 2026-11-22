@@ -1,0 +1,25 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Halo Badge — translucent pill\n// Small translucent surfaces with inset glow\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"backdrop-blur-xl bg-foreground/[0.08] text-foreground \" +\n          \"shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--halo)_10%,transparent)]\",\n        primary:\n          \"backdrop-blur-xl bg-primary/20 shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--primary)_18%,transparent)] text-[color:oklch(0.875_0.062_256)]\",\n        signature:\n          \"backdrop-blur-xl bg-signature/20 shadow-[inset_0_0_0.375rem_color-mix(in_oklch,var(--signature)_20%,transparent)] text-[color:oklch(0.875_0.076_52)]\",\n        secondary:\n          \"text-secondary-foreground bg-[color:oklch(0.97_0_194/0.08)]\",\n        destructive:\n          \"bg-destructive/20 text-[color:oklch(0.875_0.066_25)]\",\n        \"destructive-light\":\n          \"bg-destructive/20 text-[color:oklch(0.875_0.066_25)]\",\n        success:\n          \"bg-[color:oklch(0.696_0.17_162.48/0.2)] text-[color:oklch(0.875_0.177_163.2)]\",\n        \"success-light\":\n          \"bg-[color:oklch(0.696_0.17_162.5/0.13)] text-[color:oklch(0.875_0.177_163.2)]\",\n        warning:\n          \"bg-orange-500/20 text-[color:oklch(0.875_0.079_55.9)]\",\n        \"warning-light\":\n          \"bg-[color:oklch(0.705_0.213_47.6/0.14)] text-[color:oklch(0.875_0.079_55.9)]\",\n        outline:\n          \"border border-foreground/[0.15] text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide\",\n        default: \"h-5 gap-1.5 px-2 text-xs\",\n        lg: \"h-6 gap-1.5 px-2.5 text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "signature": "oklch(0.72 0.19 52)",
+      "halo": "oklch(1 0 0)"
+    },
+    "dark": {
+      "signature": "oklch(0.72 0.19 52)",
+      "halo": "oklch(1 0 0)"
+    }
+  }
+}

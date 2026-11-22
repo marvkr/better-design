@@ -1,0 +1,37 @@
+{
+  "name": "sheet",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sheet.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SheetPrimitive from \"@radix-ui/react-dialog\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Icon } from \"@iconify/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { buttonVariants } from \"./button\";\n\n/**\n * Playful console Sheet: a white panel that slides in from one edge.\n *\n * Side sheets run the full height with a hairline on their inner edge, like\n * a docked app panel. Top and bottom sheets run edge to edge and round only\n * their inner corners; the bottom sheet carries a small olive grab bar.\n */\nconst Sheet = SheetPrimitive.Root;\n/** Opens the sheet. */\nconst SheetTrigger = SheetPrimitive.Trigger;\n/** Closes the sheet from any element inside it. */\nconst SheetClose = SheetPrimitive.Close;\n/** Renders the sheet into the document body. */\nconst SheetPortal = SheetPrimitive.Portal;\n\n/** The scrim behind the sheet. */\nconst SheetOverlay = React.forwardRef<\n  React.ElementRef<typeof SheetPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <SheetPrimitive.Overlay\n    ref={ref}\n    data-slot=\"sheet-overlay\"\n    className={cn(\n      \"fixed inset-0 z-50 bg-(--scrim)\",\n      \"data-[state=open]:animate-in data-[state=open]:fade-in-0 duration-base\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nSheetOverlay.displayName = SheetPrimitive.Overlay.displayName;\n\nconst sheetVariants = cva(\n  [\n    \"fixed z-50 flex flex-col border-border bg-card text-card-foreground shadow-(--shadow-overlay) outline-none\",\n    \"ease-out data-[state=open]:animate-in duration-base\",\n    \"data-[state=closed]:animate-out\",\n  ].join(\" \"),\n  {\n    variants: {\n      side: {\n        top:\n          \"inset-x-2 top-2 sm:inset-x-3 sm:top-3 max-h-[85dvh] rounded-xl border \" +\n          \"data-[state=open]:slide-in-from-top-[calc(100%+1rem)] data-[state=closed]:slide-out-to-top-[calc(100%+1rem)]\",\n        bottom:\n          \"inset-x-2 bottom-2 sm:inset-x-3 sm:bottom-3 max-h-[85dvh] rounded-xl border \" +\n          \"data-[state=open]:slide-in-from-bottom-[calc(100%+1rem)] data-[state=closed]:slide-out-to-bottom-[calc(100%+1rem)]\",\n        left:\n          \"inset-y-0 left-0 h-full w-3/4 max-w-sm border-r \" +\n          \"data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left\",\n        right:\n          \"inset-y-0 right-0 h-full w-3/4 max-w-sm border-l \" +\n          \"data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right\",\n      },\n    },\n    defaultVariants: {\n      side: \"right\",\n    },\n  },\n);\n\ninterface SheetContentProps\n  extends\n    React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,\n    VariantProps<typeof sheetVariants> {}\n\n/** The sheet panel, docked to the chosen side. */\nconst SheetContent = React.forwardRef<\n  React.ElementRef<typeof SheetPrimitive.Content>,\n  SheetContentProps\n>(({ side = \"right\", className, children, ...props }, ref) => (\n  <SheetPortal>\n    <SheetOverlay />\n    <SheetPrimitive.Content\n      ref={ref}\n      data-slot=\"sheet-content\"\n      data-side={side}\n      className={cn(sheetVariants({ side }), className)}\n      {...props}\n    >\n      {side === \"bottom\" ? (\n        <div\n          aria-hidden=\"true\"\n          data-slot=\"sheet-handle\"\n          className=\"mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-(--line-strong)\"\n        />\n      ) : null}\n      {children}\n      <SheetPrimitive.Close\n        data-slot=\"sheet-close\"\n        className={cn(\n          buttonVariants({ variant: \"ghost\", size: \"icon-sm\" }),\n          \"absolute end-3 top-3 text-muted-foreground hover:text-foreground\",\n        )}\n      >\n        <Icon icon=\"ph:x-bold\" className=\"size-4\" aria-hidden=\"true\" />\n        <span className=\"sr-only\">Close</span>\n      </SheetPrimitive.Close>\n    </SheetPrimitive.Content>\n  </SheetPortal>\n));\nSheetContent.displayName = SheetPrimitive.Content.displayName;\n\n/** Holds the title and description, clear of the close square. */\nconst SheetHeader = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"sheet-header\"\n    className={cn(\"flex flex-col gap-1 border-b border-(--line-soft) px-5 pt-5 pb-4 pe-12 text-start\", className)}\n    {...props}\n  />\n);\nSheetHeader.displayName = \"SheetHeader\";\n\n/** The footer pins to the bottom of a side sheet and lines its actions up at the end. */\nconst SheetFooter = ({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) => (\n  <div\n    data-slot=\"sheet-footer\"\n    className={cn(\n      \"mt-auto flex flex-col-reverse gap-3 border-t border-(--line-soft) px-5 pt-4 pb-5 sm:flex-row sm:justify-end\",\n      className,\n    )}\n    {...props}\n  />\n);\nSheetFooter.displayName = \"SheetFooter\";\n\n/** The sheet title. */\nconst SheetTitle = React.forwardRef<\n  React.ElementRef<typeof SheetPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <SheetPrimitive.Title\n    ref={ref}\n    data-slot=\"sheet-title\"\n    className={cn(\"text-xl font-extrabold leading-tight tracking-tight text-foreground\", className)}\n    {...props}\n  />\n));\nSheetTitle.displayName = SheetPrimitive.Title.displayName;\n\n/** The supporting line under the title. */\nconst SheetDescription = React.forwardRef<\n  React.ElementRef<typeof SheetPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <SheetPrimitive.Description\n    ref={ref}\n    data-slot=\"sheet-description\"\n    className={cn(\"text-sm text-(--foreground-secondary)\", className)}\n    {...props}\n  />\n));\nSheetDescription.displayName = SheetPrimitive.Description.displayName;\n\nexport {\n  Sheet,\n  SheetPortal,\n  SheetOverlay,\n  SheetTrigger,\n  SheetClose,\n  SheetContent,\n  SheetHeader,\n  SheetFooter,\n  SheetTitle,\n  SheetDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dialog@^1.1.14",
+    "class-variance-authority@>=0.7.1 <1",
+    "@iconify/react@^6.0.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playful-console/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-soft": "oklch(0.898 0.018 117.3)",
+      "line-strong": "oklch(0.69 0.016 114)",
+      "foreground-secondary": "oklch(0.373 0.031 259.7)",
+      "scrim": "oklch(0.26 0.015 118.8 / 0.45)",
+      "shadow-overlay": "0 1.25rem 2.5rem -0.75rem oklch(0.26 0.015 118.8 / 0.3), 0 0.25rem 0.75rem oklch(0.26 0.015 118.8 / 0.08)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "line-soft": "oklch(0.31 0.012 114)",
+      "line-strong": "oklch(0.48 0.014 114)",
+      "foreground-secondary": "oklch(0.84 0.01 114)",
+      "scrim": "oklch(0 0 0 / 0.6)",
+      "shadow-overlay": "0 1.25rem 2.5rem -0.75rem oklch(0 0 0 / 0.7), 0 0 0 0.0625rem oklch(0.36 0.012 114)"
+    }
+  }
+}

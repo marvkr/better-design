@@ -1,0 +1,29 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Kanban Glass Badge — the board's category / priority labels.\n// Soft-tinted pills in the board's multi-hue label palette (High / Medium / Low /\n// Info / Grape), plus the indigo primary and neutral chips. Each colored variant\n// is a low-alpha tint of its hue with a matching ink, the way the board's labels\n// read on white cards.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-[var(--radius-sm)] font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        // Neutral chip\n        default:\n          \"bg-secondary text-secondary-foreground border border-border\",\n        secondary:\n          \"bg-muted border border-border text-[color:oklch(0.535_0.012_262)]\",\n        // Indigo accent\n        primary: \"bg-primary text-primary-foreground\",\n        outline: \"border text-foreground bg-transparent border-[color:oklch(0.905_0.004_250)]\",\n        // ── Board label hues ──\n        high:\n          \"text-[color:var(--label-high-ink)] bg-[color:oklch(0.64_0.19_25/0.18)]\",\n        medium:\n          \"bg-[color:oklch(0.78_0.15_75/0.33)] text-[color:oklch(0.5_0.108_70)]\",\n        low:\n          \"text-[color:var(--label-low-ink)] bg-[color:oklch(0.7_0.13_158/0.26)]\",\n        info:\n          \"text-[color:var(--label-info-ink)] bg-[color:oklch(0.62_0.15_252/0.19)]\",\n        grape:\n          \"text-[color:var(--label-grape-ink)] bg-[color:oklch(0.58_0.18_302/0.17)]\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n      },\n      size: {\n        sm: \"h-5 gap-1 px-2 text-[0.6875rem] font-semibold\",\n        default: \"h-6 gap-1.5 px-2.5 text-xs\",\n        lg: \"h-7 gap-1.5 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "label-high-ink": "oklch(0.50 0.18 25)",
+      "label-low-ink": "oklch(0.48 0.11 158)",
+      "label-info-ink": "oklch(0.48 0.15 252)",
+      "label-grape-ink": "oklch(0.46 0.17 302)"
+    },
+    "dark": {
+      "label-high-ink": "oklch(0.50 0.18 25)",
+      "label-low-ink": "oklch(0.48 0.11 158)",
+      "label-info-ink": "oklch(0.48 0.15 252)",
+      "label-grape-ink": "oklch(0.46 0.17 302)"
+    }
+  }
+}

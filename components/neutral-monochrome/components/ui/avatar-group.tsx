@@ -40,7 +40,7 @@ function AvatarGroup({
           key={i}
           className={cn(
             sizeClasses[size],
-            "ring-2 ring-background transition-transform hover:translate-y-[-2px] hover:z-10",
+            "ring-2 ring-background transition-transform hover:translate-y-[-0.125rem] hover:z-10",
             "relative"
           )}
         >

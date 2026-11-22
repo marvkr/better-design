@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Airy docs: a light documentation system for developer docs, API references
+  and knowledge bases. A white page, faint green-grey neutrals, Inter for prose
+  and Geist Mono for code. One deep green carries every action and every
+  "you are here" mark: the primary pill, the active sidebar link, the selected
+  tab. Everything else is a hairline on white, so long pages stay calm.
+*/
+
+:root {
+  /* ─── Ground: white page, green-grey ink ─── */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.214 0.006 156.7);
+
+  --card: oklch(1 0 0);                          /* cards sit on the page, edged by a hairline */
+  --card-foreground: oklch(0.214 0.006 156.7);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.214 0.006 156.7);
+
+  /* ─── Primary: the deep docs green ─── */
+  --primary: oklch(0.476 0.11 154.3);
+  --primary-foreground: oklch(1 0 0);
+  --primary-hover: oklch(0.43 0.1 154.3);
+  --primary-active: oklch(0.39 0.092 154.3);
+  --primary-text: oklch(0.476 0.11 154.3);       /* the green as text on white: 6.3:1 */
+  --primary-wash: oklch(0.476 0.11 154.3 / 0.08); /* active nav rows, selected chips */
+  --primary-line: oklch(0.476 0.11 154.3 / 0.32);
+
+  --secondary: oklch(0.97 0.004 157.2);          /* the tray: code-block frames, search, quiet buttons */
+  --secondary-foreground: oklch(0.214 0.006 156.7);
+
+  --muted: oklch(0.955 0.004 157.2);             /* tracks and wells, one step below the tray */
+  --muted-foreground: oklch(0.552 0.005 157.1);
+
+  --accent: oklch(0.97 0.004 157.2);             /* hover rows */
+  --accent-foreground: oklch(0.214 0.006 156.7);
+
+  --destructive: oklch(0.577 0.17 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.476 0.11 154.3);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.648 0.138 69.8);
+  --warning-foreground: oklch(0.214 0.006 156.7);
+  --info: oklch(0.562 0.156 259.2);
+  --info-foreground: oklch(1 0 0);
+
+  --border: oklch(0.214 0.006 156.7 / 0.1);      /* the hairline: ink at one tenth */
+  --input: oklch(0.94 0.004 157.2);              /* a pale well where a part fills with it, or a quiet outline */
+  --line-strong: oklch(0.65 0.004 160);          /* field edges, switch tracks, outline buttons: 3.2:1 on white */
+  --ring: oklch(0.476 0.11 154.3 / 0.7);         /* 3.3:1 on white */
+  --radius: 0.75rem;
+  /* Radius by size, stepped from --radius the way the catalog derives it:
+     chips, fields and rows, panels, cards, dialogs. */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* ─── Ink ladder ─── */
+  --foreground-secondary: oklch(0.373 0.003 164.9); /* sidebar links, body copy in dense lists */
+  --foreground-disabled: oklch(0.72 0.004 160);
+  --control: oklch(0.6 0.004 160);               /* unchecked box edges and field hover: 3.9:1 on white */
+  --field: oklch(1 0 0);
+  --thumb: oklch(1 0 0);
+  --scrim: oklch(0.155 0.005 173.5 / 0.4);
+
+  /* ─── Code: a white panel inside a pale tray ─── */
+  --code: oklch(1 0 0);
+  --code-foreground: oklch(0.214 0.006 156.7);
+  --code-inline: oklch(0.955 0.004 157.2 / 0.7);
+  --syntax-keyword: oklch(0.52 0.19 330);
+  --syntax-string: oklch(0.476 0.11 154.3);
+  --syntax-fn: oklch(0.5 0.15 259);
+  --syntax-comment: oklch(0.552 0.005 157.1);
+
+  /* ─── Callout tints ─── */
+  --success-tint: oklch(0.476 0.11 154.3 / 0.08);
+  --success-text: oklch(0.42 0.1 154.3);
+  --warning-tint: oklch(0.648 0.138 69.8 / 0.1);
+  --warning-text: oklch(0.5 0.11 66);
+  --info-tint: oklch(0.562 0.156 259.2 / 0.1);
+  --info-text: oklch(0.48 0.15 259.2);
+  --destructive-tint: oklch(0.577 0.17 25 / 0.08);
+  --destructive-text: oklch(0.5 0.16 25);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ─── Depth: the page is flat. Menus and popovers take a hairline ring, no
+     shadow; only dialogs and sheets, which sit on a scrim, cast one. ─── */
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0.155 0.005 173.5 / 0.04);
+  --shadow-sm: 0 0.0625rem 0.1875rem oklch(0.155 0.005 173.5 / 0.06);
+  --shadow-md: 0 0 0 0 oklch(0 0 0 / 0);               /* floating panels carry their own hairline, no shadow */
+  --shadow-lg: 0 0.5rem 1.5rem -0.25rem oklch(0.155 0.005 173.5 / 0.1);
+  --shadow-card: none;
+  --shadow-menu: 0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.12);
+  --shadow-overlay: 0 1.5rem 3rem -0.75rem oklch(0.155 0.005 173.5 / 0.18), 0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.08);
+  --shadow-thumb: 0 0.0625rem 0.1875rem oklch(0.155 0.005 173.5 / 0.16), 0 0 0 0.0625rem oklch(0.214 0.006 156.7 / 0.08);
+
+  --chart-1: oklch(0.476 0.11 154.3);
+  --chart-2: oklch(0.705 0.169 153.6);
+  --chart-3: oklch(0.562 0.156 259.2);
+  --chart-4: oklch(0.648 0.138 69.8);
+  --chart-5: oklch(0.552 0.005 157.1);
+
+  /* --- Motion (standard profile) ---
+     Bare transition-* and ease-* classes read these; durations are
+     duration-fast, duration-base and duration-slow once installed. */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+.dark {
+  --background: oklch(0.156 0.005 196.7);
+  --foreground: oklch(0.955 0.004 157.2);
+  --card: oklch(0.156 0.005 196.7);
+  --card-foreground: oklch(0.955 0.004 157.2);
+  --popover: oklch(0.2 0.006 190);
+  --popover-foreground: oklch(0.955 0.004 157.2);
+  --primary: oklch(0.705 0.169 153.6);
+  --primary-foreground: oklch(0.156 0.005 196.7);
+  --primary-hover: oklch(0.76 0.16 153.6);
+  --primary-active: oklch(0.66 0.16 153.6);
+  --primary-text: oklch(0.705 0.169 153.6);
+  --primary-wash: oklch(0.705 0.169 153.6 / 0.12);
+  --primary-line: oklch(0.705 0.169 153.6 / 0.4);
+  --secondary: oklch(0.2 0.006 190);
+  --secondary-foreground: oklch(0.955 0.004 157.2);
+  --muted: oklch(0.24 0.006 190);
+  --muted-foreground: oklch(0.68 0.005 160);
+  --accent: oklch(0.22 0.006 190);
+  --accent-foreground: oklch(0.955 0.004 157.2);
+  --destructive: oklch(0.66 0.17 23);
+  --destructive-foreground: oklch(0.156 0.005 196.7);
+  --success: oklch(0.705 0.169 153.6);
+  --success-foreground: oklch(0.156 0.005 196.7);
+  --warning: oklch(0.78 0.14 75);
+  --warning-foreground: oklch(0.156 0.005 196.7);
+  --info: oklch(0.7 0.13 259);
+  --info-foreground: oklch(0.156 0.005 196.7);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.14);
+  --line-strong: oklch(1 0 0 / 0.36);
+  --ring: oklch(0.705 0.169 153.6 / 0.6);
+  --foreground-secondary: oklch(0.82 0.004 160);
+  --foreground-disabled: oklch(0.48 0.005 170);
+  --control: oklch(0.52 0.005 170);
+  --field: oklch(0.18 0.006 190);
+  --thumb: oklch(1 0 0);
+  --scrim: oklch(0 0 0 / 0.6);
+  --code: oklch(0.18 0.006 190);
+  --code-foreground: oklch(0.92 0.004 160);
+  --code-inline: oklch(1 0 0 / 0.08);
+  --syntax-keyword: oklch(0.75 0.15 330);
+  --syntax-string: oklch(0.78 0.15 153.6);
+  --syntax-fn: oklch(0.76 0.12 259);
+  --syntax-comment: oklch(0.6 0.005 160);
+  --success-tint: oklch(0.705 0.169 153.6 / 0.12);
+  --success-text: oklch(0.78 0.15 153.6);
+  --warning-tint: oklch(0.78 0.14 75 / 0.12);
+  --warning-text: oklch(0.84 0.13 80);
+  --info-tint: oklch(0.7 0.13 259 / 0.14);
+  --info-text: oklch(0.8 0.1 259);
+  --destructive-tint: oklch(0.66 0.17 23 / 0.14);
+  --destructive-text: oklch(0.78 0.13 22);
+  --shadow-xs: 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.35);
+  --shadow-md: 0 0 0 0 oklch(0 0 0 / 0);               /* floating panels carry their own hairline, no shadow */
+  --shadow-lg: 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.5);
+  --shadow-card: none;
+  --shadow-menu: 0 0 0 0.0625rem oklch(1 0 0 / 0.14);
+  --shadow-overlay: 0 1.5rem 3rem -0.75rem oklch(0 0 0 / 0.6), 0 0 0 0.0625rem oklch(1 0 0 / 0.1);
+  --shadow-thumb: 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.4), 0 0 0 0.0625rem oklch(1 0 0 / 0.1);
+  --chart-1: oklch(0.705 0.169 153.6);
+  --chart-2: oklch(0.476 0.11 154.3);
+  --chart-3: oklch(0.7 0.13 259);
+  --chart-4: oklch(0.78 0.14 75);
+  --chart-5: oklch(0.68 0.005 160);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-text: var(--primary-text);
+  --color-primary-wash: var(--primary-wash);
+  --color-primary-line: var(--primary-line);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-line-strong: var(--line-strong);
+  --color-ring: var(--ring);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-disabled: var(--foreground-disabled);
+  --color-control: var(--control);
+  --color-field: var(--field);
+  --color-thumb: var(--thumb);
+  --color-scrim: var(--scrim);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-inline: var(--code-inline);
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-fn: var(--syntax-fn);
+  --color-syntax-comment: var(--syntax-comment);
+  --color-success-tint: var(--success-tint);
+  --color-success-text: var(--success-text);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-text: var(--warning-text);
+  --color-info-tint: var(--info-tint);
+  --color-info-text: var(--info-text);
+  --color-destructive-tint: var(--destructive-tint);
+  --color-destructive-text: var(--destructive-text);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);   /* 0.5rem    chips, inline code */
+  --radius-md: var(--radius-md);   /* 0.625rem  fields, menu rows, sidebar links */
+  --radius-lg: var(--radius-lg);   /* 0.75rem   popovers, inner code panels */
+  --radius-xl: var(--radius-xl);   /* 1rem      cards, code-block trays */
+  --radius-2xl: var(--radius-2xl); /* 1.25rem   dialogs, sheets */
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-card: var(--shadow-card);
+  --shadow-menu: var(--shadow-menu);
+  --shadow-overlay: var(--shadow-overlay);
+  --shadow-thumb: var(--shadow-thumb);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  /* Docs headings: Inter at medium weight with tight tracking. */
+  :is(h1, h2) {
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  :is(h3, h4) {
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  code, kbd, pre, samp {
+    font-family: var(--font-mono);
+  }
+
+  td, th, time, data, output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes: content loading in, moving between a short
+     and a tall page, or a scroll lock that just hides overflow. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack and
+         opening a dialog shifts the page the other way. */
+      margin-right: 0 !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+}
+
+:root {
+  --layout-density: spacious;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 62);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 10);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 12);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 4);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 6);
+}

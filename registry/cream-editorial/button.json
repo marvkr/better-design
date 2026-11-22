@@ -1,0 +1,34 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, primaryFill } from \"./_shared\";\n\n/**\n * Cream editorial Button: a flat block with a 0.5rem corner.\n *\n * Type is the clean sans at medium weight. The primary is flat terracotta\n * with white type; hover deepens it and nothing else moves. The secondary is\n * a cream block behind a warm hairline, and the ink variant is the dark\n * block a reading room uses for \"Contact sales\". No gradients, no shadows.\n */\nconst buttonVariants = cva(\n  [\n    \"inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap\",\n    \"rounded-md font-medium\",\n    \"transition-[background-color,color,border-color] duration-fast ease-out\",\n    focusRing,\n    \"disabled:pointer-events-none disabled:border-transparent disabled:bg-muted disabled:text-(--foreground-disabled)\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: primaryFill,\n        primary: primaryFill,\n        // Warm ink block, for a strong action that is not the terracotta one.\n        solid: \"bg-foreground text-background hover:bg-foreground/85\",\n        secondary: \"bg-secondary text-secondary-foreground hover:bg-muted\",\n        outline:\n          \"border border-(--line-strong) bg-background text-foreground hover:bg-secondary\",\n        ghost: \"bg-transparent text-(--foreground-secondary) hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        link: \"h-auto rounded-sm px-0 text-(--primary-text) underline-offset-4 hover:underline\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-sm\",\n        default: \"h-9 px-4 text-[0.9375rem]\",\n        lg: \"h-11 px-5 text-base\",\n        icon: \"size-9 px-0\",\n        \"icon-sm\": \"size-8 px-0\",\n        \"icon-lg\": \"size-11 px-0\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        type={asChild ? undefined : \"button\"}\n        data-slot=\"button\"\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-text": "oklch(0.55 0.135 39)",
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "foreground-secondary": "oklch(0.359 0.005 106.7)",
+      "foreground-disabled": "oklch(0.75 0.013 96.5)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "primary-text": "oklch(0.72 0.12 38.8)",
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "foreground-secondary": "oklch(0.853 0.014 97.5)",
+      "foreground-disabled": "oklch(0.478 0.006 95.2)"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "sidebar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sidebar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Sidebar.\n *\n * A card that runs the full height of the screen. It has no border, so the\n * header and the footer separate from the scrolling list with one pixel of the\n * track token. The active item is the only lit row: it takes the primary\n * gradient and the primary shadow, matching the filled controls elsewhere.\n */\n\n/** Props for `Sidebar`; `collapsible` is reserved for a narrow rail. */\ninterface SidebarProps extends React.HTMLAttributes<HTMLElement> {\n  collapsible?: boolean\n}\n\nconst Sidebar = React.forwardRef<HTMLElement, SidebarProps>(\n  ({ className, collapsible: _collapsible, ...props }, ref) => (\n    <aside\n      ref={ref}\n      className={cn(\n        \"flex h-full w-64 flex-col\",\n        \"bg-card text-card-foreground\",\n        \"[box-shadow:var(--shadow-card)]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nSidebar.displayName = \"Sidebar\"\n\nconst SidebarHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"relative flex items-center gap-2.5 px-3.5 py-3\",\n      \"after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[var(--track)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nSidebarHeader.displayName = \"SidebarHeader\"\n\nconst SidebarContent = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex-1 overflow-y-auto p-2.5\", className)}\n    {...props}\n  />\n))\nSidebarContent.displayName = \"SidebarContent\"\n\nconst SidebarFooter = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"relative px-3.5 py-3\",\n      \"before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-[var(--track)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nSidebarFooter.displayName = \"SidebarFooter\"\n\nconst SidebarGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex flex-col gap-1 py-2\", className)}\n    {...props}\n  />\n))\nSidebarGroup.displayName = \"SidebarGroup\"\n\nconst SidebarGroupLabel = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"px-2.5 pb-1.5 text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nSidebarGroupLabel.displayName = \"SidebarGroupLabel\"\n\n/** Props for `SidebarItem`; `active` lights the row the reader is on. */\ninterface SidebarItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  active?: boolean\n  icon?: React.ReactNode\n}\n\nconst SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>(\n  ({ className, active, icon, children, ...props }, ref) => (\n    <button\n      ref={ref}\n      type=\"button\"\n      className={cn(\n        \"flex w-full items-center gap-2.5 rounded-[0.75rem] px-3.5 py-2.5 text-left\",\n        \"text-[0.9063rem] leading-[1.125rem] font-medium tracking-[0.0188rem]\",\n        \"transition-[background-color,background-image,color,box-shadow] duration-fast ease-out\",\n        \"text-muted-foreground hover:bg-[var(--inner)] hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        active && [\n          \"font-semibold text-primary-foreground\",\n          \"bg-[linear-gradient(180deg,var(--primary-from)_0%,var(--primary-to)_100%)]\",\n          \"[box-shadow:var(--shadow-primary)]\",\n          \"hover:bg-[linear-gradient(180deg,var(--primary-hover-from)_0%,var(--primary-hover-to)_100%)] hover:text-primary-foreground\",\n        ],\n        className,\n      )}\n      {...props}\n    >\n      {icon && (\n        <span className=\"flex size-[1.125rem] shrink-0 items-center justify-center\">\n          {icon}\n        </span>\n      )}\n      <span className=\"flex-1 truncate\">{children}</span>\n    </button>\n  ),\n)\nSidebarItem.displayName = \"SidebarItem\"\n\nexport {\n  Sidebar,\n  SidebarHeader,\n  SidebarContent,\n  SidebarFooter,\n  SidebarGroup,\n  SidebarGroupLabel,\n  SidebarItem,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "primary-from": "oklch(0.59 0.175 264.6)",
+      "primary-to": "oklch(0.505 0.183 263.4)",
+      "primary-hover-from": "oklch(0.625 0.168 264.8)",
+      "primary-hover-to": "oklch(0.54 0.18 263.6)",
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-card": "var(--shadow-md)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.3), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.28 0.13 263 / 0.55), 0 0 0 0.0625rem oklch(0.44 0.175 263.4 / 0.9), 0 0.0625rem 0.125rem oklch(0.3 0.14 263 / 0.24), 0 0.5rem 1.125rem -0.625rem oklch(0.3 0.14 263 / 0.4)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "primary-from": "oklch(0.664 0.163 265)",
+      "primary-to": "oklch(0.582 0.176 263.8)",
+      "primary-hover-from": "oklch(0.7 0.152 265.4)",
+      "primary-hover-to": "oklch(0.618 0.172 264)",
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.24), inset 0 -0.375rem 0.625rem -0.5rem oklch(0.3 0.13 263 / 0.5), 0 0 0 0.0625rem oklch(0.52 0.17 264 / 0.9), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.5rem 1.125rem -0.625rem oklch(0.35 0.15 263 / 0.55)",
+      "shadow-card": "var(--shadow-md)"
+    }
+  }
+}

@@ -9,6 +9,6 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-collapsible"
+    "@radix-ui/react-collapsible@^1.1.11"
   ]
 }

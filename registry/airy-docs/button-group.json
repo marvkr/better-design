@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Airy docs ButtonGroup: buttons joined into one pill, the way a docs page\n * offers \"Copy page\" beside a menu chevron. Only the outer ends stay round;\n * inner edges go square and overlap by a hairline, so outline buttons share\n * one line. A focused button rises above its neighbours so its ring shows.\n * Stacked, the ends take the 0.75rem panel corner.\n */\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(\n        \"inline-flex w-fit items-stretch *:rounded-none *:focus-visible:z-10\",\n        orientation === \"horizontal\"\n          ? \"*:first:rounded-s-full *:last:rounded-e-full [&>*+*]:-ms-px\"\n          : \"flex-col *:first:rounded-t-lg *:last:rounded-b-lg [&>*+*]:-mt-px\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nButtonGroup.displayName = \"ButtonGroup\";\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "cursor",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/cursor.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\n\n/** Props for Cursor: the text to type, its pace, and an optional collaborator label. */\nexport interface CursorProps extends React.HTMLAttributes<HTMLSpanElement> {\n  text: string;\n  speed?: number;\n  loop?: boolean;\n  pauseMs?: number;\n  /** Name shown in a small orange tag beside a pointer, like a collaborator's cursor. */\n  label?: string;\n  /** Fill for the pointer arrow; the caret and the tag keep the orange. */\n  color?: string;\n  /** Wait before the first letter, in milliseconds. */\n  delay?: number;\n}\n\n/**\n * Playful console Cursor: text that types itself out behind a console caret.\n *\n * The caret is a chunky orange block that blinks on and off like a terminal\n * prompt. Give it a label and a pointer arrow appears under the text with\n * the name on a small orange tag with the rim edge, the way a teammate shows\n * up on a shared board. With reduced motion on, the full text shows at once.\n */\nconst Cursor = React.forwardRef<HTMLSpanElement, CursorProps>(\n  (\n    {\n      className,\n      text,\n      speed = 60,\n      loop = false,\n      pauseMs = 1500,\n      label,\n      color,\n      delay = 0,\n      ...props\n    },\n    ref,\n  ) => {\n    const [display, setDisplay] = React.useState(\"\");\n    const reduceMotion = useReducedMotion();\n\n    React.useEffect(() => {\n      if (reduceMotion) {\n        setDisplay(text);\n        return;\n      }\n\n      let timer: ReturnType<typeof setTimeout>;\n      let shown = 0;\n      let deleting = false;\n      setDisplay(\"\");\n\n      const tick = () => {\n        if (!deleting) {\n          if (shown < text.length) {\n            shown += 1;\n            setDisplay(text.slice(0, shown));\n            timer = setTimeout(tick, speed);\n            return;\n          }\n          if (!loop) return;\n          deleting = true;\n          timer = setTimeout(tick, pauseMs);\n          return;\n        }\n        if (shown > 0) {\n          shown -= 1;\n          setDisplay(text.slice(0, shown));\n          timer = setTimeout(tick, speed / 2);\n          return;\n        }\n        deleting = false;\n        timer = setTimeout(tick, speed * 4);\n      };\n\n      timer = setTimeout(tick, delay);\n      return () => clearTimeout(timer);\n    }, [text, speed, loop, pauseMs, delay, reduceMotion]);\n\n    return (\n      <span\n        ref={ref}\n        data-slot=\"cursor\"\n        className={cn(\"inline-flex flex-col items-start gap-1\", className)}\n        {...props}\n      >\n        <span className=\"sr-only\">{text}</span>\n        <span\n          aria-hidden=\"true\"\n          className=\"inline-flex min-h-6 items-baseline font-mono text-sm font-medium text-foreground\"\n        >\n          <span className=\"whitespace-pre-wrap\">{display}</span>\n          <motion.span\n            animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 1, 0, 0] }}\n            transition={\n              reduceMotion\n                ? { duration: 0 }\n                : { duration: 1, repeat: Infinity, times: [0, 0.5, 0.5, 1], ease: \"linear\" }\n            }\n            className=\"ms-0.5 inline-block h-4 w-2 translate-y-0.5 rounded-[0.0625rem] bg-primary\"\n          />\n        </span>\n        {label && (\n          <span aria-hidden=\"true\" className=\"inline-flex items-start\">\n            <svg\n              viewBox=\"0 0 16 16\"\n              className=\"size-4 shrink-0 fill-primary stroke-(--primary-rim)\"\n              style={color ? { fill: color } : undefined}\n              strokeWidth={1.5}\n              strokeLinejoin=\"round\"\n            >\n              <path d=\"M2.5 1.5 13 8.2 8.3 9.1 5.9 13.6Z\" />\n            </svg>\n            <span className=\"mt-3 whitespace-nowrap rounded-md border-[0.09375rem] border-(--primary-rim) bg-primary px-1.5 py-0.5 text-xs font-bold text-primary-foreground shadow-(--shadow-control)\">\n              {label}\n            </span>\n          </span>\n        )}\n      </span>\n    );\n  },\n);\nCursor.displayName = \"Cursor\";\n\nexport { Cursor };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-base": "oklch(0.673 0.144 70.5)",
+      "primary-rim": "oklch(0.617 0.124 74)",
+      "shadow-control": "0 0.125rem 0 -0.0625rem var(--primary-base), 0 0.125rem 0 0 var(--primary-rim)"
+    },
+    "dark": {
+      "primary-base": "oklch(0.6 0.13 68)",
+      "primary-rim": "oklch(0.52 0.11 70)"
+    }
+  }
+}

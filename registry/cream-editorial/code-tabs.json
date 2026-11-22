@@ -1,0 +1,33 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { CopyButton } from \"./copy-button\";\n\ninterface CodeTab {\n  label: string;\n  lang: string;\n  code: string;\n}\n\ninterface CodeTabsProps {\n  tabs: CodeTab[];\n  defaultTab?: number;\n  className?: string;\n}\n\n/** The tab a roving-focus key moves to, wrapping at both ends. */\nfunction nextTabIndex(key: string, index: number, last: number): number | undefined {\n  switch (key) {\n    case \"ArrowRight\":\n      return index === last ? 0 : index + 1;\n    case \"ArrowLeft\":\n      return index === 0 ? last : index - 1;\n    case \"Home\":\n      return 0;\n    case \"End\":\n      return last;\n    default:\n      return undefined;\n  }\n}\n\n/**\n * Cream editorial CodeTabs: the dark warm product panel with file tabs.\n *\n * The header is a slightly lighter warm band. Each tab is a filename in\n * small muted type; the chosen one brightens to the panel's cream ink and\n * sits on a faint cream wash. The code swaps with a short fade. The active\n * language and a quiet copy button sit at the end of the header. Arrow keys,\n * Home and End move between tabs.\n */\nfunction CodeTabs({ tabs, defaultTab = 0, className }: CodeTabsProps) {\n  const [activeIndex, setActiveIndex] = React.useState(() =>\n    Math.min(Math.max(defaultTab, 0), Math.max(tabs.length - 1, 0)),\n  );\n  const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);\n  const reduceMotion = useReducedMotion();\n  const uid = React.useId();\n\n  if (tabs.length === 0) return null;\n\n  const index = Math.min(activeIndex, tabs.length - 1);\n  const active = tabs[index];\n\n  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n    const next = nextTabIndex(event.key, index, tabs.length - 1);\n    if (next === undefined) return;\n    event.preventDefault();\n    setActiveIndex(next);\n    tabRefs.current[next]?.focus();\n  };\n\n  return (\n    <div\n      data-slot=\"code-tabs\"\n      className={cn(\n        \"overflow-hidden rounded-xl bg-(--code) text-(--code-foreground)\",\n        className,\n      )}\n    >\n      <div\n        data-slot=\"code-tabs-header\"\n        className=\"flex items-center justify-between gap-3 bg-(--code-header) px-2 py-1.5\"\n      >\n        <div\n          role=\"tablist\"\n          aria-label=\"Code examples\"\n          onKeyDown={onKeyDown}\n          className=\"inline-flex min-w-0 gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden\"\n        >\n          {tabs.map((tab, i) => {\n            const selected = i === index;\n            return (\n              <button\n                key={`${tab.label}-${i}`}\n                ref={(node) => {\n                  tabRefs.current[i] = node;\n                }}\n                type=\"button\"\n                role=\"tab\"\n                id={`${uid}-tab-${i}`}\n                aria-selected={selected}\n                aria-controls={`${uid}-panel`}\n                tabIndex={selected ? 0 : -1}\n                onClick={() => setActiveIndex(i)}\n                className={cn(\n                  \"h-7 shrink-0 whitespace-nowrap rounded-md px-2.5 text-xs font-medium\",\n                  \"transition-colors duration-fast ease-out\",\n                  \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n                  selected\n                    ? \"bg-(--code-foreground)/10 text-(--code-foreground)\"\n                    : \"text-(--code-muted) hover:text-(--code-foreground)\",\n                )}\n              >\n                {tab.label}\n              </button>\n            );\n          })}\n        </div>\n        <div className=\"flex shrink-0 items-center gap-1\">\n          <span className=\"font-mono text-xs text-(--code-muted)\">{active.lang}</span>\n          <CopyButton\n            value={active.code}\n            size=\"icon-sm\"\n            label=\"Copy code\"\n            className=\"text-(--code-muted) hover:bg-(--code-foreground)/10 hover:text-(--code-foreground)\"\n          />\n        </div>\n      </div>\n\n      <div\n        role=\"tabpanel\"\n        id={`${uid}-panel`}\n        aria-labelledby={`${uid}-tab-${index}`}\n        className=\"relative overflow-hidden\"\n      >\n        <AnimatePresence mode=\"popLayout\" initial={false}>\n          <motion.pre\n            key={index}\n            initial={{ opacity: 0 }}\n            animate={{ opacity: 1 }}\n            exit={{ opacity: 0 }}\n            transition={{ duration: reduceMotion ? 0 : 0.15, ease: \"easeOut\" }}\n            className=\"m-0 overflow-x-auto p-5 font-mono text-[0.8125rem] leading-relaxed\"\n          >\n            <code>{active.code}</code>\n          </motion.pre>\n        </AnimatePresence>\n      </div>\n    </div>\n  );\n}\n\nexport { CodeTabs };\nexport type { CodeTabsProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "motion@^12.25.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/copy-button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "code": "oklch(0.214 0.002 67.7)",
+      "code-foreground": "oklch(0.948 0.011 95.2)",
+      "code-header": "oklch(0.257 0.006 78.2)",
+      "code-muted": "oklch(0.696 0.011 87.5)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "code": "oklch(0.155 0.002 67.7)",
+      "code-foreground": "oklch(0.948 0.011 95.2)",
+      "code-header": "oklch(0.214 0.002 67.7)",
+      "code-muted": "oklch(0.696 0.011 87.5)"
+    }
+  }
+}

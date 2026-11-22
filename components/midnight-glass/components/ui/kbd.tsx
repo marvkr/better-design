@@ -11,8 +11,8 @@ const Kbd = React.forwardRef<
       "pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded-md px-1.5",
       "backdrop-blur-xl bg-white/[0.07]",
       "border border-white/[0.08]",
-      "font-mono text-[10px] font-medium text-muted-foreground",
-      "shadow-[inset_0_0_4px_rgba(255,255,255,0.05)]",
+      "font-mono text-[0.625rem] font-medium text-muted-foreground",
+      "shadow-[inset_0_0_0.25rem_oklch(1_0_0/0.05)]",
       className
     )}
     {...props}

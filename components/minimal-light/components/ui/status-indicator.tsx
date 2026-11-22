@@ -10,10 +10,10 @@ const statusIndicatorVariants = cva(
   {
     variants: {
       status: {
-        online:  "bg-primary shadow-[0_0_0_2px_hsl(var(--background))]",
-        offline: "bg-muted-foreground shadow-[0_0_0_2px_hsl(var(--background))]",
-        busy:    "bg-destructive shadow-[0_0_0_2px_hsl(var(--background))]",
-        away:    "bg-muted-foreground/50 shadow-[0_0_0_2px_hsl(var(--background))]",
+        online:  "bg-primary shadow-[0_0_0_0.125rem_var(--background)]",
+        offline: "bg-muted-foreground shadow-[0_0_0_0.125rem_var(--background)]",
+        busy:    "bg-destructive shadow-[0_0_0_0.125rem_var(--background)]",
+        away:    "bg-muted-foreground/50 shadow-[0_0_0_0.125rem_var(--background)]",
       },
       size: {
         xs:      "h-1.5 w-1.5",

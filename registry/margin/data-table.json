@@ -1,0 +1,24 @@
+{
+  "name": "data-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-table.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing } from \"./_shared\";\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"./table\";\n\n/** One column: its key, its header and how it renders a cell. */\nexport interface DataTableColumn<T> {\n  key: string;\n  header: React.ReactNode;\n  cell: (row: T) => React.ReactNode;\n  className?: string;\n}\n\n/** Props for a table driven by a column list. */\nexport interface DataTableProps<T> {\n  columns: DataTableColumn<T>[];\n  data: T[];\n  getRowKey?: (row: T, index: number) => string | number;\n  emptyMessage?: React.ReactNode;\n  className?: string;\n  onRowClick?: (row: T) => void;\n}\n\n/**\n * Margin DataTable: the Margin table driven by a column list. A row that\n * opens something holds a real button in its first cell, so the keyboard\n * reaches it, and an empty table says so in muted text.\n */\nfunction DataTable<T>({\n  columns,\n  data,\n  getRowKey,\n  emptyMessage = \"No results.\",\n  className,\n  onRowClick,\n}: DataTableProps<T>) {\n  return (\n    <div data-slot=\"data-table\" className={cn(\"w-full\", className)}>\n      <Table>\n        <TableHeader>\n          <TableRow className=\"pointer-fine:hover:bg-transparent\">\n            {columns.map((column) => (\n              <TableHead key={column.key} className={column.className}>\n                {column.header}\n              </TableHead>\n            ))}\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          {data.length === 0 ? (\n            <TableRow className=\"pointer-fine:hover:bg-transparent\">\n              <TableCell colSpan={columns.length} className=\"h-24 text-center text-muted-foreground\">\n                {emptyMessage}\n              </TableCell>\n            </TableRow>\n          ) : (\n            data.map((row, rowIndex) => (\n              <TableRow\n                key={getRowKey ? getRowKey(row, rowIndex) : rowIndex}\n                onClick={onRowClick ? () => onRowClick(row) : undefined}\n                className={cn(onRowClick && \"cursor-pointer active:bg-(--field)\")}\n              >\n                {columns.map((column, columnIndex) => (\n                  <TableCell key={column.key} className={column.className}>\n                    {onRowClick && columnIndex === 0 ? (\n                      <button\n                        type=\"button\"\n                        onClick={(event) => {\n                          // The row handles clicks as well; stop so one press opens once.\n                          event.stopPropagation();\n                          onRowClick(row);\n                        }}\n                        className={cn(focusRing, \"flex w-full rounded-sm text-start font-medium text-foreground\")}\n                      >\n                        {column.cell(row)}\n                      </button>\n                    ) : (\n                      column.cell(row)\n                    )}\n                  </TableCell>\n                ))}\n              </TableRow>\n            ))\n          )}\n        </TableBody>\n      </Table>\n    </div>\n  );\n}\n\nexport { DataTable };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared.json",
+    "https://better-design.com/registry/margin/table.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "field": "oklch(0.99 0.008 85)"
+    },
+    "dark": {
+      "field": "oklch(0.22 0.014 260)"
+    }
+  }
+}

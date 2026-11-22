@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitives from \"@radix-ui/react-switch\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\nfunction Switch({\n  className,\n  ...props\n}: React.ComponentProps<typeof SwitchPrimitives.Root>) {\n  return (\n    <SwitchPrimitives.Root\n      className={cn(\n        \"peer inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitives.Thumb asChild>\n        <motion.span\n          layout\n          transition={springInteraction}\n          className=\"pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0\"\n        />\n      </SwitchPrimitives.Thumb>\n    </SwitchPrimitives.Root>\n  )\n}\n\nexport { Switch }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitives from \"@radix-ui/react-switch\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\nfunction Switch({\n  className,\n  ...props\n}: React.ComponentProps<typeof SwitchPrimitives.Root>) {\n  return (\n    <SwitchPrimitives.Root\n      className={cn(\n        \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full bg-muted p-0.5 transition-[background-color,box-shadow] focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)] disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitives.Thumb asChild>\n        <motion.span\n          layout\n          transition={springInteraction}\n          className=\"pointer-events-none block h-5 w-5 rounded-full bg-background [box-shadow:var(--shadow-thumb)] data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0\"\n        />\n      </SwitchPrimitives.Thumb>\n    </SwitchPrimitives.Root>\n  )\n}\n\nexport { Switch }\n",
       "type": "registry:ui"
     },
     {
@@ -14,10 +14,20 @@
     }
   ],
   "dependencies": [
-    "@radix-ui/react-switch",
-    "motion"
+    "@radix-ui/react-switch@^1.2.5",
+    "motion@^12.25.0"
   ],
-  "registryDependencies": [
-    "utils"
-  ]
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.0625rem 0.1875rem oklch(0.2651 0.0621 251.37 / 0.2)"
+    },
+    "dark": {
+      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
+      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)",
+      "shadow-thumb": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.0625rem 0.1875rem oklch(0.2651 0.0621 251.37 / 0.2)"
+    }
+  }
 }

@@ -1,0 +1,32 @@
+{
+  "name": "icon-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/icon-button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault IconButton: circular pucks for icon-only actions, like the\n// wallet's swap and history buttons. Default ghost; primary takes the hero\n// magenta material.\n\nconst iconButtonVariants = cva(\n  \"relative inline-flex shrink-0 items-center justify-center outline-none transition duration-fast ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary [background-image:var(--gradient-primary)] text-primary-foreground [box-shadow:var(--shadow-button)] hover:brightness-110\",\n        secondary:\n          \"bg-secondary text-foreground border border-border [box-shadow:var(--shadow-raised)] hover:bg-accent\",\n        ghost: \"text-muted-foreground hover:bg-secondary hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:brightness-110\",\n        outline: \"border border-border bg-transparent text-foreground hover:bg-secondary\",\n      },\n      size: {\n        xs: \"h-7 w-7 rounded-full text-xs\",\n        sm: \"h-8 w-8 rounded-full text-sm\",\n        default: \"h-9 w-9 rounded-full text-sm\",\n        lg: \"h-10 w-10 rounded-full text-base\",\n        xl: \"h-11 w-11 rounded-full text-base\",\n      },\n      corners: {\n        square: \"rounded-md\",\n        circle: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"ghost\",\n      size: \"default\",\n      corners: \"circle\",\n    },\n  }\n)\n\nexport interface IconButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof iconButtonVariants> {\n  asChild?: boolean\n}\n\nconst IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(\n  ({ className, variant, size, corners, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(iconButtonVariants({ variant, size, corners, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nIconButton.displayName = \"IconButton\"\n\nexport { IconButton, iconButtonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "primary-bright": "oklch(0.71 0.25 350)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, pressScale, pressedFace } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Margin Toggle: a small toolbar button that holds its state. Off, it is\n * muted text, or a hairline outline for `outline`. Pressed, it becomes the\n * white toolbar pill in full ink.\n */\nconst toggleVariants = cva(\n  [\n    \"inline-flex shrink-0 select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-lg\",\n    \"text-sm text-muted-foreground\",\n    pressScale,\n    focusRing,\n    \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n    pressedFace,\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent hover:not-data-[pressed]:bg-accent hover:not-data-[pressed]:text-foreground\",\n        outline:\n          \"bg-transparent ring-1 ring-inset ring-input hover:not-data-[pressed]:bg-accent hover:not-data-[pressed]:text-foreground\",\n      },\n      size: {\n        sm: \"h-7 px-2 text-xs\",\n        default: \"h-7.5 px-2.5 text-sm\",\n        lg: \"h-9 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\n/** Margin Toggle on Base UI: one toolbar button that stays pressed. */\nconst Toggle = React.forwardRef<\n  HTMLButtonElement,\n  WithClassName<TogglePrimitive.Props> & VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive\n    ref={ref}\n    data-slot=\"toggle\"\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n));\nToggle.displayName = \"Toggle\";\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/margin/_shared-base.json"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "checkbox-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/**\n * Cream editorial Checkbox: a 1rem paper box with a small corner and a warm\n * grey edge. Checked or mixed, it fills with the flat terracotta of the\n * primary button and shows a white tick or dash. Base UI owns the checked\n * state, so a controlled parent passes `checked` straight through.\n */\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: WithClassName<CheckboxPrimitive.Root.Props>) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-(--control) bg-(--field) text-primary-foreground\",\n        \"transition-[background-color,border-color] duration-fast ease-out\",\n        \"outline-none focus-visible:ring-3 focus-visible:ring-ring\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:border-(--line-strong) data-[disabled]:bg-secondary\",\n        controlChecked,\n        \"data-[indeterminate]:border-primary data-[indeterminate]:bg-primary\",\n        \"data-[disabled]:data-[indeterminate]:border-(--line-strong) data-[disabled]:data-[indeterminate]:bg-muted data-[disabled]:data-[indeterminate]:text-(--foreground-disabled)\",\n        className,\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot=\"checkbox-indicator\"\n        className=\"flex size-full items-center justify-center text-current\"\n      >\n        {indeterminate ? (\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" className=\"size-3\">\n            <path d=\"M3.5 8h9\" stroke=\"currentColor\" strokeWidth=\"2.25\" strokeLinecap=\"round\" />\n          </svg>\n        ) : (\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" className=\"size-3\">\n            <path\n              d=\"M3 8.5 6.25 11.5 13 4.5\"\n              stroke=\"currentColor\"\n              strokeWidth=\"2.25\"\n              strokeLinecap=\"round\"\n              strokeLinejoin=\"round\"\n            />\n          </svg>\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/cream-editorial/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "line-strong": "oklch(0.853 0.014 97.5)",
+      "foreground-disabled": "oklch(0.75 0.013 96.5)",
+      "control": "oklch(0.75 0.013 96.5)",
+      "field": "oklch(0.993 0.003 95)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {
+      "line-strong": "oklch(1 0 0 / 0.2)",
+      "foreground-disabled": "oklch(0.478 0.006 95.2)",
+      "control": "oklch(0.551 0.009 99)",
+      "field": "oklch(0.214 0.002 67.7)"
+    }
+  }
+}

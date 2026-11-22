@@ -15,7 +15,7 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
         ref={ref}
         className={cn(
           "flex flex-col items-center justify-center text-center",
-          "rounded-[14px] border-2 border-dashed border-border",
+          "rounded-[0.875rem] border-2 border-dashed border-border",
           "bg-secondary/30 px-8 py-12",
           className
         )}

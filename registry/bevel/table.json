@@ -1,0 +1,27 @@
+{
+  "name": "table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Bevel Table.\n *\n * The table is one card: a 20px borderless surface with the card shadow, and\n * the rows inside it are separated by a single pixel of the track token. The\n * rule is an inset shadow on each cell, because a collapsed table drops a\n * shadow set on the row itself. No row carries a border, so a long list reads\n * as one grouped card the way an iOS settings screen does. The header and the\n * footer sit on the inner surface, a shade below the card they live in.\n */\n\nconst Table = React.forwardRef<\n  HTMLTableElement,\n  React.HTMLAttributes<HTMLTableElement>\n>(({ className, ...props }, ref) => (\n  <div className=\"relative w-full overflow-auto rounded-[1.25rem] bg-card text-card-foreground [box-shadow:var(--shadow-card)]\">\n    <table\n      ref={ref}\n      className={cn(\n        \"w-full caption-bottom text-[0.9063rem] leading-[1.125rem] tracking-[0.0188rem]\",\n        className,\n      )}\n      {...props}\n    />\n  </div>\n))\nTable.displayName = \"Table\"\n\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead\n    ref={ref}\n    className={cn(\n      \"bg-[var(--inner)]\",\n      \"[&_tr>*]:[box-shadow:inset_0_-0.0625rem_0_0_var(--track)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableHeader.displayName = \"TableHeader\"\n\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    className={cn(\n      \"[&_tr>*]:[box-shadow:inset_0_-0.0625rem_0_0_var(--track)]\",\n      \"[&_tr:last-child>*]:[box-shadow:none]\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableBody.displayName = \"TableBody\"\n\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    className={cn(\n      \"bg-[var(--inner)] font-semibold text-[var(--strong)]\",\n      \"[&_tr>*]:[box-shadow:inset_0_0.0625rem_0_0_var(--track)]\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableFooter.displayName = \"TableFooter\"\n\nconst TableRow = React.forwardRef<\n  HTMLTableRowElement,\n  React.HTMLAttributes<HTMLTableRowElement>\n>(({ className, ...props }, ref) => (\n  <tr\n    ref={ref}\n    className={cn(\n      \"transition-colors duration-fast ease-out\",\n      \"hover:bg-[var(--inner)] data-[state=selected]:bg-accent\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableRow.displayName = \"TableRow\"\n\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    className={cn(\n      \"h-10 px-3.5 text-left align-middle\",\n      \"text-[0.7813rem] leading-4 font-semibold tracking-[0.0188rem] text-muted-foreground\",\n      \"[&:has([role=checkbox])]:pr-0\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableHead.displayName = \"TableHead\"\n\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    className={cn(\n      \"px-3.5 py-2.5 align-middle text-foreground\",\n      \"[&:has([role=checkbox])]:pr-0\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableCell.displayName = \"TableCell\"\n\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    className={cn(\n      \"mt-3 text-[0.7813rem] leading-4 tracking-[0.0188rem] text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nTableCaption.displayName = \"TableCaption\"\n\nexport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "inner": "oklch(0.9745 0.0028 264.5)",
+      "strong": "oklch(0.3382 0.0208 265.5)",
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-card": "var(--shadow-md)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+    },
+    "dark": {
+      "inner": "oklch(0.2519 0.0152 268)",
+      "strong": "oklch(0.8409 0.0148 267)",
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-card": "var(--shadow-md)"
+    }
+  }
+}

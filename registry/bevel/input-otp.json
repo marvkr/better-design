@@ -1,0 +1,28 @@
+{
+  "name": "input-otp",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-otp.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { OTPInput, OTPInputContext } from \"input-otp\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase } from \"./_shared\"\n\n/*\n * Bevel InputOTP.\n *\n * One code, six wells. Each slot is the shared field surface squared off to\n * 44px, so a passcode screen uses the same material as the form behind it.\n * The active slot swaps its well for the accent ring and lifts above its\n * neighbours. The separator is one pixel of the track token.\n */\n\nconst InputOTP = React.forwardRef<\n  React.ElementRef<typeof OTPInput>,\n  React.ComponentPropsWithoutRef<typeof OTPInput>\n>(({ className, containerClassName, ...props }, ref) => (\n  <OTPInput\n    ref={ref}\n    containerClassName={cn(\n      \"flex items-center gap-2.5 has-[:disabled]:opacity-50\",\n      containerClassName,\n    )}\n    className={cn(\"disabled:cursor-not-allowed\", className)}\n    {...props}\n  />\n))\nInputOTP.displayName = \"InputOTP\"\n\nconst InputOTPGroup = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"flex items-center gap-2\", className)}\n    {...props}\n  />\n))\nInputOTPGroup.displayName = \"InputOTPGroup\"\n\n/** Props for `InputOTPSlot`; `index` picks which character the slot shows. */\nexport interface InputOTPSlotProps extends React.ComponentPropsWithoutRef<\"div\"> {\n  index: number\n}\n\nconst InputOTPSlot = React.forwardRef<React.ElementRef<\"div\">, InputOTPSlotProps>(\n  ({ index, className, ...props }, ref) => {\n    const inputOTPContext = React.useContext(OTPInputContext)\n    const slot = inputOTPContext.slots[index]\n    const char = slot?.char\n    const hasFakeCaret = slot?.hasFakeCaret\n    const isActive = slot?.isActive\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          formFieldBase,\n          \"relative flex size-11 items-center justify-center px-0\",\n          \"text-[1.1875rem] leading-6 font-semibold tracking-[-0.0375rem]\",\n          isActive &&\n            \"z-10 [box-shadow:var(--shadow-inset),0_0_0_0.125rem_var(--ring)]\",\n          className,\n        )}\n        {...props}\n      >\n        {char}\n        {hasFakeCaret && (\n          <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n            <div className=\"animate-caret-blink h-5 w-px bg-foreground duration-1000\" />\n          </div>\n        )}\n      </div>\n    )\n  },\n)\nInputOTPSlot.displayName = \"InputOTPSlot\"\n\nconst InputOTPSeparator = React.forwardRef<\n  React.ElementRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\">\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    role=\"separator\"\n    className={cn(\"flex items-center justify-center px-0.5\", className)}\n    {...props}\n  >\n    <span className=\"block h-px w-2.5 bg-[var(--track)]\" />\n  </div>\n))\nInputOTPSeparator.displayName = \"InputOTPSeparator\"\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "input-otp@^1.4.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/bevel/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "track": "oklch(0.9306 0.0058 264.53)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0.1593 0.0111 267.98 / 0.06), inset 0 0 0 0.0625rem oklch(0.1593 0.0111 267.98 / 0.045)"
+    },
+    "dark": {
+      "track": "oklch(0.2849 0.0175 266.34)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem 0 oklch(0 0 0 / 0.45), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.05)"
+    }
+  }
+}

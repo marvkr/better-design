@@ -1,0 +1,26 @@
+{
+  "name": "toggle-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Command Noir Toggle — a quiet command chip.\n *\n * Off state: dim label, flat on the surface.\n * On state:  lights up with the cool accent material (fill + rim + glow),\n *            mirroring the primary Button so active controls read as one\n *            material across the system.\n */\n\nconst toggleVariants = cva(\n  [\n    \"relative inline-flex items-center justify-center gap-1.5\",\n    \"rounded-md text-sm font-medium leading-none tracking-[-0.005em]\",\n    \"transition-[color,background,box-shadow] duration-fast\",\n    \"cursor-pointer select-none\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"text-muted-foreground hover:text-foreground\",\n    \"data-pressed:text-primary-foreground\",\n    \"data-pressed:[background:var(--accent-fill)]\",\n    \"data-pressed:[box-shadow:var(--shadow-accent)]\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline:\n          \"border border-border bg-transparent \" +\n          \"data-pressed:border-transparent\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst sizeClasses = {\n  default: \"h-[2.125rem] px-[0.8125rem]\",\n  sm: \"h-[1.75rem] px-2.5 text-xs\",\n  lg: \"h-[2.5rem] px-4\",\n}\n\ninterface ToggleProps\n  extends Omit<TogglePrimitive.Props, \"className\">,\n    VariantProps<typeof toggleVariants> {\n  className?: string\n  size?: keyof typeof sizeClasses\n}\n\nconst Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(\n  ({ className, variant, size = \"default\", ...props }, ref) => (\n    <TogglePrimitive\n      ref={ref}\n      className={cn(toggleVariants({ variant }), sizeClasses[size], className)}\n      {...props}\n    />\n  )\n)\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants, sizeClasses as toggleSizeClasses }\nexport type { ToggleProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
+    },
+    "dark": {
+      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
+    }
+  }
+}

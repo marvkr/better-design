@@ -1,0 +1,30 @@
+{
+  "name": "data-table",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-table.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ChevronDown, ChevronUp } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"./table\";\n\n/*\n * Playdesk DataTable — the Table inside a window, with click-to-sort headers.\n */\n\nexport interface Column<T> {\n  key: keyof T & string;\n  header: string;\n  align?: \"left\" | \"right\";\n  render?: (row: T) => React.ReactNode;\n}\n\nexport interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> {\n  columns: Column<T>[];\n  rows: T[];\n}\n\n/** A row's cell values: primitives the table can sort and print. */\ntype DataTableCell = string | number | boolean | null | undefined\n\n// Numeric collation puts \"9\" before \"20\" before \"100\"; a plain string\n// compare puts \"100\" first.\nconst collator = new Intl.Collator(undefined, { numeric: true, sensitivity: \"base\" });\n\n/** Narrows a cell to a number, so two of them sort by value. */\nfunction isNumberCell<TCell>(cell: TCell | number): cell is number {\n  return typeof cell === \"number\";\n}\n\nfunction compareCells<TCell>(a: TCell, b: TCell) {\n  if (isNumberCell(a) && isNumberCell(b)) return a - b;\n  return collator.compare(String(a ?? \"\"), String(b ?? \"\"));\n}\n\nfunction DataTable<T extends Record<string, DataTableCell>>({\n  className,\n  columns,\n  rows,\n  ...props\n}: DataTableProps<T>) {\n  const [sort, setSort] = React.useState<{\n    key: string;\n    direction: \"asc\" | \"desc\";\n  } | null>(null);\n\n  const sorted = React.useMemo(() => {\n    if (!sort) return rows;\n    return [...rows].sort((a, b) => {\n      const compare = compareCells(a[sort.key], b[sort.key]);\n      return sort.direction === \"asc\" ? compare : -compare;\n    });\n  }, [rows, sort]);\n\n  const toggleSort = (key: string) =>\n    setSort((current) =>\n      current?.key === key\n        ? { key, direction: current.direction === \"asc\" ? \"desc\" : \"asc\" }\n        : { key, direction: \"asc\" },\n    );\n\n  return (\n    <div\n      className={cn(\n        \"overflow-hidden rounded-xl bg-card [box-shadow:var(--shadow-window)]\",\n        className,\n      )}\n      {...props}\n    >\n      <Table>\n        <TableHeader>\n          <TableRow>\n            {columns.map((column) => (\n              <TableHead\n                key={column.key}\n                className={column.align === \"right\" ? \"text-right\" : undefined}\n                aria-sort={\n                  sort?.key === column.key\n                    ? sort.direction === \"asc\"\n                      ? \"ascending\"\n                      : \"descending\"\n                    : undefined\n                }\n              >\n                <button\n                  type=\"button\"\n                  onClick={() => toggleSort(column.key)}\n                  className=\"inline-flex items-center gap-1 transition-colors hover:text-foreground\"\n                >\n                  {column.header}\n                  {sort?.key === column.key ? (\n                    sort.direction === \"asc\" ? (\n                      <ChevronUp className=\"size-3\" />\n                    ) : (\n                      <ChevronDown className=\"size-3\" />\n                    )\n                  ) : null}\n                </button>\n              </TableHead>\n            ))}\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          {sorted.map((row, index) => (\n            <TableRow key={index}>\n              {columns.map((column) => (\n                <TableCell\n                  key={column.key}\n                  className={column.align === \"right\" ? \"text-right\" : undefined}\n                >\n                  {column.render ? column.render(row) : String(row[column.key])}\n                </TableCell>\n              ))}\n            </TableRow>\n          ))}\n        </TableBody>\n      </Table>\n    </div>\n  );\n}\nDataTable.displayName = \"DataTable\";\n\nexport { DataTable };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/playdesk/table.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    },
+    "dark": {
+      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
+      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
+      "shadow-window": "var(--shadow-rim), var(--shadow-float)"
+    }
+  }
+}

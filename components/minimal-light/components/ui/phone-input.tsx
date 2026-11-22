@@ -73,7 +73,7 @@ function PhoneInput({
 
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (ref.current && !(e.target instanceof Node && ref.current.contains(e.target))) {
         setOpen(false)
         setSearch("")
       }
@@ -107,7 +107,7 @@ function PhoneInput({
         aria-label={`Country: ${currentCountry.name}`}
         className={cn(
           "flex h-10 shrink-0 items-center gap-1.5 rounded-l-xl border border-r-0 border-border bg-secondary px-3",
-          "text-sm text-foreground transition-colors duration-200 hover:bg-accent",
+          "text-sm text-foreground transition-colors duration-base hover:bg-accent",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:z-10",
           "disabled:cursor-not-allowed disabled:opacity-40"
         )}
@@ -124,7 +124,7 @@ function PhoneInput({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={cn("text-muted-foreground transition-transform duration-200", open && "rotate-180")}
+          className={cn("text-muted-foreground transition-transform duration-base", open && "rotate-180")}
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
@@ -140,7 +140,7 @@ function PhoneInput({
         className={cn(
           "flex h-10 w-full rounded-r-xl border border-border bg-secondary px-4 py-2 text-sm",
           "text-foreground placeholder:text-muted-foreground",
-          "transition-colors duration-200 hover:bg-accent",
+          "transition-colors duration-base hover:bg-accent",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0",
           "focus-visible:border-primary/30",
           "disabled:cursor-not-allowed disabled:opacity-40"
@@ -151,7 +151,7 @@ function PhoneInput({
       {open && (
         <div
           className={cn(
-            "absolute left-0 top-full z-50 mt-1 w-64 overflow-hidden rounded-xl border border-border bg-card shadow-xl",
+            "absolute left-0 top-full z-50 mt-1 w-64 overflow-hidden rounded-xl bg-card shadow-xl",
             "animate-in fade-in-0 zoom-in-95"
           )}
           role="listbox"
@@ -185,7 +185,7 @@ function PhoneInput({
                   onClick={() => handleCountrySelect(country)}
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground",
-                    "transition-colors duration-150 hover:bg-accent",
+                    "transition-colors duration-fast hover:bg-accent",
                     "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                     currentCountry.code === country.code && "bg-accent"
                   )}

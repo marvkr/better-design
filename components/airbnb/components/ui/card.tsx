@@ -2,10 +2,9 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Card — extracted from airbnb.com (2026-04)
-// Listing cards have NO border and NO shadow — just stacked content.
-// Image gets rounded-xl, text sits directly below with no wrapper chrome.
-// Use border only when explicitly needed (e.g. settings panels, modals).
+// Airbnb Card, measured on airbnb.com (13 November 2026)
+// A raised panel: 16px radius and a soft shadow that carries its own edge.
+// A listing tile is a photo with text under it, so it takes no Card.
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -14,7 +13,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-2xl bg-card text-card-foreground",
+      "rounded-2xl bg-card text-card-foreground shadow",
       className
     )}
     {...props}
@@ -41,7 +40,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-base font-medium leading-tight tracking-tight text-foreground",
+      "text-xl font-medium leading-tight tracking-tight text-foreground",
       className
     )}
     {...props}

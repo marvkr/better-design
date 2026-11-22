@@ -1,0 +1,35 @@
+{
+  "name": "file-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/file-input.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Upload, X, FileText } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Gauge Dark FileInput: a dashed loading bay recessed into the panel; the\n// drop state rims it in gold. Listed files are small nested panels.\n\ninterface FileInputProps extends React.HTMLAttributes<HTMLDivElement> {\n  accept?: string;\n  multiple?: boolean;\n  onFileChange?: (files: File[]) => void;\n  disabled?: boolean;\n  maxSize?: number; // in bytes\n}\n\nfunction FileInput({\n  accept,\n  multiple,\n  onFileChange,\n  disabled,\n  maxSize,\n  className,\n  ...props\n}: FileInputProps) {\n  const [isDragging, setIsDragging] = React.useState(false);\n  const [files, setFiles] = React.useState<File[]>([]);\n  const inputRef = React.useRef<HTMLInputElement>(null);\n\n  const handleFiles = (newFiles: File[]) => {\n    const filtered = maxSize\n      ? newFiles.filter((f) => f.size <= maxSize)\n      : newFiles;\n    const updated = multiple ? [...files, ...filtered] : filtered;\n    setFiles(updated);\n    onFileChange?.(updated);\n  };\n\n  const removeFile = (index: number) => {\n    const updated = files.filter((_, i) => i !== index);\n    setFiles(updated);\n    onFileChange?.(updated);\n  };\n\n  return (\n    <div className={cn(\"flex flex-col gap-3\", className)} {...props}>\n      <div\n        onClick={() => !disabled && inputRef.current?.click()}\n        onDragOver={(e) => {\n          e.preventDefault();\n          if (!disabled) setIsDragging(true);\n        }}\n        onDragLeave={() => setIsDragging(false)}\n        onDrop={(e) => {\n          e.preventDefault();\n          setIsDragging(false);\n          if (!disabled) {\n            handleFiles(Array.from(e.dataTransfer.files));\n          }\n        }}\n        className={cn(\n          \"flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border bg-input p-8 shadow-[var(--shadow-well)]\",\n          \"transition-[border-color,box-shadow,background-color] duration-base\",\n          isDragging &&\n            \"border-[var(--gauge-rim)] bg-primary/5 shadow-[var(--shadow-well),var(--shadow-focus)]\",\n          !isDragging && \"hover:border-[var(--gauge-line-soft)]\",\n          disabled && \"cursor-not-allowed opacity-50\"\n        )}\n      >\n        <div className=\"flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary shadow-[var(--shadow-raised)]\">\n          <Upload className=\"h-5 w-5 text-muted-foreground\" />\n        </div>\n        <div className=\"text-center\">\n          <p className=\"text-sm font-medium text-foreground\">\n            Click to upload or drag and drop\n          </p>\n          {accept && (\n            <p className=\"mt-0.5 text-xs text-muted-foreground\">{accept}</p>\n          )}\n          {maxSize && (\n            <p className=\"mt-0.5 text-xs text-muted-foreground\">\n              Max {Math.round(maxSize / 1024 / 1024)}MB\n            </p>\n          )}\n        </div>\n        <input\n          ref={inputRef}\n          type=\"file\"\n          accept={accept}\n          multiple={multiple}\n          disabled={disabled}\n          className=\"hidden\"\n          onChange={(e) => handleFiles(Array.from(e.target.files ?? []))}\n        />\n      </div>\n\n      {files.length > 0 && (\n        <div className=\"flex flex-col gap-2\">\n          {files.map((file, i) => (\n            <div\n              key={i}\n              className=\"flex items-center gap-3 rounded-lg border border-border bg-[var(--gauge-nested)] px-3 py-2 shadow-[var(--shadow-nested)]\"\n            >\n              <FileText className=\"h-4 w-4 shrink-0 text-muted-foreground\" />\n              <div className=\"min-w-0 flex-1\">\n                <p className=\"truncate text-sm text-foreground\">{file.name}</p>\n                <p className=\"font-mono text-xs text-muted-foreground\">\n                  {(file.size / 1024).toFixed(1)} KB\n                </p>\n              </div>\n              <button\n                type=\"button\"\n                onClick={() => removeFile(i)}\n                className=\"text-muted-foreground transition-colors hover:text-foreground\"\n              >\n                <X className=\"h-4 w-4\" />\n              </button>\n            </div>\n          ))}\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport { FileInput };\nexport type { FileInputProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "lucide-react@>=0.518.0 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "gauge-nested": "oklch(0.235 0.015 283)",
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-line-soft": "oklch(0.8 0.115 85 / 0.25)",
+      "shadow-nested": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem -0.125rem oklch(0 0 0 / 0.35)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)"
+    },
+    "dark": {
+      "gauge-nested": "oklch(0.235 0.015 283)",
+      "gauge-rim": "oklch(0.6 0.1 78)",
+      "gauge-line-soft": "oklch(0.8 0.115 85 / 0.25)",
+      "shadow-nested": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem -0.125rem oklch(0 0 0 / 0.35)",
+      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
+      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
+      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)"
+    }
+  }
+}
