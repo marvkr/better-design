@@ -12,7 +12,7 @@ const Switch = React.forwardRef<
   <SwitchPrimitive.Root
     ref={ref}
     className={cn(
-      "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-[0.125rem] border-2 border-border",
+      "group/switch peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-[0.125rem] border-2 border-border",
       "bg-card [box-shadow:var(--shadow-xs)]",
       "transition-[background-color,box-shadow,transform] duration-fast",
       "hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:var(--shadow-sm)]",
@@ -26,9 +26,10 @@ const Switch = React.forwardRef<
     <SwitchPrimitive.Thumb
       className={cn(
         "pointer-events-none block h-4 w-4 rounded-[0.0625rem] border-2 border-border bg-foreground",
-        "ring-0 transition-transform duration-fast",
+        "ring-0",
         "data-[state=checked]:translate-x-5 data-[state=checked]:bg-primary-foreground",
-        "data-[state=unchecked]:translate-x-0.5"
+        "data-[state=unchecked]:translate-x-0.5",
+        "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none"
       )}
     />
   </SwitchPrimitive.Root>

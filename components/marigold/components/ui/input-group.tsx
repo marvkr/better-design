@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard InputGroup: recessed shell with quiet prefix/suffix slots.
+// InputGroup: recessed shell with quiet prefix/suffix slots.
 
 interface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "prefix"> {
   prefix?: React.ReactNode;

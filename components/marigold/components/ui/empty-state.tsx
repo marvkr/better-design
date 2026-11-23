@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard EmptyState: card-framed zero state with a dashed inner well.
+// EmptyState: card-framed zero state with a dashed inner well.
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;

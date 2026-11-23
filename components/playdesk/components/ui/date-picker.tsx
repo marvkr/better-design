@@ -23,6 +23,12 @@ const DatePicker = ({
   className,
 }: DatePickerProps) => {
   const [internal, setInternal] = React.useState<Date | undefined>(value);
+  // Follow the parent's value, including a reset to undefined.
+  const [syncedValue, setSyncedValue] = React.useState(value);
+  if (value !== syncedValue) {
+    setSyncedValue(value);
+    setInternal(value);
+  }
   const selected = value ?? internal;
 
   const handleSelect = (date: Date | undefined) => {

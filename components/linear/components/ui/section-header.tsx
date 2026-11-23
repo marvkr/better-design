@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Linear Section Header: page/section title with optional subtitle and action
+// Section Header: page/section title with optional subtitle and action
 
 interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string

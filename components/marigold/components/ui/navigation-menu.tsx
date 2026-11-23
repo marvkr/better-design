@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard NavigationMenu: viewport floats on the shared layered pop shadow.
+// NavigationMenu: viewport floats on the shared layered pop shadow.
 
 const NavigationMenu = React.forwardRef<
   React.ComponentRef<typeof NavigationMenuPrimitive.Root>,

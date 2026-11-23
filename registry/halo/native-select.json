@@ -17,9 +17,6 @@
       "halo": "oklch(1 0 0)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "halo": "oklch(1 0 0)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

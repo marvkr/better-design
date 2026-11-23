@@ -19,9 +19,6 @@
       "shadow-popover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)",
       "shadow-destructive-popover": "0 0 0 0.0625rem var(--destructive), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)"
     },
-    "dark": {
-      "shadow-popover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)",
-      "shadow-destructive-popover": "0 0 0 0.0625rem var(--destructive), 0 0.125rem 0.3125rem -0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.625rem 1.75rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2)"
-    }
+    "dark": {}
   }
 }

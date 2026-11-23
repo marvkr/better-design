@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { oxFace, focusRing } from "./_shared";
@@ -32,14 +31,22 @@ const Checkbox = React.forwardRef<
       data-slot="checkbox-indicator"
       className={cn("absolute -inset-0.25 flex items-center justify-center rounded-sm", oxFace)}
     >
-      {props.checked === "indeterminate" ? (
-        <span className="h-0.5 w-2 rounded-full bg-current" />
-      ) : (
-        <Icon icon="solar:unread-linear" className="size-3.5 [&_path]:stroke-3" aria-hidden />
-      )}
+      <CheckIcon className="size-3.5 [&_path]:stroke-3 in-data-[state=indeterminate]:hidden" aria-hidden />
+      <span className="hidden h-0.5 w-2 rounded-full bg-current in-data-[state=indeterminate]:block" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
+
+// "solar:unread-linear" from Solar,
+// the icon library this system pairs with, drawn inline so the installed
+// component loads no icon at runtime. [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 12.9L10.1429 16.5L18 7.5"/>
+    </svg>
+  );
+}

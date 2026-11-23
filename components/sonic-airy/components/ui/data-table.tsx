@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Airbnb Data Table: sortable, clean table with Airbnb styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

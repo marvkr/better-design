@@ -19,8 +19,6 @@
     "light": {
       "overlay": "oklch(0.10 0.03 256 / 0.7)"
     },
-    "dark": {
-      "overlay": "oklch(0.10 0.03 256 / 0.7)"
-    }
+    "dark": {}
   }
 }

@@ -17,9 +17,6 @@
       "fg-border": "oklch(1 0 0 / 0.14)",
       "fg-blur": "1.125rem"
     },
-    "dark": {
-      "fg-border": "oklch(1 0 0 / 0.14)",
-      "fg-blur": "1.125rem"
-    }
+    "dark": {}
   }
 }

@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Label } from "./label"
 
-// Airbnb Field: Label + Input + optional description + optional error
+// Field: Label + Input + optional description + optional error
 // Light theme: label text-sm font-medium, description/error text-xs
 // Error state: error message in text-destructive
 

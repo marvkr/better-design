@@ -1,0 +1,19 @@
+{
+  "name": "data-range-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"./calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\nexport function DataRangePicker() {\n  const [date, setDate] = React.useState<Date>()\n\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button\n          variant=\"secondary\"\n          className={cn(\"w-[17.5rem] justify-start text-left font-normal\", !date && \"text-muted-foreground\")}\n        >\n          <CalendarIcon className=\"text-muted-foreground\" />\n          {date ? format(date, \"PPP\") : <span>Pick a date</span>}\n        </Button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\">\n        <Calendar mode=\"single\" selected={date} onSelect={setDate} initialFocus />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\n// feather:calendar\nfunction CalendarIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\">\n        <rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" ry=\"2\" />\n        <path d=\"M16 2v4M8 2v4m-5 4h18\" />\n      </g>\n    </svg>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/button.json",
+    "https://better-design.com/registry/plinth/calendar.json",
+    "https://better-design.com/registry/plinth/popover.json"
+  ]
+}

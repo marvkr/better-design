@@ -18,8 +18,6 @@
     "light": {
       "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4)"
     },
-    "dark": {
-      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4)"
-    }
+    "dark": {}
   }
 }

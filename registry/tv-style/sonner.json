@@ -16,8 +16,6 @@
     "light": {
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55)"
     },
-    "dark": {
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.55)"
-    }
+    "dark": {}
   }
 }

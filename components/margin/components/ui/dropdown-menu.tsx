@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { menuItemBase, popoverSurface } from "./_shared";
@@ -47,7 +46,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon icon="solar:alt-arrow-right-linear" className="ml-auto size-3.5 text-muted-foreground" aria-hidden />
+    <ChevronRightIcon className="ml-auto size-3.5 text-muted-foreground" aria-hidden />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
@@ -111,7 +110,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className={indicatorSlot}>
       <DropdownMenuPrimitive.ItemIndicator>
-        <Icon icon="solar:unread-linear" className="size-3.5 text-(--primary-text)" aria-hidden />
+        <CheckIcon className="size-3.5 text-(--primary-text)" aria-hidden />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -195,3 +194,22 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };
+
+// Solar, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "solar:unread-linear" "solar:alt-arrow-right-linear"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 12.9L10.1429 16.5L18 7.5"/>
+    </svg>
+  );
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5L15 12L9 19"/>
+    </svg>
+  );
+}

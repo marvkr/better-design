@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Airbnb Badge, measured on airbnb.com (13 November 2026)
+// Badge, measured on airbnb.com (13 November 2026)
 // Pill shape, weight 500. Status colours come from the site's own scale.
 
 const badgeVariants = cva(

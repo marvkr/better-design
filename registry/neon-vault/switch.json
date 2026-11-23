@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitives from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Switch: a recessed dark track that, when on, takes the hero\n// magenta material (gradient + sheen + rim + glow) shared with the primary\n// Button. The thumb is a soft raised puck.\n\nfunction Switch({\n  className,\n  ...props\n}: React.ComponentProps<typeof SwitchPrimitives.Root>) {\n  return (\n    <SwitchPrimitives.Root\n      className={cn(\n        \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full\",\n        \"border border-border bg-input [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background,box-shadow,border-color] duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-[state=checked]:border-transparent data-[state=checked]:bg-primary\",\n        \"data-[state=checked]:[background-image:var(--gradient-primary)]\",\n        \"data-[state=checked]:[box-shadow:var(--shadow-button)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitives.Thumb\n        className={cn(\n          \"pointer-events-none block h-5 w-5 rounded-full bg-foreground\",\n          \"[box-shadow:0_0.0625rem_0.125rem_oklch(0_0_0/0.45)]\",\n          \"transition-transform duration-fast\",\n          \"data-[state=checked]:translate-x-5.5 data-[state=unchecked]:translate-x-0.5\"\n        )}\n      />\n    </SwitchPrimitives.Root>\n  )\n}\n\nexport { Switch }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitives from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Neon Vault Switch: a recessed dark track that, when on, takes the hero\n// magenta material (gradient + sheen + rim + glow) shared with the primary\n// Button. The thumb is a soft raised puck.\n\nfunction Switch({\n  className,\n  ...props\n}: React.ComponentProps<typeof SwitchPrimitives.Root>) {\n  return (\n    <SwitchPrimitives.Root\n      className={cn(\n        \"group/switch peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full\",\n        \"border border-border bg-input [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background,box-shadow,border-color] duration-fast\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"data-[state=checked]:border-transparent data-[state=checked]:bg-primary\",\n        \"data-[state=checked]:[background-image:var(--gradient-primary)]\",\n        \"data-[state=checked]:[box-shadow:var(--shadow-button)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitives.Thumb\n        className={cn(\n          \"pointer-events-none block h-5 w-5 rounded-full bg-foreground\",\n          \"[box-shadow:0_0.0625rem_0.125rem_oklch(0_0_0/0.45)]\",\n          \"data-[state=checked]:translate-x-5.5 data-[state=unchecked]:translate-x-0.5\",\n          \"origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\"\n        )}\n      />\n    </SwitchPrimitives.Root>\n  )\n}\n\nexport { Switch }\n",
       "type": "registry:ui"
     }
   ],
@@ -17,13 +17,9 @@
       "primary-bright": "oklch(0.71 0.25 350)",
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
       "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)",
-      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
+      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "primary-bright": "oklch(0.71 0.25 350)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
-      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)",
-      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
-    }
+    "dark": {}
   }
 }

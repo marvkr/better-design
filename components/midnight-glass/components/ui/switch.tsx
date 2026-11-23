@@ -17,7 +17,7 @@ const Switch = React.forwardRef<
   <div className="inline-flex p-px rounded-full bg-[linear-gradient(165deg,oklch(1_0_0/0.42)_0%,oklch(1_0_0/0.16)_20%,oklch(1_0_0/0.03)_50%,oklch(1_0_0/0.08)_80%,oklch(1_0_0/0.21)_100%)]">
     <SwitchPrimitive.Root
       className={cn(
-        "peer inline-flex h-[1.875rem] w-[3.25rem] shrink-0 cursor-pointer items-center rounded-full",
+        "group/switch peer inline-flex h-[1.875rem] w-[3.25rem] shrink-0 cursor-pointer items-center rounded-full",
         "bg-transparent",
         "border border-white/[0.15]",
         "shadow-[inset_0_0_0.5rem_oklch(1_0_0/0.15)]",
@@ -36,9 +36,9 @@ const Switch = React.forwardRef<
           "pointer-events-none block h-[1.375rem] w-[1.375rem] rounded-full",
           "bg-[radial-gradient(circle_at_35%_30%,oklch(1_0_0/1),oklch(1_0_0/0.8)_60%,oklch(0.9_0.012_255/0.7))]",
           "shadow-[0_0_0.625rem_oklch(1_0_0/0.35),0_0.0625rem_0.1875rem_oklch(0_0_0/0.3)]",
-          "transition-transform duration-slow",
           "data-[state=unchecked]:translate-x-[0.1875rem]",
           "data-[state=checked]:translate-x-[1.4375rem]",
+          "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none",
         )}
       />
     </SwitchPrimitive.Root>

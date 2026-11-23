@@ -1,0 +1,24 @@
+{
+  "name": "tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\n\nimport { cn } from \"@/lib/utils\"\nimport { GlassLens } from \"./glass-lens\"\n\n/*\n * Liquid Glass Tabs — Radix Tabs (roving focus, arrow keys, tab and panel\n * wiring) with the kit's travelling lens. When the selection changes, the\n * lens leaves the old tab, swells into clear glass that bends the labels it\n * passes, then settles into the flat highlight under the new tab. Press and\n * hold opens the lens in place; drag it and let go to select. Without WebGL2\n * or with reduced motion the highlight simply jumps.\n */\n\nconst TabsValueContext = React.createContext<string | null>(null)\n\nfunction Tabs({\n  className,\n  value,\n  defaultValue,\n  onValueChange,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Root>) {\n  // Radix owns the selection; this mirror tells the lens and the triggers which tab holds it.\n  const [own, setOwn] = React.useState(defaultValue ?? null)\n  const current = value ?? own\n  return (\n    <TabsValueContext.Provider value={current}>\n      <TabsPrimitive.Root\n        data-slot=\"tabs\"\n        className={cn(\"flex flex-col gap-3\", className)}\n        value={value}\n        defaultValue={defaultValue}\n        onValueChange={(next) => {\n          setOwn(next)\n          onValueChange?.(next)\n        }}\n        {...props}\n      />\n    </TabsValueContext.Provider>\n  )\n}\n\nfunction TabsList({ className, children, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) {\n  const value = React.useContext(TabsValueContext)\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      data-glass-host=\"\"\n      className={cn(\"relative isolate inline-flex w-fit items-center gap-1 rounded-full bg-(--glass-wash) p-1\", className)}\n      {...props}\n    >\n      {/* The lens must be the list's first child. */}\n      <GlassLens value={value} />\n      {children}\n    </TabsPrimitive.List>\n  )\n}\n\nfunction TabsTrigger({ className, children, value, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {\n  const selected = React.useContext(TabsValueContext) === value\n  return (\n    <TabsPrimitive.Trigger\n      data-slot=\"tabs-trigger\"\n      value={value}\n      className={cn(\n        \"relative inline-flex h-8 cursor-pointer items-center justify-center gap-1.5 rounded-full px-3.5 text-[0.8125rem] font-semibold whitespace-nowrap outline-none select-none\",\n        \"text-muted-foreground transition-colors duration-base hover:text-foreground\",\n        \"data-[state=active]:text-foreground [[data-glass-traveling]_&]:data-[state=active]:text-muted-foreground\",\n        \"focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50\",\n        \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className\n      )}\n      {...props}\n    >\n      {selected ? (\n        <span\n          aria-hidden\n          data-glass-highlight=\"\"\n          className=\"absolute inset-0 rounded-full bg-background [box-shadow:0_0_0_0.0625rem_var(--border)] [[data-glass-moving]_&]:opacity-0\"\n        />\n      ) : null}\n      <span className=\"relative z-20 inline-flex items-center gap-1.5\">{children}</span>\n    </TabsPrimitive.Trigger>\n  )\n}\n\n/** Radix makes a panel focusable; its ring sits inside, so a clipping frame never hides it. */\nfunction TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>) {\n  return (\n    <TabsPrimitive.Content\n      data-slot=\"tabs-content\"\n      className={cn(\"rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs@^1.1.12"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/liquid-glass/glass-lens.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glass-wash": "oklch(0 0 0 / 0.05)"
+    },
+    "dark": {}
+  }
+}

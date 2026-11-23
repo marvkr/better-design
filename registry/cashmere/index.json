@@ -1768,6 +1768,14 @@
       "name": "collapsible-base"
     },
     {
+      "name": "combobox-base",
+      "registryDependencies": [
+        "_shared-base",
+        "command-base",
+        "popover-base"
+      ]
+    },
+    {
       "name": "command-base",
       "registryDependencies": [
         "_shared-base",
@@ -1784,6 +1792,22 @@
       "name": "copy-button-base",
       "registryDependencies": [
         "button-base"
+      ]
+    },
+    {
+      "name": "data-range-picker-base",
+      "registryDependencies": [
+        "calendar-base",
+        "button-base",
+        "popover-base"
+      ]
+    },
+    {
+      "name": "date-picker-base",
+      "registryDependencies": [
+        "calendar-base",
+        "_shared-base",
+        "popover-base"
       ]
     },
     {
@@ -1856,6 +1880,12 @@
     },
     {
       "name": "label-base"
+    },
+    {
+      "name": "mega-menu-base",
+      "registryDependencies": [
+        "popover-base"
+      ]
     },
     {
       "name": "menubar-base",
@@ -1979,10 +2009,6 @@
     }
   ],
   "baseSkipped": [
-    "combobox",
-    "data-range-picker",
-    "date-picker",
-    "mega-menu",
     "multi-select"
   ]
 }

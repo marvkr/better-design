@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Vercel / Geist Card — dark, #111 surface, 12px radius
+// Card — dark, #111 surface, 12px radius
 // Border: 1px solid #333 (accents-2 in dark mode)
 // Shadow: subtle inset glow rgba(255,255,255,0.05)
 // Hover: brighter border, stronger glow

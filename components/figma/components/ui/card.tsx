@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Figma Card — light, white surface, 12-16px radius
+// Card — light, white surface, 12-16px radius
 // Matches figma.com marketing site — white cards, subtle border, light shadow
 // Border: 1px solid light purple-gray
 // Shadow: subtle upward shadow

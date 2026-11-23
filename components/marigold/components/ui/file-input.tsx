@@ -5,7 +5,7 @@ import { File as FileIcon, Upload, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard FileInput: dashed recessed drop well; hover lifts the border to orange.
+// FileInput: dashed recessed drop well; hover lifts the border to orange.
 
 interface FileInputProps extends React.HTMLAttributes<HTMLDivElement> {
   accept?: string;

@@ -22,9 +22,6 @@
       "shadow-l": "var(--shadow-lg)",
       "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     },
-    "dark": {
-      "shadow-l": "var(--shadow-lg)",
-      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
-    }
+    "dark": {}
   }
 }

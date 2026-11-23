@@ -1,8 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Pulseboard Empty State: centered content with icon, title, description, and optional action
-// Uses rounded-2xl bg-secondary/50 pattern from Pulseboard's empty states
+// Empty State: centered content with icon, title, description, and optional action
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode

@@ -19,11 +19,6 @@
       "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.14), 0 0 0 0.0625rem oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55)",
       "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.22), 0 0 0 0.0625rem oklch(0.7019 0.2294 349.48 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0.6785 0.2413 354.7 / 0.18)"
     },
-    "dark": {
-      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)",
-      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.14), 0 0 0 0.0625rem oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.22), 0 0 0 0.0625rem oklch(0.7019 0.2294 349.48 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0.6785 0.2413 354.7 / 0.18)"
-    }
+    "dark": {}
   }
 }

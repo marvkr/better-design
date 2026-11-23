@@ -1363,6 +1363,12 @@
       ]
     },
     {
+      "name": "breadcrumb-base",
+      "registryDependencies": [
+        "_shared-base"
+      ]
+    },
+    {
       "name": "button-base",
       "registryDependencies": [
         "_shared-base"
@@ -2047,6 +2053,12 @@
       ]
     },
     {
+      "name": "item-base",
+      "registryDependencies": [
+        "_shared-base"
+      ]
+    },
+    {
       "name": "ix-onboarding-stepper-base",
       "registryDependencies": [
         "button-base"
@@ -2062,6 +2074,13 @@
     },
     {
       "name": "label-base"
+    },
+    {
+      "name": "mega-menu-base",
+      "registryDependencies": [
+        "_shared-base",
+        "popover-base"
+      ]
     },
     {
       "name": "menubar-base",
@@ -2298,9 +2317,6 @@
     }
   ],
   "baseSkipped": [
-    "breadcrumb",
-    "item",
-    "mega-menu",
     "multi-select"
   ]
 }

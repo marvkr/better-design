@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Empty: compact zero-state block.
+// Empty: compact zero-state block.
 
 interface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;

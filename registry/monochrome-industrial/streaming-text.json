@@ -14,9 +14,6 @@
       "label": "0.6875rem",
       "ease-out": "cubic-bezier(0.25, 0.1, 0.25, 1)"
     },
-    "dark": {
-      "label": "0.6875rem",
-      "ease-out": "cubic-bezier(0.25, 0.1, 0.25, 1)"
-    }
+    "dark": {}
   }
 }

@@ -19,10 +19,6 @@
       "shadow-button-hover": "0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.06), 0 0.125rem 0.375rem -0.0625rem oklch(0.30 0.01 75 / 0.08)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "shadow-button": "0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.05), 0 0.0625rem 0.0625rem oklch(0.30 0.01 75 / 0.04)",
-      "shadow-button-hover": "0 0 0 0.0625rem oklch(0.30 0.01 75 / 0.06), 0 0.125rem 0.375rem -0.0625rem oklch(0.30 0.01 75 / 0.08)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

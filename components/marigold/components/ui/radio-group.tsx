@@ -5,7 +5,7 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard RadioGroup: unchecked = recessed well; checked = raised orange
+// RadioGroup: unchecked = recessed well; checked = raised orange
 // material (Button gradient + rim + ambient shadow) with a punched-out center dot.
 
 const RadioGroup = React.forwardRef<

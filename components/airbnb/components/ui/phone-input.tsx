@@ -4,7 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { ChevronDown } from "lucide-react"
 
-// Airbnb Phone Input: phone number input with country code selector
+// Phone Input: phone number input with country code selector
 
 interface Country {
   code: string

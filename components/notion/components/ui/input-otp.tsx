@@ -6,7 +6,7 @@ import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// Notion OTP Input: individual digit boxes with Notion styling
+// OTP Input: individual digit boxes
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,

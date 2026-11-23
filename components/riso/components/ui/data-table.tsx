@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Retro-Playful Data Table: sortable, clean table with Linear styling
+// Retro-Playful Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

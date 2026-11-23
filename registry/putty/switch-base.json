@@ -4,30 +4,21 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { springInteraction } from \"@/lib/motion\"\n\n// Clay Product Switch, unchecked track is a recessed clay well; CHECKED track\n// reuses the primary Button's exact clay material (blue oklch gradient +\n// --shadow-clay-primary-sm). The thumb is a raised pillowy clay knob.\n\nfunction Switch({ className, ...props }: SwitchPrimitive.Root.Props) {\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"peer inline-flex h-[1.625rem] w-[2.875rem] shrink-0 cursor-pointer items-center rounded-full border border-border transition-all\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-unchecked:bg-input data-unchecked:[box-shadow:var(--shadow-clay-inset)]\",\n        \"data-checked:border-transparent\",\n        \"data-checked:bg-[linear-gradient(180deg,oklch(0.66_0.18_254),var(--primary)_55%,oklch(0.52_0.19_258))]\",\n        \"data-checked:[box-shadow:var(--shadow-clay-primary-sm)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        render={\n          <motion.span\n            layout\n            transition={springInteraction}\n            className=\"pointer-events-none block h-[1.25rem] w-[1.25rem] rounded-full bg-[linear-gradient(180deg,oklch(1_0_0),oklch(0.96_0.01_94))] [box-shadow:var(--shadow-clay-sm)] ring-0 data-checked:translate-x-[1.3125rem] data-unchecked:translate-x-[0.125rem]\"\n          />\n        }\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "content": "\"use client\"\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Clay Product Switch, unchecked track is a recessed clay well; CHECKED track\n// reuses the primary Button's exact clay material (blue oklch gradient +\n// --shadow-clay-primary-sm). The thumb is a raised pillowy clay knob.\n\nfunction Switch({ className, ...props }: SwitchPrimitive.Root.Props) {\n  return (\n    <SwitchPrimitive.Root\n      className={cn(\n        \"group/switch peer inline-flex h-[1.625rem] w-[2.875rem] shrink-0 cursor-pointer items-center rounded-full border border-border transition-all\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-unchecked:bg-input data-unchecked:[box-shadow:var(--shadow-clay-inset)]\",\n        \"data-checked:border-transparent\",\n        \"data-checked:bg-[linear-gradient(180deg,oklch(0.66_0.18_254),var(--primary)_55%,oklch(0.52_0.19_258))]\",\n        \"data-checked:[box-shadow:var(--shadow-clay-primary-sm)]\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        render={\n          <span\n            className=\"pointer-events-none block h-[1.25rem] w-[1.25rem] rounded-full bg-[linear-gradient(180deg,oklch(1_0_0),oklch(0.96_0.01_94))] [box-shadow:var(--shadow-clay-sm)] ring-0 data-checked:translate-x-[1.3125rem] data-unchecked:translate-x-[0.125rem] origin-left data-checked:origin-right rtl:origin-right rtl:data-checked:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\"\n          />\n        }\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
       "type": "registry:ui"
-    },
-    {
-      "path": "lib/motion.ts",
-      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport type { RefObject } from \"react\"\n\nexport const springInteraction = {\n  type: \"spring\" as const,\n  stiffness: 500,\n  damping: 35,\n}\n\nexport const springStateChange = {\n  type: \"spring\" as const,\n  stiffness: 400,\n  damping: 30,\n}\n\nexport function useDataState(ref: RefObject<HTMLElement | null>): string | null {\n  const [state, setState] = useState<string | null>(null)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    setState(el.getAttribute(\"data-state\"))\n\n    const observer = new MutationObserver(() => {\n      setState(el.getAttribute(\"data-state\"))\n    })\n\n    observer.observe(el, { attributes: true, attributeFilter: [\"data-state\"] })\n\n    return () => observer.disconnect()\n  }, [ref])\n\n  return state\n}\n",
-      "type": "registry:lib"
     }
   ],
   "dependencies": [
-    "@base-ui/react@^1.6.0",
-    "motion@^12.25.0"
+    "@base-ui/react@^1.6.0"
   ],
   "cssVars": {
     "theme": {},
     "light": {
       "shadow-clay-sm": "inset 0 0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.85), inset 0 -0.0625rem 0.0625rem 0 oklch(0.62 0.04 70 / 0.14), 0 0.0625rem 0.125rem -0.0313rem oklch(0.5 0.04 70 / 0.16), 0 0.1875rem 0.375rem -0.125rem oklch(0.5 0.04 70 / 0.14)",
       "shadow-clay-primary-sm": "inset 0 0.0625rem 0.0313rem 0 oklch(0.82 0.1 250 / 0.85), inset 0 -0.0625rem 0.0938rem 0 oklch(0.36 0.14 258 / 0.5), 0 0.0625rem 0.125rem -0.0313rem oklch(0.4 0.14 258 / 0.32), 0 0.1875rem 0.375rem -0.125rem oklch(0.45 0.16 256 / 0.36)",
-      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
+      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "shadow-clay-sm": "inset 0 0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.85), inset 0 -0.0625rem 0.0625rem 0 oklch(0.62 0.04 70 / 0.14), 0 0.0625rem 0.125rem -0.0313rem oklch(0.5 0.04 70 / 0.16), 0 0.1875rem 0.375rem -0.125rem oklch(0.5 0.04 70 / 0.14)",
-      "shadow-clay-primary-sm": "inset 0 0.0625rem 0.0313rem 0 oklch(0.82 0.1 250 / 0.85), inset 0 -0.0625rem 0.0938rem 0 oklch(0.36 0.14 258 / 0.5), 0 0.0625rem 0.125rem -0.0313rem oklch(0.4 0.14 258 / 0.32), 0 0.1875rem 0.375rem -0.125rem oklch(0.45 0.16 256 / 0.36)",
-      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
-    }
+    "dark": {}
   }
 }

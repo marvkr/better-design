@@ -5,7 +5,7 @@ import { File as FileIcon, Upload, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline FileInput: dashed recessed drop well; hover lifts the border to cyan.
+// FileInput: dashed recessed drop well; hover lifts the border to cyan.
 
 interface FileInputProps extends React.HTMLAttributes<HTMLDivElement> {
   accept?: string;

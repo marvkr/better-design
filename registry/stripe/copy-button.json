@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/copy-button.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Check, Copy } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Stripe Copy Button: icon button that copies text to clipboard\n\ninterface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string\n  timeout?: number\n}\n\nfunction CopyButton({\n  value,\n  timeout = 2000,\n  className,\n  onClick,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(value)\n    setCopied(true)\n    setTimeout(() => setCopied(false), timeout)\n  }\n\n  return (\n    <button\n      onClick={(e) => { onClick?.(e); handleCopy(); }}\n      className={cn(\n        \"inline-flex h-8 w-8 items-center justify-center rounded-md bg-background text-muted-foreground [box-shadow:var(--shadow-control)]\",\n        \"transition-[background-color,color,box-shadow] hover:bg-secondary hover:text-foreground hover:[box-shadow:var(--shadow-control-hover)]\",\n        \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)]\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? (\n        <Check className=\"h-3.5 w-3.5 text-success\" />\n      ) : (\n        <Copy className=\"h-3.5 w-3.5\" />\n      )}\n      <span className=\"sr-only\">{copied ? \"Copied\" : \"Copy to clipboard\"}</span>\n    </button>\n  )\n}\n\nexport { CopyButton }\nexport type { CopyButtonProps }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Check, Copy } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\n// Copy Button: icon button that copies text to clipboard\n\ninterface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string\n  timeout?: number\n}\n\nfunction CopyButton({\n  value,\n  timeout = 2000,\n  className,\n  onClick,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(value)\n    setCopied(true)\n    setTimeout(() => setCopied(false), timeout)\n  }\n\n  return (\n    <button\n      onClick={(e) => { onClick?.(e); handleCopy(); }}\n      className={cn(\n        \"inline-flex h-8 w-8 items-center justify-center rounded-md bg-background text-muted-foreground [box-shadow:var(--shadow-control)]\",\n        \"transition-[background-color,color,box-shadow] hover:bg-secondary hover:text-foreground hover:[box-shadow:var(--shadow-control-hover)]\",\n        \"focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus)]\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? (\n        <Check className=\"h-3.5 w-3.5 text-success\" />\n      ) : (\n        <Copy className=\"h-3.5 w-3.5\" />\n      )}\n      <span className=\"sr-only\">{copied ? \"Copied\" : \"Copy to clipboard\"}</span>\n    </button>\n  )\n}\n\nexport { CopyButton }\nexport type { CopyButtonProps }\n",
       "type": "registry:ui"
     }
   ],
@@ -19,11 +19,6 @@
       "shadow-control-hover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.2), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.1)",
       "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
     },
-    "dark": {
-      "success": "oklch(0.545 0.142 155)",
-      "shadow-control": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.12), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
-      "shadow-control-hover": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.2), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.1)",
-      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
-    }
+    "dark": {}
   }
 }

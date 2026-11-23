@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard NumberInput: recessed field with raised stepper column.
+// NumberInput: recessed field with raised stepper column.
 
 interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange"> {

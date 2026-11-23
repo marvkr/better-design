@@ -1,0 +1,29 @@
+{
+  "name": "item-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { mergeProps } from \"@base-ui/react/merge-props\";\nimport { useRender } from \"@base-ui/react/use-render\";\n\nimport { cn } from \"@/lib/utils\";\nimport { focusRing, pressScale, surfacePlate } from \"./_shared\";\n\n/**\n * Burnished Item: a row cut as a flat umber plate. An interactive row lifts\n * to the graphite face under a fine pointer and presses toward the page;\n * a selected row wears the raised bevel with its brighter rim.\n */\ninterface ItemProps extends useRender.ComponentProps<\"div\"> {\n  interactive?: boolean;\n  selected?: boolean;\n}\n\nfunction Item({\n  className,\n  render,\n  ref,\n  interactive = true,\n  selected = false,\n  ...props\n}: ItemProps) {\n  return useRender({\n    defaultTagName: \"div\",\n    ref,\n    render,\n    state: { slot: \"item\", selected },\n    props: mergeProps<\"div\">(\n      {\n        className: cn(\n          \"flex items-center gap-3 rounded-xl px-3 py-2.5\",\n          surfacePlate,\n          \"transition-[background-image,box-shadow] duration-base ease-(--ease-out)\",\n          interactive && [\n            \"cursor-pointer\",\n            pressScale,\n            focusRing,\n            \"[@media(hover:hover)_and_(pointer:fine)]:hover:bg-(image:--fill-raised) [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-(--bevel-raised-hover)\",\n          ],\n          selected && \"bg-(image:--fill-raised) shadow-(--bevel-raised-focus)\",\n          className,\n        ),\n      },\n      props,\n    ),\n  });\n}\nItem.displayName = \"Item\";\n\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-icon\"\n      className={cn(\n        \"flex size-9 shrink-0 items-center justify-center rounded-md text-muted-foreground [&_svg]:size-4\",\n        \"bg-(image:--fill-well) shadow-(--bevel-well)\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nItemIcon.displayName = \"ItemIcon\";\n\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} data-slot=\"item-content\" className={cn(\"min-w-0 flex-1\", className)} {...props} />\n  ),\n);\nItemContent.displayName = \"ItemContent\";\n\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-title\"\n      className={cn(\"truncate text-sm font-semibold text-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nItemTitle.displayName = \"ItemTitle\";\n\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-description\"\n      className={cn(\"truncate text-xs text-muted-foreground\", className)}\n      {...props}\n    />\n  ),\n);\nItemDescription.displayName = \"ItemDescription\";\n\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"item-actions\"\n      className={cn(\"flex shrink-0 items-center gap-1\", className)}\n      {...props}\n    />\n  ),\n);\nItemActions.displayName = \"ItemActions\";\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@base-ui/react@^1.6.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/burnished/_shared-base.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
+      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
+      "bevel-raised-hover": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.17), inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "bevel-raised-focus": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26), inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
+      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

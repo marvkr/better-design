@@ -4,10 +4,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Notion Button — minimal, near-black primary, very small radius (rounded-sm)
-// Matches actual Notion app: dark primary CTA, light secondary/ghost
-// Transition: 100ms colors (snappy Notion feel)
-// Uses `rounded-sm` (2px) like the Notion clone — ultra-tight radius
+// Button — minimal, near-black primary, very small radius (rounded-sm)
+// Matches the source app: dark primary CTA, light secondary/ghost
+// Transition: 100ms colors (snappy feel)
+// Uses `rounded-sm` (2px) ultra-tight radius
 
 const buttonVariants = cva(
   [

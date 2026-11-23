@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Figma Input — light, white bg, subtle purple-tinted border
+// Input — light, white bg, subtle purple-tinted border
 // Focus: purple border + very subtle purple glow
 // Matches figma.com light design
 

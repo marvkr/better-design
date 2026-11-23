@@ -4,7 +4,7 @@ import * as React from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Linear Password Input: input with show/hide toggle
+// Password Input: input with show/hide toggle
 
 export interface PasswordInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {}

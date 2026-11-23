@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Toggle: pressed state lifts into the raised orange material.
+// Toggle: pressed state lifts into the raised orange material.
 
 const toggleVariants = cva(
   [

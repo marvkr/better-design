@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Supabase Button — dark developer platform, green (#3ecf8e) primary
+// Button — dark developer platform, green (#3ecf8e) primary
 // Real supabase.com treatment: green with border ring, depth shadow, inset top highlight
 // Secondary: dark surface with subtle border
 

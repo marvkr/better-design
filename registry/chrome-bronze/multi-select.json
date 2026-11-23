@@ -21,11 +21,6 @@
       "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
       "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.701 0.091 83.5 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.752 0.091 83.8 / 0.35)"
     },
-    "dark": {
-      "surface-on": "linear-gradient(to bottom, oklch(0.752 0.091 83.8), oklch(0.701 0.091 83.5), oklch(0.65 0.091 83.2))",
-      "surface-silver": "linear-gradient(to bottom, oklch(0.653 0.058 68.3), oklch(0.548 0.062 66))",
-      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.701 0.091 83.5 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.752 0.091 83.8 / 0.35)"
-    }
+    "dark": {}
   }
 }

@@ -29,6 +29,10 @@
 
   --destructive: oklch(0.63 0.235 32);         /* #FF3E00 vivid orange */
   --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.55 0.15 150);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.77 0.16 75);
+  --warning-foreground: oklch(0.31 0.006 75);
 
   --border: oklch(0.905 0.009 85);             /* #E7E2D8 warm hairline */
   --input: oklch(0.99 0.003 88);               /* near-white field on cream */
@@ -146,6 +150,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

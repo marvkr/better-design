@@ -19,11 +19,6 @@
       "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
       "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.125rem 0.25rem oklch(0.75 0.06 85 / 0.55), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.125rem oklch(0 0 0 / 0.45)"
     },
-    "dark": {
-      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
-      "champagne": "linear-gradient( to bottom, oklch(0.95 0.03 95), oklch(0.875 0.045 88) )",
-      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.5rem oklch(0 0 0 / 0.3)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.85), inset 0 -0.125rem 0.25rem oklch(0.75 0.06 85 / 0.55), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.375rem 1.125rem oklch(0 0 0 / 0.45)"
-    }
+    "dark": {}
   }
 }

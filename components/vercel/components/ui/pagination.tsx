@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { type ButtonProps, buttonVariants } from "@/components/ui/button"
 
-// Vercel Pagination: clean minimal style
+// Pagination: clean minimal style
 // Active page: bg-primary text-primary-foreground rounded-[0.625rem]
 // Other pages: bg-transparent hover:bg-secondary
 

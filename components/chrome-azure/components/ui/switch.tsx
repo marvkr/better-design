@@ -20,7 +20,7 @@ const Switch = React.forwardRef<
   <SwitchPrimitive.Root
     ref={ref}
     className={cn(
-      "group relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full p-[0.0938rem]",
+      "group/switch group relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full p-[0.0938rem]",
       "[background:var(--metal-rim)] [box-shadow:var(--shadow-rim)]",
       "transition-[box-shadow] duration-base",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -48,9 +48,9 @@ const Switch = React.forwardRef<
       className={cn(
         "pointer-events-none relative z-10 block h-5 w-5 overflow-hidden rounded-full",
         "[background:var(--knob-off)] [box-shadow:var(--shadow-knob)]",
-        "transition-[transform,background] duration-slow ease-in-out",
         "translate-x-0.5 data-[state=checked]:translate-x-[1.375rem]",
-        "data-[state=checked]:[background:var(--knob-on)]"
+        "data-[state=checked]:[background:var(--knob-on)]",
+        "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none"
       )}
     >
       <span

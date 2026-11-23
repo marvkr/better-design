@@ -13,8 +13,6 @@
     "light": {
       "shade": "oklch(0 0 0)"
     },
-    "dark": {
-      "shade": "oklch(0 0 0)"
-    }
+    "dark": {}
   }
 }

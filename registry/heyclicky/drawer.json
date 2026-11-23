@@ -16,8 +16,6 @@
     "light": {
       "shadow-window": "var(--shadow-xl)"
     },
-    "dark": {
-      "shadow-window": "var(--shadow-xl)"
-    }
+    "dark": {}
   }
 }

@@ -24,9 +24,6 @@
       "halo": "oklch(1 0 0)",
       "shade": "oklch(0 0 0)"
     },
-    "dark": {
-      "halo": "oklch(1 0 0)",
-      "shade": "oklch(0 0 0)"
-    }
+    "dark": {}
   }
 }

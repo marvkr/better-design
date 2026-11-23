@@ -7,7 +7,7 @@ import { Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Hyperline InputOTP: recessed slots; the active slot lifts with the cyan ring.
+// InputOTP: recessed slots; the active slot lifts with the cyan ring.
 
 const InputOTP = React.forwardRef<
   React.ComponentRef<typeof OTPInput>,

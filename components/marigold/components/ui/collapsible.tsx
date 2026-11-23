@@ -2,7 +2,7 @@
 
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 
-// Talentboard Collapsible: thin wrapper over the Radix primitive.
+// Collapsible: thin wrapper over the Radix primitive.
 
 const Collapsible = CollapsiblePrimitive.Root;
 

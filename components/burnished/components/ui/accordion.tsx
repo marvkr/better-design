@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { focusRing, raisedBevel } from "./_shared";
@@ -52,8 +51,7 @@ const AccordionTrigger = React.forwardRef<
           "inline-flex size-7 shrink-0 items-center justify-center rounded-full text-muted-foreground",
         )}
       >
-        <Icon
-          icon="ph:caret-down"
+        <ChevronDownIcon
           className="size-3.5 transition-transform duration-base ease-(--ease-out) group-data-[state=open]/accordion:rotate-180 motion-reduce:transition-none"
         />
       </span>
@@ -78,3 +76,15 @@ const AccordionContent = React.forwardRef<
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+
+// Phosphor, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "ph:caret-down"
+// [BD-1029]
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m213.66 101.66l-80 80a8 8 0 0 1-11.32 0l-80-80a8 8 0 0 1 11.32-11.32L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32"/>
+    </svg>
+  );
+}

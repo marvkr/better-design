@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/collapsible.tsx",
-      "content": "\"use client\";\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\";\n\n// Hyperline Collapsible: thin wrapper over the Base UI primitive.\n\nconst Collapsible = CollapsiblePrimitive.Root;\n\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nconst CollapsibleContent = CollapsiblePrimitive.Panel;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "content": "\"use client\";\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\";\n\n// Collapsible: thin wrapper over the Base UI primitive.\n\nconst Collapsible = CollapsiblePrimitive.Root;\n\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nconst CollapsibleContent = CollapsiblePrimitive.Panel;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
       "type": "registry:ui"
     }
   ],

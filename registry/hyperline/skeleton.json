@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/skeleton.tsx",
-      "content": "import { cn } from \"@/lib/utils\";\n\n// Hyperline Skeleton: pulsing recessed placeholder.\n\nfunction Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\n        \"animate-pulse rounded-lg bg-muted shadow-[var(--hl-shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "content": "import { cn } from \"@/lib/utils\";\n\n// Skeleton: pulsing recessed placeholder.\n\nfunction Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\n        \"animate-pulse rounded-lg bg-muted shadow-[var(--hl-shadow-inset)]\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
       "type": "registry:ui"
     }
   ],
@@ -13,8 +13,6 @@
     "light": {
       "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)"
     },
-    "dark": {
-      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)"
-    }
+    "dark": {}
   }
 }

@@ -1,0 +1,18 @@
+{
+  "name": "input-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth InputGroup: one recessed well that holds a field and its addons.\n * The well takes the inset and the focus ring; the field inside it is bare.\n * Addons read like the editor's parameter units: mono, muted, divided from\n * the field by a hairline.\n */\n\ninterface InputGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"prefix\"> {\n  prefix?: React.ReactNode\n  suffix?: React.ReactNode\n  disabled?: boolean\n}\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  ({ className, prefix, suffix, disabled, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"input-group\"\n      aria-disabled={disabled || undefined}\n      className={cn(\n        \"flex h-9 w-full items-stretch overflow-hidden rounded-lg\",\n        \"bg-input border border-transparent [box-shadow:var(--shadow-inset)]\",\n        \"transition-[border-color,box-shadow] duration-fast\",\n        \"hover:border-border\",\n        \"focus-within:border-ring/70 focus-within:ring-2 focus-within:ring-ring/30\",\n        \"[&_input]:h-full [&_input]:min-w-0 [&_input]:flex-1 [&_input]:rounded-none [&_input]:border-0 [&_input]:bg-transparent [&_input]:[box-shadow:none]\",\n        \"[&_input]:focus-visible:ring-0 [&_input]:focus-visible:border-0\",\n        disabled && \"pointer-events-none opacity-50\",\n        className\n      )}\n      {...props}\n    >\n      {prefix && <InputGroupAddon side=\"left\">{prefix}</InputGroupAddon>}\n      {children}\n      {suffix && <InputGroupAddon side=\"right\">{suffix}</InputGroupAddon>}\n    </div>\n  )\n)\nInputGroup.displayName = \"InputGroup\"\n\nconst InputGroupAddon = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { side?: \"left\" | \"right\" }\n>(({ className, side = \"left\", ...props }, ref) => (\n  <div\n    ref={ref}\n    data-slot=\"input-group-addon\"\n    className={cn(\n      \"flex shrink-0 select-none items-center px-3\",\n      \"font-mono text-[0.6875rem] uppercase text-muted-foreground [&_svg]:size-4\",\n      side === \"left\" ? \"border-r border-border\" : \"border-l border-border\",\n      className\n    )}\n    {...props}\n  />\n))\nInputGroupAddon.displayName = \"InputGroupAddon\"\n\nconst InputGroupInput = React.forwardRef<\n  HTMLInputElement,\n  React.InputHTMLAttributes<HTMLInputElement>\n>(({ className, ...props }, ref) => (\n  <input\n    ref={ref}\n    data-slot=\"input-group-input\"\n    className={cn(\n      \"flex h-full min-w-0 flex-1 bg-transparent px-3 text-sm text-foreground\",\n      \"placeholder:text-muted-foreground outline-none\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      className\n    )}\n    {...props}\n  />\n))\nInputGroupInput.displayName = \"InputGroupInput\"\n\nexport { InputGroup, InputGroupAddon, InputGroupInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

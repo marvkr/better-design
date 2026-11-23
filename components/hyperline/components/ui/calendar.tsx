@@ -7,7 +7,7 @@ import { DayPicker } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./button";
 
-// Hyperline Calendar: quiet grid; selected day wears the raised cyan material.
+// Calendar: quiet grid; selected day wears the raised cyan material.
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 

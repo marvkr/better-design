@@ -1,0 +1,19 @@
+{
+  "name": "cursor",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/cursor.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Cursor: a typing readout. The text types into a recessed well with\n * an ember caret; an optional name tag sits under it like a collaborator's\n * pointer label on the canvas.\n */\n\nexport interface CursorProps extends React.HTMLAttributes<HTMLSpanElement> {\n  text: string\n  label?: string\n  color?: string\n  speed?: number\n  delay?: number\n  loop?: boolean\n  pauseMs?: number\n}\n\nconst Cursor = React.forwardRef<HTMLSpanElement, CursorProps>(\n  (\n    { className, text, label, color = \"var(--primary)\", speed = 60, delay = 300, loop = false, pauseMs = 1500, ...props },\n    ref\n  ) => {\n    const [count, setCount] = React.useState(0)\n    const [phase, setPhase] = React.useState<\"waiting\" | \"typing\" | \"holding\" | \"deleting\">(\"waiting\")\n\n    React.useEffect(() => {\n      let timer: ReturnType<typeof setTimeout> | undefined\n      if (phase === \"waiting\") timer = setTimeout(() => setPhase(\"typing\"), delay)\n      else if (phase === \"typing\") {\n        if (count < text.length) timer = setTimeout(() => setCount((n) => n + 1), speed)\n        else if (loop) timer = setTimeout(() => setPhase(\"deleting\"), pauseMs)\n        else setPhase(\"holding\")\n      } else if (phase === \"deleting\") {\n        if (count > 0) timer = setTimeout(() => setCount((n) => n - 1), speed / 2)\n        else setPhase(\"typing\")\n      }\n      return () => clearTimeout(timer)\n    }, [count, phase, text, speed, delay, loop, pauseMs])\n\n    return (\n      <span ref={ref} className={cn(\"inline-flex flex-col items-start gap-2\", className)} {...props}>\n        <span\n          aria-label={text}\n          className=\"inline-flex min-h-9 items-center rounded-lg bg-input px-3 py-1.5 font-mono text-sm text-foreground [box-shadow:var(--shadow-inset)]\"\n        >\n          <span aria-hidden=\"true\">{text.slice(0, count)}</span>\n          <span\n            aria-hidden=\"true\"\n            className=\"ml-0.5 inline-block h-[1.1em] w-[0.125rem] rounded-full motion-safe:animate-pulse motion-safe:[animation-duration:1s]\"\n            style={{ backgroundColor: color }}\n          />\n        </span>\n        {label && (\n          <span className=\"inline-flex items-center gap-1.5 rounded-md bg-secondary py-0.5 pl-1.5 pr-2 [box-shadow:var(--shadow-button)]\">\n            <span aria-hidden=\"true\" className=\"size-2 rounded-full\" style={{ backgroundColor: color }} />\n            <span className=\"font-mono text-[0.6875rem] text-secondary-foreground\">{label}</span>\n          </span>\n        )}\n      </span>\n    )\n  }\n)\nCursor.displayName = \"Cursor\"\n\nexport { Cursor }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {}
+  }
+}

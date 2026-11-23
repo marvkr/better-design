@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 import { buttonVariants } from "./button";
 
-// Hyperline AlertDialog: same modal material as Dialog; actions reuse the
+// AlertDialog: same modal material as Dialog; actions reuse the
 // Button variants so the confirm CTA is the raised cyan hero.
 
 const AlertDialog = AlertDialogPrimitive.Root;

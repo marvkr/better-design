@@ -14,9 +14,6 @@
       "shadow-m": "var(--shadow-md)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "shadow-m": "var(--shadow-md)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

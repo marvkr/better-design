@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 
-// Hyperline Toast: floating card on the layered pop shadow.
+// Toast: floating card on the layered pop shadow.
 
 const ToastProvider = ToastPrimitives.Provider;
 

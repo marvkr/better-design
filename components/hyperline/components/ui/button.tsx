@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { hlPrimaryRaised, hlPrimaryRaisedHover, hlRaisedPanel } from "./_shared";
 
-// Hyperline Button: raised cyan primary over the deep purple backdrop.
+// Button: raised cyan primary over the deep purple backdrop.
 // Hero treatment = cyan gradient fill + hairline rim + inset top highlight
 // + layered drop shadow with a soft cyan ambient glow.
 

@@ -25,17 +25,6 @@
       "pastel-lavender": "oklch(0.85 0.07 300)",
       "pastel-lavender-foreground": "oklch(0.46 0.12 300)"
     },
-    "dark": {
-      "pastel-pink": "oklch(0.86 0.075 12)",
-      "pastel-pink-foreground": "oklch(0.44 0.11 14)",
-      "pastel-blue": "oklch(0.85 0.07 245)",
-      "pastel-blue-foreground": "oklch(0.45 0.11 252)",
-      "pastel-green": "oklch(0.87 0.082 152)",
-      "pastel-green-foreground": "oklch(0.42 0.1 153)",
-      "pastel-yellow": "oklch(0.92 0.085 95)",
-      "pastel-yellow-foreground": "oklch(0.5 0.1 80)",
-      "pastel-lavender": "oklch(0.85 0.07 300)",
-      "pastel-lavender-foreground": "oklch(0.46 0.12 300)"
-    }
+    "dark": {}
   }
 }

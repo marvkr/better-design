@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Linear Quality Card — two variants from linear.app/quality
+// Quality Card — two variants from linear.app/quality
 //
 // 1. Panel Card (bg-card, border, precise multi-layer shadow) — dashboard/settings use
 // 2. Poster Card (transparent, no border) — media/episode listing (the primary card on /quality)

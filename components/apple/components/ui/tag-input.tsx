@@ -4,7 +4,7 @@ import * as React from "react"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Apple Tag Input: input for adding/removing tags
+// Tag Input: input for adding/removing tags
 
 interface TagInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {
   value?: string[]

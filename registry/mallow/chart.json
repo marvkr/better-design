@@ -19,8 +19,6 @@
     "light": {
       "option-track": "oklch(0.955 0.014 295)"
     },
-    "dark": {
-      "option-track": "oklch(0.955 0.014 295)"
-    }
+    "dark": {}
   }
 }

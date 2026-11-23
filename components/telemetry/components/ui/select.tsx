@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
-import { Icon } from "@iconify/react"
 
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
@@ -32,8 +31,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon
-        icon="tabler:chevron-down"
+      <ChevronDownIcon
         className="size-4 shrink-0 text-muted-foreground"
       />
     </SelectPrimitive.Icon>
@@ -105,7 +103,7 @@ const SelectItem = React.forwardRef<
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center text-primary">
       <SelectPrimitive.ItemIndicator>
-        <Icon icon="tabler:check" className="size-4" />
+        <CheckIcon className="size-4" />
       </SelectPrimitive.ItemIndicator>
     </span>
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -134,4 +132,24 @@ export {
   SelectLabel,
   SelectItem,
   SelectSeparator,
+}
+
+// Carbon Icons, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "carbon:checkmark" "carbon:chevron-down"
+// One unit of stroke keeps the thin Carbon tick readable at small sizes.
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" d="m13 24l-9-9l1.414-1.414L13 21.171L26.586 7.586L28 9z"/>
+    </svg>
+  )
+}
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M16 22L6 12l1.4-1.4l8.6 8.6l8.6-8.6L26 12z"/>
+    </svg>
+  )
 }

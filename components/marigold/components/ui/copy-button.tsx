@@ -5,7 +5,7 @@ import { Check, Copy } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard CopyButton: quiet icon button; flips to an orange check on copy.
+// CopyButton: quiet icon button; flips to an orange check on copy.
 
 interface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;

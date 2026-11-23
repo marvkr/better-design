@@ -4,7 +4,7 @@ import * as React from "react"
 import { Check, Copy } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Vercel Copy Button: icon button that copies text to clipboard
+// Copy Button: icon button that copies text to clipboard
 
 interface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string

@@ -5,7 +5,7 @@ import { Check, Copy } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline CopyButton: quiet icon button; flips to a cyan check on copy.
+// CopyButton: quiet icon button; flips to a cyan check on copy.
 
 interface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;

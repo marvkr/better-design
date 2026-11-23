@@ -17,9 +17,6 @@
       "fill-surface": "linear-gradient(180deg, oklch(0.227 0.004 84.6), oklch(0.201 0.004 84.6))",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "fill-surface": "linear-gradient(180deg, oklch(0.227 0.004 84.6), oklch(0.201 0.004 84.6))",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

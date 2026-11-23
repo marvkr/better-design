@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Card — extracted from airbnb.com (2026-04)
+// Card — extracted from airbnb.com (2026-04)
 // Listing cards have NO border and NO shadow — just stacked content.
 // Image gets rounded-xl, text sits directly below with no wrapper chrome.
 // Use border only when explicitly needed (e.g. settings panels, modals).

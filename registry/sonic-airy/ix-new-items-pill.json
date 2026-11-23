@@ -21,8 +21,6 @@
     "light": {
       "shadow": "0 0.125rem 0.25rem oklch(0 0 0 / 0.05)"
     },
-    "dark": {
-      "shadow": "0 0.125rem 0.25rem oklch(0 0 0 / 0.05)"
-    }
+    "dark": {}
   }
 }

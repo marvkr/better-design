@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
 
-// Hyperline CodeBlock: deep recessed terminal surface with optional filename
+// CodeBlock: deep recessed terminal surface with optional filename
 // chrome and line numbers.
 
 interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {

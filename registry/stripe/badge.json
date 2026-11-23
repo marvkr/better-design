@@ -21,13 +21,6 @@
       "warning-foreground": "oklch(0.43 0.105 62)",
       "warning-muted": "oklch(0.968 0.043 82)"
     },
-    "dark": {
-      "success": "oklch(0.545 0.142 155)",
-      "success-foreground": "oklch(0.345 0.102 155)",
-      "success-muted": "oklch(0.955 0.036 155)",
-      "warning": "oklch(0.685 0.143 72)",
-      "warning-foreground": "oklch(0.43 0.105 62)",
-      "warning-muted": "oklch(0.968 0.043 82)"
-    }
+    "dark": {}
   }
 }

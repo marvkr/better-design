@@ -19,9 +19,6 @@
       "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4)",
       "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     },
-    "dark": {
-      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4)",
-      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
-    }
+    "dark": {}
   }
 }

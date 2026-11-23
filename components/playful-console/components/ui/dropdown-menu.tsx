@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { menuItemBase, popoverSurface } from "./_shared";
@@ -64,8 +63,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon
-      icon="ph:caret-right-bold"
+    <ChevronRightIcon
       className="ms-auto size-3.5 text-muted-foreground rtl:rotate-180"
       aria-hidden="true"
     />
@@ -146,7 +144,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="pointer-events-none absolute start-2 flex size-4 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Icon icon="ph:check-bold" className="size-4 text-primary" aria-hidden="true" />
+        <CheckIcon className="size-4 text-primary" aria-hidden="true" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -241,3 +239,22 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };
+
+// Phosphor, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "ph:check-bold" "ph:caret-right-bold"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m232.49 80.49l-128 128a12 12 0 0 1-17 0l-56-56a12 12 0 1 1 17-17L96 183L215.51 63.51a12 12 0 0 1 17 17Z"/>
+    </svg>
+  );
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128L87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1-.02 17"/>
+    </svg>
+  );
+}

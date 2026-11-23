@@ -10,7 +10,7 @@ import {
 } from "./toast";
 import { useToast } from "./use-toast";
 
-// Hyperline Toaster: renders the toast queue into the viewport.
+// Toaster: renders the toast queue into the viewport.
 
 export function Toaster() {
   const { toasts } = useToast();

@@ -24,12 +24,6 @@
       "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.55), inset 0 -0.0625rem 0.0625rem oklch(0.34 0.072 153 / 0.12), 0 0.0625rem 0.125rem oklch(0.29 0.018 285 / 0.06), 0 0.3125rem 0.875rem -0.1875rem oklch(0.72 0.12 152 / 0.4)",
       "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), inset 0 -0.0625rem 0.0625rem oklch(0.34 0.072 153 / 0.14), 0 0.125rem 0.25rem oklch(0.29 0.018 285 / 0.07), 0 0.5rem 1.25rem -0.1875rem oklch(0.72 0.12 152 / 0.5)"
     },
-    "dark": {
-      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.29 0.018 285 / 0.07), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.5)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), 0 0.0625rem 0.125rem oklch(0.29 0.018 285 / 0.06), 0 0.1875rem 0.5rem -0.125rem oklch(0.29 0.018 285 / 0.08)",
-      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.8), 0 0.125rem 0.25rem oklch(0.29 0.018 285 / 0.07), 0 0.375rem 1rem -0.1875rem oklch(0.29 0.018 285 / 0.12)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.55), inset 0 -0.0625rem 0.0625rem oklch(0.34 0.072 153 / 0.12), 0 0.0625rem 0.125rem oklch(0.29 0.018 285 / 0.06), 0 0.3125rem 0.875rem -0.1875rem oklch(0.72 0.12 152 / 0.4)",
-      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), inset 0 -0.0625rem 0.0625rem oklch(0.34 0.072 153 / 0.14), 0 0.125rem 0.25rem oklch(0.29 0.018 285 / 0.07), 0 0.5rem 1.25rem -0.1875rem oklch(0.72 0.12 152 / 0.5)"
-    }
+    "dark": {}
   }
 }

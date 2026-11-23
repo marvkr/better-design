@@ -21,9 +21,6 @@
       "primary-text": "oklch(0.798 0.084 66.7)",
       "success": "oklch(0.79 0.12 150)"
     },
-    "dark": {
-      "primary-text": "oklch(0.798 0.084 66.7)",
-      "success": "oklch(0.79 0.12 150)"
-    }
+    "dark": {}
   }
 }

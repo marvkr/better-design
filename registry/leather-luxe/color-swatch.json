@@ -13,8 +13,6 @@
     "light": {
       "highlight": "oklch(1 0 0 / 0.1)"
     },
-    "dark": {
-      "highlight": "oklch(1 0 0 / 0.1)"
-    }
+    "dark": {}
   }
 }

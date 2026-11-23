@@ -20,10 +20,6 @@
       "shadow-overlay": "var(--shadow-clay-lg)",
       "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     },
-    "dark": {
-      "shadow-clay-lg": "inset 0 0.125rem 0.0313rem 0 oklch(1 0 0 / 0.95), inset 0 -0.1875rem 0.1875rem 0 oklch(0.62 0.04 70 / 0.16), 0 0.25rem 0.5rem -0.125rem oklch(0.5 0.04 70 / 0.16), 0 1.125rem 2.25rem -0.625rem oklch(0.5 0.04 70 / 0.24)",
-      "shadow-overlay": "var(--shadow-clay-lg)",
-      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
-    }
+    "dark": {}
   }
 }

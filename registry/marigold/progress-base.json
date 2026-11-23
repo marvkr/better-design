@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/progress.tsx",
-      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Talentboard Progress: recessed track, orange gradient fill with top highlight.\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"];\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full\",\n      \"border border-border/60 bg-input/80 shadow-[var(--tb-shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator\n        className={cn(\n          \"h-full w-full flex-1 rounded-full\",\n          \"bg-[image:var(--tb-primary-gradient)]\",\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.35)]\",\n          \"transition-all duration-slow ease-out\"\n        )}\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n));\nProgress.displayName = \"Progress\";\n\nexport { Progress };\n",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Progress: recessed track, orange gradient fill with top highlight.\n\nconst Progress = React.forwardRef<\n  HTMLDivElement,\n  Omit<ProgressPrimitive.Root.Props, \"value\"> & {\n    value?: ProgressPrimitive.Root.Props[\"value\"];\n  }\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    value={value ?? null}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full\",\n      \"border border-border/60 bg-input/80 shadow-[var(--tb-shadow-inset)]\",\n      className\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Track className=\"h-full w-full\">\n      <ProgressPrimitive.Indicator\n        className={cn(\n          \"h-full w-full flex-1 rounded-full\",\n          \"bg-[image:var(--tb-primary-gradient)]\",\n          \"shadow-[inset_0_0.0625rem_0_oklch(1_0_0/0.35)]\",\n          \"transition-all duration-slow ease-out\"\n        )}\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n));\nProgress.displayName = \"Progress\";\n\nexport { Progress };\n",
       "type": "registry:ui"
     }
   ],
@@ -18,10 +18,6 @@
       "tb-primary-gradient": "linear-gradient(to bottom, oklch(0.74 0.165 55), oklch(0.67 0.175 48))",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "tb-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.27 0.03 60 / 0.05)",
-      "tb-primary-gradient": "linear-gradient(to bottom, oklch(0.74 0.165 55), oklch(0.67 0.175 48))",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

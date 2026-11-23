@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
-import { Check, ChevronRight, Circle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -41,7 +40,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
+    <ChevronRightIcon className="ml-auto h-4 w-4 text-muted-foreground" />
   </ContextMenuPrimitive.SubTrigger>
 ));
 ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName;
@@ -118,7 +117,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Check className="h-4 w-4 text-primary" />
+        <CheckIcon className="h-4 w-4 text-primary" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -143,7 +142,7 @@ const ContextMenuRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Circle className="h-2 w-2 fill-primary text-primary" />
+        <CircleIcon className="h-2 w-2 fill-primary text-primary" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -214,3 +213,30 @@ export {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
 };
+
+// Carbon Icons, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "carbon:checkmark" "carbon:chevron-right" "carbon:circle-solid"
+// One unit of stroke keeps the thin Carbon tick readable at small sizes.
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" d="m13 24l-9-9l1.414-1.414L13 21.171L26.586 7.586L28 9z"/>
+    </svg>
+  );
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M22 16L12 26l-1.4-1.4l8.6-8.6l-8.6-8.6L12 6z"/>
+    </svg>
+  );
+}
+function CircleIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <circle cx="16" cy="16" r="14" fill="currentColor"/>
+    </svg>
+  );
+}

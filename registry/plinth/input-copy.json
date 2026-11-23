@@ -1,0 +1,23 @@
+{
+  "name": "input-copy",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input-copy.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\n/*\n * InputCopy: a read-only value in a recessed well, set in Geist Mono like\n * the editor's readouts, with a copy button seated inside its right edge.\n *\n *   <InputCopy label=\"Share link\" value=\"example.com/s/8f2k\" />\n */\n\ninterface InputCopyProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"value\" | \"onChange\" | \"readOnly\"> {\n  value: string\n  label?: React.ReactNode\n  /** ms before the copied state resets. Default 1800. */\n  copiedTimeoutMs?: number\n}\n\nfunction InputCopy({ value, label, copiedTimeoutMs = 1800, className, id: idProp, ...props }: InputCopyProps) {\n  const generatedId = React.useId()\n  const id = idProp ?? generatedId\n  const [copied, setCopied] = React.useState(false)\n\n  const handleCopy = React.useCallback(async () => {\n    try {\n      await navigator.clipboard.writeText(value)\n      setCopied(true)\n    } catch {\n      // The clipboard can be unavailable; the field stays selectable.\n    }\n  }, [value])\n\n  React.useEffect(() => {\n    if (!copied) return\n    const t = setTimeout(() => setCopied(false), copiedTimeoutMs)\n    return () => clearTimeout(t)\n  }, [copied, copiedTimeoutMs])\n\n  return (\n    <div className={cn(\"flex flex-col gap-2\", className)}>\n      {label && (\n        <label htmlFor={id} className=\"text-[0.8125rem] font-medium text-secondary-foreground\">\n          {label}\n        </label>\n      )}\n      <div className=\"relative flex items-center\">\n        <input\n          id={id}\n          type=\"text\"\n          value={value}\n          readOnly\n          onFocus={(e) => e.currentTarget.select()}\n          className={cn(formFieldBase, formFieldSingleLine, \"pr-11 font-mono text-[0.8125rem]\")}\n          {...props}\n        />\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied\" : \"Copy to clipboard\"}\n          className={cn(\n            \"absolute right-1 flex size-7 cursor-pointer items-center justify-center rounded-md\",\n            \"[background:var(--graphite-gradient)] [box-shadow:var(--shadow-button)]\",\n            \"text-muted-foreground transition-colors duration-fast hover:text-foreground\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n            copied && \"text-success hover:text-success\"\n          )}\n        >\n          {copied ? <CheckIcon className=\"size-3.5\" /> : <CopyIcon className=\"size-3.5\" />}\n        </button>\n      </div>\n    </div>\n  )\n}\n\n// feather:check\nfunction CheckIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M20 6L9 17l-5-5\" />\n    </svg>\n  )\n}\n\n// feather:copy\nfunction CopyIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\">\n        <rect width=\"13\" height=\"13\" x=\"9\" y=\"9\" rx=\"2\" ry=\"2\" />\n        <path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\" />\n      </g>\n    </svg>\n  )\n}\n\nexport { InputCopy }\nexport type { InputCopyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/_shared.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.72 0.17 150)",
+      "graphite-gradient": "linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286))",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {}
+  }
+}

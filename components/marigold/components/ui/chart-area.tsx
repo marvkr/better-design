@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Talentboard area chart: orange fill fading into the white card.
+// Area chart: orange fill fading into the white card.
 
 const chartData = [
   { month: "January", revenue: 4980 },

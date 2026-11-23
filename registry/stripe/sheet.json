@@ -20,10 +20,6 @@
       "shadow-dialog": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.5rem 1.25rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2), 0 1.5rem 4rem -1.25rem oklch(0.2651 0.0621 251.37 / 0.32)",
       "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     },
-    "dark": {
-      "overlay": "oklch(0.245 0.045 258 / 0.22)",
-      "shadow-dialog": "0 0 0 0.0625rem oklch(0.2651 0.0621 251.37 / 0.08), 0 0.5rem 1.25rem -0.5rem oklch(0.2651 0.0621 251.37 / 0.2), 0 1.5rem 4rem -1.25rem oklch(0.2651 0.0621 251.37 / 0.32)",
-      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
-    }
+    "dark": {}
   }
 }

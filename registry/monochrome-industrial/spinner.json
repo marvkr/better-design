@@ -14,9 +14,6 @@
       "mono-text-primary": "oklch(0.931 0 0)",
       "label": "0.6875rem"
     },
-    "dark": {
-      "mono-text-primary": "oklch(0.931 0 0)",
-      "label": "0.6875rem"
-    }
+    "dark": {}
   }
 }

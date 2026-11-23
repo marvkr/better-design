@@ -14,9 +14,6 @@
       "knob-on": "linear-gradient(to bottom, oklch(0.886 0.059 246.2), oklch(0.783 0.088 247), oklch(0.732 0.116 248.3))",
       "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
     },
-    "dark": {
-      "knob-on": "linear-gradient(to bottom, oklch(0.886 0.059 246.2), oklch(0.783 0.088 247), oklch(0.732 0.116 248.3))",
-      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
-    }
+    "dark": {}
   }
 }

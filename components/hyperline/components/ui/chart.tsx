@@ -6,7 +6,7 @@ import * as RechartsPrimitive from "recharts";
 import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 
-// Hyperline Chart: recharts container wired to the DS chart palette.
+// Chart: recharts container wired to the DS chart palette.
 // Tooltip floats on the shared layered pop shadow.
 
 const THEMES = { light: "", dark: ".dark" } as const;

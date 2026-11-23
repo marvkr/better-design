@@ -17,12 +17,6 @@
       "pop-green": "oklch(0.945 0.0451 163.2)",
       "pop-green-foreground": "oklch(0.4623 0.1114 158)"
     },
-    "dark": {
-      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
-      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
-      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
-      "pop-green": "oklch(0.945 0.0451 163.2)",
-      "pop-green-foreground": "oklch(0.4623 0.1114 158)"
-    }
+    "dark": {}
   }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "tooltip",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst TooltipProvider = TooltipPrimitive.Provider\nconst Tooltip = TooltipPrimitive.Root\nconst TooltipTrigger = TooltipPrimitive.Trigger\n\n/* A short label on a floating chip, the size of a toolbar hint. */\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 6, ...props }, ref) => (\n  <TooltipPrimitive.Portal>\n    <TooltipPrimitive.Content\n      ref={ref}\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 origin-(--radix-tooltip-content-transform-origin) overflow-hidden rounded-lg px-2.5 py-1.5\",\n        \"text-xs font-medium text-popover-foreground bg-popover [box-shadow:var(--shadow-l)]\",\n        \"animate-in fade-in-0 zoom-in-[0.97] data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[0.97]\",\n        className\n      )}\n      {...props}\n    />\n  </TooltipPrimitive.Portal>\n))\nTooltipContent.displayName = TooltipPrimitive.Content.displayName\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tooltip@^1.2.7"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), 0 0.5rem 1rem -0.5rem oklch(0 0 0 / 0.6), 0 1.25rem 2.5rem -1.25rem oklch(0 0 0 / 0.8)"
+    },
+    "dark": {}
+  }
+}

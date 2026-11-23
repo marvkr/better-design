@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Typography: tight tracking, confident weights, quiet muted tones.
+// Typography: tight tracking, confident weights, quiet muted tones.
 
 function H1({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (

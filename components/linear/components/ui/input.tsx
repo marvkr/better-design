@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Linear Input — dark developer tool aesthetic
+// Input — dark developer tool aesthetic
 // Dark bg, subtle border, purple glow on focus (matches the ring/primary color)
 // Resting: inset shadow for depth, border slightly visible
 // Focus: purple ring + border brightens

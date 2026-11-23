@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Apple Data Table: sortable, clean table with Apple styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

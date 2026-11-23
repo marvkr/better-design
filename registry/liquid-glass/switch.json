@@ -1,0 +1,27 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport type * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Switch as GlassSwitch } from \"./glass-switch\"\n\n/*\n * Liquid Glass Switch — the kit's flip: an iOS-proportioned track whose white\n * knob swells into clear glass while it crosses, bending the track beneath it,\n * then settles. Drag the knob or press the track. Drawn by one shared WebGL2\n * renderer (three.js), so a page full of switches stays on one GPU context.\n * The system is light, so the glass keeps its light tokens on a dark page.\n * It takes the shadcn Switch props: checked, defaultChecked, onCheckedChange.\n *\n * Under the canvas sits the same switch in CSS: the look before the glass\n * draws, and the whole switch where WebGL2 is missing. The canvas paints an\n * opaque track over it, so the two never show at once. Its thumb stretches\n * from its resting edge while the switch is pressed, as the glass knob swells.\n */\ntype SwitchProps = React.ComponentProps<typeof SwitchPrimitive.Root> & {\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nfunction Switch({\n  className,\n  checked,\n  defaultChecked = false,\n  onCheckedChange,\n  disabled,\n  id,\n  size = \"md\",\n  \"aria-label\": ariaLabel,\n}: SwitchProps) {\n  const [own, setOwn] = React.useState(defaultChecked)\n  const on = checked ?? own\n  return (\n    <span\n      data-slot=\"switch\"\n      data-state={on ? \"checked\" : \"unchecked\"}\n      className={cn(\"group/switch relative isolate inline-flex\", className)}\n    >\n      <span\n        aria-hidden\n        data-state={on ? \"checked\" : \"unchecked\"}\n        className=\"pointer-events-none absolute inset-0 -z-10 rounded-full bg-(--track) transition-colors duration-base data-[state=checked]:bg-(--glass-accent)\"\n      >\n        <span\n          data-state={on ? \"checked\" : \"unchecked\"}\n          className=\"absolute top-[0.13rem] left-[0.13rem] h-[calc(100%-0.26rem)] w-[59%] rounded-full bg-background [box-shadow:var(--shadow-knob)] transition-[left,scale] duration-base ease-out group-active/switch:scale-x-[1.18] origin-left data-[state=checked]:origin-right data-[state=checked]:left-[calc(41%-0.13rem)]\"\n        />\n      </span>\n      <GlassSwitch\n        id={id}\n        aria-label={ariaLabel}\n        label=\"\"\n        theme=\"light\"\n        size={size}\n        checked={on}\n        disabled={disabled}\n        onChange={(next) => {\n          setOwn(next)\n          onCheckedChange?.(next)\n        }}\n      />\n    </span>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/liquid-glass/glass-switch.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glass-accent": "oklch(0.658 0.185 255)",
+      "track": "oklch(0.825 0.006 297.7)",
+      "shadow-knob": "0 0.0625rem 0.25rem oklch(0 0 0 / 0.16)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

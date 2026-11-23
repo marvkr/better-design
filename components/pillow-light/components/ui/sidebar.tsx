@@ -3,7 +3,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Airbnb Sidebar: navigation sidebar component
+// Sidebar: navigation sidebar component
 // Clean left nav with bg-background, border-r border-border
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {

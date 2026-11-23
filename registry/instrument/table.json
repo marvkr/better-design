@@ -13,8 +13,6 @@
     "light": {
       "gauge-nested": "oklch(0.235 0.015 283)"
     },
-    "dark": {
-      "gauge-nested": "oklch(0.235 0.015 283)"
-    }
+    "dark": {}
   }
 }

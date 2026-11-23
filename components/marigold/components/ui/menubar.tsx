@@ -7,7 +7,7 @@ import { Check, ChevronRight, Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { tbPopSurface, tbRaisedPanel } from "./_shared";
 
-// Talentboard Menubar: raised panel bar; menus share the layered pop shadow.
+// Menubar: raised panel bar; menus share the layered pop shadow.
 
 const MenubarMenu = MenubarPrimitive.Menu;
 

@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Hyperline area chart: cyan fill fading into the purple card.
+// Area chart: cyan fill fading into the purple card.
 
 const chartData = [
   { month: "January", revenue: 4980 },

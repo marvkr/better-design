@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check, Minus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -38,13 +37,11 @@ const Checkbox = React.forwardRef<
     {...props}
   >
     <CheckboxPrimitive.Indicator className="group flex items-center justify-center text-primary-foreground">
-      <Minus
+      <MinusIcon
         className="hidden size-3 group-data-[state=indeterminate]:block"
-        strokeWidth={2.5}
       />
-      <Check
+      <CheckIcon
         className="size-3 group-data-[state=indeterminate]:hidden"
-        strokeWidth={2.5}
       />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
@@ -52,3 +49,21 @@ const Checkbox = React.forwardRef<
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
+
+// "iconoir:check" and "iconoir:minus" from Iconoir,
+// the icon library this system pairs with, drawn inline so the installed
+// component loads no icon at runtime. [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m5 13l4 4L19 7"/>
+    </svg>
+  );
+}
+function MinusIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 12h12"/>
+    </svg>
+  );
+}

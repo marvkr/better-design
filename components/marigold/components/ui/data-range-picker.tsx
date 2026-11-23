@@ -10,7 +10,7 @@ import { Button } from "./button";
 import { Calendar } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-// Talentboard DataRangePicker: billing-period style range selection.
+// DataRangePicker: billing-period style range selection.
 
 export function DataRangePicker() {
   const [date, setDate] = React.useState<DateRange | undefined>({

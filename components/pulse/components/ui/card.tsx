@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Pulseboard Card — dark analytics data card.
+// Card — dark analytics data card.
 // Dark surface, 1px border, subtle depth shadow with a faint top edge highlight.
 
 const Card = React.forwardRef<

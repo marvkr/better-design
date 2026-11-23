@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Cursor: typewriter caret in the DS orange with a tidy label pill.
+// Cursor: typewriter caret in the DS orange with a tidy label pill.
 
 interface CursorProps {
   text: string;

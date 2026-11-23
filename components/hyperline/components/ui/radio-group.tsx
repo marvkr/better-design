@@ -5,7 +5,7 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline RadioGroup: unchecked = recessed well; checked = raised cyan
+// RadioGroup: unchecked = recessed well; checked = raised cyan
 // material (Button's gradient + rim + glow) with a punched-out center dot.
 
 const RadioGroup = React.forwardRef<

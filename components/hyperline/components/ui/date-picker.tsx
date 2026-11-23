@@ -9,7 +9,7 @@ import { Calendar } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { formFieldBase } from "./_shared";
 
-// Hyperline DatePicker: recessed field trigger opening the calendar pop surface.
+// DatePicker: recessed field trigger opening the calendar pop surface.
 
 interface DatePickerProps {
   value?: Date;

@@ -1,0 +1,11 @@
+{
+  "name": "section-header",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/section-header.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth SectionHeader: a tight Geist title with an optional mono index\n * above it, the way the stage numbers its sections, and an action on the\n * right.\n */\n\nexport interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title: React.ReactNode\n  description?: React.ReactNode\n  eyebrow?: React.ReactNode\n  action?: React.ReactNode\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst titleSizes = {\n  sm: \"text-base\",\n  md: \"text-xl\",\n  lg: \"text-[1.75rem] leading-[1.1]\",\n}\n\nconst SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps>(\n  ({ className, title, description, eyebrow, action, size = \"md\", ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"section-header\"\n      className={cn(\"flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between\", className)}\n      {...props}\n    >\n      <div className=\"min-w-0 flex-1\">\n        {eyebrow && <div className=\"mb-2 font-mono text-[0.6875rem] uppercase text-muted-foreground\">{eyebrow}</div>}\n        <h2 className={cn(\"font-medium tracking-[-0.025em] text-foreground\", titleSizes[size])}>{title}</h2>\n        {description && <p className=\"mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground\">{description}</p>}\n      </div>\n      {action && <div className=\"flex shrink-0 items-center gap-2\">{action}</div>}\n    </div>\n  )\n)\nSectionHeader.displayName = \"SectionHeader\"\n\nexport { SectionHeader }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 // Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism
 
-// Hyperline ThinkingIndicator: cycling status words with a soft cyan shimmer.
+// ThinkingIndicator: cycling status words with a soft cyan shimmer.
 
 interface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   words?: string[];

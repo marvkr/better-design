@@ -1,0 +1,24 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Switch: a recessed track with a white thumb, like the editor's\n * scene toggles. On, the track takes the ember Button material, scaled down.\n */\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"group/switch peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background,box-shadow] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:[background:var(--ember-gradient)] data-[state=checked]:[box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.4),0_0_0_0.0625rem_var(--ember-rim)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block size-4 rounded-full bg-foreground\",\n        \"[box-shadow:0_0_0_0.0625rem_oklch(0_0_0/0.25),0_0.0625rem_0.125rem_oklch(0_0_0/0.4)]\",\n        \"data-[state=checked]:translate-x-[1.125rem] data-[state=unchecked]:translate-x-0.5\",\n        \"origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin] duration-[180ms,120ms,0ms] delay-[0ms,0ms,120ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ember-gradient": "linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39))",
+      "ember-rim": "oklch(0.5 0.16 39)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    },
+    "dark": {}
+  }
+}

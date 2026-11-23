@@ -1,0 +1,20 @@
+{
+  "name": "data-range-picker-base",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/data-range-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport type { DateRange } from \"react-day-picker\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"./button\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"./popover\"\n\n/*\n * Chrome Azure Date Range Picker — an outline metal trigger that drops a\n * two-month brushed popover calendar. The selected span fills with azure alloy.\n */\n\nexport interface DateRangePickerProps {\n  value?: DateRange\n  onValueChange?: (range: DateRange | undefined) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n}\n\nconst DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePickerProps>(\n  ({ value, onValueChange, placeholder = \"Pick a date range\", className, disabled }, ref) => (\n    <Popover>\n      <PopoverTrigger\n        render={\n          <Button\n            ref={ref}\n            variant=\"outline\"\n            disabled={disabled}\n            className={cn(\n              \"w-full justify-start text-left font-normal\",\n              !value && \"text-muted-foreground\",\n              className\n            )}\n          />\n        }\n      >\n        <svg\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth={2}\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n          className=\"mr-2 h-4 w-4\"\n        >\n          <path d=\"M8 2v4\" />\n          <path d=\"M16 2v4\" />\n          <rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" />\n          <path d=\"M3 10h18\" />\n        </svg>\n        {value?.from ? (\n          value.to ? (\n            <>\n              {format(value.from, \"LLL dd, y\")} to {format(value.to, \"LLL dd, y\")}\n            </>\n          ) : (\n            format(value.from, \"LLL dd, y\")\n          )\n        ) : (\n          <span>{placeholder}</span>\n        )}\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          initialFocus\n          mode=\"range\"\n          defaultMonth={value?.from}\n          selected={value}\n          onSelect={onValueChange}\n          numberOfMonths={2}\n        />\n      </PopoverContent>\n    </Popover>\n  )\n)\nDateRangePicker.displayName = \"DateRangePicker\"\n\nexport { DateRangePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "date-fns@^4.1.0",
+    "react-day-picker@^9.7.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/chrome-emerald/calendar-base.json",
+    "https://better-design.com/registry/chrome-emerald/button-base.json",
+    "https://better-design.com/registry/chrome-emerald/popover-base.json"
+  ]
+}

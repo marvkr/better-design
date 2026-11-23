@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { formFieldBase, formFieldSingleLine, menuItemBase, popoverSurface } from "./_shared";
@@ -35,7 +34,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon icon="solar:alt-arrow-down-linear" className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+      <ChevronDownIcon className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -50,7 +49,7 @@ const SelectScrollUpButton = React.forwardRef<
     className={cn("flex cursor-default items-center justify-center py-1 text-muted-foreground", className)}
     {...props}
   >
-    <Icon icon="solar:alt-arrow-up-linear" className="size-3.5" aria-hidden />
+    <ChevronUpIcon className="size-3.5" aria-hidden />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -64,7 +63,7 @@ const SelectScrollDownButton = React.forwardRef<
     className={cn("flex cursor-default items-center justify-center py-1 text-muted-foreground", className)}
     {...props}
   >
-    <Icon icon="solar:alt-arrow-down-linear" className="size-3.5" aria-hidden />
+    <ChevronDownIcon className="size-3.5" aria-hidden />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
@@ -130,7 +129,7 @@ const SelectItem = React.forwardRef<
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     <span className="absolute right-2.5 flex size-4 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Icon icon="solar:unread-linear" className="size-3.5 text-(--primary-text)" aria-hidden />
+        <CheckIcon className="size-3.5 text-(--primary-text)" aria-hidden />
       </SelectPrimitive.ItemIndicator>
     </span>
   </SelectPrimitive.Item>
@@ -161,3 +160,30 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 };
+
+// Solar, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "solar:unread-linear" "solar:alt-arrow-down-linear"
+// "solar:alt-arrow-up-linear"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 12.9L10.1429 16.5L18 7.5"/>
+    </svg>
+  );
+}
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 9L12 15L5 9"/>
+    </svg>
+  );
+}
+function ChevronUpIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 15L12 9L5 15"/>
+    </svg>
+  );
+}

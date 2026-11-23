@@ -1,0 +1,22 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { GlassLayer, type GlassOptics } from \"./glass-layer\"\n\n/*\n * Liquid Glass Card — the kit's GlassCard. The face frosts and tints whatever\n * lies behind the card so its text stays readable, and the rim pulls the\n * backdrop towards the centre. A card holds content, so it stays still under\n * the pointer. The classes are the same tint and frost in CSS, shown before\n * the first glass frame and kept without WebGL2.\n */\n\n// The card's own glass, from the kit: a radial rim bend, a 5px frost over the\n// bent picture, a 70% tint and a hairline white rim. No colour split, no light.\nconst CARD_OPTICS: GlassOptics = {\n  bendMode: \"radial\",\n  borderColor: \"#ffffff\",\n  borderAlpha: 0.6,\n  borderWidth: 1.3,\n  frostMix: 1,\n  frostEdge: 1,\n  saturation: 1,\n  refraction: 1,\n  bendDepth: 1.35,\n  bendCurve: 9.75,\n  dispersion: 0,\n  magnify: 0,\n  light: 0,\n  cursorLight: false,\n  shadow: 0,\n  dark: { borderAlpha: 0.25 },\n}\n\ninterface CardProps extends React.ComponentProps<\"div\"> {\n  /** Repaint the backdrop every frame, for content that moves behind the card. */\n  live?: boolean\n}\n\nfunction Card({ className, live = false, children, ...props }: CardProps) {\n  return (\n    <div\n      data-slot=\"card\"\n      data-glass-host=\"\"\n      className={cn(\n        \"flex flex-col rounded-[1.75rem] border border-(--glass-rim) bg-(--glass-fill) text-card-foreground backdrop-blur-[0.3125rem]\",\n        className\n      )}\n      {...props}\n    >\n      {/* The glass layer must be the host's first child. */}\n      <GlassLayer material=\"clear\" tint={0.7} blur={5} live={live} swell={false} optics={CARD_OPTICS} />\n      {children}\n    </div>\n  )\n}\n\nfunction CardHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"card-header\" className={cn(\"flex flex-col gap-1.5 p-6\", className)} {...props} />\n}\n\nfunction CardTitle({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"card-title\"\n      className={cn(\"text-[1.0625rem] font-semibold leading-snug tracking-tight text-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction CardDescription({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"card-description\" className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)} {...props} />\n}\n\nfunction CardContent({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"card-content\" className={cn(\"px-6 pb-6\", className)} {...props} />\n}\n\nfunction CardFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"card-footer\" className={cn(\"flex items-center gap-2 px-6 pb-6\", className)} {...props} />\n}\n\nexport { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/liquid-glass/glass-layer.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glass-fill": "oklch(1 0 0 / 0.6)",
+      "glass-rim": "oklch(1 0 0 / 0.6)"
+    },
+    "dark": {}
+  }
+}

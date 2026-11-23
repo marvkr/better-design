@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check, Minus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -33,14 +32,29 @@ const Checkbox = React.forwardRef<
     {...props}
   >
     <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-      {props.checked === "indeterminate" ? (
-        <Minus className="h-3 w-3" strokeWidth={3} />
-      ) : (
-        <Check className="h-3 w-3" strokeWidth={3} />
-      )}
+      <CheckIcon className="h-3 w-3 in-data-[state=indeterminate]:hidden" />
+      <MinusIcon className="h-3 w-3 hidden in-data-[state=indeterminate]:block" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
+
+// "feather:check" and "feather:minus" from Feather,
+// the icon library this system pairs with, drawn inline so the installed
+// component loads no icon at runtime. [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 6L9 17l-5-5"/>
+    </svg>
+  );
+}
+function MinusIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14"/>
+    </svg>
+  );
+}

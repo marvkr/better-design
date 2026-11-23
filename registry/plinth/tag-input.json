@@ -1,0 +1,20 @@
+{
+  "name": "tag-input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/tag-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Tag Input: a recessed well that holds raised graphite chips, with\n * the typing caret after the last chip.\n */\n\nexport interface TagInputProps {\n  value: string[]\n  onValueChange: (tags: string[]) => void\n  placeholder?: string\n  className?: string\n  disabled?: boolean\n  maxTags?: number\n}\n\nconst TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(\n  ({ value, onValueChange, placeholder = \"Add tag\", className, disabled, maxTags }, ref) => {\n    const [input, setInput] = React.useState(\"\")\n\n    const addTag = (tag: string) => {\n      const trimmed = tag.trim()\n      if (!trimmed || value.includes(trimmed)) return\n      if (maxTags && value.length >= maxTags) return\n      onValueChange([...value, trimmed])\n      setInput(\"\")\n    }\n\n    const removeTag = (tag: string) => onValueChange(value.filter((t) => t !== tag))\n\n    return (\n      <div\n        className={cn(\n          \"flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-lg px-1.5 py-1.5\",\n          \"bg-input border border-transparent [box-shadow:var(--shadow-inset)]\",\n          \"transition-[border-color,box-shadow] duration-fast hover:border-border\",\n          \"focus-within:border-ring/70 focus-within:ring-2 focus-within:ring-ring/30\",\n          disabled && \"cursor-not-allowed opacity-50\",\n          className\n        )}\n      >\n        {value.map((tag) => (\n          <span\n            key={tag}\n            className=\"inline-flex h-6 items-center gap-1 rounded-md pl-2 pr-0.5 text-xs text-secondary-foreground [background:var(--segment-gradient)] [box-shadow:var(--shadow-segment)]\"\n          >\n            {tag}\n            <button\n              type=\"button\"\n              onClick={() => removeTag(tag)}\n              disabled={disabled}\n              aria-label={`Remove ${tag}`}\n              className=\"flex size-5 items-center justify-center rounded-[0.3125rem] text-muted-foreground transition-colors duration-fast hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n            >\n              <XIcon className=\"size-3\" />\n            </button>\n          </span>\n        ))}\n        <input\n          ref={ref}\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyDown={(e) => {\n            if (e.key === \"Enter\" || e.key === \",\") {\n              e.preventDefault()\n              addTag(input)\n            } else if (e.key === \"Backspace\" && !input && value.length > 0) {\n              removeTag(value[value.length - 1])\n            }\n          }}\n          placeholder={value.length === 0 ? placeholder : \"\"}\n          aria-label={placeholder}\n          disabled={disabled}\n          className=\"min-w-[5rem] flex-1 bg-transparent px-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground\"\n        />\n      </div>\n    )\n  }\n)\nTagInput.displayName = \"TagInput\"\n\n// feather:x\nfunction XIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M18 6L6 18M6 6l12 12\" />\n    </svg>\n  )\n}\n\nexport { TagInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "segment-gradient": "linear-gradient(180deg, oklch(0.295 0.009 286), oklch(0.258 0.007 286))",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)",
+      "shadow-segment": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0 0 0.0625rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {}
+  }
+}

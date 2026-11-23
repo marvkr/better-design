@@ -15,10 +15,6 @@
       "ag-border": "oklch(1 0 0 / 0.09)",
       "ag-well": "oklch(0.15 0.005 70 / 0.55)"
     },
-    "dark": {
-      "ag-fill": "oklch(1 0 0 / 0.05)",
-      "ag-border": "oklch(1 0 0 / 0.09)",
-      "ag-well": "oklch(0.15 0.005 70 / 0.55)"
-    }
+    "dark": {}
   }
 }

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { menuItemBase, popoverSurface, primaryFinish } from "./_shared";
@@ -51,7 +50,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon icon="iconoir:nav-arrow-right" aria-hidden="true" className="ms-auto size-4 text-muted-foreground rtl:rotate-180" />
+    <ChevronRightIcon aria-hidden="true" className="ms-auto size-4 text-muted-foreground rtl:rotate-180" />
   </ContextMenuPrimitive.SubTrigger>
 ));
 ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName;
@@ -110,7 +109,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   >
     <span className={indicatorSlot}>
       <ContextMenuPrimitive.ItemIndicator>
-        <Icon icon="iconoir:check" aria-hidden="true" className="size-4" />
+        <CheckIcon aria-hidden="true" className="size-4" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -190,3 +189,22 @@ export {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
 };
+
+// Iconoir, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "iconoir:check" "iconoir:nav-arrow-right"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m5 13l4 4L19 7"/>
+    </svg>
+  );
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m9 6l6 6l-6 6"/>
+    </svg>
+  );
+}

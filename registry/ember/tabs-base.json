@@ -19,11 +19,6 @@
       "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "ag-border": "oklch(1 0 0 / 0.09)",
-      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
-      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

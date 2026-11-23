@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { hlCardSurface } from "./_shared";
 
-// Hyperline Card: matte purple surface lifted off the gradient backdrop by
+// Card: matte purple surface lifted off the gradient backdrop by
 // the layered card shadow (hairline rim + top highlight + near + far ambient).
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

@@ -21,8 +21,6 @@
     "light": {
       "heading": "1.5rem"
     },
-    "dark": {
-      "heading": "1.5rem"
-    }
+    "dark": {}
   }
 }

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 import { Check, X, Pencil } from "lucide-react"
 
-// Stripe Inline Edit: click-to-edit text field with confirm/cancel actions
+// Inline Edit: click-to-edit text field with confirm/cancel actions
 
 interface InlineEditProps {
   value: string

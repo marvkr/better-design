@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { type ButtonProps, buttonVariants } from "@/components/ui/button"
 
-// Airbnb Pagination: clean minimal style
+// Pagination: clean minimal style
 // Active page: bg-primary text-primary-foreground rounded-sm
 // Other pages: bg-transparent hover:bg-secondary
 

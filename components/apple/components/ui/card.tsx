@@ -2,9 +2,9 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Apple Card — light, white surface, 18px radius, very minimal shadow
+// Card — light, white surface, 18px radius, very minimal shadow
 // Shadow: 2px 4px 12px rgba(0,0,0,0.08) — ultra subtle
-// No border (Apple avoids borders on cards)
+// No border
 // Background: white on #f5f5f7 page background
 
 const Card = React.forwardRef<

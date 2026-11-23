@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Supabase Input — dark developer platform aesthetic
+// Input — dark developer platform aesthetic
 // Dark bg, subtle border, green glow on focus (matches the green primary)
 // Resting: slight inset shadow for depth
 // Focus: green ring glow + border color shift to primary

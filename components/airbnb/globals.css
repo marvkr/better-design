@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Airbnb: measured on airbnb.com, 13 November 2026 */
+  /* Measured on the source site, 13 November 2026 */
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.252 0 0); /* hof */

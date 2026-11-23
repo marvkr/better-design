@@ -4,13 +4,12 @@
   "files": [
     {
       "path": "components/ui/checkbox.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-[1.125rem] w-[1.125rem] shrink-0 rounded-sm\",\n      \"bg-input border border-border [box-shadow:var(--shadow-well)]\",\n      \"transition-[background,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      // Filled state reuses the primary Button accent material, scaled down.\n      \"data-[state=checked]:border-transparent data-[state=checked]:[background:var(--accent-fill)] data-[state=checked]:text-primary-foreground data-[state=checked]:[box-shadow:var(--shadow-accent)]\",\n      \"data-[state=indeterminate]:border-transparent data-[state=indeterminate]:[background:var(--accent-fill)] data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:[box-shadow:var(--shadow-accent)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator className=\"flex items-center justify-center text-current\">\n      {props.checked === \"indeterminate\" ? (\n        <Icon icon=\"tabler:minus\" className=\"h-3 w-3\" />\n      ) : (\n        <Icon icon=\"tabler:check\" className=\"h-3 w-3\" />\n      )}\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-[1.125rem] w-[1.125rem] shrink-0 rounded-sm\",\n      \"bg-input border border-border [box-shadow:var(--shadow-well)]\",\n      \"transition-[background,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      // Filled state reuses the primary Button accent material, scaled down.\n      \"data-[state=checked]:border-transparent data-[state=checked]:[background:var(--accent-fill)] data-[state=checked]:text-primary-foreground data-[state=checked]:[box-shadow:var(--shadow-accent)]\",\n      \"data-[state=indeterminate]:border-transparent data-[state=indeterminate]:[background:var(--accent-fill)] data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:[box-shadow:var(--shadow-accent)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator className=\"flex items-center justify-center text-current\">\n      <CheckIcon className=\"h-3 w-3 in-data-[state=indeterminate]:hidden\" />\n      <MinusIcon className=\"h-3 w-3 hidden in-data-[state=indeterminate]:block\" />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n\n// \"feather:check\" and \"feather:minus\" from Feather,\n// the icon library this system pairs with, drawn inline so the installed\n// component loads no icon at runtime. [BD-1029]\nfunction CheckIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M20 6L9 17l-5-5\"/>\n    </svg>\n  )\n}\nfunction MinusIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M5 12h14\"/>\n    </svg>\n  )\n}\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@radix-ui/react-checkbox@^1.3.2",
-    "@iconify/react@^6.0.2"
+    "@radix-ui/react-checkbox@^1.3.2"
   ],
   "cssVars": {
     "theme": {},
@@ -19,10 +18,6 @@
       "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
       "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
     },
-    "dark": {
-      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
-      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
-      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
-    }
+    "dark": {}
   }
 }

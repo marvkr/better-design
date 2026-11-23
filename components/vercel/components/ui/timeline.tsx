@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Vercel Timeline: vertical list of events with connector lines
+// Timeline: vertical list of events with connector lines
 
 interface TimelineItem {
   title: string

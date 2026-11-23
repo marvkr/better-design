@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 
-// Hyperline Carousel: embla slider; nav arrows are raised secondary buttons.
+// Carousel: embla slider; nav arrows are raised secondary buttons.
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

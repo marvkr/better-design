@@ -20,8 +20,6 @@
     "light": {
       "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
     },
-    "dark": {
-      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
-    }
+    "dark": {}
   }
 }

@@ -26,8 +26,6 @@
     "light": {
       "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
     },
-    "dark": {
-      "shadow-hard-sm": "0.125rem 0.125rem 0 0 var(--foreground)"
-    }
+    "dark": {}
   }
 }

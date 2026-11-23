@@ -22,9 +22,6 @@
       "scrim": "oklch(0.12 0.003 67.7 / 0.6)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "scrim": "oklch(0.12 0.003 67.7 / 0.6)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

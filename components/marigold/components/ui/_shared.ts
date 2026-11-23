@@ -1,4 +1,4 @@
-// Talentboard shared material recipes.
+// Shared material recipes.
 // A light recruiting platform: crisp white surfaces over a warm off-white
 // canvas, quiet depth from a hairline rim plus a soft low-alpha ambient
 // shadow, and one confident orange material on the primary actions. All

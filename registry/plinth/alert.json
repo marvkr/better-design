@@ -1,0 +1,23 @@
+{
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Alert: an in-panel notice on a recessed well, its icon tinted by\n * tone. A destructive notice tints the well and its edge red; it never\n * floats, so it carries no drop shadow.\n */\nconst alertVariants = cva(\n  [\n    \"relative w-full rounded-2xl border px-4 py-3.5 text-sm\",\n    \"[&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:size-4\",\n    \"[&>svg~*]:pl-7\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default: \"bg-input border-border text-foreground [box-shadow:var(--shadow-inset)] [&>svg]:text-muted-foreground\",\n        destructive:\n          \"bg-[oklch(0.22_0.05_25)] border-[oklch(0.62_0.2_25/0.45)] text-[color:oklch(0.9_0.06_25)] [&>svg]:text-destructive\",\n        success:\n          \"bg-[oklch(0.21_0.04_150)] border-[oklch(0.72_0.17_150/0.4)] text-[color:oklch(0.9_0.08_150)] [&>svg]:text-success\",\n        warning:\n          \"bg-[oklch(0.22_0.04_75)] border-[oklch(0.8_0.15_80/0.4)] text-[color:oklch(0.92_0.08_85)] [&>svg]:text-warning\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>\n>(({ className, variant, ...props }, ref) => (\n  <div ref={ref} role=\"alert\" data-slot=\"alert\" className={cn(alertVariants({ variant }), className)} {...props} />\n))\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(\n  ({ className, ...props }, ref) => (\n    <h5 ref={ref} className={cn(\"mb-1 font-medium leading-tight tracking-tight\", className)} {...props} />\n  )\n)\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-sm leading-relaxed opacity-90 [&_p]:leading-relaxed\", className)} {...props} />\n  )\n)\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.72 0.17 150)",
+      "warning": "oklch(0.8 0.15 80)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

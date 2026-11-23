@@ -44,6 +44,10 @@
 
   --destructive: oklch(0.62 0.23 25);      /* the red "Yes/cancel" action */
   --destructive-foreground: oklch(0.98 0.01 20);
+  --success: oklch(0.62 0.16 150);
+  --success-foreground: oklch(0.145 0.01 264);
+  --warning: oklch(0.76 0.16 75);
+  --warning-foreground: oklch(0.145 0.01 264);
 
   --border: oklch(1 0 0 / 0.09);           /* hairline white */
   --input: oklch(0.2 0.012 264);           /* field well */
@@ -185,6 +189,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

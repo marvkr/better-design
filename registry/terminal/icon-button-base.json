@@ -20,11 +20,6 @@
       "shadow-button-hover": "inset 0 0.0625rem 0 oklch(0.95 0.05 207 / 0.22), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.22), 0 0 0.75rem oklch(0.80 0.15 205 / 0.2)",
       "shadow-primary": "inset 0 0.0625rem 0 oklch(0.98 0.03 207 / 0.4), 0 0 0 0.0625rem oklch(0.80 0.15 205 / 0.5), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0 0.875rem oklch(0.80 0.15 205 / 0.4)"
     },
-    "dark": {
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(0.95 0.05 207 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.14)",
-      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(0.95 0.05 207 / 0.22), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0 0 0.0625rem oklch(0.86 0.13 207 / 0.22), 0 0 0.75rem oklch(0.80 0.15 205 / 0.2)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(0.98 0.03 207 / 0.4), 0 0 0 0.0625rem oklch(0.80 0.15 205 / 0.5), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0 0.875rem oklch(0.80 0.15 205 / 0.4)"
-    }
+    "dark": {}
   }
 }

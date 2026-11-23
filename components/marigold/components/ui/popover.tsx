@@ -6,7 +6,7 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard Popover: floating surface on the shared layered pop shadow.
+// Popover: floating surface on the shared layered pop shadow.
 
 const Popover = PopoverPrimitive.Root;
 

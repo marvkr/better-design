@@ -5,7 +5,7 @@ import { Minus, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 
-// Stripe Number Input: input with increment/decrement buttons
+// Number Input: input with increment/decrement buttons
 
 interface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange"> {
   value?: number

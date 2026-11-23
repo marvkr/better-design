@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Steps: completed markers wear the raised cyan material.
+// Steps: completed markers wear the raised cyan material.
 
 interface Step {
   title: string;

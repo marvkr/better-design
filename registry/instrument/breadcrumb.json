@@ -16,8 +16,6 @@
     "light": {
       "gauge-well-border": "oklch(0.268 0.016 285)"
     },
-    "dark": {
-      "gauge-well-border": "oklch(0.268 0.016 285)"
-    }
+    "dark": {}
   }
 }

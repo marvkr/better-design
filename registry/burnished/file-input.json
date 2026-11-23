@@ -20,9 +20,6 @@
       "primary-text": "oklch(0.798 0.084 66.7)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "primary-text": "oklch(0.798 0.084 66.7)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

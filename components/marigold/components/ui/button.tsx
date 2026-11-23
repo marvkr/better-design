@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { tbPrimaryRaised, tbPrimaryRaisedHover, tbRaisedPanel } from "./_shared";
 
-// Talentboard Button: raised orange primary over the warm off-white canvas.
+// Button: raised orange primary over the warm off-white canvas.
 // Hero treatment = orange gradient fill + hairline rim + inset top highlight
 // + a soft low-alpha ambient shadow.
 

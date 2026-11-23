@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Figma Data Table: sortable, clean table with Figma styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

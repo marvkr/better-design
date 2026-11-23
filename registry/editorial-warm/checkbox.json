@@ -18,9 +18,6 @@
       "glass-strong": "oklch(1 0 0 / 0.65)",
       "glass-blur": "blur(1.75rem) saturate(160%)"
     },
-    "dark": {
-      "glass-strong": "oklch(1 0 0 / 0.65)",
-      "glass-blur": "blur(1.75rem) saturate(160%)"
-    }
+    "dark": {}
   }
 }

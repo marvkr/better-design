@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Input, measured on airbnb.com (13 November 2026)
+// Input, measured on airbnb.com (13 November 2026)
 // 12px radius, a 1px grey line, clear fill, 16px text
 // Focus: the line turns dark and thickens to 2px, with no glow
 

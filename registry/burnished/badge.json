@@ -32,21 +32,6 @@
       "glow-text": "oklch(0.875 0.06 66.7)",
       "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
     },
-    "dark": {
-      "success": "oklch(0.79 0.12 150)",
-      "warning": "oklch(0.827 0.122 62.1)",
-      "info": "oklch(0.78 0.08 240)",
-      "glow": "oklch(0.798 0.084 66.7)",
-      "ember": "oklch(0.73 0.177 45.6)",
-      "flame": "oklch(0.827 0.122 62.1)",
-      "success-text": "oklch(0.875 0.09 150)",
-      "warning-text": "oklch(0.875 0.09 70)",
-      "destructive-text": "oklch(0.875 0.07 29)",
-      "info-text": "oklch(0.875 0.06 240)",
-      "ember-text": "oklch(0.875 0.08 50)",
-      "flame-text": "oklch(0.875 0.08 75)",
-      "glow-text": "oklch(0.875 0.06 66.7)",
-      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)"
-    }
+    "dark": {}
   }
 }

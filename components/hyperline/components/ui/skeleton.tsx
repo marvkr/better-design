@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-// Hyperline Skeleton: pulsing recessed placeholder.
+// Skeleton: pulsing recessed placeholder.
 
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (

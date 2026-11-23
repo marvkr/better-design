@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-// Linear Date Picker: calendar popover triggered by button
+// Date Picker: calendar popover triggered by button
 
 interface DatePickerProps {
   value?: Date

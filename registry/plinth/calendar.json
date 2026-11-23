@@ -1,0 +1,27 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/calendar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { DayButton, DayPicker, type DayButtonProps } from \"react-day-picker\"\n\nimport { cn } from \"@/lib/utils\"\nimport { buttonVariants } from \"./button\"\n\nexport type CalendarProps = React.ComponentProps<typeof DayPicker>\n\n/*\n * Plinth Calendar: a month set on the panel. Weekday heads are mono caps\n * readouts; days are quiet tool buttons. A picked day takes the ember\n * Button material, a range runs through a recessed well between its ends,\n * and today wears a graphite chip.\n */\n\nconst navButton = cn(\n  buttonVariants({ variant: \"secondary\", size: \"icon-sm\" }),\n  \"size-7 rounded-md p-0 text-muted-foreground hover:text-foreground\"\n)\n\nconst dayState = {\n  today: \"bg-secondary text-foreground [box-shadow:var(--shadow-button)]\",\n  outside: \"text-muted-foreground/60\",\n  disabled: \"text-muted-foreground/40 line-through\",\n  selected:\n    \"[background:var(--ember-gradient)] text-primary-foreground [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.4),0_0_0_0.0625rem_var(--ember-rim)] hover:bg-transparent hover:text-primary-foreground\",\n  range_start: \"rounded-r-sm\",\n  range_end: \"rounded-l-sm\",\n  range_middle:\n    \"rounded-none bg-transparent [background:none] [box-shadow:none] text-foreground hover:text-foreground\",\n}\n\nfunction CalendarDayButton({ className, modifiers, ...props }: DayButtonProps) {\n  return (\n    <DayButton\n      modifiers={modifiers}\n      data-selected={modifiers.selected || undefined}\n      data-range-middle={modifiers.range_middle || undefined}\n      className={cn(\n        className,\n        modifiers.today && dayState.today,\n        modifiers.outside && dayState.outside,\n        modifiers.disabled && dayState.disabled,\n        modifiers.selected && dayState.selected,\n        modifiers.range_start && dayState.range_start,\n        modifiers.range_end && dayState.range_end,\n        modifiers.range_middle && dayState.range_middle,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"relative flex flex-col gap-4 sm:flex-row\",\n        month: \"flex flex-col gap-3\",\n        month_caption: \"flex h-7 items-center justify-center\",\n        caption_label: \"text-sm font-medium text-foreground\",\n        nav: \"absolute inset-x-0 top-0 flex items-center justify-between\",\n        button_previous: navButton,\n        button_next: navButton,\n        month_grid: \"w-full border-collapse\",\n        weekdays: \"flex\",\n        weekday: \"w-9 pb-1 font-mono text-[0.6875rem] font-normal uppercase text-muted-foreground\",\n        week: \"mt-1 flex w-full\",\n        day: cn(\n          \"relative size-9 p-0 text-center text-sm focus-within:relative focus-within:z-20\",\n          \"[&:has([data-range-middle])]:bg-input [&:has([data-range-middle])]:[box-shadow:var(--shadow-inset)]\"\n        ),\n        day_button: cn(\n          buttonVariants({ variant: \"ghost\", size: \"icon\" }),\n          \"size-9 rounded-md p-0 text-sm font-normal text-foreground\"\n        ),\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation }: { orientation?: string }) =>\n          orientation === \"left\" ? <ChevronLeftIcon className=\"size-4\" /> : <ChevronRightIcon className=\"size-4\" />,\n        DayButton: CalendarDayButton,\n      }}\n      {...props}\n    />\n  )\n}\nCalendar.displayName = \"Calendar\"\n\n// feather:chevron-left\nfunction ChevronLeftIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"m15 18l-6-6l6-6\" />\n    </svg>\n  )\n}\n\n// feather:chevron-right\nfunction ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"m9 18l6-6l-6-6\" />\n    </svg>\n  )\n}\n\nexport { Calendar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker@^9.7.0"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/button.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ember-gradient": "linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39))",
+      "ember-rim": "oklch(0.5 0.16 39)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {}
+  }
+}

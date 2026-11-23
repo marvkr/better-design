@@ -23,15 +23,6 @@
       "shadow-bezel": "0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4), inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5)",
       "shadow-track": "inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.2)"
     },
-    "dark": {
-      "metal": "linear-gradient( to bottom, oklch(0.925 0 0), oklch(0.82 0 0) 50%, oklch(0.7 0 0) )",
-      "bezel": "linear-gradient(to bottom, oklch(0.37 0 0), oklch(0.27 0 0))",
-      "ring-recess": "linear-gradient(to bottom, oklch(0.27 0 0), oklch(0.205 0 0))",
-      "track-sheen": "linear-gradient(to bottom, oklch(1 0 0 / 0.1), oklch(1 0 0 / 0.05))",
-      "shadow-inset": "inset 0 0.125rem 0.25rem oklch(0 0 0 / 0.8), inset 0 -0.0625rem 0.125rem oklch(1 0 0 / 0.05)",
-      "shadow-primary": "0 0.125rem 0.5rem oklch(0 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), inset 0 0.125rem 0 oklch(1 0 0 / 0.5), inset 0 -0.125rem 0 oklch(1 0 0 / 0.3), inset 0 -0.5rem 1rem oklch(1 0 0 / 0.2), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.4), inset 0 0.0625rem 0.25rem oklch(0 0 0 / 0.1)",
-      "shadow-bezel": "0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4), inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5)",
-      "shadow-track": "inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.2)"
-    }
+    "dark": {}
   }
 }

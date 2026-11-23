@@ -16,8 +16,6 @@
     "light": {
       "glass-strong": "oklch(1 0 0 / 0.65)"
     },
-    "dark": {
-      "glass-strong": "oklch(1 0 0 / 0.65)"
-    }
+    "dark": {}
   }
 }

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { hlPrimaryRaised, hlPrimaryRaisedHover, hlRaisedPanel } from "./_shared";
 
-// Hyperline IconButton: square control sharing the Button materials.
+// IconButton: square control sharing the Button materials.
 
 const iconButtonVariants = cva(
   [

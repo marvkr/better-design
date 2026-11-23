@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Field: label + control + description/error stack.
+// Field: label + control + description/error stack.
 
 interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;

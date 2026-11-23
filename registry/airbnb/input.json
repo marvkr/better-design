@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/input.tsx",
-      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Airbnb Input, measured on airbnb.com (13 November 2026)\n// 12px radius, a 1px grey line, clear fill, 16px text\n// Focus: the line turns dark and thickens to 2px, with no glow\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-12 w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color,box-shadow] duration-fast ease-in-out\",\n          \"hover:border-foreground\",\n          \"focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Input, measured on airbnb.com (13 November 2026)\n// 12px radius, a 1px grey line, clear fill, 16px text\n// Focus: the line turns dark and thickens to 2px, with no glow\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-12 w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground\",\n          \"placeholder:text-muted-foreground\",\n          \"transition-[border-color,box-shadow] duration-fast ease-in-out\",\n          \"hover:border-foreground\",\n          \"focus-visible:outline-none focus-visible:border-foreground focus-visible:shadow-[inset_0_0_0_0.0625rem_var(--ring)]\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className\n        )}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nInput.displayName = \"Input\";\n\nexport { Input };\n",
       "type": "registry:ui"
     }
   ],
@@ -14,9 +14,6 @@
       "shadow": "0 0 0 0.0625rem oklch(0 0 0 / 0.04), 0 0.375rem 1rem oklch(0 0 0 / 0.12)",
       "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     },
-    "dark": {
-      "shadow": "0 0 0 0.0625rem oklch(0 0 0 / 0.04), 0 0.375rem 1rem oklch(0 0 0 / 0.12)",
-      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
-    }
+    "dark": {}
   }
 }

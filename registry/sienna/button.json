@@ -29,20 +29,6 @@
       "shadow-destructive-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--destructive-hover-to)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "primary-from": "oklch(0.76 0.22 54)",
-      "primary-to": "oklch(0.7 0.245 43)",
-      "primary-hover-to": "oklch(0.75 0.23 50)",
-      "destructive-from": "oklch(0.577 0.245 27.325)",
-      "destructive-to": "oklch(0.505 0.213 27.518)",
-      "destructive-hover-to": "oklch(0.59 0.245 27)",
-      "shadow-button": "var(--shadow-sm)",
-      "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)",
-      "shadow-primary": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--primary-to)",
-      "shadow-primary-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--primary-hover-to)",
-      "shadow-destructive": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--destructive-to)",
-      "shadow-destructive-hover": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0.12), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.12), 0 0.125rem 0.25rem oklch(0 0 0 / 0.13), 0 0 0 0.0625rem var(--destructive-hover-to)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

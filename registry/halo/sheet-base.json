@@ -20,10 +20,6 @@
       "shade": "oklch(0 0 0)",
       "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
     },
-    "dark": {
-      "halo": "oklch(1 0 0)",
-      "shade": "oklch(0 0 0)",
-      "ease-in-out": "cubic-bezier(0.645, 0.045, 0.355, 1)"
-    }
+    "dark": {}
   }
 }

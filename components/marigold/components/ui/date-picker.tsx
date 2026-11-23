@@ -9,7 +9,7 @@ import { formFieldBase } from "./_shared";
 import { Calendar } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-// Talentboard DatePicker: recessed-well trigger (the form-field material,
+// DatePicker: recessed-well trigger (the form-field material,
 // matching Input and Select) opening the calendar pop surface.
 
 interface DatePickerProps {

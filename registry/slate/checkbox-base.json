@@ -4,13 +4,12 @@
   "files": [
     {
       "path": "components/ui/checkbox.tsx",
-      "content": "\"use client\"\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\nimport { Check, Minus } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded-sm border border-border\",\n        \"bg-card [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background-color,box-shadow,border-color] duration-fast\",\n        \"hover:border-ring/40\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:border-primary data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n        \"data-indeterminate:bg-primary data-indeterminate:border-primary data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        {indeterminate ? (\n          <Minus className=\"h-3 w-3\" strokeWidth={3} />\n        ) : (\n          <Check className=\"h-3 w-3\" strokeWidth={3} />\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n",
+      "content": "\"use client\"\n\nimport type { SVGProps } from \"react\"\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({\n  className,\n  indeterminate,\n  ...props\n}: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      indeterminate={indeterminate}\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded-sm border border-border\",\n        \"bg-card [box-shadow:var(--shadow-inset)]\",\n        \"transition-[background-color,box-shadow,border-color] duration-fast\",\n        \"hover:border-ring/40\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:bg-primary data-checked:border-primary data-checked:text-primary-foreground data-checked:[box-shadow:var(--shadow-primary)]\",\n        \"data-indeterminate:bg-primary data-indeterminate:border-primary data-indeterminate:text-primary-foreground data-indeterminate:[box-shadow:var(--shadow-primary)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        {indeterminate ? (\n          <MinusIcon className=\"h-3 w-3\" />\n        ) : (\n          <CheckIcon className=\"h-3 w-3\" />\n        )}\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\nCheckbox.displayName = \"Checkbox\"\n\nexport { Checkbox }\n\n// \"feather:check\" and \"feather:minus\" from Feather,\n// the icon library this system pairs with, drawn inline so the installed\n// component loads no icon at runtime. [BD-1029]\nfunction CheckIcon(props: SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M20 6L9 17l-5-5\"/>\n    </svg>\n  )\n}\nfunction MinusIcon(props: SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M5 12h14\"/>\n    </svg>\n  )\n}\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@base-ui/react@^1.6.0",
-    "lucide-react@>=0.518.0 <1"
+    "@base-ui/react@^1.6.0"
   ],
   "cssVars": {
     "theme": {},
@@ -18,9 +17,6 @@
       "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)",
       "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
     },
-    "dark": {
-      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.06)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.20), 0 0 0 0.0625rem oklch(0 0 0 / 0.06)"
-    }
+    "dark": {}
   }
 }

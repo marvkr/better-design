@@ -3,7 +3,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Notion Code Block: syntax-highlighted code display with copy button
+// Code Block: syntax-highlighted code display with copy button
 
 interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   code: string

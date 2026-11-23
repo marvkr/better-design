@@ -57,6 +57,7 @@ export function ComboboxDemo() {
                 <CommandItem
                   key={option.value}
                   value={option.value}
+                  keywords={[option.label]}
                   onSelect={(current: string) => {
                     setValue(current === value ? "" : current);
                     setOpen(false);

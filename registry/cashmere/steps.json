@@ -17,9 +17,6 @@
       "shadow-m": "var(--shadow-md)",
       "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
     },
-    "dark": {
-      "shadow-m": "var(--shadow-md)",
-      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
-    }
+    "dark": {}
   }
 }

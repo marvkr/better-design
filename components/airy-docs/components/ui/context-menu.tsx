@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { menuItemBase, popoverSurface } from "./_shared";
@@ -59,8 +58,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon
-      icon="feather:chevron-right"
+    <ChevronRightIcon
       className="ms-auto size-3.5 text-muted-foreground rtl:rotate-180"
       aria-hidden="true"
     />
@@ -136,7 +134,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   >
     <span className="pointer-events-none absolute start-2.5 flex size-4 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Icon icon="feather:check" className="size-3.5 text-(--primary-text)" aria-hidden="true" />
+        <CheckIcon className="size-3.5 text-(--primary-text)" aria-hidden="true" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -227,3 +225,22 @@ export {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
 };
+
+// Feather, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "feather:check" "feather:chevron-right"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 6L9 17l-5-5"/>
+    </svg>
+  );
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 18l6-6l-6-6"/>
+    </svg>
+  );
+}

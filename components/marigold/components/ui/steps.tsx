@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Steps: completed markers wear the raised orange material.
+// Steps: completed markers wear the raised orange material.
 
 interface Step {
   title: string;

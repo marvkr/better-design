@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { focusRing, softPanel } from "./_shared";
@@ -52,8 +51,7 @@ const AccordionTrigger = React.forwardRef<
           "transition-shadow duration-fast group-hover/accordion:text-foreground group-hover/accordion:shadow-(--option-edge-hover)",
         )}
       >
-        <Icon
-          icon="iconoir:nav-arrow-down"
+        <ChevronDownIcon
           className="size-3.5 transition-transform duration-base ease-(--ease-out) group-data-[state=open]/accordion:rotate-180 motion-reduce:transition-none"
         />
       </span>
@@ -78,3 +76,15 @@ const AccordionContent = React.forwardRef<
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+
+// Iconoir, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "iconoir:nav-arrow-down"
+// [BD-1029]
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m6 9l6 6l6-6"/>
+    </svg>
+  );
+}

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Stripe Item: settings row / menu item / list item
+// Item: settings row / menu item / list item
 // Left: icon/avatar slot + text (title + subtitle)
 // Right: optional action (button, badge, toggle)
 // Light theme: hover:bg-secondary/60, h-14 default, border-b border-border

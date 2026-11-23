@@ -27,14 +27,6 @@
       "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "primary-text": "oklch(0.798 0.084 66.7)",
-      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
-      "fill-primary-hover": "linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5))",
-      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
-      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
-      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

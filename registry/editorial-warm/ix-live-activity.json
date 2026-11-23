@@ -19,10 +19,9 @@
   "cssVars": {
     "theme": {},
     "light": {
+      "success": "oklch(0.55 0.15 150)",
       "shadow": "0 0.0625rem 0.1875rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.04)"
     },
-    "dark": {
-      "shadow": "0 0.0625rem 0.1875rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.04)"
-    }
+    "dark": {}
   }
 }

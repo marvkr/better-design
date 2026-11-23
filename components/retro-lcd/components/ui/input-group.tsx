@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Airbnb InputGroup: input with prefix/suffix addons, visually merged inside border
+// InputGroup: input with prefix/suffix addons, visually merged inside border
 // Addons share the same rounded-[0.625rem] container as the input
 // Prefix/suffix: bg-muted border-r/l border-border, text-muted-foreground
 

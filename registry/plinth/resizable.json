@@ -1,0 +1,22 @@
+{
+  "name": "resizable",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ResizablePrimitive from \"react-resizable-panels\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst ResizablePanelGroup = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (\n  <ResizablePrimitive.PanelGroup\n    className={cn(\"flex h-full w-full data-[panel-group-direction=vertical]:flex-col\", className)}\n    {...props}\n  />\n)\n\nconst ResizablePanel = ResizablePrimitive.Panel\n\n/* A hairline divider; the grip is a small graphite keycap that turns\n   ember while it is dragged or focused. */\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  ...props\n}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {\n  withHandle?: boolean\n}) => (\n  <ResizablePrimitive.PanelResizeHandle\n    className={cn(\n      \"group/handle relative flex w-px items-center justify-center bg-border\",\n      \"after:absolute after:inset-y-0 after:left-1/2 after:w-2 after:-translate-x-1/2\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"data-[resize-handle-state=drag]:bg-primary\",\n      \"data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full\",\n      \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-2 data-[panel-group-direction=vertical]:after:w-full\",\n      \"data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0\",\n      \"[&[data-panel-group-direction=vertical]>div]:rotate-90\",\n      className\n    )}\n    {...props}\n  >\n    {withHandle && (\n      <div className=\"z-10 flex h-5 w-3 items-center justify-center rounded-[0.3125rem] text-muted-foreground [background:var(--graphite-gradient)] [box-shadow:var(--shadow-button)] group-data-[resize-handle-state=drag]/handle:text-primary\">\n        <MoreVerticalIcon className=\"size-3\" />\n      </div>\n    )}\n  </ResizablePrimitive.PanelResizeHandle>\n)\n\n// feather:more-vertical\nfunction MoreVerticalIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\"><circle cx=\"12\" cy=\"12\" r=\"1\" /><circle cx=\"12\" cy=\"5\" r=\"1\" /><circle cx=\"12\" cy=\"19\" r=\"1\" /></g>\n    </svg>\n  )\n}\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels@^3.0.3"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "graphite-gradient": "linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286))",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {}
+  }
+}

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Figma Kbd: keyboard shortcut display
+// Kbd: keyboard shortcut display
 // Style: rounded-md border border-border bg-secondary px-1.5 py-0.5 text-xs font-mono
 
 interface KbdProps extends React.HTMLAttributes<HTMLElement> {}

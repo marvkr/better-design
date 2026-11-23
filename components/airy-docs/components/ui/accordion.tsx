@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 
@@ -51,8 +50,7 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <Icon
-          icon="feather:chevron-right"
+        <ChevronRightIcon
           aria-hidden="true"
           className="size-4 shrink-0 text-muted-foreground transition-transform duration-fast ease-out"
         />
@@ -81,3 +79,15 @@ function AccordionContent({
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+
+// Feather, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "feather:chevron-right"
+// [BD-1029]
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 18l6-6l-6-6"/>
+    </svg>
+  );
+}

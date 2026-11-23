@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Supabase Empty: centered icon area (dashed border), title, description, optional action
+// Empty: centered icon area (dashed border), title, description, optional action
 // Light theme: bg-secondary/30, dashed border-border, rounded icon box with shadow
 
 interface EmptyProps extends React.HTMLAttributes<HTMLDivElement> {

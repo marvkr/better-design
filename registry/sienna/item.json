@@ -19,11 +19,6 @@
       "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.09), inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.025)",
       "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)"
     },
-    "dark": {
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-m": "var(--shadow-md)",
-      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.09), inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.025)",
-      "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)"
-    }
+    "dark": {}
   }
 }

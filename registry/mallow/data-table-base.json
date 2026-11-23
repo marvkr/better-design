@@ -17,8 +17,6 @@
     "light": {
       "option-face": "oklch(0.955 0.035 290)"
     },
-    "dark": {
-      "option-face": "oklch(0.955 0.035 290)"
-    }
+    "dark": {}
   }
 }

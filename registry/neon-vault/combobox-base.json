@@ -21,8 +21,6 @@
     "light": {
       "primary-bright": "oklch(0.71 0.25 350)"
     },
-    "dark": {
-      "primary-bright": "oklch(0.71 0.25 350)"
-    }
+    "dark": {}
   }
 }

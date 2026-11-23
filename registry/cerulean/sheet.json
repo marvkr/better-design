@@ -19,9 +19,6 @@
       "shadow-l": "var(--shadow-lg)",
       "ease-in-out": "cubic-bezier(0.455, 0.03, 0.515, 0.955)"
     },
-    "dark": {
-      "shadow-l": "var(--shadow-lg)",
-      "ease-in-out": "cubic-bezier(0.455, 0.03, 0.515, 0.955)"
-    }
+    "dark": {}
   }
 }

@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Figma Badge — light, pill-shaped, Electric Violet primary (#a259ff)
+// Badge — light, pill-shaped, Electric Violet primary (#a259ff)
 // Light theme matches figma.com marketing site
 
 const badgeVariants = cva(

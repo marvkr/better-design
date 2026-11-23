@@ -4,7 +4,7 @@ import * as React from "react"
 import { Upload, X, FileText } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Figma File Input: drag-and-drop file upload
+// File Input: drag-and-drop file upload
 
 interface FileInputProps extends React.HTMLAttributes<HTMLDivElement> {
   accept?: string

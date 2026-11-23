@@ -1,0 +1,11 @@
+{
+  "name": "glass-controls-shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/glass-controls-shared.ts",
+      "content": "'use client'\n\n// From Liquid Glass by Bilal Gürsen, https://github.com/bilalgursen/liquid-glass\n// (commit 2311cd12d56fc105b4127a1e762f4092bfbb9283). Copyright (c) 2026 Bilal Abdullah Gürşen.\n// MIT licence: the full text is in LICENSE beside this system's components folder.\n// Changed here: flat file names, import paths, theme tokens in place of fixed label\n// colours, and the props marked [port].\n\nimport { useEffect, useRef, useState } from 'react'\n\n/** Per-component theme override; omit it to follow the page (data-theme=\"dark\" or class=\"dark\"). */\nexport type Theme = 'light' | 'dark'\n\n// Mirrors a prop into local state so a component stays interactive on the\n// canvas without a handler, yet still follows the prop when it changes.\nexport function useSyncedState<T>(value: T, onChange?: (value: T) => void) {\n  const [state, setState] = useState(value)\n  useEffect(() => setState(value), [value])\n  const update = (next: T) => {\n    setState(next)\n    onChange?.(next)\n  }\n  return [state, update] as const\n}\n\nexport const focusRing =\n  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring'\n\n// Tracks an element's border-box size (0 × 0 until mounted).\nexport function useElementSize<T extends HTMLElement>() {\n  const ref = useRef<T>(null)\n  const [size, setSize] = useState({ width: 0, height: 0 })\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n    const update = () => setSize({ width: el.offsetWidth, height: el.offsetHeight })\n    update()\n    const observer = new ResizeObserver(update)\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [])\n  return [ref, size] as const\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

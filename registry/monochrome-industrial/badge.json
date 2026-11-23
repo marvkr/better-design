@@ -20,12 +20,6 @@
       "mono-success": "oklch(0.6299 0.1279 148.63)",
       "mono-warning": "oklch(0.7534 0.1274 84.93)"
     },
-    "dark": {
-      "mono-surface-raised": "oklch(0.2178 0 0)",
-      "mono-border-visible": "oklch(0.3211 0 0)",
-      "mono-accent": "oklch(0.5607 0.2177 26.79)",
-      "mono-success": "oklch(0.6299 0.1279 148.63)",
-      "mono-warning": "oklch(0.7534 0.1274 84.93)"
-    }
+    "dark": {}
   }
 }

@@ -1213,6 +1213,14 @@
       "name": "collapsible-base"
     },
     {
+      "name": "combobox-base",
+      "registryDependencies": [
+        "button-base",
+        "command-base",
+        "popover-base"
+      ]
+    },
+    {
       "name": "command-base",
       "registryDependencies": [
         "dialog-base"
@@ -1285,6 +1293,12 @@
       "name": "label-base"
     },
     {
+      "name": "mega-menu-base",
+      "registryDependencies": [
+        "popover-base"
+      ]
+    },
+    {
       "name": "navigation-menu-base"
     },
     {
@@ -1353,8 +1367,6 @@
     }
   ],
   "baseSkipped": [
-    "combobox",
-    "mega-menu",
     "multi-select"
   ]
 }

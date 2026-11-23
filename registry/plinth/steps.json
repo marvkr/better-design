@@ -1,0 +1,21 @@
+{
+  "name": "steps",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/steps.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Steps: numbered markers in Geist Mono. A done step takes the\n * ember Button material with a check; the current step is a raised\n * graphite marker in an ember ring; a later step stays a recessed well.\n */\n\ninterface Step {\n  title: string\n  description?: string\n}\n\ninterface StepsProps extends React.HTMLAttributes<HTMLOListElement> {\n  steps: Step[]\n  currentStep: number\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nfunction Steps({ steps, currentStep, orientation = \"horizontal\", className, ...props }: StepsProps) {\n  const horizontal = orientation === \"horizontal\"\n  return (\n    <ol\n      data-slot=\"steps\"\n      className={cn(\"flex\", horizontal ? \"w-full flex-row items-start\" : \"flex-col\", className)}\n      {...props}\n    >\n      {steps.map((step, index) => {\n        const done = index < currentStep\n        const current = index === currentStep\n        const last = index === steps.length - 1\n        return (\n          <li\n            key={`${step.title}-${index}`}\n            aria-current={current ? \"step\" : undefined}\n            className={cn(\"flex min-w-0\", horizontal ? \"flex-1 flex-col\" : \"flex-row gap-3\")}\n          >\n            <div className={cn(\"flex items-center\", horizontal ? \"flex-row\" : \"flex-col self-stretch\")}>\n              <span\n                className={cn(\n                  \"flex size-7 shrink-0 items-center justify-center rounded-full font-mono text-xs font-medium\",\n                  \"transition-[background,box-shadow,color] duration-base\",\n                  done && \"text-primary-foreground [background:var(--ember-gradient)] [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.4),0_0_0_0.0625rem_var(--ember-rim)]\",\n                  current && \"text-foreground [background:var(--segment-gradient)] [box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.09),0_0_0_0.125rem_var(--ring)]\",\n                  !done && !current && \"bg-input text-muted-foreground [box-shadow:var(--shadow-inset)]\"\n                )}\n              >\n                {done ? <CheckIcon className=\"size-3.5\" /> : index + 1}\n              </span>\n              {!last && (\n                <span\n                  aria-hidden=\"true\"\n                  className={cn(\n                    \"rounded-full\",\n                    horizontal ? \"mx-2 h-0.5 flex-1\" : \"my-1.5 w-0.5 flex-1 min-h-6\",\n                    done ? \"bg-primary\" : \"bg-muted\"\n                  )}\n                />\n              )}\n            </div>\n            <div className={cn(\"min-w-0\", horizontal ? \"mt-2.5 pr-3\" : \"pb-6 pt-1\")}>\n              <p className={cn(\"text-sm font-medium leading-tight\", current || done ? \"text-foreground\" : \"text-muted-foreground\")}>\n                {step.title}\n              </p>\n              {step.description && (\n                <p className=\"mt-1 text-xs leading-relaxed text-muted-foreground\">{step.description}</p>\n              )}\n            </div>\n          </li>\n        )\n      })}\n    </ol>\n  )\n}\n\n// feather:check\nfunction CheckIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"3\" d=\"M20 6L9 17l-5-5\" />\n    </svg>\n  )\n}\n\nexport { Steps }\nexport type { StepsProps, Step }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ember-gradient": "linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39))",
+      "ember-rim": "oklch(0.5 0.16 39)",
+      "segment-gradient": "linear-gradient(180deg, oklch(0.295 0.009 286), oklch(0.258 0.007 286))",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

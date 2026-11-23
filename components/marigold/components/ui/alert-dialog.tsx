@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 import { buttonVariants } from "./button";
 
-// Talentboard AlertDialog: same modal material as Dialog; actions reuse the
+// AlertDialog: same modal material as Dialog; actions reuse the
 // Button variants so the confirm CTA is the raised orange hero.
 
 const AlertDialog = AlertDialogPrimitive.Root;

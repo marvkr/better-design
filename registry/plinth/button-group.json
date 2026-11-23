@@ -1,0 +1,18 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Button Group: controls joined into one machined bar, like the\n * editor's capture-and-export pair. The bar sits in a dark groove; inner\n * corners square off and a hairline of the groove shows between members.\n */\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n  attached?: boolean\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", attached = true, ...props }, ref) => {\n    const horizontal = orientation === \"horizontal\"\n    return (\n      <div\n        ref={ref}\n        role=\"group\"\n        className={cn(\n          \"inline-flex w-fit\",\n          horizontal ? \"flex-row\" : \"flex-col\",\n          attached\n            ? [\n                \"rounded-lg bg-[var(--groove)] [box-shadow:0_0_0_0.125rem_var(--groove)]\",\n                \"gap-px\",\n                \"*:rounded-none *:relative [&>*:focus-visible]:z-10\",\n                horizontal\n                  ? \"[&>*:first-child]:rounded-l-lg [&>*:last-child]:rounded-r-lg\"\n                  : \"[&>*:first-child]:rounded-t-lg [&>*:last-child]:rounded-b-lg\",\n              ]\n            : \"gap-2\",\n          className\n        )}\n        {...props}\n      />\n    )\n  }\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\ninterface ButtonGroupItemProps extends React.HTMLAttributes<HTMLDivElement> {}\n\n/* Passes its child straight through, so the group styles the control. */\nconst ButtonGroupItem = React.forwardRef<HTMLDivElement, ButtonGroupItemProps>(\n  ({ className, ...props }, ref) => <div ref={ref} className={cn(\"contents\", className)} {...props} />\n)\nButtonGroupItem.displayName = \"ButtonGroupItem\"\n\nexport { ButtonGroup, ButtonGroupItem }\nexport type { ButtonGroupProps, ButtonGroupItemProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "groove": "oklch(0.174 0.004 286)"
+    },
+    "dark": {}
+  }
+}

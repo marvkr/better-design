@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Linear Quality Input — extremely dark bg, purple focus glow
+// Quality Input — extremely dark bg, purple focus glow
 // Precise inset shadow for depth, purple ring on focus
 
 export interface InputProps

@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Sidebar: a calm white rail like the recruiting portal's left
+// Sidebar: a calm white rail like the recruiting portal's left
 // nav. The active item gets a soft orange-tinted highlight.
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {

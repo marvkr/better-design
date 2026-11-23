@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Hyperline TagInput: recessed shell holding raised chip tags.
+// TagInput: recessed shell holding raised chip tags.
 
 interface TagInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {

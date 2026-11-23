@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 // Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism
 
-// Talentboard ThinkingIndicator: cycling status words with a soft orange shimmer.
+// ThinkingIndicator: cycling status words with a soft orange shimmer.
 
 interface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   words?: string[];

@@ -4,7 +4,6 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 // Retro-Playful Icon Button: square/circle button for icon-only actions
-// Based on Linear's button pattern with icon sizes
 
 const iconButtonVariants = cva(
   "relative inline-flex items-center justify-center shrink-0 outline-none border-2 border-border shadow-[var(--shadow-hard-sm)] transition-all duration-fast ease-out focus-visible:outline-none active:translate-x-[0.1875rem] active:translate-y-[0.1875rem] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0",

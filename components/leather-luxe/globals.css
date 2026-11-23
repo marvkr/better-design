@@ -33,6 +33,10 @@
 
   --destructive: oklch(0.52 0.16 28);
   --destructive-foreground: oklch(0.975 0.012 50);
+  --success: oklch(0.52 0.12 150);
+  --success-foreground: oklch(0.975 0.012 50);
+  --warning: oklch(0.66 0.12 75);
+  --warning-foreground: oklch(0.165 0.005 65);
 
   /* Mint payment-signal accent, used by charts and status dots. */
   --mint: oklch(0.85 0.12 162);
@@ -158,6 +162,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-mint: var(--mint);
   --color-border: var(--border);
   --color-input: var(--input);

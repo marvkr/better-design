@@ -15,10 +15,6 @@
       "gauge-warn": "oklch(0.76 0.14 70)",
       "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)"
     },
-    "dark": {
-      "gauge-ok": "oklch(0.74 0.12 152)",
-      "gauge-warn": "oklch(0.76 0.14 70)",
-      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)"
-    }
+    "dark": {}
   }
 }

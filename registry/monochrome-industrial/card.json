@@ -15,10 +15,6 @@
       "mono-border-visible": "oklch(0.3211 0 0)",
       "mono-text-display": "oklch(1 0 0)"
     },
-    "dark": {
-      "mono-border": "oklch(0.252 0 0)",
-      "mono-border-visible": "oklch(0.3211 0 0)",
-      "mono-text-display": "oklch(1 0 0)"
-    }
+    "dark": {}
   }
 }

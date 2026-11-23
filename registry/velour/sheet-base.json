@@ -19,9 +19,6 @@
       "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
       "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
     },
-    "dark": {
-      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
-      "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
-    }
+    "dark": {}
   }
 }

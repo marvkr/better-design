@@ -19,8 +19,6 @@
     "light": {
       "success": "oklch(0.545 0.142 155)"
     },
-    "dark": {
-      "success": "oklch(0.545 0.142 155)"
-    }
+    "dark": {}
   }
 }

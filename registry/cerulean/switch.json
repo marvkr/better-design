@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer inline-flex h-[1.375rem] w-[2.375rem] shrink-0 cursor-pointer items-center rounded-full\",\n      \"bg-input border border-border [box-shadow:var(--shadow-well)]\",\n      \"transition-[background,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      // Checked track reuses the primary Button accent material.\n      \"data-[state=checked]:border-transparent data-[state=checked]:[background:var(--accent-fill)] data-[state=checked]:[box-shadow:var(--shadow-accent)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-[1.125rem] w-[1.125rem] rounded-full bg-foreground\",\n        \"[box-shadow:0_0_0_0.03125rem_oklch(0_0_0/0.25),0_0.0625rem_0.125rem_oklch(0_0_0/0.4)]\",\n        \"transition-transform duration-fast\",\n        \"data-[state=checked]:translate-x-[1.125rem]\",\n        \"data-[state=unchecked]:translate-x-0.5\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"group/switch peer inline-flex h-[1.375rem] w-[2.375rem] shrink-0 cursor-pointer items-center rounded-full\",\n      \"bg-input border border-border [box-shadow:var(--shadow-well)]\",\n      \"transition-[background,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      // Checked track reuses the primary Button accent material.\n      \"data-[state=checked]:border-transparent data-[state=checked]:[background:var(--accent-fill)] data-[state=checked]:[box-shadow:var(--shadow-accent)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-[1.125rem] w-[1.125rem] rounded-full bg-foreground\",\n        \"[box-shadow:0_0_0_0.03125rem_oklch(0_0_0/0.25),0_0.0625rem_0.125rem_oklch(0_0_0/0.4)]\",\n        \"data-[state=checked]:translate-x-[1.125rem]\",\n        \"data-[state=unchecked]:translate-x-0.5\",\n        \"origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
       "type": "registry:ui"
     }
   ],
@@ -16,12 +16,9 @@
     "light": {
       "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
       "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
-      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
+      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)",
+      "ease-out": "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
     },
-    "dark": {
-      "shadow-well": "inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
-      "accent-fill": "linear-gradient(180deg, oklch(0.58 0.146 248) 0%, oklch(0.5 0.142 248) 100%)",
-      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)"
-    }
+    "dark": {}
   }
 }

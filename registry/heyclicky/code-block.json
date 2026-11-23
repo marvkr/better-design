@@ -17,9 +17,6 @@
       "gradient-chrome": "linear-gradient( 90deg, oklch(0.874 0.003 308.4) 0%, oklch(0.955 0 0) 50%, oklch(0.874 0.003 308.4) 100% )",
       "shadow-window": "var(--shadow-xl)"
     },
-    "dark": {
-      "gradient-chrome": "linear-gradient( 90deg, oklch(0.874 0.003 308.4) 0%, oklch(0.955 0 0) 50%, oklch(0.874 0.003 308.4) 100% )",
-      "shadow-window": "var(--shadow-xl)"
-    }
+    "dark": {}
   }
 }

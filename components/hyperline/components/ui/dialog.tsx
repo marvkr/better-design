@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 
-// Hyperline Dialog: modal card on the deepest layered shadow; scrim dims the
+// Dialog: modal card on the deepest layered shadow; scrim dims the
 // purple backdrop instead of blacking it out.
 
 const Dialog = DialogPrimitive.Root;

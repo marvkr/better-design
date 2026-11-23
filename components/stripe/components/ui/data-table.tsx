@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Stripe Data Table: sortable, clean table with Stripe styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

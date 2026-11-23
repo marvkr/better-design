@@ -19,10 +19,6 @@
       "velour-hover": "linear-gradient( to bottom, oklch(0.335 0.015 286), oklch(0.27 0.013 286) )",
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
     },
-    "dark": {
-      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )",
-      "velour-hover": "linear-gradient( to bottom, oklch(0.335 0.015 286), oklch(0.27 0.013 286) )",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0.0625rem oklch(0 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem oklch(0 0 0 / 0.3)"
-    }
+    "dark": {}
   }
 }

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard CodeTabs: a light code card on the soft card shadow; the active
+// CodeTabs: a light code card on the soft card shadow; the active
 // tab gets the orange underline like the portal's section tabs.
 
 interface CodeTab {

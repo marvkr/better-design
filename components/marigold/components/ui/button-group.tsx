@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard ButtonGroup: fused control strip; one rim around the whole group.
+// ButtonGroup: fused control strip; one rim around the whole group.
 
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   orientation?: "horizontal" | "vertical";

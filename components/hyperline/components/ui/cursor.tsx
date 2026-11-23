@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Cursor: typewriter caret in the DS cyan with a soft glow.
+// Cursor: typewriter caret in the DS cyan with a soft glow.
 
 interface CursorProps {
   text: string;

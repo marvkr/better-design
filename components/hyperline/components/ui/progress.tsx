@@ -5,7 +5,7 @@ import * as ProgressPrimitive from "@radix-ui/react-progress";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Progress: recessed track, cyan gradient fill with top highlight.
+// Progress: recessed track, cyan gradient fill with top highlight.
 
 const Progress = React.forwardRef<
   React.ComponentRef<typeof ProgressPrimitive.Root>,

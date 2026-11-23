@@ -20,12 +20,6 @@
       "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)",
       "shadow-primary": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--primary-to)"
     },
-    "dark": {
-      "primary-to": "oklch(0.7 0.245 43)",
-      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.09), inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.025)",
-      "shadow-button": "var(--shadow-sm)",
-      "shadow-button-hover": "0 0 0 0.0625rem oklch(0 0 0 / 0.08), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.08)",
-      "shadow-primary": "inset 0 0 0 62.4375rem oklch(1 0 0 / 0), inset 0 0 0.0625rem 0.0625rem oklch(1 0 0 / 0.06), 0 0.0938rem 0.125rem oklch(0 0 0 / 0.1), 0 0 0 0.0625rem var(--primary-to)"
-    }
+    "dark": {}
   }
 }

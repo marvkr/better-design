@@ -17,9 +17,6 @@
       "fill-lit": "linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2))",
       "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)"
     },
-    "dark": {
-      "fill-lit": "linear-gradient(100deg, oklch(0.801 0.107 61.7), oklch(0.946 0.028 76.2) 36%, oklch(0.965 0.019 75.3) 64%, oklch(0.886 0.065 75.2))",
-      "bevel-glow": "0 0 1.25rem -0.125rem oklch(0.73 0.177 45.6 / 0.45), 0 0 0.5rem -0.125rem oklch(0.827 0.122 62.1 / 0.5)"
-    }
+    "dark": {}
   }
 }

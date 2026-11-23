@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Linear Quality Button — precision-crafted, purple (#5e6ad2) primary
+// Quality Button — precision-crafted, purple (#5e6ad2) primary
 // Precise ring + drop shadow treatment, tight 0.5rem radius
 
 const buttonVariants = cva(

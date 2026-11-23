@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 
-// Pulseboard NativeSelect: native <select> on the shared formFieldBase surface,
+// NativeSelect: native <select> on the shared formFieldBase surface,
 // so it reads as the same recessed well as Input and the other field triggers.
 // appearance-none hides the native arrow; pr-9 makes room for the custom chevron.
 

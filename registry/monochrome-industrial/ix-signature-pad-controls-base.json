@@ -18,8 +18,6 @@
     "light": {
       "label": "0.6875rem"
     },
-    "dark": {
-      "label": "0.6875rem"
-    }
+    "dark": {}
   }
 }

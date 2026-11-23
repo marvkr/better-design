@@ -22,9 +22,6 @@
       "primary-text": "oklch(0.798 0.084 66.7)",
       "fill-card": "linear-gradient(180deg, oklch(0.241 0.005 67.6), oklch(0.196 0.003 67.7))"
     },
-    "dark": {
-      "primary-text": "oklch(0.798 0.084 66.7)",
-      "fill-card": "linear-gradient(180deg, oklch(0.241 0.005 67.6), oklch(0.196 0.003 67.7))"
-    }
+    "dark": {}
   }
 }

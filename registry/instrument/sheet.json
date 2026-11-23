@@ -19,9 +19,6 @@
       "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)",
       "ease-in-out": "cubic-bezier(0.455, 0.03, 0.515, 0.955)"
     },
-    "dark": {
-      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)",
-      "ease-in-out": "cubic-bezier(0.455, 0.03, 0.515, 0.955)"
-    }
+    "dark": {}
   }
 }

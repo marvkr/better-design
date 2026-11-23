@@ -35,24 +35,6 @@
       "badge-orange-text": "oklch(0.47 0.14 50)",
       "badge-yellow-text": "oklch(0.44 0.09 95)"
     },
-    "dark": {
-      "primary-text": "oklch(0.48 0.2 288)",
-      "success": "oklch(0.56 0.14 155)",
-      "warning": "oklch(0.72 0.15 55)",
-      "info": "oklch(0.55 0.14 250)",
-      "free-text": "oklch(0.45 0.12 155)",
-      "free-surface": "oklch(0.895 0.065 155)",
-      "fee-text": "oklch(0.5 0.16 35)",
-      "fee-surface": "oklch(0.9 0.055 35)",
-      "tag": "oklch(0.9 0.032 292)",
-      "badge-orange": "oklch(0.68 0.16 50)",
-      "badge-yellow": "oklch(0.8 0.14 95)",
-      "success-text": "oklch(0.42 0.11 155)",
-      "warning-text": "oklch(0.46 0.12 55)",
-      "destructive-text": "oklch(0.47 0.18 22)",
-      "info-text": "oklch(0.44 0.13 250)",
-      "badge-orange-text": "oklch(0.47 0.14 50)",
-      "badge-yellow-text": "oklch(0.44 0.09 95)"
-    }
+    "dark": {}
   }
 }

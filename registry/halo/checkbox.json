@@ -4,13 +4,12 @@
   "files": [
     {
       "path": "components/ui/checkbox.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { Icon } from \"@iconify/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-5 w-5 shrink-0 rounded-xs\",\n      \"backdrop-blur-xl bg-foreground/[0.06]\",\n      \"border border-foreground/[0.15]\",\n      \"shadow-[inset_0_0_0.25rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n      \"transition-all duration-base\",\n      \"hover:border-foreground/[0.25] hover:bg-foreground/[0.1]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:bg-gradient-to-t data-[state=checked]:from-primary data-[state=checked]:to-primary/85 data-[state=checked]:text-primary-foreground\",\n      \"data-[state=checked]:border-primary-foreground/20\",\n      \"data-[state=checked]:shadow-[0_0.125rem_0.25rem_-0.0625rem_color-mix(in_oklch,var(--shade)_30%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.22)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      className={cn(\"flex items-center justify-center text-current\")}\n    >\n      <Icon icon=\"tabler:check\" className=\"h-3.5 w-3.5\" />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer h-5 w-5 shrink-0 rounded-xs\",\n      \"backdrop-blur-xl bg-foreground/[0.06]\",\n      \"border border-foreground/[0.15]\",\n      \"shadow-[inset_0_0_0.25rem_color-mix(in_oklch,var(--halo)_6%,transparent)]\",\n      \"transition-all duration-base\",\n      \"hover:border-foreground/[0.25] hover:bg-foreground/[0.1]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:bg-gradient-to-t data-[state=indeterminate]:bg-gradient-to-t data-[state=checked]:from-primary data-[state=indeterminate]:from-primary data-[state=checked]:to-primary/85 data-[state=indeterminate]:to-primary/85 data-[state=checked]:text-primary-foreground data-[state=indeterminate]:text-primary-foreground\",\n      \"data-[state=checked]:border-primary-foreground/20 data-[state=indeterminate]:border-primary-foreground/20\",\n      \"data-[state=checked]:shadow-[0_0.125rem_0.25rem_-0.0625rem_color-mix(in_oklch,var(--shade)_30%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.22)] data-[state=indeterminate]:shadow-[0_0.125rem_0.25rem_-0.0625rem_color-mix(in_oklch,var(--shade)_30%,transparent),inset_0_0.0625rem_0_oklch(1_0_0/0.22)]\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      className={cn(\"flex items-center justify-center text-current\")}\n    >\n      <CheckIcon className=\"h-3.5 w-3.5 in-data-[state=indeterminate]:hidden\" />\n      <MinusIcon className=\"h-3.5 w-3.5 hidden in-data-[state=indeterminate]:block\" />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox }\n\n// \"solar:check-linear\" and \"solar:minus-linear\" from Solar,\n// the icon library this system pairs with, drawn inline so the installed\n// component loads no icon at runtime. [BD-1029]\nfunction CheckIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"1.5\" d=\"M5 13L9 17L19 7\"/>\n    </svg>\n  )\n}\nfunction MinusIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeWidth=\"1.5\" d=\"M20 12L4 12\"/>\n    </svg>\n  )\n}\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@radix-ui/react-checkbox@^1.3.2",
-    "@iconify/react@^6.0.2"
+    "@radix-ui/react-checkbox@^1.3.2"
   ],
   "cssVars": {
     "theme": {},
@@ -18,9 +17,6 @@
       "halo": "oklch(1 0 0)",
       "shade": "oklch(0 0 0)"
     },
-    "dark": {
-      "halo": "oklch(1 0 0)",
-      "shade": "oklch(0 0 0)"
-    }
+    "dark": {}
   }
 }

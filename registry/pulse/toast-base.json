@@ -18,8 +18,6 @@
     "light": {
       "shadow-pop": "0 0 0 0.0625rem oklch(0 0 0 / 0.4), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0.25rem 0.625rem -0.25rem oklch(0 0 0 / 0.4)"
     },
-    "dark": {
-      "shadow-pop": "0 0 0 0.0625rem oklch(0 0 0 / 0.4), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.55), 0 0.25rem 0.625rem -0.25rem oklch(0 0 0 / 0.4)"
-    }
+    "dark": {}
   }
 }

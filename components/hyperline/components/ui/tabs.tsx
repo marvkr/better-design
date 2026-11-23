@@ -5,7 +5,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Tabs: recessed strip; the active tab raises on a soft layered
+// Tabs: recessed strip; the active tab raises on a soft layered
 // shadow like the billing portal's segment switcher.
 
 const Tabs = TabsPrimitive.Root;

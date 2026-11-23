@@ -17,9 +17,6 @@
       "shadow-l": "var(--shadow-lg)",
       "shadow-button": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
     },
-    "dark": {
-      "shadow-l": "var(--shadow-lg)",
-      "shadow-button": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
-    }
+    "dark": {}
   }
 }

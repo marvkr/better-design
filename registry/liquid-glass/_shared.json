@@ -1,0 +1,22 @@
+{
+  "name": "_shared",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/_shared.ts",
+      "content": "/**\n * Shared recipes for Liquid Glass.\n *\n * Fields are quiet wells on the stage: a faint wash, a hairline rim and the\n * kit's one focus ring. Popover surfaces are frosted glass in CSS, the same\n * tint, blur and white rim the kit's GlassCard draws before WebGL takes over,\n * with the card's two-layer drop shadow under them.\n */\n\nexport const formFieldBase =\n  \"w-full rounded-xl px-3.5 text-sm \" +\n  \"bg-input text-foreground border border-border [box-shadow:var(--shadow-inset)] \" +\n  \"placeholder:text-muted-foreground \" +\n  \"transition-[color,background-color,border-color,box-shadow] duration-fast ease-out \" +\n  \"hover:border-foreground/15 \" +\n  \"focus-visible:outline-none focus-visible:border-ring focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring/30 \" +\n  \"disabled:cursor-not-allowed disabled:opacity-50\"\n\nexport const formFieldSingleLine = \"flex h-10 py-2\"\nexport const formFieldMultiLine = \"flex min-h-[5.25rem] py-2.5 resize-y\"\n\n/** A frosted glass panel: menus, popovers, tooltips and dialogs. */\nexport const glassSurface =\n  \"border border-(--glass-rim) bg-popover/80 text-popover-foreground \" +\n  \"backdrop-blur-xl backdrop-saturate-150 [box-shadow:var(--shadow-glass)]\"\n\n/** The row of a glass menu: a soft wash under the pointer, pill corners. */\nexport const glassMenuItem =\n  \"relative flex cursor-default select-none items-center gap-2 rounded-xl px-2.5 py-1.5 text-sm outline-none \" +\n  \"transition-colors duration-fast \" +\n  \"focus:bg-(--glass-wash) focus:text-foreground \" +\n  \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50 \" +\n  \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "glass-rim": "oklch(1 0 0 / 0.6)",
+      "glass-wash": "oklch(0 0 0 / 0.05)",
+      "shadow-glass": "0 1.03rem 2.25rem oklch(0 0 0 / 0.08), 0 1.65rem 3.49rem oklch(0 0 0 / 0.08)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
+      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    },
+    "dark": {}
+  }
+}

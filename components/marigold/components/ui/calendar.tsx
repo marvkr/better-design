@@ -7,7 +7,7 @@ import { DayPicker } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./button";
 
-// Talentboard Calendar: quiet grid; selected day wears the raised orange material.
+// Calendar: quiet grid; selected day wears the raised orange material.
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 

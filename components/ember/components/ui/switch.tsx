@@ -14,7 +14,7 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SwitchPrimitives.Root
     className={cn(
-      "peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full",
+      "group/switch peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full",
       "transition-all duration-fast ease-out",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
       "disabled:cursor-not-allowed disabled:opacity-50",
@@ -30,8 +30,9 @@ const Switch = React.forwardRef<
         "pointer-events-none block h-4 w-4 rounded-full",
         "bg-[oklch(0.97_0.005_85)]",
         "shadow-[0_0.0625rem_0.125rem_oklch(0_0_0/0.4),inset_0_0.0625rem_0_oklch(1_0_0/0.5)]",
-        "ring-0 transition-transform duration-fast ease-out",
-        "data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0.5"
+        "ring-0",
+        "data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0.5",
+        "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none"
       )}
     />
   </SwitchPrimitives.Root>

@@ -21,16 +21,6 @@
       "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.26), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.4)",
       "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.585 0.124 21.6 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.635 0.122 21.1 / 0.35)"
     },
-    "dark": {
-      "surface-on": "linear-gradient(to bottom, oklch(0.635 0.122 21.1), oklch(0.585 0.124 21.6), oklch(0.534 0.127 22.3))",
-      "knob-off": "linear-gradient(to bottom, oklch(0.625 0.058 18.8), oklch(0.52 0.064 19.4))",
-      "knob-on": "linear-gradient(to bottom, oklch(0.919 0.041 17.9), oklch(0.802 0.08 19), oklch(0.836 0.119 97.8))",
-      "surface-silver": "linear-gradient(to bottom, oklch(0.625 0.058 18.8), oklch(0.52 0.064 19.4))",
-      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
-      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)",
-      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.26), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.4)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.585 0.124 21.6 / 0.35), 0 0.125rem 0.25rem oklch(0 0 0 / 0.5), 0 0.25rem 0.875rem oklch(0.635 0.122 21.1 / 0.35)"
-    }
+    "dark": {}
   }
 }

@@ -1177,6 +1177,22 @@
       "name": "context-menu-base"
     },
     {
+      "name": "data-range-picker-base",
+      "registryDependencies": [
+        "button-base",
+        "calendar",
+        "popover-base"
+      ]
+    },
+    {
+      "name": "date-picker-base",
+      "registryDependencies": [
+        "button-base",
+        "calendar",
+        "popover-base"
+      ]
+    },
+    {
       "name": "dialog-base"
     },
     {
@@ -1287,9 +1303,5 @@
         "toast-base"
       ]
     }
-  ],
-  "baseSkipped": [
-    "data-range-picker",
-    "date-picker"
   ]
 }

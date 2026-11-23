@@ -1,8 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Apple Empty State: centered content with icon, title, description, and optional action
-// Uses rounded-[1.25rem] bg-secondary/50 pattern from Apple's empty states
+// Empty State: centered content with icon, title, description, and optional action
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode

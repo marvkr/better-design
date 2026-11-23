@@ -19,8 +19,6 @@
     "light": {
       "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)"
     },
-    "dark": {
-      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)"
-    }
+    "dark": {}
   }
 }

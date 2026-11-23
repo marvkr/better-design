@@ -19,10 +19,6 @@
       "warning": "var(--primary)",
       "shadow-m": "var(--shadow-md)"
     },
-    "dark": {
-      "success": "oklch(0.78 0.2 145)",
-      "warning": "var(--primary)",
-      "shadow-m": "var(--shadow-md)"
-    }
+    "dark": {}
   }
 }

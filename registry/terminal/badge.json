@@ -17,9 +17,6 @@
       "success": "oklch(0.80 0.17 150)",
       "warning": "oklch(0.84 0.16 84)"
     },
-    "dark": {
-      "success": "oklch(0.80 0.17 150)",
-      "warning": "oklch(0.84 0.16 84)"
-    }
+    "dark": {}
   }
 }

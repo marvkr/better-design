@@ -17,9 +17,6 @@
       "warning": "oklch(0.78 0.16 75)",
       "info": "oklch(0.7 0.13 235)"
     },
-    "dark": {
-      "warning": "oklch(0.78 0.16 75)",
-      "info": "oklch(0.7 0.13 235)"
-    }
+    "dark": {}
   }
 }

@@ -17,9 +17,6 @@
       "signature": "oklch(0.72 0.19 52)",
       "halo": "oklch(1 0 0)"
     },
-    "dark": {
-      "signature": "oklch(0.72 0.19 52)",
-      "halo": "oklch(1 0 0)"
-    }
+    "dark": {}
   }
 }

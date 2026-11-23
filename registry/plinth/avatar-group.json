@@ -1,0 +1,21 @@
+{
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\"\n\n/*\n * Plinth AvatarGroup: overlapping avatars, each cut out of the next by a\n * ring in the stage colour. The overflow count is a graphite chip in mono.\n * Pass `items`, or pass Avatar children.\n */\n\ninterface AvatarGroupItem {\n  src?: string\n  alt?: string\n  fallback?: string\n}\n\ninterface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  items?: AvatarGroupItem[]\n  max?: number\n  total?: number\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nconst sizeClasses = {\n  sm: \"size-6 text-[0.625rem]\",\n  md: \"size-8 text-[0.6875rem]\",\n  lg: \"size-10 text-xs\",\n}\n\nconst AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ items, max = 5, total, size = \"md\", className, children, ...props }, ref) => {\n    const entries: React.ReactNode[] = items\n      ? items.map((item, index) => (\n          <Avatar key={index} className={sizeClasses[size]}>\n            {item.src && <AvatarImage src={item.src} alt={item.alt ?? \"\"} />}\n            <AvatarFallback>{item.fallback ?? \"?\"}</AvatarFallback>\n          </Avatar>\n        ))\n      : React.Children.toArray(children)\n    const visible = entries.slice(0, max)\n    const hidden = (total ?? entries.length) - visible.length\n\n    return (\n      <div ref={ref} data-slot=\"avatar-group\" className={cn(\"flex items-center -space-x-2\", className)} {...props}>\n        {visible.map((entry, index) => (\n          <div key={index} className=\"relative rounded-full ring-2 ring-background\">\n            {entry}\n          </div>\n        ))}\n        {hidden > 0 && (\n          <div\n            className={cn(\n              \"relative flex items-center justify-center rounded-full ring-2 ring-background\",\n              \"font-mono font-medium text-secondary-foreground [background:var(--graphite-gradient)]\",\n              sizeClasses[size]\n            )}\n          >\n            +{hidden}\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { AvatarGroup }\nexport type { AvatarGroupProps, AvatarGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/avatar.json"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "graphite-gradient": "linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286))"
+    },
+    "dark": {}
+  }
+}

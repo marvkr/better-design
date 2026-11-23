@@ -1,4 +1,4 @@
-// Hyperline shared material recipes.
+// Shared material recipes.
 // Premium depth comes from layered soft shadows (rim + top highlight + near
 // shadow + far ambient) over the deep purple gradient backdrop. All optical
 // values live in globals.css :root as --hl-* tokens; retune them there.

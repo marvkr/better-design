@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { formFieldBase } from "./_shared";
 
-// Talentboard TimePicker: recessed-well trigger (the form-field material,
+// TimePicker: recessed-well trigger (the form-field material,
 // matching Input and Select) with a scrollable time list on the shared pop
 // surface.
 
@@ -26,6 +26,12 @@ const TIMES = Array.from({ length: 48 }, (_, i) => {
 
 function TimePicker({ value, onChange, disabled, className }: TimePickerProps) {
   const [internalValue, setInternalValue] = React.useState<string | undefined>(value);
+  // Follow the parent's value, including a reset to undefined.
+  const [syncedValue, setSyncedValue] = React.useState(value);
+  if (value !== syncedValue) {
+    setSyncedValue(value);
+    setInternalValue(value);
+  }
   const [open, setOpen] = React.useState(false);
   const selected = value ?? internalValue;
 

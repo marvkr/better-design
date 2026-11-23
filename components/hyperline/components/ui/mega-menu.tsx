@@ -6,7 +6,7 @@ import { AnimatePresence, motion, type Transition } from "motion/react";
 import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 
-// Hyperline MegaMenu: nav bar with a sliding hover indicator and a wide
+// MegaMenu: nav bar with a sliding hover indicator and a wide
 // columned panel on the shared pop surface.
 
 interface MegaMenuColumn {

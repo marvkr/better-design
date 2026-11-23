@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { copperRim, focusRing, wellInset } from "./_shared";
@@ -37,14 +36,29 @@ const Checkbox = React.forwardRef<
         copperRim,
       )}
     >
-      {props.checked === "indeterminate" ? (
-        <Icon icon="ph:minus-bold" className="size-3" />
-      ) : (
-        <Icon icon="ph:check-bold" className="size-3" />
-      )}
+      <CheckIcon className="size-3 in-data-[state=indeterminate]:hidden" />
+      <MinusIcon className="size-3 hidden in-data-[state=indeterminate]:block" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
+
+// "ph:check-bold" and "ph:minus-bold" from Phosphor,
+// the icon library this system pairs with, drawn inline so the installed
+// component loads no icon at runtime. [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m232.49 80.49l-128 128a12 12 0 0 1-17 0l-56-56a12 12 0 1 1 17-17L96 183L215.51 63.51a12 12 0 0 1 17 17Z"/>
+    </svg>
+  );
+}
+function MinusIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M228 128a12 12 0 0 1-12 12H40a12 12 0 0 1 0-24h176a12 12 0 0 1 12 12"/>
+    </svg>
+  );
+}

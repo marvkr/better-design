@@ -1,0 +1,14 @@
+{
+  "name": "time-picker",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/time-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { formFieldBase, formFieldSingleLine } from \"./_shared\"\n\nexport interface TimePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {}\n\n/* A time well: the readout in Geist Mono, the way the timeline shows time. */\nconst TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(\n  ({ className, ...props }, ref) => (\n    <div className=\"relative w-full\">\n      <ClockIcon className=\"pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground\" />\n      <input\n        ref={ref}\n        type=\"time\"\n        data-slot=\"time-picker\"\n        className={cn(\n          formFieldBase,\n          formFieldSingleLine,\n          \"pl-9 font-mono tabular-nums [color-scheme:dark]\",\n          \"[&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-50\",\n          className\n        )}\n        {...props}\n      />\n    </div>\n  )\n)\nTimePicker.displayName = \"TimePicker\"\n\n// feather:clock\nfunction ClockIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 6v6l4 2\" /></g>\n    </svg>\n  )\n}\n\nexport { TimePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/_shared.json"
+  ]
+}

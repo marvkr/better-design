@@ -15,7 +15,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { formFieldBase } from "./_shared";
 
-// Hyperline MultiSelect: recessed trigger holding raised chips; menu on the
+// MultiSelect: recessed trigger holding raised chips; menu on the
 // shared pop surface.
 
 interface MultiSelectOption {

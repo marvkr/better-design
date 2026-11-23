@@ -16,8 +16,6 @@
     "light": {
       "shadow-l": "0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05), 0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12)"
     },
-    "dark": {
-      "shadow-l": "0 0.125rem 0.25rem oklch(0.2 0.01 110 / 0.05), 0 1.5rem 3rem -0.75rem oklch(0.2 0.01 110 / 0.12)"
-    }
+    "dark": {}
   }
 }

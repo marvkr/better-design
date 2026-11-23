@@ -20,12 +20,6 @@
       "ag-well": "oklch(0.15 0.005 70 / 0.55)",
       "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)"
     },
-    "dark": {
-      "ag-blur": "0.875rem",
-      "ag-fill": "oklch(1 0 0 / 0.05)",
-      "ag-border": "oklch(1 0 0 / 0.09)",
-      "ag-well": "oklch(0.15 0.005 70 / 0.55)",
-      "shadow-glass": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.25), 0 0.625rem 1.875rem oklch(0 0 0 / 0.35)"
-    }
+    "dark": {}
   }
 }

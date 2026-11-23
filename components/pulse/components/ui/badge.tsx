@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Pulseboard Badge: rounded-full, h-4/h-5/h-6, px-2, text-xs.
+// Badge: rounded-full, h-4/h-5/h-6, px-2, text-xs.
 // Status hues read as solid chips on the dark board; *-light are tinted on dark.
 // Variants: default, primary (violet), destructive (red), success (teal), warning (amber).
 
@@ -28,7 +28,7 @@ const badgeVariants = cva(
         outline: "border border-border text-foreground bg-transparent",
       },
       size: {
-        // Pulseboard: sm=h-4 (16px), md=h-5 (20px), lg=h-6 (24px)
+        // Sm=h-4 (16px), md=h-5 (20px), lg=h-6 (24px)
         sm: "h-4 gap-1 px-1.5 text-[0.625rem] uppercase tracking-wide",
         default: "h-5 gap-1.5 px-2 text-xs",
         lg: "h-6 gap-1.5 px-2.5 text-xs",

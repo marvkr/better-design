@@ -17,9 +17,6 @@
       "shadow-destructive-control": "0 0 0 0.0625rem var(--destructive), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
       "shadow-destructive-focus": "0 0 0 0.0625rem var(--destructive), 0 0 0 0.1875rem oklch(0.5903 0.2299 19.34 / 0.14), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
     },
-    "dark": {
-      "shadow-destructive-control": "0 0 0 0.0625rem var(--destructive), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
-      "shadow-destructive-focus": "0 0 0 0.0625rem var(--destructive), 0 0 0 0.1875rem oklch(0.5903 0.2299 19.34 / 0.14), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)"
-    }
+    "dark": {}
   }
 }

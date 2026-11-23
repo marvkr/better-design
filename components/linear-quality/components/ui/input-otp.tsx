@@ -6,7 +6,7 @@ import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// Linear OTP Input: individual digit boxes with Linear styling
+// OTP Input: individual digit boxes
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,

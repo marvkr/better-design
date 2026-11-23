@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
 
-// Talentboard CodeBlock: a light recessed code surface with optional filename
+// CodeBlock: a light recessed code surface with optional filename
 // chrome and line numbers, tinted just off the card so it reads as inset.
 
 interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {

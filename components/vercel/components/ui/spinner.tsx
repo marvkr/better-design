@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Vercel Spinner: circular loading indicator
+// Spinner: circular loading indicator
 // Sizes: sm (16px), md (20px), lg (24px), xl (32px)
 
 interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {

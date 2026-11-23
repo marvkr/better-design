@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import { Icon } from "@iconify/react"
 import { AnimatePresence, motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -39,7 +38,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <Icon icon="tabler:chevron-right" className="ml-auto h-4 w-4" />
+      <ChevronRightIcon className="ml-auto h-4 w-4" />
     </DropdownMenuPrimitive.SubTrigger>
   )
 }
@@ -145,7 +144,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <Icon icon="tabler:check" className="h-4 w-4" />
+          <CheckIcon className="h-4 w-4" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -236,4 +235,23 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
+}
+
+// Solar, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "solar:check-linear" "solar:alt-arrow-right-linear"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13L9 17L19 7"/>
+    </svg>
+  )
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5L15 12L9 19"/>
+    </svg>
+  )
 }

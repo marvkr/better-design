@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Rating: gold stars, the DS signature warm accent.
+// Rating: gold stars, the DS signature warm accent.
 
 interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number;

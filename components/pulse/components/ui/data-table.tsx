@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Pulseboard Data Table: sortable, clean table with Pulseboard styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

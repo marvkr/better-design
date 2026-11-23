@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 
@@ -53,8 +52,7 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <Icon
-          icon="ph:plus-bold"
+        <PlusIcon
           aria-hidden="true"
           className="size-4 shrink-0 text-(--primary-text) transition-transform duration-fast ease-out"
         />
@@ -83,3 +81,15 @@ function AccordionContent({
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+
+// Phosphor, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "ph:plus-bold"
+// [BD-1029]
+function PlusIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M228 128a12 12 0 0 1-12 12h-76v76a12 12 0 0 1-24 0v-76H40a12 12 0 0 1 0-24h76V40a12 12 0 0 1 24 0v76h76a12 12 0 0 1 12 12"/>
+    </svg>
+  );
+}

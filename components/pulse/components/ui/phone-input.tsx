@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { ChevronDown } from "lucide-react"
 import { formFieldBase } from "./_shared"
 
-// Pulseboard Phone Input: phone number input with country code selector
+// Phone Input: phone number input with country code selector
 
 interface Country {
   code: string

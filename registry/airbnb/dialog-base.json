@@ -17,8 +17,6 @@
     "light": {
       "radius-dialog": "2rem"
     },
-    "dark": {
-      "radius-dialog": "2rem"
-    }
+    "dark": {}
   }
 }

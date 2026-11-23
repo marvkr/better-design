@@ -5,7 +5,7 @@ import { Check, ChevronDown, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 
-// Pulseboard Multi Select: dropdown with multiple selection
+// Multi Select: dropdown with multiple selection
 
 interface MultiSelectOption {
   label: string

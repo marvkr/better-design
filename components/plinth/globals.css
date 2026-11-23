@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Plinth - a dark studio-editor system for tools that stage and render
+ * product shots.
+ *
+ * The language:
+ *   - A near-black stage. Panels sit one neutral step lighter, wells one
+ *     step darker, so depth reads from fill steps and hairline rings, not
+ *     from drop shadows.
+ *   - Controls are machined: a short 160deg graphite gradient, a top
+ *     inset catch-light, and a dark 0.1875rem groove ring that seats the
+ *     control into the panel it sits on.
+ *   - One action colour: an ember orange gradient, deep enough that its
+ *     white label clears AA. It marks the main action, the selected
+ *     thumbnail and the focus ring, and nothing else.
+ *   - Wells (fields, segmented tracks, slider tracks) are recessed: a dark
+ *     blocked-light inset at the top and a faint lit lip at the bottom.
+ *   - Generous radii: 0.875rem controls, 1.5rem panels. Geist for words,
+ *     Geist Mono in caps for parameter labels and readouts.
+ */
+
+:root {
+  /* Surfaces: stage, panel, raised control, well */
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.228 0.006 286);
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.205 0.005 286);
+  --popover-foreground: oklch(0.985 0 0);
+
+  /* Ember: the one action colour */
+  --primary: oklch(0.58 0.19 42);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Graphite: the raised secondary control */
+  --secondary: oklch(0.282 0.004 286);
+  --secondary-foreground: oklch(0.953 0.003 286);
+
+  --muted: oklch(0.258 0.007 286);
+  --muted-foreground: oklch(0.72 0.01 286);
+
+  --accent: oklch(0.295 0.009 286);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.57 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --success: oklch(0.72 0.17 150);
+  --success-foreground: oklch(0.16 0.03 150);
+
+  --warning: oklch(0.8 0.15 80);
+  --warning-foreground: oklch(0.2 0.04 70);
+
+  --border: oklch(1 0 0 / 0.07);
+  --input: oklch(0.174 0.004 286);
+  --ring: oklch(0.69 0.2 41);
+
+  /* Radii: controls 0.875rem, panels 1.5rem */
+  --radius: 0.875rem;
+
+  /* Ember and graphite materials */
+  --ember-gradient: linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39));
+  --ember-rim: oklch(0.5 0.16 39);
+  --graphite-gradient: linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286));
+  --segment-gradient: linear-gradient(180deg, oklch(0.295 0.009 286), oklch(0.258 0.007 286));
+  --groove: oklch(0.174 0.004 286);
+
+  /* Edges and depth. Controls and panels carry rings and insets only; the
+     drop shadows below belong to floating layers. */
+  --shadow-s: inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(1 0 0 / 0.06);
+  --shadow-m: inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0 0 0.0625rem oklch(0 0 0 / 0.35);
+  --shadow-l: 0 0 0 0.0625rem oklch(1 0 0 / 0.07), 0 0.5rem 1rem -0.5rem oklch(0 0 0 / 0.6), 0 1.25rem 2.5rem -1.25rem oklch(0 0 0 / 0.8);
+  --shadow-xl: 0 0 0 0.0625rem oklch(1 0 0 / 0.07), 0 1.5rem 3.5rem -1.5rem oklch(0 0 0 / 0.9);
+  --shadow-inset: inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06);
+  --shadow-button: inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6);
+  --shadow-button-hover: inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0 0 0.0625rem oklch(0 0 0 / 0.6);
+  --shadow-primary: inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0 0 0.0625rem var(--ember-rim), 0 0 0 0.1875rem var(--groove);
+  --shadow-segment: inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0 0 0.0625rem oklch(0 0 0 / 0.45);
+
+  /* Charts: ember first, then the blue and green accents of the stage */
+  --chart-1: var(--primary);
+  --chart-2: oklch(0.67 0.16 246);
+  --chart-3: oklch(0.72 0.17 150);
+  --chart-4: oklch(0.78 0.14 75);
+  --chart-5: oklch(0.65 0.02 286);
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Motion: the crisp profile, short like a tool panel */
+  --transition-duration-fast: 120ms;
+  --transition-duration-base: 160ms;
+  --transition-duration-slow: 220ms;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --default-transition-duration: var(--transition-duration-fast);
+  --default-transition-timing-function: var(--ease-out);
+
+  /* AI parts: the label that marks what a model wrote. */
+  --ai-label: var(--muted);
+  --ai-label-foreground: var(--foreground);
+}
+
+/* Registers duration-fast, duration-base and duration-slow, which the
+   components use. `reference` writes no variable that points at itself. */
+@theme inline reference {
+  --transition-duration-fast: var(--transition-duration-fast);
+  --transition-duration-base: var(--transition-duration-base);
+  --transition-duration-slow: var(--transition-duration-slow);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 0.375rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.375rem);
+  --radius-2xl: calc(var(--radius) + 0.625rem);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --shadow-s: var(--shadow-s);
+  --shadow-m: var(--shadow-m);
+  --shadow-l: var(--shadow-l);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-primary: var(--shadow-primary);
+  --shadow-segment: var(--shadow-segment);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--font-sans);
+    letter-spacing: -0.005em;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.025em;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+  @supports (field-sizing: content) {
+    textarea {
+      field-sizing: content;
+      max-height: 20lh;
+      overflow-y: auto;
+    }
+  }
+
+  /* Reserve the scrollbar gutter so the page keeps its width whenever the
+     scrollbar comes and goes. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  @supports (scrollbar-gutter: stable) {
+    html body[data-scroll-locked] {
+      /* Radix's scroll lock re-adds the scrollbar width as body margin. The
+         stable gutter already reserves it, so without this the two stack. */
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Show an invalid field on the field itself, not only in the message under
+     it. Declared after Tailwind's utilities, so it wins over the field's own
+     border and focus-ring classes. */
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+  [role="radiogroup"][aria-invalid="true"] [role="radio"] {
+    border-color: var(--destructive);
+  }
+  [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]):focus-visible,
+  [role="radiogroup"][aria-invalid="true"] [role="radio"]:focus-visible {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklch, var(--destructive) 35%, transparent);
+  }
+
+  /* Shake a field once when it turns invalid. */
+  @keyframes deny-shake {
+    25% { translate: -0.09375rem; }
+    50% { translate: 0.109375rem; }
+    75% { translate: -0.109375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [aria-invalid="true"]:is(input, textarea, select, [role="combobox"], [role="checkbox"], [role="radio"]),
+    [role="radiogroup"][aria-invalid="true"] [role="radio"],
+    [data-input-otp-container]:has([aria-invalid="true"]) {
+      animation: deny-shake 250ms linear;
+    }
+  }
+
+}
+
+:root {
+  --layout-density: compact;
+  --layout-density-source: design-system;
+  --layout-sidebar: calc(var(--spacing, 0.25rem) * 46);
+  --layout-inset: calc(var(--spacing, 0.25rem) * 4);
+  --layout-section-gap: calc(var(--spacing, 0.25rem) * 6);
+  --layout-column-gap: calc(var(--spacing, 0.25rem) * 3);
+  --layout-card-padding: calc(var(--spacing, 0.25rem) * 4);
+}

@@ -19,10 +19,6 @@
       "flame": "oklch(0.827 0.122 62.1)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "glow": "oklch(0.798 0.084 66.7)",
-      "flame": "oklch(0.827 0.122 62.1)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

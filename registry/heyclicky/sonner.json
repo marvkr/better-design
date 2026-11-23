@@ -20,12 +20,6 @@
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
       "shadow-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28)"
     },
-    "dark": {
-      "gradient-primary": "linear-gradient( 180deg, oklch(0.684 0.171 252.2) 0%, oklch(0.591 0.224 259) 100% )",
-      "gradient-silver": "linear-gradient( 180deg, oklch(0.952 0 0) 0%, oklch(0.894 0 0) 100% )",
-      "shadow-window": "var(--shadow-xl)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
-      "shadow-control": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.32), 0 0.125rem 0.375rem oklch(0.591 0.224 259 / 0.28)"
-    }
+    "dark": {}
   }
 }

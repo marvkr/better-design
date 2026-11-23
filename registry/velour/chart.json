@@ -17,9 +17,6 @@
       "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
       "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.05), 0 1rem 3rem oklch(0 0 0 / 0.55), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4)"
     },
-    "dark": {
-      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )",
-      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.05), 0 1rem 3rem oklch(0 0 0 / 0.55), 0 0.25rem 0.75rem oklch(0 0 0 / 0.4)"
-    }
+    "dark": {}
   }
 }

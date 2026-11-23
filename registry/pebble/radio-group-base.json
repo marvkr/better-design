@@ -22,8 +22,6 @@
     "light": {
       "shadow-pillow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.14), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.3), 0 0.0625rem 0.0625rem 0 oklch(0.1452 0.0021 286.13 / 0.1), 0 0.25rem 0.625rem -0.1875rem oklch(0.1452 0.0021 286.13 / 0.18)"
     },
-    "dark": {
-      "shadow-pillow-primary": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.14), inset 0 -0.0938rem 0 0 oklch(0 0 0 / 0.3), 0 0.0625rem 0.0625rem 0 oklch(0.1452 0.0021 286.13 / 0.1), 0 0.25rem 0.625rem -0.1875rem oklch(0.1452 0.0021 286.13 / 0.18)"
-    }
+    "dark": {}
   }
 }

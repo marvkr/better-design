@@ -5,7 +5,7 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
 
-// Vercel Avatar: rounded-full, sizes xs(20) sm(24) md(32) lg(40) xl(48) 2xl(56) 3xl(64)
+// Avatar: rounded-full, sizes xs(20) sm(24) md(32) lg(40) xl(48) 2xl(56) 3xl(64)
 // Uses initials fallback with bg-secondary, image fills circle
 
 const Avatar = React.forwardRef<

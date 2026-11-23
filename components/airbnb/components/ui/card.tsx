@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Card, measured on airbnb.com (13 November 2026)
+// Card, measured on airbnb.com (13 November 2026)
 // A raised panel: 16px radius and a soft shadow that carries its own edge.
 // A listing tile is a photo with text under it, so it takes no Card.
 

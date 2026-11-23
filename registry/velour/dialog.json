@@ -17,8 +17,6 @@
     "light": {
       "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )"
     },
-    "dark": {
-      "velour": "linear-gradient( to bottom, oklch(0.235 0.013 285), oklch(0.185 0.01 285) )"
-    }
+    "dark": {}
   }
 }

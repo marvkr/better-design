@@ -16,8 +16,6 @@
     "light": {
       "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
     },
-    "dark": {
-      "shadow-float-popover": "0 1.125rem 2.5rem -1.5rem oklch(0.2161 0.0061 56.04 / 0.5)"
-    }
+    "dark": {}
   }
 }

@@ -1,0 +1,14 @@
+{
+  "name": "use-glass-canvas",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/use-glass-canvas.ts",
+      "content": "'use client'\n\n// From Liquid Glass by Bilal Gürsen, https://github.com/bilalgursen/liquid-glass\n// (commit 2311cd12d56fc105b4127a1e762f4092bfbb9283). Copyright (c) 2026 Bilal Abdullah Gürşen.\n// MIT licence: the full text is in LICENSE beside this system's components folder.\n// Changed here: flat file names, import paths, theme tokens in place of fixed label\n// colours, and the props marked [port].\n\nimport { useCallback, useEffect, useRef } from 'react'\n\nimport type { GlassViewHandle, GlassViewSpec, GlassViewStats } from './glass-runtime'\n\n/**\n * Registers a canvas with the shared glass renderer. The spec is read fresh every\n * frame, so callers keep animation state in refs and simply return a new spec.\n */\nexport function useGlassCanvas(spec: GlassViewSpec) {\n  const canvasRef = useRef<HTMLCanvasElement>(null)\n  const specRef = useRef(spec)\n  specRef.current = spec\n  const handle = useRef<GlassViewHandle | null>(null)\n\n  useEffect(() => {\n    const canvas = canvasRef.current\n    if (!canvas) return\n    let disposed = false\n    // three.js loads lazily so the page still prerenders on the server.\n    import('./glass-runtime')\n      .then(({ getGlassRuntime }) => getGlassRuntime())\n      .then((runtime) => runtime.createView(canvas, () => specRef.current))\n      .then((view) => {\n        if (disposed) view.dispose()\n        else handle.current = view\n      })\n      .catch((error) => console.warn('Liquid glass renderer unavailable', error))\n    return () => {\n      disposed = true\n      handle.current?.dispose()\n      handle.current = null\n    }\n  }, [])\n\n  // Any React render (new props, theme, size) repaints once.\n  useEffect(() => {\n    handle.current?.invalidate()\n  })\n\n  const invalidate = useCallback(() => handle.current?.invalidate(), [])\n  /** Running totals of GPU passes for this canvas (zero until the renderer is up). */\n  const stats = useCallback((): GlassViewStats => handle.current?.stats() ?? { renders: 0, ms: 0 }, [])\n  return { canvasRef, invalidate, stats }\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/liquid-glass/glass-runtime.json"
+  ]
+}

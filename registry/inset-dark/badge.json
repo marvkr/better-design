@@ -17,9 +17,6 @@
       "pill-gradient": "linear-gradient(180deg, oklch(0.27 0 0) 0%, oklch(0.21 0 0) 100%)",
       "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5)"
     },
-    "dark": {
-      "pill-gradient": "linear-gradient(180deg, oklch(0.27 0 0) 0%, oklch(0.21 0 0) 100%)",
-      "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.5)"
-    }
+    "dark": {}
   }
 }

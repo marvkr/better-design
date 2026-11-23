@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Label } from "./label";
 
-// Hyperline Form: react-hook-form wiring with DS field messaging.
+// Form: react-hook-form wiring with DS field messaging.
 
 const Form = FormProvider;
 

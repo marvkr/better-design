@@ -21,9 +21,6 @@
       "primary-text": "oklch(0.48 0.2 288)",
       "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
     },
-    "dark": {
-      "primary-text": "oklch(0.48 0.2 288)",
-      "danger-face": "linear-gradient(180deg, oklch(0.57 0.2 22), oklch(0.53 0.2 22))"
-    }
+    "dark": {}
   }
 }

@@ -6,7 +6,7 @@ import { formFieldBase, formFieldSingleLine } from "./_shared"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-// Pulseboard Date Picker: recessed-well trigger (the form-field material,
+// Date Picker: recessed-well trigger (the form-field material,
 // matching Input and Select) opening the calendar popover.
 
 interface DatePickerProps {

@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Talentboard line chart: orange lead line with amber counterpoint.
+// Line chart: orange lead line with amber counterpoint.
 
 const chartData = [
   { month: "January", arr: 4980, mrr: 415 },

@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard PasswordInput: recessed field with a quiet visibility toggle.
+// PasswordInput: recessed field with a quiet visibility toggle.
 
 export interface PasswordInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {}

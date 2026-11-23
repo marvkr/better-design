@@ -140,9 +140,9 @@ export function ChartLineInteractive() {
   )
 
   return (
-    <Card className="py-4 sm:py-0">
-      <CardHeader className="flex flex-col items-stretch border-b p-0! sm:flex-row">
-        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
+    <Card className="@container py-0">
+      <CardHeader className="flex flex-col items-stretch border-b p-0! @2xl:flex-row">
+        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 @2xl:py-0">
           <CardTitle className="whitespace-nowrap">Line Chart - Interactive</CardTitle>
           <CardDescription>
             Showing total visitors for the last 3 months
@@ -155,13 +155,13 @@ export function ChartLineInteractive() {
               <button
                 key={chart}
                 data-active={activeChart === chart}
-                className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
+                className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 @2xl:border-t-0 @2xl:border-l @2xl:px-8 @2xl:py-6"
                 onClick={() => setActiveChart(chart)}
               >
                 <span className="text-xs text-muted-foreground">
                   {chartConfig[chart].label}
                 </span>
-                <span className="text-lg leading-none font-bold sm:text-3xl">
+                <span className="text-lg leading-none font-bold @2xl:text-3xl">
                   {total[key as keyof typeof total].toLocaleString()}
                 </span>
               </button>
@@ -169,7 +169,7 @@ export function ChartLineInteractive() {
           })}
         </div>
       </CardHeader>
-      <CardContent className="px-2 sm:p-6">
+      <CardContent className="px-2 pb-4 @2xl:p-6">
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[15.625rem] w-full"

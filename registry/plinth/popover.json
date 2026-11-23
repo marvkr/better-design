@@ -1,0 +1,21 @@
+{
+  "name": "popover",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Popover = PopoverPrimitive.Root\nconst PopoverTrigger = PopoverPrimitive.Trigger\nconst PopoverAnchor = PopoverPrimitive.Anchor\n\n/* A floating inspector panel: the popover surface, its ring and the one\n   drop shadow floating layers carry. */\nconst PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 8, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 w-72 origin-(--radix-popover-content-transform-origin) p-4 outline-none\",\n        \"rounded-xl bg-popover text-popover-foreground [box-shadow:var(--shadow-l)]\",\n        \"duration-base data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-[0.97] data-[state=closed]:zoom-out-[0.97]\",\n        className\n      )}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n))\nPopoverContent.displayName = PopoverPrimitive.Content.displayName\n\nexport { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-popover@^1.1.14"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), 0 0.5rem 1rem -0.5rem oklch(0 0 0 / 0.6), 0 1.25rem 2.5rem -1.25rem oklch(0 0 0 / 0.8)"
+    },
+    "dark": {}
+  }
+}

@@ -19,10 +19,9 @@
   "cssVars": {
     "theme": {},
     "light": {
+      "success": "oklch(0.676 0.16 150)",
       "shadow": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.5rem 1.25rem oklch(0 0 0 / 0.45)"
     },
-    "dark": {
-      "shadow": "inset 0 0.0625rem 0 0 oklch(1 0 0 / 0.06), 0 0.125rem 0.25rem oklch(0 0 0 / 0.4), 0 0.5rem 1.25rem oklch(0 0 0 / 0.45)"
-    }
+    "dark": {}
   }
 }

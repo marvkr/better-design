@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { formFieldBase, formFieldSingleLine, menuItemBase, popoverSurface } from "./_shared";
@@ -37,8 +36,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon
-        icon="feather:chevron-down"
+      <ChevronDownIcon
         className="size-4 shrink-0 text-muted-foreground transition-transform duration-fast ease-out group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
@@ -60,7 +58,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="feather:chevron-up" className="size-4" aria-hidden="true" />
+    <ChevronUpIcon className="size-4" aria-hidden="true" />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -78,7 +76,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="feather:chevron-down" className="size-4" aria-hidden="true" />
+    <ChevronDownIcon className="size-4" aria-hidden="true" />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =
@@ -147,7 +145,7 @@ const SelectItem = React.forwardRef<
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     <span className="pointer-events-none absolute end-2 flex size-4 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Icon icon="feather:check" className="size-4 text-(--primary-text)" aria-hidden="true" />
+        <CheckIcon className="size-4 text-(--primary-text)" aria-hidden="true" />
       </SelectPrimitive.ItemIndicator>
     </span>
   </SelectPrimitive.Item>
@@ -179,3 +177,29 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 };
+
+// Feather, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "feather:check" "feather:chevron-down" "feather:chevron-up"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 6L9 17l-5-5"/>
+    </svg>
+  );
+}
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m6 9l6 6l6-6"/>
+    </svg>
+  );
+}
+function ChevronUpIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m18 15l-6-6l-6 6"/>
+    </svg>
+  );
+}

@@ -1,0 +1,20 @@
+{
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth StatusIndicator: a lit dot in a dark socket, like a record light\n * on the timeline, with an optional mono label.\n */\n\ntype StatusType = \"online\" | \"offline\" | \"busy\" | \"away\" | \"idle\"\n\nconst statusConfig = {\n  online: { label: \"Online\", dot: \"bg-success\" },\n  offline: { label: \"Offline\", dot: \"bg-muted-foreground\" },\n  busy: { label: \"Busy\", dot: \"bg-destructive\" },\n  away: { label: \"Away\", dot: \"bg-warning\" },\n  idle: { label: \"Idle\", dot: \"bg-muted-foreground/60\" },\n} satisfies Record<StatusType, { label: string; dot: string }>\n\nconst dotSizes = {\n  sm: \"size-1.5\",\n  md: \"size-2\",\n  lg: \"size-2.5\",\n}\n\ninterface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {\n  status: StatusType\n  showLabel?: boolean\n  label?: React.ReactNode\n  size?: \"sm\" | \"md\" | \"lg\"\n  pulse?: boolean\n}\n\nfunction StatusIndicator({ status, showLabel, label, size = \"md\", pulse, className, ...props }: StatusIndicatorProps) {\n  const config = statusConfig[status]\n  const text = label ?? (showLabel ? config.label : null)\n  return (\n    <div data-slot=\"status-indicator\" className={cn(\"inline-flex items-center gap-2\", className)} {...props}>\n      <span className=\"relative flex shrink-0 rounded-full p-0.5 bg-input [box-shadow:var(--shadow-inset)]\">\n        {pulse && (\n          <span\n            aria-hidden=\"true\"\n            className={cn(\"absolute inset-0.5 rounded-full opacity-60 motion-safe:animate-ping\", config.dot)}\n          />\n        )}\n        <span className={cn(\"relative inline-flex rounded-full\", dotSizes[size], config.dot)} />\n      </span>\n      {text ? (\n        <span className=\"font-mono text-[0.6875rem] uppercase text-muted-foreground\">{text}</span>\n      ) : (\n        <span className=\"sr-only\">{config.label}</span>\n      )}\n    </div>\n  )\n}\n\ninterface AvatarStatusProps {\n  status: StatusType\n  className?: string\n}\n\n/* A status dot pinned to the corner of an avatar, cut out of it by a ring\n   in the stage colour. */\nfunction AvatarStatus({ status, className }: AvatarStatusProps) {\n  const config = statusConfig[status]\n  return (\n    <span\n      data-slot=\"avatar-status\"\n      className={cn(\"absolute bottom-0 right-0 block size-2.5 rounded-full ring-2 ring-background\", config.dot, className)}\n    >\n      <span className=\"sr-only\">{config.label}</span>\n    </span>\n  )\n}\n\nexport { StatusIndicator, AvatarStatus }\nexport type { StatusIndicatorProps, AvatarStatusProps, StatusType }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.72 0.17 150)",
+      "warning": "oklch(0.8 0.15 80)",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

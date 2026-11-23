@@ -19,7 +19,7 @@ const Switch = React.forwardRef<
   <SwitchPrimitive.Root
     ref={ref}
     className={cn(
-      "peer inline-flex h-[1.6875rem] w-[2.875rem] shrink-0 cursor-pointer items-center rounded-full bg-input",
+      "group/switch peer inline-flex h-[1.6875rem] w-[2.875rem] shrink-0 cursor-pointer items-center rounded-full bg-input",
       "[box-shadow:var(--shadow-inset)]",
       "transition-[box-shadow,background-image] duration-base ease-out",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -33,8 +33,8 @@ const Switch = React.forwardRef<
       className={cn(
         "pointer-events-none block size-[1.375rem] rounded-full bg-card",
         "[box-shadow:var(--shadow-sm)]",
-        "transition-transform duration-base ease-out",
         "data-[state=checked]:translate-x-[1.3125rem] data-[state=unchecked]:translate-x-[0.1563rem]",
+        "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none",
       )}
     />
   </SwitchPrimitive.Root>

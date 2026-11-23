@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Linear Card — dark developer tool
+// Card — dark developer tool
 // Real treatment: dark bg, 1px border, subtle depth shadow with slight edge glow
 
 const Card = React.forwardRef<

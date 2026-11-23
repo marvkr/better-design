@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline StatusIndicator: live-state dots like the portal's Live badge.
+// StatusIndicator: live-state dots like the portal's Live badge.
 
 type StatusType = "online" | "offline" | "busy" | "away" | "idle";
 

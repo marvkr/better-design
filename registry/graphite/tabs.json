@@ -19,11 +19,6 @@
       "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
       "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.4)"
     },
-    "dark": {
-      "shadow-pill": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.2), 0 0.125rem 0.25rem oklch(0 0 0 / 0.25)",
-      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.28), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.03)",
-      "pill-gradient": "linear-gradient(180deg, oklch(0.42 0 0) 0%, oklch(0.37 0 0) 100%)",
-      "text-shadow-pressed": "0 0.0625rem 0.0625rem oklch(0 0 0 / 0.4)"
-    }
+    "dark": {}
   }
 }

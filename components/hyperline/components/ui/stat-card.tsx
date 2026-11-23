@@ -4,7 +4,7 @@ import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { hlCardSurface } from "./_shared";
 
-// Hyperline StatCard: KPI tile like Estimated ARR, with trend chip.
+// StatCard: KPI tile like Estimated ARR, with trend chip.
 
 interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;

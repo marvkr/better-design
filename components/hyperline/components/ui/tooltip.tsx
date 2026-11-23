@@ -6,7 +6,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 
-// Hyperline Tooltip: same floating material as every other pop surface.
+// Tooltip: same floating material as every other pop surface.
 
 const TooltipProvider = TooltipPrimitive.Provider;
 

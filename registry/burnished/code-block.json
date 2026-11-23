@@ -18,9 +18,6 @@
       "primary-text": "oklch(0.798 0.084 66.7)",
       "glow": "oklch(0.798 0.084 66.7)"
     },
-    "dark": {
-      "primary-text": "oklch(0.798 0.084 66.7)",
-      "glow": "oklch(0.798 0.084 66.7)"
-    }
+    "dark": {}
   }
 }

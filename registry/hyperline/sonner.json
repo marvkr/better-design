@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/sonner.tsx",
-      "content": "\"use client\";\n\nimport { Toaster as Sonner } from \"sonner\";\n\n// Hyperline Sonner: toasts styled with the shared pop-surface tokens.\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>;\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border-border/60 group-[.toaster]:shadow-[var(--hl-shadow-pop)] group-[.toaster]:rounded-xl\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-[image:var(--hl-primary-gradient)] group-[.toast]:text-primary-foreground group-[.toast]:shadow-[var(--hl-shadow-primary-sm)]\",\n          cancelButton: \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
+      "content": "\"use client\";\n\nimport { Toaster as Sonner } from \"sonner\";\n\n// Sonner: toasts styled with the shared pop-surface tokens.\n\ntype ToasterProps = React.ComponentProps<typeof Sonner>;\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      theme=\"dark\"\n      className=\"toaster group\"\n      toastOptions={{\n        classNames: {\n          toast:\n            \"group toast group-[.toaster]:bg-popover group-[.toaster]:text-popover-foreground group-[.toaster]:border-border/60 group-[.toaster]:shadow-[var(--hl-shadow-pop)] group-[.toaster]:rounded-xl\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton:\n            \"group-[.toast]:bg-[image:var(--hl-primary-gradient)] group-[.toast]:text-primary-foreground group-[.toast]:shadow-[var(--hl-shadow-primary-sm)]\",\n          cancelButton: \"group-[.toast]:bg-secondary group-[.toast]:text-secondary-foreground\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
       "type": "registry:ui"
     }
   ],
@@ -18,10 +18,6 @@
       "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
       "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)"
     },
-    "dark": {
-      "hl-shadow-pop": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.25rem 0.75rem -0.125rem oklch(0.05 0.02 300 / 0.45), 0 1.25rem 3rem -0.75rem oklch(0.04 0.02 300 / 0.6)",
-      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
-      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)"
-    }
+    "dark": {}
   }
 }

@@ -13,5 +13,12 @@
       "type": "registry:file",
       "target": "components/ui/web-search.module.css"
     }
-  ]
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.55 0.15 150)"
+    },
+    "dark": {}
+  }
 }

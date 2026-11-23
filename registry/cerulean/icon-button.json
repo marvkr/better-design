@@ -21,13 +21,6 @@
       "shadow-button-hover": "var(--shadow-accent-hover)",
       "shadow-primary": "var(--shadow-accent)"
     },
-    "dark": {
-      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)",
-      "shadow-accent-hover": "0 0 0 0.0313rem oklch(0.82 0.13 233 / 0.85), inset 0 0.0625rem 0 oklch(1 0 0 / 0.24), 0 0.125rem 0.3125rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.7 0.122 233 / 0.38)",
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-button": "var(--shadow-accent)",
-      "shadow-button-hover": "var(--shadow-accent-hover)",
-      "shadow-primary": "var(--shadow-accent)"
-    }
+    "dark": {}
   }
 }

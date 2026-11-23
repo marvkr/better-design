@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
-import { Icon } from "@iconify/react"
 
 import { cn } from "@/lib/utils"
 
@@ -36,7 +35,7 @@ function ContextMenuSubTrigger({
       {...props}
     >
       {children}
-      <Icon icon="tabler:chevron-right" className="ml-auto h-4 w-4" />
+      <ChevronRightIcon className="ml-auto h-4 w-4" />
     </ContextMenuPrimitive.SubTrigger>
   )
 }
@@ -113,7 +112,7 @@ function ContextMenuCheckboxItem({
     >
       <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <Icon icon="tabler:check" className="h-4 w-4" />
+          <CheckIcon className="h-4 w-4" />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -208,4 +207,23 @@ export {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
+}
+
+// Ant Design Icons, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "ant-design:check-outlined" "ant-design:right-outlined"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5L207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8"/>
+    </svg>
+  )
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1l-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4"/>
+    </svg>
+  )
 }

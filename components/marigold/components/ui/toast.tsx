@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard Toast: floating card on the layered pop shadow.
+// Toast: floating card on the layered pop shadow.
 
 const ToastProvider = ToastPrimitives.Provider;
 

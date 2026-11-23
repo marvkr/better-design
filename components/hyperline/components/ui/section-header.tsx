@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline SectionHeader: section title row with an optional trailing action,
+// SectionHeader: section title row with an optional trailing action,
 // like Payment methods / Edit in the portal.
 
 interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {

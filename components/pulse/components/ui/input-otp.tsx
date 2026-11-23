@@ -7,7 +7,7 @@ import { Dot } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 
-// Pulseboard OTP Input: individual dark digit boxes with a violet active glow
+// OTP Input: individual dark digit boxes with a violet active glow
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,

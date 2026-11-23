@@ -22,10 +22,6 @@
       "fill-primary-hover": "linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5))",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "glow": "oklch(0.798 0.084 66.7)",
-      "fill-primary-hover": "linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5))",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

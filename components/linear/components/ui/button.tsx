@@ -5,7 +5,7 @@ import { LoaderCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-// Linear Button — dark developer tool, purple (#5e6ad2) primary
+// Button — dark developer tool, purple (#5e6ad2) primary
 // Real linear.app treatment: gradient fill, 1px border ring, subtle drop shadow
 // Secondary: dark panel with border, ghost understated
 

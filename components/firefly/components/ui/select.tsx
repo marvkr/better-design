@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { formFieldBase, formFieldSingleLine, menuItemBase, popoverSurface } from "./_shared";
@@ -38,8 +37,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon
-        icon="carbon:chevron-down"
+      <ChevronDownIcon
         className="size-4 shrink-0 text-muted-foreground transition-transform duration-fast ease-out group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
@@ -61,7 +59,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="carbon:chevron-up" className="size-4" aria-hidden="true" />
+    <ChevronUpIcon className="size-4" aria-hidden="true" />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -79,7 +77,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="carbon:chevron-down" className="size-4" aria-hidden="true" />
+    <ChevronDownIcon className="size-4" aria-hidden="true" />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =
@@ -148,7 +146,7 @@ const SelectItem = React.forwardRef<
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     <span className="pointer-events-none absolute end-2 flex size-4 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Icon icon="carbon:checkmark" className="size-4 text-foreground" aria-hidden="true" />
+        <CheckIcon className="size-4 text-foreground" aria-hidden="true" />
       </SelectPrimitive.ItemIndicator>
     </span>
   </SelectPrimitive.Item>
@@ -180,3 +178,30 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 };
+
+// Carbon Icons, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "carbon:checkmark" "carbon:chevron-down" "carbon:chevron-up"
+// One unit of stroke keeps the thin Carbon tick readable at small sizes.
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" d="m13 24l-9-9l1.414-1.414L13 21.171L26.586 7.586L28 9z"/>
+    </svg>
+  );
+}
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M16 22L6 12l1.4-1.4l8.6 8.6l8.6-8.6L26 12z"/>
+    </svg>
+  );
+}
+function ChevronUpIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m16 10l10 10l-1.4 1.4l-8.6-8.6l-8.6 8.6L6 20z"/>
+    </svg>
+  );
+}

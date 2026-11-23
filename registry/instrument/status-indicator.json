@@ -14,9 +14,6 @@
       "gauge-ok": "oklch(0.74 0.12 152)",
       "gauge-warn": "oklch(0.76 0.14 70)"
     },
-    "dark": {
-      "gauge-ok": "oklch(0.74 0.12 152)",
-      "gauge-warn": "oklch(0.76 0.14 70)"
-    }
+    "dark": {}
   }
 }

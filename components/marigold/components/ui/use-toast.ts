@@ -1,6 +1,6 @@
 "use client";
 
-// Talentboard toast state: reducer-driven queue, one visible toast at a time.
+// Toast state: reducer-driven queue, one visible toast at a time.
 
 import * as React from "react";
 

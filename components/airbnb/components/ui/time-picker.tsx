@@ -3,7 +3,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Airbnb Time Picker: HH:MM time input with AM/PM toggle
+// Time Picker: HH:MM time input with AM/PM toggle
 
 interface TimePickerProps {
   value?: string

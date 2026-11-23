@@ -14,9 +14,6 @@
       "shadow-m": "var(--shadow-md)",
       "shadow-l": "var(--shadow-lg)"
     },
-    "dark": {
-      "shadow-m": "var(--shadow-md)",
-      "shadow-l": "var(--shadow-lg)"
-    }
+    "dark": {}
   }
 }

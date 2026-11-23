@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 // Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism
 
-// Talentboard TabsSubtle: underline tabs like the billing portal header
+// TabsSubtle: underline tabs like the billing portal header
 // (Subscriptions / Credits / Invoices). Orange indicator slides between tabs.
 
 interface TabsSubtleContextValue {

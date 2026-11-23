@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
-// Talentboard AvatarGroup: overlapping stack with a count chip.
+// AvatarGroup: overlapping stack with a count chip.
 
 interface AvatarGroupItem {
   src?: string;

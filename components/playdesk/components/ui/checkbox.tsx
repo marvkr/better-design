@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check, Minus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -40,13 +39,11 @@ const Checkbox = React.forwardRef<
     {/* The glyph follows data-state rather than the checked prop, so an
         uncontrolled defaultChecked="indeterminate" still shows the dash. */}
     <CheckboxPrimitive.Indicator className="group flex items-center justify-center text-primary-foreground">
-      <Minus
+      <MinusIcon
         className="hidden size-3 group-data-[state=indeterminate]:block"
-        strokeWidth={3}
       />
-      <Check
+      <CheckIcon
         className="size-3 group-data-[state=indeterminate]:hidden"
-        strokeWidth={3}
       />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
@@ -54,3 +51,21 @@ const Checkbox = React.forwardRef<
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
+
+// "mingcute:check-line" and "mingcute:minimize-line" from MingCute,
+// the icon library this system pairs with, drawn inline so the installed
+// component loads no icon at runtime. [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M9.171 16.072L19.778 5.465c.409-.359 1.01-.404 1.414 0c.404.405.359 1.005 0 1.415L9.878 18.193c-.204.179-.429.293-.707.293s-.503-.114-.707-.293l-5.657-5.657c-.297-.339-.393-.8-.159-1.207c.34-.588 1.092-.629 1.574-.207Z"/>
+    </svg>
+  );
+}
+function MinusIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M4.741 12.966C3.643 12.672 3.796 11.079 5 11h14c.543.036 1 .428 1 1s-.457.964-1 1H5Z"/>
+    </svg>
+  );
+}

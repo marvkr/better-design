@@ -1,0 +1,14 @@
+{
+  "name": "copy-button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button, type ButtonProps } from \"./button\"\n\nexport interface CopyButtonProps extends Omit<ButtonProps, \"children\"> {\n  value: string\n  copiedLabel?: string\n  label?: string\n}\n\n/* A graphite tool button that copies a value; the copy glyph turns into an\n   ember check for two seconds once the value is on the clipboard. */\nconst CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(\n  ({ value, copiedLabel = \"Copied\", label = \"Copy\", size = \"icon\", variant = \"secondary\", onClick, ...props }, ref) => {\n    const [copied, setCopied] = React.useState(false)\n\n    React.useEffect(() => {\n      if (!copied) return\n      const timer = setTimeout(() => setCopied(false), 2000)\n      return () => clearTimeout(timer)\n    }, [copied])\n\n    const copy = async () => {\n      try {\n        await navigator.clipboard.writeText(value)\n        setCopied(true)\n      } catch {\n        // The clipboard can refuse in an insecure context; the label stays as it was.\n      }\n    }\n\n    const isIcon = size === \"icon\" || size === \"icon-sm\"\n\n    return (\n      <Button\n        ref={ref}\n        size={size}\n        variant={variant}\n        onClick={(event) => {\n          onClick?.(event)\n          void copy()\n        }}\n        aria-label={copied ? copiedLabel : label}\n        {...props}\n      >\n        {copied ? <CheckIcon className={cn(\"text-primary\")} /> : <CopyIcon />}\n        {!isIcon && <span aria-live=\"polite\">{copied ? copiedLabel : label}</span>}\n      </Button>\n    )\n  }\n)\nCopyButton.displayName = \"CopyButton\"\n\n// feather:copy\nfunction CopyIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\"><rect width=\"13\" height=\"13\" x=\"9\" y=\"9\" rx=\"2\" ry=\"2\" /><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\" /></g>\n    </svg>\n  )\n}\n\n// feather:check\nfunction CheckIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <path fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2.5\" d=\"M20 6L9 17l-5-5\" />\n    </svg>\n  )\n}\n\nexport { CopyButton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/button.json"
+  ]
+}

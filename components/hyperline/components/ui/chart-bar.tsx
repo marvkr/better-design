@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Hyperline bar chart: rounded cyan bars over hairline grid.
+// Bar chart: rounded cyan bars over hairline grid.
 
 const chartData = [
   { month: "January", invoices: 186 },

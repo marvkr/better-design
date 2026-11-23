@@ -15,7 +15,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { formFieldBase } from "./_shared";
 
-// Hyperline Combobox: recessed field trigger with the command palette surface.
+// Combobox: recessed field trigger with the command palette surface.
 
 const plans = [
   { value: "b2c-plan", label: "B2C Plan" },

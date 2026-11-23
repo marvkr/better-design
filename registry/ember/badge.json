@@ -19,11 +19,6 @@
       "ag-border": "oklch(1 0 0 / 0.09)",
       "ag-border-strong": "oklch(1 0 0 / 0.16)"
     },
-    "dark": {
-      "ag-blur": "0.875rem",
-      "ag-fill": "oklch(1 0 0 / 0.05)",
-      "ag-border": "oklch(1 0 0 / 0.09)",
-      "ag-border-strong": "oklch(1 0 0 / 0.16)"
-    }
+    "dark": {}
   }
 }

@@ -13,8 +13,6 @@
     "light": {
       "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
     },
-    "dark": {
-      "shadow-thumb": "0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.28)"
-    }
+    "dark": {}
   }
 }

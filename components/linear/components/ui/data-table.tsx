@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Linear Data Table: sortable, clean table with Linear styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

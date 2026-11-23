@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard Dialog: modal card on the deepest layered shadow; scrim dims the
+// Dialog: modal card on the deepest layered shadow; scrim dims the
 // warm scrim instead of blacking it out.
 
 const Dialog = DialogPrimitive.Root;

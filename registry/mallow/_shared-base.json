@@ -29,24 +29,6 @@
       "shadow-card": "var(--card-edge)",
       "shadow-menu": "var(--menu-edge)"
     },
-    "dark": {
-      "option-track": "oklch(0.955 0.014 295)",
-      "option-face": "oklch(0.955 0.035 290)",
-      "violet-face": "linear-gradient(180deg, oklch(0.54 0.2 288), oklch(0.5 0.205 288))",
-      "violet-face-hover": "linear-gradient(180deg, oklch(0.57 0.2 288), oklch(0.53 0.205 288))",
-      "quiet-face": "linear-gradient(180deg, oklch(1 0 0), oklch(0.985 0.006 295))",
-      "quiet-face-hover": "linear-gradient(180deg, oklch(0.985 0.008 295), oklch(0.965 0.012 295))",
-      "violet-edge": "inset 0 -0.125rem 0 0 oklch(0.32 0.16 288 / 0.3), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.16), 0 0.25rem 0.75rem -0.25rem oklch(0.45 0.18 288 / 0.35)",
-      "option-edge": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.8), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06), 0 0.25rem 0.75rem -0.25rem oklch(0.52 0.2 288 / 0.2)",
-      "option-edge-hover": "inset 0 0 0 0.09375rem oklch(0.52 0.2 288 / 0.95), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.08), 0 0.375rem 1rem -0.25rem oklch(0.52 0.2 288 / 0.24)",
-      "quiet-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.16), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.06)",
-      "card-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06), 0 0.0625rem 0.125rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 2rem -0.75rem oklch(0.35 0.08 290 / 0.16)",
-      "panel-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08)",
-      "option-track-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06)",
-      "menu-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08), 0 0.125rem 0.25rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 1.75rem -0.5rem oklch(0.35 0.08 290 / 0.22)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
-      "shadow-card": "var(--card-edge)",
-      "shadow-menu": "var(--menu-edge)"
-    }
+    "dark": {}
   }
 }

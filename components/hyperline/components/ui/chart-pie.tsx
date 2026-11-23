@@ -13,7 +13,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Hyperline donut: revenue mix in the cyan-gold-violet palette.
+// Donut: revenue mix in the cyan-gold-violet palette.
 
 const chartData = [
   { plan: "b2c", revenue: 415, fill: "var(--color-b2c)" },

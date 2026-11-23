@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Folio Switch — recessed track; checked track becomes the amber paper tab\n * (--shadow-primary), matching the primary Button. The thumb is a small raised\n * folder tab carrying its own rim shadow.\n */\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-color,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:[box-shadow:var(--shadow-primary)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-4 w-4 rounded-full bg-foreground\",\n        \"[box-shadow:var(--shadow-s)]\",\n        \"ring-0 transition-transform duration-fast\",\n        \"data-[state=checked]:translate-x-4 data-[state=checked]:bg-primary-foreground\",\n        \"data-[state=unchecked]:translate-x-0.5\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Folio Switch — recessed track; checked track becomes the amber paper tab\n * (--shadow-primary), matching the primary Button. The thumb is a small raised\n * folder tab carrying its own rim shadow.\n */\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"group/switch peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-border\",\n      \"bg-input [box-shadow:var(--shadow-inset)]\",\n      \"transition-[background-color,box-shadow,border-color] duration-fast\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:[box-shadow:var(--shadow-primary)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-4 w-4 rounded-full bg-foreground\",\n        \"[box-shadow:var(--shadow-s)]\",\n        \"ring-0\",\n        \"data-[state=checked]:translate-x-4 data-[state=checked]:bg-primary-foreground\",\n        \"data-[state=unchecked]:translate-x-0.5\",\n        \"origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n",
       "type": "registry:ui"
     }
   ],
@@ -16,12 +16,9 @@
     "light": {
       "shadow-s": "var(--shadow-sm)",
       "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.81 0.115 78 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.375rem 1rem -0.125rem oklch(0.75 0.13 75 / 0.28)"
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.81 0.115 78 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.375rem 1rem -0.125rem oklch(0.75 0.13 75 / 0.28)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.3), 0 0 0 0.0625rem oklch(0.81 0.115 78 / 0.25), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0.375rem 1rem -0.125rem oklch(0.75 0.13 75 / 0.28)"
-    }
+    "dark": {}
   }
 }

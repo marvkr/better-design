@@ -19,11 +19,6 @@
       "info": "oklch(0.78 0.08 240)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "success": "oklch(0.79 0.12 150)",
-      "warning": "oklch(0.827 0.122 62.1)",
-      "info": "oklch(0.78 0.08 240)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

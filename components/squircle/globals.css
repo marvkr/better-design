@@ -155,8 +155,9 @@
      block and keeps the plain circle. Pills, avatars, badges and switches
      (rounded-full) keep the circle, as does any element that opts out with
      [corner-shape:round]: a pill's radius is clamped to half its height, so
-     a squircle there turns the capsule into a box. See
-     docs/ui/squircle-corners.md. */
+     a squircle there turns the capsule into a box. A pill button or link
+     instead takes a 50% radius and becomes one squircle across its width.
+     See docs/ui/squircle-corners.md. */
   @supports (corner-shape: squircle) {
     :where([class*="rounded"]):not([class~="rounded-full"], [class~="[corner-shape:round]"]) {
       --corner-factor: 1.841;
@@ -168,6 +169,9 @@
     :where([class*="after:rounded"]):not([class~="after:rounded-full"], [class~="after:[corner-shape:round]"])::after {
       --corner-factor: 1.841;
       corner-shape: squircle;
+    }
+    :is(button, a, [role="button"])[class~="rounded-full"]:not([role]:not([role="button"])) {
+      corner-shape: superellipse(1.585) !important;
     }
   }
 

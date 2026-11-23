@@ -18,10 +18,6 @@
       "warning": "var(--primary)",
       "shadow-s": "var(--shadow-sm)"
     },
-    "dark": {
-      "success": "oklch(0.78 0.2 145)",
-      "warning": "var(--primary)",
-      "shadow-s": "var(--shadow-sm)"
-    }
+    "dark": {}
   }
 }

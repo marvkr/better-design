@@ -5,7 +5,7 @@ import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
 
-// Supabase Drawer: uses vaul for bottom-sheet/side drawer
+// Drawer: uses vaul for bottom-sheet/side drawer
 // Rounded-[1.25rem_1.25rem_0_0] for bottom drawers
 
 const Drawer = ({

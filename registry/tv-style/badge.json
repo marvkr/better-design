@@ -18,10 +18,6 @@
       "tv-amber": "oklch(0.87 0.17 95)",
       "tv-green": "oklch(0.86 0.24 145)"
     },
-    "dark": {
-      "tv-cyan": "oklch(0.78 0.16 220)",
-      "tv-amber": "oklch(0.87 0.17 95)",
-      "tv-green": "oklch(0.86 0.24 145)"
-    }
+    "dark": {}
   }
 }

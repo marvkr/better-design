@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 // Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism
 import { formFieldBase } from "./_shared";
 
-// Talentboard InputCopy: read-only token field like the portal's customer id
+// InputCopy: read-only token field like the portal's customer id
 // chip (cus_9BJEcuJ_X35q0T), with one-tap copy.
 
 interface InputCopyProps

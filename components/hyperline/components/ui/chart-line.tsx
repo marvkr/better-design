@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Hyperline line chart: cyan lead line with gold counterpoint.
+// Line chart: cyan lead line with gold counterpoint.
 
 const chartData = [
   { month: "January", arr: 4980, mrr: 415 },

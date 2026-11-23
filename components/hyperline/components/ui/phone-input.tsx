@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Hyperline PhoneInput: country selector fused to the recessed field.
+// PhoneInput: country selector fused to the recessed field.
 
 interface Country {
   code: string;

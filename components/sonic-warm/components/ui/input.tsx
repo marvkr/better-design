@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Input — extracted from airbnb.com (2026-04)
+// Input — extracted from airbnb.com (2026-04)
 // Rounded 8px, 1px #DDDDDD border, white bg
 // Focus: border goes #222, no shadow bloom — just the border change
 // Height: ~48px on search fields, 40px on forms

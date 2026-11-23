@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Vercel Status Indicator: presence/status dot with optional label
+// Status Indicator: presence/status dot with optional label
 
 type StatusType = "online" | "offline" | "busy" | "away" | "idle"
 

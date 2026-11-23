@@ -19,10 +19,6 @@
       "shadow-button-hover": "0.3125rem 0.3125rem 0 oklch(0.115 0.012 255)",
       "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
     },
-    "dark": {
-      "shadow-button": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)",
-      "shadow-button-hover": "0.3125rem 0.3125rem 0 oklch(0.115 0.012 255)",
-      "shadow-primary": "0.25rem 0.25rem 0 oklch(0.115 0.012 255)"
-    }
+    "dark": {}
   }
 }

@@ -18,10 +18,6 @@
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
       "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
     },
-    "dark": {
-      "primary-bright": "oklch(0.71 0.25 350)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), 0 0 0 0.0625rem oklch(0.55 0.21 350 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.25rem 0.875rem oklch(0.65 0.24 350 / 0.32)",
-      "gradient-primary": "linear-gradient( to bottom, var(--primary-bright), var(--primary) )"
-    }
+    "dark": {}
   }
 }

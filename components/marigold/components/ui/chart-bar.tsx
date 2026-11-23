@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Talentboard bar chart: rounded orange bars over hairline grid.
+// Bar chart: rounded orange bars over hairline grid.
 
 const chartData = [
   { month: "January", invoices: 186 },

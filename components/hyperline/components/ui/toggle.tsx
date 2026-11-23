@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Toggle: pressed state lifts into the raised cyan material.
+// Toggle: pressed state lifts into the raised cyan material.
 
 const toggleVariants = cva(
   [

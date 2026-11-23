@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard Textarea: same recessed material as Input.
+// Textarea: same recessed material as Input.
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 

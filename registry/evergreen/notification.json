@@ -20,8 +20,6 @@
     "light": {
       "shadow-l": "var(--shadow-lg)"
     },
-    "dark": {
-      "shadow-l": "var(--shadow-lg)"
-    }
+    "dark": {}
   }
 }

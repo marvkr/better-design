@@ -6,7 +6,7 @@ import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard Drawer: bottom sheet on the layered pop shadow with a grab handle.
+// Drawer: bottom sheet on the layered pop shadow with a grab handle.
 
 const Drawer = ({
   shouldScaleBackground = true,

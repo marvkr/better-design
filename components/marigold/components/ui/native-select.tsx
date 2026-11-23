@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard NativeSelect: recessed field shell around the platform select.
+// NativeSelect: recessed field shell around the platform select.
 
 interface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   error?: boolean;

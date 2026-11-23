@@ -1,0 +1,19 @@
+{
+  "name": "empty",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Empty: an empty drop zone on the stage. A dashed hairline frame,\n * the icon seated in a graphite keycap, a short title and one action.\n */\n\ninterface EmptyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: React.ReactNode\n  title?: React.ReactNode\n  description?: React.ReactNode\n  action?: React.ReactNode\n}\n\nconst Empty = React.forwardRef<HTMLDivElement, EmptyProps>(\n  ({ icon, title, description, action, className, children, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"empty\"\n      className={cn(\n        \"flex flex-col items-center justify-center gap-4 rounded-3xl p-10 text-center\",\n        \"border border-dashed border-[oklch(1_0_0/0.12)]\",\n        className\n      )}\n      {...props}\n    >\n      <div\n        className={cn(\n          \"flex size-11 items-center justify-center rounded-xl text-muted-foreground\",\n          \"[background:var(--graphite-gradient)] [box-shadow:var(--shadow-button)] [&_svg]:size-5\"\n        )}\n      >\n        {icon ?? <InboxIcon />}\n      </div>\n      {(title || description) && (\n        <div className=\"flex max-w-xs flex-col gap-1.5\">\n          {title && <p className=\"text-[0.9375rem] font-medium leading-snug tracking-tight text-foreground\">{title}</p>}\n          {description && <p className=\"text-sm leading-relaxed text-muted-foreground\">{description}</p>}\n        </div>\n      )}\n      {children}\n      {action && <div className=\"flex items-center gap-2\">{action}</div>}\n    </div>\n  )\n)\nEmpty.displayName = \"Empty\"\n\n// feather:inbox\nfunction InboxIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\"><path d=\"M22 12h-6l-2 3h-4l-2-3H2\" /><path d=\"M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11\" /></g>\n    </svg>\n  )\n}\n\nexport { Empty }\nexport type { EmptyProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "graphite-gradient": "linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286))",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)"
+    },
+    "dark": {}
+  }
+}

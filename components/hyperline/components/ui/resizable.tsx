@@ -5,7 +5,7 @@ import * as ResizablePrimitive from "react-resizable-panels";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Resizable: hairline rails with a raised grip handle.
+// Resizable: hairline rails with a raised grip handle.
 
 const ResizablePanelGroup = ({
   className,

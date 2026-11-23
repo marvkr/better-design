@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { menuItemBase, popoverSurface } from "./_shared";
@@ -59,8 +58,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon
-      icon="ph:caret-right"
+    <ChevronRightIcon
       className="ms-auto size-3.5 text-muted-foreground rtl:rotate-180"
       aria-hidden="true"
     />
@@ -138,7 +136,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
     {children}
     <span className="pointer-events-none absolute end-2.5 flex size-4 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Icon icon="ph:check" className="size-4 text-(--primary-text)" aria-hidden="true" />
+        <CheckIcon className="size-4 text-(--primary-text)" aria-hidden="true" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
   </DropdownMenuPrimitive.CheckboxItem>
@@ -228,3 +226,22 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };
+
+// Phosphor, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "ph:check" "ph:caret-right"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m229.66 77.66l-128 128a8 8 0 0 1-11.32 0l-56-56a8 8 0 0 1 11.32-11.32L96 188.69L218.34 66.34a8 8 0 0 1 11.32 11.32"/>
+    </svg>
+  );
+}
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m181.66 133.66l-80 80a8 8 0 0 1-11.32-11.32L164.69 128L90.34 53.66a8 8 0 0 1 11.32-11.32l80 80a8 8 0 0 1 0 11.32"/>
+    </svg>
+  );
+}

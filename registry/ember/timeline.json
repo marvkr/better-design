@@ -13,8 +13,6 @@
     "light": {
       "ag-border": "oklch(1 0 0 / 0.09)"
     },
-    "dark": {
-      "ag-border": "oklch(1 0 0 / 0.09)"
-    }
+    "dark": {}
   }
 }

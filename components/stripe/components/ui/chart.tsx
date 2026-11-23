@@ -4,7 +4,7 @@ import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 import { cn } from "@/lib/utils"
 
-// Stripe Chart: recharts-based with Stripe styling
+// Chart: recharts-based
 // Uses bg-background, border-border, rounded-[0.625rem]
 
 /** Narrows a chart datum to a number, so the value renders as one. */

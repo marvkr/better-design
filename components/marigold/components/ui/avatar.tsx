@@ -5,7 +5,7 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Avatar: hairline rim keeps it readable on dark surfaces.
+// Avatar: hairline rim keeps it readable on dark surfaces.
 
 const Avatar = React.forwardRef<
   React.ComponentRef<typeof AvatarPrimitive.Root>,

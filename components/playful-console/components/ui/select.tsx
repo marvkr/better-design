@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import { formFieldBase, formFieldSingleLine, menuItemBase, popoverSurface } from "./_shared";
@@ -41,8 +40,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon
-        icon="ph:caret-down-bold"
+      <ChevronDownIcon
         className="size-3.5 shrink-0 text-muted-foreground transition-transform duration-fast ease-out group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
@@ -65,7 +63,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="ph:caret-up-bold" className="size-3.5" aria-hidden="true" />
+    <ChevronUpIcon className="size-3.5" aria-hidden="true" />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -84,7 +82,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon icon="ph:caret-down-bold" className="size-3.5" aria-hidden="true" />
+    <ChevronDownIcon className="size-3.5" aria-hidden="true" />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =
@@ -156,7 +154,7 @@ const SelectItem = React.forwardRef<
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     <span className="pointer-events-none absolute end-2 flex size-4 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Icon icon="ph:check-bold" className="size-4 text-primary" aria-hidden="true" />
+        <CheckIcon className="size-4 text-primary" aria-hidden="true" />
       </SelectPrimitive.ItemIndicator>
     </span>
   </SelectPrimitive.Item>
@@ -189,3 +187,29 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 };
+
+// Phosphor, the icon library this system pairs with, drawn inline
+// so the installed component loads no icon at runtime:
+// "ph:check-bold" "ph:caret-down-bold" "ph:caret-up-bold"
+// [BD-1029]
+function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m232.49 80.49l-128 128a12 12 0 0 1-17 0l-56-56a12 12 0 1 1 17-17L96 183L215.51 63.51a12 12 0 0 1 17 17Z"/>
+    </svg>
+  );
+}
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/>
+    </svg>
+  );
+}
+function ChevronUpIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M216.49 168.49a12 12 0 0 1-17 0L128 97l-71.51 71.49a12 12 0 0 1-17-17l80-80a12 12 0 0 1 17 0l80 80a12 12 0 0 1 0 17"/>
+    </svg>
+  );
+}

@@ -33,28 +33,6 @@
       "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "field": "oklch(0.258 0.005 67.6)",
-      "fill-primary": "linear-gradient(180deg, oklch(0.959 0.014 84.6), oklch(0.885 0.028 83.5))",
-      "fill-primary-hover": "linear-gradient(180deg, oklch(0.975 0.012 84.6), oklch(0.905 0.028 83.5))",
-      "fill-raised": "linear-gradient(180deg, oklch(0.306 0.006 78.2), oklch(0.258 0.005 67.6))",
-      "fill-quiet": "linear-gradient(180deg, oklch(0.29 0.006 78.2), oklch(0.241 0.005 67.6))",
-      "fill-quiet-hover": "linear-gradient(180deg, oklch(0.311 0.007 67.6), oklch(0.258 0.005 67.6))",
-      "fill-card": "linear-gradient(180deg, oklch(0.241 0.005 67.6), oklch(0.196 0.003 67.7))",
-      "fill-surface": "linear-gradient(180deg, oklch(0.227 0.004 84.6), oklch(0.201 0.004 84.6))",
-      "fill-well": "linear-gradient(180deg, oklch(0.2 0.003 67.7), oklch(0.226 0.004 67.6))",
-      "bevel-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), inset 0 -0.0625rem 0 oklch(0.515 0.051 77.4 / 0.25), 0 0 0 0.0625rem oklch(0 0 0 / 0.35), 0 0.375rem 1.125rem -0.375rem oklch(0 0 0 / 0.6)",
-      "bevel-raised": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.09), inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
-      "bevel-raised-hover": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.17), inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
-      "bevel-raised-focus": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.26), inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.25rem 0.875rem -0.25rem oklch(0 0 0 / 0.6)",
-      "bevel-quiet": "inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.1), inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.35), 0 0 0 0.0625rem oklch(0 0 0 / 0.5), 0 0.25rem 0.75rem -0.25rem oklch(0 0 0 / 0.6)",
-      "bevel-card": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.35), 0 0 0 0.0625rem oklch(0 0 0 / 0.5), 0 1.5rem 3.125rem -1.5rem oklch(0 0 0 / 0.85)",
-      "bevel-surface": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.05), inset 0 -0.0625rem 0 oklch(0 0 0 / 0.35), 0 0 0 0.0625rem oklch(0 0 0 / 0.45), 0 0.0625rem 0 0.0625rem oklch(1 0 0 / 0.03)",
-      "bevel-well": "inset 0 0.125rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.4)",
-      "bevel-menu": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), inset 0 0 0 0.0625rem oklch(0.936 0.016 82.8 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.55), 0 0.75rem 1.75rem -0.5rem oklch(0 0 0 / 0.7)",
-      "ring-flow": "oklch(0.908 0.056 74.9), oklch(0.759 0.106 59.1), oklch(0.398 0.045 56.8) 22%, oklch(0.309 0.025 56.3) 34%, oklch(0.666 0.107 48.1) 48%, oklch(0.878 0.07 68.1) 60%, oklch(0.368 0.038 54.9) 74%, oklch(0.287 0.023 61) 86%, oklch(0.908 0.056 74.9)",
-      "ring-sheen": "linear-gradient(180deg, oklch(1 0 0 / 0.38), oklch(1 0 0 / 0) 22%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.42))",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

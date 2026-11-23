@@ -2,8 +2,8 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Notion Input — gray-filled, no visible border, 6px radius
-// Extracted from live Notion: /Type to search input is gray-filled with no border
+// Input — gray-filled, no visible border, 6px radius
+// Extracted from the live source: /Type to search input is gray-filled with no border
 // Focus: blue ring color-mix(in_oklch,var(--primary)_35%,transparent), 100ms transition
 
 export interface InputProps

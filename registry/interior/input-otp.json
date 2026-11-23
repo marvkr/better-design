@@ -18,9 +18,6 @@
       "success": "oklch(0.5262 0.0942 151.04)",
       "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
     },
-    "dark": {
-      "success": "oklch(0.5262 0.0942 151.04)",
-      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0.2161 0.0061 56.04 / 0.07)"
-    }
+    "dark": {}
   }
 }

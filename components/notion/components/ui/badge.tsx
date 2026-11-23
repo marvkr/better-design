@@ -3,8 +3,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Notion Badge — multi-select / select tag style
-// Extracted from live Notion workspace (table view, Tags column)
+// Badge — multi-select / select tag style
+// Extracted from the live source workspace (table view, Tags column)
 // No border, semi-transparent fills, 4px radius, 13px font, regular weight
 // Palette: Engineering=gray, Product=yellow, Foundations=orange,
 //          Misc/Post-mortem=pink, RFC=green, Data=purple
@@ -22,7 +22,7 @@ const badgeVariants = cva(
         destructive: "bg-[oklch(0.6032_0.1712_21.7649/0.15)] text-[oklch(0.4733_0.1261_5.08)]",
         // outline kept for composability
         outline: "border border-border text-foreground bg-transparent",
-        // Named Notion palette variants
+        // Named palette variants
         orange: "bg-[oklch(0.5868_0.1586_48.496/0.2)] text-[oklch(0.4188_0.0721_57.6729)]",
         green: "bg-[oklch(0.6747_0.1357_162.2691/0.2)] text-[oklch(0.405_0.0609_157.5864)]",
         purple: "bg-[oklch(0.3953_0.2109_300.0738/0.14)] text-[oklch(0.4018_0.0809_309.1777)]",

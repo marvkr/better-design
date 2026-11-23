@@ -22,11 +22,6 @@
       "shadow-window": "var(--shadow-rim), var(--shadow-float)",
       "chrome-brushed": "linear-gradient( 90deg, oklch(0.8744 0.0029 308.42) 0%, oklch(0.9551 0 0) 50%, oklch(0.8744 0.0029 308.42) 100% )"
     },
-    "dark": {
-      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
-      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
-      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
-      "chrome-brushed": "linear-gradient( 90deg, oklch(0.8744 0.0029 308.42) 0%, oklch(0.9551 0 0) 50%, oklch(0.8744 0.0029 308.42) 100% )"
-    }
+    "dark": {}
   }
 }

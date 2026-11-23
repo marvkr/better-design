@@ -6,7 +6,7 @@ import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard HoverCard: floating surface on the shared layered pop shadow.
+// HoverCard: floating surface on the shared layered pop shadow.
 
 const HoverCard = HoverCardPrimitive.Root;
 

@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Vercel / Geist Input — dark, pure black bg, #333 border
+// Input — dark, pure black bg, #333 border
 // Height: 32px (Geist md), 14px font, -0.006em tracking
 // Focus: #888 border + very subtle white glow
 // Transition: 150ms ease (snappy)

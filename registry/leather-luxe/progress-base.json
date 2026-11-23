@@ -19,11 +19,6 @@
       "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "well": "oklch(0.14 0.005 65)",
-      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
-      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

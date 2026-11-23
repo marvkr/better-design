@@ -2,7 +2,7 @@ import * as React from "react"
 import { Search, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Apple Search Input: input with search icon and optional clear button
+// Search Input: input with search icon and optional clear button
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void

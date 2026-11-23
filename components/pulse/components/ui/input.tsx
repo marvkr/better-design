@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { formFieldBase, formFieldSingleLine } from "./_shared"
 
-// Pulseboard Input — dark recessed well on the analytics board.
+// Input — dark recessed well on the analytics board.
 // Inset depth, hairline border, violet focus glow (shared formFieldBase).
 
 export interface InputProps

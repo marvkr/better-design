@@ -22,9 +22,6 @@
       "ag-fill": "oklch(1 0 0 / 0.05)",
       "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
     },
-    "dark": {
-      "ag-fill": "oklch(1 0 0 / 0.05)",
-      "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
-    }
+    "dark": {}
   }
 }

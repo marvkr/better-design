@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Stripe Typography: light theme, precise sizing
+// Typography: light theme, precise sizing
 // Uses Inter font family, tight leading for headings, relaxed for body
 
 // --- Heading components ---

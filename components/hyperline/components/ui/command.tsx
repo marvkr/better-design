@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 import { Dialog, DialogContent } from "./dialog";
 
-// Hyperline Command: palette surface shares the layered pop shadow.
+// Command: palette surface shares the layered pop shadow.
 
 const Command = React.forwardRef<
   React.ComponentRef<typeof CommandPrimitive>,

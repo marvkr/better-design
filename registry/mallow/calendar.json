@@ -21,9 +21,6 @@
       "option-track": "oklch(0.955 0.014 295)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "option-track": "oklch(0.955 0.014 295)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

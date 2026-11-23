@@ -1,0 +1,28 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Button: a machined control seated in the panel.\n *   - default/primary: the ember gradient, a white catch-light along the top\n *     edge, an ember rim and a dark groove ring that seats it in the panel.\n *   - secondary: the same shape in graphite, the toolbar's resting control.\n *   - outline / ghost: quiet actions inside a panel row.\n * 0.875rem corners on a 2.25rem control, the radius of every tool button.\n */\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\n    \"text-sm font-medium leading-none\",\n    \"rounded-lg cursor-pointer select-none\",\n    \"transition-[background,box-shadow,color,border-color,scale] duration-fast\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"motion-safe:active:scale-[0.98]\",\n    \"[&_svg]:size-4 [&_svg]:shrink-0\",\n  ].join(\" \"),\n  {\n    variants: {\n      variant: {\n        default:\n          \"[background:var(--ember-gradient)] text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:brightness-105\",\n        primary:\n          \"[background:var(--ember-gradient)] text-primary-foreground \" +\n          \"[box-shadow:var(--shadow-primary)] \" +\n          \"hover:brightness-105\",\n        secondary:\n          \"[background:var(--graphite-gradient)] text-secondary-foreground font-normal \" +\n          \"[box-shadow:var(--shadow-button)] \" +\n          \"hover:[box-shadow:var(--shadow-button-hover)] hover:text-foreground\",\n        outline:\n          \"bg-transparent text-foreground border border-border \" +\n          \"hover:bg-muted\",\n        ghost:\n          \"bg-transparent text-muted-foreground \" +\n          \"hover:bg-muted hover:text-foreground\",\n        destructive:\n          \"bg-destructive text-destructive-foreground \" +\n          \"[box-shadow:inset_0_0.0625rem_0_oklch(1_0_0/0.3),0_0_0_0.0625rem_oklch(0.48_0.17_25)] \" +\n          \"hover:brightness-105\",\n        link: \"h-auto px-0 text-foreground underline-offset-4 hover:text-primary\",\n      },\n      size: {\n        sm: \"h-8 px-3 text-xs rounded-md\",\n        default: \"h-9 px-3.5\",\n        lg: \"h-11 px-6 text-sm rounded-xl\",\n        icon: \"size-9\",\n        \"icon-sm\": \"size-8 rounded-md\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3",
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ember-gradient": "linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39))",
+      "ember-rim": "oklch(0.5 0.16 39)",
+      "graphite-gradient": "linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286))",
+      "groove": "oklch(0.174 0.004 286)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)",
+      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0 0 0.0625rem var(--ember-rim), 0 0 0 0.1875rem var(--groove)"
+    },
+    "dark": {}
+  }
+}

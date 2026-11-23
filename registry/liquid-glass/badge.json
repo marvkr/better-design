@@ -1,0 +1,22 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Liquid Glass Badge — the kit site's pill: a 13% wash of its own colour with\n * the colour as text (each clears 4.5:1 on its wash), a quiet outline for\n * facts and versions, and one solid pill. Badges stay flat so the glass\n * around them reads as glass.\n */\nconst badgeVariants = cva(\n  \"inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1.5 rounded-full px-2 text-[0.6875rem] font-medium whitespace-nowrap \" +\n    \"[&>svg]:pointer-events-none [&>svg]:size-3\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary/13 text-primary\",\n        primary: \"bg-primary/13 text-primary\",\n        solid: \"bg-foreground text-background\",\n        secondary: \"bg-foreground/10 text-foreground\",\n        outline: \"border border-foreground/25 font-normal text-muted-foreground\",\n        success: \"bg-success/13 text-success\",\n        warning: \"bg-warning/13 text-warning\",\n        destructive: \"bg-destructive/13 text-destructive\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\ninterface BadgeProps extends React.ComponentProps<\"span\">, VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, ...props }: BadgeProps) {\n  return <span data-slot=\"badge\" data-variant={variant ?? \"default\"} className={cn(badgeVariants({ variant }), className)} {...props} />\n}\n\nexport { Badge, badgeVariants }\nexport type { BadgeProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.492 0.115 158)",
+      "warning": "oklch(0.515 0.122 59.3)"
+    },
+    "dark": {}
+  }
+}

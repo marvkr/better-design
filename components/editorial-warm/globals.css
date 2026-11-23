@@ -41,6 +41,10 @@
   /* Destructive — saturated red for irreversible actions */
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.985 0.006 80);
+  --success: oklch(0.55 0.15 150);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.72 0.15 75);
+  --warning-foreground: oklch(0.27 0.012 55);
 
   /* Hairline using ink alpha — sits on cream cleanly */
   --border: oklch(0 0 0 / 0.08);
@@ -136,6 +140,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

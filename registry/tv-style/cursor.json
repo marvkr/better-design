@@ -16,8 +16,6 @@
     "light": {
       "tv-amber": "oklch(0.87 0.17 95)"
     },
-    "dark": {
-      "tv-amber": "oklch(0.87 0.17 95)"
-    }
+    "dark": {}
   }
 }

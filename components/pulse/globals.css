@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Pulseboard — dark analytics / admin-board design system.
+ * Dark analytics / admin-board design system.
  * Derived from a deep near-black canvas with a glowing violet accent,
  * data cards, and chart surfaces. Surfaces are layered cool-dark; the
  * primary is a saturated electric violet that glows on filled controls.
@@ -40,6 +40,10 @@
 
   --destructive: oklch(0.585 0.2 24);
   --destructive-foreground: oklch(0.99 0.004 286);
+  --success: oklch(0.585 0.15 150);
+  --success-foreground: oklch(0.171 0.018 285);
+  --warning: oklch(0.725 0.15 75);
+  --warning-foreground: oklch(0.171 0.018 285);
 
   --border: oklch(0.312 0.026 288);
   --input: oklch(0.246 0.024 287);
@@ -113,6 +117,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

@@ -1,0 +1,11 @@
+{
+  "name": "glass-tokens",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/glass-tokens.ts",
+      "content": "// From Liquid Glass by Bilal Gürsen, https://github.com/bilalgursen/liquid-glass\n// (commit 2311cd12d56fc105b4127a1e762f4092bfbb9283). Copyright (c) 2026 Bilal Abdullah Gürşen.\n// MIT licence: the full text is in LICENSE beside this system's components folder.\n// Changed here: flat file names, import paths, theme tokens in place of fixed label\n// colours, and the props marked [port].\n\n// Theme colors shared by every canvas glass control; light/dark match the hero slider.\nexport type GlassThemeName = 'light' | 'dark'\n\nexport type GlassTokens = {\n  /** Page color the glass refracts where nothing is drawn beneath it. */\n  surface: string\n  track: string\n  accent: string\n  accentDeep: string\n  frostCenter: string\n  frostEdge: string\n  text: string\n  textMuted: string\n  well: string\n}\n\nexport const glassTokens: Record<GlassThemeName, GlassTokens> = {\n  light: {\n    surface: '#dedfe2',\n    track: '#c6c5c9',\n    accent: '#3291FF',\n    accentDeep: '#02458f',\n    frostCenter: '#f9fafc',\n    frostEdge: '#e2e4e9',\n    text: '#1d1d1f',\n    textMuted: '#6e6e75',\n    well: 'rgba(0, 0, 0, 0.055)',\n  },\n  dark: {\n    surface: '#17181c',\n    track: '#34353b',\n    accent: '#3291FF',\n    accentDeep: '#02458f',\n    frostCenter: '#2a2c31',\n    frostEdge: '#1c1d21',\n    text: '#f5f5f7',\n    textMuted: '#8d8d95',\n    well: 'rgba(255, 255, 255, 0.06)',\n  },\n}\n\nexport function hexToRgb(hex: string): [number, number, number] {\n  const h = hex.replace('#', '')\n  const n = parseInt(h.length === 3 ? h.replace(/./g, '$&$&') : h.slice(0, 6), 16)\n  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

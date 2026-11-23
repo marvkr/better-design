@@ -11,7 +11,7 @@ import { WebHaptics } from "web-haptics"
  * trigger: any built-in preset → success / error / warning / heavy / etc.
  *          Use for variant-specific feedback (destructive button, toast status).
  *
- * Haptics supplement, never replace, the visual feedback (Apple HIG). The UI
+ * Haptics supplement, never replace, the visual feedback. The UI
  * works fully without vibration: web-haptics silently no-ops on desktop and on
  * any platform without the Vibration API, and we also respect reduced-motion.
  */

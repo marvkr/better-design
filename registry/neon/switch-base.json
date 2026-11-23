@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Checked track reuses the primary Button's neon material, scaled down. */\nconst Switch = React.forwardRef<\n  HTMLButtonElement,\n  Omit<SwitchPrimitive.Root.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer inline-flex h-[1.375rem] w-[2.5rem] shrink-0 cursor-pointer items-center rounded-full border border-border\",\n      \"bg-input [box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0_/_0.4)]\",\n      \"transition-[background,box-shadow,border-color] duration-base\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:[background:var(--neon-gradient)] data-checked:border-transparent\",\n      \"data-checked:[box-shadow:var(--shadow-neon)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-[1rem] w-[1rem] rounded-full bg-background\",\n        \"[box-shadow:0_0.0625rem_0.125rem_oklch(0_0_0_/_0.5)]\",\n        \"transition-transform duration-base\",\n        \"data-checked:translate-x-[1.25rem]\",\n        \"data-unchecked:translate-x-0.5\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = \"Switch\"\n\nexport { Switch }\n",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Checked track reuses the primary Button's neon material, scaled down. */\nconst Switch = React.forwardRef<\n  HTMLButtonElement,\n  Omit<SwitchPrimitive.Root.Props, \"className\"> & { className?: string }\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"group/switch peer inline-flex h-[1.375rem] w-[2.5rem] shrink-0 cursor-pointer items-center rounded-full border border-border\",\n      \"bg-input [box-shadow:inset_0_0.0625rem_0.125rem_oklch(0_0_0_/_0.4)]\",\n      \"transition-[background,box-shadow,border-color] duration-base\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n      \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n      \"data-checked:[background:var(--neon-gradient)] data-checked:border-transparent\",\n      \"data-checked:[box-shadow:var(--shadow-neon)]\",\n      className\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-[1rem] w-[1rem] rounded-full bg-background\",\n        \"[box-shadow:0_0.0625rem_0.125rem_oklch(0_0_0_/_0.5)]\",\n        \"data-checked:translate-x-[1.25rem]\",\n        \"data-unchecked:translate-x-0.5\",\n        \"origin-left data-checked:origin-right rtl:origin-right rtl:data-checked:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\"\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = \"Switch\"\n\nexport { Switch }\n",
       "type": "registry:ui"
     }
   ],
@@ -15,11 +15,9 @@
     "theme": {},
     "light": {
       "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
-      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)"
+      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)",
+      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "neon-gradient": "linear-gradient( 180deg, oklch(0.9 0.21 145) 0%, oklch(0.83 0.22 146) 100% )",
-      "shadow-neon": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.35), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.25rem 0.75rem -0.1875rem oklch(0.86 0.22 145 / 0.22), 0 0.625rem 1.875rem -0.5rem oklch(0.86 0.22 145 / 0.16)"
-    }
+    "dark": {}
   }
 }

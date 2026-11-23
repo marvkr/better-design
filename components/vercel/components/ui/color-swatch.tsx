@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Vercel Color Swatch: displays a color with optional label
+// Color Swatch: displays a color with optional label
 
 interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string

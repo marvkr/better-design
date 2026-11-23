@@ -34,25 +34,6 @@
       "fill-secondary-hover": "var(--gloss), linear-gradient( 180deg, var(--secondary-hover-from) 0%, var(--secondary-hover-to) 100% )",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "primary-from": "oklch(0.684 0.1713 252.21)",
-      "primary-to": "oklch(0.5914 0.224 258.99)",
-      "primary-hover-from": "oklch(0.724 0.1521 250.8)",
-      "primary-hover-to": "oklch(0.6314 0.2129 257.6)",
-      "secondary-from": "oklch(0.9521 0 0)",
-      "secondary-to": "oklch(0.8945 0 0)",
-      "secondary-hover-from": "oklch(0.9731 0 0)",
-      "secondary-hover-to": "oklch(0.9189 0 0)",
-      "shadow-button": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.1), 0 0.5rem 1.5rem oklch(0 0 0 / 0.08)",
-      "shadow-button-hover": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.12), 0 0.75rem 1.875rem oklch(0 0 0 / 0.12)",
-      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.34), 0 0.5rem 1.5rem oklch(0.6243 0.2056 255.49 / 0.32)",
-      "shadow-primary-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.75rem 1.875rem oklch(0.6243 0.2056 255.49 / 0.4)",
-      "gloss": "linear-gradient( 180deg, oklch(1 0 0 / 0.34) 0%, oklch(1 0 0 / 0.14) 34%, oklch(1 0 0 / 0.04) 62%, oklch(1 0 0 / 0) 100% )",
-      "fill-primary": "var(--gloss), linear-gradient(180deg, var(--primary-from) 0%, var(--primary-to) 100%)",
-      "fill-primary-hover": "var(--gloss), linear-gradient( 180deg, var(--primary-hover-from) 0%, var(--primary-hover-to) 100% )",
-      "fill-secondary": "var(--gloss), linear-gradient(180deg, var(--secondary-from) 0%, var(--secondary-to) 100%)",
-      "fill-secondary-hover": "var(--gloss), linear-gradient( 180deg, var(--secondary-hover-from) 0%, var(--secondary-hover-to) 100% )",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

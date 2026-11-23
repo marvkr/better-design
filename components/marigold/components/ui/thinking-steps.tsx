@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 // Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism
 
-// Talentboard ThinkingSteps: agent progress feed; complete markers wear the
+// ThinkingSteps: agent progress feed; complete markers wear the
 // scaled-down orange material, the active marker pulses.
 
 type StepStatus = "complete" | "active" | "pending";

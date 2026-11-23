@@ -5,7 +5,7 @@ import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 
-// Stripe Tag Input: input for adding/removing tags
+// Tag Input: input for adding/removing tags
 
 interface TagInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {
   value?: string[]

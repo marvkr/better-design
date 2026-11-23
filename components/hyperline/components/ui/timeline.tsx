@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Timeline: event feed with tinted markers per intent.
+// Timeline: event feed with tinted markers per intent.
 
 interface TimelineItem {
   title: string;

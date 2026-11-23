@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Talentboard: a light hiring / recruiting platform.
+ * A light hiring / recruiting platform.
  * Warm off-white page, crisp white cards, a confident orange accent on
  * primary actions, and friendly medium-to-large radii. Depth is quiet:
  * a single hairline rim plus a soft low-alpha ambient shadow, never a glow.
@@ -38,6 +38,10 @@
 
   --destructive: oklch(0.6 0.2 27);
   --destructive-foreground: oklch(0.99 0.005 80);
+  --success: oklch(0.55 0.15 150);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.74 0.15 75);
+  --warning-foreground: oklch(0.27 0.012 60);
 
   --border: oklch(0.915 0.006 70);
   --input: oklch(1 0 0);
@@ -113,6 +117,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

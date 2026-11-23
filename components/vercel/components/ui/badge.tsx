@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Vercel / Geist Badge — minimal, monochromatic
+// Badge — minimal, monochromatic
 // Default: dark secondary bg with subtle border
 // Primary: white bg, black text (inverted on dark)
 

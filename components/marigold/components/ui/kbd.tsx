@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Kbd: tiny raised keycap, the same layered language as buttons.
+// Kbd: tiny raised keycap, the same layered language as buttons.
 
 interface KbdProps extends React.HTMLAttributes<HTMLElement> {}
 

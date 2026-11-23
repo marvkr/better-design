@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Talentboard Item: list row like the portal's payment-method entry.
+// Item: list row like the portal's payment-method entry.
 
 interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
   leading?: React.ReactNode;

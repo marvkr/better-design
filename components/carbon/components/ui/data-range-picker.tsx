@@ -32,6 +32,12 @@ export function DataRangePicker({
   className,
 }: DataRangePickerProps) {
   const [date, setDate] = React.useState<DateRange | undefined>(value);
+  // Follow the parent's value, including a reset to undefined.
+  const [syncedValue, setSyncedValue] = React.useState(value);
+  if (value !== syncedValue) {
+    setSyncedValue(value);
+    setDate(value);
+  }
 
   const handleSelect = (range: DateRange | undefined) => {
     setDate(range);

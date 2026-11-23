@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Sidebar: near-black purple rail like the portal's left nav.
+// Sidebar: near-black purple rail like the portal's left nav.
 // The active item gets a raised panel highlight.
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {

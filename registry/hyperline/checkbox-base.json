@@ -4,13 +4,12 @@
   "files": [
     {
       "path": "components/ui/checkbox.tsx",
-      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\nimport { Check } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Hyperline Checkbox: unchecked = recessed well, checked = the exact raised\n// cyan material the primary Button uses, scaled down.\n\nfunction Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded-sm\",\n        \"border border-border/80 bg-input/80 shadow-[var(--hl-shadow-inset)]\",\n        \"transition-all duration-fast ease-out\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:border-transparent data-checked:bg-[image:var(--hl-primary-gradient)]\",\n        \"data-checked:text-primary-foreground data-checked:shadow-[var(--hl-shadow-primary-sm)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        <Check className=\"h-3 w-3\" strokeWidth={3} />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n",
+      "content": "\"use client\";\n\nimport type { SVGProps } from \"react\";\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Checkbox: unchecked = recessed well, checked = the exact raised\n// cyan material the primary Button uses, scaled down.\n\nfunction Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot=\"checkbox\"\n      className={cn(\n        \"peer inline-flex items-center justify-center h-4 w-4 shrink-0 rounded-sm\",\n        \"border border-border/80 bg-input/80 shadow-[var(--hl-shadow-inset)]\",\n        \"transition-all duration-fast ease-out\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        \"data-checked:border-transparent data-indeterminate:border-transparent data-checked:bg-[image:var(--hl-primary-gradient)] data-indeterminate:bg-[image:var(--hl-primary-gradient)]\",\n        \"data-checked:text-primary-foreground data-indeterminate:text-primary-foreground data-checked:shadow-[var(--hl-shadow-primary-sm)] data-indeterminate:shadow-[var(--hl-shadow-primary-sm)]\",\n        className\n      )}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator data-slot=\"checkbox-indicator\" className=\"size-full flex items-center justify-center text-current\">\n        <CheckIcon className=\"h-3 w-3 in-data-[indeterminate]:hidden\" />\n        <MinusIcon className=\"h-3 w-3 hidden in-data-[indeterminate]:block\" />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\nCheckbox.displayName = \"Checkbox\";\n\nexport { Checkbox };\n\n// \"carbon:checkmark\" and \"carbon:subtract\" from Carbon Icons,\n// the icon library this system pairs with, drawn inline so the installed\n// component loads no icon at runtime.\n// One unit of stroke keeps the thin Carbon tick readable at 12px. [BD-1029]\nfunction CheckIcon(props: SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 32 32\" aria-hidden=\"true\" {...props}>\n      <path fill=\"currentColor\" stroke=\"currentColor\" strokeWidth=\"1\" strokeLinejoin=\"round\" d=\"m13 24l-9-9l1.414-1.414L13 21.171L26.586 7.586L28 9z\"/>\n    </svg>\n  );\n}\nfunction MinusIcon(props: SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 32 32\" aria-hidden=\"true\" {...props}>\n      <path fill=\"currentColor\" d=\"M8 15h16v2H8z\"/>\n    </svg>\n  );\n}\n",
       "type": "registry:ui"
     }
   ],
   "dependencies": [
-    "@base-ui/react@^1.6.0",
-    "lucide-react@>=0.518.0 <1"
+    "@base-ui/react@^1.6.0"
   ],
   "cssVars": {
     "theme": {},
@@ -20,11 +19,6 @@
       "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "hl-shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.05 0.02 300 / 0.4), inset 0 0 0 0.0625rem oklch(1 0 0 / 0.02)",
-      "hl-primary-gradient": "linear-gradient(to bottom, oklch(0.85 0.115 198), oklch(0.74 0.13 205))",
-      "hl-shadow-primary-sm": "0 0 0 0.0625rem oklch(0.6 0.115 205 / 0.9), inset 0 0.0625rem 0 oklch(1 0 0 / 0.4), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.125rem 0.5rem -0.125rem oklch(0.74 0.13 205 / 0.45)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { tbCardSurface } from "./_shared";
 
-// Talentboard Card: white surface lifted off the warm canvas by
+// Card: white surface lifted off the warm canvas by
 // the layered card shadow (hairline rim + top highlight + near + far ambient).
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

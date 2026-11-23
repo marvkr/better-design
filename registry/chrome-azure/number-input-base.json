@@ -16,8 +16,6 @@
     "light": {
       "surface-silver": "linear-gradient(to bottom, oklch(0.719 0.053 246.8), oklch(0.569 0.067 251.9))"
     },
-    "dark": {
-      "surface-silver": "linear-gradient(to bottom, oklch(0.719 0.053 246.8), oklch(0.569 0.067 251.9))"
-    }
+    "dark": {}
   }
 }

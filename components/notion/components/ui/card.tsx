@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Notion Card — board/database cards use 10px radius, box-shadow border
+// Card — board/database cards use 10px radius, box-shadow border
 // Real extracted: rgba(42,28,0,0.07) 0px 0px 0px 1px (warm 1px border via shadow)
 // + rgba(25,25,25,0.027) 0px 4px 12px (subtle backdrop), rgba(25,25,25,0.02) 0px 1px 2px
 // Callout blocks use same 10px radius

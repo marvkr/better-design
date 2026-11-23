@@ -19,11 +19,6 @@
       "warning": "oklch(0.7686 0.1647 70.08)",
       "warning-foreground": "oklch(0.2178 0 0)"
     },
-    "dark": {
-      "success": "oklch(0.6271 0.1699 149.21)",
-      "success-foreground": "oklch(0.9851 0 0)",
-      "warning": "oklch(0.7686 0.1647 70.08)",
-      "warning-foreground": "oklch(0.2178 0 0)"
-    }
+    "dark": {}
   }
 }

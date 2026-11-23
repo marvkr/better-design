@@ -6,7 +6,7 @@ import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Hyperline SearchInput: recessed field with leading glass and clear action.
+// SearchInput: recessed field with leading glass and clear action.
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;

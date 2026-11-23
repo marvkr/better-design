@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 import { ChevronDown } from "lucide-react"
 
-// Stripe Phone Input: phone number input with country code selector
+// Phone Input: phone number input with country code selector
 
 interface Country {
   code: string

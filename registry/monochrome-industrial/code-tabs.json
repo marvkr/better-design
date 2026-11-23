@@ -18,10 +18,6 @@
       "mono-border-visible": "oklch(0.3211 0 0)",
       "mono-accent": "oklch(0.5607 0.2177 26.79)"
     },
-    "dark": {
-      "mono-surface": "oklch(0.1776 0 0)",
-      "mono-border-visible": "oklch(0.3211 0 0)",
-      "mono-accent": "oklch(0.5607 0.2177 26.79)"
-    }
+    "dark": {}
   }
 }

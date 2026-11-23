@@ -13,8 +13,6 @@
     "light": {
       "shadow": "0 0 0 0.0625rem oklch(0 0 0 / 0.04), 0 0.375rem 1rem oklch(0 0 0 / 0.12)"
     },
-    "dark": {
-      "shadow": "0 0 0 0.0625rem oklch(0 0 0 / 0.04), 0 0.375rem 1rem oklch(0 0 0 / 0.12)"
-    }
+    "dark": {}
   }
 }

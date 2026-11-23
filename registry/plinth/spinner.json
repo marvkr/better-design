@@ -1,0 +1,11 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Spinner: a recessed ring with an ember arc that sweeps around it,\n * like a render in progress.\n */\n\ninterface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: \"sm\" | \"md\" | \"lg\" | \"xl\"\n  label?: string\n}\n\nconst sizeClasses = {\n  sm: \"size-4 border-2\",\n  md: \"size-5 border-2\",\n  lg: \"size-6 border-[0.1875rem]\",\n  xl: \"size-8 border-[0.1875rem]\",\n}\n\nfunction Spinner({ size = \"md\", label = \"Loading\", className, ...props }: SpinnerProps) {\n  return (\n    <div\n      role=\"status\"\n      aria-live=\"polite\"\n      data-slot=\"spinner\"\n      className={cn(\n        \"inline-block shrink-0 rounded-full border-muted border-t-primary\",\n        \"animate-spin [animation-duration:0.8s] motion-reduce:[animation-duration:2.4s]\",\n        sizeClasses[size],\n        className\n      )}\n      {...props}\n    >\n      <span className=\"sr-only\">{label}</span>\n    </div>\n  )\n}\n\nexport { Spinner }\nexport type { SpinnerProps }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

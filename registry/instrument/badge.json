@@ -21,13 +21,6 @@
       "gauge-ok": "oklch(0.74 0.12 152)",
       "gauge-warn": "oklch(0.76 0.14 70)"
     },
-    "dark": {
-      "gauge-rim": "oklch(0.6 0.1 78)",
-      "gauge-grad-top": "oklch(0.845 0.108 88)",
-      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
-      "gauge-line-soft": "oklch(0.8 0.115 85 / 0.25)",
-      "gauge-ok": "oklch(0.74 0.12 152)",
-      "gauge-warn": "oklch(0.76 0.14 70)"
-    }
+    "dark": {}
   }
 }

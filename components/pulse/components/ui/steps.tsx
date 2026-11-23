@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Check } from "lucide-react"
 
-// Pulseboard Steps / Stepper component
+// Steps / Stepper component
 // Completed: bg-primary with check icon
 // Active: ring-2 ring-primary text-primary
 // Upcoming: bg-secondary text-muted-foreground

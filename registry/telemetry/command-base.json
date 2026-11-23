@@ -21,8 +21,6 @@
     "light": {
       "shadow-popover": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 0.75rem 1.75rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.78 0.21 148 / 0.07)"
     },
-    "dark": {
-      "shadow-popover": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 0.75rem 1.75rem oklch(0 0 0 / 0.55), 0 0 1.125rem oklch(0.78 0.21 148 / 0.07)"
-    }
+    "dark": {}
   }
 }

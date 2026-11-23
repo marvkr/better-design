@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// Apple Badge — pill-shaped (like Apple labels), minimal
+// Badge — pill-shaped, minimal
 // Default: light gray bg, very subtle
 // Primary: blue (#0071e3)
 

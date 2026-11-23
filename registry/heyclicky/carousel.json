@@ -21,12 +21,6 @@
       "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), 0 0.25rem 0.875rem oklch(0 0 0 / 0.1)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "gradient-silver": "linear-gradient( 180deg, oklch(0.952 0 0) 0%, oklch(0.894 0 0) 100% )",
-      "gradient-silver-hover": "linear-gradient( 180deg, oklch(0.973 0 0) 0%, oklch(0.919 0 0) 100% )",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.6), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.05)",
-      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.7), 0 0.25rem 0.875rem oklch(0 0 0 / 0.1)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

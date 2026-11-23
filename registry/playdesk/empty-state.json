@@ -16,11 +16,6 @@
       "shadow-window": "var(--shadow-rim), var(--shadow-float)",
       "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)"
     },
-    "dark": {
-      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)",
-      "shadow-rim": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.06)",
-      "shadow-window": "var(--shadow-rim), var(--shadow-float)",
-      "shadow-track-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.14)"
-    }
+    "dark": {}
   }
 }

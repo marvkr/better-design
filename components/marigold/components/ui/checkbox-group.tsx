@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 // Ported from fluid-functionalism (mickadesign): https://github.com/mickadesign/fluid-functionalism
 import { Checkbox } from "./checkbox";
 
-// Talentboard CheckboxGroup: stacked options reusing the DS Checkbox material.
+// CheckboxGroup: stacked options reusing the DS Checkbox material.
 
 interface CheckboxGroupOption {
   value: string;

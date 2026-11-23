@@ -17,9 +17,6 @@
       "shadow-l": "var(--shadow-lg)",
       "shadow-button": "var(--shadow-sm)"
     },
-    "dark": {
-      "shadow-l": "var(--shadow-lg)",
-      "shadow-button": "var(--shadow-sm)"
-    }
+    "dark": {}
   }
 }

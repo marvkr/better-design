@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { X } from "lucide-react"
 
-// Notion Notification: alert/notification item component
+// Notification: alert/notification item component
 
 interface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode

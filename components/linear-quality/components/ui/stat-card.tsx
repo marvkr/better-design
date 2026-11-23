@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
-// Linear Stat Card: displays a metric with label, value, and optional change indicator
+// Stat Card: displays a metric with label, value, and optional change indicator
 
 interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string

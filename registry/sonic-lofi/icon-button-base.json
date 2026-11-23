@@ -17,8 +17,6 @@
     "light": {
       "shadow-primary": "0 0 0 0.0625rem oklch(0.7541 0.0853 67.1 / 0.35)"
     },
-    "dark": {
-      "shadow-primary": "0 0 0 0.0625rem oklch(0.7541 0.0853 67.1 / 0.35)"
-    }
+    "dark": {}
   }
 }

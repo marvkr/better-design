@@ -5,7 +5,7 @@ import * as ResizablePrimitive from "react-resizable-panels"
 
 import { cn } from "@/lib/utils"
 
-// Linear Resizable panels
+// Resizable panels
 
 const ResizablePanelGroup = ({
   className,

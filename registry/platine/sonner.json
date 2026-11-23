@@ -17,9 +17,6 @@
       "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4)",
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.5rem oklch(0 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
     },
-    "dark": {
-      "shadow-l": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0.5rem 2rem oklch(0 0 0 / 0.6), 0 0.125rem 0.5rem oklch(0 0 0 / 0.4)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.12), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.5rem oklch(0 0 0 / 0.45), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)"
-    }
+    "dark": {}
   }
 }

@@ -37,6 +37,10 @@
   /* Muted brick — the only warm tone an LCD ever shows (low-battery dot) */
   --destructive: oklch(0.5050 0.1300 28.00);
   --destructive-foreground: oklch(0.9400 0.0200 126.14);
+  --success: oklch(0.505 0.098 150);
+  --success-foreground: oklch(0.94 0.02 126.1);
+  --warning: oklch(0.645 0.098 75);
+  --warning-foreground: oklch(0.2 0 0);
 
   /* Olive grid lines, low alpha — like the pixel grid */
   --border: oklch(0.2776 0.0445 144.26 / 0.28);
@@ -108,6 +112,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

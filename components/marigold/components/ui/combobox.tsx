@@ -15,7 +15,7 @@ import {
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-// Talentboard Combobox: recessed-well trigger (the form-field material,
+// Combobox: recessed-well trigger (the form-field material,
 // matching Input and Select) with the command palette surface.
 
 const plans = [

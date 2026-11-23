@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "sonner"
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
-// Figma Sonner: clean minimal toast notifications
+// Sonner: clean minimal toast notifications
 // Uses bg-background, rounded-[0.75rem], ring-1 border
 
 const Toaster = ({ ...props }: ToasterProps) => {

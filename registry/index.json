@@ -195,6 +195,10 @@
       "label": "Linear Quality"
     },
     {
+      "name": "liquid-glass",
+      "label": "Liquid Glass"
+    },
+    {
       "name": "lumen-dark",
       "label": "Lumen Dark"
     },
@@ -273,6 +277,10 @@
     {
       "name": "playful-console",
       "label": "Playful console"
+    },
+    {
+      "name": "plinth",
+      "label": "Plinth"
     },
     {
       "name": "precision",

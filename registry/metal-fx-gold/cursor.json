@@ -16,8 +16,6 @@
     "light": {
       "gradient-chromatic": "linear-gradient( 135deg, oklch(0.78 0.16 320) 0%, oklch(0.78 0.16 280) 25%, oklch(0.78 0.14 220) 50%, oklch(0.82 0.14 90) 75%, oklch(0.78 0.16 320) 100% )"
     },
-    "dark": {
-      "gradient-chromatic": "linear-gradient( 135deg, oklch(0.78 0.16 320) 0%, oklch(0.78 0.16 280) 25%, oklch(0.78 0.14 220) 50%, oklch(0.82 0.14 90) 75%, oklch(0.78 0.16 320) 100% )"
-    }
+    "dark": {}
   }
 }

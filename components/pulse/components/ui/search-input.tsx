@@ -3,7 +3,7 @@ import { Search, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formFieldBase, formFieldSingleLine } from "./_shared"
 
-// Pulseboard Search Input: dark well with search icon and optional clear button.
+// Search Input: dark well with search icon and optional clear button.
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void

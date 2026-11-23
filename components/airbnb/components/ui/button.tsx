@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Airbnb Button, measured on airbnb.com (13 November 2026)
+// Button, measured on airbnb.com (13 November 2026)
 // Default: brand gradient, linear at rest and radial on hover, weight 500
 // Secondary: grey fill with a dark label
 // Outline: white with a 1px dark line

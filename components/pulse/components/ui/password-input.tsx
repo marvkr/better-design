@@ -5,7 +5,7 @@ import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formFieldBase, formFieldSingleLine } from "./_shared"
 
-// Pulseboard Password Input: dark well with show/hide toggle.
+// Password Input: dark well with show/hide toggle.
 
 export interface PasswordInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {}

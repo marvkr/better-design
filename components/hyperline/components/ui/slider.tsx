@@ -5,7 +5,7 @@ import * as SliderPrimitive from "@radix-ui/react-slider";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Slider: recessed track; the Range fill and thumb both wear the
+// Slider: recessed track; the Range fill and thumb both wear the
 // raised cyan primary material so the slider matches the Button.
 
 const Slider = React.forwardRef<

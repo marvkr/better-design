@@ -1,0 +1,14 @@
+{
+  "name": "field",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Label } from \"./label\"\n\n/*\n * Plinth Field: a label, its control, and a hint or an error under it.\n * The error swaps in for the hint, in the destructive colour with an icon.\n */\n\ninterface FieldProps extends React.HTMLAttributes<HTMLDivElement> {\n  label?: string\n  htmlFor?: string\n  description?: string\n  error?: string\n  required?: boolean\n  optional?: boolean\n}\n\nconst Field = React.forwardRef<HTMLDivElement, FieldProps>(\n  ({ label, htmlFor, description, error, required, optional, className, children, ...props }, ref) => {\n    const hasError = Boolean(error)\n\n    return (\n      <div ref={ref} className={cn(\"flex flex-col gap-2\", className)} {...props}>\n        {label && (\n          <div className=\"flex items-center gap-1.5\">\n            <Label htmlFor={htmlFor} className={cn(hasError && \"text-destructive\")}>\n              {label}\n            </Label>\n            {required && (\n              <span className=\"text-sm leading-none text-destructive\" aria-hidden=\"true\">\n                *\n              </span>\n            )}\n            {optional && !required && (\n              <span className=\"text-xs text-muted-foreground\">Optional</span>\n            )}\n          </div>\n        )}\n\n        <div className={cn(hasError && \"[&_input]:border-destructive [&_textarea]:border-destructive [&_select]:border-destructive\")}>\n          {children}\n        </div>\n\n        {description && !hasError && (\n          <p className=\"text-xs leading-relaxed text-muted-foreground\">{description}</p>\n        )}\n\n        {hasError && (\n          <p className=\"flex items-center gap-1.5 text-xs leading-relaxed text-destructive\" role=\"alert\">\n            <AlertCircleIcon className=\"size-3.5 shrink-0\" />\n            {error}\n          </p>\n        )}\n      </div>\n    )\n  }\n)\nField.displayName = \"Field\"\n\n// feather:alert-circle\nfunction AlertCircleIcon(props: React.SVGProps<SVGSVGElement>) {\n  return (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" {...props}>\n      <g fill=\"none\" stroke=\"currentColor\" strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\">\n        <circle cx=\"12\" cy=\"12\" r=\"10\" />\n        <path d=\"M12 8v4m0 4h.01\" />\n      </g>\n    </svg>\n  )\n}\n\nexport { Field }\nexport type { FieldProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/plinth/label.json"
+  ]
+}

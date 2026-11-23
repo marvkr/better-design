@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Pulseboard ButtonGroup: groups buttons horizontally, removes inner rounded edges
+// ButtonGroup: groups buttons horizontally, removes inner rounded edges
 // Outer buttons keep rounded-lg, inner buttons get flat edges where they meet
 // Divider between buttons via ring-inset on adjacent elements
 

@@ -21,12 +21,6 @@
       "mono-accent": "oklch(0.5607 0.2177 26.79)",
       "ease-out": "cubic-bezier(0.25, 0.1, 0.25, 1)"
     },
-    "dark": {
-      "mono-surface": "oklch(0.1776 0 0)",
-      "mono-surface-raised": "oklch(0.2178 0 0)",
-      "mono-border-visible": "oklch(0.3211 0 0)",
-      "mono-accent": "oklch(0.5607 0.2177 26.79)",
-      "ease-out": "cubic-bezier(0.25, 0.1, 0.25, 1)"
-    }
+    "dark": {}
   }
 }

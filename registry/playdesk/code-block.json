@@ -16,8 +16,6 @@
     "light": {
       "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)"
     },
-    "dark": {
-      "shadow-float": "0 1.125rem 3.125rem oklch(0 0 0 / 0.12)"
-    }
+    "dark": {}
   }
 }

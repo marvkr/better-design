@@ -7,7 +7,7 @@ import { Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard InputOTP: recessed slots; the active slot lifts with the orange ring.
+// InputOTP: recessed slots; the active slot lifts with the orange ring.
 
 const InputOTP = React.forwardRef<
   React.ComponentRef<typeof OTPInput>,

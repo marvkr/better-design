@@ -17,9 +17,6 @@
       "surface-on": "linear-gradient(to bottom, oklch(0.767 0.116 160.2), oklch(0.717 0.116 159.6), oklch(0.667 0.117 159))",
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
     },
-    "dark": {
-      "surface-on": "linear-gradient(to bottom, oklch(0.767 0.116 160.2), oklch(0.717 0.116 159.6), oklch(0.667 0.117 159))",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.18), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 0.125rem 0.375rem oklch(0 0 0 / 0.3)"
-    }
+    "dark": {}
   }
 }

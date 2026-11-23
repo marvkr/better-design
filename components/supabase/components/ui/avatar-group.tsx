@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-// Supabase Avatar Group: overlapping avatars with ring border
+// Avatar Group: overlapping avatars with ring border
 // Sizes: sm (24px), md (32px), lg (40px)
 
 interface AvatarGroupItem {

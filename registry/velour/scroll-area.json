@@ -16,8 +16,6 @@
     "light": {
       "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )"
     },
-    "dark": {
-      "velour-raised": "linear-gradient( to bottom, oklch(0.305 0.014 286), oklch(0.245 0.012 286) )"
-    }
+    "dark": {}
   }
 }

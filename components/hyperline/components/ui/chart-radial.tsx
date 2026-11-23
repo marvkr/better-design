@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Hyperline radial: plan distribution rings in the DS palette.
+// Radial: plan distribution rings in the DS palette.
 
 const chartData = [
   { plan: "b2c", customers: 275, fill: "var(--color-b2c)" },

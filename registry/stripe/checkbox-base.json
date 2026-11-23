@@ -18,9 +18,6 @@
       "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
       "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)"
     },
-    "dark": {
-      "shadow-focus": "0 0 0 0.0625rem var(--primary), 0 0 0 0.1875rem oklch(0.5803 0.2335 278.46 / 0.16), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.08)",
-      "shadow-primary": "inset 0 0 0 0.0625rem oklch(0.46 0.22 278.46 / 0.32), 0 0.0625rem 0.125rem oklch(0.2651 0.0621 251.37 / 0.16)"
-    }
+    "dark": {}
   }
 }

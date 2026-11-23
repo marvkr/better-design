@@ -17,9 +17,6 @@
       "success": "oklch(0.79 0.12 150)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "success": "oklch(0.79 0.12 150)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

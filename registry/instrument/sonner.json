@@ -20,12 +20,6 @@
       "gauge-ok": "oklch(0.74 0.12 152)",
       "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
     },
-    "dark": {
-      "gauge-rim": "oklch(0.6 0.1 78)",
-      "gauge-grad-top": "oklch(0.845 0.108 88)",
-      "gauge-grad-bottom": "oklch(0.755 0.118 80)",
-      "gauge-ok": "oklch(0.74 0.12 152)",
-      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
-    }
+    "dark": {}
   }
 }

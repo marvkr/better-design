@@ -4,7 +4,7 @@ import * as React from "react"
 import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Figma Rating: star rating component
+// Rating: star rating component
 
 interface RatingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number

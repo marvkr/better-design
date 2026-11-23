@@ -14,9 +14,6 @@
       "shadow": "0 0.0625rem 0.1875rem 0 oklch(0 0 0 / 0.1), 0 0.0625rem 0.125rem -0.0625rem oklch(0 0 0 / 0.08)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "shadow": "0 0.0625rem 0.1875rem 0 oklch(0 0 0 / 0.1), 0 0.0625rem 0.125rem -0.0625rem oklch(0 0 0 / 0.08)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

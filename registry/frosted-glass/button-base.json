@@ -23,11 +23,6 @@
       "fg-blur": "1.125rem",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "fg-fill": "oklch(1 0 0 / 0.08)",
-      "fg-border": "oklch(1 0 0 / 0.14)",
-      "fg-blur": "1.125rem",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

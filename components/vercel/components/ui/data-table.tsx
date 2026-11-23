@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Vercel Data Table: sortable, clean table with Vercel styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

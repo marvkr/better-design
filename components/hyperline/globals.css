@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Hyperline: premium dark billing SaaS.
+ * Premium dark billing SaaS.
  * Deep purple gradient backdrop, layered soft shadows for depth,
  * raised cyan primary controls, warm gold signature accent.
  * All depth comes from the --hl-shadow-* recipes below; surfaces stay
@@ -35,6 +35,10 @@
 
   --destructive: oklch(0.6 0.21 22);
   --destructive-foreground: oklch(0.98 0.01 20);
+  --success: oklch(0.6 0.158 150);
+  --success-foreground: oklch(0.21 0.04 300);
+  --warning: oklch(0.74 0.155 75);
+  --warning-foreground: oklch(0.21 0.04 300);
 
   --border: oklch(0.36 0.04 298);
   --input: oklch(0.185 0.03 299);
@@ -112,6 +116,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

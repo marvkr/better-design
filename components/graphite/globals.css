@@ -44,6 +44,10 @@
 
   --destructive: oklch(0.6 0.18 25);
   --destructive-foreground: oklch(0.96 0 0);
+  --success: oklch(0.6 0.135 150);
+  --success-foreground: oklch(0.218 0 0);
+  --warning: oklch(0.74 0.135 75);
+  --warning-foreground: oklch(0.218 0 0);
 
   --border: oklch(1 0 0 / 0.07);           /* hairline white */
   --input: oklch(0.269 0 0);               /* #262626 — recessed well */
@@ -193,6 +197,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

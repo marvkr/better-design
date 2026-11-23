@@ -34,21 +34,18 @@ const Checkbox = React.forwardRef<
       data-slot="checkbox-indicator"
       className="flex items-center justify-center text-current"
     >
-      {props.checked === "indeterminate" ? (
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-3.5">
-          <path d="M4 8h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-3.5">
-          <path
-            d="M3.75 8.25 6.5 11l5.75-6"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )}
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-3.5 in-data-[state=indeterminate]:hidden">
+        <path
+          d="M3.75 8.25 6.5 11l5.75-6"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-3.5 hidden in-data-[state=indeterminate]:block">
+        <path d="M4 8h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

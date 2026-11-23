@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/badge.tsx",
-      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Airbnb Badge, measured on airbnb.com (13 November 2026)\n// Pill shape, weight 500. Status colours come from the site's own scale.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-foreground text-background\",\n        secondary: \"border border-border bg-secondary text-secondary-foreground\",\n        primary: \"bg-primary text-primary-foreground\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive-tint text-destructive-tint-foreground\",\n        success: \"bg-success text-primary-foreground\",\n        \"success-light\": \"bg-success-tint text-success-tint-foreground\",\n        warning: \"bg-warning text-primary-foreground\",\n        \"warning-light\": \"bg-warning-tint text-warning-tint-foreground\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-5 gap-1 px-2 text-[0.6875rem]\",\n        default: \"h-6 gap-1.5 px-2.5 text-xs\",\n        lg: \"h-7 gap-1.5 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Badge, measured on airbnb.com (13 November 2026)\n// Pill shape, weight 500. Status colours come from the site's own scale.\n\nconst badgeVariants = cva(\n  \"inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-foreground text-background\",\n        secondary: \"border border-border bg-secondary text-secondary-foreground\",\n        primary: \"bg-primary text-primary-foreground\",\n        destructive: \"bg-destructive text-destructive-foreground\",\n        \"destructive-light\": \"bg-destructive-tint text-destructive-tint-foreground\",\n        success: \"bg-success text-primary-foreground\",\n        \"success-light\": \"bg-success-tint text-success-tint-foreground\",\n        warning: \"bg-warning text-primary-foreground\",\n        \"warning-light\": \"bg-warning-tint text-warning-tint-foreground\",\n        outline: \"border border-border text-foreground bg-transparent\",\n      },\n      size: {\n        sm: \"h-5 gap-1 px-2 text-[0.6875rem]\",\n        default: \"h-6 gap-1.5 px-2.5 text-xs\",\n        lg: \"h-7 gap-1.5 px-3 text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, size, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
       "type": "registry:ui"
     }
   ],
@@ -23,15 +23,6 @@
       "destructive-tint": "oklch(0.9029 0.0504 27.2)",
       "destructive-tint-foreground": "oklch(0.4582 0.1755 29)"
     },
-    "dark": {
-      "success": "oklch(0.5222 0.1595 145.8)",
-      "success-tint": "oklch(0.8926 0.0510 153.1)",
-      "success-tint-foreground": "oklch(0.4226 0.1291 145.8)",
-      "warning": "oklch(0.5564 0.1645 43.1)",
-      "warning-tint": "oklch(0.9043 0.0549 61.7)",
-      "warning-tint-foreground": "oklch(0.4499 0.1342 42.6)",
-      "destructive-tint": "oklch(0.9029 0.0504 27.2)",
-      "destructive-tint-foreground": "oklch(0.4582 0.1755 29)"
-    }
+    "dark": {}
   }
 }

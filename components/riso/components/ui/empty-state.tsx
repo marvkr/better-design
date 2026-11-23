@@ -2,7 +2,6 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 // Retro-Playful Empty State: centered content with icon, title, description, and optional action
-// Uses rounded-xl bg-secondary/50 pattern from Linear's empty states
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode

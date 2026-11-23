@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Alert: card-grade surface with a tinted hairline per intent.
+// Alert: card-grade surface with a tinted hairline per intent.
 
 const alertVariants = cva(
   "relative w-full rounded-xl border p-4 text-sm shadow-[var(--hl-shadow-sm)] [&>svg+div]:translate-y-[-0.1875rem] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:size-4 [&>svg~*]:pl-7",

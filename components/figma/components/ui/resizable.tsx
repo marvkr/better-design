@@ -5,7 +5,7 @@ import * as ResizablePrimitive from "react-resizable-panels"
 
 import { cn } from "@/lib/utils"
 
-// Figma Resizable panels
+// Resizable panels
 
 const ResizablePanelGroup = ({
   className,

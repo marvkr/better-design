@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "./table"
 
-// Notion Data Table: sortable, clean table with Notion styling
+// Data Table: sortable, clean table
 
 export interface Column<T> {
   key: keyof T

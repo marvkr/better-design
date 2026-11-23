@@ -1,0 +1,17 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport type * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Checkbox as GlassCheckbox } from \"./glass-checkbox\"\n\n/*\n * Liquid Glass Checkbox — the kit's tick: a recessed box under a cap of clear\n * glass that bends it even at rest, so the control always reads as glass.\n * The tick draws itself in beneath the cap, and the cap swells while pressed.\n * The system is light, so the glass keeps its light tokens on a dark page.\n * It takes the shadcn Checkbox props; \"indeterminate\" shows as unchecked.\n */\ntype CheckboxProps = React.ComponentProps<typeof CheckboxPrimitive.Root> & {\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nfunction Checkbox({\n  className,\n  checked,\n  defaultChecked = false,\n  onCheckedChange,\n  disabled,\n  id,\n  size = \"md\",\n  \"aria-label\": ariaLabel,\n}: CheckboxProps) {\n  const [own, setOwn] = React.useState(defaultChecked === true)\n  const on = checked === undefined ? own : checked === true\n  return (\n    <span data-slot=\"checkbox\" data-state={on ? \"checked\" : \"unchecked\"} className={cn(\"inline-flex\", className)}>\n      <GlassCheckbox\n        id={id}\n        aria-label={ariaLabel}\n        label=\"\"\n        theme=\"light\"\n        size={size}\n        checked={on}\n        disabled={disabled}\n        onChange={(next) => {\n          setOwn(next)\n          onCheckedChange?.(next)\n        }}\n      />\n    </span>\n  )\n}\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox@^1.3.2"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/liquid-glass/glass-checkbox.json"
+  ]
+}

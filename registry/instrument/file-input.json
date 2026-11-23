@@ -22,14 +22,6 @@
       "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
       "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)"
     },
-    "dark": {
-      "gauge-nested": "oklch(0.235 0.015 283)",
-      "gauge-rim": "oklch(0.6 0.1 78)",
-      "gauge-line-soft": "oklch(0.8 0.115 85 / 0.25)",
-      "shadow-nested": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.1875rem 0.5rem -0.125rem oklch(0 0 0 / 0.35)",
-      "shadow-well": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), inset 0 0.125rem 0.375rem oklch(0 0 0 / 0.3), 0 0.0625rem 0 oklch(1 0 0 / 0.04)",
-      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.125rem 0.3125rem -0.0625rem oklch(0 0 0 / 0.35)",
-      "shadow-focus": "0 0 0 0.1875rem oklch(0.8 0.115 85 / 0.25)"
-    }
+    "dark": {}
   }
 }

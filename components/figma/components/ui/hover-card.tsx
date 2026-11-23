@@ -18,7 +18,7 @@ const HoverCardContent = React.forwardRef<
     align={align}
     sideOffset={sideOffset}
     className={cn(
-      // Figma popover: rounded-[0.75rem], shadow, ring border
+      // Popover: rounded-[0.75rem], shadow, ring border
       "origin-(--radix-hover-card-content-transform-origin) z-50 w-64 rounded-[0.75rem] bg-popover p-4 text-popover-foreground shadow-[0_0.25rem_1rem_0_oklch(0_0_0/0.08),0_0_0_0.0625rem_oklch(0_0_0/0.06)] outline-none",
       "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",

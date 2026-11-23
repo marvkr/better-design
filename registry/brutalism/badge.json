@@ -19,11 +19,6 @@
       "warning": "var(--primary)",
       "warning-foreground": "var(--primary-foreground)"
     },
-    "dark": {
-      "success": "oklch(0.78 0.2 145)",
-      "success-foreground": "oklch(0.105 0.01 255)",
-      "warning": "var(--primary)",
-      "warning-foreground": "var(--primary-foreground)"
-    }
+    "dark": {}
   }
 }

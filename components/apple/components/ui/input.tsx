@@ -2,10 +2,10 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Apple Input — light, white bg, 10px radius
+// Input — light, white bg, 10px radius
 // Border: 1px solid rgba(0,0,0,0.12)
 // Focus: blue border + subtle blue glow
-// Font: system-ui at 17px (Apple's standard body)
+// Font: system-ui at 17px (the standard body size)
 // Transition: 0.3s ease
 
 export interface InputProps

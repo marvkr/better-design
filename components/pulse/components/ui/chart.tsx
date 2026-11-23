@@ -4,7 +4,7 @@ import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 import { cn } from "@/lib/utils"
 
-// Pulseboard Chart: recharts-based with Pulseboard styling
+// Chart: recharts-based
 // Uses bg-background, border-border, rounded-lg
 
 /** Narrows a chart datum to a number, so the value renders as one. */

@@ -18,10 +18,6 @@
       "shadow-l": "var(--shadow-lg)",
       "shadow-button": "var(--shadow-accent)"
     },
-    "dark": {
-      "shadow-accent": "0 0 0 0.0313rem oklch(0.78 0.13 233 / 0.7), inset 0 0.0625rem 0 oklch(1 0 0 / 0.2), 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.5), 0 0 0.75rem oklch(0.7 0.122 233 / 0.28)",
-      "shadow-l": "var(--shadow-lg)",
-      "shadow-button": "var(--shadow-accent)"
-    }
+    "dark": {}
   }
 }

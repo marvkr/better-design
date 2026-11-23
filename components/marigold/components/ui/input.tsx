@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Talentboard Input: recessed field over the card surface. Soft inset shadow
+// Input: recessed field over the card surface. Soft inset shadow
 // sinks it below the raised controls; focus brings up the orange ring.
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}

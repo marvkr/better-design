@@ -2047,6 +2047,13 @@
       ]
     },
     {
+      "name": "time-picker-base",
+      "registryDependencies": [
+        "popover-base",
+        "_shared-base"
+      ]
+    },
+    {
       "name": "toast-base",
       "registryDependencies": [
         "_shared-base"
@@ -2082,7 +2089,6 @@
     }
   ],
   "baseSkipped": [
-    "multi-select",
-    "time-picker"
+    "multi-select"
   ]
 }

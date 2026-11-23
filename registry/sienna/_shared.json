@@ -14,9 +14,6 @@
       "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.09), inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.025)",
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
     },
-    "dark": {
-      "shadow-inset": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.09), inset 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.025)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)"
-    }
+    "dark": {}
   }
 }

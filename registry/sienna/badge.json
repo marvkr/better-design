@@ -24,16 +24,6 @@
       "pop-purple": "oklch(0.94 0.05 293.541)",
       "pop-purple-foreground": "oklch(0.49 0.15 293.541)"
     },
-    "dark": {
-      "pop-blue": "oklch(0.93 0.05 232.661)",
-      "pop-blue-foreground": "oklch(0.46 0.13 237.323)",
-      "pop-green": "oklch(0.93 0.06 163.223)",
-      "pop-green-foreground": "oklch(0.43 0.105 163.223)",
-      "pop-orange": "oklch(0.94 0.055 47.604)",
-      "pop-orange-foreground": "oklch(0.52 0.17 38.2)",
-      "pop-yellow-foreground": "oklch(0.5 0.11 84.429)",
-      "pop-purple": "oklch(0.94 0.05 293.541)",
-      "pop-purple-foreground": "oklch(0.49 0.15 293.541)"
-    }
+    "dark": {}
   }
 }

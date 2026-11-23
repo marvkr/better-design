@@ -292,6 +292,12 @@
       "description": "Precision-crafted dark UI: purple accents, multi-layer shadows, engineering aesthetic"
     },
     {
+      "name": "liquid-glass/all",
+      "type": "registry:style",
+      "title": "Liquid Glass",
+      "description": "Open-source controls made of glass. Buttons, cards, tabs and switches bend what sits behind them and swell under the pointer."
+    },
+    {
       "name": "lumen-dark/all",
       "type": "registry:style",
       "title": "Lumen Dark",
@@ -410,6 +416,12 @@
       "type": "registry:style",
       "title": "Playful console",
       "description": "Playful developer-tools system for product analytics, dashboards and open source startups: a warm off-white page, white cards with a thin olive hairline, and chunky bordered buttons that sit on an offset slab and press down into it. One saturated orange carries the primary action, with bold blue, purple, green and red marker highlights, callouts and chart series. Figtree for every text role and Source Code Pro for code, with heavy friendly headings and a slightly retro, hand-built feel."
+    },
+    {
+      "name": "plinth/all",
+      "type": "registry:style",
+      "title": "Plinth",
+      "description": "Dark studio editor: graphite panels, recessed wells, machined gradient controls and one ember orange action"
     },
     {
       "name": "precision/all",

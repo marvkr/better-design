@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Badge: a small readout chip, set in Geist Mono caps like the\n * editor's parameter labels. Neutral chips are graphite wells; status chips\n * take a deep tint of their own hue and a ring in that hue.\n */\n\nconst badgeVariants = cva(\n  \"inline-flex items-center gap-1 rounded-md px-2 py-0.5 \" +\n    \"font-mono text-[0.6875rem] font-medium uppercase leading-4 \" +\n    \"ring-1 ring-inset transition-colors duration-fast\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-secondary text-secondary-foreground ring-[oklch(1_0_0/0.12)]\",\n        primary:\n          \"bg-primary text-primary-foreground \" +\n          \"ring-[oklch(0.5_0.16_39)]\",\n        secondary: \"bg-input text-muted-foreground ring-[oklch(1_0_0/0.1)]\",\n        outline: \"bg-transparent text-foreground ring-[oklch(1_0_0/0.18)]\",\n        success:\n          \"bg-[oklch(0.3_0.07_150)] ring-[oklch(0.55_0.13_150)] text-[color:oklch(0.88_0.13_150)]\",\n        warning:\n          \"bg-[oklch(0.32_0.07_75)] ring-[oklch(0.62_0.13_75)] text-[color:oklch(0.88_0.11_85)]\",\n        destructive:\n          \"bg-[oklch(0.3_0.09_25)] ring-[oklch(0.58_0.17_25)] text-[color:oklch(0.88_0.07_25)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nconst Badge = React.forwardRef<HTMLDivElement, BadgeProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n)\nBadge.displayName = \"Badge\"\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "class-variance-authority@>=0.7.1 <1"
+  ]
+}

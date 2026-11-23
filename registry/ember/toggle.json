@@ -19,10 +19,6 @@
       "ag-border-strong": "oklch(1 0 0 / 0.16)",
       "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
     },
-    "dark": {
-      "ag-fill": "oklch(1 0 0 / 0.05)",
-      "ag-border-strong": "oklch(1 0 0 / 0.16)",
-      "ease-out": "cubic-bezier(0.19, 1, 0.22, 1)"
-    }
+    "dark": {}
   }
 }

@@ -21,9 +21,6 @@
       "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
       "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)"
     },
-    "dark": {
-      "shadow-s": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4)",
-      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.1), 0 0 0 0.0625rem oklch(1 0 0 / 0.04), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5)"
-    }
+    "dark": {}
   }
 }

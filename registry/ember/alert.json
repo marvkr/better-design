@@ -18,10 +18,6 @@
       "ag-fill": "oklch(1 0 0 / 0.05)",
       "ag-border": "oklch(1 0 0 / 0.09)"
     },
-    "dark": {
-      "ag-blur": "0.875rem",
-      "ag-fill": "oklch(1 0 0 / 0.05)",
-      "ag-border": "oklch(1 0 0 / 0.09)"
-    }
+    "dark": {}
   }
 }

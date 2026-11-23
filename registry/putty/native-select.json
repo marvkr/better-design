@@ -16,8 +16,6 @@
     "light": {
       "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
     },
-    "dark": {
-      "shadow-clay-inset": "inset 0 0.0938rem 0.1875rem 0 oklch(0.5 0.04 70 / 0.16), inset 0 -0.0625rem 0.0313rem 0 oklch(1 0 0 / 0.7)"
-    }
+    "dark": {}
   }
 }

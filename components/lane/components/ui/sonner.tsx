@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "sonner"
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
-// Airbnb Sonner: clean minimal toast notifications
+// Sonner: clean minimal toast notifications
 // Uses bg-background, rounded-md, ring-1 border
 
 const Toaster = ({ ...props }: ToasterProps) => {

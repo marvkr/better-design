@@ -1,0 +1,27 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as SonnerPrimitive, type ToasterProps } from \"sonner\"\n\n/* Toasts are floating graphite panels with the system's floating shadow;\n   the action is the ember button, the cancel is graphite. */\nconst Toaster = ({ ...props }: ToasterProps) => (\n  <SonnerPrimitive\n    theme=\"dark\"\n    className=\"group\"\n    toastOptions={{\n      classNames: {\n        toast:\n          \"group toast group-data-[sonner-toaster]:rounded-2xl group-data-[sonner-toaster]:border-0 group-data-[sonner-toaster]:bg-popover group-data-[sonner-toaster]:text-popover-foreground group-data-[sonner-toaster]:[box-shadow:var(--shadow-l)]\",\n        title: \"group-[.toast]:text-sm group-[.toast]:font-medium\",\n        description: \"group-[.toast]:text-muted-foreground\",\n        actionButton:\n          \"group-[.toast]:rounded-md group-[.toast]:[background:var(--ember-gradient)] group-[.toast]:text-primary-foreground group-[.toast]:[box-shadow:var(--shadow-primary)]\",\n        cancelButton:\n          \"group-[.toast]:rounded-md group-[.toast]:[background:var(--graphite-gradient)] group-[.toast]:text-secondary-foreground group-[.toast]:[box-shadow:var(--shadow-button)]\",\n      },\n    }}\n    {...props}\n  />\n)\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "sonner@^2.0.5"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ember-gradient": "linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39))",
+      "ember-rim": "oklch(0.5 0.16 39)",
+      "graphite-gradient": "linear-gradient(160deg, oklch(0.282 0.004 286), oklch(0.244 0.002 286))",
+      "groove": "oklch(0.174 0.004 286)",
+      "shadow-l": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), 0 0.5rem 1rem -0.5rem oklch(0 0 0 / 0.6), 0 1.25rem 2.5rem -1.25rem oklch(0 0 0 / 0.8)",
+      "shadow-button": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.08), 0 0 0 0.0625rem oklch(0 0 0 / 0.6)",
+      "shadow-primary": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.45), 0 0 0 0.0625rem var(--ember-rim), 0 0 0 0.1875rem var(--groove)"
+    },
+    "dark": {}
+  }
+}

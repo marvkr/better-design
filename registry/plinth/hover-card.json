@@ -1,0 +1,21 @@
+{
+  "name": "hover-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\"\n\nimport { cn } from \"@/lib/utils\"\n\n/* Plinth Hover Card: a floating inspector panel on the popover surface. */\n\nconst HoverCard = HoverCardPrimitive.Root\nconst HoverCardTrigger = HoverCardPrimitive.Trigger\n\nconst HoverCardContent = React.forwardRef<\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 8, ...props }, ref) => (\n  <HoverCardPrimitive.Content\n    ref={ref}\n    align={align}\n    sideOffset={sideOffset}\n    className={cn(\n      \"z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-xl p-4\",\n      \"bg-popover text-popover-foreground [box-shadow:var(--shadow-l)] outline-none\",\n      \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n      \"data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1\",\n      className\n    )}\n    {...props}\n  />\n))\nHoverCardContent.displayName = HoverCardPrimitive.Content.displayName\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-hover-card@^1.1.14"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-l": "0 0 0 0.0625rem oklch(1 0 0 / 0.07), 0 0.5rem 1rem -0.5rem oklch(0 0 0 / 0.6), 0 1.25rem 2.5rem -1.25rem oklch(0 0 0 / 0.8)"
+    },
+    "dark": {}
+  }
+}

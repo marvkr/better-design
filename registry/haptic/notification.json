@@ -17,8 +17,6 @@
     "light": {
       "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)"
     },
-    "dark": {
-      "shadow-m": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.16), 0 0.125rem 0.25rem oklch(0 0 0 / 0.55), 0 0.25rem 0.5rem oklch(0 0 0 / 0.28)"
-    }
+    "dark": {}
   }
 }

@@ -11,7 +11,7 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SwitchPrimitive.Root
     className={cn(
-      "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full",
+      "group/switch peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full",
       "backdrop-blur-xl bg-white/[0.1]",
       "border border-white/10",
       "shadow-[inset_0_0_0.375rem_oklch(1_0_0/0.08)]",
@@ -29,8 +29,8 @@ const Switch = React.forwardRef<
       className={cn(
         "pointer-events-none block h-5 w-5 rounded-full",
         "bg-white shadow-[0_0.0625rem_0.1875rem_oklch(0_0_0/0.3)]",
-        "transition-transform duration-base",
-        "data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0.5"
+        "data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0.5",
+        "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none"
       )}
     />
   </SwitchPrimitive.Root>

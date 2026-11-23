@@ -2,7 +2,7 @@
 
 import { Toaster as Sonner } from "sonner";
 
-// Talentboard Sonner: toasts styled with the shared pop-surface tokens.
+// Sonner: toasts styled with the shared pop-surface tokens.
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 

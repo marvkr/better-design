@@ -1,0 +1,20 @@
+{
+  "name": "code-tabs",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/code-tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Code Tabs: an editor panel whose file switcher is the system's\n * segmented control, a recessed track with the chosen file raised out of it.\n * The code sits in a darker well below.\n */\n\nexport interface CodeTabsItem {\n  label: string\n  code: string\n  language?: string\n  lang?: string\n  filename?: string\n}\n\nexport interface CodeTabsProps {\n  tabs: CodeTabsItem[]\n  defaultTab?: string\n  className?: string\n}\n\nconst CodeTabs = ({ tabs, defaultTab, className }: CodeTabsProps) => {\n  const [active, setActive] = React.useState(defaultTab ?? tabs[0]?.label)\n  const current = tabs.find((t) => t.label === active) ?? tabs[0]\n\n  if (!current) return null\n  const language = current.language ?? current.lang\n\n  return (\n    <div className={cn(\"overflow-hidden rounded-3xl border border-border bg-card p-2\", className)}>\n      <div className=\"flex items-center justify-between gap-2 px-1 pb-2\">\n        <div\n          role=\"tablist\"\n          aria-label=\"Files\"\n          className=\"flex min-w-0 items-center gap-0.5 overflow-x-auto rounded-lg bg-input p-0.5 [box-shadow:var(--shadow-inset)]\"\n        >\n          {tabs.map((tab) => {\n            const selected = tab.label === current.label\n            return (\n              <button\n                key={tab.label}\n                type=\"button\"\n                role=\"tab\"\n                aria-selected={selected}\n                onClick={() => setActive(tab.label)}\n                className={cn(\n                  \"shrink-0 cursor-pointer rounded-md px-2.5 py-1 font-mono text-xs\",\n                  \"transition-[color,background,box-shadow] duration-fast\",\n                  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n                  selected\n                    ? \"[background:var(--segment-gradient)] text-foreground [box-shadow:var(--shadow-segment)]\"\n                    : \"text-muted-foreground hover:text-foreground\"\n                )}\n              >\n                {tab.label}\n              </button>\n            )\n          })}\n        </div>\n        {language && (\n          <span className=\"shrink-0 pr-1 font-mono text-[0.6875rem] uppercase text-muted-foreground\">{language}</span>\n        )}\n      </div>\n      <pre\n        role=\"tabpanel\"\n        className=\"overflow-x-auto rounded-2xl bg-input px-4 py-3.5 font-mono text-[0.8125rem] leading-relaxed text-foreground [box-shadow:var(--shadow-inset)]\"\n      >\n        <code>{current.code}</code>\n      </pre>\n    </div>\n  )\n}\nCodeTabs.displayName = \"CodeTabs\"\n\nexport { CodeTabs }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "segment-gradient": "linear-gradient(180deg, oklch(0.295 0.009 286), oklch(0.258 0.007 286))",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)",
+      "shadow-segment": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0 0 0.0625rem oklch(0 0 0 / 0.45)"
+    },
+    "dark": {}
+  }
+}

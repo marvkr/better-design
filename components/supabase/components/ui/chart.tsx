@@ -4,7 +4,7 @@ import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 import { cn } from "@/lib/utils"
 
-// Supabase Chart: recharts-based with Supabase styling
+// Chart: recharts-based
 // Uses bg-background, border-border, rounded-[0.625rem]
 
 /** Narrows a chart datum to a number, so the value renders as one. */

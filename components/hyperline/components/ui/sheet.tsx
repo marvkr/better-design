@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { hlPopSurface } from "./_shared";
 
-// Hyperline Sheet: side panel on the layered pop shadow.
+// Sheet: side panel on the layered pop shadow.
 
 const Sheet = SheetPrimitive.Root;
 

@@ -18,8 +18,6 @@
     "light": {
       "shadow-hard": "0.25rem 0.25rem 0 0 var(--foreground)"
     },
-    "dark": {
-      "shadow-hard": "0.25rem 0.25rem 0 0 var(--foreground)"
-    }
+    "dark": {}
   }
 }

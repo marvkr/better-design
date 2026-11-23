@@ -15,10 +15,6 @@
       "secondary-to": "oklch(0.8945 0 0)",
       "shadow-button": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.1), 0 0.5rem 1.5rem oklch(0 0 0 / 0.08)"
     },
-    "dark": {
-      "secondary-from": "oklch(0.9521 0 0)",
-      "secondary-to": "oklch(0.8945 0 0)",
-      "shadow-button": "inset 0 0 0 0.0625rem oklch(0 0 0 / 0.1), 0 0.5rem 1.5rem oklch(0 0 0 / 0.08)"
-    }
+    "dark": {}
   }
 }

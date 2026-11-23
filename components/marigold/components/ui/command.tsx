@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 import { Dialog, DialogContent } from "./dialog";
 
-// Talentboard Command: palette surface shares the layered pop shadow.
+// Command: palette surface shares the layered pop shadow.
 
 const Command = React.forwardRef<
   React.ComponentRef<typeof CommandPrimitive>,

@@ -21,16 +21,6 @@
       "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)",
       "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
     },
-    "dark": {
-      "highlight": "oklch(1 0 0 / 0.1)",
-      "well": "oklch(0.14 0.005 65)",
-      "gradient-leather": "linear-gradient( 180deg, oklch(0.63 0.115 56), oklch(0.55 0.115 52) 48%, oklch(0.465 0.105 48) )",
-      "gradient-raised": "linear-gradient( 180deg, oklch(0.275 0.008 65), oklch(0.215 0.007 65) )",
-      "shadow-leather": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.28), inset 0 -0.125rem 0.1875rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.35), 0 0.375rem 1rem -0.25rem oklch(0 0 0 / 0.3)",
-      "shadow-leather-sm": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.25), inset 0 -0.0625rem 0.125rem oklch(0 0 0 / 0.3), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.4), 0 0.125rem 0.375rem oklch(0.45 0.1 50 / 0.3)",
-      "shadow-raised": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.09), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45), 0 0.3125rem 0.875rem oklch(0 0 0 / 0.3)",
-      "shadow-popover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.07), 0 0.0625rem 0.125rem oklch(0 0 0 / 0.5), 0 1rem 2.5rem oklch(0 0 0 / 0.5)",
-      "shadow-well": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.45), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.05)"
-    }
+    "dark": {}
   }
 }

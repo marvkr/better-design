@@ -22,8 +22,6 @@
     "light": {
       "halo": "oklch(1 0 0)"
     },
-    "dark": {
-      "halo": "oklch(1 0 0)"
-    }
+    "dark": {}
   }
 }

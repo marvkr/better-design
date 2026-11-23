@@ -4,7 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Check, X, Pencil } from "lucide-react"
 
-// Notion Inline Edit: click-to-edit text field with confirm/cancel actions
+// Inline Edit: click-to-edit text field with confirm/cancel actions
 
 interface InlineEditProps {
   value: string

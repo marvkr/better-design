@@ -1,0 +1,19 @@
+{
+  "name": "timeline",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Timeline: an event log read like the editor's shot track. Each\n * event hangs off a recessed rail on a small seated marker; the time is a\n * Geist Mono readout.\n */\n\nconst Timeline = React.forwardRef<HTMLOListElement, React.HTMLAttributes<HTMLOListElement>>(\n  ({ className, ...props }, ref) => (\n    <ol ref={ref} className={cn(\"relative flex flex-col\", className)} {...props} />\n  )\n)\nTimeline.displayName = \"Timeline\"\n\nexport interface TimelineItemProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, \"title\"> {\n  icon?: React.ReactNode\n  title?: React.ReactNode\n  timestamp?: React.ReactNode\n  isLast?: boolean\n}\n\nconst TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(\n  ({ className, icon, title, timestamp, isLast, children, ...props }, ref) => (\n    <li ref={ref} className={cn(\"relative flex gap-3.5\", className)} {...props}>\n      <div className=\"relative flex w-7 shrink-0 flex-col items-center\">\n        <span className=\"flex size-7 shrink-0 items-center justify-center rounded-full bg-input text-muted-foreground [box-shadow:var(--shadow-inset)]\">\n          {icon ?? <span className=\"size-2 rounded-full [background:var(--ember-gradient)]\" />}\n        </span>\n        {!isLast && <span aria-hidden=\"true\" className=\"my-1 w-0.5 flex-1 rounded-full bg-input\" />}\n      </div>\n      <div className={cn(\"min-w-0 flex-1 pt-1\", !isLast && \"pb-5\")}>\n        {(title || timestamp) && (\n          <div className=\"flex items-baseline justify-between gap-3\">\n            {title && <div className=\"text-sm font-medium text-foreground\">{title}</div>}\n            {timestamp && (\n              <div className=\"shrink-0 font-mono text-[0.6875rem] uppercase text-muted-foreground\">{timestamp}</div>\n            )}\n          </div>\n        )}\n        {children && <div className=\"mt-1 text-sm leading-relaxed text-muted-foreground\">{children}</div>}\n      </div>\n    </li>\n  )\n)\nTimelineItem.displayName = \"TimelineItem\"\n\nexport { Timeline, TimelineItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "ember-gradient": "linear-gradient(160deg, oklch(0.6 0.185 45), oklch(0.58 0.19 42) 50%, oklch(0.55 0.19 39))",
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

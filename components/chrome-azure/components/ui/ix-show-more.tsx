@@ -25,6 +25,10 @@ const SMALL = {
 
 const INSTANT = { duration: 0 } as const;
 
+// Opaque above the last 2.25rem, then down to --veil-clear at the bottom edge: 0 hides the last line, 1 shows it.
+const VEIL_MASK =
+  "linear-gradient(to top, oklch(0 0 0 / var(--veil-clear, 0)), oklch(0 0 0) 2.25rem)";
+
 type Metrics = { line: number; full: number };
 
 export type UseShowMoreOptions = {
@@ -170,34 +174,31 @@ export function ShowMore({
     <div
       className={`text-[0.8438rem] leading-relaxed text-foreground ${className}`}
     >
-      <div className="relative">
-        <motion.div
-          ref={regionRef}
-          id={regionId}
-          role={scrollable ? "region" : undefined}
-          aria-label={scrollable ? label : undefined}
-          tabIndex={scrollable ? 0 : undefined}
-          initial={false}
-          animate={height === null ? {} : { height }}
-          transition={reduced ? INSTANT : DISCLOSE}
-          style={{
-            maxHeight: height === null ? `${lines}lh` : undefined,
-            overflowY: scrollable ? "auto" : "hidden",
+      <motion.div
+        ref={regionRef}
+        id={regionId}
+        role={scrollable ? "region" : undefined}
+        aria-label={scrollable ? label : undefined}
+        tabIndex={scrollable ? 0 : undefined}
+        initial={false}
+        // The last lines fade out through a mask, so the fade works on any surface, a translucent one too.
+        animate={
+          height === null
+            ? { "--veil-clear": veiled ? 0 : 1 }
+            : { height, "--veil-clear": veiled ? 0 : 1 }
+        }
+        transition={reduced ? INSTANT : { ...DISCLOSE, "--veil-clear": SMALL }}
+        style={{
+          maskImage: VEIL_MASK,
+          maxHeight: height === null ? `${lines}lh` : undefined,
+          overflowY: scrollable ? "auto" : "hidden",
 
-            scrollbarGutter: capped ? "stable" : undefined,
-          }}
-          className="overflow-hidden overscroll-contain rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
-        >
-          <div ref={contentRef}>{children}</div>
-        </motion.div>
-        <motion.div
-          aria-hidden
-          initial={false}
-          animate={{ opacity: veiled ? 1 : 0 }}
-          transition={reduced ? INSTANT : SMALL}
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-background to-background/0"
-        />
-      </div>
+          scrollbarGutter: capped ? "stable" : undefined,
+        }}
+        className="overflow-hidden overscroll-contain rounded-md outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+      >
+        <div ref={contentRef}>{children}</div>
+      </motion.div>
       <div className="mt-2 flex h-8 items-center">
         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button

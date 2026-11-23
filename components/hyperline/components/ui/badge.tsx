@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline Badge: compact status chips. Tinted fills with hairline rims;
+// Badge: compact status chips. Tinted fills with hairline rims;
 // gold variant carries the signature warm accent.
 
 const badgeVariants = cva(

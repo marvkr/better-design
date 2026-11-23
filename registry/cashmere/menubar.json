@@ -22,10 +22,6 @@
       "shadow-l": "var(--shadow-lg)",
       "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
     },
-    "dark": {
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-l": "var(--shadow-lg)",
-      "shadow-primary": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.12)"
-    }
+    "dark": {}
   }
 }

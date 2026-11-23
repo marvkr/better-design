@@ -20,12 +20,6 @@
       "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
       "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
     },
-    "dark": {
-      "surface-on": "linear-gradient(to bottom, oklch(0.687 0.13 260.2), oklch(0.636 0.132 260.1), oklch(0.584 0.134 260.1))",
-      "knob-off": "linear-gradient(to bottom, oklch(0.719 0.053 246.8), oklch(0.569 0.067 251.9))",
-      "gloss-top": "linear-gradient(to top, transparent, oklch(1 0 0 / 0.2))",
-      "shadow-inset": "inset 0 0.0625rem 0.1875rem oklch(0 0 0 / 0.55), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.04)",
-      "shadow-knob": "0 0.125rem 0.25rem oklch(0 0 0 / 0.45), inset 0 0.0625rem 0.125rem oklch(1 0 0 / 0.3)"
-    }
+    "dark": {}
   }
 }

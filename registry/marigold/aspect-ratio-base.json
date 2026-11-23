@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/aspect-ratio.tsx",
-      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n// Talentboard AspectRatio: Base UI has no AspectRatio primitive, so this is a\n// plain div with CSS aspect-ratio. position: relative + width: 100% mirror the\n// old primitive's root box so absolutely positioned children keep working.\n\nexport interface AspectRatioProps\n  extends React.ComponentPropsWithoutRef<\"div\"> {\n  ratio?: number;\n}\n\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  ({ ratio = 1, style, ...props }, ref) => (\n    <div\n      ref={ref}\n      style={{\n        position: \"relative\",\n        width: \"100%\",\n        aspectRatio: String(ratio),\n        ...style,\n      }}\n      {...props}\n    />\n  )\n);\nAspectRatio.displayName = \"AspectRatio\";\n\nexport { AspectRatio };\n",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n// AspectRatio: Base UI has no AspectRatio primitive, so this is a\n// plain div with CSS aspect-ratio. position: relative + width: 100% mirror the\n// old primitive's root box so absolutely positioned children keep working.\n\nexport interface AspectRatioProps\n  extends React.ComponentPropsWithoutRef<\"div\"> {\n  ratio?: number;\n}\n\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  ({ ratio = 1, style, ...props }, ref) => (\n    <div\n      ref={ref}\n      style={{\n        position: \"relative\",\n        width: \"100%\",\n        aspectRatio: String(ratio),\n        ...style,\n      }}\n      {...props}\n    />\n  )\n);\nAspectRatio.displayName = \"AspectRatio\";\n\nexport { AspectRatio };\n",
       "type": "registry:ui"
     }
   ]

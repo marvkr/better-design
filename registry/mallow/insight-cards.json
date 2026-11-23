@@ -26,14 +26,6 @@
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
       "shadow-menu": "var(--menu-edge)"
     },
-    "dark": {
-      "fee": "oklch(0.66 0.17 35)",
-      "tag": "oklch(0.9 0.032 292)",
-      "success-text": "oklch(0.42 0.11 155)",
-      "destructive-text": "oklch(0.47 0.18 22)",
-      "menu-edge": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.08), 0 0.125rem 0.25rem 0 oklch(0.32 0.08 290 / 0.05), 0 0.75rem 1.75rem -0.5rem oklch(0.35 0.08 290 / 0.22)",
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
-      "shadow-menu": "var(--menu-edge)"
-    }
+    "dark": {}
   }
 }

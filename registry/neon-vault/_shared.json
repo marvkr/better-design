@@ -13,8 +13,6 @@
     "light": {
       "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
     },
-    "dark": {
-      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.45)"
-    }
+    "dark": {}
   }
 }

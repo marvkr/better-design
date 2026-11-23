@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Apple Button — pill-shaped CTAs, blue primary, f5f5f7 secondary
+// Button — pill-shaped CTAs, blue primary, f5f5f7 secondary
 // Primary: #0071e3 blue, 980px radius (fully pill), 17px font, 400 weight
 // Secondary: #f5f5f7 off-white bg, dark text
 // Transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)

@@ -17,9 +17,6 @@
       "success-foreground": "oklch(0.345 0.102 155)",
       "success-muted": "oklch(0.955 0.036 155)"
     },
-    "dark": {
-      "success-foreground": "oklch(0.345 0.102 155)",
-      "success-muted": "oklch(0.955 0.036 155)"
-    }
+    "dark": {}
   }
 }

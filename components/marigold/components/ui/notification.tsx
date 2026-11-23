@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { tbCardSurface } from "./_shared";
 
-// Talentboard Notification: inbox row on the card surface; unread shows the
+// Notification: inbox row on the card surface; unread shows the
 // orange dot.
 
 interface NotificationProps extends React.HTMLAttributes<HTMLDivElement> {

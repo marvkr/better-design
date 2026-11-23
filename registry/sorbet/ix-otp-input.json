@@ -10,5 +10,12 @@
   ],
   "dependencies": [
     "motion@^12.25.0"
-  ]
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "success": "oklch(0.71 0.112 150)"
+    },
+    "dark": {}
+  }
 }

@@ -13,7 +13,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Talentboard donut: revenue mix in the orange-amber-teal palette.
+// Donut: revenue mix in the orange-amber-teal palette.
 
 const chartData = [
   { plan: "b2c", revenue: 415, fill: "var(--color-b2c)" },

@@ -21,10 +21,6 @@
       "warning": "oklch(0.827 0.122 62.1)",
       "info": "oklch(0.78 0.08 240)"
     },
-    "dark": {
-      "success": "oklch(0.79 0.12 150)",
-      "warning": "oklch(0.827 0.122 62.1)",
-      "info": "oklch(0.78 0.08 240)"
-    }
+    "dark": {}
   }
 }

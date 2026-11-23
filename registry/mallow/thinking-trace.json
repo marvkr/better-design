@@ -21,10 +21,6 @@
       "success-text": "oklch(0.42 0.11 155)",
       "destructive-text": "oklch(0.47 0.18 22)"
     },
-    "dark": {
-      "tag": "oklch(0.9 0.032 292)",
-      "success-text": "oklch(0.42 0.11 155)",
-      "destructive-text": "oklch(0.47 0.18 22)"
-    }
+    "dark": {}
   }
 }

@@ -16,8 +16,6 @@
     "light": {
       "shadow-overlay": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 1.5rem 4rem oklch(0 0 0 / 0.7), 0 0 2rem oklch(0.78 0.21 148 / 0.1)"
     },
-    "dark": {
-      "shadow-overlay": "0 0 0 0.0625rem oklch(0.32 0.005 160), 0 1.5rem 4rem oklch(0 0 0 / 0.7), 0 0 2rem oklch(0.78 0.21 148 / 0.1)"
-    }
+    "dark": {}
   }
 }

@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { tbPopSurface } from "./_shared";
 
-// Talentboard Sheet: side panel on the layered pop shadow.
+// Sheet: side panel on the layered pop shadow.
 
 const Sheet = SheetPrimitive.Root;
 

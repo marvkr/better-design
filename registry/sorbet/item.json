@@ -19,11 +19,6 @@
       "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.29 0.018 285 / 0.07), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.5)",
       "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.8), 0 0.125rem 0.25rem oklch(0.29 0.018 285 / 0.07), 0 0.375rem 1rem -0.1875rem oklch(0.29 0.018 285 / 0.12)"
     },
-    "dark": {
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-m": "var(--shadow-md)",
-      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0.29 0.018 285 / 0.07), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.5)",
-      "shadow-button-hover": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.8), 0 0.125rem 0.25rem oklch(0.29 0.018 285 / 0.07), 0 0.375rem 1rem -0.1875rem oklch(0.29 0.018 285 / 0.12)"
-    }
+    "dark": {}
   }
 }

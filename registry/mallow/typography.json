@@ -14,9 +14,6 @@
       "option-track": "oklch(0.955 0.014 295)",
       "option-track-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06)"
     },
-    "dark": {
-      "option-track": "oklch(0.955 0.014 295)",
-      "option-track-edge": "inset 0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.06)"
-    }
+    "dark": {}
   }
 }

@@ -6,7 +6,7 @@ import { Check, Pencil, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formFieldBase } from "./_shared";
 
-// Hyperline InlineEdit: click-to-edit value with confirm and cancel actions.
+// InlineEdit: click-to-edit value with confirm and cancel actions.
 
 interface InlineEditProps {
   value: string;

@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Pulseboard Button — dark analytics board, glowing electric-violet primary.
+// Button — dark analytics board, glowing electric-violet primary.
 // default/primary: saturated violet fill, violet rim, soft outer glow + inset
 // highlight (the --shadow-glow material reused by checkbox/switch/radio/slider).
 // secondary/outline/ghost: dark panels over the canvas.

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { useSound } from "./sound-provider";
 
-// Airbnb Button — extracted from airbnb.com (2026-04)
+// Button — extracted from airbnb.com (2026-04)
 // Primary: solid #FF385C, radial gradient on hover
 // Secondary: #222 solid
 // Outline: white bg, 1px #222 border

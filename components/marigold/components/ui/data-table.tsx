@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "./table";
 
-// Talentboard DataTable: sortable table inside the card material.
+// DataTable: sortable table inside the card material.
 
 export interface Column<T> {
   key: keyof T;

@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Vercel / Geist Button — pure black/white, minimal, 6px radius
+// Button — pure black/white, minimal, 6px radius
 // Primary: white bg, black text (inverted on dark bg) — Geist design language
 // Secondary: transparent with subtle white border
 // Height: 32px default (Geist md), tight 14px font, -0.006em tracking

@@ -20,7 +20,7 @@ const Switch = React.forwardRef<
     ref={ref}
     data-slot="switch"
     className={cn(
-      "peer group/switch inline-flex h-6 w-10 shrink-0 cursor-pointer items-center rounded-full border-[0.09375rem] border-(--line-strong) bg-(--surface-3) p-0.5",
+      "group/switch peer group/switch inline-flex h-6 w-10 shrink-0 cursor-pointer items-center rounded-full border-[0.09375rem] border-(--line-strong) bg-(--surface-3) p-0.5",
       "transition-[background-color,border-color,box-shadow] duration-fast ease-out",
       "hover:data-[state=unchecked]:border-(--control)",
       "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
@@ -34,9 +34,9 @@ const Switch = React.forwardRef<
       data-slot="switch-thumb"
       className={cn(
         "pointer-events-none block size-4 rounded-full border-[0.09375rem] border-(--line-strong) bg-(--thumb) shadow-(--shadow-thumb)",
-        "transition-[translate,border-color] duration-fast ease-out",
         "data-[state=checked]:translate-x-4 data-[state=checked]:border-(--primary-rim) data-[state=unchecked]:translate-x-0",
         "group-disabled/switch:bg-muted group-disabled/switch:shadow-none",
+        "origin-left data-[state=checked]:origin-right rtl:origin-right rtl:data-[state=checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none",
       )}
     />
   </SwitchPrimitive.Root>

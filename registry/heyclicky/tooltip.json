@@ -16,8 +16,6 @@
     "light": {
       "shadow-m": "var(--shadow-md)"
     },
-    "dark": {
-      "shadow-m": "var(--shadow-md)"
-    }
+    "dark": {}
   }
 }

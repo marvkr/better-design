@@ -1,0 +1,18 @@
+{
+  "name": "color-swatch",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/color-swatch.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Color Swatch: a colour chip seated in a recessed well, the way the\n * editor shows a background choice, with a mono readout of the value.\n */\n\ninterface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {\n  color: string\n  label?: string\n  name?: string\n  size?: \"sm\" | \"md\" | \"lg\"\n  showHex?: boolean\n  showValue?: boolean\n}\n\nconst chipSize = {\n  sm: \"size-7 rounded-md\",\n  md: \"size-10 rounded-lg\",\n  lg: \"size-14 rounded-xl\",\n}\n\nfunction ColorSwatch({\n  color,\n  label,\n  name,\n  size = \"md\",\n  showHex,\n  showValue,\n  className,\n  ...props\n}: ColorSwatchProps) {\n  const title = label ?? name\n  const showCode = showHex ?? showValue\n  return (\n    <div className={cn(\"flex flex-col items-center gap-1.5\", className)} {...props}>\n      <div className=\"rounded-xl bg-input p-1 [box-shadow:var(--shadow-inset)]\">\n        <div\n          className={cn(chipSize[size], \"[box-shadow:inset_0_0_0_0.0625rem_oklch(1_0_0/0.12)]\")}\n          style={{ backgroundColor: color }}\n          title={color}\n        />\n      </div>\n      {(title || showCode) && (\n        <div className=\"flex flex-col items-center gap-0.5\">\n          {title && <span className=\"text-xs font-medium text-foreground\">{title}</span>}\n          {showCode && <span className=\"font-mono text-[0.625rem] uppercase text-muted-foreground\">{color}</span>}\n        </div>\n      )}\n    </div>\n  )\n}\n\ninterface ColorPaletteProps extends React.HTMLAttributes<HTMLDivElement> {\n  colors: Array<{ color: string; label?: string }>\n  size?: ColorSwatchProps[\"size\"]\n  showHex?: boolean\n}\n\nfunction ColorPalette({ colors, size, showHex, className, ...props }: ColorPaletteProps) {\n  return (\n    <div className={cn(\"flex flex-wrap gap-3\", className)} {...props}>\n      {colors.map((c, i) => (\n        <ColorSwatch key={`${c.color}-${i}`} color={c.color} label={c.label} size={size} showHex={showHex} />\n      ))}\n    </div>\n  )\n}\n\nexport { ColorSwatch, ColorPalette }\nexport type { ColorSwatchProps, ColorPaletteProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

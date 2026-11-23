@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline ColorSwatch: token chips with hairline rims.
+// ColorSwatch: token chips with hairline rims.
 
 interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string;

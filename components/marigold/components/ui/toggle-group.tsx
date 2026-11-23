@@ -7,7 +7,7 @@ import { type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { toggleVariants } from "./toggle";
 
-// Talentboard ToggleGroup: a recessed strip; the active item raises into the
+// ToggleGroup: a recessed strip; the active item raises into the
 // orange primary material.
 
 const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({

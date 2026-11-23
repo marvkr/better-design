@@ -20,9 +20,6 @@
       "ai-label": "var(--muted)",
       "ai-label-foreground": "var(--foreground)"
     },
-    "dark": {
-      "ai-label": "var(--muted)",
-      "ai-label-foreground": "var(--foreground)"
-    }
+    "dark": {}
   }
 }

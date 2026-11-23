@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
-// Hyperline CodeTabs: terminal card on the layered card shadow; active tab
+// CodeTabs: terminal card on the layered card shadow; active tab
 // gets the cyan underline like the portal's section tabs.
 
 interface CodeTab {

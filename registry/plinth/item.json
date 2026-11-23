@@ -1,0 +1,21 @@
+{
+  "name": "item",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/item.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Plinth Item: a row inside a panel, like the editor's source row. It sits\n * flat on a faint tint with a hairline ring; hover lifts the tint one step,\n * and a chosen row takes the ember ring the selected thumbnail wears.\n */\n\ninterface ItemProps extends React.HTMLAttributes<HTMLDivElement> {\n  asChild?: boolean\n  interactive?: boolean\n  selected?: boolean\n}\n\nconst Item = React.forwardRef<HTMLDivElement, ItemProps>(\n  ({ className, asChild, interactive = true, selected, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"div\"\n    return (\n      <Comp\n        ref={ref}\n        className={cn(\n          \"flex items-center gap-3 rounded-2xl p-2 pr-3 text-card-foreground\",\n          \"bg-[oklch(1_0_0/0.015)] [box-shadow:inset_0_0_0_0.0625rem_oklch(1_0_0/0.045)]\",\n          \"transition-[background-color,box-shadow] duration-fast\",\n          interactive && \"cursor-pointer hover:bg-muted\",\n          selected && \"bg-muted [box-shadow:inset_0_0_0_0.0625rem_var(--ring)]\",\n          className\n        )}\n        {...props}\n      />\n    )\n  }\n)\nItem.displayName = \"Item\"\n\nconst ItemIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"flex size-10 shrink-0 items-center justify-center rounded-xl bg-input text-muted-foreground\",\n        \"[box-shadow:var(--shadow-inset)] [&_svg]:size-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\nItemIcon.displayName = \"ItemIcon\"\n\nconst ItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex min-w-0 flex-1 flex-col gap-0.5\", className)} {...props} />\n  )\n)\nItemContent.displayName = \"ItemContent\"\n\nconst ItemTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"truncate text-sm font-medium text-foreground\", className)} {...props} />\n  )\n)\nItemTitle.displayName = \"ItemTitle\"\n\nconst ItemDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"truncate font-mono text-[0.6875rem] uppercase text-muted-foreground\", className)}\n      {...props}\n    />\n  )\n)\nItemDescription.displayName = \"ItemDescription\"\n\nconst ItemActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex shrink-0 items-center gap-1.5\", className)} {...props} />\n  )\n)\nItemActions.displayName = \"ItemActions\"\n\nexport { Item, ItemIcon, ItemContent, ItemTitle, ItemDescription, ItemActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.3"
+  ],
+  "cssVars": {
+    "theme": {},
+    "light": {
+      "shadow-inset": "inset 0 0.0625rem 0.125rem oklch(0 0 0 / 0.65), inset 0 0 0 0.0625rem oklch(0 0 0 / 0.35), inset 0 -0.0625rem 0 oklch(1 0 0 / 0.06)"
+    },
+    "dark": {}
+  }
+}

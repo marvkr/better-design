@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "components/ui/switch.tsx",
-      "content": "\"use client\";\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing, optionTrack } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Mallow Switch: a lilac track with a white knob when off, and a violet track with the same white knob when on. */\nfunction Switch({ className, ...props }: WithClassName<SwitchPrimitive.Root.Props>) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(\n        \"peer inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full p-0.5\",\n        optionTrack,\n        \"inset-ring-1 inset-ring-foreground/50 data-[checked]:inset-ring-transparent\",\n        controlChecked,\n        \"transition-[box-shadow,background-color] duration-base ease-(--ease-out)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block size-6 rounded-full\",\n          \"bg-card shadow-(--shadow-thumb)\",\n          \"transition-[translate,background-color,box-shadow] duration-base ease-(--ease-out)\",\n          \"data-[checked]:translate-x-5 data-[unchecked]:translate-x-0 rtl:data-[checked]:-translate-x-5\",\n        )}\n      />\n    </SwitchPrimitive.Root>\n  );\n}\nSwitch.displayName = \"Switch\";\n\nexport { Switch };\n",
+      "content": "\"use client\";\n\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\";\n\nimport { cn } from \"@/lib/utils\";\nimport { controlChecked, focusRing, optionTrack } from \"./_shared\";\n\ntype WithClassName<P> = Omit<P, \"className\"> & { className?: string };\n\n/** Mallow Switch: a lilac track with a white knob when off, and a violet track with the same white knob when on. */\nfunction Switch({ className, ...props }: WithClassName<SwitchPrimitive.Root.Props>) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(\n        \"group/switch peer inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full p-0.5\",\n        optionTrack,\n        \"inset-ring-1 inset-ring-foreground/50 data-[checked]:inset-ring-transparent\",\n        controlChecked,\n        \"transition-[box-shadow,background-color] duration-base ease-(--ease-out)\",\n        focusRing,\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block size-6 rounded-full\",\n          \"bg-card shadow-(--shadow-thumb)\",\n          \"data-[checked]:translate-x-5 data-[unchecked]:translate-x-0 rtl:data-[checked]:-translate-x-5\",\n          \"origin-left data-[checked]:origin-right rtl:origin-right rtl:data-[checked]:origin-left transition-[translate,scale,transform-origin,background-color,box-shadow] duration-[260ms,140ms,0ms,150ms,150ms] delay-[0ms,0ms,140ms,0ms,0ms] ease-out motion-safe:group-active/switch:scale-x-[1.18] motion-reduce:transition-none\",\n        )}\n      />\n    </SwitchPrimitive.Root>\n  );\n}\nSwitch.displayName = \"Switch\";\n\nexport { Switch };\n",
       "type": "registry:ui"
     }
   ],
@@ -20,9 +20,6 @@
       "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
       "shadow-thumb": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.1), 0 0.0625rem 0.25rem 0 oklch(0.32 0.08 290 / 0.2)"
     },
-    "dark": {
-      "ease-out": "cubic-bezier(0.165, 0.84, 0.44, 1)",
-      "shadow-thumb": "0 0 0 0.0625rem oklch(0.25 0.04 290 / 0.1), 0 0.0625rem 0.25rem 0 oklch(0.32 0.08 290 / 0.2)"
-    }
+    "dark": {}
   }
 }

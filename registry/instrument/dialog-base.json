@@ -17,8 +17,6 @@
     "light": {
       "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
     },
-    "dark": {
-      "shadow-pop": "inset 0 0.0625rem 0 oklch(1 0 0 / 0.06), 0 0 0 0.0625rem oklch(0 0 0 / 0.3), 0 0.5rem 1.5rem -0.25rem oklch(0 0 0 / 0.55), 0 1.25rem 3rem -0.75rem oklch(0 0 0 / 0.5)"
-    }
+    "dark": {}
   }
 }

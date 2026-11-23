@@ -1889,6 +1889,12 @@
       "name": "label-base"
     },
     {
+      "name": "mega-menu-base",
+      "registryDependencies": [
+        "popover-base"
+      ]
+    },
+    {
       "name": "menubar-base",
       "registryDependencies": [
         "_shared-base"
@@ -2026,7 +2032,6 @@
     }
   ],
   "baseSkipped": [
-    "mega-menu",
     "multi-select"
   ]
 }

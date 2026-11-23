@@ -22,10 +22,6 @@
       "success-text": "oklch(0.42 0.11 155)",
       "info-text": "oklch(0.44 0.13 250)"
     },
-    "dark": {
-      "fee": "oklch(0.66 0.17 35)",
-      "success-text": "oklch(0.42 0.11 155)",
-      "info-text": "oklch(0.44 0.13 250)"
-    }
+    "dark": {}
   }
 }

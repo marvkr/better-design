@@ -18,9 +18,6 @@
       "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)",
       "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)"
     },
-    "dark": {
-      "shadow-s": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.0625rem 0.0625rem oklch(0 0 0 / 0.04)",
-      "shadow-popover": "0 0.0625rem 0.125rem oklch(0 0 0 / 0.06), 0 0.5rem 1.5rem oklch(0 0 0 / 0.12)"
-    }
+    "dark": {}
   }
 }

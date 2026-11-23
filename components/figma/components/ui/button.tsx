@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// Figma Button — light, Electric Violet (#a259ff) primary, 8px radius
+// Button — light, Electric Violet (#a259ff) primary, 8px radius
 // Light theme matching figma.com marketing site
 // Primary: solid purple, slight shadow on hover
 // Secondary: light purple tint bg

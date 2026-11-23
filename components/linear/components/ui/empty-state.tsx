@@ -1,8 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Linear Empty State: centered content with icon, title, description, and optional action
-// Uses rounded-[1.25rem] bg-secondary/50 pattern from Linear's empty states
+// Empty State: centered content with icon, title, description, and optional action
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode

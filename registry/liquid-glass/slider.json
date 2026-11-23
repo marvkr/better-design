@@ -1,0 +1,17 @@
+{
+  "name": "slider",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport type * as SliderPrimitive from \"@radix-ui/react-slider\"\n\nimport { cn } from \"@/lib/utils\"\nimport { RangeSlider } from \"./glass-range-slider\"\n\n/*\n * Liquid Glass Slider — the kit's slide: at rest a white pill sits on the\n * track; held, it opens into a wide lens of clear glass that magnifies and\n * bends the track while it moves. Keyboard, Page Up and Page Down, and a\n * native range input underneath keep it accessible. It takes the shadcn\n * Slider props and drives the first thumb.\n */\ntype SliderProps = React.ComponentProps<typeof SliderPrimitive.Root> & {\n  size?: \"sm\" | \"md\" | \"lg\" | \"xl\"\n}\n\nfunction Slider({\n  className,\n  value,\n  defaultValue,\n  onValueChange,\n  onValueCommit,\n  min = 0,\n  max = 100,\n  step = 1,\n  size = \"sm\",\n  \"aria-label\": ariaLabel,\n}: SliderProps) {\n  const [own, setOwn] = React.useState(defaultValue?.[0] ?? min)\n  const current = value?.[0] ?? own\n  return (\n    <div data-slot=\"slider\" className={cn(\"flex w-full items-center\", className)}>\n      <RangeSlider\n        aria-label={ariaLabel ?? \"Value\"}\n        className=\"max-w-none\"\n        label=\"\"\n        theme=\"light\"\n        showValue={false}\n        size={size}\n        min={min}\n        max={max}\n        step={step}\n        value={current}\n        onChange={(next) => {\n          setOwn(next)\n          onValueChange?.([next])\n          onValueCommit?.([next])\n        }}\n      />\n    </div>\n  )\n}\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slider@^1.3.5"
+  ],
+  "registryDependencies": [
+    "https://better-design.com/registry/liquid-glass/glass-range-slider.json"
+  ]
+}

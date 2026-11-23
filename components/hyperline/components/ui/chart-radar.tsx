@@ -12,7 +12,7 @@ import {
 } from "./card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./chart";
 
-// Hyperline radar: cyan footprint on the polar hairline grid.
+// Radar: cyan footprint on the polar hairline grid.
 
 const chartData = [
   { metric: "Billing", score: 186 },

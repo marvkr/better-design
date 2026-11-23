@@ -18,10 +18,6 @@
       "shadow-s": "var(--shadow-sm)",
       "shadow-m": "var(--shadow-md)"
     },
-    "dark": {
-      "success": "oklch(0.80 0.17 150)",
-      "shadow-s": "var(--shadow-sm)",
-      "shadow-m": "var(--shadow-md)"
-    }
+    "dark": {}
   }
 }

@@ -4,7 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { formFieldBase } from "./_shared"
 
-// Pulseboard Time Picker: HH:MM time input with AM/PM toggle on the shared
+// Time Picker: HH:MM time input with AM/PM toggle on the shared
 // recessed-well field surface (matching Input and Select).
 
 interface TimePickerProps {
